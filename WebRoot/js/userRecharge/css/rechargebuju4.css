@@ -1,0 +1,145 @@
+#allDiv {
+	width: 80%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	/* background: #FFFFFF */
+}
+
+#numberOne {
+	width: auto;
+	height: 50px;
+	border-bottom: 1px #F6F7F8 solid;
+	font-size: 20px;
+	background: #FFFFFF
+}
+
+#chongzhi {
+	width: auto;
+	height: auto;;
+	font-size: 26px;
+	float: left;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-left: 32px
+}
+
+#chongzhirecord {
+	width: auto;
+	height: auto;
+	font-size: 18px;
+	float: right;
+	margin: 10px
+}
+
+#chongzhirecord a {
+	cursor: pointer;
+}
+
+#grwangy {
+	width: 150px;
+	height: 40px;
+	border-top: 5px #FF9900 solid;
+	float: left;
+	color: black;
+	font-size: 20px;
+	margin-top: 10px;
+	text-align: center;
+	cursor: pointer;
+	border-bottom: 1px #FFFFFF solid;
+	border: 1px red solid;
+}
+
+#qywangy {
+	width: 150px;
+	height: 40px;
+	border: 1px #F6F7F8 solid;
+	float: left;
+	color: black;
+	font-size: 20px;
+	margin-top: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+
+#middle {
+	background: #FFFFFF;
+	height: auto;
+	border:1px red solid;
+}
+
+#grwangy_nr {
+	display: block;
+	width: 100%;
+	height: auto;
+	
+}
+
+#kjnr_div3 {
+	width: 100%;
+	height: 530px;
+}
+
+ #kjnr_div3 div {
+	font-size: 20px;
+	margin-top: 20px;
+
+} 
+ #kjnr_div3_1 {
+	margin-top: 20px;
+	margin-left: 60px;
+	
+} 
+ #kjnr_div3_1 div{
+ 	float:left;
+	margin-top: 20px;
+} 
+ #kjnr_div3_2{
+ 	float:left;
+	margin-top: 20px;
+	margin-left: 60px
+} 
+
+#kjnr_div3 div font {
+	margin-left: 10px;
+	color: red
+}
+
+#kjnr_div3 div input {
+	margin-left: 10px;
+	width: 200px;
+	background: #CBE9CF
+}
+
+#kjnr_div3 div button {
+	background: #FF9900;
+	width: 130px;
+	height: 40px
+}
+
+#grwangy_nr ul li {
+	cursor: pointer;
+	float: left;
+	height: 40px;
+	margin: 20px;
+	width: 180px;
+	list-style: outside none none;
+}
+
+#grwangy_nr ul li input {
+	outline: medium none;
+	border: medium none;
+	margin-top: 15px;
+	vertical-align: middle;
+	margin-left: 20px
+}
+
+
+/* 充值记录详情 */
+#czjl_nr {
+	width: 100%;
+	height: auto;
+	display: none;
+	background: #FFFFFF;
+	border: 1px #FFFFFF solid;
+}

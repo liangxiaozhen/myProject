@@ -1,0 +1,1416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserTenderMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserTender">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ORDERNO" property="orderno" jdbcType="VARCHAR" />
+		<result column="OUTACCOUNTID" property="outaccountid" jdbcType="DECIMAL" />
+		<result column="INACCOUNTID" property="inaccountid" jdbcType="DECIMAL" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="FEE" property="fee" jdbcType="FLOAT" />
+		<result column="FEERATE" property="feerate" jdbcType="FLOAT" />
+		<result column="TRANSFERTYPE" property="transfertype" jdbcType="DECIMAL" />
+		<result column="OABALANCE" property="oabalance" jdbcType="FLOAT" />
+		<result column="IABALANCE" property="iabalance" jdbcType="FLOAT" />
+		<result column="ORIGINCLIENT" property="originclient" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="TBEGINTIME" property="tbegintime" jdbcType="TIMESTAMP" />
+		<result column="TENDTIME" property="tendtime" jdbcType="TIMESTAMP" />
+		<result column="ICID" property="icid" jdbcType="DECIMAL" />
+		<result column="REID" property="reid" jdbcType="DECIMAL" />
+		<result column="TPROPERTY" property="tproperty" jdbcType="DECIMAL" />
+		<result column="APPOINTTENDERPASS" property="appointtenderpass"
+			jdbcType="VARCHAR" />
+		<result column="ISFREEZE" property="isfreeze" jdbcType="DECIMAL" />
+		<result column="TSTATUS" property="tstatus" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="ISDA" property="isda" jdbcType="DECIMAL" />
+		<result column="TENDERTYPE" property="tendertype" jdbcType="DECIMAL" />
+		<result column="ISREPAYEND" property="isrepayend" jdbcType="DECIMAL" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="FREEZETRXID" property="freezetrxid" jdbcType="VARCHAR" />
+		<result column="TENDERTIME" property="tendertime" jdbcType="TIMESTAMP" />
+		<result column="DAID" property="daid" jdbcType="DECIMAL" />
+		<result column="OLDDAORDERNO" property="olddaorderno" jdbcType="VARCHAR" />
+		<result column="HOLDDATE" property="holddate" jdbcType="DECIMAL" />
+		<result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR" />
+		<result column="TOTALAMOUNT" property="totalamount" jdbcType="FLOAT" />
+		<result column="UTPRINAMOUNT" property="utprinamount" jdbcType="FLOAT" />
+		<result column="UTINTAMOUNT" property="utintamount" jdbcType="FLOAT" />
+		<result column="RESTAMOUNT" property="restamount" jdbcType="FLOAT" />
+		<result column="YEARPROFIT" property="yearprofit" jdbcType="FLOAT" />
+		<result column="DATIMES" property="datimes" jdbcType="DECIMAL" />
+		<result column="FEEMODE" property="feemode" jdbcType="DECIMAL" />
+		<result column="DAHFEE" property="dahfee" jdbcType="FLOAT" />
+		<result column="DATYPE" property="datype" jdbcType="DECIMAL" />
+		<result column="UTPROPERTY" property="utproperty" jdbcType="DECIMAL" />
+		<result column="DADATE" property="dadate" jdbcType="TIMESTAMP" />
+		<result column="VALUEDATE" property="valuedate" jdbcType="TIMESTAMP" />
+		<result column="MEDIACYFEE" property="mediacyfee" jdbcType="FLOAT" />
+		<result column="GUARANTEEFEE" property="guaranteefee" jdbcType="FLOAT" />
+		<result column="RISKGUARANTYFEE" property="riskguarantyfee"
+			jdbcType="FLOAT" />
+		<result column="ISDISABLEDA" property="isdisableda" jdbcType="DECIMAL" />
+		<result column="DAPROPERTY" property="daproperty" jdbcType="DECIMAL" />
+		<result column="MRECMAN" property="mrecman" jdbcType="VARCHAR" />
+		<result column="MRECMANCUSTID" property="mrecmancustid"
+			jdbcType="VARCHAR" />
+		<result column="GFRECMAN" property="gfrecman" jdbcType="VARCHAR" />
+		<result column="GFRECMANCUSTID" property="gfrecmancustid"
+			jdbcType="VARCHAR" />
+		<result column="RGMRECMAN" property="rgmrecman" jdbcType="VARCHAR" />
+		<result column="RGMRECMANCUSTID" property="rgmrecmancustid"
+			jdbcType="VARCHAR" />
+		<result column="MFID" property="mfid" jdbcType="DECIMAL" />
+		<result column="GFID" property="gfid" jdbcType="DECIMAL" />
+		<result column="RGMID" property="rgmid" jdbcType="DECIMAL" />
+		<result column="ISALLOWDA" property="isallowda" jdbcType="DECIMAL" />
+		<result column="REALAMOUNT" property="realamount" jdbcType="FLOAT" />
+		<result column="VOUCHERAMOUNT" property="voucheramount"
+			jdbcType="FLOAT" />
+		<result column="LIKEVOUCHERAMOUNT" property="likevoucheramount"
+			jdbcType="FLOAT" />
+		<result column="LOANNO" property="loanno" jdbcType="VARCHAR" />
+		<result column="OCAMOUNT" property="ocamount" jdbcType="FLOAT" />
+		<result column="AUTHCODE" property="authcode" jdbcType="VARCHAR" />
+		<!-- 关联投资人用户基本信息表 -->
+		<association property="outaccount" resultMap="OutAccountMap" />
+		<!-- 关联借款人用户基本信息表 -->
+		<association property="inaccount" resultMap="InAccountMap" />
+		<!-- 标的设置表 -->
+		<association property="tenderitem" resultMap="tenderitemMap" />
+		<!-- 标的债转设置表 -->
+		<association property="debtattorn" resultMap="debtattornMap" />
+	</resultMap>
+
+	<!-- 投资人用户基本信息表（用户名） -->
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="OutAccountMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="OUTACCOUNT" property="loginname" jdbcType="VARCHAR" />
+		<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 借款人用户基本信息表（用户名） -->
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="InAccountMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="INACCOUNT" property="loginname" jdbcType="VARCHAR" />
+		<result column="REALNAME2" property="realname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- t2 标的设置:是否允许债转,标的状态, -->
+	<resultMap type="com.ptpl.model.TenderItem" id="tenderitemMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TNO" property="tno" jdbcType="VARCHAR" />
+		<result column="TNAME" property="tname" jdbcType="VARCHAR" />
+		<result column="TAMOUNT" property="tamount" jdbcType="FLOAT"/>
+		<result column="FINISHTAMOUNT" property="finishtamount" jdbcType="FLOAT"/>
+		<result column="LOANTIME" property="loantime" jdbcType="DECIMAL" />
+		<result column="DAYORMONTH" property="dayormonth" jdbcType="VARCHAR" />
+		<result column="ISACANCEL" property="isacancel" jdbcType="DECIMAL" />
+		<result column="ALLOWCUGRADE" property="allowcugrade" jdbcType="VARCHAR" />
+		<result column="TINTEREST" property="tinterest" jdbcType="FLOAT" />
+		<result column="isadebtattorn" property="isadebtattorn"
+			jdbcType="DECIMAL" />
+		<result column="t2_tstatus" property="tstatus" jdbcType="DECIMAL" /><!--
+			标的状态（1投标中，2已完成，3流标…） -->
+		<result column="repaymentpro" property="repaymentpro" jdbcType="DECIMAL" /><!--
+			还款方式:1,一次性还本付息 -->
+		<result column="graceperiod" property="graceperiod" jdbcType="DECIMAL" /><!--
+			逾期宽限日 -->
+		<result column="daylatefeerate" property="daylatefeerate"
+			jdbcType="FLOAT" /><!-- 日滞纳率 -->
+		<result column="isadebtattorn" property="isadebtattorn"
+			jdbcType="DECIMAL" /><!-- 是否允许债券转让 -->
+	</resultMap>
+
+	<!--jxy t3 标的债券转让表 :是否审核,是否允许拆分,债转系数最低值,最高值, 手续费开关,债转次数,债转金额最低值最高值,手续费金额最低值最高值,允许债转的会员等级,
+		手续费允许的会员等级,持有时间,距离下个还款日时间,定额,百分比,百分比最低值最高值 -->
+	<resultMap type="com.ptpl.model.DebtAttorn" id="debtattornMap">
+		<id column="t3_id" property="id" jdbcType="DECIMAL" />
+		<result column="tid" property="tid" jdbcType="DECIMAL" />
+		<result column="isdebtaudit" property="isdebtaudit" jdbcType="DECIMAL" /><!--
+			债券转让是否需要审核 -->
+		<result column="isasplit" property="isasplit" jdbcType="DECIMAL" /><!--
+			是否允许拆分 -->
+		<result column="minattornratio" property="minattornratio"
+			jdbcType="FLOAT" />
+		<result column="maxattornratio" property="maxattornratio"
+			jdbcType="FLOAT" />
+		<result column="t3_datimes" property="datimes" jdbcType="DECIMAL" /><!--
+			允许有几个层级承接或每人允许多少次债转 -->
+		<result column="attornmoney" property="attornmoney" jdbcType="FLOAT" />
+		<result column="attornmoneylow" property="attornmoneylow"
+			jdbcType="FLOAT" />
+		<result column="aownergrade" property="aownergrade" jdbcType="VARCHAR" />
+		<result column="holdday" property="holdday" jdbcType="DECIMAL" /><!--
+			持有时间多少天后可债转 -->
+		<result column="intervalday" property="intervalday" jdbcType="DECIMAL" /><!--
+			距离下个还款日 -->
+		<result column="aheadocday" property="aheadocday" jdbcType="DECIMAL" /><!--
+			逾期前多少天可债转 -->
+		<result column="deadline" property="deadline" jdbcType="DECIMAL" /><!--
+			债转期限:要在规定的时间内，有人承接，否则会下架 -->
+		<result column="dattrestrict" property="dattrestrict" jdbcType="DECIMAL" /><!--
+			债转次数方式:1层级次数，2每人次数 -->
+		<result column="valuepoint" property="valuepoint" jdbcType="VARCHAR" /><!--
+			起息日时间点 -->
+		<result column="valuerule" property="valuerule" jdbcType="DECIMAL" /><!--
+			起息规则（1承接日当天，2承接日次日，3固定时间点 (承接日固定时间之前，承接日固定时间之后)） -->
+		<result column="snlid" property="snlid" jdbcType="DECIMAL" /><!--定向名单列表id -->
+	</resultMap>
+	<select id="findAllUserTender" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from usertender
+		where outaccountid = #{outaccountid,jdbcType=DECIMAL} and utproperty=2 and
+		tstatus=4
+	</select>
+	<!-- jxy查询当前用户可债转的标 -->
+	<select id="findUserTenderisadebtattorn" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		t1.id,t1.orderno,t1.outaccountid,t1.inaccountid,t1.amount,
+		t1.fee,t1.feerate,t1.transfertype,t1.oabalance,
+		t1.iabalance,t1.originclient,t1.remark,t1.tenderid,
+		t1.tbegintime,t1.tendtime,t1.icid,t1.reid,
+		t1.tproperty,t1.appointtenderpass,t1.isfreeze,t1.valuedate,
+		t1.tstatus,t1.isblending,t1.ismanblending,t1.sysbtime,
+		t1.manbtime,t1.isaudit,t1.auditman,t1.audittime,t1.utproperty,t1.utprinamount,
+		t1.isda,t1.tendertype,t1.isrepayend,t1.sysrectime,t1.receivetime,t1.olddaorderno,
+		t1.reqquerydata,t1.recresultdata,t1.paycompany,t1.freezetrxid,t1.tendertime,t1.ocamount,
+		t2.isadebtattorn,t2.debtattornno,t2.tstatus as
+		t2_tstatus,t2.repaymentpro,t2.graceperiod,t2.daylatefeerate,
+		t3.id as
+		t3_id,t3.tid,t3.isdebtaudit,t3.isasplit,t3.minattornratio,t3.maxattornratio,
+		t3.datimes as
+		t3_datimes,t3.attornmoney,t3.attornmoneylow,t3.aownergrade,t3.holdday,t3.intervalday,
+		t3.aheadocday,t3.deadline,t3.dattrestrict,t3.valuepoint,t3.valuerule,t3.snlid
+		from
+		usertender t1 left join tenderitem t2 on t1.tenderid = t2.id
+		left join usermakealoan t6 on t1.orderno = t6.orderno
+		left join debtattorn t3 on t1.tenderid = t3.tid
+		where
+		t1.outaccountid =#{outaccountid,jdbcType=DECIMAL}
+		and t2.isadebtattorn=1 and t1.tstatus=4 and t2.isadebtattorn=1 and
+		t2.repaymentpro!=4 and t1.utproperty!=3 and t1.isda!=1
+	</select>
+	<!-- 页面条件查询 -->
+	<select id="findUserTenderisadebtattornAndCode" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserTender">
+		select
+		t1.id,t1.orderno,t1.outaccountid,t1.inaccountid,t1.amount,
+		t1.fee,t1.feerate,t1.transfertype,t1.oabalance,
+		t1.iabalance,t1.originclient,t1.remark,t1.tenderid,
+		t1.tbegintime,t1.tendtime,t1.icid,t1.reid,
+		t1.tproperty,t1.appointtenderpass,t1.isfreeze,t1.valuedate,
+		t1.tstatus,t1.isblending,t1.ismanblending,t1.sysbtime,
+		t1.manbtime,t1.isaudit,t1.auditman,t1.audittime,t1.utproperty,t1.utprinamount,
+		t1.isda,t1.tendertype,t1.isrepayend,t1.sysrectime,t1.receivetime,t1.olddaorderno,
+		t1.reqquerydata,t1.recresultdata,t1.paycompany,t1.freezetrxid,t1.tendertime,t1.ocamount,
+		t2.isadebtattorn,t2.debtattornno,t2.tstatus as
+		t2_tstatus,t2.repaymentpro,t2.graceperiod,t2.daylatefeerate,t2.tinterest,
+		t3.id as
+		t3_id,t3.tid,t3.isdebtaudit,t3.isasplit,t3.minattornratio,t3.maxattornratio,
+		t3.datimes as
+		t3_datimes,t3.attornmoney,t3.attornmoneylow,t3.aownergrade,t3.holdday,t3.intervalday,
+		t3.aheadocday,t3.deadline,t3.dattrestrict,t3.valuepoint,t3.valuerule,t3.snlid
+		from
+		usertender t1 left join tenderitem t2 on t1.tenderid = t2.id
+		left join usermakealoan t6 on t1.orderno = t6.orderno
+		left join debtattorn t3 on t1.tenderid = t3.tid
+		<trim prefix="where" prefixOverrides="and">
+			t1.outaccountid =#{outaccountid,jdbcType=DECIMAL}
+			<if test="starttime != null">
+				and t1.tbegintime &gt;= #{starttime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="endtime != null">
+				and t1.tbegintime &lt;= #{endtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="sign == 'week'">
+				and t1.tbegintime >= sysdate-7
+			</if>
+			<if test="sign == 'oneMonth'">
+				and t1.tbegintime >=add_months(sysdate,-1)
+			</if>
+			<if test="sign == 'threeMonth'">
+				and t1.tbegintime >=add_months(sysdate,-3)
+			</if>
+
+			and t2.isadebtattorn=1 and t1.tstatus=4 and t2.isadebtattorn=1 and
+			t2.repaymentpro!=4 and t1.utproperty!=3 and t1.isda!=1
+		</trim>
+	</select>
+	<!-- 投资人id,可债转,投标成功,是支持逾期债转,不是先息后本的模式,不是假投标,不是全部债转出去的标 -->
+	<!-- 新增用户投标记录 -->
+	<insert id="insert" parameterType="com.ptpl.model.UserTender">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERTENDER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERTENDER (ID, ORDERNO, OUTACCOUNTID,
+		INACCOUNTID, AMOUNT, FEE,
+		FEERATE, TRANSFERTYPE, OABALANCE,
+		IABALANCE, ORIGINCLIENT, REMARK,
+		TENDERID, TBEGINTIME, TENDTIME,
+		ICID, REID, TPROPERTY,
+		APPOINTTENDERPASS, ISFREEZE, TSTATUS,
+		ISBLENDING, ISMANBLENDING, SYSBTIME,
+		MANBTIME, ISAUDIT, AUDITMAN,
+		AUDITTIME, SYSRECTIME, RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA, ISDA,
+		TENDERTYPE, ISREPAYEND, PAYCOMPANY,
+		FREEZETRXID, TENDERTIME, VALUEDATE,
+		DAID, OLDDAORDERNO, HOLDDATE,
+		PMISCRECMAN, TOTALAMOUNT, UTPRINAMOUNT,
+		UTINTAMOUNT, RESTAMOUNT, YEARPROFIT,
+		DATIMES, FEEMODE, DAHFEE,
+		DATYPE, UTPROPERTY, DADATE, MEDIACYFEE,
+		GUARANTEEFEE, RISKGUARANTYFEE, ISDISABLEDA,
+		DAPROPERTY, MRECMAN, MRECMANCUSTID,
+		GFRECMAN, GFRECMANCUSTID, RGMRECMAN,
+		RGMRECMANCUSTID, MFID, GFID, RGMID,
+		ISALLOWDA, REALAMOUNT, VOUCHERAMOUNT,
+		LIKEVOUCHERAMOUNT, OCAMOUNT, LOANNO,
+		AUTHCODE
+		)
+		values (#{id,jdbcType=DECIMAL}, #{orderno,jdbcType=VARCHAR},
+		#{outaccountid,jdbcType=DECIMAL},
+		#{inaccountid,jdbcType=DECIMAL}, #{amount,jdbcType=FLOAT}, #{fee,jdbcType=FLOAT},
+		#{feerate,jdbcType=FLOAT}, #{transfertype,jdbcType=DECIMAL},
+		#{oabalance,jdbcType=FLOAT},
+		#{iabalance,jdbcType=FLOAT}, #{originclient,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{tenderid,jdbcType=DECIMAL}, #{tbegintime,jdbcType=TIMESTAMP},
+		#{tendtime,jdbcType=TIMESTAMP},
+		#{icid,jdbcType=DECIMAL}, #{reid,jdbcType=DECIMAL}, #{tproperty,jdbcType=DECIMAL},
+		#{appointtenderpass,jdbcType=VARCHAR}, #{isfreeze,jdbcType=DECIMAL},
+		#{tstatus,jdbcType=DECIMAL},
+		#{isblending,jdbcType=DECIMAL}, #{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP}, #{isaudit,jdbcType=DECIMAL},
+		#{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP}, #{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR},
+		#{isda,jdbcType=DECIMAL},
+		#{tendertype,jdbcType=DECIMAL}, #{isrepayend,jdbcType=DECIMAL}, #{paycompany,jdbcType=VARCHAR},
+		#{freezetrxid,jdbcType=VARCHAR}, #{tendertime,jdbcType=TIMESTAMP},
+		#{valuedate,jdbcType=TIMESTAMP},
+		#{daid,jdbcType=DECIMAL}, #{olddaorderno,jdbcType=VARCHAR}, #{holddate,jdbcType=DECIMAL},
+		#{pmiscrecman,jdbcType=VARCHAR}, #{totalamount,jdbcType=FLOAT},
+		#{utprinamount,jdbcType=FLOAT},
+		#{utintamount,jdbcType=FLOAT}, #{restamount,jdbcType=FLOAT}, #{yearprofit,jdbcType=FLOAT},
+		#{datimes,jdbcType=DECIMAL}, #{feemode,jdbcType=DECIMAL},
+		#{dahfee,jdbcType=FLOAT},
+		#{datype,jdbcType=DECIMAL}, #{utproperty,jdbcType=DECIMAL}, #{dadate,jdbcType=TIMESTAMP},
+		#{mediacyfee,jdbcType=FLOAT}, #{guaranteefee,jdbcType=FLOAT},
+		#{riskguarantyfee,jdbcType=FLOAT},
+		#{isdisableda,jdbcType=DECIMAL}, #{daproperty,jdbcType=DECIMAL}, #{mrecman,jdbcType=VARCHAR},
+		#{mrecmancustid,jdbcType=VARCHAR}, #{gfrecman,jdbcType=VARCHAR},
+		#{gfrecmancustid,jdbcType=VARCHAR},
+		#{rgmrecman,jdbcType=VARCHAR}, #{rgmrecmancustid,jdbcType=VARCHAR},, #{mfid,jdbcType=DECIMAL},
+		#{gfid,jdbcType=DECIMAL}, #{rgmid,jdbcType=DECIMAL},
+		#{isallowda,jdbcType=DECIMAL},
+		#{realamount,jdbcType=FLOAT}, #{voucheramount,jdbcType=FLOAT},
+		#{likevoucheramount,jdbcType=FLOAT}, #{OCAMOUNT,jdbcType=FLOAT}, #{LOANNO,jdbcType=VARCHAR},
+		#{AUTHCODE,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 新增用户投标记录（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserTender">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERTENDER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERTENDER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orderno != null">
+				ORDERNO,
+			</if>
+			<if test="outaccountid != null">
+				OUTACCOUNTID,
+			</if>
+			<if test="inaccountid != null">
+				INACCOUNTID,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="fee != null">
+				FEE,
+			</if>
+			<if test="feerate != null">
+				FEERATE,
+			</if>
+			<if test="transfertype != null">
+				TRANSFERTYPE,
+			</if>
+			<if test="oabalance != null">
+				OABALANCE,
+			</if>
+			<if test="iabalance != null">
+				IABALANCE,
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="tbegintime != null">
+				TBEGINTIME,
+			</if>
+			<if test="tendtime != null">
+				TENDTIME,
+			</if>
+			<if test="icid != null">
+				ICID,
+			</if>
+			<if test="reid != null">
+				REID,
+			</if>
+			<if test="tproperty != null">
+				TPROPERTY,
+			</if>
+			<if test="appointtenderpass != null">
+				APPOINTTENDERPASS,
+			</if>
+			<if test="isfreeze != null">
+				ISFREEZE,
+			</if>
+			<if test="tstatus != null">
+				TSTATUS,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="isda != null">
+				ISDA,
+			</if>
+			<if test="tendertype != null">
+				TENDERTYPE,
+			</if>
+			<if test="isrepayend != null">
+				ISREPAYEND,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="freezetrxid != null">
+				FREEZETRXID,
+			</if>
+			<if test="tendertime != null">
+				TENDERTIME,
+			</if>
+			<if test="valuedate != null">
+				VALUEDATE,
+			</if>
+			<if test="daid != null">
+				DAID,
+			</if>
+			<if test="olddaorderno != null">
+				OLDDAORDERNO,
+			</if>
+			<if test="holddate != null">
+				HOLDDATE,
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN,
+			</if>
+			<if test="totalamount != null">
+				TOTALAMOUNT,
+			</if>
+			<if test="utprinamount != null">
+				UTPRINAMOUNT,
+			</if>
+			<if test="utintamount != null">
+				UTINTAMOUNT,
+			</if>
+			<if test="restamount != null">
+				RESTAMOUNT,
+			</if>
+			<if test="yearprofit != null">
+				YEARPROFIT,
+			</if>
+			<if test="datimes != null">
+				DATIMES,
+			</if>
+			<if test="feemode != null">
+				FEEMODE,
+			</if>
+			<if test="dahfee != null">
+				DAHFEE,
+			</if>
+			<if test="datype != null">
+				DATYPE,
+			</if>
+			<if test="utproperty != null">
+				UTPROPERTY,
+			</if>
+			<if test="dadate != null">
+				DADATE,
+			</if>
+			<if test="mediacyfee != null">
+				MEDIACYFEE,
+			</if>
+			<if test="guaranteefee != null">
+				GUARANTEEFEE,
+			</if>
+			<if test="riskguarantyfee != null">
+				RISKGUARANTYFEE,
+			</if>
+			<if test="isdisableda != null">
+				ISDISABLEDA,
+			</if>
+			<if test="daproperty != null">
+				DAPROPERTY,
+			</if>
+			<if test="mrecman != null">
+				MRECMAN,
+			</if>
+			<if test="mrecmancustid != null">
+				MRECMANCUSTID,
+			</if>
+			<if test="gfrecman != null">
+				GFRECMAN,
+			</if>
+			<if test="gfrecmancustid != null">
+				GFRECMANCUSTID,
+			</if>
+			<if test="rgmrecman != null">
+				RGMRECMAN,
+			</if>
+			<if test="rgmrecmancustid != null">
+				RGMRECMANCUSTID,
+			</if>
+			<if test="mfid != null">
+				MFID,
+			</if>
+			<if test="gfid != null">
+				GFID,
+			</if>
+			<if test="rgmid != null">
+				RGMID,
+			</if>
+			<if test="isallowda != null">
+				ISALLOWDA,
+			</if>
+			<if test="realamount != null">
+				REALAMOUNT,
+			</if>
+			<if test="voucheramount != null">
+				VOUCHERAMOUNT,
+			</if>
+			<if test="likevoucheramount != null">
+				LIKEVOUCHERAMOUNT,
+			</if>
+			<if test="ocamount != null">
+				OCAMOUNT,
+			</if>
+			<if test="loanno != null">
+				LOANNO,
+			</if>
+			<if test="authcode != null">
+				AUTHCODE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="orderno != null">
+				#{orderno,jdbcType=VARCHAR},
+			</if>
+			<if test="outaccountid != null">
+				#{outaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="inaccountid != null">
+				#{inaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=FLOAT},
+			</if>
+			<if test="fee != null">
+				#{fee,jdbcType=FLOAT},
+			</if>
+			<if test="feerate != null">
+				#{feerate,jdbcType=FLOAT},
+			</if>
+			<if test="transfertype != null">
+				#{transfertype,jdbcType=DECIMAL},
+			</if>
+			<if test="oabalance != null">
+				#{oabalance,jdbcType=FLOAT},
+			</if>
+			<if test="iabalance != null">
+				#{iabalance,jdbcType=FLOAT},
+			</if>
+			<if test="originclient != null">
+				#{originclient,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="tbegintime != null">
+				#{tbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tendtime != null">
+				#{tendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="icid != null">
+				#{icid,jdbcType=DECIMAL},
+			</if>
+			<if test="reid != null">
+				#{reid,jdbcType=DECIMAL},
+			</if>
+			<if test="tproperty != null">
+				#{tproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="appointtenderpass != null">
+				#{appointtenderpass,jdbcType=VARCHAR},
+			</if>
+			<if test="isfreeze != null">
+				#{isfreeze,jdbcType=DECIMAL},
+			</if>
+			<if test="tstatus != null">
+				#{tstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isda != null">
+				#{isda,jdbcType=DECIMAL},
+			</if>
+			<if test="tendertype != null">
+				#{tendertype,jdbcType=DECIMAL},
+			</if>
+			<if test="isrepayend != null">
+				#{isrepayend,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="freezetrxid != null">
+				#{freezetrxid,jdbcType=VARCHAR},
+			</if>
+			<if test="tendertime != null">
+				#{tendertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="valuedate != null">
+				#{valuedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="daid != null">
+				#{daid,jdbcType=DECIMAL},
+			</if>
+			<if test="olddaorderno != null">
+				#{olddaorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="holddate != null">
+				#{holddate,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecman != null">
+				#{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="totalamount != null">
+				#{totalamount,jdbcType=FLOAT},
+			</if>
+			<if test="utprinamount != null">
+				#{utprinamount,jdbcType=FLOAT},
+			</if>
+			<if test="utintamount != null">
+				#{utintamount,jdbcType=FLOAT},
+			</if>
+			<if test="restamount != null">
+				#{restamount,jdbcType=FLOAT},
+			</if>
+			<if test="yearprofit != null">
+				#{yearprofit,jdbcType=FLOAT},
+			</if>
+			<if test="datimes != null">
+				#{datimes,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				#{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="dahfee != null">
+				#{dahfee,jdbcType=FLOAT},
+			</if>
+			<if test="datype != null">
+				#{datype,jdbcType=DECIMAL},
+			</if>
+			<if test="utproperty != null">
+				#{utproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="dadate != null">
+				#{dadate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mediacyfee != null">
+				#{mediacyfee,jdbcType=FLOAT},
+			</if>
+			<if test="guaranteefee != null">
+				#{guaranteefee,jdbcType=FLOAT},
+			</if>
+			<if test="riskguarantyfee != null">
+				#{riskguarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="isdisableda != null">
+				#{isdisableda,jdbcType=DECIMAL},
+			</if>
+			<if test="daproperty != null">
+				#{daproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="mrecman != null">
+				#{mrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="mrecmancustid != null">
+				#{mrecmancustid,jdbcType=VARCHAR},
+			</if>
+			<if test="gfrecman != null">
+				#{gfrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="gfrecmancustid != null">
+				#{gfrecmancustid,jdbcType=VARCHAR},
+			</if>
+			<if test="rgmrecman != null">
+				#{rgmrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="rgmrecmancustid != null">
+				#{rgmrecmancustid,jdbcType=VARCHAR},
+			</if>
+			<if test="mfid != null">
+				#{mfid,jdbcType=DECIMAL},
+			</if>
+			<if test="gfid != null">
+				#{gfid,jdbcType=DECIMAL},
+			</if>
+			<if test="rgmid != null">
+				#{rgmid,jdbcType=DECIMAL},
+			</if>
+			<if test="isallowda != null">
+				#{isallowda,jdbcType=DECIMAL},
+			</if>
+			<if test="realamount != null">
+				#{realamount,jdbcType=FLOAT},
+			</if>
+			<if test="voucheramount != null">
+				#{voucheramount,jdbcType=FLOAT},
+			</if>
+			<if test="likevoucheramount != null">
+				#{likevoucheramount,jdbcType=FLOAT},
+			</if>
+			<if test="ocamount != null">
+				#{ocamount,jdbcType=FLOAT},
+			</if>
+			<if test="loanno != null">
+				#{loanno,jdbcType=VARCHAR},
+			</if>
+			<if test="authcode != null">
+				#{authcode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 投标记录表 -->
+	<sql id="Base_Column_List">
+		ID, ORDERNO, OUTACCOUNTID, INACCOUNTID, AMOUNT, FEE,
+		FEERATE,TRANSFERTYPE, OABALANCE,
+		IABALANCE, ORIGINCLIENT, REMARK,
+		TENDERID, TBEGINTIME, TENDTIME, ICID, REID,TPROPERTY,
+		APPOINTTENDERPASS, ISFREEZE, TSTATUS, ISBLENDING, ISMANBLENDING,
+		SYSBTIME, MANBTIME,
+		ISAUDIT, AUDITMAN, AUDITTIME, SYSRECTIME,
+		RECEIVETIME, REQQUERYDATA,RECRESULTDATA,
+		ISDA, TENDERTYPE, ISREPAYEND,
+		PAYCOMPANY, FREEZETRXID, TENDERTIME,VALUEDATE, DAID,
+		OLDDAORDERNO,
+		HOLDDATE, PMISCRECMAN, TOTALAMOUNT, UTPRINAMOUNT,
+		UTINTAMOUNT,RESTAMOUNT,
+		YEARPROFIT, DATIMES, FEEMODE, DAHFEE, DATYPE,
+		UTPROPERTY, DADATE, MEDIACYFEE, GUARANTEEFEE,
+		RISKGUARANTYFEE,
+		ISDISABLEDA, DAPROPERTY, MRECMAN, MRECMANCUSTID, GFRECMAN,
+		GFRECMANCUSTID,
+		RGMRECMAN, RGMRECMANCUSTID, MFID, GFID, RGMID,
+		ISALLOWDA, REALAMOUNT, VOUCHERAMOUNT,
+		LIKEVOUCHERAMOUNT, OCAMOUNT, LOANNO, AUTHCODE
+	</sql>
+
+	<!-- 投标记录表、标的设置表、用户基本信息表 -->
+	<sql id="Association_Column_List">
+		ut.id,ut.orderno,ut.outaccountid,ut.inaccountid,ut.amount,ut.fee,ut.feerate,ut.transfertype,
+		ut.oabalance,ut.iabalance,ut.originclient,ut.remark,ut.tenderid,ut.tbegintime,ut.tendtime,
+		ut.icid,ut.reid,ut.tproperty,ut.appointtenderpass,ut.isfreeze,ut.tstatus,ut.isblending,
+		ut.ismanblending,ut.sysbtime,ut.manbtime,ut.isaudit,ut.auditman,ut.audittime,ut.isda,
+		ut.tendertype,ut.isrepayend,ut.sysrectime,ut.receivetime,ut.reqquerydata,ut.recresultdata,
+		ut.paycompany,ut.freezetrxid,ut.tendertime,ut.valuedate,ut.daid,ut.olddaorderno,ut.holddate,
+		ut.pmiscrecman,ut.totalamount,ut.utprinamount,ut.utintamount,ut.restamount,ut.yearprofit,
+		ut.datimes,ut.feemode,ut.dahfee,ut.datype,ut.utproperty,ut.dadate,ut.mediacyfee,ut.guaranteefee,
+		ut.riskguarantyfee,ut.isdisableda,ut.daproperty,ut.mrecman,ut.mrecmancustid,ut.gfrecman,
+		ut.gfrecmancustid,ut.rgmrecman,ut.rgmrecmancustid,ut.mfid,ut.gfid,ut.rgmid,ut.isallowda,ut.realamount,
+		ut.voucheramount,ut.likevoucheramount,ut.loanno,ut.authcode,ti.tno,ti.tname,ti.tamount,ti.finishtamount,u1.loginname
+		outaccount,u1.realname realname,u2.loginname inaccount,u2.realname realname2
+	</sql>
+
+	<!-- 根据投标订单号查询数据 -->
+	<select id="findUserTenderByOrderno" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		usertender where orderno = #{orderno,jdbcType=VARCHAR}
+	</select>
+	<!-- 根据投标订单号和债转标识查询原始投标订单号 -->
+	<select id="findUserTenderByOrdernoAndUtProperty" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		usertender where orderno = #{orderno,jdbcType=VARCHAR} and
+		utproperty=2
+	</select>
+
+	<!-- 获取用户投标记录列表 -->
+	<select id="findUserTenderRecord" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		<include refid="Base_Column_List" />
+		from
+		usertender
+		<trim prefix="where" prefixOverrides="and">
+			<if test="orderno != null">
+				and orderno like #{orderno,jdbcType=VARCHAR}
+			</if>
+			<if test="tproperty != null">
+				and tproperty = #{tproperty,jdbcType=DECIMAL}
+			</if>
+			<if test="originclient != null">
+				and originclient = #{originclient,jdbcType=VARCHAR}
+			</if>
+			<if test="outaccountid != null">
+				and outaccountid = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="inaccountid != null">
+				and inaccountid = #{inaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="amount != null">
+				and amount = #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="fee != null">
+				and fee = #{fee,jdbcType=FLOAT}
+			</if>
+			<if test="feerate != null">
+				and feerate = #{feerate,jdbcType=FLOAT}
+			</if>
+			<if test="transfertype != null">
+				and transfertype = #{transfertype,jdbcType=DECIMAL}
+			</if>
+			<if test="oabalance != null">
+				and oabalance = #{oabalance,jdbcType=FLOAT}
+			</if>
+			<if test="iabalance != null">
+				and iabalance = #{iabalance,jdbcType=FLOAT}
+			</if>
+			<if test="remark != null">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="tenderid != null">
+				and tenderid = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="freezetrxid != null">
+				and freezetrxid = #{freezetrxid,jdbcType=VARCHAR}
+			</if>
+			<if test="tstatus != null">
+				and tstatus = #{tstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="utproperty != null">
+				and utproperty = #{utproperty,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 获取用户投标记录详情（关联用户用户基本信息表、标的设置表） -->
+	<select id="findUserTenderById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Association_Column_List" />
+		from
+		usertender ut
+		left join UserBaseAccountInfo u1 on ut.outaccountid =
+		u1.id
+		left join UserBaseAccountInfo u2 on ut.inaccountid = u2.id
+		left
+		join TenderItem ti on ut.tenderid = ti.id
+		where
+		ut.id=#{id,jdbcType=DECIMAL}
+		order by ut.id
+	</select>
+
+	<select id="findTenderByTstatusAndTenderid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select ut.id from USERTENDER ut where ut.tenderid=#{tenderid，jdbcType=DECIMAL} and ut.tstatus in (1,4,5)
+	</select>
+
+
+	<!-- 查询用户投标记录列表（关联用户用户基本信息表、标的设置表） -->
+	<select id="findTenderList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserTender">
+		select
+		<include refid="Association_Column_List" />
+		from
+		usertender ut
+		left join UserBaseAccountInfo u1 on ut.outaccountid =
+		u1.id
+		left join UserBaseAccountInfo u2 on ut.inaccountid = u2.id
+		left
+		join TenderItem ti on ut.tenderid = ti.id
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="outaccount != null and outaccount.loginname != ''">
+				and u1.loginname like '%'||#{outaccount.loginname}||'%'
+			</if>
+			<if test="inaccount != null and inaccount.loginname != ''">
+				and u2.loginname like '%'||#{inaccount.loginname}||'%'
+			</if>
+			<if test="orderno != null and orderno != ''">
+				and ut.orderno = #{orderno}
+			</if>
+			<if test="tproperty != null and tproperty != ''">
+				and ut.tproperty = #{tproperty}
+			</if>
+			<if test="originclient != null and originclient != ''">
+				and ut.originclient = #{originclient}
+			</if>
+			<if test="tenderitem != null and tenderitem.tno != ''">
+				and ti.tno = #{tenderitem.tno}
+			</if>
+			<if test="tenderid != null and tenderid != ''">
+				and ut.tenderid = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="outaccountid != null and outaccountid != ''">
+				and ut.outaccountid = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="utproperty != null and utproperty != ''">
+				and ut.utproperty = #{utproperty,jdbcType=DECIMAL}
+			</if>
+			<if test="daproperty != null and daproperty != ''">
+				and ut.daproperty = #{daproperty,jdbcType=DECIMAL}
+			</if>
+			<if test="isda != null and isda != ''">
+				and ut.isda = #{isda,jdbcType=DECIMAL}
+			</if>
+			<if test="tendertype != null and tendertype != ''">
+				and ut.tendertype = #{tendertype,jdbcType=DECIMAL}
+			</if>
+			<if test="isrepayend != null and isrepayend != ''">
+				and ut.isrepayend = #{isrepayend,jdbcType=DECIMAL}
+			</if>
+			<if test="tstatus != null and tstatus != ''">
+				and ut.tstatus = #{tstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ut.isaudit = #{isaudit,jdbcType=DECIMAL}
+			</if>
+		</trim>
+		order by ut.id desc
+	</select>
+
+	<!-- 根据主键ID更新投标记录 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserTender">
+		update USERTENDER
+		<set>
+			<if test="orderno != null">
+				ORDERNO = #{orderno,jdbcType=VARCHAR},
+			</if>
+			<if test="outaccountid != null">
+				OUTACCOUNTID = #{outaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="inaccountid != null">
+				INACCOUNTID = #{inaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=FLOAT},
+			</if>
+			<if test="fee != null">
+				FEE = #{fee,jdbcType=FLOAT},
+			</if>
+			<if test="feerate != null">
+				FEERATE = #{feerate,jdbcType=FLOAT},
+			</if>
+			<if test="transfertype != null">
+				TRANSFERTYPE = #{transfertype,jdbcType=DECIMAL},
+			</if>
+			<if test="oabalance != null">
+				OABALANCE = #{oabalance,jdbcType=FLOAT},
+			</if>
+			<if test="iabalance != null">
+				IABALANCE = #{iabalance,jdbcType=FLOAT},
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT = #{originclient,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="tbegintime != null">
+				TBEGINTIME = #{tbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="tendtime != null">
+				TENDTIME = #{tendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="icid != null">
+				ICID = #{icid,jdbcType=DECIMAL},
+			</if>
+			<if test="reid != null">
+				REID = #{reid,jdbcType=DECIMAL},
+			</if>
+			<if test="tproperty != null">
+				TPROPERTY = #{tproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="appointtenderpass != null">
+				APPOINTTENDERPASS = #{appointtenderpass,jdbcType=VARCHAR},
+			</if>
+			<if test="isfreeze != null">
+				ISFREEZE = #{isfreeze,jdbcType=DECIMAL},
+			</if>
+			<if test="tstatus != null">
+				TSTATUS = #{tstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=DATE},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=DATE},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isda != null">
+				ISDA = #{isda,jdbcType=DECIMAL},
+			</if>
+			<if test="tendertype != null">
+				TENDERTYPE = #{tendertype,jdbcType=DECIMAL},
+			</if>
+			<if test="isrepayend != null">
+				ISREPAYEND = #{isrepayend,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="freezetrxid != null">
+				FREEZETRXID = #{freezetrxid,jdbcType=VARCHAR},
+			</if>
+			<if test="tendertime != null">
+				TENDERTIME = #{tendertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="valuedate != null">
+				VALUEDATE = #{valuedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="daid != null">
+				DAID = #{daid,jdbcType=DECIMAL},
+			</if>
+			<if test="olddaorderno != null">
+				OLDDAORDERNO = #{olddaorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="holddate != null">
+				HOLDDATE = #{holddate,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="totalamount != null">
+				TOTALAMOUNT = #{totalamount,jdbcType=FLOAT},
+			</if>
+			<if test="utprinamount != null">
+				UTPRINAMOUNT = #{utprinamount,jdbcType=FLOAT},
+			</if>
+			<if test="utintamount != null">
+				UTINTAMOUNT = #{utintamount,jdbcType=FLOAT},
+			</if>
+			<if test="restamount != null">
+				RESTAMOUNT = #{restamount,jdbcType=FLOAT},
+			</if>
+			<if test="yearprofit != null">
+				YEARPROFIT = #{yearprofit,jdbcType=FLOAT},
+			</if>
+			<if test="datimes != null">
+				DATIMES = #{datimes,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				FEEMODE = #{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="dahfee != null">
+				DAHFEE = #{dahfee,jdbcType=FLOAT},
+			</if>
+			<if test="datype != null">
+				DATYPE = #{datype,jdbcType=DECIMAL},
+			</if>
+			<if test="utproperty != null">
+				UTPROPERTY = #{utproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="dadate != null">
+				DADATE = #{dadate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mediacyfee != null">
+				MEDIACYFEE = #{mediacyfee,jdbcType=FLOAT},
+			</if>
+			<if test="guaranteefee != null">
+				GUARANTEEFEE = #{guaranteefee,jdbcType=FLOAT},
+			</if>
+			<if test="riskguarantyfee != null">
+				RISKGUARANTYFEE = #{riskguarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="isdisableda != null">
+				ISDISABLEDA = #{isdisableda,jdbcType=DECIMAL},
+			</if>
+			<if test="daproperty != null">
+				DAPROPERTY = #{daproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="mrecman != null">
+				MRECMAN = #{mrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="mrecmancustid != null">
+				MRECMANCUSTID = #{mrecmancustid,jdbcType=VARCHAR},
+			</if>
+			<if test="gfrecman != null">
+				GFRECMAN = #{gfrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="gfrecmancustid != null">
+				GFRECMANCUSTID = #{gfrecmancustid,jdbcType=VARCHAR},
+			</if>
+			<if test="rgmrecman != null">
+				RGMRECMAN = #{rgmrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="rgmrecmancustid != null">
+				RGMRECMANCUSTID = #{rgmrecmancustid,jdbcType=VARCHAR},
+			</if>
+			<if test="mfid != null">
+				MFID = #{mfid,jdbcType=DECIMAL},
+			</if>
+			<if test="gfid != null">
+				GFID = #{gfid,jdbcType=DECIMAL},
+			</if>
+			<if test="rgmid != null">
+				RGMID = #{rgmid,jdbcType=DECIMAL},
+			</if>
+			<if test="isallowda != null">
+				ISALLOWDA = #{isallowda,jdbcType=DECIMAL},
+			</if>
+			<if test="realamount != null">
+				REALAMOUNT = #{realamount,jdbcType=FLOAT},
+			</if>
+			<if test="voucheramount != null">
+				VOUCHERAMOUNT = #{voucheramount,jdbcType=FLOAT},
+			</if>
+			<if test="likevoucheramount != null">
+				LIKEVOUCHERAMOUNT = #{likevoucheramount,jdbcType=FLOAT},
+			</if>
+			<if test="ocamount != null">
+				OCAMOUNT = #{ocamount,jdbcType=FLOAT}
+			</if>
+			<if test="loanno != null">
+				LOANNO = #{loanno,jdbcType=VARCHAR}
+			</if>
+			<if test="authcode != null">
+				AUTHCODE = #{authcode,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据投标订单号orderNO更新投标记录 -->
+	<update id="updateByOrderNO" parameterType="com.ptpl.model.UserTender">
+		update USERTENDER
+		<set>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="tendtime != null">
+				TENDTIME = #{tendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isfreeze != null">
+				ISFREEZE = #{isfreeze,jdbcType=DECIMAL},
+			</if>
+			<if test="tstatus != null">
+				TSTATUS = #{tstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isda != null">
+				ISDA = #{isda,jdbcType=DECIMAL},
+			</if>
+			<if test="isrepayend != null">
+				ISREPAYEND = #{isrepayend,jdbcType=DECIMAL},
+			</if>
+			<if test="freezetrxid != null">
+				FREEZETRXID = #{freezetrxid,jdbcType=VARCHAR},
+			</if>
+			<if test="valuedate != null">
+				VALUEDATE = #{valuedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loanno != null">
+				LOANNO = #{loanno,jdbcType=VARCHAR},
+			</if>
+			<if test="authcode != null">
+				AUTHCODE = #{authcode,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ORDERNO = #{orderno,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 根据标的号ID更新原始投标成功的订单号起息日 -->
+	<update id="updateValueDateByTenderId" parameterType="com.ptpl.model.UserTender">
+		update USERTENDER
+		<set>
+			<if test="valuedate != null">
+				VALUEDATE = #{valuedate,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where tenderid = #{tenderid,jdbcType=DECIMAL} and tstatus = 4 and
+		utproperty = 1
+	</update>
+
+	<!-- 查询待放款投标记录（关联标的设置表、用户账户基本信息表、投标放款记录表） -->
+	<select id="selectPendingLoanByTno" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		<include refid="Association_Column_List" />
+		FROM
+		USERTENDER UT
+		LEFT JOIN TENDERITEM TI ON UT.TENDERID=TI.ID
+		LEFT JOIN USERBASEACCOUNTINFO U1 ON UT.OUTACCOUNTID = U1.ID
+		LEFT JOIN USERBASEACCOUNTINFO U2 ON UT.INACCOUNTID = U2.ID
+		WHERE
+		TI.TNO=#{TNO,jdbcType=VARCHAR}
+		AND UT.TSTATUS = 1
+		AND UT.UTPROPERTY = 1
+		AND UT.ISAUDIT = 2
+		AND UT.ORDERNO NOT IN (SELECT UMAL.ORDERNO FROM
+		USERMAKEALOAN UMAL LEFT JOIN USERTENDER UT ON UMAL.ORDERNO=UT.ORDERNO
+		WHERE UMAL.MALSTATUS=1)
+	</select>
+
+	<!-- 查询我的投资记录（关联标的设置表） -->
+	<select id="findMyTenderRecord" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserTender">
+		select
+		*
+		from
+		usertender ut
+		left join tenderitem ti on ut.tenderid=ti.id
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="tenderitem != null">
+				and ti.tstatus = #{tenderitem.tstatus}
+			</if>
+			<if test="tstatus != null and tstatus != ''">
+				and ut.tstatus = #{tstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="outaccountid != null">
+				and ut.outaccountid = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="starttime != null">
+				and ut.tbegintime &gt;= #{starttime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="endtime != null">
+				and ut.tbegintime &lt;= #{endtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="time == 'week'">
+				and ut.tbegintime >= sysdate-7
+			</if>
+			<if test="time == 'oneMonth'">
+				and ut.tbegintime >=add_months(sysdate,-1)
+			</if>
+			<if test="time == 'threeMonth'">
+				and ut.tbegintime >=add_months(sysdate,-3)
+			</if>
+		</trim>
+		order by ut.tbegintime desc
+	</select>
+
+	<!-- 查询投资人同一标的下状态为初始的投标订单 -->
+	<select id="selectInitialOrderByBaseidAndTid" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserTender">
+		select
+		<include refid="Base_Column_List" />
+		from
+		usertender
+		where
+		outaccountid = #{outaccountid,jdbcType=DECIMAL}
+		and tenderid =
+		#{tenderid,jdbcType=DECIMAL}
+		and tstatus = 0
+		and utproperty=1
+	</select>
+
+	<!-- 根据托管方流水号LoanNo查询投标记录 -->
+	<select id="selectByLoanNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+			<include refid="Base_Column_List" />
+		from
+			usertender
+		where
+			loanno = #{loanno,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询放款中、放款成功和放款失败的记录 -->
+	<select id="findIsFailTC" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Association_Column_List" />
+		from
+		usertender ut
+		left join UserBaseAccountInfo u1 on ut.outaccountid =
+		u1.id
+		left join UserBaseAccountInfo u2 on ut.inaccountid = u2.id
+		left
+		join TenderItem ti on ut.tenderid = ti.id
+		<where>
+			ut.tenderid = #{tenderid,jdbcType=DECIMAL}
+			and ut.utproperty = '1'
+			and (ut.tstatus = '4' or ut.tstatus = '5' or ut.tstatus = '6')
+		</where>
+	</select>
+
+	<select id="findRecordByBaseId"  resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select <include refid="Base_Column_List" />
+		from usertender where outaccountid = #{outaccountid,jdbcType=DECIMAL}
+	</select>
+
+</mapper>

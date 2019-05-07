@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.WCCAwardRuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.WCCAwardRule">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTID" property="actid" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="FINISHTIME" property="finishtime" jdbcType="DECIMAL" />
+		<result column="AWARDID" property="awardid" jdbcType="DECIMAL" />
+		<result column="AWARDNAME" property="awardname" jdbcType="VARCHAR" />
+		<result column="AWARDCOPIES" property="awardcopies" jdbcType="DECIMAL" />
+		<result column="AWARDTYPE" property="awardtype" jdbcType="DECIMAL" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="AWARDRATIO" property="awardratio" jdbcType="FLOAT" />
+		<result column="AWARDMIN" property="awardmin" jdbcType="FLOAT" />
+		<result column="AWARDMAX" property="awardmax" jdbcType="FLOAT" />
+		<result column="DISTRIBUTETYPE" property="distributetype"
+			jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ACTID, UGRADE, FINISHTIME, AWARDID, AWARDNAME, AWARDCOPIES,
+		AWARDTYPE, QUOTA,
+		AWARDRATIO, AWARDMIN, AWARDMAX, DISTRIBUTETYPE, ADDMAN, ADDTIME, REMARK
+	</sql>
+
+	<!-- 根据ID查询提低卷活动奖励 资源 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from WCCAWARDRULE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 查询全部提低卷活动奖励 资源 -->
+	<select id="findWCCAwardRules" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.WCCAwardRule">
+		select
+		<include refid="Base_Column_List" />
+		from WCCAWARDRULE
+		<if test="actid !=null">
+			where actid like '%${actid}%'
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from WCCAWARDRULE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.WCCAwardRule">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT WCCAWARDRULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into WCCAWARDRULE (ID, ACTID, UGRADE,
+		FINISHTIME, AWARDID, AWARDNAME,
+		AWARDCOPIES, AWARDTYPE, QUOTA,
+		AWARDRATIO, AWARDMIN, AWARDMAX,
+		DISTRIBUTETYPE, ADDMAN, ADDTIME,
+		REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{actid,jdbcType=DECIMAL},
+		#{ugrade,jdbcType=VARCHAR},
+		#{finishtime,jdbcType=DECIMAL}, #{awardid,jdbcType=DECIMAL}, #{awardname,jdbcType=VARCHAR},
+		#{awardcopies,jdbcType=DECIMAL}, #{awardtype,jdbcType=DECIMAL},
+		#{quota,jdbcType=OTHER},
+		#{awardratio,jdbcType=OTHER}, #{awardmin,jdbcType=OTHER}, #{awardmax,jdbcType=OTHER},
+		#{distributetype,jdbcType=DECIMAL}, #{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.WCCAwardRule">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT WCCAWARDRULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into WCCAWARDRULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actid != null">
+				ACTID,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="finishtime != null">
+				FINISHTIME,
+			</if>
+			<if test="awardid != null">
+				AWARDID,
+			</if>
+			<if test="awardname != null">
+				AWARDNAME,
+			</if>
+			<if test="awardcopies != null">
+				AWARDCOPIES,
+			</if>
+			<if test="awardtype != null">
+				AWARDTYPE,
+			</if>
+			<if test="quota != null">
+				QUOTA,
+			</if>
+			<if test="awardratio != null">
+				AWARDRATIO,
+			</if>
+			<if test="awardmin != null">
+				AWARDMIN,
+			</if>
+			<if test="awardmax != null">
+				AWARDMAX,
+			</if>
+			<if test="distributetype != null">
+				DISTRIBUTETYPE,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actid != null">
+				#{actid,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="finishtime != null">
+				#{finishtime,jdbcType=DECIMAL},
+			</if>
+			<if test="awardid != null">
+				#{awardid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardname != null">
+				#{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardcopies != null">
+				#{awardcopies,jdbcType=DECIMAL},
+			</if>
+			<if test="awardtype != null">
+				#{awardtype,jdbcType=DECIMAL},
+			</if>
+			<if test="quota != null">
+				#{quota,jdbcType=OTHER},
+			</if>
+			<if test="awardratio != null">
+				#{awardratio,jdbcType=OTHER},
+			</if>
+			<if test="awardmin != null">
+				#{awardmin,jdbcType=OTHER},
+			</if>
+			<if test="awardmax != null">
+				#{awardmax,jdbcType=OTHER},
+			</if>
+			<if test="distributetype != null">
+				#{distributetype,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.ptpl.model.WCCAwardRule">
+		update WCCAWARDRULE
+		<set>
+			<if test="actid != null">
+				ACTID = #{actid,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="finishtime != null">
+				FINISHTIME = #{finishtime,jdbcType=DECIMAL},
+			</if>
+			<if test="awardid != null">
+				AWARDID = #{awardid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardname != null">
+				AWARDNAME = #{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardcopies != null">
+				AWARDCOPIES = #{awardcopies,jdbcType=DECIMAL},
+			</if>
+			<if test="awardtype != null">
+				AWARDTYPE = #{awardtype,jdbcType=DECIMAL},
+			</if>
+			<if test="quota != null">
+				QUOTA = #{quota,jdbcType=OTHER},
+			</if>
+			<if test="awardratio != null">
+				AWARDRATIO = #{awardratio,jdbcType=OTHER},
+			</if>
+			<if test="awardmin != null">
+				AWARDMIN = #{awardmin,jdbcType=OTHER},
+			</if>
+			<if test="awardmax != null">
+				AWARDMAX = #{awardmax,jdbcType=OTHER},
+			</if>
+			<if test="distributetype != null">
+				DISTRIBUTETYPE = #{distributetype,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.WCCAwardRule">
+		update WCCAWARDRULE
+		set ACTID = #{actid,jdbcType=DECIMAL},
+		UGRADE = #{ugrade,jdbcType=VARCHAR},
+		FINISHTIME = #{finishtime,jdbcType=DECIMAL},
+		AWARDID = #{awardid,jdbcType=DECIMAL},
+		AWARDNAME = #{awardname,jdbcType=VARCHAR},
+		AWARDCOPIES = #{awardcopies,jdbcType=DECIMAL},
+		AWARDTYPE = #{awardtype,jdbcType=DECIMAL},
+		QUOTA = #{quota,jdbcType=FLOAT},
+		AWARDRATIO = #{awardratio,jdbcType=FLOAT},
+		AWARDMIN = #{awardmin,jdbcType=FLOAT},
+		AWARDMAX = #{awardmax,jdbcType=FLOAT},
+		DISTRIBUTETYPE = #{distributetype,jdbcType=DECIMAL},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

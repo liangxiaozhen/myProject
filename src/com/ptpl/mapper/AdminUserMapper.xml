@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AdminUserMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AdminUser">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+		<result column="FULLNAME" property="fullname" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+		<result column="ERRORCOUNT" property="errorcount" jdbcType="DECIMAL" />
+		<result column="LOGINTIME" property="logintime" jdbcType="TIMESTAMP" />
+		<result column="MODIFYPWDTIME" property="modifypwdtime"
+			jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FORBID" property="forbid" jdbcType="VARCHAR" />
+		<result column="REGDATE" property="regdate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,username,password,fullname,email,mobilephone,errorcount,logintime,modifypwdtime,remark,forbid,regdate
+	</sql>
+
+	<!-- 数据新增 方法 -->
+	<insert id="insert" parameterType="com.ptpl.model.AdminUser">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ADMINUSER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ADMINUSER (ID, USERNAME, PASSWORD,
+		FULLNAME, EMAIL, MOBILEPHONE,
+		ERRORCOUNT, LOGINTIME, MODIFYPWDTIME,
+		REMARK,FORBID,REGDATE)
+		values (#{id,jdbcType=DECIMAL}, #{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{fullname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR},
+		#{errorcount,jdbcType=DECIMAL}, #{logintime}, #{modifypwdtime},
+		#{remark,jdbcType=VARCHAR},#{forbid,jdbcType=VARCHAR},#{regdate})
+	</insert>
+
+	<!-- 数据新增 非空 -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.AdminUser">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ADMINUSER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ADMINUSER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="password != null">
+				PASSWORD,
+			</if>
+			<if test="fullname != null">
+				FULLNAME,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="mobilephone != null">
+				MOBILEPHONE,
+			</if>
+			<if test="errorcount != null">
+				ERRORCOUNT,
+			</if>
+			<if test="logintime != null">
+				LOGINTIME,
+			</if>
+			<if test="modifypwdtime != null">
+				MODIFYPWDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="forbid != null">
+				FORBID,
+			</if>
+			<if test="regdate != null">
+				REGDATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="fullname != null">
+				#{fullname,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilephone != null">
+				#{mobilephone,jdbcType=VARCHAR},
+			</if>
+			<if test="errorcount != null">
+				#{errorcount,jdbcType=DECIMAL},
+			</if>
+			<if test="logintime != null">
+				#{logintime},
+			</if>
+			<if test="modifypwdtime != null">
+				#{modifypwdtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="forbid != null">
+				#{forbid,jdbcType=VARCHAR},
+			</if>
+			<if test="regdate != null">
+				#{regdate},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据用户名查询密码 -->
+	<select id="findAdminUserPSWByUsName" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.AdminUser">
+		select
+		<include refid="Base_Column_List"></include>
+		from ADMINUSER where username = #{username,jdbcType=VARCHAR} or email
+		= #{email,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findAdminUserByEamil" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.AdminUser">
+		select
+		<include refid="Base_Column_List"></include>
+		from ADMINUSER where email = #{email,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 动态更新 -->
+	<update id="updateAdminUser" parameterType="com.ptpl.model.AdminUser">
+		update ADMINUSER
+		<set>
+			<if test="username != null">
+				USERNAME=#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				PASSWORD=#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="fullname != null">
+				FULLNAME=#{fullname,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL=#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilephone != null">
+				MOBILEPHONE=#{mobilephone,jdbcType=VARCHAR},
+			</if>
+			<if test="errorcount != null">
+				ERRORCOUNT=#{errorcount,jdbcType=VARCHAR},
+			</if>
+			<if test="logintime != null">
+				LOGINTIME=#{logintime},
+			</if>
+			<if test="modifypwdtime != null">
+				MODIFYPWDTIME=#{modifypwdtime},
+			</if>
+			<if test="remark != null">
+				REMARK=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="forbid != null">
+				FORBID=#{forbid,jdbcType=VARCHAR},
+			</if>
+			<if test="regdate != null">
+				REGDATE=#{regdate},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据密码输入错误数和禁止状态查询最后登录时间 -->
+	<select id="findAllAdminUserByForBid" parameterType="com.ptpl.model.AdminUser"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ADMINUSER
+		<trim prefix="where" prefixOverrides="and">
+			<if test="errorcount !=null">
+				AND errorcount=#{errorcount,jdbcType=VARCHAR}
+			</if>
+			<if test="forbid !=null">
+				AND forbid=#{forbid,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+	<resultMap type="com.ptpl.model.AdminUser" id="getAdminUserAndRole"
+		extends="BaseResultMap">
+		<association property="systemRole" column="systemrole_id"
+			javaType="com.ptpl.model.SystemRole">
+			<result column="systemrole_id" property="id" jdbcType="DECIMAL" />
+			<result column="rolename" property="rolename" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<!-- 根据用户ID查询对应的角色 -->
+	<select id="findRoleByAdminUserId" resultMap="getAdminUserAndRole"
+		parameterType="java.lang.Integer">
+		select WM_CONCAT(s.rolename) as rolename from roleuser r,adminuser
+		u,systemrole s where r.user_id = u.id and r.role_id = s.id and u.id =
+		#{id}
+	</select>
+
+	<!-- 查询全部用户 -->
+	<select id="findAdminUsers" resultMap="getAdminUserAndRole"
+		parameterType="com.ptpl.model.AdminUser">
+		select
+		<include refid="Base_Column_List"></include>
+		from ADMINUSER
+		<trim prefix="WHERE">
+			<if test="username !=null">
+				username like '%${username}%'
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据角色ID查询已经分配的用户 -->
+	<select id="findUserByRoleId" resultMap="getAdminUserAndRole"
+		parameterType="java.lang.Integer">
+		select u.username,u.email,u.id as id ,r.id as systemrole_id ,r.rolename
+		from ROLEUSER t,adminuser u,systemrole r where t.user_id = u.id and
+		t.role_id = r.id and r.id = #{id}
+	</select>
+
+	<!-- 根据id获取对应的管理员记录 -->
+	<select id="getAdminUserById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"></include>
+		from ADMINUSER where ID = #{id,jdbcType=DECIMAL}
+	</select>
+</mapper>

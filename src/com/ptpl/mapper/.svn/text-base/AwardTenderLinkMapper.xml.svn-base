@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AwardTenderLinkMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AwardTenderLink">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="AWARDID" property="awardId" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderId" jdbcType="DECIMAL" />
+
+	</resultMap>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.AwardTenderLink">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT AwardTenderLink_Seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AWARDTENDERLINK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id !=null">
+				ID,
+			</if>
+			<if test="awardId !=null">
+				AWARDID,
+			</if>
+			<if test="tenderId !=null">
+				TENDERID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id !=null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="awardId !=null">
+				#{awardId,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderId !=null">
+				#{tenderId,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<!-- 获得多个 根据奖品的id获得对应的列表 -->
+	<select id="getAwardTenderLinksByawardId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select * from AwardTenderLink where AWARDID = #{awardId,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据奖品的id删除对应的列表（多个） -->
+	<delete id="deleteAwardTenderLink">
+		delete from AWARDTENDERLINK where AWARDID = #{awardId,jdbcType=DECIMAL}
+	</delete>
+</mapper>

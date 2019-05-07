@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.OverdueRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.OverdueRecord" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ORORDERNO" property="ororderno" jdbcType="VARCHAR" />
+    <result column="ORID" property="orid" jdbcType="DECIMAL" />
+    <result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+    <result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+    <result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR" />
+    <result column="BMANID" property="bmanid" jdbcType="DECIMAL" />
+    <result column="INVESTORID" property="investorid" jdbcType="DECIMAL" />
+    <result column="PROXYACCOUNTID" property="proxyaccountid" jdbcType="DECIMAL" />
+    <result column="NEEDRDATE" property="needrdate" jdbcType="TIMESTAMP" />
+    <result column="PERIODS" property="periods" jdbcType="DECIMAL" />
+    <result column="ODAY" property="oday" jdbcType="DECIMAL" />
+    <result column="OAMOUNT" property="oamount" jdbcType="FLOAT" />
+    <result column="ADVOAMOUNT" property="advoamount" jdbcType="FLOAT" />
+    <result column="OINTEREST" property="ointerest" jdbcType="FLOAT" />
+    <result column="ADVOINTEREST" property="advointerest" jdbcType="FLOAT" />
+    <result column="OFEE" property="ofee" jdbcType="FLOAT" />
+    <result column="ADVOFEE" property="advofee" jdbcType="FLOAT" />
+    <result column="ADVPAYTYPE" property="advpaytype" jdbcType="VARCHAR" />
+    <result column="ISDEAL" property="isdeal" jdbcType="DECIMAL" />
+    <result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+    <result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+    <result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+    <result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+    <result column="DEALDATE" property="dealdate" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="RBATCHNO" property="rbatchno" jdbcType="VARCHAR" />
+    <result column="OTOTALAMOUNT" property="ototalamount" jdbcType="FLOAT" />
+    <result column="ADVOTOTALAMOUNT" property="advototalamount" jdbcType="FLOAT" />
+    <result column="OTOTALINT" property="ototalint" jdbcType="FLOAT" />
+    <result column="ADVOTOTALINT" property="advototalint" jdbcType="FLOAT" />
+    <result column="OAVOUCHER" property="oavoucher" jdbcType="FLOAT" />
+    <result column="ADVOAVOUCHER" property="advoavoucher" jdbcType="FLOAT" />
+    <result column="OALVOUCHER" property="oalvoucher" jdbcType="FLOAT" />
+    <result column="ADVOALVOUCHER" property="advoalvoucher" jdbcType="FLOAT" />
+    <result column="OAMOUNTINT" property="oamountint" jdbcType="FLOAT" />
+    <result column="ADVOAMOUNTINT" property="advoamountint" jdbcType="FLOAT" />
+    <result column="OAVOUCHERINT" property="oavoucherint" jdbcType="FLOAT" />
+    <result column="ADVOAVOUCHERINT" property="advoavoucherint" jdbcType="FLOAT" />
+    <result column="OALVOUCHERINT" property="oalvoucherint" jdbcType="FLOAT" />
+    <result column="ADVOALVOUCHERINT" property="advoalvoucherint" jdbcType="FLOAT" />
+    <result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+    <result column="ISMANBLENDING" property="ismanblending" jdbcType="DECIMAL" />
+    <result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+    <result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+    <result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+    <result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+    <result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+    <result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+    <result column="RECRESULTDATA" property="recresultdata" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORORDERNO, ORID, TENDERID, RORDERNO, PMISCRECMAN, BMANID, INVESTORID, PROXYACCOUNTID, 
+    NEEDRDATE, PERIODS, ODAY, OAMOUNT, ADVOAMOUNT, OINTEREST, ADVOINTEREST, OFEE, ADVOFEE, 
+    ADVPAYTYPE, ISDEAL, ISAUDIT, AUDITMAN, AUDITTIME, MADETIME, DEALDATE, REMARK, RBATCHNO, 
+    OTOTALAMOUNT, ADVOTOTALAMOUNT, OTOTALINT, ADVOTOTALINT, OAVOUCHER, ADVOAVOUCHER, 
+    OALVOUCHER, ADVOALVOUCHER, OAMOUNTINT, ADVOAMOUNTINT, OAVOUCHERINT, ADVOAVOUCHERINT, 
+    OALVOUCHERINT, ADVOALVOUCHERINT, ISBLENDING, ISMANBLENDING, SYSBTIME, MANBTIME, PAYCOMPANY, 
+    SYSRECTIME, RECEIVETIME, REQQUERYDATA, RECRESULTDATA
+  </sql>
+  <select id="findOverdueRecordById" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from OVERDUERECORD
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="findOverdueRecords" resultMap="BaseResultMap" parameterType="com.ptpl.model.OverdueRecord" >
+    select 
+    <include refid="Base_Column_List" />
+    from OVERDUERECORD
+   </select>
+  
+  <delete id="deleteById" parameterType="java.math.BigDecimal" >
+    delete from OVERDUERECORD
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.OverdueRecord" >
+  	<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+  		SELECT OVERDUERECORD_SEQ.NEXTVAL AS id from dual
+   	</selectKey>
+    insert into OVERDUERECORD (ID, ORORDERNO, ORID, 
+      TENDERID, RORDERNO, PMISCRECMAN, 
+      BMANID, INVESTORID, PROXYACCOUNTID, 
+      NEEDRDATE, PERIODS, ODAY, 
+      OAMOUNT, ADVOAMOUNT, OINTEREST, 
+      ADVOINTEREST, OFEE, ADVOFEE, 
+      ADVPAYTYPE, ISDEAL, ISAUDIT, 
+      AUDITMAN, AUDITTIME, MADETIME, 
+      DEALDATE, REMARK, RBATCHNO, 
+      OTOTALAMOUNT, ADVOTOTALAMOUNT, OTOTALINT, 
+      ADVOTOTALINT, OAVOUCHER, ADVOAVOUCHER, 
+      OALVOUCHER, ADVOALVOUCHER, OAMOUNTINT, 
+      ADVOAMOUNTINT, OAVOUCHERINT, ADVOAVOUCHERINT, 
+      OALVOUCHERINT, ADVOALVOUCHERINT, ISBLENDING, 
+      ISMANBLENDING, SYSBTIME, MANBTIME, 
+      PAYCOMPANY, SYSRECTIME, RECEIVETIME, 
+      REQQUERYDATA, RECRESULTDATA)
+    values (#{id,jdbcType=DECIMAL}, #{ororderno,jdbcType=VARCHAR}, #{orid,jdbcType=DECIMAL}, 
+      #{tenderid,jdbcType=DECIMAL}, #{rorderno,jdbcType=VARCHAR}, #{pmiscrecman,jdbcType=VARCHAR}, 
+      #{bmanid,jdbcType=DECIMAL}, #{investorid,jdbcType=DECIMAL}, #{proxyaccountid,jdbcType=DECIMAL}, 
+      #{needrdate,jdbcType=TIMESTAMP}, #{periods,jdbcType=DECIMAL}, #{oday,jdbcType=DECIMAL}, 
+      #{oamount,jdbcType=FLOAT}, #{advoamount,jdbcType=FLOAT}, #{ointerest,jdbcType=FLOAT}, 
+      #{advointerest,jdbcType=FLOAT}, #{ofee,jdbcType=FLOAT}, #{advofee,jdbcType=FLOAT}, 
+      #{advpaytype,jdbcType=VARCHAR}, #{isdeal,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL}, 
+      #{auditman,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP}, #{madetime,jdbcType=TIMESTAMP}, 
+      #{dealdate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{rbatchno,jdbcType=VARCHAR}, 
+      #{ototalamount,jdbcType=FLOAT}, #{advototalamount,jdbcType=FLOAT}, #{ototalint,jdbcType=FLOAT}, 
+      #{advototalint,jdbcType=FLOAT}, #{oavoucher,jdbcType=FLOAT}, #{advoavoucher,jdbcType=FLOAT}, 
+      #{oalvoucher,jdbcType=FLOAT}, #{advoalvoucher,jdbcType=FLOAT}, #{oamountint,jdbcType=FLOAT}, 
+      #{advoamountint,jdbcType=FLOAT}, #{oavoucherint,jdbcType=FLOAT}, #{advoavoucherint,jdbcType=FLOAT}, 
+      #{oalvoucherint,jdbcType=FLOAT}, #{advoalvoucherint,jdbcType=FLOAT}, #{isblending,jdbcType=DECIMAL}, 
+      #{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=TIMESTAMP}, #{manbtime,jdbcType=TIMESTAMP}, 
+      #{paycompany,jdbcType=VARCHAR}, #{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP}, 
+      #{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.OverdueRecord" >
+  <selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+  	SELECT OVERDUERECORD_SEQ.NEXTVAL AS id from dual
+  </selectKey>
+    insert into OVERDUERECORD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="ororderno != null" >
+        ORORDERNO,
+      </if>
+      <if test="orid != null" >
+        ORID,
+      </if>
+      <if test="tenderid != null" >
+        TENDERID,
+      </if>
+      <if test="rorderno != null" >
+        RORDERNO,
+      </if>
+      <if test="pmiscrecman != null" >
+        PMISCRECMAN,
+      </if>
+      <if test="bmanid != null" >
+        BMANID,
+      </if>
+      <if test="investorid != null" >
+        INVESTORID,
+      </if>
+      <if test="proxyaccountid != null" >
+        PROXYACCOUNTID,
+      </if>
+      <if test="needrdate != null" >
+        NEEDRDATE,
+      </if>
+      <if test="periods != null" >
+        PERIODS,
+      </if>
+      <if test="oday != null" >
+        ODAY,
+      </if>
+      <if test="oamount != null" >
+        OAMOUNT,
+      </if>
+      <if test="advoamount != null" >
+        ADVOAMOUNT,
+      </if>
+      <if test="ointerest != null" >
+        OINTEREST,
+      </if>
+      <if test="advointerest != null" >
+        ADVOINTEREST,
+      </if>
+      <if test="ofee != null" >
+        OFEE,
+      </if>
+      <if test="advofee != null" >
+        ADVOFEE,
+      </if>
+      <if test="advpaytype != null" >
+        ADVPAYTYPE,
+      </if>
+      <if test="isdeal != null" >
+        ISDEAL,
+      </if>
+      <if test="isaudit != null" >
+        ISAUDIT,
+      </if>
+      <if test="auditman != null" >
+        AUDITMAN,
+      </if>
+      <if test="audittime != null" >
+        AUDITTIME,
+      </if>
+      <if test="madetime != null" >
+        MADETIME,
+      </if>
+      <if test="dealdate != null" >
+        DEALDATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="rbatchno != null" >
+        RBATCHNO,
+      </if>
+      <if test="ototalamount != null" >
+        OTOTALAMOUNT,
+      </if>
+      <if test="advototalamount != null" >
+        ADVOTOTALAMOUNT,
+      </if>
+      <if test="ototalint != null" >
+        OTOTALINT,
+      </if>
+      <if test="advototalint != null" >
+        ADVOTOTALINT,
+      </if>
+      <if test="oavoucher != null" >
+        OAVOUCHER,
+      </if>
+      <if test="advoavoucher != null" >
+        ADVOAVOUCHER,
+      </if>
+      <if test="oalvoucher != null" >
+        OALVOUCHER,
+      </if>
+      <if test="advoalvoucher != null" >
+        ADVOALVOUCHER,
+      </if>
+      <if test="oamountint != null" >
+        OAMOUNTINT,
+      </if>
+      <if test="advoamountint != null" >
+        ADVOAMOUNTINT,
+      </if>
+      <if test="oavoucherint != null" >
+        OAVOUCHERINT,
+      </if>
+      <if test="advoavoucherint != null" >
+        ADVOAVOUCHERINT,
+      </if>
+      <if test="oalvoucherint != null" >
+        OALVOUCHERINT,
+      </if>
+      <if test="advoalvoucherint != null" >
+        ADVOALVOUCHERINT,
+      </if>
+      <if test="isblending != null" >
+        ISBLENDING,
+      </if>
+      <if test="ismanblending != null" >
+        ISMANBLENDING,
+      </if>
+      <if test="sysbtime != null" >
+        SYSBTIME,
+      </if>
+      <if test="manbtime != null" >
+        MANBTIME,
+      </if>
+      <if test="paycompany != null" >
+        PAYCOMPANY,
+      </if>
+      <if test="sysrectime != null" >
+        SYSRECTIME,
+      </if>
+      <if test="receivetime != null" >
+        RECEIVETIME,
+      </if>
+      <if test="reqquerydata != null" >
+        REQQUERYDATA,
+      </if>
+      <if test="recresultdata != null" >
+        RECRESULTDATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="ororderno != null" >
+        #{ororderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orid != null" >
+        #{orid,jdbcType=DECIMAL},
+      </if>
+      <if test="tenderid != null" >
+        #{tenderid,jdbcType=DECIMAL},
+      </if>
+      <if test="rorderno != null" >
+        #{rorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="pmiscrecman != null" >
+        #{pmiscrecman,jdbcType=VARCHAR},
+      </if>
+      <if test="bmanid != null" >
+        #{bmanid,jdbcType=DECIMAL},
+      </if>
+      <if test="investorid != null" >
+        #{investorid,jdbcType=DECIMAL},
+      </if>
+      <if test="proxyaccountid != null" >
+        #{proxyaccountid,jdbcType=DECIMAL},
+      </if>
+      <if test="needrdate != null" >
+        #{needrdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periods != null" >
+        #{periods,jdbcType=DECIMAL},
+      </if>
+      <if test="oday != null" >
+        #{oday,jdbcType=DECIMAL},
+      </if>
+      <if test="oamount != null" >
+        #{oamount,jdbcType=FLOAT},
+      </if>
+      <if test="advoamount != null" >
+        #{advoamount,jdbcType=FLOAT},
+      </if>
+      <if test="ointerest != null" >
+        #{ointerest,jdbcType=FLOAT},
+      </if>
+      <if test="advointerest != null" >
+        #{advointerest,jdbcType=FLOAT},
+      </if>
+      <if test="ofee != null" >
+        #{ofee,jdbcType=FLOAT},
+      </if>
+      <if test="advofee != null" >
+        #{advofee,jdbcType=FLOAT},
+      </if>
+      <if test="advpaytype != null" >
+        #{advpaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeal != null" >
+        #{isdeal,jdbcType=DECIMAL},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=DECIMAL},
+      </if>
+      <if test="auditman != null" >
+        #{auditman,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="madetime != null" >
+        #{madetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealdate != null" >
+        #{dealdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="rbatchno != null" >
+        #{rbatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="ototalamount != null" >
+        #{ototalamount,jdbcType=FLOAT},
+      </if>
+      <if test="advototalamount != null" >
+        #{advototalamount,jdbcType=FLOAT},
+      </if>
+      <if test="ototalint != null" >
+        #{ototalint,jdbcType=FLOAT},
+      </if>
+      <if test="advototalint != null" >
+        #{advototalint,jdbcType=FLOAT},
+      </if>
+      <if test="oavoucher != null" >
+        #{oavoucher,jdbcType=FLOAT},
+      </if>
+      <if test="advoavoucher != null" >
+        #{advoavoucher,jdbcType=FLOAT},
+      </if>
+      <if test="oalvoucher != null" >
+        #{oalvoucher,jdbcType=FLOAT},
+      </if>
+      <if test="advoalvoucher != null" >
+        #{advoalvoucher,jdbcType=FLOAT},
+      </if>
+      <if test="oamountint != null" >
+        #{oamountint,jdbcType=FLOAT},
+      </if>
+      <if test="advoamountint != null" >
+        #{advoamountint,jdbcType=FLOAT},
+      </if>
+      <if test="oavoucherint != null" >
+        #{oavoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="advoavoucherint != null" >
+        #{advoavoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="oalvoucherint != null" >
+        #{oalvoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="advoalvoucherint != null" >
+        #{advoalvoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="isblending != null" >
+        #{isblending,jdbcType=DECIMAL},
+      </if>
+      <if test="ismanblending != null" >
+        #{ismanblending,jdbcType=DECIMAL},
+      </if>
+      <if test="sysbtime != null" >
+        #{sysbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manbtime != null" >
+        #{manbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paycompany != null" >
+        #{paycompany,jdbcType=VARCHAR},
+      </if>
+      <if test="sysrectime != null" >
+        #{sysrectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivetime != null" >
+        #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqquerydata != null" >
+        #{reqquerydata,jdbcType=VARCHAR},
+      </if>
+      <if test="recresultdata != null" >
+        #{recresultdata,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.ptpl.model.OverdueRecord" >
+    update OVERDUERECORD
+    <set >
+      <if test="ororderno != null" >
+        ORORDERNO = #{ororderno,jdbcType=VARCHAR},
+      </if>
+      <if test="orid != null" >
+        ORID = #{orid,jdbcType=DECIMAL},
+      </if>
+      <if test="tenderid != null" >
+        TENDERID = #{tenderid,jdbcType=DECIMAL},
+      </if>
+      <if test="rorderno != null" >
+        RORDERNO = #{rorderno,jdbcType=VARCHAR},
+      </if>
+      <if test="pmiscrecman != null" >
+        PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+      </if>
+      <if test="bmanid != null" >
+        BMANID = #{bmanid,jdbcType=DECIMAL},
+      </if>
+      <if test="investorid != null" >
+        INVESTORID = #{investorid,jdbcType=DECIMAL},
+      </if>
+      <if test="proxyaccountid != null" >
+        PROXYACCOUNTID = #{proxyaccountid,jdbcType=DECIMAL},
+      </if>
+      <if test="needrdate != null" >
+        NEEDRDATE = #{needrdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periods != null" >
+        PERIODS = #{periods,jdbcType=DECIMAL},
+      </if>
+      <if test="oday != null" >
+        ODAY = #{oday,jdbcType=DECIMAL},
+      </if>
+      <if test="oamount != null" >
+        OAMOUNT = #{oamount,jdbcType=FLOAT},
+      </if>
+      <if test="advoamount != null" >
+        ADVOAMOUNT = #{advoamount,jdbcType=FLOAT},
+      </if>
+      <if test="ointerest != null" >
+        OINTEREST = #{ointerest,jdbcType=FLOAT},
+      </if>
+      <if test="advointerest != null" >
+        ADVOINTEREST = #{advointerest,jdbcType=FLOAT},
+      </if>
+      <if test="ofee != null" >
+        OFEE = #{ofee,jdbcType=FLOAT},
+      </if>
+      <if test="advofee != null" >
+        ADVOFEE = #{advofee,jdbcType=FLOAT},
+      </if>
+      <if test="advpaytype != null" >
+        ADVPAYTYPE = #{advpaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeal != null" >
+        ISDEAL = #{isdeal,jdbcType=DECIMAL},
+      </if>
+      <if test="isaudit != null" >
+        ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+      </if>
+      <if test="auditman != null" >
+        AUDITMAN = #{auditman,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="madetime != null" >
+        MADETIME = #{madetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dealdate != null" >
+        DEALDATE = #{dealdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="rbatchno != null" >
+        RBATCHNO = #{rbatchno,jdbcType=VARCHAR},
+      </if>
+      <if test="ototalamount != null" >
+        OTOTALAMOUNT = #{ototalamount,jdbcType=FLOAT},
+      </if>
+      <if test="advototalamount != null" >
+        ADVOTOTALAMOUNT = #{advototalamount,jdbcType=FLOAT},
+      </if>
+      <if test="ototalint != null" >
+        OTOTALINT = #{ototalint,jdbcType=FLOAT},
+      </if>
+      <if test="advototalint != null" >
+        ADVOTOTALINT = #{advototalint,jdbcType=FLOAT},
+      </if>
+      <if test="oavoucher != null" >
+        OAVOUCHER = #{oavoucher,jdbcType=FLOAT},
+      </if>
+      <if test="advoavoucher != null" >
+        ADVOAVOUCHER = #{advoavoucher,jdbcType=FLOAT},
+      </if>
+      <if test="oalvoucher != null" >
+        OALVOUCHER = #{oalvoucher,jdbcType=FLOAT},
+      </if>
+      <if test="advoalvoucher != null" >
+        ADVOALVOUCHER = #{advoalvoucher,jdbcType=FLOAT},
+      </if>
+      <if test="oamountint != null" >
+        OAMOUNTINT = #{oamountint,jdbcType=FLOAT},
+      </if>
+      <if test="advoamountint != null" >
+        ADVOAMOUNTINT = #{advoamountint,jdbcType=FLOAT},
+      </if>
+      <if test="oavoucherint != null" >
+        OAVOUCHERINT = #{oavoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="advoavoucherint != null" >
+        ADVOAVOUCHERINT = #{advoavoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="oalvoucherint != null" >
+        OALVOUCHERINT = #{oalvoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="advoalvoucherint != null" >
+        ADVOALVOUCHERINT = #{advoalvoucherint,jdbcType=FLOAT},
+      </if>
+      <if test="isblending != null" >
+        ISBLENDING = #{isblending,jdbcType=DECIMAL},
+      </if>
+      <if test="ismanblending != null" >
+        ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+      </if>
+      <if test="sysbtime != null" >
+        SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manbtime != null" >
+        MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paycompany != null" >
+        PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+      </if>
+      <if test="sysrectime != null" >
+        SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivetime != null" >
+        RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqquerydata != null" >
+        REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+      </if>
+      <if test="recresultdata != null" >
+        RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+ 
+</mapper>

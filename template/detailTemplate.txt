@@ -1,0 +1,120 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+ <%@taglib uri="/WEB-INF/tld/gj.tld" prefix="gj"%>
+ <%@include file="/WEB-INF/jsp/common/taglib.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[description]详情列表</title>
+ <%@include file="/WEB-INF/jsp/common/public.jsp" %>
+ <style>
+ 	.text-center td{vertical-align: text-top!important;}
+ 	.input-group-addon a{text-decoration:none;}
+   </style>
+ </head>
+<body>
+ 	<div class="container">
+		<div class="row">
+ 			<div class="col-md-12" style="margin-top:15px;">
+ 			
+ 				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-4 text-right">
+					    <label class="col-sm-2">增益清算流水号</label>
+					 </div>
+					 <div class="col-md-8 col-sm-8 col-xs-8">
+   				    	<span>${plusPayoutRecord.pporderno}</span>
+  				  	</div>
+ 				</div>
+ 				
+				 <div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">活动编号</label>
+ 				    	<span>${[lowEntity].actno}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">活动名称</label>
+ 				    	<span>${[lowEntity].actname}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">活动生效日期</label>
+ 				    	<span>${[lowEntity].actbtimestr}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">活动截止日期</label>
+ 				    	<span>${[lowEntity].actetimestr}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">活动状态</label>
+ 				    	<span class="${[lowEntity].status==1?'green':'red'}">${[lowEntity].status==1?'启用':'未启用'}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">活动规则</label>
+ 				    	<span>${[lowEntity].actrule ==1?'升降级只发一次':'升降级重发，取消之前奖品'}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">执行时间点</label>
+ 				    	<span>${[lowEntity].executetime}</span>
+ 				  	</div>
+				</div>
+				
+				 
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">排除名单表编号</label>
+ 				    	<span>${[lowEntity].removenameno}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8" >
+					    <label class="col-sm-2 text-right">获奖名单是否需要审核才生成 </label>
+ 				    	<span class="${[lowEntity].isauditalist==1?'green':'red'}">${[lowEntity].isauditalist==1?'已审核':'未审核'}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">制表时间 </label>
+ 				    	<span>${[lowEntity].addtimestr}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">制表人 </label>
+ 				    	<span>${[lowEntity].addman}</span>
+ 				  	</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-8">
+					    <label class="col-sm-2 text-right">备注 </label>
+ 				    	<span>${[lowEntity].remark}</span>
+ 				  	</div>
+				</div>
+			</div>
+   		</div>
+	</div>
+ </body>
+</html>

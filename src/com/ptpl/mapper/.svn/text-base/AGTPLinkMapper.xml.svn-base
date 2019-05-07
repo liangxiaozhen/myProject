@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AGTPLinkMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AGTPLink">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PROXYGRADE" property="proxygrade" jdbcType="DECIMAL" />
+		<result column="AGPAID" property="agpaid" jdbcType="DECIMAL" />
+		<result column="ISOPEN" property="isopen" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROXYGRADE, AGPAID, ISOPEN
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AGTPLINK
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectByProxyGrade" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AGTPLINK
+		where PROXYGRADE =#{proxyGrade}
+	</select>
+	<select id="selectByProxyGradeAndAGAPID" resultType="com.ptpl.model.AGTPLink"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AGTPLINK
+		where PROXYGRADE =#{1}
+		AND AGPAID = #{0}
+	</select>
+	<select id="selectByAGPAID" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AGTPLINK
+		where AGPAID =#{AGPAID}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		AGTPLINK
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByAGPAID" parameterType="java.math.BigDecimal">
+		delete from AGTPLINK
+		where AGPAID = #{agpaID,jdbcType=DECIMAL}
+	</delete>
+	<delete id="deleteByProxyGrade" parameterType="java.math.BigDecimal">
+		delete from
+		AGTPLINK
+		where PROXYGRADE = #{proxyGrade,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AGTPLink">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select AGTPLINK_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into AGTPLINK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="proxygrade != null">
+				PROXYGRADE,
+			</if>
+			<if test="agpaid != null">
+				AGPAID,
+			</if>
+			<if test="isopen != null">
+				ISOPEN,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="proxygrade != null">
+				#{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="agpaid != null">
+				#{agpaid,jdbcType=DECIMAL},
+			</if>
+			<if test="isopen != null">
+				#{isopen,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.AGTPLink">
+		update AGTPLINK
+		<set>
+			<if test="proxygrade != null">
+				PROXYGRADE = #{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="agpaid != null">
+				AGPAID = #{agpaid,jdbcType=DECIMAL},
+			</if>
+			<if test="isopen != null">
+				ISOPEN = #{isopen,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

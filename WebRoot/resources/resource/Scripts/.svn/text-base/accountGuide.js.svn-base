@@ -1,0 +1,26 @@
+//新手向导
+$(function(){
+		$("#nextStep1").click(function(){
+			$(this).parents('.gi6').fadeOut().siblings('.gi1').fadeIn();
+		})
+		$("#nextStep2").bind('click',function(){
+			$(this).parents('.gi1').fadeOut().siblings('.gi2').fadeIn();
+		})
+		$("#nextStep3").bind('click',function(){
+			$(this).parents('.gi2').fadeOut().siblings('.gi3').fadeIn();
+		})
+		$("#nextStep4").bind('click',function(){
+			$(this).parents('.gi3').fadeOut().siblings('.gi4').fadeIn();
+		})
+		$("#nextStep5").bind('click',function(){
+			$(this).parents('.gi4').fadeOut().siblings('.gi5').fadeIn();
+		})
+		$("#nextStep6").bind('click',function(){
+			$(this).parents('.gi5').fadeOut();
+			$(this).parents('.guideOut').remove();
+		})
+		$('.closeGuide').click(function(){
+			$(this).parents('.guideOut').remove();	
+		});
+		
+});

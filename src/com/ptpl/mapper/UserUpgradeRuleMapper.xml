@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserUpgradeRuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserUpgradeRule">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="GRADE" property="grade" jdbcType="DECIMAL" />
+		<result column="METHOD" property="method" jdbcType="DECIMAL" />
+		<result column="EFFECTTIME" property="effecttime" jdbcType="DECIMAL" />
+		<result column="PAYAMOUNT" property="payamount" jdbcType="FLOAT" />
+		<result column="NEEDBONUSPOINTS" property="needbonuspoints"
+			jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="UNIT" property="unit" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, GRADE, METHOD, EFFECTTIME, PAYAMOUNT, NEEDBONUSPOINTS, REMARK,UNIT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERUPGRADERULE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from USERUPGRADERULE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.UserUpgradeRule">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERUPGRADERULE_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into USERUPGRADERULE (ID, GRADE, METHOD,
+		EFFECTTIME, PAYAMOUNT, NEEDBONUSPOINTS,
+		REMARK,UNIT)
+		values (#{id,jdbcType=DECIMAL}, #{grade,jdbcType=DECIMAL},
+		#{method,jdbcType=DECIMAL},
+		#{effecttime,jdbcType=DECIMAL}, #{payamount,jdbcType=FLOAT}, #{needbonuspoints,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR},#{unit,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserUpgradeRule">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERUPGRADERULE_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into USERUPGRADERULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="method != null">
+				METHOD,
+			</if>
+			<if test="effecttime != null">
+				EFFECTTIME,
+			</if>
+			<if test="payamount != null">
+				PAYAMOUNT,
+			</if>
+			<if test="needbonuspoints != null">
+				NEEDBONUSPOINTS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="unit != null">
+				UNIT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=DECIMAL},
+			</if>
+			<if test="method != null">
+				#{method,jdbcType=DECIMAL},
+			</if>
+			<if test="effecttime != null">
+				#{effecttime,jdbcType=DECIMAL},
+			</if>
+			<if test="payamount != null">
+				#{payamount,jdbcType=FLOAT},
+			</if>
+			<if test="needbonuspoints != null">
+				#{needbonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserUpgradeRule">
+		update USERUPGRADERULE
+		<set>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=DECIMAL},
+			</if>
+			<if test="method != null">
+				METHOD = #{method,jdbcType=DECIMAL},
+			</if>
+			<if test="effecttime != null">
+				EFFECTTIME = #{effecttime,jdbcType=DECIMAL},
+			</if>
+			<if test="payamount != null">
+				PAYAMOUNT = #{payamount,jdbcType=FLOAT},
+			</if>
+			<if test="needbonuspoints != null">
+				NEEDBONUSPOINTS = #{needbonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="unit != null">
+				UNIT = #{unit,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- getall 根据条件查找 -->
+	<select id="getallUserRule" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserUpgradeRule">
+		select
+		<include refid="Base_Column_List" />
+		from USERUPGRADERULE
+		<where>
+			<if test="id != null">
+				ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="grade != null">
+				AND GRADE = #{grade,jdbcType=VARCHAR}
+			</if>
+			<if test="method != null">
+				AND METHOD = #{method,jdbcType=VARCHAR}
+			</if>
+			<if test="effecttime != null">
+				AND EFFECTTIME = #{effecttime,jdbcType=DECIMAL}
+			</if>
+			<if test="payamount != null">
+				AND PAYAMOUNT = #{payamount,jdbcType=TIMESTAMP}
+			</if>
+			<if test="needbonuspoints != null">
+				AND NEEDBONUSPOINTS = #{needbonuspoints,jdbcType=DECIMAL}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=DECIMAL}
+			</if>
+			<if test="unit != null">
+				AND UNIT = #{unit,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+</mapper>

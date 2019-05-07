@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserIntMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.UserIntMsg" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+    <result column="MSGTYPE" property="msgtype" jdbcType="DECIMAL" />
+    <result column="MSGTITLE" property="msgtitle" jdbcType="VARCHAR" />
+    <result column="MSGCONTENT" property="msgcontent" jdbcType="VARCHAR" />
+    <result column="MSGTIME" property="msgtime" jdbcType="TIMESTAMP" />
+    <result column="ISREAD" property="isread" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, BASEID, MSGTYPE, MSGTITLE, MSGCONTENT, MSGTIME, ISREAD
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from USERINTMSG
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from USERINTMSG
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.UserIntMsg" >
+    <selectKey order="BEFORE" resultType="java.math.BigDecimal"
+               keyProperty="id">
+      SELECT USERINTMSG_SEQ.NEXTVAL AS id from dual
+    </selectKey>
+    insert into USERINTMSG (ID, BASEID, MSGTYPE, 
+      MSGTITLE, MSGCONTENT, MSGTIME, 
+      ISREAD)
+    values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL}, #{msgtype,jdbcType=DECIMAL}, 
+      #{msgtitle,jdbcType=VARCHAR}, #{msgcontent,jdbcType=VARCHAR}, #{msgtime,jdbcType=TIMESTAMP}, 
+      #{isread,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.UserIntMsg" >
+    <selectKey order="BEFORE" resultType="java.math.BigDecimal"
+               keyProperty="id">
+      SELECT USERINTMSG_SEQ.NEXTVAL AS id from dual
+    </selectKey>
+    insert into USERINTMSG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="baseid != null" >
+        BASEID,
+      </if>
+      <if test="msgtype != null" >
+        MSGTYPE,
+      </if>
+      <if test="msgtitle != null" >
+        MSGTITLE,
+      </if>
+      <if test="msgcontent != null" >
+        MSGCONTENT,
+      </if>
+      <if test="msgtime != null" >
+        MSGTIME,
+      </if>
+      <if test="isread != null" >
+        ISREAD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="baseid != null" >
+        #{baseid,jdbcType=DECIMAL},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=DECIMAL},
+      </if>
+      <if test="msgtitle != null" >
+        #{msgtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgcontent != null" >
+        #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtime != null" >
+        #{msgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        #{isread,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserIntMsg" >
+    update USERINTMSG
+    <set >
+      <if test="baseid != null" >
+        BASEID = #{baseid,jdbcType=DECIMAL},
+      </if>
+      <if test="msgtype != null" >
+        MSGTYPE = #{msgtype,jdbcType=DECIMAL},
+      </if>
+      <if test="msgtitle != null" >
+        MSGTITLE = #{msgtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="msgcontent != null" >
+        MSGCONTENT = #{msgcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="msgtime != null" >
+        MSGTIME = #{msgtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isread != null" >
+        ISREAD = #{isread,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserIntMsg" >
+    update USERINTMSG
+    set BASEID = #{baseid,jdbcType=DECIMAL},
+      MSGTYPE = #{msgtype,jdbcType=DECIMAL},
+      MSGTITLE = #{msgtitle,jdbcType=VARCHAR},
+      MSGCONTENT = #{msgcontent,jdbcType=VARCHAR},
+      MSGTIME = #{msgtime,jdbcType=TIMESTAMP},
+      ISREAD = #{isread,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <select id="selectByBaseId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select
+    <include refid="Base_Column_List" />
+    from USERINTMSG
+    where BASEID = #{baseid,jdbcType=DECIMAL}
+  </select>
+</mapper>

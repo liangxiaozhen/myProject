@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ThirdPbLoginMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ThirdPbLogin">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="THIRDPUID" property="thirdpuid" jdbcType="VARCHAR" />
+		<result column="IMGURL" property="imgurl" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="THIRDPNAME" property="thirdpname" jdbcType="VARCHAR" />
+		<result column="AUTHBINDDATE" property="authbinddate" jdbcType="TIMESTAMP" />
+		<result column="UPDATEBINDDATE" property="updatebinddate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="THIRDAPPNAME" property="thirdAPPName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID,IMGURL, THIRDPUID,STATUS, THIRDPNAME, AUTHBINDDATE,THIRDAPPNAME,
+		REMARK,UPDATEBINDDATE
+	</sql>
+	<select id="getBaseIdByOtherParams" resultMap="BaseResultMap" parameterType="com.ptpl.model.ThirdPbLogin">
+		select
+		<include refid="Base_Column_List" />
+		from THIRDPBLOGIN
+		where THIRDPUID = #{thirdpuid,jdbcType=VARCHAR}
+		 AND THIRDAPPNAME =#{thirdAPPName,jdbcType=VARCHAR}
+		 AND THIRDPNAME =#{thirdpname,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 根据第三方名称和第三方用户ID,用户ID查询是否存在 -->
+	<select id="selectByThirdUserIdAndThirdNameBaseID" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ThirdPbLogin">
+		select
+		<include refid="Base_Column_List" />
+		from THIRDPBLOGIN
+		<trim prefix="where" prefixOverrides="AND">
+			<if test="thirdpuid !=null">
+				AND THIRDPUID = #{thirdpuid,jdbcType=VARCHAR}
+			</if>
+			<if test="thirdpname !=null">
+				AND THIRDPNAME = #{thirdpname,jdbcType=VARCHAR}
+			</if>
+			<if test="baseid !=null">
+				AND BASEID = #{baseid,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+	<!-- 根据第三方名称和第三方用户ID,查询用户是否存在 -->
+	<select id="selectByThirdUserIdAndThirdName" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ThirdPbLogin">
+		select
+		<include refid="Base_Column_List" />
+		from THIRDPBLOGIN
+		<trim prefix="where" prefixOverrides="AND">
+			<if test="thirdpuid !=null">
+				AND THIRDPUID = #{thirdpuid,jdbcType=VARCHAR}
+			</if>
+			<if test="thirdAPPName !=null">
+				AND THIRDAPPNAME = #{thirdAPPName,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+	<!-- 根据第三方名称和第三方用户ID,查询用户是否存在 -->
+	<delete id="deleteThirdUserByBaseIdAndThirdName" parameterType="com.ptpl.model.ThirdPbLogin">
+		delete from THIRDPBLOGIN
+		<trim prefix="where" prefixOverrides="AND">
+			<if test="baseid !=null">
+				AND BASEID = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="thirdAPPName !=null">
+				AND THIRDAPPNAME = #{thirdAPPName,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</delete>
+	<select id="findThirdPbLoginById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from THIRDPBLOGIN
+		where BASEID = #{baseid,jdbcType=DECIMAL}
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from THIRDPBLOGIN
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from THIRDPBLOGIN
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.ThirdPbLogin">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT THIRDPBLOGIN_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into THIRDPBLOGIN (ID, BASEID,IMGURL, THIRDPUID,
+		STATUS, THIRDPNAME,THIRDAPPNAME, AUTHBINDDATE, UPDATEBINDDATE,
+		REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},#{imgurl,jdbcType=VARCHAR},
+		#{thirdpuid,jdbcType=VARCHAR},
+		#{status,jdbcType=DECIMAL}, #{thirdpname,jdbcType=VARCHAR},#{thirdAPPName,jdbcType=VARCHAR}, #{authbinddate,jdbcType=TIMESTAMP},
+		#{updatebinddate,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ThirdPbLogin">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT THIRDPBLOGIN_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into THIRDPBLOGIN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="baseid != null">
+				IMGURL,
+			</if>
+			<if test="thirdpuid != null">
+				THIRDPUID,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="thirdpname != null">
+				THIRDPNAME,
+			</if>
+			<if test="authbinddate != null">
+				AUTHBINDDATE,
+			</if>
+			<if test="updatebinddate != null">
+				UPDATEBINDDATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="thirdAPPName != null">
+				THIRDAPPNAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpuid != null">
+				#{imgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpuid != null">
+				#{thirdpuid,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpname != null">
+				#{thirdpname,jdbcType=VARCHAR},
+			</if>
+			<if test="authbinddate != null">
+				#{authbinddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatebinddate != null">
+				#{UPDATEBINDDATE,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdAPPName != null">
+				#{thirdAPPName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="com.ptpl.model.ThirdPbLogin">
+		update THIRDPBLOGIN
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpuid != null">
+				IMGURL = #{imgurl,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpuid != null">
+				THIRDPUID = #{thirdpuid,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpname != null">
+				THIRDPNAME = #{thirdpname,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdAPPName != null">
+				THIRDAPPNAME = #{thirdAPPName,jdbcType=VARCHAR},
+			</if>
+			<if test="authbinddate != null">
+				AUTHBINDDATE = #{authbinddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updatebinddate != null">
+				UPDATEBINDDATE = #{updatebinddate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ActivityRuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ActivityRule">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="actno" jdbcType="VARCHAR" />
+		<result column="ACTTYPE" property="acttype" jdbcType="DECIMAL" />
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR" />
+		<result column="SETTIME" property="settime" jdbcType="TIMESTAMP" />
+		<result column="ACTBTIME" property="actbtime" jdbcType="TIMESTAMP" />
+		<result column="ACTETIME" property="actetime" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="TCTYPE" property="tctype" jdbcType="DECIMAL" />
+		<result column="CRESTRICT" property="crestrict" jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="SPECIFYTNO" property="specifytno" jdbcType="VARCHAR" />
+		<result column="CANCELTNO" property="canceltno" jdbcType="VARCHAR" />
+		<result column="TATTRIBUTE" property="tattribute" jdbcType="VARCHAR" />
+		<result column="TDAYRESTRICT" property="tdayrestrict" jdbcType="DECIMAL" />
+		<result column="TMLRRESTRICT" property="tmlrrestrict" jdbcType="FLOAT" />
+		<result column="TMHRRESTRICT" property="tmhrrestrict" jdbcType="FLOAT" />
+		<result column="GTYPE" property="gtype" jdbcType="DECIMAL" />
+		<result column="ISAUDITALIST" property="isauditalist" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,ACTNO,ACTTYPE,ACTNAME,SETTIME,ACTBTIME,ACTETIME,STATUS,TCTYPE,CRESTRICT,UGRADE,SPECIFYTNO,CANCELTNO,TATTRIBUTE,TDAYRESTRICT,TMLRRESTRICT,TMHRRESTRICT,GTYPE,ISAUDITALIST,ISAUDIT,AUDITMAN,AUDITTIME,REMARK,REMOVENAMENO,ADDMAN
+	</sql>
+
+	<!-- 查询全部信息 -->
+	<select id="findActivityRules" parameterType="com.ptpl.model.ActivityRule"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACTIVITYRULE
+		<where>
+			<if test="id != null">
+				and ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="actno != null">
+				and ACTNO like '%${actno}%'
+			</if>
+			<if test="acttype != null">
+				and ACTTYPE=#{acttype,jdbcType=DECIMAL}
+			</if>
+			<if test="actname != null">
+				and ACTNAME=#{actname,jdbcType=VARCHAR}
+			</if>
+			<if test="settime != null">
+				and SETTIME=#{settime},
+			</if>
+			<if test="actbtime != null">
+				and ACTBTIME=#{actbtime},
+			</if>
+			<if test="actetime != null">
+				and ACTETIME=#{actetime},
+			</if>
+			<if test="status != null">
+				and STATUS=#{status,jdbcType=DECIMAL}
+			</if>
+			<if test="tctype != null">
+				and TCTYPE=#{tctype,jdbcType=DECIMAL}
+			</if>
+			<if test="crestrict != null">
+				and CRESTRICT=#{crestrict,jdbcType=VARCHAR}
+			</if>
+			<if test="ugrade != null">
+				and UGRADE=#{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="specifytno != null">
+				and SPECIFYTNO=#{specifytno,jdbcType=VARCHAR}
+			</if>
+			<if test="canceltno != null">
+				and CANCELTNO=#{canceltno,jdbcType=VARCHAR}
+			</if>
+			<if test="tattribute != null">
+				and TATTRIBUTE=#{tattribute,jdbcType=VARCHAR}
+			</if>
+			<if test="tdayrestrict != null">
+				and TDAYRESTRICT=#{tdayrestrict,jdbcType=DECIMAL}
+			</if>
+			<if test="tmlrrestrict != null">
+				and TMLRRESTRICT=#{tmlrrestrict,jdbcType=FLOAT}
+			</if>
+			<if test="tmhrrestrict != null">
+				and TMHRRESTRICT=#{tmhrrestrict,jdbcType=FLOAT}
+			</if>
+			<if test="gtype != null">
+				and GTYPE=#{gtype,jdbcType=DECIMAL}
+			</if>
+			<if test="isauditalist != null">
+				and ISAUDITALIST=#{isauditalist,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ISAUDIT=#{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null">
+				and AUDITMAN=#{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				and AUDITTIME=#{audittime,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				and REMARK=#{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="removenameno != null">
+				and REMOVENAMENO=#{removenameno,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				and ADDMAN=#{addman,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据ID查找 -->
+	<select id="findActivityRuleById" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACTIVITYRULE where id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据ID删除 -->
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from ACTIVITYRULE where id = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 条件更新 -->
+	<update id="updateById" parameterType="com.ptpl.model.ActivityRule">
+		update ACTIVITYRULE
+		<set>
+			<if test="actno != null">
+				ACTNO=#{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="acttype != null">
+				ACTTYPE=#{acttype,jdbcType=DECIMAL},
+			</if>
+			<if test="actname != null">
+				ACTNAME=#{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="settime != null">
+				SETTIME=#{settime},
+			</if>
+			<if test="actbtime != null">
+				ACTBTIME=#{actbtime},
+			</if>
+			<if test="actetime != null">
+				ACTETIME=#{actetime},
+			</if>
+			<if test="status != null">
+				STATUS=#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="tctype != null">
+				TCTYPE=#{tctype,jdbcType=DECIMAL},
+			</if>
+			<if test="crestrict != null">
+				CRESTRICT=#{crestrict,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				UGRADE=#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="specifytno != null">
+				SPECIFYTNO=#{specifytno,jdbcType=VARCHAR},
+			</if>
+			<if test="canceltno != null">
+				CANCELTNO=#{canceltno,jdbcType=VARCHAR},
+			</if>
+			<if test="tattribute != null">
+				TATTRIBUTE=#{tattribute,jdbcType=VARCHAR},
+			</if>
+			<if test="tdayrestrict != null">
+				TDAYRESTRICT=#{tdayrestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="tmlrrestrict != null">
+				TMLRRESTRICT=#{tmlrrestrict,jdbcType=FLOAT},
+			</if>
+			<if test="tmhrrestrict != null">
+				TMHRRESTRICT=#{tmhrrestrict,jdbcType=FLOAT},
+			</if>
+			<if test="gtype != null">
+				GTYPE=#{gtype,jdbcType=DECIMAL},
+			</if>
+			<if test="isauditalist != null">
+				ISAUDITALIST=#{isauditalist,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT=#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN=#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME=#{audittime,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO=#{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN=#{addman,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id =#{id,jdbcType=DECIMAL}
+	</update>
+	<insert id="insert" parameterType="com.ptpl.model.ActivityRule">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT ACTIVITYRULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYRULE (ID, ACTNO, ACTTYPE,
+		ACTNAME, SETTIME, ACTBTIME,
+		ACTETIME, STATUS, TCTYPE,
+		CRESTRICT, UGRADE, SPECIFYTNO,
+		CANCELTNO, TATTRIBUTE, TDAYRESTRICT,
+		TMLRRESTRICT, TMHRRESTRICT, GTYPE,
+		ISAUDITALIST, ISAUDIT, AUDITMAN,
+		AUDITTIME, REMARK,REMOVENAMENO,ADDMAN)
+		values (#{id,jdbcType=DECIMAL}, #{actno,jdbcType=VARCHAR},
+		#{acttype,jdbcType=DECIMAL},
+		#{actname,jdbcType=VARCHAR}, #{settime}, #{actbtime},
+		#{actetime}, #{status,jdbcType=DECIMAL}, #{tctype,jdbcType=DECIMAL},
+		#{crestrict,jdbcType=VARCHAR}, #{ugrade,jdbcType=VARCHAR},
+		#{specifytno,jdbcType=VARCHAR},
+		#{canceltno,jdbcType=VARCHAR}, #{tattribute,jdbcType=VARCHAR}, #{tdayrestrict,jdbcType=DECIMAL},
+		#{tmlrrestrict,jdbcType=FLOAT}, #{tmhrrestrict,jdbcType=FLOAT},
+		#{gtype,jdbcType=DECIMAL},
+		#{isauditalist,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR},
+		#{audittime}, #{remark,jdbcType=VARCHAR},
+		#{removenameno,jdbcType=VARCHAR}, #{addman,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ActivityRule">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT ACTIVITYRULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYRULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actno != null">
+				ACTNO,
+			</if>
+			<if test="acttype != null">
+				ACTTYPE,
+			</if>
+			<if test="actname != null">
+				ACTNAME,
+			</if>
+			<if test="settime != null">
+				SETTIME,
+			</if>
+			<if test="actbtime != null">
+				ACTBTIME,
+			</if>
+			<if test="actetime != null">
+				ACTETIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="tctype != null">
+				TCTYPE,
+			</if>
+			<if test="crestrict != null">
+				CRESTRICT,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="specifytno != null">
+				SPECIFYTNO,
+			</if>
+			<if test="canceltno != null">
+				CANCELTNO,
+			</if>
+			<if test="tattribute != null">
+				TATTRIBUTE,
+			</if>
+			<if test="tdayrestrict != null">
+				TDAYRESTRICT,
+			</if>
+			<if test="tmlrrestrict != null">
+				TMLRRESTRICT,
+			</if>
+			<if test="tmhrrestrict != null">
+				TMHRRESTRICT,
+			</if>
+			<if test="gtype != null">
+				GTYPE,
+			</if>
+			<if test="isauditalist != null">
+				ISAUDITALIST,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actno != null">
+				#{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="acttype != null">
+				#{acttype,jdbcType=DECIMAL},
+			</if>
+			<if test="actname != null">
+				#{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="settime != null">
+				#{settime},
+			</if>
+			<if test="actbtime != null">
+				#{actbtime},
+			</if>
+			<if test="actetime != null">
+				#{actetime},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="tctype != null">
+				#{tctype,jdbcType=DECIMAL},
+			</if>
+			<if test="crestrict != null">
+				#{crestrict,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="specifytno != null">
+				#{specifytno,jdbcType=VARCHAR},
+			</if>
+			<if test="canceltno != null">
+				#{canceltno,jdbcType=VARCHAR},
+			</if>
+			<if test="tattribute != null">
+				#{tattribute,jdbcType=VARCHAR},
+			</if>
+			<if test="tdayrestrict != null">
+				#{tdayrestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="tmlrrestrict != null">
+				#{tmlrrestrict,jdbcType=FLOAT},
+			</if>
+			<if test="tmhrrestrict != null">
+				#{tmhrrestrict,jdbcType=FLOAT},
+			</if>
+			<if test="gtype != null">
+				#{gtype,jdbcType=DECIMAL},
+			</if>
+			<if test="isauditalist != null">
+				#{isauditalist,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="removenameno != null">
+				#{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

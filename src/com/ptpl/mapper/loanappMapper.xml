@@ -1,0 +1,563 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.loanappMapper">
+    <resultMap id="BaseResultMap" type="com.ptpl.model.loanapp">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="BASEID" property="baseid" jdbcType="DECIMAL"/>
+        <result column="LOANNO" property="loanno" jdbcType="VARCHAR"/>
+        <result column="LOANTYPE" property="loantype" jdbcType="DECIMAL"/>
+        <result column="LOANAMOUNT" property="loanamount" jdbcType="FLOAT"/>
+        <result column="APPTIME" property="apptime" jdbcType="TIMESTAMP"/>
+        <result column="APPDAY" property="appday" jdbcType="DECIMAL"/>
+        <result column="LOANRATE" property="loanrate" jdbcType="FLOAT"/>
+        <result column="ISNEEDCONFIRM" property="isneedconfirm" jdbcType="DECIMAL"/>
+        <result column="APPSTATUS" property="appstatus" jdbcType="DECIMAL"/>
+        <result column="AUDITMAN" property="auditman" jdbcType="VARCHAR"/>
+        <result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="RECEIPTSAMOUNT" property="receiptsamount" jdbcType="FLOAT"/>
+        <result column="FINISHTIME" property="finishtime" jdbcType="TIMESTAMP"/>
+        <result column="LOANNAME" property="loanname" jdbcType="VARCHAR"/>
+        <result column="LOANPURPOSEDESC" property="loanpurposedesc" jdbcType="VARCHAR"/>
+        <result column="REPAYMENTTYPE" property="repaymenttype" jdbcType="DECIMAL"/>
+        <result column="ISAPPOINTTENDER" property="isappointtender" jdbcType="DECIMAL"/>
+        <result column="ISAUTOREPAY" property="isautorepay" jdbcType="DECIMAL"/>
+        <result column="UNIT" property="unit" jdbcType="VARCHAR"/>
+        <result column="PROXYMAN" property="proxyman" jdbcType="VARCHAR"/>
+        <result column="LIANO" property="liano" jdbcType="VARCHAR"/>
+        <result column="REPAYSTATUS" property="repaystatus" jdbcType="DECIMAL"/>
+        <result column="IFAPPORIGIN" property="ifapporigin" jdbcType="VARCHAR"/>
+        <result column="APPTYPE" property="apptype" jdbcType="DECIMAL"/>
+        <result column="MASTATUS" property="mastatus" jdbcType="DECIMAL"/>
+        <result column="RISKMVALUE" property="riskmvalue" jdbcType="FLOAT"/>
+        <result column="RISKMORIGIN" property="riskmorigin" jdbcType="VARCHAR"/>
+        <result column="RISKMLEVEL" property="riskmlevel" jdbcType="VARCHAR"/>
+        <result column="ISAITENDER" property="isaitender" jdbcType="DECIMAL"/>
+        <result column="ISMULTTENDER" property="ismulttender" jdbcType="DECIMAL"/>
+        <result column="SPLITNUM" property="splitnum" jdbcType="DECIMAL"/>
+        <result column="PERIOD" property="period" jdbcType="VARCHAR"/>
+        <result column="STARTDATE" property="startdate" jdbcType="VARCHAR"/>
+        <result column="ENDDATE" property="enddate" jdbcType="VARCHAR"/>
+        <result column="TBEGINTIME" property="tbegintime" jdbcType="TIMESTAMP"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, BASEID, LOANNO, LOANTYPE, LOANAMOUNT, APPTIME, APPDAY, LOANRATE, ISNEEDCONFIRM, 
+    APPSTATUS, AUDITMAN, AUDITTIME, REMARK, RECEIPTSAMOUNT, FINISHTIME, LOANNAME, LOANPURPOSEDESC, 
+    REPAYMENTTYPE, ISAPPOINTTENDER, ISAUTOREPAY, UNIT, PROXYMAN, LIANO, REPAYSTATUS, 
+    IFAPPORIGIN, APPTYPE, MASTATUS, RISKMVALUE, RISKMORIGIN, RISKMLEVEL,ISAITENDER,ISMULTTENDER,SPLITNUM,PERIOD,TBEGINTIME
+  </sql>
+
+    <resultMap type="java.util.Map" id="CountResultMap">
+        <result column="appstatus" property="appstatus" jdbcType="DECIMAL"/>
+        <result column="counts" property="counts" jdbcType="DECIMAL"/>
+    </resultMap>
+
+
+    <select id="selectdaterange" resultMap="BaseResultMap">
+       select * from LOANAPP t where 1=1 and  t.apptime &gt;= to_date(&apos;#{0}&apos;,&apos;yyyy-MM-dd&apos;) and t.apptime &lt;=to_date(&apos;#{1}&apos;,&apos;yyyy-MM-dd&apos;)
+    </select>
+
+    <select id="selectcount" resultType="int">
+     select count(*) from dividedPayments d,tenderitem t where t.id=d.tenderid and d.iscomplete=1 and t.loanappid= #{id,jdbcType=DECIMAL}
+   </select>
+
+
+    <select id="findloanappCountByBaseid" resultMap="CountResultMap" parameterType="com.ptpl.model.loanapp">
+  	select count(1) as counts,appstatus as appstatus from LOANAPP where  baseid = #{baseid}  
+  	group by appstatus order by appstatus asc
+  </select>
+
+    <select id="intervalloanapp" resultMap="BaseResultMap">
+        select * from loanapp t
+        <where>
+            <if test="baseid != null">
+                baseid =#{baseid,jdbcType=DECIMAL}
+            </if>
+            <if test="period != null">
+                <if test="period == '最近三个月'">
+                    and apptime >= add_months(sysdate,-3)
+                </if>
+                <if test="period == '最近一周'">
+                    and apptime >= sysdate-7
+                </if>
+                <if test="period == '最近一个月'">
+                    and apptime >= add_months(sysdate,-1)
+                </if>
+            </if>
+            <if test="appstatus != null">
+                and appstatus=#{appstatus,jdbcType=DECIMAL}
+            </if>
+            <if test="startdate !=null and  enddate != null">
+                and t.apptime &gt;= to_date(#{startdate},&apos;yyyy-MM-dd&apos;) and t.apptime &lt;=to_date(#{enddate},&apos;yyyy-MM-dd&apos;)
+            </if>
+            order by t.apptime desc
+        </where>
+    </select>
+
+
+
+    <!--appstatus借款申请状态(1.待审核  2.审核失败  3.待建标  4.待录入  5.待投标  6.投标中  7.已流标  8.待放款  9.待生成还款计划  10.还款中  11.已完成)-->
+    <select id="selectloanAppbyappStatus" resultMap="BaseResultMap">
+     select * from loanapp t where  t.appstatus=3
+  </select>
+    <!-- 根据参数不同来查询结果 -->
+    <select id="selectByParam" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from loanapp t where t.isaitender=1
+        <if test="loanno!=null and loanno!='' ">
+            and t.loanno=#{loanno}
+        </if>
+        <if test="loanname!=null and loanname!='' ">
+            and t.loanname like #{loanname}
+        </if>
+        <if test="startAppTime != null and startAppTime != '' ">
+            and t.apptime &gt;= #{startAppTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endAppTime !=null and endAppTime!= ''">
+            and t.apptime &lt;= #{endAppTime,jdbcType=TIMESTAMP}
+        </if>
+    </select>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+    select 
+    *
+    from LOANAPP
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from LOANAPP
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.ptpl.model.loanapp">
+        <selectKey resultType="java.math.BigDecimal" keyProperty="id"
+                   order="BEFORE">
+            SELECT loanapp_seq.NEXTVAL AS id from dual
+        </selectKey>
+        insert into LOANAPP (ID, BASEID, LOANNO,
+        LOANTYPE, LOANAMOUNT, APPTIME,
+        APPDAY, LOANRATE, ISNEEDCONFIRM,
+        APPSTATUS, AUDITMAN, AUDITTIME,
+        REMARK, RECEIPTSAMOUNT, FINISHTIME,
+        LOANNAME, LOANPURPOSEDESC, REPAYMENTTYPE,
+        ISAPPOINTTENDER, ISAUTOREPAY, UNIT,
+        PROXYMAN, LIANO,TBEGINTIME)
+        values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL}, #{loanno,jdbcType=VARCHAR},
+        #{loantype,jdbcType=DECIMAL}, #{loanamount,jdbcType=OTHER}, #{apptime,jdbcType=TIMESTAMP},
+        #{appday,jdbcType=DECIMAL}, #{loanrate,jdbcType=OTHER}, #{isneedconfirm,jdbcType=DECIMAL},
+        #{appstatus,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP},
+        #{remark,jdbcType=VARCHAR}, #{receiptsamount,jdbcType=OTHER}, #{finishtime,jdbcType=TIMESTAMP},
+        #{loanname,jdbcType=VARCHAR}, #{loanpurposedesc,jdbcType=VARCHAR}, #{repaymenttype,jdbcType=DECIMAL},
+        #{isappointtender,jdbcType=DECIMAL}, #{isautorepay,jdbcType=DECIMAL}, #{unit,jdbcType=VARCHAR},
+        #{proxyman,jdbcType=VARCHAR}, #{liano,jdbcType=VARCHAR}),#{tbegintime,jdbcType=TIMESTAMP}
+    </insert>
+    <insert id="insertSelective" parameterType="com.ptpl.model.loanapp">
+        <selectKey resultType="java.math.BigDecimal" keyProperty="id"
+                   order="BEFORE">
+            SELECT loanapp_seq.NEXTVAL AS id from dual
+        </selectKey>
+        insert into LOANAPP
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="baseid != null">
+                BASEID,
+            </if>
+            <if test="loanno != null">
+                LOANNO,
+            </if>
+            <if test="loantype != null">
+                LOANTYPE,
+            </if>
+            <if test="loanamount != null">
+                LOANAMOUNT,
+            </if>
+            <if test="apptime != null">
+                APPTIME,
+            </if>
+            <if test="appday != null">
+                APPDAY,
+            </if>
+            <if test="loanrate != null">
+                LOANRATE,
+            </if>
+            <if test="isneedconfirm != null">
+                ISNEEDCONFIRM,
+            </if>
+            <if test="appstatus != null">
+                APPSTATUS,
+            </if>
+            <if test="auditman != null">
+                AUDITMAN,
+            </if>
+            <if test="audittime != null">
+                AUDITTIME,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="receiptsamount != null">
+                RECEIPTSAMOUNT,
+            </if>
+            <if test="finishtime != null">
+                FINISHTIME,
+            </if>
+            <if test="loanname != null">
+                LOANNAME,
+            </if>
+            <if test="loanpurposedesc != null">
+                LOANPURPOSEDESC,
+            </if>
+            <if test="repaymenttype != null">
+                REPAYMENTTYPE,
+            </if>
+            <if test="isappointtender != null">
+                ISAPPOINTTENDER,
+            </if>
+            <if test="isautorepay != null">
+                ISAUTOREPAY,
+            </if>
+            <if test="unit != null">
+                UNIT,
+            </if>
+            <if test="proxyman != null">
+                PROXYMAN,
+            </if>
+            <if test="liano != null">
+                LIANO,
+            </if>
+            <if test="repaystatus != null">
+                REPAYSTATUS,
+            </if>
+            <if test="ifapporigin != null">
+                IFAPPORIGIN,
+            </if>
+            <if test="apptype != null">
+                APPTYPE,
+            </if>
+            <if test="mastatus != null">
+                MASTATUS,
+            </if>
+            <if test="riskmvalue != null">
+                RISKMVALUE,
+            </if>
+            <if test="riskmorigin != null">
+                RISKMORIGIN,
+            </if>
+            <if test="riskmlevel != null">
+                RISKMLEVEL,
+            </if>
+            <if test="isaitender != null">
+                ISAITENDER,
+            </if>
+            <if test="ismulttender != null">
+                ISMULTTENDER,
+            </if>
+            <if test="splitnum != null">
+                SPLITNUM,
+            </if>
+            <if test="tbegintime != null">
+                TBEGINTIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="baseid != null">
+                #{baseid,jdbcType=DECIMAL},
+            </if>
+            <if test="loanno != null">
+                #{loanno,jdbcType=VARCHAR},
+            </if>
+            <if test="loantype != null">
+                #{loantype,jdbcType=DECIMAL},
+            </if>
+            <if test="loanamount != null">
+                #{loanamount,jdbcType=FLOAT},
+            </if>
+            <if test="apptime != null">
+                #{apptime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appday != null">
+                #{appday,jdbcType=DECIMAL},
+            </if>
+            <if test="loanrate != null">
+                #{loanrate,jdbcType=FLOAT},
+            </if>
+            <if test="isneedconfirm != null">
+                #{isneedconfirm,jdbcType=DECIMAL},
+            </if>
+            <if test="appstatus != null">
+                #{appstatus,jdbcType=DECIMAL},
+            </if>
+            <if test="auditman != null">
+                #{auditman,jdbcType=VARCHAR},
+            </if>
+            <if test="audittime != null">
+                #{audittime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptsamount != null">
+                #{receiptsamount,jdbcType=FLOAT},
+            </if>
+            <if test="finishtime != null">
+                #{finishtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loanname != null">
+                #{loanname,jdbcType=VARCHAR},
+            </if>
+            <if test="loanpurposedesc != null">
+                #{loanpurposedesc,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymenttype != null">
+                #{repaymenttype,jdbcType=DECIMAL},
+            </if>
+            <if test="isappointtender != null">
+                #{isappointtender,jdbcType=DECIMAL},
+            </if>
+            <if test="isautorepay != null">
+                #{isautorepay,jdbcType=DECIMAL},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="proxyman != null">
+                #{proxyman,jdbcType=VARCHAR},
+            </if>
+            <if test="liano != null">
+                #{liano,jdbcType=VARCHAR},
+            </if>
+            <if test="repaystatus != null">
+                #{repaystatus,jdbcType=DECIMAL},
+            </if>
+            <if test="ifapporigin != null">
+                #{ifapporigin,jdbcType=VARCHAR},
+            </if>
+            <if test="apptype != null">
+                #{apptype,jdbcType=DECIMAL},
+            </if>
+            <if test="mastatus != null">
+                #{mastatus,jdbcType=DECIMAL},
+            </if>
+            <if test="riskmvalue != null">
+                #{riskmvalue,jdbcType=FLOAT},
+            </if>
+            <if test="riskmorigin != null">
+                #{riskmorigin,jdbcType=VARCHAR},
+            </if>
+            <if test="riskmlevel != null">
+                #{riskmlevel,jdbcType=VARCHAR},
+            </if>
+            <if test="isaitender != null">
+                #{isaitender,jdbcType=DECIMAL},
+            </if>
+            <if test="ismulttender != null">
+                #{ismulttender,jdbcType=DECIMAL},
+            </if>
+            <if test="splitnum != null">
+                #{splitnum,jdbcType=DECIMAL}
+            </if>
+            <if test="tbegintime != null">
+                #{tbegintime,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.loanapp">
+        update LOANAPP
+        <set>
+            <if test="baseid != null">
+                BASEID = #{baseid,jdbcType=DECIMAL},
+            </if>
+            <if test="loanno != null">
+                LOANNO = #{loanno,jdbcType=VARCHAR},
+            </if>
+            <if test="loantype != null">
+                LOANTYPE = #{loantype,jdbcType=DECIMAL},
+            </if>
+            <if test="loanamount != null">
+                LOANAMOUNT = #{loanamount,jdbcType=FLOAT},
+            </if>
+            <if test="apptime != null">
+                APPTIME = #{apptime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appday != null">
+                APPDAY = #{appday,jdbcType=DECIMAL},
+            </if>
+            <if test="loanrate != null">
+                LOANRATE = #{loanrate,jdbcType=FLOAT},
+            </if>
+            <if test="isneedconfirm != null">
+                ISNEEDCONFIRM = #{isneedconfirm,jdbcType=DECIMAL},
+            </if>
+            <if test="appstatus != null">
+                APPSTATUS = #{appstatus,jdbcType=DECIMAL},
+            </if>
+            <if test="auditman != null">
+                AUDITMAN = #{auditman,jdbcType=VARCHAR},
+            </if>
+            <if test="audittime != null">
+                AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptsamount != null">
+                RECEIPTSAMOUNT = #{receiptsamount,jdbcType=FLOAT},
+            </if>
+            <if test="finishtime != null">
+                FINISHTIME = #{finishtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loanname != null">
+                LOANNAME = #{loanname,jdbcType=VARCHAR},
+            </if>
+            <if test="loanpurposedesc != null">
+                LOANPURPOSEDESC = #{loanpurposedesc,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymenttype != null">
+                REPAYMENTTYPE = #{repaymenttype,jdbcType=DECIMAL},
+            </if>
+            <if test="isappointtender != null">
+                ISAPPOINTTENDER = #{isappointtender,jdbcType=DECIMAL},
+            </if>
+            <if test="isautorepay != null">
+                ISAUTOREPAY = #{isautorepay,jdbcType=DECIMAL},
+            </if>
+            <if test="unit != null">
+                UNIT = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="proxyman != null">
+                PROXYMAN = #{proxyman,jdbcType=VARCHAR},
+            </if>
+            <if test="liano != null">
+                LIANO = #{liano,jdbcType=VARCHAR},
+            </if>
+            <if test="repaystatus != null">
+                REPAYSTATUS = #{repaystatus,jdbcType=DECIMAL},
+            </if>
+            <if test="ifapporigin != null">
+                IFAPPORIGIN = #{ifapporigin,jdbcType=VARCHAR},
+            </if>
+            <if test="apptype != null">
+                APPTYPE = #{apptype,jdbcType=DECIMAL},
+            </if>
+            <if test="mastatus != null">
+                MASTATUS = #{mastatus,jdbcType=DECIMAL},
+            </if>
+            <if test="riskmvalue != null">
+                RISKMVALUE = #{riskmvalue,jdbcType=FLOAT},
+            </if>
+            <if test="riskmorigin != null">
+                RISKMORIGIN = #{riskmorigin,jdbcType=VARCHAR},
+            </if>
+            <if test="riskmlevel != null">
+                RISKMLEVEL = #{riskmlevel,jdbcType=VARCHAR},
+            </if>
+            <if test="ismulttender != null">
+                ISMULTTENDER = #{ismulttender,jdbcType=DECIMAL},
+            </if>
+            <if test="splitnum != null">
+                SPLITNUM = #{splitnum,jdbcType=DECIMAL},
+            </if>
+            <if test="isaitender != null">
+                ISAITENDER = #{isaitender,jdbcType=DECIMAL},
+            </if>
+            <if test="tbegintime != null">
+                TBEGINTIME = #{tbegintime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ptpl.model.loanapp">
+    update LOANAPP
+    set BASEID = #{baseid,jdbcType=DECIMAL},
+      LOANNO = #{loanno,jdbcType=VARCHAR},
+      LOANTYPE = #{loantype,jdbcType=DECIMAL},
+      LOANAMOUNT = #{loanamount,jdbcType=FLOAT},
+      APPTIME = #{apptime,jdbcType=TIMESTAMP},
+      APPDAY = #{appday,jdbcType=DECIMAL},
+      LOANRATE = #{loanrate,jdbcType=FLOAT},
+      ISNEEDCONFIRM = #{isneedconfirm,jdbcType=DECIMAL},
+      APPSTATUS = #{appstatus,jdbcType=DECIMAL},
+      AUDITMAN = #{auditman,jdbcType=VARCHAR},
+      AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      RECEIPTSAMOUNT = #{receiptsamount,jdbcType=FLOAT},
+      FINISHTIME = #{finishtime,jdbcType=TIMESTAMP},
+      LOANNAME = #{loanname,jdbcType=VARCHAR},
+      LOANPURPOSEDESC = #{loanpurposedesc,jdbcType=VARCHAR},
+      REPAYMENTTYPE = #{repaymenttype,jdbcType=DECIMAL},
+      ISAPPOINTTENDER = #{isappointtender,jdbcType=DECIMAL},
+      ISAUTOREPAY = #{isautorepay,jdbcType=DECIMAL},
+      UNIT = #{unit,jdbcType=VARCHAR},
+      PROXYMAN = #{proxyman,jdbcType=VARCHAR},
+      LIANO = #{liano,jdbcType=VARCHAR},
+      REPAYSTATUS = #{repaystatus,jdbcType=DECIMAL},
+      IFAPPORIGIN = #{ifapporigin,jdbcType=VARCHAR},
+      APPTYPE = #{apptype,jdbcType=DECIMAL},
+      MASTATUS = #{mastatus,jdbcType=DECIMAL},
+      RISKMVALUE = #{riskmvalue,jdbcType=FLOAT},
+      RISKMORIGIN = #{riskmorigin,jdbcType=VARCHAR},
+      RISKMLEVEL = #{riskmlevel,jdbcType=VARCHAR},
+      ISMULTTENDER = #{ismulttender,jdbcType=DECIMAL},
+      SPLITNUM = #{splitnum,jdbcType=DECIMAL},
+      ISAITENDER = #{isaitender,jdbcType=DECIMAL},
+      TBEGINTIME = #{tbegintime,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <select id="selectBaseByid" resultMap="BaseResultMap" parameterType="int">
+  	select t.* from LOANAPP  t  where BASEID = #{id}
+  </select>
+    <select id="selectloanAll" resultMap="BaseResultMap">
+  	select t.* from LOANAPP  t  order by t.APPTIME DESC
+  </select>
+    <select id="selectloaninfos" resultMap="BaseResultMap" parameterType="com.ptpl.model.loanapp">
+        select * from LOANAPP where 1=1
+        <if test="appstatus != null">
+            and appstatus = #{appstatus,jdbcType=DECIMAL}
+        </if>
+        <if test="baseid != null">
+            and BASEID = #{baseid,jdbcType=DECIMAL}
+        </if>
+        <if test="loanrate != null">
+            and loanrate = #{loanrate,jdbcType=DECIMAL}
+        </if>
+        <if test="repaymenttype != null">
+            and repaymenttype = #{repaymenttype,jdbcType=DECIMAL}
+        </if>
+        <if test="loanamount != null">
+            <if test="loanamount &gt;100000">
+                and loanamount &gt;= #{loanamount,jdbcType=DECIMAL}
+            </if>
+            <if test="loanamount &lt;=100000">
+                and loanamount &lt;= #{loanamount,jdbcType=DECIMAL}
+            </if>
+        </if>
+        order by APPTIME desc
+    </select>
+    <select id="selectloanappAudit" resultMap="BaseResultMap" parameterType="com.ptpl.model.loanapp">
+        select * from LOANAPP where 1=1 and appstatus in (1,2)
+        <if test="baseid != null">
+            and BASEID = #{baseid,jdbcType=DECIMAL}
+        </if>
+        <if test="loanrate != null">
+            and loanrate = #{loanrate,jdbcType=DECIMAL}
+        </if>
+        <if test="repaymenttype != null">
+            and repaymenttype = #{repaymenttype,jdbcType=DECIMAL}
+        </if>
+        <if test="loanamount != null">
+            <if test="loanamount &gt;100000">
+                and loanamount &gt;= #{loanamount,jdbcType=DECIMAL}
+            </if>
+            <if test="loanamount &lt;=100000">
+                and loanamount &lt;= #{loanamount,jdbcType=DECIMAL}
+            </if>
+        </if>
+        order by APPTIME asc
+    </select>
+</mapper>

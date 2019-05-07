@@ -1,0 +1,320 @@
+body {
+	font-family: "微软雅黑";
+}
+
+th {
+	text-align: center;
+	background: #ccc;
+}
+
+td {
+	text-align: center;
+}
+
+li:hover {
+	cursor: pointer;
+}
+
+table tr td {
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.text-center2 td {
+	border: 1px solid #666;
+}
+
+#all {
+	width: 90%;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	width: 90%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* 大标签栏样式 */
+#navigationbar {
+	width: 100%;
+	height: 35px;
+	border-bottom: 1px #F3F2F1 solid;
+}
+
+#navigationbar div {
+	float: left;
+	font-size: 20px;
+	height: 35px;
+	width: 150px;
+	padding-top: 5px;
+	text-align: center;
+}
+
+#bar1 {
+	border-bottom: 2px #FF8C00 solid;
+	cursor: pointer;
+}
+
+#bar2 {
+	cursor: pointer;
+	margin-left: 10px
+}
+
+#bar3 {
+	cursor: pointer;
+	margin-left: 10px
+}
+
+#bar4 {
+	cursor: pointer;
+	margin-left: 10px
+}
+
+#smalllabel {
+	width: 100%;
+	height: 50px;
+	margin-top: 10px
+}
+
+#smalllabel div {
+	float: left;
+	font-size: 15px;
+	height: auto;
+	padding-top: 3px;
+}
+/* 进行重的投资下面的小标签 */
+#lable0 {
+	margin-left: 5px;
+}
+
+#lable1 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	background: #FF9900;
+	cursor: pointer;
+}
+
+#lable2 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable3 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable4 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable5 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#smalllabel2 {
+	display: none
+}
+
+#smalllabel3 {
+	display: none
+}
+
+#smalllabel4 {
+	display: none
+}
+/* 债转列表中的小标签 */
+#lable3_0 {
+	margin-left: 5px;
+}
+
+#lable3_1 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	background: #FF9900;
+	cursor: pointer;
+}
+
+#lable3_2 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable3_3 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable3_4 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable3_5 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#lable3_6 {
+	margin-left: 15px;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+/* 承接人列表 */
+#label4_0 {
+	margin-left: 5px;
+}
+
+#label4_1 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	background: #FF9900;
+	cursor: pointer;
+}
+
+#label4_2 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#label4_3 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+
+#label4_4 {
+	margin-left: 15px;
+	width: 80px;
+	border: 1px #FFFFFF solid;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	cursor: pointer;
+}
+/* 具体内容 */
+#content {
+	height: 300px;
+	width: 100%;
+}
+
+#content_tzz {
+	height: 300px;
+	width: 100%;
+}
+
+#content_tzz2 {
+	display: none
+}
+
+#content_tzz3 {
+	display: none
+}
+
+#content_tzz4 {
+	display: none
+}
+
+#content_tzz5 {
+	display: none
+}
+
+#content_ywc {
+	height: 300px;
+	width: 100%;
+	display: none;
+	border: 3px blue solid;
+}
+
+#content_zz {
+	height: 300px;
+	width: 100%;
+	display: none
+}
+
+#content_zz2 {
+	display: none
+}
+
+#content_zz3 {
+	display: none
+}
+
+#content_zz4 {
+	display: none
+}
+
+#content_zz5 {
+	display: none
+}
+
+#content_sr {
+	height: 300px;
+	width: 100%;
+	display: none
+}
+
+#content_sr2 {
+	display: none
+}
+
+#content_sr3 {
+	display: none
+}
+
+#content_sr4 {
+	display: none
+}

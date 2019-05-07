@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.MessageTemplateMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.MessageTemplate">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="DATE" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="VARIABLE" property="variable" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, CONTENT, ADDTIME, ADDMAN, REMARK, TYPE,VARIABLE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from MESSAGETEMPLATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selective" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.MessageTemplate">
+		select
+		<include refid="Base_Column_List"></include>
+		from MESSAGETEMPLATE
+		<where>
+			<if test="id != null">
+				AND id = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null">
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="content != null">
+				AND CONTENT = #{content,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime,jdbcType=DATE}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null">
+				AND TYPE = #{type,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		MESSAGETEMPLATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.MessageTemplate">
+		insert into MESSAGETEMPLATE
+		(ID, NAME, CONTENT,
+		ADDTIME, ADDMAN, REMARK,
+		TYPE,VARIABLE)
+		values
+		(#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR},
+		#{addtime,jdbcType=DATE},
+		#{addman,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},#{variable,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.MessageTemplate">
+		insert into MESSAGETEMPLATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=DATE},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.MessageTemplate">
+		update MESSAGETEMPLATE
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=DATE},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="variable != null">
+				VARIBALE = #{variable,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.MessageTemplate">
+		update
+		MESSAGETEMPLATE
+		set NAME = #{name,jdbcType=VARCHAR},
+		CONTENT =
+		#{content,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=DATE},
+		ADDMAN
+		= #{addman,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		TYPE
+		= #{type,jdbcType=VARCHAR},
+		VARIBALE=#{varibale,jdbcType=VARCHAR}
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

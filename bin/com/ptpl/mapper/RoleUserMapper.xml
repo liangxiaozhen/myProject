@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RoleUserMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RoleUser">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="USER_ID" property="userId" jdbcType="DECIMAL" />
+		<result column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ptpl.model.RoleUser">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ROLEUSER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ROLEUSER (ID, USER_ID, ROLE_ID
+		)
+		values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL},
+		#{roleId,jdbcType=DECIMAL}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RoleUser">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ROLEUSER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ROLEUSER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="roleId != null">
+				ROLE_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=DECIMAL},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<delete id="deleteByRoleIdAndUserId" parameterType="com.ptpl.model.RoleUser">
+		delete ROLEUSER where user_id = #{userId,jdbcType=DECIMAL} and role_id =
+		#{roleId,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 当删除角色时根据角色ID 删除数据 避免数据冗余 -->
+	<delete id="deleteByRoleId" parameterType="com.ptpl.model.RoleUser">
+		delete roleuser where role_id = #{roleId}
+	</delete>
+
+</mapper>

@@ -1,0 +1,146 @@
+package junit.test;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+ import com.ptpl.mapper.[entity]Mapper;
+import com.ptpl.mapper.[entity]Mapper;
+ import com.ptpl.model.[entity];
+/**
+ * 
+ * [description] 测试类
+ * [entity]Test
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:spring/applicationContext.xml",
+		"classpath:mybatis/mybatis-config.xml"})
+public class [entity]Test {
+
+	 @Autowired
+	 private [entity]Mapper [lowEntity]Mapper;
+	 
+  	 
+	 @Test
+	 public void handle05(){
+		 ApplicationContext content = new ClassPathXmlApplicationContext("spring/applicationContext-dao.xml");
+		 System.out.println(content);
+		 String[] strings = content.getBeanDefinitionNames();
+		 for(String string :strings){
+			 System.out.println("==================="+string);
+		 }
+		 
+	 }
+	 
+	 
+	  /**
+	  * 
+	 * @Title: find[entity]s 
+	 * @Description: TODO(查询全部信息 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	 @Test
+	 public void find[entity]s(){
+	     [entity] [lowEntity] = new  [entity]();
+		 List<[entity]> [lowEntity]s = [lowEntity]Mapper.find[entity]s([lowEntity]);
+  		 for([entity] [lowEntity]1 :[lowEntity]s){
+			System.out.println("=========================="+[lowEntity]);
+  			}
+	 }
+	 
+	  /**
+	  * 
+	 * @Title: updateById 
+	 * @Description: TODO(更新 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	 @Test
+	 public void updateById(){
+		 [entity] [lowEntity] = new [entity]();
+		 [lowEntity].setId(new BigDecimal(4));
+ 		 int count = [lowEntity]Mapper.updateById([lowEntity]);
+		 if(count > 0){
+			 System.out.println("===================更新成功");
+		 }else{
+			 System.out.println("===================更新不成功");
+		 }
+	 }
+	 
+	  /**
+	  * 
+	 * @Title: find[entity]ById 
+	 * @Description: TODO(根据ID查找 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	 @Test
+	 public void find[entity]ById(){
+ 		
+		 [entity] [lowEntity]= [lowEntity]Mapper.find[entity]ById(new BigDecimal(25));
+		 System.out.println([lowEntity].getId());
+	 }
+  /**
+	  * 
+	 * @Title: deleteById 
+	 * @Description: TODO(删除 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	  @Test
+	 public void deleteById(){
+  		 int count = [lowEntity]Mapper.deleteById(new BigDecimal(2));
+ 		 if(count > 0){
+ 			 System.out.println("=============================删除成功");
+ 		 }else{
+ 			 System.out.println("=============================删除失败");
+ 		 }
+	 }
+	 
+	  /**
+	  * 
+	 * @Title: insertSelective 
+	 * @Description: TODO(新增 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+ 	 @Test
+	 public void insertSelective(){
+ 		 for(int i = 0 ;i<=230;i++){
+  			 [entity] [lowEntity] = new [entity]();
+ 			 BigDecimal bd = new BigDecimal(i);
+ 			 [lowEntity].setId(bd);
+  			 int count = 0;
+ 			 count = [lowEntity]Mapper.insertSelective([lowEntity]);
+ 			if(count > 0){
+ 				System.out.println("数据添加成功.."+i);
+ 			}else{
+ 				System.out.println("数据添加失败"+i);
+ 			}
+  		 }
+ 
+ 	 }
+  
+}

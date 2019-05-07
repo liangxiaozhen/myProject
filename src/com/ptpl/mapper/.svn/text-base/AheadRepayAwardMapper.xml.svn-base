@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AheadRepayAwardMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.AheadRepayAward" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TID" property="tid" jdbcType="DECIMAL" />
+    <result column="AHEADREPAYANO" property="aheadrepayano" jdbcType="VARCHAR" />
+    <result column="ISPLUSCOMPENSATEON" property="ispluscompensateon" jdbcType="DECIMAL" />
+    <result column="MINPLUSNORECEIVEINT" property="minplusnoreceiveint" jdbcType="FLOAT" />
+    <result column="MAXPLUSNORECEIVEINT" property="maxplusnoreceiveint" jdbcType="FLOAT" />
+    <result column="PLUSAWARDTYPE" property="plusawardtype" jdbcType="DECIMAL" />
+    <result column="PLUSPENALTYNAME" property="pluspenaltyname" jdbcType="VARCHAR" />
+    <result column="PLUSPENALTYQUOTA" property="pluspenaltyquota" jdbcType="FLOAT" />
+    <result column="PLUSPENALTYRATE" property="pluspenaltyrate" jdbcType="FLOAT" />
+    <result column="PLUSMAXPENALTY" property="plusmaxpenalty" jdbcType="FLOAT" />
+    <result column="PLUSPAWARDNAME" property="pluspawardname" jdbcType="VARCHAR" />
+    <result column="PLUSPAWARDNO" property="pluspawardno" jdbcType="VARCHAR" />
+    <result column="PLUSPAWARDQUOTA" property="pluspawardquota" jdbcType="FLOAT" />
+    <result column="PLUSPAWARDRATE" property="pluspawardrate" jdbcType="FLOAT" />
+    <result column="PLUSMAXPAWARD" property="plusmaxpaward" jdbcType="FLOAT" />
+    <result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+    <result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+    <result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+    <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="PLUSPAWARDCOUNT" property="pluspawardcount" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TID, AHEADREPAYANO, ISPLUSCOMPENSATEON, MINPLUSNORECEIVEINT, MAXPLUSNORECEIVEINT, 
+    PLUSAWARDTYPE, PLUSPENALTYNAME, PLUSPENALTYQUOTA, PLUSPENALTYRATE, PLUSMAXPENALTY, 
+    PLUSPAWARDNAME, PLUSPAWARDNO, PLUSPAWARDQUOTA, PLUSPAWARDRATE, PLUSMAXPAWARD, ISAUDIT, 
+    ISTEMPLET, ADDMAN, ADDTIME, REMARK,PLUSPAWARDCOUNT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from AHEADREPAYAWARD
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 根据tid查询信息 -->
+  <select id="selectahpayAwardBytid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from AHEADREPAYAWARD
+    where TID = #{tid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from AHEADREPAYAWARD
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.AheadRepayAward" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+     select AHEADREPAYAWARD_SEQ.NEXTVAL as id from dual
+  </selectKey>
+    insert into AHEADREPAYAWARD (ID, TID, AHEADREPAYANO, 
+      ISPLUSCOMPENSATEON, MINPLUSNORECEIVEINT, 
+      MAXPLUSNORECEIVEINT, PLUSAWARDTYPE, PLUSPENALTYNAME, 
+      PLUSPENALTYQUOTA, PLUSPENALTYRATE, PLUSMAXPENALTY, 
+      PLUSPAWARDNAME, PLUSPAWARDNO, PLUSPAWARDQUOTA, 
+      PLUSPAWARDRATE, PLUSMAXPAWARD, ISAUDIT, 
+      ISTEMPLET, ADDMAN, ADDTIME, 
+      REMARK,PLUSPAWARDCOUNT)
+    values (#{id,jdbcType=DECIMAL}, #{tid,jdbcType=DECIMAL}, #{aheadrepayano,jdbcType=VARCHAR}, 
+      #{ispluscompensateon,jdbcType=DECIMAL}, #{minplusnoreceiveint,jdbcType=FLOAT}, 
+      #{maxplusnoreceiveint,jdbcType=FLOAT}, #{plusawardtype,jdbcType=DECIMAL}, #{pluspenaltyname,jdbcType=VARCHAR}, 
+      #{pluspenaltyquota,jdbcType=FLOAT}, #{pluspenaltyrate,jdbcType=FLOAT}, #{plusmaxpenalty,jdbcType=FLOAT}, 
+      #{pluspawardname,jdbcType=VARCHAR}, #{pluspawardno,jdbcType=VARCHAR}, #{pluspawardquota,jdbcType=FLOAT}, 
+      #{pluspawardrate,jdbcType=FLOAT}, #{plusmaxpaward,jdbcType=FLOAT}, #{isaudit,jdbcType=DECIMAL}, 
+      #{istemplet,jdbcType=DECIMAL}, #{addman,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR},#{pluspawardcount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.AheadRepayAward" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+     select AHEADREPAYAWARD_SEQ.NEXTVAL as id from dual
+  </selectKey>
+    insert into AHEADREPAYAWARD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tid != null" >
+        TID,
+      </if>
+      <if test="aheadrepayano != null" >
+        AHEADREPAYANO,
+      </if>
+      <if test="ispluscompensateon != null" >
+        ISPLUSCOMPENSATEON,
+      </if>
+      <if test="minplusnoreceiveint != null" >
+        MINPLUSNORECEIVEINT,
+      </if>
+      <if test="maxplusnoreceiveint != null" >
+        MAXPLUSNORECEIVEINT,
+      </if>
+      <if test="plusawardtype != null" >
+        PLUSAWARDTYPE,
+      </if>
+      <if test="pluspenaltyname != null" >
+        PLUSPENALTYNAME,
+      </if>
+      <if test="pluspenaltyquota != null" >
+        PLUSPENALTYQUOTA,
+      </if>
+      <if test="pluspenaltyrate != null" >
+        PLUSPENALTYRATE,
+      </if>
+      <if test="plusmaxpenalty != null" >
+        PLUSMAXPENALTY,
+      </if>
+      <if test="pluspawardname != null" >
+        PLUSPAWARDNAME,
+      </if>
+      <if test="pluspawardno != null" >
+        PLUSPAWARDNO,
+      </if>
+      <if test="pluspawardquota != null" >
+        PLUSPAWARDQUOTA,
+      </if>
+      <if test="pluspawardrate != null" >
+        PLUSPAWARDRATE,
+      </if>
+      <if test="plusmaxpaward != null" >
+        PLUSMAXPAWARD,
+      </if>
+      <if test="isaudit != null" >
+        ISAUDIT,
+      </if>
+      <if test="istemplet != null" >
+        ISTEMPLET,
+      </if>
+      <if test="addman != null" >
+        ADDMAN,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="pluspawardcount != null" >
+        PLUSPAWARDCOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="aheadrepayano != null" >
+        #{aheadrepayano,jdbcType=VARCHAR},
+      </if>
+      <if test="ispluscompensateon != null" >
+        #{ispluscompensateon,jdbcType=DECIMAL},
+      </if>
+      <if test="minplusnoreceiveint != null" >
+        #{minplusnoreceiveint,jdbcType=FLOAT},
+      </if>
+      <if test="maxplusnoreceiveint != null" >
+        #{maxplusnoreceiveint,jdbcType=FLOAT},
+      </if>
+      <if test="plusawardtype != null" >
+        #{plusawardtype,jdbcType=DECIMAL},
+      </if>
+      <if test="pluspenaltyname != null" >
+        #{pluspenaltyname,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspenaltyquota != null" >
+        #{pluspenaltyquota,jdbcType=FLOAT},
+      </if>
+      <if test="pluspenaltyrate != null" >
+        #{pluspenaltyrate,jdbcType=FLOAT},
+      </if>
+      <if test="plusmaxpenalty != null" >
+        #{plusmaxpenalty,jdbcType=FLOAT},
+      </if>
+      <if test="pluspawardname != null" >
+        #{pluspawardname,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspawardno != null" >
+        #{pluspawardno,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspawardquota != null" >
+        #{pluspawardquota,jdbcType=FLOAT},
+      </if>
+      <if test="pluspawardrate != null" >
+        #{pluspawardrate,jdbcType=FLOAT},
+      </if>
+      <if test="plusmaxpaward != null" >
+        #{plusmaxpaward,jdbcType=FLOAT},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=DECIMAL},
+      </if>
+      <if test="istemplet != null" >
+        #{istemplet,jdbcType=DECIMAL},
+      </if>
+      <if test="addman != null" >
+        #{addman,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+       <if test="pluspawardcount != null" >
+        #{pluspawardcount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.AheadRepayAward" >
+    update AHEADREPAYAWARD
+    <set >
+      <if test="tid != null" >
+        TID = #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="aheadrepayano != null" >
+        AHEADREPAYANO = #{aheadrepayano,jdbcType=VARCHAR},
+      </if>
+      <if test="ispluscompensateon != null" >
+        ISPLUSCOMPENSATEON = #{ispluscompensateon,jdbcType=DECIMAL},
+      </if>
+      <if test="minplusnoreceiveint != null" >
+        MINPLUSNORECEIVEINT = #{minplusnoreceiveint,jdbcType=FLOAT},
+      </if>
+      <if test="maxplusnoreceiveint != null" >
+        MAXPLUSNORECEIVEINT = #{maxplusnoreceiveint,jdbcType=FLOAT},
+      </if>
+      <if test="plusawardtype != null" >
+        PLUSAWARDTYPE = #{plusawardtype,jdbcType=DECIMAL},
+      </if>
+      <if test="pluspenaltyname != null" >
+        PLUSPENALTYNAME = #{pluspenaltyname,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspenaltyquota != null" >
+        PLUSPENALTYQUOTA = #{pluspenaltyquota,jdbcType=FLOAT},
+      </if>
+      <if test="pluspenaltyrate != null" >
+        PLUSPENALTYRATE = #{pluspenaltyrate,jdbcType=FLOAT},
+      </if>
+      <if test="plusmaxpenalty != null" >
+        PLUSMAXPENALTY = #{plusmaxpenalty,jdbcType=FLOAT},
+      </if>
+      <if test="pluspawardname != null" >
+        PLUSPAWARDNAME = #{pluspawardname,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspawardno != null" >
+        PLUSPAWARDNO = #{pluspawardno,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspawardquota != null" >
+        PLUSPAWARDQUOTA = #{pluspawardquota,jdbcType=FLOAT},
+      </if>
+      <if test="pluspawardrate != null" >
+        PLUSPAWARDRATE = #{pluspawardrate,jdbcType=FLOAT},
+      </if>
+      <if test="plusmaxpaward != null" >
+        PLUSMAXPAWARD = #{plusmaxpaward,jdbcType=FLOAT},
+      </if>
+      <if test="isaudit != null" >
+        ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+      </if>
+      <if test="istemplet != null" >
+        ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+      </if>
+      <if test="addman != null" >
+        ADDMAN = #{addman,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="pluspawardcount != null" >
+        PLUSPAWARDCOUNT=#{pluspawardcount,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.AheadRepayAward" >
+    update AHEADREPAYAWARD
+    set TID = #{tid,jdbcType=DECIMAL},
+      AHEADREPAYANO = #{aheadrepayano,jdbcType=VARCHAR},
+      ISPLUSCOMPENSATEON = #{ispluscompensateon,jdbcType=DECIMAL},
+      MINPLUSNORECEIVEINT = #{minplusnoreceiveint,jdbcType=FLOAT},
+      MAXPLUSNORECEIVEINT = #{maxplusnoreceiveint,jdbcType=FLOAT},
+      PLUSAWARDTYPE = #{plusawardtype,jdbcType=DECIMAL},
+      PLUSPENALTYNAME = #{pluspenaltyname,jdbcType=VARCHAR},
+      PLUSPENALTYQUOTA = #{pluspenaltyquota,jdbcType=FLOAT},
+      PLUSPENALTYRATE = #{pluspenaltyrate,jdbcType=FLOAT},
+      PLUSMAXPENALTY = #{plusmaxpenalty,jdbcType=FLOAT},
+      PLUSPAWARDNAME = #{pluspawardname,jdbcType=VARCHAR},
+      PLUSPAWARDNO = #{pluspawardno,jdbcType=VARCHAR},
+      PLUSPAWARDQUOTA = #{pluspawardquota,jdbcType=FLOAT},
+      PLUSPAWARDRATE = #{pluspawardrate,jdbcType=FLOAT},
+      PLUSMAXPAWARD = #{plusmaxpaward,jdbcType=FLOAT},
+      ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+      ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+      ADDMAN = #{addman,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      PLUSPAWARDCOUNT=#{pluspawardcount,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 查询增益 -->
+  <select id="selectAheadRepayZY" parameterType="com.ptpl.model.AheadRepayAward" resultMap="BaseResultMap">
+    select * from Aheadrepayaward where 1=1
+  </select>
+  
+  <!-- 查询 -->
+	<select id="selectAheadAwardMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+	 select * from Aheadrepayaward where 1=1
+	    <if test="aheadRepayPNo!=null and aheadRepayPNo!='' ">
+        and aheadrepayano=#{aheadRepayPNo}
+       </if>
+        <if test="startAppTime != null and startAppTime != '' ">
+			and addtime &gt;= #{startAppTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endAppTime !=null and endAppTime!= ''">
+			and addtime &lt;= #{endAppTime,jdbcType=TIMESTAMP}
+		</if>
+	
+	</select>
+  
+</mapper>

@@ -1,0 +1,18 @@
+driverClassName=oracle.jdbc.driver.OracleDriver
+validationQuery=SELECT 'x' FROM DUAL
+jdbc_url=jdbc:oracle:thin:@139.196.189.68:1521:PTPHS
+#jdbc_url=jdbc:oracle:thin:@192.168.0.250:1521:PTPHS
+#jdbc_url=jdbc:oracle:thin:@192.168.0.250:1521:PTPL
+#jdbc_url=jdbc:oracle:thin:@139.196.189.68:1521:PTPL
+#jdbc_url=jdbc:oracle:thin:@10.46.18.63:1521:PTPL
+jdbc_username=p2puser
+jdbc_password=p2p123123
+#jdbc_url=jdbc:oracle:thin:@192.168.0.250:1521:PTPL
+#driverClassName=oracle.jdbc.driver.OracleDriver
+#validationQuery=SELECT 'x' FROM DUAL
+#jdbc_url=jdbc:oracle:thin:@localhost:1521:ORCL
+#jdbc_username=abc
+#jdbc_password=abc
+
+
+ 

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ActivityListMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ActivityList">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="actno" jdbcType="VARCHAR" />
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR" />
+		<result column="ACTTYPE" property="acttype" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ACTBEGINTIME" property="actbegintime" jdbcType="TIMESTAMP" />
+		<result column="ACTENDTIME" property="actendtime" jdbcType="TIMESTAMP" />
+		<result column="MADEMAN" property="mademan" jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISLISTAUDIT" property="islistaudit" jdbcType="DECIMAL" />
+		<result column="GENERATETYPE" property="generatetype" jdbcType="DECIMAL" />
+		<result column="ALLOWMANUAL" property="allowmanual" jdbcType="DECIMAL" />
+		<result column="EXECUTESTATUS" property="executestatus"
+			jdbcType="DECIMAL" />
+		<result column="EXECUTETIME" property="executetime" jdbcType="TIMESTAMP" />
+		<result column="AWARDTIMES" property="awardtimes" jdbcType="DECIMAL" />
+		<result column="AWARDNUMBER" property="awardnumber" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, ACTNO, ACTNAME, ACTTYPE, STATUS, ACTBEGINTIME, ACTENDTIME, MADEMAN,
+		MADETIME,
+		REMARK, ISLISTAUDIT, GENERATETYPE, ALLOWMANUAL, EXECUTESTATUS, EXECUTETIME,
+		AWARDTIMES,
+		AWARDNUMBER
+	</sql>
+
+	<!-- 删除活动列表 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from ACTIVITYLIST where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据活动编号actno删除活动列表 -->
+	<delete id="deleteByActNo" parameterType="java.lang.String">
+		delete from ACTIVITYLIST where actno = #{actno,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 新增活动列表 -->
+	<insert id="insert" parameterType="com.ptpl.model.ActivityList">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ACTIVITYLIST_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYLIST (ID, ACTNO, ACTNAME,
+		ACTTYPE, STATUS, ACTBEGINTIME,
+		ACTENDTIME, MADEMAN, MADETIME,
+		REMARK, ISLISTAUDIT, GENERATETYPE,
+		ALLOWMANUAL, EXECUTESTATUS, EXECUTETIME,
+		AWARDTIMES, AWARDNUMBER)
+		values (#{id,jdbcType=DECIMAL}, #{actno,jdbcType=VARCHAR},
+		#{actname,jdbcType=VARCHAR},
+		#{acttype,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{actbegintime,jdbcType=TIMESTAMP},
+		#{actendtime,jdbcType=TIMESTAMP}, #{mademan,jdbcType=VARCHAR},
+		#{madetime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}, #{islistaudit,jdbcType=DECIMAL}, #{generatetype,jdbcType=DECIMAL},
+		#{allowmanual,jdbcType=DECIMAL}, #{executestatus,jdbcType=DECIMAL},
+		#{executetime,jdbcType=TIMESTAMP},
+		#{awardtimes,jdbcType=DECIMAL}, #{awardnumber,jdbcType=DECIMAL})
+	</insert>
+
+	<!-- 新增活动列表（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.ActivityList">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ACTIVITYLIST_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYLIST
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actno != null">
+				ACTNO,
+			</if>
+			<if test="actname != null">
+				ACTNAME,
+			</if>
+			<if test="acttype != null">
+				ACTTYPE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="actbegintime != null">
+				ACTBEGINTIME,
+			</if>
+			<if test="actendtime != null">
+				ACTENDTIME,
+			</if>
+			<if test="mademan != null">
+				MADEMAN,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="islistaudit != null">
+				ISLISTAUDIT,
+			</if>
+			<if test="generatetype != null">
+				GENERATETYPE,
+			</if>
+			<if test="allowmanual != null">
+				ALLOWMANUAL,
+			</if>
+			<if test="executestatus != null">
+				EXECUTESTATUS,
+			</if>
+			<if test="executetime != null">
+				EXECUTETIME,
+			</if>
+			<if test="awardtimes != null">
+				AWARDTIMES,
+			</if>
+			<if test="awardnumber != null">
+				AWARDNUMBER,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actno != null">
+				#{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="actname != null">
+				#{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="acttype != null">
+				#{acttype,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="actbegintime != null">
+				#{actbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actendtime != null">
+				#{actendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mademan != null">
+				#{mademan,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="islistaudit != null">
+				#{islistaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="generatetype != null">
+				#{generatetype,jdbcType=DECIMAL},
+			</if>
+			<if test="allowmanual != null">
+				#{allowmanual,jdbcType=DECIMAL},
+			</if>
+			<if test="executestatus != null">
+				#{executestatus,jdbcType=DECIMAL},
+			</if>
+			<if test="executetime != null">
+				#{executetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="awardtimes != null">
+				#{awardtimes,jdbcType=DECIMAL},
+			</if>
+			<if test="awardnumber != null">
+				#{awardnumber,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- pxl 2016-11-12 获取活动列表 -->
+	<select id="getActivityList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ActivityList">
+		select * from ACTIVITYLIST
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="actno !=null and actno!=''">
+				and actno=#{actno,jdbcType=VARCHAR}
+			</if>
+			<if test="actname !=null and actname!=''">
+				and actname = #{actname,jdbcType=VARCHAR}
+			</if>
+			<if test="status !=null and status!='' or status==0">
+				and status=#{status,jdbcType=DECIMAL}
+			</if>
+			<if test="acttype !=null">
+				and acttype=#{acttype,jdbcType=DECIMAL}
+			</if>
+		</trim>
+		order by id desc
+	</select>
+
+	<!-- pxl 2016-11-18 更新活动列表（比如：状态） -->
+	<update id="updateActivityList" parameterType="com.ptpl.model.ActivityList">
+		update ACTIVITYLIST
+		<set>
+			<if test="status !=null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="awardtimes !=null">
+				AWARDTIMES = #{awardtimes,jdbcType=DECIMAL},
+			</if>
+			<if test="awardnumber !=null">
+				AWARDNUMBER = #{awardnumber,jdbcType=DECIMAL},
+			</if>
+			<if test="executestatus !=null">
+				EXECUTESTATUS = #{executestatus,jdbcType=DECIMAL}
+			</if>
+		</set>
+		where ACTNO = #{actno,jdbcType=VARCHAR}
+	</update>
+
+	<!-- pxl 2016-11-18 活动列表 -->
+	<select id="getActListByAl" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ActivityList">
+		select * from ACTIVITYLIST
+		<where>
+			<if test="actno !=null and actno!=''">
+				and actno = #{actno,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- pxl 2016-11-28 根据活动编号删除对应的活动 -->
+	<delete id="deleteActivityListByActNo" parameterType="string">
+		delete from ACTIVITYLIST where ACTNO= #{actno,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- 根据活动编号更新活动列表 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ActivityList">
+		update ACTIVITYLIST
+		<set>
+			<if test="actname != null">
+				ACTNAME = #{actname,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="actbegintime != null">
+				ACTBEGINTIME = #{actbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actendtime != null">
+				ACTENDTIME = #{actendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="mademan != null">
+				MADEMAN = #{mademan,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="islistaudit != null">
+				ISLISTAUDIT = #{islistaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="generatetype != null">
+				GENERATETYPE = #{generatetype,jdbcType=DECIMAL},
+			</if>
+			<if test="allowmanual != null">
+				ALLOWMANUAL = #{allowmanual,jdbcType=DECIMAL},
+			</if>
+			<if test="executestatus != null">
+				EXECUTESTATUS = #{executestatus,jdbcType=DECIMAL},
+			</if>
+			<if test="executetime != null">
+				EXECUTETIME = #{executetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="awardtimes != null">
+				AWARDTIMES = #{awardtimes,jdbcType=DECIMAL},
+			</if>
+			<if test="awardnumber != null">
+				AWARDNUMBER = #{awardnumber,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ACTNO = #{actno,jdbcType=VARCHAR}
+	</update>
+</mapper>

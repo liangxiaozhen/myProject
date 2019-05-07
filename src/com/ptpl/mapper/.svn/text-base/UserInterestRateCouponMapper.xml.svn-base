@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserInterestRateCouponMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserInterestRateCoupon">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="ICTYPE" property="ictype" jdbcType="DECIMAL" />
+		<result column="ICTIME" property="ictime" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ICRATE" property="icrate" jdbcType="FLOAT" />
+		<result column="ICDEALTIME" property="icdealtime" jdbcType="TIMESTAMP" />
+		<result column="ICFAILTIME" property="icfailtime" jdbcType="TIMESTAMP" />
+		<result column="PURPOSE" property="purpose" jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="UIRCTYPE" property="uirctype" jdbcType="DECIMAL" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="VOUCHERCASH" property="vouchercash" jdbcType="FLOAT" />
+		<result column="UIRCNO" property="uircno" jdbcType="VARCHAR" />
+		<result column="USEDATE" property="usedate" jdbcType="TIMESTAMP" />
+		<!-- 关联用户基本信息表 -->
+		<association property="userBaseAccountInfo" resultMap="UserBaseInfoMap" />
+		<!-- 关联奖品表 -->
+		<association property="award" resultMap="awardMap"></association>
+	</resultMap>
+
+	<!-- 用户基本信息 -->
+	<resultMap id="UserBaseInfoMap" type="com.ptpl.model.UserBaseAccountInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 奖品表 -->
+	<resultMap id="awardMap" type="com.ptpl.model.Award">
+		<result column="ANO" property="ano" jdbcType="VARCHAR"/>
+		<result column="ANAME" property="aname" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 用户使用券表 -->
+	<sql id="Base_Column_List">
+		ID, BASEID, ICTYPE, ICTIME, STATUS, ICRATE, ICDEALTIME,
+		ICFAILTIME, PURPOSE, ISAUDIT, AUDITMAN, AUDITTIME,
+		REMARK,UIRCTYPE,ISUSE,VOUCHERCASH, UIRCNO,USEDATE
+	</sql>
+
+	<!-- 用户使用券表、用户基本信息表 -->
+	<sql id="Association_Column_List">
+		UIRC.ID, UIRC.BASEID, UIRC.ICTYPE, UIRC.ICTIME,
+		UIRC.STATUS, UIRC.ICRATE, UIRC.ICDEALTIME, UIRC.ICFAILTIME,
+		UIRC.PURPOSE,
+		UIRC.ISAUDIT, UIRC.AUDITMAN, UIRC.AUDITTIME,
+		UIRC.REMARK,UIRC.UIRCTYPE,UIRC.ISUSE,UIRC.VOUCHERCASH, UIRC.UIRCNO,
+		UIRC.USEDATE,
+		UBAI.LOGINNAME
+	</sql>
+
+	<!-- 新增用户使用券明细 -->
+	<insert id="insert" parameterType="com.ptpl.model.UserInterestRateCoupon">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT USERINTERESTRATECOUPON_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into
+		USERINTERESTRATECOUPON (ID, BASEID, ICTYPE,
+		ICTIME, STATUS,
+		ICRATE,
+		ICDEALTIME, ICFAILTIME, PURPOSE,
+		ISAUDIT, AUDITMAN, AUDITTIME,
+		REMARK,UIRCTYPE,ISUSE,VOUCHERCASH,UIRCNO,USEDATE)
+		values
+		(#{id,jdbcType=DECIMAL},
+		#{baseid,jdbcType=DECIMAL},
+		#{ictype,jdbcType=DECIMAL},
+		#{ictime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=DECIMAL},
+		#{icrate,jdbcType=FLOAT},
+		#{icdealtime,jdbcType=TIMESTAMP},
+		#{icfailtime,jdbcType=TIMESTAMP},
+		#{purpose,jdbcType=VARCHAR},
+		#{isaudit,jdbcType=DECIMAL},
+		#{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},
+		#{uirctype,jdbcType=DECIMAL},
+		#{isuse,jdbcType=DECIMAL},
+		#{vouchercash,jdbcType=FLOAT},
+		#{uircno,jdbcType=VARCHAR},
+		#{usedate,jdbcType=TIMESTAMP})
+	</insert>
+
+	<!-- 新增用户使用券明细（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserInterestRateCoupon">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT USERINTERESTRATECOUPON_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERINTERESTRATECOUPON
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="ictype != null">
+				ICTYPE,
+			</if>
+			<if test="ictime != null">
+				ICTIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="icrate != null">
+				ICRATE,
+			</if>
+			<if test="icdealtime != null">
+				ICDEALTIME,
+			</if>
+			<if test="icfailtime != null">
+				ICFAILTIME,
+			</if>
+			<if test="purpose != null">
+				PURPOSE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="uirctype != null">
+				uirctype,
+			</if>
+			<if test="isuse != null">
+				isuse,
+			</if>
+			<if test="vouchercash != null">
+				vouchercash,
+			</if>
+			<if test="uircno != null">
+				uircno,
+			</if>
+			<if test="usedate != null">
+				usedate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="ictype != null">
+				#{ictype,jdbcType=DECIMAL},
+			</if>
+			<if test="ictime != null">
+				#{ictime},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="icrate != null">
+				#{icrate,jdbcType=FLOAT},
+			</if>
+			<if test="icdealtime != null">
+				#{icdealtime},
+			</if>
+			<if test="icfailtime != null">
+				#{icfailtime},
+			</if>
+			<if test="purpose != null">
+				#{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="uirctype != null">
+				#{uirctype,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="vouchercash != null">
+				#{vouchercash,jdbcType=FLOAT},
+			</if>
+			<if test="uircno != null">
+				#{uircno,jdbcType=VARCHAR},
+			</if>
+			<if test="usedate != null">
+				#{usedate},
+			</if>
+		</trim>
+	</insert>
+
+	<!--条件查询用户使用券列表（关联用户基本信息表） -->
+	<select id="findCouponList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserInterestRateCoupon">
+		SELECT
+		<include refid="Association_Column_List" />
+		FROM
+		USERINTERESTRATECOUPON UIRC,
+		USERBASEACCOUNTINFO UBAI
+		<where>
+			UIRC.BASEID = UBAI.ID
+			<if test="uirctype != null">
+				AND UIRC.UIRCTYPE = #{uirctype}
+			</if>
+			<if test="ictype != null">
+				AND UIRC.ICTYPE = #{ictype}
+			</if>
+			<if test="status != null">
+				AND UIRC.STATUS = #{status}
+			</if>
+			<if test="isuse != null">
+				AND UIRC.ISUSE = #{isuse}
+			</if>
+			<if test="isaudit != null">
+				AND UIRC.ISAUDIT = #{isaudit}
+			</if>
+			<if test="id != null">
+				AND UIRC.ID like '%'||#{id}||'%'
+			</if>
+			<if
+				test="userBaseAccountInfo != null and userBaseAccountInfo.loginname != ''">
+				AND UBAI.LOGINNAME LIKE
+				'%'||#{userBaseAccountInfo.loginname}||'%'
+			</if>
+		</where>
+		order by UIRC.ID
+	</select>
+
+	<!-- 根据主键查看用户使用券详情（关联用户基本信息表） -->
+	<select id="findCouponDetailById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		SELECT
+		<include refid="Association_Column_List" />
+		FROM
+		USERINTERESTRATECOUPON UIRC,
+		USERBASEACCOUNTINFO UBAI
+		<where>
+			UIRC.BASEID = UBAI.ID
+			AND UIRC.ID = #{id,jdbcType=DECIMAL}
+		</where>
+	</select>
+
+	<!-- 根据baseid查询用户是否使用了使用券 -->
+	<select id="findIsUseByBaseid" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserInterestRateCoupon">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userinterestratecoupon
+		<trim prefix="where" prefixOverrides="and">
+			<if test="baseid != null">
+				and baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse != null">
+				and isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="uirctype != null">
+				and uirctype = #{uirctype,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据baseid查询用户已过期的使用券 -->
+	<select id="findOverdueByBaseid" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserInterestRateCoupon">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userinterestratecoupon
+		<trim prefix="where" prefixOverrides="and">
+			<if test="baseid != null">
+				and baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			and icfailtime &lt; sysdate
+		</trim>
+	</select>
+
+	<!-- 更新用户使用券记录（参数可选） -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserInterestRateCoupon">
+		update userinterestratecoupon
+		<set>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="usedate != null">
+				USEDATE = #{usedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="icdealtime != null">
+				ICDEALTIME = #{icdealtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="icfailtime != null">
+				ICFAILTIME = #{icfailtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="purpose != null">
+				PURPOSE = #{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime},
+			</if>
+			<if test="remark">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据ID查询用户使用券记录 -->
+	<select id="findUserInterestRateCouponById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userinterestratecoupon
+		where
+		id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据使用券编号查询详情 -->
+	<select id="selectByUircNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userinterestratecoupon
+		where
+		uircno = #{uircno,jdbcType=VARCHAR}
+	</select>
+
+	<!-- pxl 将券作废掉 -->
+	<update id="updataCouponById" parameterType="com.ptpl.model.UserInterestRateCoupon">
+		update userinterestratecoupon
+		<set>
+			<if test="isuse != null">
+				isuse=#{isuse}
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<!-- 根据用户id来查询用户的加息券 -->
+	<select id="findCouponByBaseId" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserInterestRateCoupon">
+		select u.*,a.aname from USERINTERESTRATECOUPON u,AWARD a
+		<where>
+			u.UIRCNO = a.ANO
+			<if test="baseid !=null">
+				and u.BASEID = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse !=null">
+				and u.ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="cSort == 1">
+				order by u.icdealtime
+			</if>
+			<if test="cSort == 2">
+				order by u.icfailtime
+			</if>
+			<if test="cSort == 3">
+				order by u.icrate
+			</if>
+		</where> 
+	</select>
+	
+	<!-- 查询所有的记录(未到期  可使用) -->
+	<select id="findUserInterestRateCoupon" resultMap="BaseResultMap">
+		select * from USERINTERESTRATECOUPON where ISUSE in(1,2)
+	</select>
+</mapper>

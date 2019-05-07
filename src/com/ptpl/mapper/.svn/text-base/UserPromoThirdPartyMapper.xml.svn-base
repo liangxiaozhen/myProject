@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserPromoThirdPartyMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserPromoThirdParty">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="UPID" property="upid" jdbcType="DECIMAL" />
+		<result column="THIRDPARTYCODE" property="thirdpartycode"
+			jdbcType="VARCHAR" />
+		<result column="THIRDPARTYNAME" property="thirdpartyname"
+			jdbcType="VARCHAR" />
+		<result column="ISOPEN" property="isopen" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<association property="ubai" column="id"
+			javaType="com.ptpl.model.UserBaseAccountInfo">
+			<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+			<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		uptp.ID, uptp.UPID, uptp.THIRDPARTYCODE,
+		uptp.THIRDPARTYNAME, uptp.ISOPEN,
+		uptp.REMARK,ubai.loginname,ubai.realname
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERPROMOTHIRDPARTY
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByThirdPartyName" parameterType="String">
+		delete from
+		USERPROMOTHIRDPARTY
+		where thirdpartyname =#{0}
+	</delete>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		USERPROMOTHIRDPARTY
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<select id="selective" parameterType="com.ptpl.model.UserPromoThirdParty"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM USERPROMOTHIRDPARTY uptp,USERBASEACCOUNTINFO ubai
+		<trim prefix="where" prefixOverrides="and">
+			uptp.upid=ubai.id
+			<if test="id != null">
+				AND uptp.ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ubai.loginname != null and ubai.loginname != ''">
+				AND ubai.LOGINNAME = #{ubai.loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="ubai.realname != null and ubai.realname != ''">
+				AND ubai.REALNAME = #{ubai.realname,jdbcType=VARCHAR}
+			</if>
+			<if test="upid != null">
+				AND uptp.UPID = #{upid,jdbcType=DECIMAL}
+			</if>
+			<if test="thirdpartycode != null">
+				AND uptp.THIRDPARTYCODE =
+				#{thirdpartycode,jdbcType=VARCHAR}
+			</if>
+			<if test="thirdpartyname != null and thirdpartyname != ''">
+				AND uptp.THIRDPARTYNAME =
+				#{thirdpartyname,jdbcType=VARCHAR}
+			</if>
+			<if test="isopen != null">
+				AND uptp.ISOPEN = #{isopen,jdbcType=DECIMAL}
+			</if>
+			<if test="remark != null">
+				AND uptp.REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		order by id
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserPromoThirdParty">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT USERPROMOTHIRDPARTY_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into USERPROMOTHIRDPARTY
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="upid != null">
+				UPID,
+			</if>
+			<if test="thirdpartycode != null">
+				THIRDPARTYCODE,
+			</if>
+			<if test="thirdpartyname != null">
+				THIRDPARTYNAME,
+			</if>
+			<if test="isopen != null">
+				ISOPEN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="upid != null">
+				#{upid,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpartycode != null">
+				#{thirdpartycode,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpartyname != null">
+				#{thirdpartyname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopen != null">
+				#{isopen,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserPromoThirdParty">
+		update USERPROMOTHIRDPARTY
+		<set>
+			<if test="upid != null">
+				UPID = #{upid,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpartycode != null">
+				THIRDPARTYCODE = #{thirdpartycode,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpartyname != null">
+				THIRDPARTYNAME = #{thirdpartyname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopen != null">
+				ISOPEN = #{isopen,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByUPID" parameterType="java.math.BigDecimal">
+		update
+		USERPROMOTHIRDPARTY set isopen = 0 where UPID =
+		#{upid,jdbcType=DECIMAL}
+	</update>
+	<update id="updateNameAndCode" parameterType="String">
+		update
+		USERPROMOTHIRDPARTY set THIRDPARTYNAME =#{2} ,THIRDPARTYCODE = #{1}
+		where THIRDPARTYNAME = #{0}
+	</update>
+</mapper>

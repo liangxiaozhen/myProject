@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.WithdrawsCashCouponMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.WithdrawsCashCoupon">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="actno" jdbcType="VARCHAR" />
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR" />
+		<result column="SETTIME" property="settime" jdbcType="TIMESTAMP" />
+		<result column="ACTBTIME" property="actbtime" jdbcType="TIMESTAMP" />
+		<result column="ACTETIME" property="actetime" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ACTRULE" property="actrule" jdbcType="DECIMAL" />
+		<result column="EXECUTETIME" property="executetime" jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR" />
+		<result column="ISAUDITALIST" property="isauditalist" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ACTNO, ACTNAME, SETTIME, ACTBTIME, ACTETIME, STATUS, ACTRULE,
+		EXECUTETIME, UGRADE,
+		REMOVENAMENO, ISAUDITALIST, ADDMAN, ADDTIME, REMARK
+	</sql>
+	<!-- 查找全部提低卷活动规则 -->
+	<select id="findWithdrawsCashCoupons" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.WithdrawsCashCoupon">
+		select * from WITHDRAWSCASHCOUPON
+		<if test="actno !=null">
+			where actno like '%${actno}%'
+		</if>
+		order by id
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from WITHDRAWSCASHCOUPON
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from WITHDRAWSCASHCOUPON
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insert" parameterType="com.ptpl.model.WithdrawsCashCoupon">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT WITHDRAWSCASHCOUPON_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into WITHDRAWSCASHCOUPON (ID, ACTNO, ACTNAME,
+		SETTIME, ACTBTIME, ACTETIME,
+		STATUS, ACTRULE, EXECUTETIME,
+		UGRADE, REMOVENAMENO, ISAUDITALIST,
+		ADDMAN, ADDTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{actno,jdbcType=VARCHAR},
+		#{actname,jdbcType=VARCHAR},
+		#{settime,jdbcType=TIMESTAMP}, #{actbtime,jdbcType=TIMESTAMP}, #{actetime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=DECIMAL}, #{actrule,jdbcType=DECIMAL},
+		#{executetime,jdbcType=VARCHAR},
+		#{ugrade,jdbcType=VARCHAR}, #{removenameno,jdbcType=VARCHAR}, #{isauditalist,jdbcType=DECIMAL},
+		#{addman,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.WithdrawsCashCoupon">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT WITHDRAWSCASHCOUPON_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into WITHDRAWSCASHCOUPON
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actno != null">
+				ACTNO,
+			</if>
+			<if test="actname != null">
+				ACTNAME,
+			</if>
+			<if test="settime != null">
+				SETTIME,
+			</if>
+			<if test="actbtime != null">
+				ACTBTIME,
+			</if>
+			<if test="actetime != null">
+				ACTETIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="actrule != null">
+				ACTRULE,
+			</if>
+			<if test="executetime != null">
+				EXECUTETIME,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO,
+			</if>
+			<if test="isauditalist != null">
+				ISAUDITALIST,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actno != null">
+				#{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="actname != null">
+				#{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="settime != null">
+				#{settime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actbtime != null">
+				#{actbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actetime != null">
+				#{actetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="actrule != null">
+				#{actrule,jdbcType=DECIMAL},
+			</if>
+			<if test="executetime != null">
+				#{executetime,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="removenameno != null">
+				#{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="isauditalist != null">
+				#{isauditalist,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.WithdrawsCashCoupon">
+		update WITHDRAWSCASHCOUPON
+		<set>
+			<if test="actno != null">
+				ACTNO = #{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="actname != null">
+				ACTNAME = #{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="settime != null">
+				SETTIME = #{settime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actbtime != null">
+				ACTBTIME = #{actbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actetime != null">
+				ACTETIME = #{actetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="actrule != null">
+				ACTRULE = #{actrule,jdbcType=DECIMAL},
+			</if>
+			<if test="executetime != null">
+				EXECUTETIME = #{executetime,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO = #{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="isauditalist != null">
+				ISAUDITALIST = #{isauditalist,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.WithdrawsCashCoupon">
+		update WITHDRAWSCASHCOUPON
+		set ACTNO = #{actno,jdbcType=VARCHAR},
+		ACTNAME = #{actname,jdbcType=VARCHAR},
+		SETTIME = #{settime,jdbcType=TIMESTAMP},
+		ACTBTIME = #{actbtime,jdbcType=TIMESTAMP},
+		ACTETIME = #{actetime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=DECIMAL},
+		ACTRULE = #{actrule,jdbcType=DECIMAL},
+		EXECUTETIME = #{executetime,jdbcType=VARCHAR},
+		UGRADE = #{ugrade,jdbcType=VARCHAR},
+		REMOVENAMENO = #{removenameno,jdbcType=VARCHAR},
+		ISAUDITALIST = #{isauditalist,jdbcType=DECIMAL},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

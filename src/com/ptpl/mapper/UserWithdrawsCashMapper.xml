@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserWithdrawsCashMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserWithdrawsCash">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="CASHNO" property="cashno" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="FEE" property="fee" jdbcType="FLOAT" />
+		<result column="FEERATE" property="feerate" jdbcType="FLOAT" />
+		<result column="BANKNAME" property="bankname" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="CARDNO" property="cardno" jdbcType="VARCHAR" />
+		<result column="APPLYDATE" property="applydate" jdbcType="TIMESTAMP" />
+		<result column="AUDITDATE" property="auditdate" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="CONFIRMMAN" property="confirmman" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISCANCEL" property="iscancel" jdbcType="DECIMAL" />
+		<result column="ORIGINCLIENT" property="originclient" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SERVFEE" property="servfee" jdbcType="FLOAT" />
+		<result column="SERVFEEACCTID" property="servfeeacctid"
+			jdbcType="VARCHAR" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISEXCEPTIONS" property="isexceptions" jdbcType="DECIMAL" />
+		<result column="SYSCHKTIME" property="syschktime" jdbcType="TIMESTAMP" />
+		<result column="FEEOBJFLAG" property="feeobjflag" jdbcType="VARCHAR" />
+		<result column="FEEACCTID" property="feeacctid" jdbcType="VARCHAR" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="CHECKTIME" property="checktime" jdbcType="TIMESTAMP" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="CASHCHL" property="cashchl" jdbcType="VARCHAR" />
+		<result column="USRCUSTID" property="usrcustid" jdbcType="VARCHAR" />
+		<result column="BANKRETURNNO" property="bankreturnno" jdbcType="VARCHAR" />
+		<result column="CITY" property="city" jdbcType="VARCHAR" />
+		<result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+		<result column="BRANCHBANKNAME" property="branchbankname"
+			jdbcType="VARCHAR" />
+		<result column="WITHDRAWMONEYMOREMORE" property="withdrawmoneymoremore"
+			jdbcType="VARCHAR" />
+		<result column="FEEWITHDRAWS" property="feewithdraws" jdbcType="FLOAT" />
+		<result column="FEEPERCENT" property="feepercent" jdbcType="FLOAT" />
+		<result column="FREELIMIT" property="freelimit" jdbcType="FLOAT" />
+		<result column="FEESPLITTING" property="feesplitting" jdbcType="FLOAT" />
+		<association property="ubai" column="id"
+			javaType="com.ptpl.model.UserBaseAccountInfo">
+			<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+			<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<resultMap type="com.ptpl.model.UserWithdrawsCash" id="DayWithdrawResultMap">
+		<result column="DAYTOTAL" property="daytotal" jdbcType="DECIMAL" />
+		<result column="DAYAMOUNT" property="DAYAMOUNT" jdbcType="FLOAT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,baseid,cashno,amount,fee,feewithdraws,feerate,bankname,username,cardno,applydate,auditdate,auditman,confirmman,status,originclient,remark,paycompany
+		,servfee,servfeeacctid,isblending,isexceptions,syschktime,feeobjflag,feeacctid,cashchl,ismanblending,checktime,sysrectime,receivetime,reqquerydata,
+		recresultdata,usrcustid,isaudit,iscancel
+	</sql>
+	<sql id="Query_Column_List">
+		uwdcash.id,uwdcash.baseid,uwdcash.cashno,uwdcash.amount,
+		uwdcash.fee,uwdcash.feerate,uwdcash.bankname,uwdcash.username,
+		uwdcash.cardno,uwdcash.applydate,uwdcash.auditdate,uwdcash.auditman,
+		uwdcash.confirmman,uwdcash.status,uwdcash.originclient,uwdcash.remark,
+		uwdcash.paycompany,uwdcash.servfee,uwdcash.servfeeacctid,uwdcash.isblending,
+		uwdcash.isexceptions,uwdcash.syschktime,uwdcash.feeobjflag,uwdcash.feeacctid,
+		uwdcash.cashchl,uwdcash.ismanblending,uwdcash.checktime,uwdcash.sysrectime,
+		uwdcash.receivetime,uwdcash.reqquerydata,uwdcash.recresultdata,uwdcash.usrcustid,
+		uwdcash.isaudit,uwdcash.bankreturnno,uwdcash.city,uwdcash.province,uwdcash.branchbankname,
+		uwdcash.withdrawmoneymoremore,uwdcash.feewithdraws,uwdcash.feepercent,uwdcash.freelimit,
+		uwdcash.feesplitting,
+		ubai.realname,ubai.loginname
+		from
+		USERWITHDRAWSCASH uwdcash,
+		USERBASEACCOUNTINFO ubai
+	</sql>
+	<sql id="Use_Column_List">
+		id,cashno,amount,applydate,status,isaudit,iscancel,fee,remark,feeobjflag,auditdate,feewithdraws
+	</sql>
+	<!-- 根据用户ID获取数据 -->
+	<select id="getUseWithdrawsCashNote" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserWithdrawsCash">
+		select
+		<include refid="Use_Column_List" />
+		from USERWITHDRAWSCASH
+		<where>
+			<if test="baseid!=null">
+				baseid =#{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				AND status=#{status,jdbcType=DECIMAL}
+			</if>
+			<if test="startdate!=null">
+				AND applydate>=#{startdate}
+			</if>
+			<if test="enddate!=null">
+				AND applydate&lt;=#{enddate}
+			</if>
+			<if test="sign == 'week'">
+				AND applydate >= sysdate-7
+			</if>
+			<if test="sign == 'month'">
+				and applydate >=add_months(sysdate,-1)
+			</if>
+			<if test="sign == 'threeMonth'">
+				and applydate >=add_months(sysdate,-3)
+			</if>
+			</where>
+		order by id desc
+	</select>
+	<!-- 查询当天 00:00:01 至现在 有几条交易记录 -->
+	<select id="selectCountAmountForId" parameterType="java.math.BigDecimal"
+		resultType="com.ptpl.model.UserWithdrawsCash">
+		select count(*) as daytotal,sum(amount) as dayamount from
+		USERWITHDRAWSCASH
+		where applydate > trunc(sysdate)
+		and applydate
+		&lt;sysdate
+		and baseid =#{id} and status =1
+	</select>
+	<!-- select 动态获取数据 -->
+	<select id="selective" parameterType="com.ptpl.model.UserWithdrawsCash"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+	from USERWITHDRAWSCASH
+		<trim prefix="where" prefixOverrides="and">
+			<if test="username  != null and username !=''">
+				AND username like
+				'%'||#{username,jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="servfee != null">
+				AND SERVFEE = #{servfee,jdbcType=FLOAT}
+			</if>
+			<if test="servfeeacctid != null">
+				AND SERVFEEACCTID =
+				#{servfeeacctid,jdbcType=VARCHAR}
+			</if>
+			<if test="isblending != null">
+				AND ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="isexceptions != null">
+				AND ISEXCEPTIONS =
+				#{isexceptions,jdbcType=DECIMAL}
+			</if>
+			<if test="syschktime != null">
+				AND SYSCHKTIME = #{syschktime}
+			</if>
+			<if test="feeobjflag != null">
+				AND FEEOBJFLAG = #{feeobjflag,jdbcType=VARCHAR}
+			</if>
+			<if test="feeacctid != null">
+				AND FEEACCTID = #{feeacctid,jdbcType=VARCHAR}
+			</if>
+			<if test="cashchl != null">
+				AND CASHCHL = #{cashchl,jdbcType=VARCHAR}
+			</if>
+			<if test="ismanblending != null">
+				AND ISMANBLENDING =
+				#{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="checktime != null">
+				AND CHECKTIME = #{checktime}
+			</if>
+			<if test="sysrectime != null">
+				AND SYSRECTIME = #{sysrectime}
+			</if>
+			<if test="receivetime != null">
+				AND RECEIVETIME = #{receivetime}
+			</if>
+			<if test="reqquerydata != null">
+				AND REQQUERYDATA =
+				#{reqquerydata,jdbcType=VARCHAR}
+			</if>
+			<if test="recresultdata != null">
+				AND RECRESULTDATA =
+				#{recresultdata,jdbcType=VARCHAR}
+			</if>
+			<if test="operator == '等于' and operator!=null">
+				AND AMOUNT = #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="operator == '大于' and operator!=null">
+				AND AMOUNT > #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="operator == '小于' and operator!=null">
+				AND AMOUNT &lt; #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="fee != null">
+				AND FEE = #{fee,jdbcType=FLOAT}
+			</if>
+			<if test="feerate != null">
+				AND FEERATE = #{feerate,jdbcType=FLOAT}
+			</if>
+			<if test="bankname != null">
+				AND BANKNAME = #{bankname,jdbcType=VARCHAR}
+			</if>
+			<if test="cardno != null">
+				AND CARDNO = #{cardno,jdbcType=VARCHAR}
+			</if>
+			<if test="applydate != null">
+				AND APPLYDATE > #{applydate}
+			</if>
+			<if test="auditdate != null">
+				AND AUDITDATE = #{auditdate}
+			</if>
+			<if test="auditman != null and  auditman!= ''">
+				AND AUDITMAN  = #{auditman,jdbcType=VARCHAR} 
+			</if>
+			<if test="confirmman != null">
+				AND CONFIRMMAN = #{confirmman,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null">
+				AND STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="originclient != null">
+				AND ORIGINCLIENT =
+				#{originclient,jdbcType=DECIMAL}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="usrcustid != null">
+				AND USRCUSTID = #{usrcustid,jdbcType=VARCHAR}
+			</if>
+			<if test="paycompany != null">
+				AND PAYCOMPANY = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="isaudit != null">
+				AND isaudit = #{isaudit,jdbcType=DECIMAL}
+			</if>
+		</trim>
+		order by APPLYDATE desc
+	</select>
+
+	<!-- 系统后台对账，查询进行比较 -->
+	<select id="selectContrast" parameterType="com.ptpl.model.UserWithdrawsCash"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERWITHDRAWSCASH
+		<trim prefix="where" prefixOverrides="and">
+			<if test="isblending != null">
+				AND ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="isexceptions != null">
+				AND ISEXCEPTIONS = #{isexceptions,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null">
+				AND ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="applydate != null">
+				AND APPLYDATE > #{applydate}
+			</if>
+			<if test="status != null">
+				AND STATUS not in (#{status,jdbcType=DECIMAL})
+			</if>
+		</trim>
+		order by ID
+	</select>
+	<!-- selectByCashNo根据订单编号查询订单记录 -->
+	<select id="selectByCashNo" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Query_Column_List" />
+		where cashno =#{cashno,jdbcType=VARCHAR} AND uwdcash.baseid=ubai.id
+	</select>
+	<!--updateByCashNo 根据ID更新提现记录 -->
+	<update id="updateByCashNo" parameterType="com.ptpl.model.UserWithdrawsCash">
+		update USERWITHDRAWSCASH
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="servfee != null">
+				SERVFEE = #{servfee,jdbcType=FLOAT},
+			</if>
+			<if test="servfeeacctid != null">
+				SERVFEEACCTID = #{servfeeacctid,jdbcType=VARCHAR},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="isexceptions != null">
+				ISEXCEPTIONS = #{isexceptions,jdbcType=DECIMAL},
+			</if>
+			<if test="syschktime != null">
+				SYSCHKTIME = #{syschktime},
+			</if>
+			<if test="feeobjflag != null">
+				FEEOBJFLAG = #{feeobjflag,jdbcType=VARCHAR},
+			</if>
+			<if test="feeacctid != null">
+				FEEACCTID = #{feeacctid,jdbcType=VARCHAR},
+			</if>
+			<if test="cashchl != null">
+				CASHCHL = #{cashchl,jdbcType=VARCHAR},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="checktime != null">
+				CHECKTIME = #{checktime},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=FLOAT},
+			</if>
+			<if test="fee != null">
+				FEE = #{fee,jdbcType=FLOAT},
+			</if>
+			<if test="feerate != null">
+				FEERATE = #{feerate,jdbcType=FLOAT},
+			</if>
+			<if test="bankname != null">
+				BANKNAME = #{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				USERNAME = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="cardno != null">
+				CARDNO = #{cardno,jdbcType=VARCHAR},
+			</if>
+			<if test="applydate != null">
+				APPLYDATE = #{applydate},
+			</if>
+			<if test="auditdate != null">
+				AUDITDATE = #{auditdate},
+			</if>
+			<if test="auditman != null and auditman != ''">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmman != null">
+				CONFIRMMAN = #{confirmman,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT = #{originclient,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="usrcustid != null">
+				USRCUSTID = #{usrcustid,jdbcType=VARCHAR},
+			</if>
+			<if test="bankreturnno != null">
+				BANKRETURNNO = #{bankreturnno,jdbcType=VARCHAR},
+			</if>
+			<if test="feewithdraws !=null ">
+				FEEWITHDRAWS = #{feewithdraws,jdbcType=FLOAT},
+			</if>
+			<if test="feepercent != null">
+				FEEPERCENT = #{feepercent,jdbcType=FLOAT},
+			</if>
+			<if test="freelimit != null">
+				FREELIMIT = #{freelimit,jdbcType=FLOAT},
+			</if>
+			<if test="feesplitting != null">
+				FEESPLITTING = #{feesplitting,jdbcType=FLOAT},
+			</if>
+		</set>
+		where CASHNO = #{cashno,jdbcType=VARCHAR}
+	</update>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserWithdrawsCash">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERWITHDRAWSCASH_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERWITHDRAWSCASH
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="cashno != null">
+				CASHNO,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="servfee != null">
+				SERVFEE,
+			</if>
+			<if test="servfeeacctid != null">
+				SERVFEEACCTID ,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="isexceptions != null">
+				ISEXCEPTIONS ,
+			</if>
+			<if test="syschktime != null">
+				SYSCHKTIME ,
+			</if>
+			<if test="feeobjflag != null">
+				FEEOBJFLAG ,
+			</if>
+			<if test="feeacctid != null">
+				FEEACCTID ,
+			</if>
+			<if test="cashchl != null">
+				CASHCHL,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="checktime != null">
+				CHECKTIME,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="fee != null">
+				FEE,
+			</if>
+			<if test="feerate != null">
+				FEERATE,
+			</if>
+			<if test="bankname != null">
+				BANKNAME,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="cardno != null">
+				CARDNO,
+			</if>
+			<if test="applydate != null">
+				APPLYDATE,
+			</if>
+			<if test="auditdate != null">
+				AUDITDATE,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="confirmman != null">
+				CONFIRMMAN,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="iscancel !=null">
+				ISCANCEL,
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="paycompany != null">
+				paycompany,
+			</if>
+			<if test="usrcustid !=null">
+				usrcustid,
+			</if>
+			<if test="withdrawmoneymoremore != null">
+				withdrawmoneymoremore,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="branchbankname != null">
+				branchbankname,
+			</if>
+			<if test="feepercent != null">
+				feepercent,
+			</if>
+			<if test="freelimit != null">
+				freelimit,
+			</if>
+			<if test="feesplitting != null">
+				feesplitting,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="cashno != null">
+				#{cashno,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=FLOAT},
+			</if>
+			<if test="servfee != null">
+				#{servfee,jdbcType=FLOAT},
+			</if>
+			<if test="servfeeacctid != null">
+				#{servfeeacctid,jdbcType=VARCHAR},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="isexceptions != null">
+				#{isexceptions,jdbcType=DECIMAL},
+			</if>
+			<if test="syschktime != null">
+				#{syschktime},
+			</if>
+			<if test="feeobjflag != null">
+				#{feeobjflag,jdbcType=VARCHAR},
+			</if>
+			<if test="feeacctid != null">
+				#{feeacctid,jdbcType=VARCHAR},
+			</if>
+			<if test="cashchl != null">
+				#{cashchl,jdbcType=VARCHAR},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="checktime != null">
+				#{checktime},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="fee != null">
+				#{fee,jdbcType=FLOAT},
+			</if>
+			<if test="feerate != null">
+				#{feerate,jdbcType=FLOAT},
+			</if>
+			<if test="bankname != null">
+				#{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="cardno != null">
+				#{cardno,jdbcType=VARCHAR},
+			</if>
+			<if test="applydate != null">
+				#{applydate},
+			</if>
+			<if test="auditdate != null">
+				#{auditdate},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="confirmman != null">
+				#{confirmman,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="iscancel != null">
+				#{iscancel,jdbcType=DECIMAL},
+			</if>
+			<if test="originclient != null">
+				#{originclient,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="usrcustid != null">
+				#{usrcustid,jdbcType=VARCHAR},
+			</if>
+			<if test="withdrawmoneymoremore != null">
+				#{withdrawmoneymoremore,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="branchbankname != null">
+				#{branchbankname,jdbcType=VARCHAR},
+			</if>
+			<if test="feepercent != null">
+				#{feepercent,jdbcType=FLOAT}
+			</if>
+			<if test="freelimit != null">
+				#{freelimit,jdbcType=FLOAT}
+			</if>
+			<if test="feesplitting != null">
+				#{feesplitting,jdbcType=FLOAT}
+			</if>
+		</trim>
+	</insert>
+</mapper>

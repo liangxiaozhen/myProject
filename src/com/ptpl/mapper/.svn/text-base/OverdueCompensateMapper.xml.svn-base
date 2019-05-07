@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.OverdueCompensateMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.OverdueCompensate">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="OVERDUECNO" property="overduecno" jdbcType="VARCHAR" />
+		<result column="CMANNO" property="cmanno" jdbcType="VARCHAR" />
+		<result column="GRACEPERIOD" property="graceperiod" jdbcType="DECIMAL" />
+		<result column="DAYLATEFEERATE" property="daylatefeerate"
+			jdbcType="FLOAT" />
+		<result column="ISPRECOVERYON" property="isprecoveryon"
+			jdbcType="DECIMAL" />
+		<result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR" />
+		<result column="OCMINMONEY" property="ocminmoney" jdbcType="FLOAT" />
+		<result column="OCMAXMONEY" property="ocmaxmoney" jdbcType="FLOAT" />
+		<result column="OCCQUOTA" property="occquota" jdbcType="FLOAT" />
+		<result column="TOCCRATE" property="toccrate" jdbcType="FLOAT" />
+		<result column="MINCFEES" property="mincfees" jdbcType="FLOAT" />
+		<result column="MAXCFEES" property="maxcfees" jdbcType="FLOAT" />
+		<result column="ISUPAYON" property="isupayon" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="PFPRINCIPALRATE" property="pfprincipalrate"
+			jdbcType="FLOAT" />
+		<result column="MAXPFPRINCIPAL" property="maxpfprincipal"
+			jdbcType="FLOAT" />
+		<result column="PFINTRATE" property="pfintrate" jdbcType="FLOAT" />
+		<result column="MAXPFINT" property="maxpfint" jdbcType="FLOAT" />
+		<result column="LATEFEERATE" property="latefeerate" jdbcType="FLOAT" />
+		<result column="MAXLATEFEE" property="maxlatefee" jdbcType="FLOAT" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="CMANID" property="cmanid" jdbcType="DECIMAL" />
+		<result column="PMISCRECMANID" property="pmiscrecmanid"
+			jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.ptpl.model.OverdueCompensate">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT OVERDUECOMPENSATE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into OVERDUECOMPENSATE (ID, OVERDUECNO, CMANNO,
+		GRACEPERIOD, DAYLATEFEERATE, ISPRECOVERYON,
+		PMISCRECMAN, OCMINMONEY, OCMAXMONEY,
+		OCCQUOTA, TOCCRATE, MINCFEES,
+		MAXCFEES, ISUPAYON, UGRADE,
+		PFPRINCIPALRATE, MAXPFPRINCIPAL, PFINTRATE,
+		MAXPFINT, LATEFEERATE, MAXLATEFEE,
+		ISTEMPLET,TID,CMANID,PMISCRECMANID,ISAUDIT,ADDMAN,ADDTIME,REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{overduecno,jdbcType=VARCHAR},
+		#{cmanno,jdbcType=VARCHAR},
+		#{graceperiod,jdbcType=DECIMAL}, #{daylatefeerate,jdbcType=FLOAT}, #{isprecoveryon,jdbcType=DECIMAL},
+		#{pmiscrecman,jdbcType=VARCHAR}, #{ocminmoney,jdbcType=FLOAT},
+		#{ocmaxmoney,jdbcType=FLOAT},
+		#{occquota,jdbcType=FLOAT}, #{toccrate,jdbcType=FLOAT}, #{mincfees,jdbcType=FLOAT},
+		#{maxcfees,jdbcType=FLOAT}, #{isupayon,jdbcType=DECIMAL},
+		#{ugrade,jdbcType=VARCHAR},
+		#{pfprincipalrate,jdbcType=FLOAT}, #{maxpfprincipal,jdbcType=FLOAT}, #{pfintrate,jdbcType=FLOAT},
+		#{maxpfint,jdbcType=FLOAT}, #{latefeerate,jdbcType=FLOAT},
+		#{maxlatefee,jdbcType=FLOAT},
+		#{istemplet,jdbcType=DECIMAL},#{tid,jdbcType=DECIMAL},#{cmanid,jdbcType=DECIMAL},#{pmiscrecmanid,jdbcType=DECIMAL},
+		#{isaudit,jdbcType=DECIMAL},#{addman,jdbcType=VARCHAR},#{addTime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR}
+		)
+
+	</insert>
+
+	<select id="selectByCondition" parameterType="com.ptpl.model.OverdueCompensate"
+		resultMap="BaseResultMap">
+		select * from OVERDUECOMPENSATE
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="overduecno != null and overduecno!=''">
+				and OVERDUECNO = #{overduecno,jdbcType=VARCHAR}
+			</if>
+			<if test="cmanno != null and cmanno!=''">
+				and CMANNO = #{cmanno,jdbcType=VARCHAR}
+			</if>
+			<if test="graceperiod != null and graceperiod!=''">
+				and GRACEPERIOD = #{graceperiod,jdbcType=DECIMAL}
+			</if>
+			<if test="daylatefeerate != null and daylatefeerate!=''">
+				and DAYLATEFEERATE = #{daylatefeerate,jdbcType=FLOAT}
+			</if>
+			<if test="isprecoveryon != null and isprecoveryon!=''">
+				and ISPRECOVERYON = #{isprecoveryon,jdbcType=DECIMAL}
+			</if>
+			<if test="pmiscrecman != null and pmiscrecman!=''">
+				and PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR}
+			</if>
+			<if test="ocminmoney != null and ocminmoney!=''">
+				and OCMINMONEY = #{ocminmoney,jdbcType=FLOAT}
+			</if>
+			<if test="ocmaxmoney != null and ocmaxmoney!=''">
+				and OCMAXMONEY = #{ocmaxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="occquota != null and occquota!=''">
+				and OCCQUOTA = #{occquota,jdbcType=FLOAT}
+			</if>
+			<if test="toccrate != null and toccrate!=''">
+				and TOCCRATE = #{toccrate,jdbcType=FLOAT}
+			</if>
+			<if test="mincfees != null and mincfees!=''">
+				and MINCFEES = #{mincfees,jdbcType=FLOAT}
+			</if>
+			<if test="maxcfees != null and maxcfees!=''">
+				and MAXCFEES = #{maxcfees,jdbcType=FLOAT}
+			</if>
+			<if test="isupayon != null and isupayon!=''">
+				and ISUPAYON = #{isupayon,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null and ugrade!=''">
+				and UGRADE = #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="pfprincipalrate != null and pfprincipalrate!=''">
+				and PFPRINCIPALRATE = #{pfprincipalrate,jdbcType=FLOAT}
+			</if>
+			<if test="maxpfprincipal != null and maxpfprincipal!=''">
+				and MAXPFPRINCIPAL = #{maxpfprincipal,jdbcType=FLOAT}
+			</if>
+			<if test="pfintrate != null and pfintrate!=''">
+				and PFINTRATE = #{pfintrate,jdbcType=FLOAT}
+			</if>
+			<if test="maxpfint != null and maxpfint!=''">
+				and MAXPFINT = #{maxpfint,jdbcType=FLOAT}
+			</if>
+			<if test="latefeerate != null and latefeerate!=''">
+				and LATEFEERATE = #{latefeerate,jdbcType=FLOAT}
+			</if>
+			<if test="maxlatefee != null and maxlatefee!=''">
+				and MAXLATEFEE = #{maxlatefee,jdbcType=FLOAT}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="cmanid != null">
+				and CMANID = #{cmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="pmiscrecmanid != null">
+				and PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addTime != null">
+				and ADDTIME = #{addTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+
+	<update id="update" parameterType="com.ptpl.model.OverdueCompensate">
+		update OVERDUECOMPENSATE
+		<trim prefix="set" suffixOverrides=",">
+			<if test="overduecno != null">
+				OVERDUECNO = #{overduecno,jdbcType=VARCHAR},
+			</if>
+			<if test="cmanno != null">
+				CMANNO = #{cmanno,jdbcType=VARCHAR},
+			</if>
+			<if test="graceperiod != null">
+				GRACEPERIOD = #{graceperiod,jdbcType=DECIMAL},
+			</if>
+			<if test="daylatefeerate != null">
+				DAYLATEFEERATE = #{daylatefeerate,jdbcType=FLOAT},
+			</if>
+			ISPRECOVERYON = #{isprecoveryon,jdbcType=DECIMAL},
+			PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+			OCMINMONEY = #{ocminmoney,jdbcType=FLOAT},
+			OCMAXMONEY = #{ocmaxmoney,jdbcType=FLOAT},
+			OCCQUOTA = #{occquota,jdbcType=FLOAT},
+			TOCCRATE = #{toccrate,jdbcType=FLOAT},
+			MINCFEES = #{mincfees,jdbcType=FLOAT},
+			MAXCFEES = #{maxcfees,jdbcType=FLOAT},
+			ISUPAYON = #{isupayon,jdbcType=DECIMAL},
+			UGRADE = #{ugrade,jdbcType=VARCHAR},
+			PFPRINCIPALRATE = #{pfprincipalrate,jdbcType=FLOAT},
+			MAXPFPRINCIPAL = #{maxpfprincipal,jdbcType=FLOAT},
+			PFINTRATE = #{pfintrate,jdbcType=FLOAT},
+			MAXPFINT = #{maxpfint,jdbcType=FLOAT},
+			LATEFEERATE = #{latefeerate,jdbcType=FLOAT},
+			MAXLATEFEE = #{maxlatefee,jdbcType=FLOAT},
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="cmanid != null">
+				CMANID = #{cmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecmanid != null">
+				PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADDTIME = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from OVERDUECOMPENSATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据tid查询信息 -->
+	<select id="selectoverPenBytid" resultMap="BaseResultMap">
+		select * from OVERDUECOMPENSATE t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据tid查询等级信息 -->
+	<select id="selectGradeByTid" resultType="java.lang.String">
+		select DISTINCT (UGRADE) from OVERDUECOMPENSATE t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

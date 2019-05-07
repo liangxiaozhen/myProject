@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.CloseTimeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.CloseTime">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TIMETYPE" property="timetype" jdbcType="VARCHAR" />
+		<result column="TIMENAME" property="timename" jdbcType="VARCHAR" />
+		<result column="BTIME" property="btime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="TIMENO" property="timeno" jdbcType="VARCHAR" />
+		<result column="ETIME" property="etime" jdbcType="TIMESTAMP" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TIMETYPE, TIMENAME, BTIME, ADDMAN, REMARK, TIMENO,
+		ETIME, ADDTIME
+	</sql>
+	<!-- 查询时间包名称 和时间包编号 -->
+	<select id="selectTimeNameAndTimeNo" resultMap="BaseResultMap">
+		select
+		timename,timeno
+		from closetime
+		group by
+		timename,timeno
+	</select>
+	<!-- 根据时间包名称查询时间编号 -->
+	<select id="selectTimeNoForTimeName" parameterType="String"
+		resultType="String">
+		select timeno
+		from CLOSETIME
+		where timename
+		=#{timename,jdbcType=VARCHAR}
+		and rownum =1
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from CLOSETIME
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selective" resultMap="BaseResultMap" parameterType="com.ptpl.model.CloseTime">
+		select
+		<include refid="Base_Column_List"></include>
+		from CLOSETIME
+		<where>
+			<if test="id !=null">
+				ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="timetype != null and timetype!= ''">
+				AND TIMETYPE = #{timetype,jdbcType=VARCHAR}
+			</if>
+			<if test="timename != null and timename!= ''">
+				AND TIMENAME = #{timename,jdbcType=VARCHAR}
+			</if>
+			<if test="btime != null ">
+				AND BTIME >= #{btime}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="timeno != null">
+				AND TIMENO = #{timeno,jdbcType=VARCHAR}
+			</if>
+			<if test="etime != null ">
+				AND ETIME &lt;= #{etime}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+		</where>
+		order by ID
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		CLOSETIME
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insertSelective" parameterType="com.ptpl.model.CloseTime">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT CLOSETIME_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into CLOSETIME
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="timetype != null">
+				TIMETYPE,
+			</if>
+			<if test="timename != null">
+				TIMENAME,
+			</if>
+			<if test="btime != null">
+				BTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="timeno != null">
+				TIMENO,
+			</if>
+			<if test="etime != null">
+				ETIME,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="timetype != null">
+				#{timetype,jdbcType=VARCHAR},
+			</if>
+			<if test="timename != null">
+				#{timename,jdbcType=VARCHAR},
+			</if>
+			<if test="btime != null">
+				#{btime},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="timeno != null">
+				#{timeno,jdbcType=VARCHAR},
+			</if>
+			<if test="etime != null">
+				#{etime},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.CloseTime">
+		update CLOSETIME
+		<set>
+			<if test="timetype != null">
+				TIMETYPE = #{timetype,jdbcType=VARCHAR},
+			</if>
+			<if test="timename != null">
+				TIMENAME = #{timename,jdbcType=VARCHAR},
+			</if>
+			<if test="btime != null">
+				BTIME = #{btime},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="timeno != null">
+				TIMENO = #{timeno,jdbcType=VARCHAR},
+			</if>
+			<if test="etime != null">
+				ETIME = #{etime},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

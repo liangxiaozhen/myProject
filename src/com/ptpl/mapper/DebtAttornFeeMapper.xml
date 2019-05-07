@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DebtAttornFeeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DebtAttornFee">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="DEBTATTORNFNO" property="debtattornfno"
+			jdbcType="VARCHAR" />
+		<result column="ISADAFEEON" property="isadafeeon" jdbcType="DECIMAL" />
+		<result column="FEEMODE" property="feemode" jdbcType="DECIMAL" />
+		<result column="HADDAY" property="hadday" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="MINATTORNMONEY" property="minattornmoney"
+			jdbcType="FLOAT" />
+		<result column="MAXATTORNMONEY" property="maxattornmoney"
+			jdbcType="FLOAT" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="ATTORNRATE" property="attornrate" jdbcType="FLOAT" />
+		<result column="MINFEE" property="minfee" jdbcType="FLOAT" />
+		<result column="MAXFEE" property="maxfee" jdbcType="FLOAT" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TID, DEBTATTORNFNO, ISADAFEEON, FEEMODE, HADDAY, UGRADE,
+		MINATTORNMONEY, MAXATTORNMONEY,
+		QUOTA, ATTORNRATE, MINFEE, MAXFEE, ISAUDIT, ISTEMPLET, ADDMAN, ADDTIME,
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from DEBTATTORNFEE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- JXY根据tid查询相关的手续费设置 -->
+	<select id="selectByTid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from DEBTATTORNFEE
+		where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from DEBTATTORNFEE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.DebtAttornFee">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select DEBTATTORNFEE_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into DEBTATTORNFEE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="debtattornfno != null">
+				DEBTATTORNFNO,
+			</if>
+			<if test="isadafeeon != null">
+				ISADAFEEON,
+			</if>
+			<if test="feemode != null">
+				FEEMODE,
+			</if>
+			<if test="hadday != null">
+				HADDAY,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="minattornmoney != null">
+				MINATTORNMONEY,
+			</if>
+			<if test="maxattornmoney != null">
+				MAXATTORNMONEY,
+			</if>
+			<if test="quota != null">
+				QUOTA,
+			</if>
+			<if test="attornrate != null">
+				ATTORNRATE,
+			</if>
+			<if test="minfee != null">
+				MINFEE,
+			</if>
+			<if test="maxfee != null">
+				MAXFEE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="debtattornfno != null">
+				#{debtattornfno,jdbcType=VARCHAR},
+			</if>
+			<if test="isadafeeon != null">
+				#{isadafeeon,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				#{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="hadday != null">
+				#{hadday,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="minattornmoney != null">
+				#{minattornmoney,jdbcType=FLOAT},
+			</if>
+			<if test="maxattornmoney != null">
+				#{maxattornmoney,jdbcType=FLOAT},
+			</if>
+			<if test="quota != null">
+				#{quota,jdbcType=FLOAT},
+			</if>
+			<if test="attornrate != null">
+				#{attornrate,jdbcType=FLOAT},
+			</if>
+			<if test="minfee != null">
+				#{minfee,jdbcType=FLOAT},
+			</if>
+			<if test="maxfee != null">
+				#{maxfee,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.ptpl.model.DebtAttornFee">
+		update DEBTATTORNFEE
+		<set>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="debtattornfno != null">
+				DEBTATTORNFNO = #{debtattornfno,jdbcType=VARCHAR},
+			</if>
+			<if test="isadafeeon != null">
+				ISADAFEEON = #{isadafeeon,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				FEEMODE = #{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="hadday != null">
+				HADDAY = #{hadday,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="minattornmoney != null">
+				MINATTORNMONEY = #{minattornmoney,jdbcType=FLOAT},
+			</if>
+			<if test="maxattornmoney != null">
+				MAXATTORNMONEY = #{maxattornmoney,jdbcType=FLOAT},
+			</if>
+			<if test="quota != null">
+				QUOTA = #{quota,jdbcType=FLOAT},
+			</if>
+			<if test="attornrate != null">
+				ATTORNRATE = #{attornrate,jdbcType=FLOAT},
+			</if>
+			<if test="minfee != null">
+				MINFEE = #{minfee,jdbcType=FLOAT},
+			</if>
+			<if test="maxfee != null">
+				MAXFEE = #{maxfee,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<select id="selectGradeByTid" resultType="java.lang.String">
+		select DISTINCT(UGRADE) from DEBTATTORNFEE where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

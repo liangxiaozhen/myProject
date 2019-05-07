@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.TradeFileDetailMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.TradeFileDetail">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACQCODE" property="acqcode" jdbcType="VARCHAR" />
+		<result column="SEQNO" property="seqno" jdbcType="VARCHAR" />
+		<result column="CENDT" property="cendt" jdbcType="VARCHAR" />
+		<result column="CARDNBR" property="cardnbr" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+		<result column="CRFLAG" property="crflag" jdbcType="VARCHAR" />
+		<result column="MSGTYPE" property="msgtype" jdbcType="VARCHAR" />
+		<result column="PROCCODE" property="proccode" jdbcType="VARCHAR" />
+		<result column="MERTYPE" property="mertype" jdbcType="VARCHAR" />
+		<result column="TERM" property="term" jdbcType="VARCHAR" />
+		<result column="RETSEQNO" property="retseqno" jdbcType="VARCHAR" />
+		<result column="CONMODE" property="conmode" jdbcType="VARCHAR" />
+		<result column="AUTRESP" property="autresp" jdbcType="VARCHAR" />
+		<result column="FORCODE" property="forcode" jdbcType="VARCHAR" />
+		<result column="CLRDATE" property="clrdate" jdbcType="VARCHAR" />
+		<result column="OLDSEQNO" property="oldseqno" jdbcType="VARCHAR" />
+		<result column="OPENBRNO" property="openbrno" jdbcType="VARCHAR" />
+		<result column="TRANBRNO" property="tranbrno" jdbcType="VARCHAR" />
+		<result column="ERVIND" property="ervind" jdbcType="DECIMAL" />
+		<result column="TRANSTYPE" property="transtype" jdbcType="VARCHAR" />
+		<result column="FILENAME" property="filename" jdbcType="VARCHAR" />
+		<result column="ENTERTIME" property="entertime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ACQCODE, SEQNO, CENDT, CARDNBR, AMOUNT, CRFLAG,
+		MSGTYPE, PROCCODE,
+		MERTYPE, TERM,
+		RETSEQNO, CONMODE, AUTRESP, FORCODE,
+		CLRDATE, OLDSEQNO, OPENBRNO, TRANBRNO,
+		ERVIND,
+		TRANSTYPE, FILENAME,
+		ENTERTIME, REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from TRADEFILEDETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="listTradeFileDetail" parameterType="com.ptpl.model.TradeFileDetail"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from TRADEFILEDETAIL
+		<where>
+			<if test="acqcode != null">
+				AND ACQCODE = #{acqcode,jdbcType=VARCHAR}
+			</if>
+			<if test="seqno != null">
+				AND SEQNO = #{seqno,jdbcType=VARCHAR}
+			</if>
+			<if test="cendt != null">
+				AND CENDT = #{cendt,jdbcType=VARCHAR}
+			</if>
+			<if test="cardnbr != null">
+				AND CARDNBR = #{cardnbr,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null">
+				AND AMOUNT = #{amount,jdbcType=DECIMAL}
+			</if>
+			<if test="crflag != null">
+				AND CRFLAG = #{crflag,jdbcType=VARCHAR}
+			</if>
+			<if test="msgtype != null">
+				AND MSGTYPE = #{msgtype,jdbcType=VARCHAR}
+			</if>
+			<if test="proccode != null">
+				AND PROCCODE = #{proccode,jdbcType=VARCHAR}
+			</if>
+			<if test="mertype != null">
+				AND MERTYPE = #{mertype,jdbcType=VARCHAR}
+			</if>
+			<if test="term != null">
+				AND TERM = #{term,jdbcType=VARCHAR}
+			</if>
+			<if test="retseqno != null">
+				AND RETSEQNO = #{retseqno,jdbcType=VARCHAR}
+			</if>
+			<if test="conmode != null">
+				AND CONMODE = #{conmode,jdbcType=VARCHAR}
+			</if>
+			<if test="autresp != null">
+				AND AUTRESP = #{autresp,jdbcType=VARCHAR}
+			</if>
+			<if test="forcode != null">
+				AND FORCODE = #{forcode,jdbcType=VARCHAR}
+			</if>
+			<if test="clrdate != null">
+				AND CLRDATE = #{clrdate,jdbcType=VARCHAR}
+			</if>
+			<if test="oldseqno != null">
+				AND OLDSEQNO = #{oldseqno,jdbcType=VARCHAR}
+			</if>
+			<if test="openbrno != null">
+				AND OPENBRNO = #{openbrno,jdbcType=VARCHAR}
+			</if>
+			<if test="tranbrno != null">
+				AND TRANBRNO = #{tranbrno,jdbcType=VARCHAR}
+			</if>
+			<if test="ervind != null">
+				AND ERVIND = #{ervind,jdbcType=DECIMAL}
+			</if>
+			<if test="transtype != null">
+				AND TRANSTYPE = #{transtype,jdbcType=VARCHAR}
+			</if>
+			<if test="filename != null">
+				AND FILENAME = #{filename,jdbcType=VARCHAR}
+			</if>
+			<if test="entertime != null">
+				AND ENTERTIME = #{entertime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		TRADEFILEDETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.TradeFileDetail">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select TRADEFILEDETAIL_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into TRADEFILEDETAIL (ID, ACQCODE, SEQNO,
+		CENDT, CARDNBR,
+		AMOUNT,
+		CRFLAG, MSGTYPE, PROCCODE,
+		MERTYPE, TERM, RETSEQNO,
+		CONMODE,
+		AUTRESP, FORCODE,
+		CLRDATE, OLDSEQNO, OPENBRNO,
+		TRANBRNO, ERVIND,
+		TRANSTYPE,
+		FILENAME, ENTERTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL},
+		#{acqcode,jdbcType=VARCHAR},
+		#{seqno,jdbcType=VARCHAR},
+		#{cendt,jdbcType=VARCHAR}, #{cardnbr,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL},
+		#{crflag,jdbcType=VARCHAR},
+		#{msgtype,jdbcType=VARCHAR},
+		#{proccode,jdbcType=VARCHAR},
+		#{mertype,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR},
+		#{retseqno,jdbcType=VARCHAR},
+		#{conmode,jdbcType=VARCHAR},
+		#{autresp,jdbcType=VARCHAR},
+		#{forcode,jdbcType=VARCHAR},
+		#{clrdate,jdbcType=VARCHAR}, #{oldseqno,jdbcType=VARCHAR},
+		#{openbrno,jdbcType=VARCHAR},
+		#{tranbrno,jdbcType=VARCHAR},
+		#{ervind,jdbcType=DECIMAL},
+		#{transtype,jdbcType=VARCHAR},
+		#{filename,jdbcType=VARCHAR}, #{entertime}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.TradeFileDetail">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select TRADEFILEDETAIL_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into TRADEFILEDETAIL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="acqcode != null">
+				ACQCODE,
+			</if>
+			<if test="seqno != null">
+				SEQNO,
+			</if>
+			<if test="cendt != null">
+				CENDT,
+			</if>
+			<if test="cardnbr != null">
+				CARDNBR,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="crflag != null">
+				CRFLAG,
+			</if>
+			<if test="msgtype != null">
+				MSGTYPE,
+			</if>
+			<if test="proccode != null">
+				PROCCODE,
+			</if>
+			<if test="mertype != null">
+				MERTYPE,
+			</if>
+			<if test="term != null">
+				TERM,
+			</if>
+			<if test="retseqno != null">
+				RETSEQNO,
+			</if>
+			<if test="conmode != null">
+				CONMODE,
+			</if>
+			<if test="autresp != null">
+				AUTRESP,
+			</if>
+			<if test="forcode != null">
+				FORCODE,
+			</if>
+			<if test="clrdate != null">
+				CLRDATE,
+			</if>
+			<if test="oldseqno != null">
+				OLDSEQNO,
+			</if>
+			<if test="openbrno != null">
+				OPENBRNO,
+			</if>
+			<if test="tranbrno != null">
+				TRANBRNO,
+			</if>
+			<if test="ervind != null">
+				ERVIND,
+			</if>
+			<if test="transtype != null">
+				TRANSTYPE,
+			</if>
+			<if test="filename != null">
+				FILENAME,
+			</if>
+			<if test="entertime != null">
+				ENTERTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="acqcode != null">
+				#{acqcode,jdbcType=VARCHAR},
+			</if>
+			<if test="seqno != null">
+				#{seqno,jdbcType=VARCHAR},
+			</if>
+			<if test="cendt != null">
+				#{cendt,jdbcType=VARCHAR},
+			</if>
+			<if test="cardnbr != null">
+				#{cardnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="crflag != null">
+				#{crflag,jdbcType=VARCHAR},
+			</if>
+			<if test="msgtype != null">
+				#{msgtype,jdbcType=VARCHAR},
+			</if>
+			<if test="proccode != null">
+				#{proccode,jdbcType=VARCHAR},
+			</if>
+			<if test="mertype != null">
+				#{mertype,jdbcType=VARCHAR},
+			</if>
+			<if test="term != null">
+				#{term,jdbcType=VARCHAR},
+			</if>
+			<if test="retseqno != null">
+				#{retseqno,jdbcType=VARCHAR},
+			</if>
+			<if test="conmode != null">
+				#{conmode,jdbcType=VARCHAR},
+			</if>
+			<if test="autresp != null">
+				#{autresp,jdbcType=VARCHAR},
+			</if>
+			<if test="forcode != null">
+				#{forcode,jdbcType=VARCHAR},
+			</if>
+			<if test="clrdate != null">
+				#{clrdate,jdbcType=VARCHAR},
+			</if>
+			<if test="oldseqno != null">
+				#{oldseqno,jdbcType=VARCHAR},
+			</if>
+			<if test="openbrno != null">
+				#{openbrno,jdbcType=VARCHAR},
+			</if>
+			<if test="tranbrno != null">
+				#{tranbrno,jdbcType=VARCHAR},
+			</if>
+			<if test="ervind != null">
+				#{ervind,jdbcType=DECIMAL},
+			</if>
+			<if test="transtype != null">
+				#{transtype,jdbcType=VARCHAR},
+			</if>
+			<if test="filename != null">
+				#{filename,jdbcType=VARCHAR},
+			</if>
+			<if test="entertime != null">
+				#{entertime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.TradeFileDetail">
+		update TRADEFILEDETAIL
+		<set>
+			<if test="acqcode != null">
+				ACQCODE = #{acqcode,jdbcType=VARCHAR},
+			</if>
+			<if test="seqno != null">
+				SEQNO = #{seqno,jdbcType=VARCHAR},
+			</if>
+			<if test="cendt != null">
+				CENDT = #{cendt,jdbcType=VARCHAR},
+			</if>
+			<if test="cardnbr != null">
+				CARDNBR = #{cardnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="crflag != null">
+				CRFLAG = #{crflag,jdbcType=VARCHAR},
+			</if>
+			<if test="msgtype != null">
+				MSGTYPE = #{msgtype,jdbcType=VARCHAR},
+			</if>
+			<if test="proccode != null">
+				PROCCODE = #{proccode,jdbcType=VARCHAR},
+			</if>
+			<if test="mertype != null">
+				MERTYPE = #{mertype,jdbcType=VARCHAR},
+			</if>
+			<if test="term != null">
+				TERM = #{term,jdbcType=VARCHAR},
+			</if>
+			<if test="retseqno != null">
+				RETSEQNO = #{retseqno,jdbcType=VARCHAR},
+			</if>
+			<if test="conmode != null">
+				CONMODE = #{conmode,jdbcType=VARCHAR},
+			</if>
+			<if test="autresp != null">
+				AUTRESP = #{autresp,jdbcType=VARCHAR},
+			</if>
+			<if test="forcode != null">
+				FORCODE = #{forcode,jdbcType=VARCHAR},
+			</if>
+			<if test="clrdate != null">
+				CLRDATE = #{clrdate,jdbcType=VARCHAR},
+			</if>
+			<if test="oldseqno != null">
+				OLDSEQNO = #{oldseqno,jdbcType=VARCHAR},
+			</if>
+			<if test="openbrno != null">
+				OPENBRNO = #{openbrno,jdbcType=VARCHAR},
+			</if>
+			<if test="tranbrno != null">
+				TRANBRNO = #{tranbrno,jdbcType=VARCHAR},
+			</if>
+			<if test="ervind != null">
+				ERVIND = #{ervind,jdbcType=DECIMAL},
+			</if>
+			<if test="transtype != null">
+				TRANSTYPE = #{transtype,jdbcType=VARCHAR},
+			</if>
+			<if test="filename != null">
+				FILENAME = #{filename,jdbcType=VARCHAR},
+			</if>
+			<if test="entertime != null">
+				ENTERTIME = #{entertime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.TradeFileDetail">
+		update
+		TRADEFILEDETAIL
+		set ACQCODE = #{acqcode,jdbcType=VARCHAR},
+		SEQNO =
+		#{seqno,jdbcType=VARCHAR},
+		CENDT = #{cendt,jdbcType=VARCHAR},
+		CARDNBR =
+		#{cardnbr,jdbcType=VARCHAR},
+		AMOUNT = #{amount,jdbcType=DECIMAL},
+		CRFLAG = #{crflag,jdbcType=VARCHAR},
+		MSGTYPE =
+		#{msgtype,jdbcType=VARCHAR},
+		PROCCODE = #{proccode,jdbcType=VARCHAR},
+		MERTYPE = #{mertype,jdbcType=VARCHAR},
+		TERM = #{term,jdbcType=VARCHAR},
+		RETSEQNO = #{retseqno,jdbcType=VARCHAR},
+		CONMODE =
+		#{conmode,jdbcType=VARCHAR},
+		AUTRESP = #{autresp,jdbcType=VARCHAR},
+		FORCODE = #{forcode,jdbcType=VARCHAR},
+		CLRDATE =
+		#{clrdate,jdbcType=VARCHAR},
+		OLDSEQNO = #{oldseqno,jdbcType=VARCHAR},
+		OPENBRNO = #{openbrno,jdbcType=VARCHAR},
+		TRANBRNO =
+		#{tranbrno,jdbcType=VARCHAR},
+		ERVIND = #{ervind,jdbcType=DECIMAL},
+		TRANSTYPE = #{transtype,jdbcType=VARCHAR},
+		FILENAME =
+		#{filename,jdbcType=VARCHAR},
+		ENTERTIME = #{entertime},
+		REMARK =
+		#{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserAuthorizationMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.UserAuthorization" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+    <result column="MONEYMOREMOREID" property="moneymoremoreid" jdbcType="VARCHAR" />
+    <result column="MERCUSTID" property="mercustid" jdbcType="VARCHAR" />
+    <result column="AUTHORIZETYPE" property="authorizetype" jdbcType="VARCHAR" />
+    <result column="AUTHORIZESTATUS" property="authorizestatus" jdbcType="VARCHAR" />
+    <result column="RANDOMTIMESTAMP" property="randomtimestamp" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="UPDATETIME" property="updatetime" jdbcType="TIMESTAMP" />
+   </resultMap> 
+  <sql id="Base_Column_List" >
+    ID, BASEID, MONEYMOREMOREID, MERCUSTID, AUTHORIZETYPE, AUTHORIZESTATUS, RANDOMTIMESTAMP, 
+    REMARK,ADDTIME,UPDATETIME
+  </sql>
+  
+  <select id="findUserAuthorizations" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserAuthorization" >
+    select 
+    <include refid="Base_Column_List" />
+    from USERAUTHORIZATION
+   </select>
+   
+   <select id="findUserAuthorizationByBaseId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from USERAUTHORIZATION
+    where BASEID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="findUserAuthorizationById" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from USERAUTHORIZATION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+   
+  <delete id="deleteById" parameterType="java.math.BigDecimal" >
+    delete from USERAUTHORIZATION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  
+  <insert id="insert" parameterType="com.ptpl.model.UserAuthorization" >
+  <selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal" >
+  	SELECT USERAUTHORIZATION_SEQ.NEXTVAL AS id from dual
+  </selectKey>
+    insert into USERAUTHORIZATION (ID, BASEID, MONEYMOREMOREID, 
+      MERCUSTID, AUTHORIZETYPE, AUTHORIZESTATUS, 
+      RANDOMTIMESTAMP, REMARK,ADDTIME,UPDATETIME)
+    values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL}, #{moneymoremoreid,jdbcType=VARCHAR}, 
+      #{mercustid,jdbcType=VARCHAR}, #{authorizetype,jdbcType=VARCHAR}, #{authorizestatus,jdbcType=VARCHAR}, 
+      #{randomtimestamp,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},#{addtime,jdbcType=TIMESTAMP},#{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.UserAuthorization" >
+  <selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+  	SELECT USERAUTHORIZATION_SEQ.NEXTVAL AS id from dual
+  </selectKey>
+    insert into USERAUTHORIZATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="baseid != null" >
+        BASEID,
+      </if>
+      <if test="moneymoremoreid != null" >
+        MONEYMOREMOREID,
+      </if>
+      <if test="mercustid != null" >
+        MERCUSTID,
+      </if>
+      <if test="authorizetype != null" >
+        AUTHORIZETYPE,
+      </if>
+      <if test="authorizestatus != null" >
+        AUTHORIZESTATUS,
+      </if>
+      <if test="randomtimestamp != null" >
+        RANDOMTIMESTAMP,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="updatetime != null" >
+        UPDATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="baseid != null" >
+        #{baseid,jdbcType=DECIMAL},
+      </if>
+      <if test="moneymoremoreid != null" >
+        #{moneymoremoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="mercustid != null" >
+        #{mercustid,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizetype != null" >
+        #{authorizetype,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizestatus != null" >
+        #{authorizestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="randomtimestamp != null" >
+        #{randomtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.ptpl.model.UserAuthorization" >
+    update USERAUTHORIZATION
+    <set >
+      <if test="baseid != null" >
+        BASEID = #{baseid,jdbcType=DECIMAL},
+      </if>
+      <if test="moneymoremoreid != null" >
+        MONEYMOREMOREID = #{moneymoremoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="mercustid != null" >
+        MERCUSTID = #{mercustid,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizetype != null" >
+        AUTHORIZETYPE = #{authorizetype,jdbcType=VARCHAR},
+      </if>
+      <if test="authorizestatus != null" >
+        AUTHORIZESTATUS = #{authorizestatus,jdbcType=VARCHAR},
+      </if>
+      <if test="randomtimestamp != null" >
+        RANDOMTIMESTAMP = #{randomtimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+       <if test="addtime != null" >
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="updatetime != null" >
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+ </mapper>

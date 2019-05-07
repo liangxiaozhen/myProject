@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.LoanCertPicpathMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.LoanCertPicpath">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="CERTTYPE" property="certtype" jdbcType="DECIMAL" />
+		<result column="CERTNAME" property="certname" jdbcType="VARCHAR" />
+		<result column="CERTINFOPATH" property="certinfopath" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="LIANO" property="liano" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, CERTTYPE, CERTNAME, CERTINFOPATH, ADDTIME, REMARK, LIANO
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from LOANCERTPICPATH
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from LOANCERTPICPATH
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.LoanCertPicpath">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT seq_LoanCertPicpath.NEXTVAL AS id from dual
+		</selectKey>
+		insert into LOANCERTPICPATH (ID, BASEID, CERTTYPE,
+		CERTNAME, CERTINFOPATH, ADDTIME,
+		REMARK, LIANO)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{certtype,jdbcType=DECIMAL},
+		#{certname,jdbcType=VARCHAR}, #{certinfopath,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}, #{liano,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.LoanCertPicpath">
+		insert into LOANCERTPICPATH
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="certtype != null">
+				CERTTYPE,
+			</if>
+			<if test="certname != null">
+				CERTNAME,
+			</if>
+			<if test="certinfopath != null">
+				CERTINFOPATH,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="liano != null">
+				LIANO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="certtype != null">
+				#{certtype,jdbcType=DECIMAL},
+			</if>
+			<if test="certname != null">
+				#{certname,jdbcType=VARCHAR},
+			</if>
+			<if test="certinfopath != null">
+				#{certinfopath,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="liano != null">
+				#{liano,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.LoanCertPicpath">
+		update LOANCERTPICPATH
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="certtype != null">
+				CERTTYPE = #{certtype,jdbcType=DECIMAL},
+			</if>
+			<if test="certname != null">
+				CERTNAME = #{certname,jdbcType=VARCHAR},
+			</if>
+			<if test="certinfopath != null">
+				CERTINFOPATH = #{certinfopath,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="liano != null">
+				LIANO = #{liano,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.LoanCertPicpath">
+		update LOANCERTPICPATH
+		set BASEID = #{baseid,jdbcType=DECIMAL},
+		CERTTYPE = #{certtype,jdbcType=DECIMAL},
+		CERTNAME = #{certname,jdbcType=VARCHAR},
+		CERTINFOPATH = #{certinfopath,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		LIANO = #{liano,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectbybaseid" parameterType="String" resultMap="BaseResultMap">
+		select t.* from LOANCERTPICPATH t where liano=#{liano}
+	</select>
+	<delete id="deleteBybaseid" parameterType="String">
+		delete from LOANCERTPICPATH
+		where liano = #{liano,jdbcType=DECIMAL}
+	</delete>
+</mapper>

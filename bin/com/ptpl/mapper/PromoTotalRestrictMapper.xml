@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.PromoTotalRestrictMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.PromoTotalRestrict">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RESTRICTTYPE" property="restricttype" jdbcType="DECIMAL" />
+		<result column="TOTALNUMLIMIT" property="totalnumlimit"
+			jdbcType="DECIMAL" />
+		<result column="LEVELLIMIT" property="levellimit" jdbcType="DECIMAL" />
+		<result column="ISMAXLEVEL" property="ismaxlevel" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, RESTRICTTYPE, TOTALNUMLIMIT, LEVELLIMIT,ISMAXLEVEL
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from PROMOTOTALRESTRICT
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.PromoTotalRestrict">
+		update PROMOTOTALRESTRICT
+		<set>
+			<if test="restricttype != null">
+				RESTRICTTYPE = #{restricttype,jdbcType=DECIMAL},
+			</if>
+			<if test="totalnumlimit != null">
+				TOTALNUMLIMIT = #{totalnumlimit,jdbcType=DECIMAL},
+			</if>
+			<if test="levellimit != null">
+				LEVELLIMIT = #{levellimit,jdbcType=DECIMAL},
+			</if>
+			<if test="ismaxlevel != null">
+				ISMAXLEVEL = #{ismaxlevel,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

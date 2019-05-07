@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AwardMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.Award">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ANAME" property="aname" jdbcType="VARCHAR" />
+		<result column="ANO" property="ano" jdbcType="VARCHAR" />
+		<result column="ATYPE" property="atype" jdbcType="DECIMAL" />
+		<result column="ATTRIBUTE" property="attribute" jdbcType="DECIMAL" />
+		<result column="ALLSWITCH" property="allswitch" jdbcType="DECIMAL" />
+		<result column="SUBSWITCH" property="subswitch" jdbcType="DECIMAL" />
+		<result column="TRADETYPE" property="tradetype" jdbcType="DECIMAL" />
+		<result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+		<result column="WCRESTDATE" property="wcrestdate" jdbcType="VARCHAR" />
+		<result column="WCRESTRICT" property="wcrestrict" jdbcType="FLOAT" />
+		<result column="WCTYPE" property="wctype" jdbcType="DECIMAL" />
+		<result column="TATTRIBUTE" property="tattribute" jdbcType="VARCHAR" />
+		<result column="TDAYLIMITL" property="tdayLimitl" jdbcType="DECIMAL" />
+		<result column="TDAYRESTRICT" property="tdayrestrict" jdbcType="DECIMAL" />
+		<result column="TMLRRESTRICT" property="tmlrrestrict" jdbcType="FLOAT" />
+		<result column="TMHRRESTRICT" property="tmhrrestrict" jdbcType="FLOAT" />
+		<result column="TRTYPE" property="trtype" jdbcType="DECIMAL" />
+		<result column="TMINMONEY" property="tminmoney" jdbcType="FLOAT" />
+		<result column="TMAXMONEY" property="tmaxmoney" jdbcType="FLOAT" />
+		<result column="CASHORVOUCHER" property="cashorvoucher"
+			jdbcType="FLOAT" />
+		<result column="POINTS" property="points" jdbcType="DECIMAL" />
+		<result column="QUANTITYALL" property="quantityall" jdbcType="DECIMAL" />
+		<result column="QUANTITYREST" property="quantityrest" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="AWARDRULES" property="awardRules" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+
+		<result column="ISCANCEL" property="iscancel" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR" />
+		<result column="USAGERIGHTS" property="usagerights" jdbcType="DECIMAL" />
+		<result column="SPECIALTNO" property="specialtno" jdbcType="VARCHAR" />
+		<result column="RAISEINTOBJECT" property="raiseIntObject"
+			jdbcType="VARCHAR" />
+		<result column="ISDEFINEAMOUNT" property="isDefineAmount"
+			jdbcType="DECIMAL" />
+
+		<result column="ISDELETE" property="isDelete" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="isTemplet" jdbcType="DECIMAL" />
+		<result column="SNLID" property="SNLId" jdbcType="DECIMAL" />
+		<result column="AWARDUNIT" property="awardUnit" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.ptpl.model.Award">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT AWARD_SEQ.NEXTVAL AS id from dual
+	</selectKey>
+    insert into AWARD (ID, ANAME, ANO, 
+      ATYPE, ATTRIBUTE, ALLSWITCH, 
+      SUBSWITCH, TRADETYPE, ENDTIME, 
+      WCRESTDATE, WCRESTRICT, WCTYPE, 
+      TATTRIBUTE, TDAYRESTRICT, TMLRRESTRICT, 
+      TMHRRESTRICT, TRTYPE, TMINMONEY, 
+      TMAXMONEY, CASHORVOUCHER, POINTS, 
+      QUANTITYALL, QUANTITYREST, ADDTIME, 
+      ADDMAN,AWARDRULES, REMARK,ISCANCEL,
+      UGRADE,REMOVENAMENO,USAGERIGHTS,SPECIALTNO,
+      RAISEINTOBJECT,ISDEFINEAMOUNT,ISDELETE,ISTEMPLET,SNLID,AWARDUNIT,TDAYLIMITL)
+    values (#{id,jdbcType=DECIMAL}, #{aname,jdbcType=VARCHAR}, #{ano,jdbcType=VARCHAR}, 
+      #{atype,jdbcType=DECIMAL}, #{attribute,jdbcType=DECIMAL}, #{allswitch,jdbcType=DECIMAL}, 
+      #{subswitch,jdbcType=DECIMAL}, #{tradetype,jdbcType=DECIMAL}, #{endtime}, 
+      #{wcrestdate,jdbcType=VARCHAR}, #{wcrestrict,jdbcType=FLOAT}, #{wctype,jdbcType=DECIMAL}, 
+      #{tattribute,jdbcType=VARCHAR}, #{tdayrestrict,jdbcType=DECIMAL}, #{tmlrrestrict,jdbcType=FLOAT}, 
+      #{tmhrrestrict,jdbcType=FLOAT}, #{trtype,jdbcType=DECIMAL}, #{tminmoney,jdbcType=FLOAT}, 
+      #{tmaxmoney,jdbcType=FLOAT}, #{cashorvoucher,jdbcType=FLOAT}, #{points,jdbcType=DECIMAL}, 
+      #{quantityall,jdbcType=DECIMAL}, #{quantityrest,jdbcType=DECIMAL}, #{addtime}, 
+      #{addman,jdbcType=VARCHAR}, #{awardRules,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR},
+      #{iscancel,jdbcType=DECIMAL},#{ugrade,jdbcType=VARCHAR},#{removenameno,jdbcType=VARCHAR},
+      #{usagerights,jdbcType=DECIMAL},#{specialtno,jdbcType=VARCHAR},#{raiseIntObject,jdbcType=VARCHAR},
+      #{isDefineAmount,jdbcType=DECIMAL},#{isDelete,jdbcType=DECIMAL},#{isTemplet,jdbcType=DECIMAL},
+      #{SNLId,jdbcType=DECIMAL},#{awardUnit,jdbcType=VARCHAR}, #{tdayLimitl,jdbcType=DECIMAL})
+  </insert>
+  
+  <select id="selectByCondition" parameterType="com.ptpl.model.Award" resultMap="BaseResultMap">
+  	select * from award 
+  	 <trim prefix="where" prefixOverrides="and|or">
+  	  		<if test="id!=null and id!=''">
+             id=#{id,jdbcType=DECIMAL}
+           </if>
+          <if test="ano!=null and ano!=''" >
+             and ano=#{ano,jdbcType=VARCHAR}
+           </if>
+           <if test="aname!=null and aname!=''">
+              and aname like #{aname,jdbcType=VARCHAR}
+           </if>
+           <if test="atype!=null and atype!=''">
+              and atype=#{atype,jdbcType=DECIMAL}
+           </if>
+             <if test="attribute!=null and attribute!=''">
+              and attribute=#{attribute,jdbcType=DECIMAL}
+           </if>
+             <if test="allswitch!=null and allswitch!=''">
+              and allswitch=#{allswitch,jdbcType=DECIMAL}
+           </if>
+             <if test="subswitch!=null and subswitch!=''">
+              and subswitch=#{subswitch,jdbcType=DECIMAL}
+           </if>
+             <if test="tradetype!=null and tradetype!=''">
+              and tradetype=#{tradetype,jdbcType=DECIMAL}
+           </if>
+             <if test="endtime!=null and endtime!=''">
+              and endtime=#{endtime,jdbcType=TIMESTAMP}
+           </if>
+             <if test="wcrestdate!=null and wcrestdate!=''">
+              and wcrestdate=#{wcrestdate,jdbcType=VARCHAR}
+           </if>
+             <if test="wcrestrict!=null and wcrestrict!=''">
+              and wcrestrict=#{wcrestrict,jdbcType=FLOAT}
+           </if>
+             <if test="wctype!=null and wctype!=''">
+              and wctype=#{wctype,jdbcType=DECIMAL}
+           </if>
+             <if test="tattribute!=null and tattribute!=''">
+              and tattribute=#{tattribute,jdbcType=VARCHAR}
+           </if>
+             <if test="tdayrestrict!=null and tdayrestrict!=''">
+              and tdayrestrict=#{tdayrestrict,jdbcType=DECIMAL}
+           </if>
+             <if test="tmlrrestrict!=null and tmlrrestrict!=''">
+              and tmlrrestrict=#{tmlrrestrict,jdbcType=FLOAT}
+           </if>
+             <if test="tmhrrestrict!=null and tmhrrestrict!=''">
+              and tmhrrestrict=#{tmhrrestrict,jdbcType=FLOAT}
+           </if>
+             <if test="trtype!=null and trtype!=''">
+              and trtype=#{trtype,jdbcType=DECIMAL}
+           </if>
+             <if test="tminmoney!=null and tminmoney!=''">
+              and tminmoney=#{tminmoney,jdbcType=FLOAT}
+           </if>
+             <if test="tmaxmoney!=null and tmaxmoney!=''">
+              and tmaxmoney=#{tmaxmoney,jdbcType=FLOAT}
+           </if>
+             <if test="cashorvoucher!=null and cashorvoucher!=''">
+              and cashorvoucher=#{cashorvoucher,jdbcType=FLOAT}
+           </if>
+             <if test="points!=null and points!=''">
+              and points=#{points,jdbcType=DECIMAL}
+           </if>
+             <if test="quantityall!=null and quantityall!=''">
+              and quantityall=#{quantityall,jdbcType=DECIMAL}
+           </if>
+              <if test="quantityrest!=null and quantityrest!=''">
+              and quantityrest=#{quantityrest,jdbcType=DECIMAL}
+           </if>
+              <if test="addtime!=null and addtime!=''">
+              and addtime=#{addtime,jdbcType=TIMESTAMP}
+           </if>
+              <if test="addman!=null and addman!=''">
+              and addman=#{addman,jdbcType=VARCHAR}
+           </if>
+            <if test="remark!=null and remark!=''">
+              and remark=#{remark,jdbcType=VARCHAR}
+           </if>
+           <if test="iscancel!=null and iscancel!=''">
+              and iscancel=#{iscancel,jdbcType=DECIMAL}
+           </if>
+            <if test="ugrade!=null and ugrade!=''">
+              and ugrade=#{ugrade,jdbcType=VARCHAR}
+           </if>
+            <if test="removenameno!=null and removenameno!=''">
+              and removenameno=#{removenameno,jdbcType=VARCHAR}
+           </if>
+            <if test="usagerights!=null and usagerights!=''">
+              and usagerights=#{usagerights,jdbcType=DECIMAL}
+           </if>
+            <if test="specialtno!=null and specialtno!=''">
+              and specialtno=#{specialtno,jdbcType=VARCHAR}
+           </if>
+           <if test="raiseIntObject!=null and raiseIntObject!=''">
+              and raiseIntObject=#{raiseIntObject,jdbcType=VARCHAR}
+           </if>
+            <if test="isDefineAmount!=null and isDefineAmount!=''">
+              and ISDEFINEAMOUNT=#{isDefineAmount,jdbcType=DECIMAL}
+           </if>
+           <if test="isDelete!=null">
+              and ISDELETE=#{isDelete,jdbcType=DECIMAL}
+           </if>
+           <if test="isTemplet!=null">
+              and isTemplet=#{isTemplet,jdbcType=DECIMAL}
+           </if>
+           <if test="SNLId!=null">
+              and SNLID=#{SNLId,jdbcType=DECIMAL}
+           </if>
+           <if test="awardUnit!=null and awardUnit!=''">
+              and AWARDUNIT=#{awardUnit,jdbcType=VARCHAR}
+           </if>
+           
+  	</trim>
+  	order by id desc
+  </select>
+  
+  <update id="update" parameterType="com.ptpl.model.Award">
+  		update award 
+  		<trim prefix="set" suffixOverrides=",">
+  			
+           <if test="aname!=null">
+              aname=#{aname},
+           </if>
+           <if test="atype!=null">
+              atype=#{atype},
+           </if>
+             <if test="attribute!=null">
+              attribute=#{attribute},
+           </if>
+             <if test="allswitch!=null">
+              allswitch=#{allswitch},
+           </if>
+             <if test="subswitch!=null">
+              subswitch=#{subswitch},
+           </if>
+             <if test="tradetype!=null">
+              tradetype=#{tradetype},
+           </if>
+             <if test="endtime!=null">
+              endtime=#{endtime},
+           </if>
+             <if test="wcrestdate!=null">
+              wcrestdate=#{wcrestdate},
+           </if>
+             <if test="wcrestrict!=null">
+              wcrestrict=#{wcrestrict},
+           </if>
+             <if test="wctype!=null">
+              wctype=#{wctype},
+           </if>
+             <if test="tattribute!=null">
+              tattribute=#{tattribute},
+           </if>
+           <if test="tdayLimitl!=null">
+              tdayLimitl=#{tdayLimitl},
+           </if>
+             <if test="tdayrestrict!=null">
+              tdayrestrict=#{tdayrestrict},
+           </if>
+             <if test="tmlrrestrict!=null">
+              tmlrrestrict=#{tmlrrestrict},
+           </if>
+             <if test="tmhrrestrict!=null">
+              tmhrrestrict=#{tmhrrestrict},
+           </if>
+             <if test="trtype!=null">
+              trtype=#{trtype},
+           </if>
+             <if test="tminmoney!=null">
+              tminmoney=#{tminmoney},
+           </if>
+             <if test="tmaxmoney!=null">
+              tmaxmoney=#{tmaxmoney},
+           </if>
+            <if test="cashorvoucher!=null">
+              cashorvoucher = #{cashorvoucher,jdbcType=FLOAT},
+           </if>
+             <if test="points!=null">
+              points=#{points},
+           </if>
+             <if test="quantityall!=null">
+              quantityall=#{quantityall},
+           </if>
+              <if test="quantityrest!=null">
+              quantityrest=#{quantityrest},
+           </if>
+              <if test="addtime!=null">
+              addtime=#{addtime},
+           </if>
+              <if test="addman!=null">
+              addman=#{addman},
+           </if>
+           <if test="awardRules!=null">
+              awardRules=#{awardRules},
+           </if>
+           <if test="remark!=null">
+              remark=#{remark},
+           </if>
+           <if test="iscancel!=null">
+              iscancel=#{iscancel},
+           </if>
+           <if test="ugrade!=null">
+              ugrade=#{ugrade},
+           </if>
+           <if test="removenameno!=null">
+              removenameno=#{removenameno},
+           </if>
+           <if test="usagerights!=null">
+              usagerights=#{usagerights},
+           </if>
+           <if test="specialtno!=null">
+              specialtno=#{specialtno},
+           </if>
+           <if test="raiseIntObject!=null">
+              raiseIntObject=#{raiseIntObject},
+           </if>
+           <if test="isDefineAmount!=null">
+              isDefineAmount = #{isDefineAmount},
+           </if>
+           <if test="isDelete!=null">
+              isDelete=#{isDelete},
+           </if>
+           <if test="isTemplet!=null">
+              isTemplet=#{isTemplet},
+           </if>
+           <if test="SNLId!=null">
+              SNLId=#{SNLId},
+           </if>
+           <if test="awardUnit!=null">
+              AWARDUNIT= #{awardUnit,jdbcType=VARCHAR},
+           </if>
+  		</trim>
+  		where ano=#{ano}
+  </update>
+  
+  
+  <update id="updateAward" parameterType="com.ptpl.model.Award">
+  		update award 
+  		<trim prefix="set" suffixOverrides=",">
+  			
+           <if test="aname!=null">
+              aname=#{aname},
+           </if>
+           <if test="atype!=null">
+              atype=#{atype},
+           </if>
+             <if test="attribute!=null">
+              attribute=#{attribute},
+           </if>
+             <if test="allswitch!=null">
+              allswitch=#{allswitch},
+           </if>
+             <if test="subswitch!=null">
+              subswitch=#{subswitch},
+           </if>
+             <if test="tradetype!=null">
+              tradetype=#{tradetype},
+           </if>
+             <if test="endtime!=null">
+              endtime=#{endtime},
+           </if>
+             <if test="wcrestdate!=null">
+              wcrestdate=#{wcrestdate},
+           </if>
+             <if test="wcrestrict!=null">
+              wcrestrict=#{wcrestrict},
+           </if>
+             <if test="wctype!=null">
+              wctype=#{wctype},
+           </if>
+             <!-- <if test="tattribute!=null"></if> -->
+              tattribute=#{tattribute,jdbcType=VARCHAR},
+              
+           <!-- <if test="tdayLimitl!=null"></if> -->
+              tdayLimitl=#{tdayLimitl,jdbcType=DECIMAL},
+           
+             <!-- <if test="tdayrestrict!=null"></if> -->
+              tdayrestrict=#{tdayrestrict,jdbcType=DECIMAL},
+           
+             <!-- <if test="tmlrrestrict!=null"></if> -->
+              tmlrrestrict=#{tmlrrestrict,jdbcType=FLOAT},
+           
+             <!-- <if test="tmhrrestrict!=null"></if> -->
+              tmhrrestrict=#{tmhrrestrict,jdbcType=FLOAT},
+           
+             <!-- <if test="trtype!=null"></if> -->
+              trtype=#{trtype,jdbcType=DECIMAL},
+           
+             <if test="tminmoney!=null">
+              tminmoney=#{tminmoney},
+           </if>
+             <if test="tmaxmoney!=null">
+              tmaxmoney=#{tmaxmoney},
+           </if>
+            <!--  <if test="cashorvoucher!=null"></if> -->
+              cashorvoucher = #{cashorvoucher,jdbcType=FLOAT},
+           
+             <if test="points!=null">
+              points=#{points},
+           </if>
+             <if test="quantityall!=null">
+              quantityall=#{quantityall},
+           </if>
+              <if test="quantityrest!=null">
+              quantityrest=#{quantityrest},
+           </if>
+              <if test="addtime!=null">
+              addtime=#{addtime},
+           </if>
+              <if test="addman!=null">
+              addman=#{addman},
+           </if>
+           <if test="awardRules!=null">
+              awardRules=#{awardRules},
+           </if>
+           <if test="remark!=null">
+              remark=#{remark},
+           </if>
+           <if test="iscancel!=null">
+              iscancel=#{iscancel},
+           </if>
+           <if test="ugrade!=null">
+              ugrade=#{ugrade},
+           </if>
+           <if test="removenameno!=null">
+              removenameno=#{removenameno},
+           </if>
+           <if test="usagerights!=null">
+              usagerights=#{usagerights},
+           </if>
+           <if test="specialtno!=null">
+              specialtno=#{specialtno},
+           </if>
+           <!-- <if test="raiseIntObject!=null"></if> -->
+              raiseIntObject=#{raiseIntObject,jdbcType=VARCHAR},
+           
+           <if test="isDefineAmount!=null">
+              isDefineAmount = #{isDefineAmount},
+           </if>
+           <if test="isDelete!=null">
+              isDelete=#{isDelete},
+           </if>
+           <if test="isTemplet!=null">
+              isTemplet=#{isTemplet},
+           </if>
+           <if test="SNLId!=null">
+              SNLId=#{SNLId},
+           </if>
+           <!-- <if test="awardUnit!=null"></if> -->
+              AWARDUNIT= #{awardUnit,jdbcType=VARCHAR},
+           
+  		</trim>
+  		where ano=#{ano}
+  </update>
+  
+  
+  <delete id="delete" parameterType="java.math.BigDecimal">
+  	delete from award where id=#{id}
+  </delete>
+  <select id="getawearType" resultMap="BaseResultMap">
+		select t.atype from AWARD t group by t.atype
+  </select>
+	<select id="getawearName" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.Attribute from AWARD t where t.atype=#{aType}
+		group by t.Attribute
+	</select>
+	<select id="getawearGoods" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.* from AWARD t where t.attribute=#{attribute}
+	</select>
+	<select id="getaNo" resultMap="BaseResultMap" parameterType="String">
+		select t.* from AWARD t where t.aname=#{aname}
+	</select>
+
+	<!-- pxl 删除奖品列表中的某个奖品 -->
+	<delete id="deleteSomeAward" parameterType="com.ptpl.model.Award">
+		delete from award
+		where id=#{id}
+	</delete>
+
+	<!-- pxl 2016-11-12 根据奖品的名称获取奖品的属性 -->
+	<select id="getAwardByName" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.* from AWARD t where
+		t.aname=#{aname,jdbcType=VARCHAR}
+	</select>
+
+	<!-- pxl 2016-11-25 根据奖品的属性获得某个奖品 -->
+	<select id="getAward" parameterType="com.ptpl.model.Award"
+		resultMap="BaseResultMap">
+		select * from award
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null">
+				and id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ano!=null and ano!=''">
+				and ano=#{ano,jdbcType=VARCHAR}
+			</if>
+			<if test="aname!=null and aname!=''">
+				and aname like #{aname,jdbcType=VARCHAR}
+			</if>
+			<if test="atype!=null">
+				and atype=#{atype,jdbcType=DECIMAL}
+			</if>
+			<if test="attribute!=null">
+				and attribute=#{attribute,jdbcType=DECIMAL}
+			</if>
+			<if test="allswitch!=null">
+				and allswitch=#{allswitch,jdbcType=DECIMAL}
+			</if>
+			<if test="subswitch!=null">
+				and subswitch=#{subswitch,jdbcType=DECIMAL}
+			</if>
+			<if test="tradetype!=null">
+				and tradetype=#{tradetype,jdbcType=DECIMAL}
+			</if>
+			<if test="endtime!=null and endtime!=''">
+				and endtime=#{endtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="wcrestdate!=null and wcrestdate!=''">
+				and wcrestdate=#{wcrestdate,jdbcType=VARCHAR}
+			</if>
+			<if test="wcrestrict!=null">
+				and wcrestrict=#{wcrestrict,jdbcType=FLOAT}
+			</if>
+			<if test="wctype!=null">
+				and wctype=#{wctype,jdbcType=DECIMAL}
+			</if>
+			<if test="tattribute!=null and tattribute!=''">
+				and tattribute=#{tattribute,jdbcType=VARCHAR}
+			</if>
+			<if test="tdayrestrict!=null">
+				and tdayrestrict=#{tdayrestrict,jdbcType=DECIMAL}
+			</if>
+			<if test="tmlrrestrict!=null">
+				and tmlrrestrict=#{tmlrrestrict,jdbcType=FLOAT}
+			</if>
+			<if test="tmhrrestrict!=null">
+				and tmhrrestrict=#{tmhrrestrict,jdbcType=FLOAT}
+			</if>
+			<if test="trtype!=null">
+				and trtype=#{trtype,jdbcType=DECIMAL}
+			</if>
+			<if test="tminmoney!=null">
+				and tminmoney=#{tminmoney,jdbcType=FLOAT}
+			</if>
+			<if test="tmaxmoney!=null">
+				and tmaxmoney=#{tmaxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="cashorvoucher!=null">
+				and cashorvoucher=#{cashorvoucher,jdbcType=FLOAT}
+			</if>
+			<if test="points!=null">
+				and points=#{points,jdbcType=DECIMAL}
+			</if>
+			<if test="quantityall!=null">
+				and quantityall=#{quantityall,jdbcType=DECIMAL}
+			</if>
+			<if test="quantityrest!=null">
+				and quantityrest=#{quantityrest,jdbcType=DECIMAL}
+			</if>
+			<!-- <if test="addtime!=null and addtime!=''">
+				and addtime=#{addtime,jdbcType=TIMESTAMP}
+			</if> -->
+			<if test="addman!=null and addman!=''">
+				and addman=#{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark!=null and remark!=''">
+				and remark=#{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancel!=null">
+				and iscancel=#{iscancel,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade!=null and ugrade!=''">
+				and ugrade=#{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="removenameno!=null and removenameno!=''">
+				and removenameno=#{removenameno,jdbcType=VARCHAR}
+			</if>
+			<if test="usagerights!=null">
+				and usagerights=#{usagerights,jdbcType=DECIMAL}
+			</if>
+			<if test="specialtno!=null and specialtno!=''">
+				and specialtno=#{specialtno,jdbcType=VARCHAR}
+			</if>
+			<if test="raiseIntObject!=null and raiseIntObject!=''">
+				and raiseIntObject=#{raiseIntObject,jdbcType=VARCHAR}
+			</if>
+			<if test="isDefineAmount!=null">
+				and isDefineAmount=#{isDefineAmount,jdbcType=DECIMAL}
+			</if>
+			<if test="isDelete!=null">
+				and isDelete=#{isDelete,jdbcType=DECIMAL}
+			</if>
+			<if test="isTemplet!=null">
+				and isTemplet=#{isTemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="SNLId!=null">
+				and SNLId=#{SNLId,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据奖品编号获取奖品的属性 -->
+	<select id="selectByAwardNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select * from AWARD where ano=#{ano,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据奖品ID获取奖品的属性 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select * from AWARD where id=#{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据奖品的类型获取其所有的奖品 -->
+	<select id="getAwardNamesByAtype" resultMap="BaseResultMap"
+		parameterType="java.lang.Short">
+		select aname,atype,cashorvoucher from AWARD where ATYPE =
+		#{atype,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 更新奖品时，防止重名 -->
+	<select id="gainAward" resultMap="BaseResultMap" parameterType="com.ptpl.model.Award">
+		select a.aname from AWARD a
+		<where>
+			<if test="aname !=null and aname !=''">
+				AND a.ANAME = #{aname,jdbcType=VARCHAR}
+			</if>
+			<if test="ano !=null and ano!=''">
+				AND a.ANO != #{ano,jdbcType = VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

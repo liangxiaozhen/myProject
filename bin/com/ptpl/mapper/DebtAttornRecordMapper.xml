@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DebtAttornRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DebtAttornRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="DAORDERNO" property="daorderno" jdbcType="VARCHAR" />
+		<result column="UDAPASS" property="udapass" jdbcType="VARCHAR" />
+		<result column="DAID" property="daid" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="TENDERORDERNO" property="tenderorderno"
+			jdbcType="VARCHAR" />
+		<result column="HOLDDATE" property="holddate" jdbcType="DECIMAL" />
+		<result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR" />
+		<result column="HOLDMANID" property="holdmanid" jdbcType="DECIMAL" />
+		<result column="UNDERTAKEMANID" property="undertakemanid"
+			jdbcType="DECIMAL" />
+		<result column="UNDERTAKECOUNT" property="undertakecount"
+			jdbcType="DECIMAL" />
+		<result column="UNITPRICE" property="unitprice" jdbcType="FLOAT" />
+		<result column="TOTALAMOUNT" property="totalamount" jdbcType="FLOAT" />
+		<result column="YEARPROFIT" property="yearprofit" jdbcType="FLOAT" />
+		<result column="DATIMES" property="datimes" jdbcType="DECIMAL" />
+		<result column="FEEMODE" property="feemode" jdbcType="DECIMAL" />
+		<result column="DAHFEE" property="dahfee" jdbcType="FLOAT" />
+		<result column="DATYPE" property="datype" jdbcType="DECIMAL" />
+		<result column="TENDERTYPE" property="tendertype" jdbcType="DECIMAL" />
+		<result column="ISDEAL" property="isdeal" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="DATE" />
+		<result column="MANBTIME" property="manbtime" jdbcType="DATE" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="DATE" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="DATE" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITTIME" property="audittime" jdbcType="DATE" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="PAYOUTDATE" property="payoutdate" jdbcType="DATE" />
+		<result column="DADATE" property="dadate" jdbcType="DATE" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="OLDDAORDERNO" property="olddaorderno" jdbcType="VARCHAR" />
+		<result column="RESTAMOUNT" property="restamount" jdbcType="FLOAT" />
+		<result column="DASTATUS" property="dastatus" jdbcType="DECIMAL" />
+		<result column="UTPRINAMOUNT" property="utprinamount" jdbcType="FLOAT" />
+		<result column="UTINTAMOUNT" property="utintamount" jdbcType="FLOAT" />
+		<result column="VALUEDATE" property="valuedate" jdbcType="DATE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DAORDERNO, UDAPASS, DAID, TENDERID, TENDERORDERNO, HOLDDATE,
+		PMISCRECMAN, HOLDMANID,
+		UNDERTAKEMANID, UNDERTAKECOUNT, UNITPRICE, TOTALAMOUNT, YEARPROFIT, DATIMES, FEEMODE,
+		DAHFEE, DATYPE, TENDERTYPE, ISDEAL, ISBLENDING, ISMANBLENDING,
+		SYSBTIME, MANBTIME,
+		PAYCOMPANY, SYSRECTIME, RECEIVETIME, REQQUERYDATA, RECRESULTDATA, ISAUDIT,
+		AUDITTIME,
+		AUDITMAN, PAYOUTDATE, DADATE, REMARK, OLDDAORDERNO, RESTAMOUNT, DASTATUS,
+		UTPRINAMOUNT,
+		UTINTAMOUNT, VALUEDATE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from DEBTATTORNRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from DEBTATTORNRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.DebtAttornRecord">
+		insert into DEBTATTORNRECORD (ID, DAORDERNO, UDAPASS,
+		DAID, TENDERID, TENDERORDERNO,
+		HOLDDATE, PMISCRECMAN, HOLDMANID,
+		UNDERTAKEMANID, UNDERTAKECOUNT, UNITPRICE,
+		TOTALAMOUNT, YEARPROFIT, DATIMES,
+		FEEMODE, DAHFEE, DATYPE,
+		TENDERTYPE, ISDEAL, ISBLENDING,
+		ISMANBLENDING, SYSBTIME, MANBTIME,
+		PAYCOMPANY, SYSRECTIME, RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA, ISAUDIT,
+		AUDITTIME, AUDITMAN, PAYOUTDATE,
+		DADATE, REMARK, OLDDAORDERNO,
+		RESTAMOUNT, DASTATUS, UTPRINAMOUNT,
+		UTINTAMOUNT, VALUEDATE)
+		values (#{id,jdbcType=DECIMAL}, #{daorderno,jdbcType=VARCHAR},
+		#{udapass,jdbcType=VARCHAR},
+		#{daid,jdbcType=DECIMAL}, #{tenderid,jdbcType=DECIMAL}, #{tenderorderno,jdbcType=VARCHAR},
+		#{holddate,jdbcType=DECIMAL}, #{pmiscrecman,jdbcType=VARCHAR},
+		#{holdmanid,jdbcType=DECIMAL},
+		#{undertakemanid,jdbcType=DECIMAL}, #{undertakecount,jdbcType=DECIMAL}, #{unitprice,jdbcType=FLOAT},
+		#{totalamount,jdbcType=FLOAT}, #{yearprofit,jdbcType=FLOAT},
+		#{datimes,jdbcType=DECIMAL},
+		#{feemode,jdbcType=DECIMAL}, #{dahfee,jdbcType=FLOAT}, #{datype,jdbcType=DECIMAL},
+		#{tendertype,jdbcType=DECIMAL}, #{isdeal,jdbcType=DECIMAL},
+		#{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=DATE}, #{manbtime,jdbcType=DATE},
+		#{paycompany,jdbcType=VARCHAR}, #{sysrectime,jdbcType=DATE},
+		#{receivetime,jdbcType=DATE},
+		#{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR}, #{isaudit,jdbcType=DECIMAL},
+		#{audittime,jdbcType=DATE}, #{auditman,jdbcType=VARCHAR},
+		#{payoutdate,jdbcType=DATE},
+		#{dadate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{olddaorderno,jdbcType=VARCHAR},
+		#{restamount,jdbcType=FLOAT}, #{dastatus,jdbcType=DECIMAL},
+		#{utprinamount,jdbcType=FLOAT},
+		#{utintamount,jdbcType=FLOAT}, #{valuedate,jdbcType=DATE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.DebtAttornRecord">
+		insert into DEBTATTORNRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="daorderno != null">
+				DAORDERNO,
+			</if>
+			<if test="udapass != null">
+				UDAPASS,
+			</if>
+			<if test="daid != null">
+				DAID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="tenderorderno != null">
+				TENDERORDERNO,
+			</if>
+			<if test="holddate != null">
+				HOLDDATE,
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN,
+			</if>
+			<if test="holdmanid != null">
+				HOLDMANID,
+			</if>
+			<if test="undertakemanid != null">
+				UNDERTAKEMANID,
+			</if>
+			<if test="undertakecount != null">
+				UNDERTAKECOUNT,
+			</if>
+			<if test="unitprice != null">
+				UNITPRICE,
+			</if>
+			<if test="totalamount != null">
+				TOTALAMOUNT,
+			</if>
+			<if test="yearprofit != null">
+				YEARPROFIT,
+			</if>
+			<if test="datimes != null">
+				DATIMES,
+			</if>
+			<if test="feemode != null">
+				FEEMODE,
+			</if>
+			<if test="dahfee != null">
+				DAHFEE,
+			</if>
+			<if test="datype != null">
+				DATYPE,
+			</if>
+			<if test="tendertype != null">
+				TENDERTYPE,
+			</if>
+			<if test="isdeal != null">
+				ISDEAL,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE,
+			</if>
+			<if test="dadate != null">
+				DADATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="olddaorderno != null">
+				OLDDAORDERNO,
+			</if>
+			<if test="restamount != null">
+				RESTAMOUNT,
+			</if>
+			<if test="dastatus != null">
+				DASTATUS,
+			</if>
+			<if test="utprinamount != null">
+				UTPRINAMOUNT,
+			</if>
+			<if test="utintamount != null">
+				UTINTAMOUNT,
+			</if>
+			<if test="valuedate != null">
+				VALUEDATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="daorderno != null">
+				#{daorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="udapass != null">
+				#{udapass,jdbcType=VARCHAR},
+			</if>
+			<if test="daid != null">
+				#{daid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderorderno != null">
+				#{tenderorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="holddate != null">
+				#{holddate,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecman != null">
+				#{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="holdmanid != null">
+				#{holdmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="undertakemanid != null">
+				#{undertakemanid,jdbcType=DECIMAL},
+			</if>
+			<if test="undertakecount != null">
+				#{undertakecount,jdbcType=DECIMAL},
+			</if>
+			<if test="unitprice != null">
+				#{unitprice,jdbcType=FLOAT},
+			</if>
+			<if test="totalamount != null">
+				#{totalamount,jdbcType=FLOAT},
+			</if>
+			<if test="yearprofit != null">
+				#{yearprofit,jdbcType=FLOAT},
+			</if>
+			<if test="datimes != null">
+				#{datimes,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				#{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="dahfee != null">
+				#{dahfee,jdbcType=FLOAT},
+			</if>
+			<if test="datype != null">
+				#{datype,jdbcType=DECIMAL},
+			</if>
+			<if test="tendertype != null">
+				#{tendertype,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				#{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=DATE},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=DATE},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=DATE},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=DATE},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=DATE},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="payoutdate != null">
+				#{payoutdate,jdbcType=DATE},
+			</if>
+			<if test="dadate != null">
+				#{dadate,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="olddaorderno != null">
+				#{olddaorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="restamount != null">
+				#{restamount,jdbcType=FLOAT},
+			</if>
+			<if test="dastatus != null">
+				#{dastatus,jdbcType=DECIMAL},
+			</if>
+			<if test="utprinamount != null">
+				#{utprinamount,jdbcType=FLOAT},
+			</if>
+			<if test="utintamount != null">
+				#{utintamount,jdbcType=FLOAT},
+			</if>
+			<if test="valuedate != null">
+				#{valuedate,jdbcType=DATE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.DebtAttornRecord">
+		update DEBTATTORNRECORD
+		<set>
+			<if test="daorderno != null">
+				DAORDERNO = #{daorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="udapass != null">
+				UDAPASS = #{udapass,jdbcType=VARCHAR},
+			</if>
+			<if test="daid != null">
+				DAID = #{daid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderorderno != null">
+				TENDERORDERNO = #{tenderorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="holddate != null">
+				HOLDDATE = #{holddate,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="holdmanid != null">
+				HOLDMANID = #{holdmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="undertakemanid != null">
+				UNDERTAKEMANID = #{undertakemanid,jdbcType=DECIMAL},
+			</if>
+			<if test="undertakecount != null">
+				UNDERTAKECOUNT = #{undertakecount,jdbcType=DECIMAL},
+			</if>
+			<if test="unitprice != null">
+				UNITPRICE = #{unitprice,jdbcType=FLOAT},
+			</if>
+			<if test="totalamount != null">
+				TOTALAMOUNT = #{totalamount,jdbcType=FLOAT},
+			</if>
+			<if test="yearprofit != null">
+				YEARPROFIT = #{yearprofit,jdbcType=FLOAT},
+			</if>
+			<if test="datimes != null">
+				DATIMES = #{datimes,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				FEEMODE = #{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="dahfee != null">
+				DAHFEE = #{dahfee,jdbcType=FLOAT},
+			</if>
+			<if test="datype != null">
+				DATYPE = #{datype,jdbcType=DECIMAL},
+			</if>
+			<if test="tendertype != null">
+				TENDERTYPE = #{tendertype,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				ISDEAL = #{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=DATE},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=DATE},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=DATE},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=DATE},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=DATE},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=DATE},
+			</if>
+			<if test="dadate != null">
+				DADATE = #{dadate,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="olddaorderno != null">
+				OLDDAORDERNO = #{olddaorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="restamount != null">
+				RESTAMOUNT = #{restamount,jdbcType=FLOAT},
+			</if>
+			<if test="dastatus != null">
+				DASTATUS = #{dastatus,jdbcType=DECIMAL},
+			</if>
+			<if test="utprinamount != null">
+				UTPRINAMOUNT = #{utprinamount,jdbcType=FLOAT},
+			</if>
+			<if test="utintamount != null">
+				UTINTAMOUNT = #{utintamount,jdbcType=FLOAT},
+			</if>
+			<if test="valuedate != null">
+				VALUEDATE = #{valuedate,jdbcType=DATE},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.DebtAttornRecord">
+		update DEBTATTORNRECORD
+		set DAORDERNO = #{daorderno,jdbcType=VARCHAR},
+		UDAPASS = #{udapass,jdbcType=VARCHAR},
+		DAID = #{daid,jdbcType=DECIMAL},
+		TENDERID = #{tenderid,jdbcType=DECIMAL},
+		TENDERORDERNO = #{tenderorderno,jdbcType=VARCHAR},
+		HOLDDATE = #{holddate,jdbcType=DECIMAL},
+		PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+		HOLDMANID = #{holdmanid,jdbcType=DECIMAL},
+		UNDERTAKEMANID = #{undertakemanid,jdbcType=DECIMAL},
+		UNDERTAKECOUNT = #{undertakecount,jdbcType=DECIMAL},
+		UNITPRICE = #{unitprice,jdbcType=FLOAT},
+		TOTALAMOUNT = #{totalamount,jdbcType=FLOAT},
+		YEARPROFIT = #{yearprofit,jdbcType=FLOAT},
+		DATIMES = #{datimes,jdbcType=DECIMAL},
+		FEEMODE = #{feemode,jdbcType=DECIMAL},
+		DAHFEE = #{dahfee,jdbcType=FLOAT},
+		DATYPE = #{datype,jdbcType=DECIMAL},
+		TENDERTYPE = #{tendertype,jdbcType=DECIMAL},
+		ISDEAL = #{isdeal,jdbcType=DECIMAL},
+		ISBLENDING = #{isblending,jdbcType=DECIMAL},
+		ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+		SYSBTIME = #{sysbtime,jdbcType=DATE},
+		MANBTIME = #{manbtime,jdbcType=DATE},
+		PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+		SYSRECTIME = #{sysrectime,jdbcType=DATE},
+		RECEIVETIME = #{receivetime,jdbcType=DATE},
+		REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+		RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+		ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+		AUDITTIME = #{audittime,jdbcType=DATE},
+		AUDITMAN = #{auditman,jdbcType=VARCHAR},
+		PAYOUTDATE = #{payoutdate,jdbcType=DATE},
+		DADATE = #{dadate,jdbcType=DATE},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		OLDDAORDERNO = #{olddaorderno,jdbcType=VARCHAR},
+		RESTAMOUNT = #{restamount,jdbcType=FLOAT},
+		DASTATUS = #{dastatus,jdbcType=DECIMAL},
+		UTPRINAMOUNT = #{utprinamount,jdbcType=FLOAT},
+		UTINTAMOUNT = #{utintamount,jdbcType=FLOAT},
+		VALUEDATE = #{valuedate,jdbcType=DATE}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

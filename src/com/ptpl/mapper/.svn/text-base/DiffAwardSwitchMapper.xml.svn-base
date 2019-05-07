@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DiffAwardSwitchMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.DiffAwardSwitch" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ATTRIBUTE" property="attribute" jdbcType="DECIMAL" />
+    <result column="AWARDTYPE" property="awardType" jdbcType="VARCHAR" />
+    <result column="ALLSWITCH" property="allSwitch" jdbcType="DECIMAL" />
+    <result column="OPERATETIME" property="operateTime" jdbcType="TIMESTAMP" />    
+    <result column="OPERATEMAN" property="operateMan" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- 查询列表 -->
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.ptpl.model.DiffAwardSwitch">
+  	select * from DIFFAWARDSWITCH
+  	<where>
+  		<if test="attribute!=null">
+  			and ATTRIBUTE = #{attribute,jdbcType=DECIMAL}
+  		</if>
+  		<if test="awardType !=null and awardType !=''">
+  			and AWARDTYPE = #{awardType,jdbcType=VARCHAR}
+  		</if>
+  		<if test="allSwitch !=null">
+  			and ALLSWITCH = #{allSwitch,jdbcType=DECIMAL}
+  		</if>
+  	</where>
+  </select>
+  
+  <!-- 插入数据 -->
+  <insert id="insertSelective" parameterType="com.ptpl.model.DiffAwardSwitch">
+  	<selectKey resultType="java.math.BigDecimal" keyProperty="id" order="BEFORE">
+		SELECT DIFFAWARDSWITCH_SEQ.NEXTVAL AS ID FROM DUAL
+	</selectKey>
+  	insert into DIFFAWARDSWITCH
+  	<trim prefix="(" suffix=")" suffixOverrides="," >
+  		<if test="id != null">
+			ID,
+		</if>
+		<if test="attribute != null">
+			ATTRIBUTE,
+		</if>
+		<if test="awardType != null">
+			AWARDTYPE,
+		</if>
+		<if test="allSwitch != null">
+			ALLSWITCH,
+		</if>
+		<if test="operateTime != null">
+			OPERATETIME,
+		</if>
+		<if test="operateMan != null">
+			OPERATEMAN,
+		</if>
+		<if test="remark != null">
+			REMARK,
+		</if>
+  	</trim>
+  	<trim prefix="values (" suffix=")" suffixOverrides=",">
+  		<if test="id != null">
+			#{id,jdbcType = DECIMAL},
+		</if>
+		<if test="attribute != null">
+			#{attribute,jdbcType=DECIMAL},
+		</if>
+		<if test="awardType != null">
+			#{awardType,jdbcType=VARCHAR},
+		</if>
+		<if test="allSwitch != null">
+			#{allSwitch,jdbcType=DECIMAL},
+		</if>
+		<if test="operateTime != null">
+			#{operateTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="operateMan != null">
+			#{operateMan,jdbcType=VARCHAR},
+		</if>
+		<if test="remark != null">
+			#{remark,jdbcType=VARCHAR},
+		</if>
+  	</trim>
+  </insert>
+  
+  <!-- 通过id来获取对应的记录 -->
+  <select id="getDiffAwardSwitchById" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+  	  select * from DiffAwardSwitch where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+   <!-- 通过奖品属性来获取对应的记录 -->
+  <select id="getDiffAwardSwitchByAttribute" resultMap="BaseResultMap" parameterType="java.lang.Short">
+  	  select * from DiffAwardSwitch where ATTRIBUTE = #{attribute,jdbcType=DECIMAL}
+  </select>
+  
+  
+  <!-- 根据列表的id来更新 -->
+  <update id="updateDiffAwardSwitchById" parameterType="com.ptpl.model.DiffAwardSwitch">
+  	   update DIFFAWARDSWITCH 
+  	   <set>
+  	   	  <if test="allSwitch !=null">
+  	   	  	ALLSWITCH = #{allSwitch,jdbcType=DECIMAL},
+  	   	  </if>
+  	   	  <if test="operateTime !=null">
+  	   	  	OPERATETIME = #{operateTime,jdbcType=TIMESTAMP},
+  	   	  </if>
+  	   	  <if test="operateMan !=null">
+  	   	  	OPERATEMAN = #{operateMan,jdbcType=VARCHAR},
+  	   	  </if>
+  	   	   <if test="remark !=null">
+  	   	  	REMARK = #{remark,jdbcType=VARCHAR},
+  	   	  </if>
+  	   </set>
+  	   where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

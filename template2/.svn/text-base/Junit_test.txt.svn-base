@@ -1,0 +1,72 @@
+package junit.test;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.ptpl.model.Pojo;
+import com.ptpl.service.PojoServiceI;
+/**
+ * @author:author
+ * @date:date
+ * @description:description
+ */
+public class PojoTest {
+	private PojoServiceI pojoService;
+	
+	@Before
+    public void before(){
+        //使用"spring.xml"和"spring-mybatis.xml"这两个配置文件创建Spring上下文
+        ApplicationContext ac = new ClassPathXmlApplicationContext(new String[]{"spring/spring-mvc.xml","spring/applicationContext-*.xml"});
+        //从Spring容器中根据bean的id取出我们要使用的userService对象
+        pojoService=(PojoServiceI) ac.getBean("pojoService");
+    }
+	
+	
+	@Test
+	public void test(){
+		System.out.println(pojoService);
+	}
+
+
+	@Test
+	public void testAddPojo_insert(){
+		for(int i=77;i<=77;i++){
+			Pojo pojo = new Pojo();
+			pojoService.insert(pojo);
+		}
+	}
+	
+	
+	
+
+	@Test
+	public void testSelectTenderItemByCondition(){
+		Pojo condition = new Pojo();
+		List<Pojo> pojoList = pojoService.selectByCondition(condition);
+		for (Pojo pojo : pojoList) {
+			System.out.println(pojo);
+		}
+	}
+	
+
+	@Test
+	public void testUpdatePojo(){
+		Pojo pojo = new Pojo();
+		pojo.setId(new BigDecimal(54));
+		pojoService.update(pojo);
+	}
+	
+
+	@Test
+	public void testDeletePojo(){
+		pojoService.delete(new BigDecimal(54));
+	}
+	
+
+}

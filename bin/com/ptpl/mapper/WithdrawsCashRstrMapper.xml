@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.WithdrawsCashRstrMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.WithdrawsCashRstr">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="DECIMAL" />
+		<result column="LOWESTMONEY" property="lowestmoney" jdbcType="FLOAT" />
+		<result column="HIGHESTMONEY" property="highestmoney" jdbcType="FLOAT" />
+		<result column="DAYMONEYREST" property="daymoneyrest" jdbcType="FLOAT" />
+		<result column="DAYTIMESREST" property="daytimesrest" jdbcType="DECIMAL" />
+		<result column="PROPORTION" property="proportion" jdbcType="FLOAT" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISCANCEL" property="iscancel" jdbcType="DECIMAL" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR" />
+		<result column="CLOSETIMENO" property="closetimeno" jdbcType="VARCHAR" />
+		<result column="SPECIALTIMENO" property="specialtimeno"
+			jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISMANAUDIT" property="ismanaudit" jdbcType="DECIMAL" />
+		<result column="PROXYPAYMAN" property="proxypayman" jdbcType="VARCHAR" />
+		<result column="SELFPAYRATIO" property="selfpayratio" jdbcType="FLOAT" />
+		<result column="PROXYPAYRATIO" property="proxypayratio"
+			jdbcType="FLOAT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, UGRADE, LOWESTMONEY, HIGHESTMONEY, DAYMONEYREST,
+		DAYTIMESREST,
+		PROPORTION, ISAUDIT,
+		ISCANCEL, PAYCOMPANY, ISUSE,
+		REMOVENAMENO, CLOSETIMENO, SPECIALTIMENO, ADDMAN,
+		ADDTIME,
+		AUDITMAN,
+		AUDITTIME, REMARK, ISMANAUDIT,PROXYPAYMAN,SELFPAYRATIO,PROXYPAYRATIO
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from WITHDRAWSCASHRSTR
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		WITHDRAWSCASHRSTR
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<select id="selective" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.WithdrawsCashRstr">
+		select
+		<include refid="Base_Column_List" />
+		from WITHDRAWSCASHRSTR
+		<where>
+			<if test="id !=null">
+				ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null">
+				AND UGRADE = #{ugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="lowestmoney != null">
+				AND LOWESTMONEY >= #{lowestmoney,jdbcType=FLOAT}
+			</if>
+			<if test="highestmoney != null">
+				AND HIGHESTMONEY &lt;= #{highestmoney,jdbcType=FLOAT}
+			</if>
+			<if test="daymoneyrest != null">
+				AND DAYMONEYREST = #{daymoneyrest,jdbcType=FLOAT}
+			</if>
+			<if test="daytimesrest != null">
+				AND DAYTIMESREST = #{daytimesrest,jdbcType=DECIMAL}
+			</if>
+			<if test="proportion != null">
+				AND PROPORTION = #{proportion,jdbcType=FLOAT}
+			</if>
+			<if test="isaudit != null">
+				AND ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="iscancel != null">
+				AND ISCANCEL = #{iscancel,jdbcType=DECIMAL}
+			</if>
+			<if test="paycompany != null">
+				AND PAYCOMPANY = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="isuse != null">
+				AND ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="removenameno != null">
+				AND REMOVENAMENO = #{removenameno,jdbcType=VARCHAR}
+			</if>
+			<if test="closetimeno != null">
+				AND CLOSETIMENO = #{closetimeno,jdbcType=VARCHAR}
+			</if>
+			<if test="specialtimeno != null">
+				AND SPECIALTIMENO = #{specialtimeno,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="auditman != null">
+				AND AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				AND AUDITTIME = #{audittime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="ismanaudit != null">
+				AND ISMANAUDIT = #{ismanaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="proxypayman != null">
+				AND PROXYPAYMAN = #{proxypayman,jdbcType=VARCHAR}
+			</if>
+			<if test="selfpayratio != null">
+				AND SELFPAYRATIO = #{selfpayratio,jdbcType=FLOAT}
+			</if>
+			<if test="proxypayratio != null">
+				AND PROXYPAYRATIO = #{proxypayratio,jdbcType=FLOAT}
+			</if>
+		</where>
+		order by ugrade ,LOWESTMONEY
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.WithdrawsCashRstr">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT WITHDRAWSCASHRSTR_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into WITHDRAWSCASHRSTR
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="lowestmoney != null">
+				LOWESTMONEY,
+			</if>
+			<if test="highestmoney != null">
+				HIGHESTMONEY,
+			</if>
+			<if test="daymoneyrest != null">
+				DAYMONEYREST,
+			</if>
+			<if test="daytimesrest != null">
+				DAYTIMESREST,
+			</if>
+			<if test="proportion != null">
+				PROPORTION,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="iscancel != null">
+				ISCANCEL,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO,
+			</if>
+			<if test="closetimeno != null">
+				CLOSETIMENO,
+			</if>
+			<if test="specialtimeno != null">
+				SPECIALTIMENO,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="ismanaudit != null">
+				ISMANAUDIT,
+			</if>
+			<if test="proxypayman != null and proxypayman != ''">
+				PROXYPAYMAN,
+			</if>
+			<if test="selfpayratio != null">
+				SELFPAYRATIO,
+			</if>
+			<if test="proxypayratio != null">
+				PROXYPAYRATIO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=DECIMAL},
+			</if>
+			<if test="lowestmoney != null">
+				#{lowestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="highestmoney != null">
+				#{highestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="daymoneyrest != null">
+				#{daymoneyrest,jdbcType=FLOAT},
+			</if>
+			<if test="daytimesrest != null">
+				#{daytimesrest,jdbcType=DECIMAL},
+			</if>
+			<if test="proportion != null">
+				#{proportion,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="iscancel != null">
+				#{iscancel,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="removenameno != null">
+				#{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="closetimeno != null">
+				#{closetimeno,jdbcType=VARCHAR},
+			</if>
+			<if test="specialtimeno != null">
+				#{specialtimeno,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ismanaudit != null">
+				#{ismanaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="proxypayman != null and proxypayman != ''">
+				#{proxypayman,jdbcType=VARCHAR},
+			</if>
+			<if test="selfpayratio != null">
+				#{selfpayratio,jdbcType=FLOAT},
+			</if>
+			<if test="proxypayratio != null">
+				#{proxypayratio,jdbcType=FLOAT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.WithdrawsCashRstr">
+		update WITHDRAWSCASHRSTR
+		<set>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=DECIMAL},
+			</if>
+			<if test="lowestmoney != null">
+				LOWESTMONEY = #{lowestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="highestmoney != null">
+				HIGHESTMONEY = #{highestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="daymoneyrest != null">
+				DAYMONEYREST = #{daymoneyrest,jdbcType=FLOAT},
+			</if>
+			<if test="daytimesrest != null">
+				DAYTIMESREST = #{daytimesrest,jdbcType=DECIMAL},
+			</if>
+			<if test="proportion != null">
+				PROPORTION = #{proportion,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="iscancel != null">
+				ISCANCEL = #{iscancel,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO = #{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="closetimeno != null">
+				CLOSETIMENO = #{closetimeno,jdbcType=VARCHAR},
+			</if>
+			<if test="specialtimeno != null">
+				SPECIALTIMENO = #{specialtimeno,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ismanaudit != null">
+				ISMANAUDIT = #{ismanaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="proxypayman != null">
+				PROXYPAYMAN = #{proxypayman,jdbcType=VARCHAR},
+			</if>
+			<if test="selfpayratio != null">
+				SELFPAYRATIO = #{selfpayratio,jdbcType=FLOAT},
+			</if>
+			<if test="proxypayratio != null">
+				PROXYPAYRATIO = #{proxypayratio,jdbcType=FLOAT},
+			</if>
+			AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			AUDITTIME =
+			#{audittime,jdbcType=TIMESTAMP},
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="getCount" resultType="Integer">
+		select count(*) from
+		WITHDRAWSCASHRSTR
+	</select>
+</mapper>

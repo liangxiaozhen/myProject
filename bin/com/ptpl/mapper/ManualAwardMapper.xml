@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ManualAwardMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ManualAward">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="actno" jdbcType="VARCHAR" />
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR" />
+		<result column="SETTIME" property="settime" jdbcType="TIMESTAMP" />
+		<result column="REWARDTYPE" property="rewardtype" jdbcType="VARCHAR" />
+		<result column="REWARDNAME" property="rewardname" jdbcType="VARCHAR" />
+		<result column="REWARDLNNO" property="rewardlnno" jdbcType="VARCHAR" />
+		<result column="REMOVENAME" property="removename" jdbcType="VARCHAR" />
+		<result column="AWARDNAME" property="awardname" jdbcType="VARCHAR" />
+		<result column="AWARDNO" property="awardno" jdbcType="VARCHAR" />
+		<result column="QUANTITY" property="quantity" jdbcType="DECIMAL" />
+		<result column="AWARDAMOUNT" property="awardamount" jdbcType="OTHER" />
+		<result column="AWARDREMARK" property="awardremark" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+
+		<result column="MACTNO" property="mactNo" jdbcType="VARCHAR" />
+		<result column="OBJECTSETTING" property="objectSetting"
+			jdbcType="DECIMAL" />
+		<result column="ISDEAL" property="isDeal" jdbcType="DECIMAL" />
+		<result column="AWARDTYPE" property="awardType" jdbcType="DECIMAL" />
+		<result column="AWARDNUM" property="awardNum" jdbcType="DECIMAL" />
+		<result column="SNLID" property="SNLId" jdbcType="DECIMAL" />
+		<result column="AWARDUNIT" property="awardUnit" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ACTNO, ACTNAME, SETTIME, REWARDTYPE, REWARDNAME, REWARDLNNO,
+		REMOVENAME, AWARDNAME,AWARDNO,
+		QUANTITY, AWARDAMOUNT, AWARDREMARK, ADDTIME, ADDMAN, REMARK,
+		ISTEMPLET,MACTNO,OBJECTSETTING,ISDEAL,
+		AWARDTYPE,AWARDNUM,SNLID,AWARDUNIT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from MANUALAWARD
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from MANUALAWARD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.ManualAward">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT MANUALAWARD_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into MANUALAWARD (ID, ACTNO, ACTNAME,
+		SETTIME, REWARDTYPE, REWARDNAME,
+		REWARDLNNO, REMOVENAME, AWARDNAME,
+		AWARDNO, QUANTITY, AWARDAMOUNT,
+		AWARDREMARK, ADDTIME, ADDMAN,
+		REMARK, ISTEMPLET,MACTNO,OBJECTSETTING,
+		ISDEAL,AWARDTYPE,AWARDNUM,SNLID,AWARDUNIT)
+		values (#{id,jdbcType=DECIMAL}, #{actno,jdbcType=VARCHAR},
+		#{actname,jdbcType=VARCHAR},
+		#{settime,jdbcType=TIMESTAMP}, #{rewardtype,jdbcType=VARCHAR}, #{rewardname,jdbcType=VARCHAR},
+		#{rewardlnno,jdbcType=VARCHAR}, #{removename,jdbcType=VARCHAR},
+		#{awardname,jdbcType=VARCHAR},
+		#{awardno,jdbcType=VARCHAR}, #{quantity,jdbcType=DECIMAL}, #{awardamount,jdbcType=OTHER},
+		#{awardremark,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+		#{addman,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{istemplet,jdbcType=DECIMAL},#{mactNo,jdbcType=VARCHAR},#{objectSetting,jdbcType=DECIMAL},
+		#{isDeal,jdbcType=DECIMAL},#{awardType,jdbcType=DECIMAL},#{awardNum,jdbcType=DECIMAL},#{SNLId,jdbcType=DECIMAL},
+		#{awardUnit,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ManualAward">
+		insert into MANUALAWARD
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT MANUALAWARD_seq.NEXTVAL AS id from dual
+		</selectKey>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actno != null">
+				ACTNO,
+			</if>
+			<if test="actname != null">
+				ACTNAME,
+			</if>
+			<if test="settime != null">
+				SETTIME,
+			</if>
+			<if test="rewardtype != null">
+				REWARDTYPE,
+			</if>
+			<if test="rewardname != null">
+				REWARDNAME,
+			</if>
+			<if test="rewardlnno != null">
+				REWARDLNNO,
+			</if>
+			<if test="removename != null">
+				REMOVENAME,
+			</if>
+			<if test="awardname != null">
+				AWARDNAME,
+			</if>
+			<if test="awardno != null">
+				AWARDNO,
+			</if>
+			<if test="quantity != null">
+				QUANTITY,
+			</if>
+			<if test="awardamount != null">
+				AWARDAMOUNT,
+			</if>
+			<if test="awardremark != null">
+				AWARDREMARK,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="mactNo != null">
+				MACTNO,
+			</if>
+			<if test="objectSetting != null">
+				OBJECTSETTING,
+			</if>
+			<if test="isDeal != null">
+				ISDEAL,
+			</if>
+			<if test="awardType != null">
+				AWARDTYPE,
+			</if>
+			<if test="awardNum != null">
+				AWARDNUM,
+			</if>
+			<if test="SNLId!=null">
+				SNLID,
+			</if>
+			<if test="awardUnit!=null">
+				AWARDUNIT,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actno != null">
+				#{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="actname != null">
+				#{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="settime != null">
+				#{settime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rewardtype != null">
+				#{rewardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="rewardname != null">
+				#{rewardname,jdbcType=VARCHAR},
+			</if>
+			<if test="rewardlnno != null">
+				#{rewardlnno,jdbcType=VARCHAR},
+			</if>
+			<if test="removename != null">
+				#{removename,jdbcType=VARCHAR},
+			</if>
+			<if test="awardname != null">
+				#{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardno != null">
+				#{awardno,jdbcType=VARCHAR},
+			</if>
+			<if test="quantity != null">
+				#{quantity,jdbcType=DECIMAL},
+			</if>
+			<if test="awardamount != null">
+				#{awardamount,jdbcType=OTHER},
+			</if>
+			<if test="awardremark != null">
+				#{awardremark,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="mactNo != null">
+				#{mactNo,jdbcType=VARCHAR},
+			</if>
+			<if test="objectSetting != null">
+				#{objectSetting,jdbcType=DECIMAL},
+			</if>
+			<if test="isDeal != null">
+				#{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="awardType != null">
+				#{awardType,jdbcType=DECIMAL},
+			</if>
+			<if test="awardNum != null">
+				#{awardNum,jdbcType=DECIMAL},
+			</if>
+			<if test="SNLId != null">
+				#{SNLId,jdbcType=DECIMAL},
+			</if>
+			<if test="awardUnit != null">
+				#{awardUnit,jdbcType=VARCHAR},
+			</if>
+
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ManualAward">
+		update MANUALAWARD
+		<set>
+			<if test="actname != null">
+				ACTNAME = #{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="settime != null">
+				SETTIME = #{settime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rewardtype != null">
+				REWARDTYPE = #{rewardtype,jdbcType=VARCHAR},
+			</if>
+			<if test="rewardname != null">
+				REWARDNAME = #{rewardname,jdbcType=VARCHAR},
+			</if>
+			<if test="rewardlnno != null">
+				REWARDLNNO = #{rewardlnno,jdbcType=VARCHAR},
+			</if>
+			<if test="removename != null">
+				REMOVENAME = #{removename,jdbcType=VARCHAR},
+			</if>
+			<if test="awardname != null">
+				AWARDNAME = #{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardno != null">
+				AWARDNO = #{awardno,jdbcType=VARCHAR},
+			</if>
+			<if test="quantity != null">
+				QUANTITY = #{quantity,jdbcType=DECIMAL},
+			</if>
+			<if test="awardamount != null">
+				AWARDAMOUNT = #{awardamount,jdbcType=OTHER},
+			</if>
+			<if test="awardremark != null">
+				AWARDREMARK = #{awardremark,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="mactNo != null">
+				MACTNO = #{mactNo,jdbcType=VARCHAR},
+			</if>
+			<if test="objectSetting != null">
+				OBJECTSETTING = #{objectSetting,jdbcType=DECIMAL},
+			</if>
+			<if test="isDeal != null">
+				ISDEAL = #{isDeal,jdbcType=DECIMAL},
+			</if>
+			<if test="awardType != null">
+				AWARDTYPE = #{awardType,jdbcType=DECIMAL},
+			</if>
+			<if test="awardNum != null">
+				AWARDNUM = #{awardNum,jdbcType=DECIMAL},
+			</if>
+			<if test="SNLId != null">
+				SNLID = #{SNLId,jdbcType=DECIMAL},
+			</if>
+			<if test="awardUnit != null">
+				AWARDUNIT = #{awardUnit,jdbcType=VARCHAR},
+			</if>
+
+		</set>
+		where ACTNO = #{actno,jdbcType=VARCHAR}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.ManualAward">
+		update MANUALAWARD set
+		ACTNO = #{actno,jdbcType=VARCHAR},
+		ACTNAME = #{actname,jdbcType=VARCHAR},
+		SETTIME = #{settime,jdbcType=TIMESTAMP},
+		REWARDTYPE = #{rewardtype,jdbcType=VARCHAR},
+		REWARDNAME = #{rewardname,jdbcType=VARCHAR},
+		REWARDLNNO = #{rewardlnno,jdbcType=VARCHAR},
+		REMOVENAME = #{removename,jdbcType=VARCHAR},
+		AWARDNAME = #{awardname,jdbcType=VARCHAR},
+		AWARDNO = #{awardno,jdbcType=VARCHAR},
+		QUANTITY = #{quantity,jdbcType=DECIMAL},
+		AWARDAMOUNT = #{awardamount,jdbcType=OTHER},
+		AWARDREMARK = #{awardremark,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+		MACTNO = #{mactNo,jdbcType=VARCHAR},
+		OBJECTSETTING = #{objectSetting,jdbcType=DECIMAL},
+		ISDEAL = #{isDeal,jdbcType=DECIMAL},
+		AWARDTYPE = #{awardType,jdbcType=DECIMAL},
+		AWARDNUM = #{awardNum,jdbcType=DECIMAL},
+		SNLID = #{SNLId,jdbcType=DECIMAL},
+		AWARDUNIT = #{awardUnit,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectone" resultMap="BaseResultMap" parameterType="String">
+		select * from MANUALAWARD where ACTNO=#{actno,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="String">
+		select * from Manualaward where actno=#{actno,jdbcType=VARCHAR} order
+		by rewardtype
+	</select>
+	<select id="selectlist" resultMap="BaseResultMap">
+		select * from Manualaward where id in (select min(id) from Manualaward group
+		by ACTNO) and ISTEMPLET=0
+	</select>
+
+	<!-- pxl 查找ManualAward表中的备注（领奖时的详细收货地址） -->
+	<select id="getRemarkById" resultMap="BaseResultMap"
+		parameterType="String">
+		select * from Manualaward where actno=#{actno,jdbcType=VARCHAR}
+	</select>
+
+	<!-- pxl date 2016-11-12 根据活动编号查找到手动颁奖设置活动 -->
+	<select id="getmanualaward" resultMap="BaseResultMap"
+		parameterType="String">
+		select * from MANUALAWARD where ACTNO = #{actno,jdbcType=VARCHAR}
+	</select>
+
+	<!-- pxl date 2016-11-12 根据主活动编号删除所有的子活动 -->
+	<delete id="deleteManualAwardByMactNo" parameterType="string">
+		delete from MANUALAWARD where MACTNO = #{mactNo,jdbcType=VARCHAR}
+	</delete>
+
+	<!-- pxl date 2016-11-12 根据主活动编号查询所有的子活动 -->
+	<select id="getManualAwardList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ManualAward">
+		select * from MANUALAWARD
+		<where>
+			<if test="actno != null">
+				and ACTNO = #{actno,jdbcType=VARCHAR}
+			</if>
+			<if test="actname != null">
+				and ACTNAME = #{actname,jdbcType=VARCHAR}
+			</if>
+			<if test="settime != null">
+				and SETTIME = #{settime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="rewardtype != null">
+				and REWARDTYPE = #{rewardtype,jdbcType=VARCHAR}
+			</if>
+			<if test="rewardname != null">
+				and REWARDNAME = #{rewardname,jdbcType=VARCHAR}
+			</if>
+			<if test="rewardlnno != null">
+				and REWARDLNNO = #{rewardlnno,jdbcType=VARCHAR}
+			</if>
+			<if test="removename != null">
+				and REMOVENAME = #{removename,jdbcType=VARCHAR}
+			</if>
+			<if test="awardname != null">
+				and AWARDNAME = #{awardname,jdbcType=VARCHAR}
+			</if>
+			<if test="awardno != null">
+				and AWARDNO = #{awardno,jdbcType=VARCHAR}
+			</if>
+			<if test="quantity != null">
+				and QUANTITY = #{quantity,jdbcType=DECIMAL}
+			</if>
+			<if test="awardamount != null">
+				and AWARDAMOUNT = #{awardamount,jdbcType=OTHER}
+			</if>
+			<if test="awardremark != null">
+				and AWARDREMARK = #{awardremark,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="addman != null">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="mactNo != null">
+				and MACTNO = #{mactNo,jdbcType=VARCHAR}
+			</if>
+			<if test="objectSetting != null">
+				and OBJECTSETTING = #{objectSetting,jdbcType=DECIMAL}
+			</if>
+			<if test="isDeal != null">
+				and ISDEAL = #{isDeal,jdbcType=DECIMAL}
+			</if>
+			<if test="awardType != null">
+				and AWARDTYPE = #{awardType,jdbcType=DECIMAL}
+			</if>
+			<if test="awardNum != null">
+				and AWARDNUM = #{awardNum,jdbcType=DECIMAL}
+			</if>
+			<if test="SNLId != null">
+				and SNLId = #{SNLId,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据主活动编号查询所有的子活动 并且按时间排序 -->
+	<select id="getManualAwardOrderBySettime" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ManualAward">
+		select * from(
+		select * from MANUALAWARD
+		<where>
+			<if test="mactNo != null">
+				and MACTNO = #{mactNo,jdbcType=VARCHAR}
+			</if>
+			<if test="setTimeStr !=null">
+				and SETTIME>to_date(#{setTimeStr},'yyyy-mm-dd hh24:mi:ss')
+			</if>
+		</where>
+		order by SETTIME ASC
+		)
+		where rownum=1
+	</select>
+
+	<!-- 根据子活动编号删除对应的子活动 -->
+	<delete id="deleteByActno" parameterType="string">
+		delete from MANUALAWARD where ACTNO = #{actno,jdbcType=DECIMAL}
+	</delete>
+</mapper>

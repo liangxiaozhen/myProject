@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DebtAttornMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DebtAttorn">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="DEBTATTORNNO" property="debtattornno" jdbcType="VARCHAR" />
+		<result column="ISDEBTAUDIT" property="isdebtaudit" jdbcType="DECIMAL" />
+		<result column="ISOCDEBT" property="isocdebt" jdbcType="DECIMAL" />
+		<result column="AOWNERGRADE" property="aownergrade" jdbcType="VARCHAR" />
+		<result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR" />
+		<result column="HOLDDAY" property="holdday" jdbcType="DECIMAL" />
+		<result column="INTERVALDAY" property="intervalday" jdbcType="DECIMAL" />
+		<result column="ISASPLIT" property="isasplit" jdbcType="DECIMAL" />
+		<result column="ATTORNMONEY" property="attornmoney" jdbcType="FLOAT" />
+		<result column="ATTORNMONEYLOW" property="attornmoneylow"
+			jdbcType="FLOAT" />
+		<result column="MINATTORNRATIO" property="minattornratio"
+			jdbcType="FLOAT" />
+		<result column="MAXATTORNRATIO" property="maxattornratio"
+			jdbcType="FLOAT" />
+		<result column="APURCHASERGRADE" property="apurchasergrade"
+			jdbcType="VARCHAR" />
+		<result column="NOAPNAMENO" property="noapnameno" jdbcType="VARCHAR" />
+		<result column="ISABUYALLORPART" property="isabuyallorpart"
+			jdbcType="DECIMAL" />
+		<result column="ISADAFEEON" property="isadafeeon" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="MINATTORNMONEY" property="minattornmoney"
+			jdbcType="FLOAT" />
+		<result column="MAXATTORNMONEY" property="maxattornmoney"
+			jdbcType="FLOAT" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="ATTORNRATE" property="attornrate" jdbcType="FLOAT" />
+		<result column="MINFEE" property="minfee" jdbcType="FLOAT" />
+		<result column="MAXFEE" property="maxfee" jdbcType="FLOAT" />
+		<result column="DATIMES" property="datimes" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="FEEMODE" property="feemode" jdbcType="DECIMAL" />
+		<result column="HADDAY" property="hadday" jdbcType="DECIMAL" />
+		<result column="AHEADOCDAY" property="aheadocday" jdbcType="DECIMAL" />
+		<result column="VALUEPOINT" property="valuepoint" jdbcType="VARCHAR" />
+		<result column="VALUERULE" property="valuerule" jdbcType="DECIMAL" />
+		<result column="INTDISABLE" property="intdisable" jdbcType="DECIMAL" />
+		<result column="DEADLINE" property="deadline" jdbcType="DECIMAL" />
+		<result column="ISFIXED" property="isfixed" jdbcType="DECIMAL" />
+		<result column="DATTRESTRICT" property="dattrestrict" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+		<!-- 投标记录对象 -->
+		<association property="usertender" resultMap="usertender" />
+		<!-- 标的设置对象 -->
+		<association property="tenderitem" resultMap="tenderitem" />
+		<!-- 还款计划具体记录表(repayment) -->
+		<association property="repayment" resultMap="repayment" />
+		<!-- 标的债转设置排出人员名单表 -->
+		<association property="dattornrnamelink" resultMap="dattornrnamelinkMap" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserTender" id="usertender">
+		<id column="t3_id" property="id" jdbcType="DECIMAL" />
+		<result column="t3_tenderid" property="tenderid" jdbcType="DECIMAL" />
+		<result column="t3_orderno" property="orderno" jdbcType="VARCHAR" />
+		<result column="t3_amount" property="amount" jdbcType="FLOAT" />
+		<result column="t3_outaccountid" property="outaccountid"
+			jdbcType="DECIMAL" />
+		<result column="t3_tendtime" property="tendtime" jdbcType="TIMESTAMP" />
+		<result column="t3_tbegintime" property="tbegintime" jdbcType="TIMESTAMP" />
+		<result column="t3_valuedate" property="valuedate" jdbcType="TIMESTAMP" />
+		<result column="t3_tendertype" property="tendertype" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.TenderItem" id="tenderitem">
+		<id column="t2_id" property="id" jdbcType="DECIMAL" />
+		<result column="t2_isadebtattorn" property="isadebtattorn"
+			jdbcType="DECIMAL" />
+		<result column="t2_isadebtattorn" property="isadebtattorn"
+			jdbcType="DECIMAL" />
+		<result column="t2_tstatus" property="tstatus" jdbcType="DECIMAL" />
+		<result column="t2_retdate" property="retdate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap type="com.ptpl.model.RepayMent" id="repayment">
+		<id column="t4_id" property="id" jdbcType="DECIMAL" />
+		<result column="t4_restprincipal" property="restprincipal"
+			jdbcType="FLOAT" />
+		<result column="t4_rtime" property="rtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!-- t5 标的债转排出人员名单表 -->
+	<resultMap type="com.ptpl.model.DattornRNameLink" id="dattornrnamelinkMap">
+		<id column="t5_tid" property="tid" jdbcType="DECIMAL" />
+		<result column="t5_ownerrnno" property="ownerrnno" jdbcType="VARCHAR" />
+		<result column="t5_noapnno" property="noapnno" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 四表联查查询允许债转的数据并且根据订单号 -->
+	<select id="getCondition" resultMap="BaseResultMap"
+		parameterType="Map">
+		select
+		t1.id,t1.tid,t1.isdebtaudit,t1.isasplit,t1.minattornratio,t1.maxattornratio,
+		t1.datimes as
+		t1_datimes,t1.attornmoney,t1.attornmoneylow,t1.aownergrade,t1.holdday,t1.intervalday,
+		t1.aheadocday,t1.deadline,t1.dattrestrict,t1.valuepoint,t1.valuerule,
+		t2.id as t2_id,t2.isadebtattorn as t2_isadebtattorn,t2.tstatus as
+		t2_tstatus,t2.retdate as t2_retdate,t2.debtattornno as
+		t2_debtattornno,
+		t3.id as t3_id,t3.orderno as t3_orderno,t3.amount as t3_amount,t3.tenderid
+		as t3_tenderid,t3.tendtime as t3_tendtime,t3.tbegintime as
+		t3_tbegintime,
+		t3.outaccountid as t3_outaccountid,t3.tendertype as t3_tendertype,t3.valuedate as
+		t3_valuedate,
+		t5.ownerrnno as t5_ownerrnno,t5.noapnno as t5_noapnno,t5.tid as t5_tid
+		from
+		debtattorn t1 left join tenderitem t2 on t1.tid=t2.id
+		left join usertender t3 on t3.tenderid=t2.id
+		left join dattornrnamelink t5 on t1.tid=t5.tid
+		where t2.isadebtattorn=1 and t3.outaccountid =
+		#{outaccountid,jdbcType=DECIMAL} and t3.orderno=
+		#{orderno,jdbcType=VARCHAR}
+	</select>
+	<!-- 根据tid查询标的债转中的设置记录,可能是多条 -->
+	<select id="selectByTid" parameterType="java.math.BigDecimal"
+		resultType="com.ptpl.model.DebtAttorn">
+		select * from debtattorn where tid=#{tid,jdbcType=DECIMAL}
+	</select>
+	<insert id="insert" parameterType="com.ptpl.model.DebtAttorn">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT DEBTATTORN_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into DEBTATTORN (ID, DEBTATTORNNO, ISDEBTAUDIT,
+		ISOCDEBT, AOWNERGRADE, REMOVENAMENO,
+		HOLDDAY, INTERVALDAY, ISASPLIT,
+		ATTORNMONEY,ATTORNMONEYLOW, MINATTORNRATIO, MAXATTORNRATIO,
+		APURCHASERGRADE, NOAPNAMENO, ISABUYALLORPART,
+		ISADAFEEON, UGRADE, MINATTORNMONEY,
+		MAXATTORNMONEY, QUOTA, ATTORNRATE,
+		MINFEE, MAXFEE,
+		DATIMES,ISTEMPLET,TID,ISAUDIT,FEEMODE,HADDAY,AHEADOCDAY,VALUEPOINT,VALUERULE,INTDISABLE,DEADLINE,ISFIXED,
+		DATTRESTRICT,ADDMAN,ADDTIME,REMARK,SNLID
+		)
+		values (#{id,jdbcType=DECIMAL}, #{debtattornno,jdbcType=VARCHAR},
+		#{isdebtaudit,jdbcType=DECIMAL},
+		#{isocdebt,jdbcType=DECIMAL}, #{aownergrade,jdbcType=VARCHAR}, #{removenameno,jdbcType=VARCHAR},
+		#{holdday,jdbcType=DECIMAL}, #{intervalday,jdbcType=DECIMAL},
+		#{isasplit,jdbcType=DECIMAL},
+		#{attornmoney,jdbcType=FLOAT}, #{attornmoneylow,jdbcType=FLOAT},#{minattornratio,jdbcType=FLOAT},
+		#{maxattornratio,jdbcType=FLOAT},
+		#{apurchasergrade,jdbcType=VARCHAR}, #{noapnameno,jdbcType=VARCHAR}, #{isabuyallorpart,jdbcType=DECIMAL},
+		#{isadafeeon,jdbcType=DECIMAL}, #{ugrade,jdbcType=VARCHAR},
+		#{minattornmoney,jdbcType=FLOAT},
+		#{maxattornmoney,jdbcType=FLOAT}, #{quota,jdbcType=FLOAT}, #{attornrate,jdbcType=FLOAT},
+		#{minfee,jdbcType=FLOAT}, #{maxfee,jdbcType=FLOAT},
+		#{datimes,jdbcType=DECIMAL},#{istemplet,jdbcType=DECIMAL},
+		#{tid,jdbcType=DECIMAL},#{isaudit,jdbcType=DECIMAL},#{feemode,jdbcType=DECIMAL},#{hadday,jdbcType=DECIMAL},
+		#{aheadocday,jdbcType=DECIMAL},#{valuepoint,jdbcType=VARCHAR},#{valuerule,jdbcType=DECIMAL},#{intdisable,jdbcType=DECIMAL},
+		#{deadline,jdbcType=DECIMAL},#{isfixed,jdbcType=DECIMAL},#{dattrestrict,jdbcType=DECIMAL},#{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{snlid,jdbcType=DECIMAL}
+		)
+	</insert>
+
+	<select id="selectByCondition" parameterType="com.ptpl.model.DebtAttorn"
+		resultMap="BaseResultMap">
+		select * from DEBTATTORN
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="debtattornno != null and debtattornno!=''">
+				and DEBTATTORNNO = #{debtattornno,jdbcType=VARCHAR}
+			</if>
+			<if test="isdebtaudit != null and isdebtaudit!=''">
+				and ISDEBTAUDIT = #{isdebtaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="isocdebt != null and isocdebt!=''">
+				and ISOCDEBT = #{isocdebt,jdbcType=DECIMAL}
+			</if>
+			<if test="aownergrade != null and aownergrade!=''">
+				and AOWNERGRADE = #{aownergrade,jdbcType=VARCHAR}
+			</if>
+			<if test="removenameno != null and removenameno!=''">
+				and REMOVENAMENO = #{removenameno,jdbcType=VARCHAR}
+			</if>
+			<if test="holdday != null and holdday!=''">
+				and HOLDDAY = #{holdday,jdbcType=DECIMAL}
+			</if>
+			<if test="intervalday != null and intervalday!=''">
+				and INTERVALDAY = #{intervalday,jdbcType=DECIMAL}
+			</if>
+			<if test="isasplit != null and isasplit!=''">
+				and ISASPLIT = #{isasplit,jdbcType=DECIMAL}
+			</if>
+			<if test="attornmoney != null and attornmoney!=''">
+				and ATTORNMONEY = #{attornmoney,jdbcType=FLOAT}
+			</if>
+			<if test="attornmoneylow != null and attornmoneylow!=''">
+				and ATTORNMONEYLOW = #{attornmoneylow,jdbcType=FLOAT}
+			</if>
+			<if test="minattornratio != null and minattornratio!=''">
+				and MINATTORNRATIO = #{minattornratio,jdbcType=FLOAT}
+			</if>
+			<if test="maxattornratio != null and maxattornratio!=''">
+				and MAXATTORNRATIO = #{maxattornratio,jdbcType=FLOAT}
+			</if>
+			<if test="apurchasergrade != null and apurchasergrade!=''">
+				and APURCHASERGRADE = #{apurchasergrade,jdbcType=VARCHAR}
+			</if>
+			<if test="noapnameno != null and noapnameno!=''">
+				and NOAPNAMENO = #{noapnameno,jdbcType=VARCHAR}
+			</if>
+			<if test="isabuyallorpart != null and isabuyallorpart!=''">
+				and ISABUYALLORPART = #{isabuyallorpart,jdbcType=DECIMAL}
+			</if>
+			<if test="isadafeeon != null and isadafeeon!=''">
+				and ISADAFEEON = #{isadafeeon,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null and ugrade!=''">
+				and UGRADE = #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="minattornmoney != null and minattornmoney!=''">
+				and MINATTORNMONEY = #{minattornmoney,jdbcType=FLOAT}
+			</if>
+			<if test="maxattornmoney != null and maxattornmoney!=''">
+				and MAXATTORNMONEY = #{maxattornmoney,jdbcType=FLOAT}
+			</if>
+			<if test="quota != null and quota!=''">
+				and QUOTA = #{quota,jdbcType=FLOAT}
+			</if>
+			<if test="attornrate != null and attornrate!=''">
+				and ATTORNRATE = #{attornrate,jdbcType=FLOAT}
+			</if>
+			<if test="minfee != null and minfee!=''">
+				and MINFEE = #{minfee,jdbcType=FLOAT}
+			</if>
+			<if test="maxfee != null and maxfee!=''">
+				and MAXFEE = #{maxfee,jdbcType=FLOAT}
+			</if>
+			<if test="datimes != null and datimes!=''">
+				and DATIMES = #{datimes,jdbcType=DECIMAL}
+			</if>
+			<if test="istemplet != null and istemplet!=''">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null and tid!=''">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null and isaudit!=''">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="feemode != null and feemode!=''">
+				and FEEMODE = #{feemode,jdbcType=DECIMAL}
+			</if>
+			<if test="hadday != null and hadday!=''">
+				and HADDAY = #{hadday,jdbcType=DECIMAL}
+			</if>
+			<if test="aheadocday != null and aheadocday!=''">
+				and AHEADOCDAY = #{aheadocday,jdbcType=DECIMAL}
+			</if>
+			<if test="valuepoint != null and valuepoint!=''">
+				and VALUEPOINT = #{valuepoint,jdbcType=VARCHAR}
+			</if>
+			<if test="valuerule != null and valuerule!=''">
+				and VALUERULE = #{valuerule,jdbcType=DECIMAL}
+			</if>
+			<if test="intdisable != null and intdisable!=''">
+				and INTDISABLE = #{intdisable,jdbcType=DECIMAL}
+			</if>
+			<if test="deadline != null and deadline!=''">
+				and DEADLINE = #{deadline,jdbcType=DECIMAL}
+			</if>
+			<if test="isfixed != null and isfixed!=''">
+				and ISFIXED = #{isfixed,jdbcType=DECIMAL}
+			</if>
+			<if test="dattrestrict != null and dattrestrict!=''">
+				and DATTRESTRICT = #{dattrestrict,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null and addman!=''">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="snlid != null and snlid!=''">
+				and SNLID = #{snlid,jdbcType=DECIMAL}
+			</if>
+		</trim>
+		order by id asc
+	</select>
+
+	<update id="update" parameterType="com.ptpl.model.DebtAttorn">
+		update DEBTATTORN
+		<trim prefix="set" suffixOverrides=",">
+			<if test="debtattornno != null">
+				DEBTATTORNNO = #{debtattornno,jdbcType=VARCHAR},
+			</if>
+			<if test="isdebtaudit != null">
+				ISDEBTAUDIT = #{isdebtaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="isocdebt != null">
+				ISOCDEBT = #{isocdebt,jdbcType=DECIMAL},
+			</if>
+			<if test="aownergrade != null">
+				AOWNERGRADE = #{aownergrade,jdbcType=VARCHAR},
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO = #{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="holdday != null">
+				HOLDDAY = #{holdday,jdbcType=DECIMAL},
+			</if>
+			<if test="intervalday != null">
+				INTERVALDAY = #{intervalday,jdbcType=DECIMAL},
+			</if>
+			<if test="isasplit != null">
+				ISASPLIT = #{isasplit,jdbcType=DECIMAL},
+			</if>
+			<if test="attornmoney != null">
+				ATTORNMONEY = #{attornmoney,jdbcType=FLOAT},
+			</if>
+			<if test="attornmoneylow != null">
+				ATTORNMONEYLOW = #{attornmoneylow,jdbcType=FLOAT},
+			</if>
+			<if test="minattornratio != null">
+				MINATTORNRATIO = #{minattornratio,jdbcType=FLOAT},
+			</if>
+			<if test="maxattornratio != null">
+				MAXATTORNRATIO = #{maxattornratio,jdbcType=FLOAT},
+			</if>
+			<if test="apurchasergrade != null">
+				APURCHASERGRADE = #{apurchasergrade,jdbcType=VARCHAR},
+			</if>
+			<if test="noapnameno != null">
+				NOAPNAMENO = #{noapnameno,jdbcType=VARCHAR},
+			</if>
+			<if test="isabuyallorpart != null">
+				ISABUYALLORPART = #{isabuyallorpart,jdbcType=DECIMAL},
+			</if>
+			<if test="isadafeeon != null">
+				ISADAFEEON = #{isadafeeon,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			MINATTORNMONEY = #{minattornmoney,jdbcType=FLOAT},
+			MAXATTORNMONEY = #{maxattornmoney,jdbcType=FLOAT},
+			QUOTA = #{quota,jdbcType=FLOAT},
+			ATTORNRATE = #{attornrate,jdbcType=FLOAT},
+			MINFEE = #{minfee,jdbcType=FLOAT},
+			MAXFEE = #{maxfee,jdbcType=FLOAT},
+			<if test="datimes != null">
+				DATIMES = #{datimes,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="feemode != null">
+				FEEMODE = #{feemode,jdbcType=DECIMAL},
+			</if>
+			<if test="hadday != null">
+				HADDAY = #{hadday,jdbcType=DECIMAL},
+			</if>
+			<if test="aheadocday != null">
+				AHEADOCDAY = #{aheadocday,jdbcType=DECIMAL},
+			</if>
+			<if test="valuepoint != null">
+				VALUEPOINT = #{valuepoint,jdbcType=VARCHAR},
+			</if>
+			<if test="valuerule != null">
+				VALUERULE = #{valuerule,jdbcType=DECIMAL},
+			</if>
+			<if test="intdisable != null">
+				INTDISABLE = #{intdisable,jdbcType=DECIMAL},
+			</if>
+			<if test="deadline != null">
+				DEADLINE = #{deadline,jdbcType=DECIMAL},
+			</if>
+			<if test="isfixed!=null">
+				ISFIXED=#{isfixed,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime!=null">
+				ADDTIME=#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark!=null">
+				REMARK=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="dattrestrict!=null">
+				DATTRESTRICT=#{dattrestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="addman!=null">
+				ADDMAN=#{addman,jdbcType=VARCHAR},
+			</if>
+			snlid
+			<if test="snlid!=null">
+				SNLID=#{snlid,jdbcType=DECIMAL}
+			</if>
+		</trim>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from DEBTATTORN
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+</mapper>

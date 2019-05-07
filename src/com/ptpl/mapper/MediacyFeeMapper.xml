@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.MediacyFeeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.MediacyFee">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="MEDIACYFEENO" property="mediacyfeeno" jdbcType="VARCHAR" />
+		<result column="MRECMAN" property="mrecman" jdbcType="VARCHAR" />
+		<result column="CHARGETYPE" property="chargetype" jdbcType="DECIMAL" />
+		<result column="MINNMMONEY" property="minnmmoney" jdbcType="FLOAT" />
+		<result column="MAXNMMONEY" property="maxnmmoney" jdbcType="FLOAT" />
+		<result column="MFQUOTA" property="mfquota" jdbcType="FLOAT" />
+		<result column="MFPERCENT" property="mfpercent" jdbcType="FLOAT" />
+		<result column="MINMFFEE" property="minmffee" jdbcType="FLOAT" />
+		<result column="MAXMFFEE" property="maxmffee" jdbcType="FLOAT" />
+		<result column="MFRATE" property="mfrate" jdbcType="FLOAT" />
+		<result column="MINMFAMOUNT" property="minmfamount" jdbcType="FLOAT" />
+		<result column="MAXMFAMOUNT" property="maxmfamount" jdbcType="FLOAT" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="MRECMANID" property="mrecmanid" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="GFITYPE" property="gfitype" jdbcType="DECIMAL" />
+		<result column="TTYPE" property="ttype" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, MEDIACYFEENO, MRECMAN, CHARGETYPE, MINNMMONEY,
+		MAXNMMONEY, MFQUOTA,
+		MFPERCENT,
+		MINMFFEE, MAXMFFEE, MFRATE, MINMFAMOUNT,
+		MAXMFAMOUNT, ISTEMPLET, TID,
+		MRECMANID,
+		ISAUDIT, ADDTIME, REMARK,
+		ADDMAN, UGRADE, GFITYPE, TTYPE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from MEDIACYFEE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		MEDIACYFEE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.MediacyFee">
+	<selectKey order="BEFORE" resultType="java.math.BigDecimal" keyProperty="id">
+		SELECT MEDIACYFEE_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+		insert into MEDIACYFEE (ID,
+		MEDIACYFEENO, MRECMAN,
+		CHARGETYPE, MINNMMONEY, MAXNMMONEY,
+		MFQUOTA,
+		MFPERCENT, MINMFFEE,
+		MAXMFFEE, MFRATE, MINMFAMOUNT,
+		MAXMFAMOUNT,
+		ISTEMPLET, TID,
+		MRECMANID, ISAUDIT, ADDTIME,
+		REMARK, ADDMAN, UGRADE,
+		GFITYPE, TTYPE)
+		values (#{id,jdbcType=DECIMAL},
+		#{mediacyfeeno,jdbcType=VARCHAR},
+		#{mrecman,jdbcType=VARCHAR},
+		#{chargetype,jdbcType=DECIMAL}, #{minnmmoney,jdbcType=FLOAT},
+		#{maxnmmoney,jdbcType=FLOAT},
+		#{mfquota,jdbcType=FLOAT},
+		#{mfpercent,jdbcType=FLOAT},
+		#{minmffee,jdbcType=FLOAT},
+		#{maxmffee,jdbcType=FLOAT}, #{mfrate,jdbcType=FLOAT},
+		#{minmfamount,jdbcType=FLOAT},
+		#{maxmfamount,jdbcType=FLOAT},
+		#{istemplet,jdbcType=DECIMAL},
+		#{tid,jdbcType=DECIMAL},
+		#{mrecmanid,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL},
+		#{addtime},
+		#{remark,jdbcType=VARCHAR},
+		#{addman,jdbcType=VARCHAR},
+		#{ugrade,jdbcType=VARCHAR},
+		#{gfitype,jdbcType=DECIMAL}, #{ttype,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.MediacyFee">
+	<selectKey order="BEFORE" resultType="java.math.BigDecimal" keyProperty="id">
+		SELECT MEDIACYFEE_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+		insert into MEDIACYFEE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="mediacyfeeno != null">
+				MEDIACYFEENO,
+			</if>
+			<if test="mrecman != null">
+				MRECMAN,
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE,
+			</if>
+			<if test="minnmmoney != null">
+				MINNMMONEY,
+			</if>
+			<if test="maxnmmoney != null">
+				MAXNMMONEY,
+			</if>
+			<if test="mfquota != null">
+				MFQUOTA,
+			</if>
+			<if test="mfpercent != null">
+				MFPERCENT,
+			</if>
+			<if test="minmffee != null">
+				MINMFFEE,
+			</if>
+			<if test="maxmffee != null">
+				MAXMFFEE,
+			</if>
+			<if test="mfrate != null">
+				MFRATE,
+			</if>
+			<if test="minmfamount != null">
+				MINMFAMOUNT,
+			</if>
+			<if test="maxmfamount != null">
+				MAXMFAMOUNT,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="mrecmanid != null">
+				MRECMANID,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="gfitype != null">
+				GFITYPE,
+			</if>
+			<if test="ttype != null">
+				TTYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="mediacyfeeno != null">
+				#{mediacyfeeno,jdbcType=VARCHAR},
+			</if>
+			<if test="mrecman != null">
+				#{mrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="chargetype != null">
+				#{chargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="minnmmoney != null">
+				#{minnmmoney,jdbcType=FLOAT},
+			</if>
+			<if test="maxnmmoney != null">
+				#{maxnmmoney,jdbcType=FLOAT},
+			</if>
+			<if test="mfquota != null">
+				#{mfquota,jdbcType=FLOAT},
+			</if>
+			<if test="mfpercent != null">
+				#{mfpercent,jdbcType=FLOAT},
+			</if>
+			<if test="minmffee != null">
+				#{minmffee,jdbcType=FLOAT},
+			</if>
+			<if test="maxmffee != null">
+				#{maxmffee,jdbcType=FLOAT},
+			</if>
+			<if test="mfrate != null">
+				#{mfrate,jdbcType=FLOAT},
+			</if>
+			<if test="minmfamount != null">
+				#{minmfamount,jdbcType=FLOAT},
+			</if>
+			<if test="maxmfamount != null">
+				#{maxmfamount,jdbcType=FLOAT},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="mrecmanid != null">
+				#{mrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="gfitype != null">
+				#{gfitype,jdbcType=DECIMAL},
+			</if>
+			<if test="ttype != null">
+				#{ttype,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.MediacyFee">
+		update MEDIACYFEE
+		<set>
+			<if test="mediacyfeeno != null">
+				MEDIACYFEENO = #{mediacyfeeno,jdbcType=VARCHAR},
+			</if>
+			<if test="mrecman != null">
+				MRECMAN = #{mrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE = #{chargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="minnmmoney != null">
+				MINNMMONEY = #{minnmmoney,jdbcType=FLOAT},
+			</if>
+			<if test="maxnmmoney != null">
+				MAXNMMONEY = #{maxnmmoney,jdbcType=FLOAT},
+			</if>
+			<if test="mfquota != null">
+				MFQUOTA = #{mfquota,jdbcType=FLOAT},
+			</if>
+			<if test="mfpercent != null">
+				MFPERCENT = #{mfpercent,jdbcType=FLOAT},
+			</if>
+			<if test="minmffee != null">
+				MINMFFEE = #{minmffee,jdbcType=FLOAT},
+			</if>
+			<if test="maxmffee != null">
+				MAXMFFEE = #{maxmffee,jdbcType=FLOAT},
+			</if>
+			<if test="mfrate != null">
+				MFRATE = #{mfrate,jdbcType=FLOAT},
+			</if>
+			<if test="minmfamount != null">
+				MINMFAMOUNT = #{minmfamount,jdbcType=FLOAT},
+			</if>
+			<if test="maxmfamount != null">
+				MAXMFAMOUNT = #{maxmfamount,jdbcType=FLOAT},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="mrecmanid != null">
+				MRECMANID = #{mrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="gfitype != null">
+				GFITYPE = #{gfitype,jdbcType=DECIMAL},
+			</if>
+			<if test="ttype != null">
+				TTYPE = #{ttype,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.MediacyFee">
+		update MEDIACYFEE
+		set MEDIACYFEENO = #{mediacyfeeno,jdbcType=VARCHAR},
+		MRECMAN =
+		#{mrecman,jdbcType=VARCHAR},
+		CHARGETYPE =
+		#{chargetype,jdbcType=DECIMAL},
+		MINNMMONEY =
+		#{minnmmoney,jdbcType=FLOAT},
+		MAXNMMONEY =
+		#{maxnmmoney,jdbcType=FLOAT},
+		MFQUOTA = #{mfquota,jdbcType=FLOAT},
+		MFPERCENT = #{mfpercent,jdbcType=FLOAT},
+		MINMFFEE =
+		#{minmffee,jdbcType=FLOAT},
+		MAXMFFEE = #{maxmffee,jdbcType=FLOAT},
+		MFRATE = #{mfrate,jdbcType=FLOAT},
+		MINMFAMOUNT =
+		#{minmfamount,jdbcType=FLOAT},
+		MAXMFAMOUNT =
+		#{maxmfamount,jdbcType=FLOAT},
+		ISTEMPLET =
+		#{istemplet,jdbcType=DECIMAL},
+		TID = #{tid,jdbcType=DECIMAL},
+		MRECMANID
+		= #{mrecmanid,jdbcType=DECIMAL},
+		ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+		ADDTIME = #{addtime},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		UGRADE
+		= #{ugrade,jdbcType=VARCHAR},
+		GFITYPE = #{gfitype,jdbcType=DECIMAL},
+		TTYPE = #{ttype,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="listMediacyFee" parameterType="com.ptpl.model.MediacyFee"
+		resultMap="BaseResultMap">
+		select
+	<include refid="Base_Column_List"/>
+		from MEDIACYFEE
+		<where>
+			<if test="mediacyfeeno != null and mediacyfeeno != ''">
+				AND MEDIACYFEENO = #{mediacyfeeno,jdbcType=VARCHAR}
+			</if>
+			<if test="mrecman != null and mrecman != ''">
+				AND MRECMAN = #{mrecman,jdbcType=VARCHAR}
+			</if>
+			<if test="chargetype != null">
+				AND CHARGETYPE = #{chargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="minnmmoney != null">
+				AND MINNMMONEY = #{minnmmoney,jdbcType=FLOAT}
+			</if>
+			<if test="maxnmmoney != null">
+				AND MAXNMMONEY = #{maxnmmoney,jdbcType=FLOAT}
+			</if>
+			<if test="mfquota != null">
+				AND MFQUOTA = #{mfquota,jdbcType=FLOAT}
+			</if>
+			<if test="mfpercent != null">
+				AND MFPERCENT = #{mfpercent,jdbcType=FLOAT}
+			</if>
+			<if test="minmffee != null">
+				AND MINMFFEE = #{minmffee,jdbcType=FLOAT}
+			</if>
+			<if test="maxmffee != null">
+				AND MAXMFFEE = #{maxmffee,jdbcType=FLOAT}
+			</if>
+			<if test="mfrate != null">
+				AND MFRATE = #{mfrate,jdbcType=FLOAT}
+			</if>
+			<if test="minmfamount != null">
+				AND MINMFAMOUNT = #{minmfamount,jdbcType=FLOAT}
+			</if>
+			<if test="maxmfamount != null">
+				AND MAXMFAMOUNT = #{maxmfamount,jdbcType=FLOAT}
+			</if>
+			<if test="istemplet != null">
+				AND ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null">
+				AND TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="mrecmanid != null">
+				AND MRECMANID = #{mrecmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				AND ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="remark != null and remark != ''">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null and addman != ''">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="ugrade != null and ugrade != ''">
+				AND UGRADE = #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="gfitype != null">
+				AND GFITYPE = #{gfitype,jdbcType=DECIMAL}
+			</if>
+			<if test="ttype != null and ttype !=''">
+				AND TTYPE = #{ttype,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

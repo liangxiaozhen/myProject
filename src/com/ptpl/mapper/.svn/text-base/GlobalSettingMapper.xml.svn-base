@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.GlobalSettingMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.GlobalSetting">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="WEBSITENAME" property="websitename" jdbcType="VARCHAR" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="KEYWORLD" property="keyworld" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="STRSTATUS" property="strstatus" jdbcType="VARCHAR" />
+		<result column="ANNUALRATE" property="annualrate" jdbcType="DECIMAL" />
+		<result column="AUTHTIMES" property="authtimes" jdbcType="DECIMAL" />
+		<result column="GJIDCODE"   property="gjidcode" jdbcType="VARCHAR"/>
+		<result column="PRESETSTR"   property="presetstr" jdbcType="VARCHAR"/>
+		<result column="URGENTMETHOD"   property="urgentmethod" jdbcType="DECIMAL"/>
+		<result column="GLOBALVERIFYCODE"   property="globalverifycode" jdbcType="DECIMAL"/>
+		<result column="UPGRADE"   property="upgrade" jdbcType="DECIMAL"/>
+		<result column="AUTORPTIMESLTD"   property="autorptimesltd" jdbcType="DECIMAL"/>
+		<result column="AUTORPSTINVL"   property="autorpstinvl" jdbcType="DECIMAL"/>
+		<result column="PREACCOUNT" property="pREAccount" jdbcType="VARCHAR"/>
+		<result column="PFEEACCOUNT" property="pFeeAccount" jdbcType="VARCHAR"/>
+		<result column="NEWERBIDRULE" property="newerBidRule" jdbcType="DECIMAL"/>
+		<result column="NEWERBIDCOUNT" property="newerBidCount" jdbcType="DECIMAL"/>
+		<result column="NEWERBIDAMOUNT" property="newerBidAmount" jdbcType="DECIMAL"/>
+		<result column="NEWERBIDDAYLIMIT" property="newerBidDayLimit" jdbcType="DECIMAL"/>
+		<result column="FAILTTIME" property="failTTime" jdbcType="DECIMAL"/>
+
+ 	</resultMap>
+	
+	<sql id="Base_Column_List">
+		ID, WEBSITENAME, TITLE, KEYWORLD, DESCRIPTION, STRSTATUS,
+		ANNUALRATE,AUTHTIMES,GJIDCODE,PRESETSTR,URGENTMETHOD,GLOBALVERIFYCODE,
+		UPGRADE,AUTORPTIMESLTD,AUTORPSTINVL,PREACCOUNT,PFEEACCOUNT,NEWERBIDRULE,
+		NEWERBIDCOUNT,NEWERBIDAMOUNT,NEWERBIDDAYLIMIT,FAILTTIME
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from GLOBALSETTING
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		GLOBALSETTING
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insert" parameterType="com.ptpl.model.GlobalSetting">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GOBALSETTING_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GLOBALSETTING (ID,WEBSITENAME, TITLE,
+		KEYWORLD,
+		DESCRIPTION, STRSTATUS,
+		ANNUALRATE,AUTHTIMES,GJIDCODE,PRESETSTR,
+		URGENTMETHOD,GLOBALVERIFYCODE,UPGRADE,AUTORPTIMESLTD,AUTORPSTINVL,
+		PREACCOUNT,PFEEACCOUNT,NEWERBIDRULE,NEWERBIDCOUNT,NEWERBIDAMOUNT,
+		NEWERBIDDAYLIMIT,FAILTTIME)
+		values
+		(
+		#{id,jdbcType=DECIMAL},
+		#{websitename,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR},
+		#{keyworld,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{strstatus,jdbcType=VARCHAR},
+		#{annualrate,jdbcType=DECIMAL},
+		#{authtimes,jdbcType=DECIMAL},
+		#{gjidcode,jdbcType=VARCHAR},
+		#{presetstr,jdbcType=VARCHAR},
+		#{urgentmethod,jdbcType=DECIMAL},
+		#{globalverifycode,jdbcType=DECIMAL},
+		#{upgrade,jdbcType=DECIMAL},
+		#{autorptimesltd,jdbcType=DECIMAL},
+		#{autorpstinvl,jdbcType=DECIMAL},
+
+		#{pREAccount,jdbcType=VARCHAR},
+		#{pFeeAccount,jdbcType=VARCHAR},
+		#{newerBidRule,jdbcType=DECIMAL},
+		#{newerBidCount,jdbcType=DECIMAL},
+		#{newerBidAmount,jdbcType=DECIMAL},
+		#{newerBidDayLimit,jdbcType=DECIMAL},
+		#{failTTime,jdbcType=DECIMAL})
+
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.GlobalSetting">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GOBALSETTING_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GLOBALSETTING
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id !=null">
+				ID,
+			</if>
+			<if test="websitename != null">
+				WEBSITENAME,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="keyworld != null">
+				KEYWORLD,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="strstatus != null">
+				STRSTATUS,
+			</if>
+			<if test="annualrate != null">
+				ANNUALRATE,
+			</if>
+			<if test="authtimes !=null">
+				AUTHTIMES,
+			</if>
+			<if test="gjidcode !=null">
+				GJIDCODE,
+			</if>
+			<if test="presetstr !=null">
+				PRESETSTR,
+			</if>
+			<if test="urgentmethod !=null">
+				URGENTMETHOD,
+			</if>
+			<if test="globalverifycode !=null">
+				GLOBALVERIFYCODE,		
+			</if>
+			<if test="upgrade !=null">
+				UPGRADE,	
+			</if>
+			<if test="autorptimesltd !=null">
+				AUTORPTIMESLTD,	
+			</if>
+			<if test="autorpstinvl !=null">
+				AUTORPSTINVL,	
+			</if>
+
+
+			<if test="pREAccount !=null">
+				PREACCOUNT,
+			</if>
+			<if test="pFeeAccount !=null">
+				PFEEACCOUNT,
+			</if>
+			<if test="newerBidRule !=null">
+				NEWERBIDRULE,
+			</if>
+			<if test="newerBidCount !=null">
+				NEWERBIDCOUNT,
+			</if>
+			<if test="newerBidAmount !=null">
+				NEWERBIDAMOUNT,
+			</if>
+			<if test="newerBidDayLimit !=null">
+				NEWERBIDDAYLIMIT,
+			</if>
+			<if test="failTTime !=null">
+				FAILTTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id !=null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="websitename != null">
+				#{websitename,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="keyworld != null">
+				#{keyworld,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="strstatus != null">
+				#{strstatus,jdbcType=VARCHAR},
+			</if>
+			<if test="annualrate != null">
+				#{annualrate,jdbcType=DECIMAL},
+			</if>
+			<if test="authtimes !=null">
+				#{authtimes,jdbcType=DECIMAL},
+			</if>
+			<if test="gjidcode !=null">
+				#{gjidcode,jdbcType=VARCHAR},
+			</if>
+			<if test="presetstr !=null">
+				#{presetstr,jdbcType=VARCHAR},
+			</if>
+			<if test="urgentmethod !=null">
+				#{urgentmethod,jdbcType=DECIMAL},
+			</if>
+			<if test="globalverifycode !=null">
+				#{globalverifycode,jdbcType=DECIMAL},	
+			</if>
+			<if test="upgrade !=null">
+				#{upgrade,jdbcType=DECIMAL},	
+			</if>
+			<if test="autorptimesltd !=null">
+				#{autorptimesltd,jdbcType=DECIMAL},	
+			</if>
+			<if test="autorpstinvl !=null">
+				#{autorpstinvl,jdbcType=DECIMAL},	
+			</if>
+
+			<if test="pREAccount !=null">
+				#{pREAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="pFeeAccount !=null">
+				#{pFeeAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="newerBidRule !=null">
+				#{newerBidRule,jdbcType=DECIMAL},
+			</if>
+			<if test="newerBidCount !=null">
+				#{newerBidCount,jdbcType=DECIMAL},
+			</if>
+			<if test="newerBidAmount !=null">
+				#{newerBidAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="newerBidDayLimit !=null">
+				#{newerBidDayLimit,jdbcType=DECIMAL},
+			</if>
+			<if test="failTTime !=null">
+				#{failTTime,jdbcType=DECIMAL},
+			</if>
+
+
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.GlobalSetting">
+		update GLOBALSETTING
+		<set>
+			<if test="websitename != null">
+				WEBSITENAME = #{websitename,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="keyworld != null">
+				KEYWORLD = #{keyworld,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="strstatus != null">
+				STRSTATUS = #{strstatus,jdbcType=VARCHAR},
+			</if>
+			<if test="annualrate != null">
+				ANNUALRATE = #{annualrate,jdbcType=DECIMAL},
+			</if>
+			<if test="authtimes !=null">
+				AUTHTIMES = #{authtimes,jdbcType=DECIMAL},
+			</if>
+			<if test="gjidcode !=null">
+				GJIDCODE = #{gjidcode,jdbcType=VARCHAR},
+			</if>
+			<if test="presetstr !=null">
+				PRESETSTR = #{presetstr,jdbcType=VARCHAR},
+			</if>
+			<if test="urgentmethod !=null">
+				URGENTMETHOD = #{urgentmethod,jdbcType=DECIMAL},
+			</if>
+			<if test="globalverifycode !=null">
+				GLOBALVERIFYCODE = #{globalverifycode,jdbcType=DECIMAL},
+			</if>
+			<if test="upgrade !=null">
+				UPGRADE = #{upgrade,jdbcType=DECIMAL},
+			</if>
+			<if test="autorptimesltd !=null">
+				AUTORPTIMESLTD = #{autorptimesltd,jdbcType=DECIMAL},
+			</if>
+			<if test="autorpstinvl !=null">
+				AUTORPSTINVL = #{autorpstinvl,jdbcType=DECIMAL},
+			</if>
+
+
+			<if test="pREAccount !=null">
+				PREACCOUNT = #{pREAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="pFeeAccount !=null">
+				PFEEACCOUNT = #{pFeeAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="newerBidRule !=null">
+				NEWERBIDRULE = #{newerBidRule,jdbcType=DECIMAL},
+			</if>
+			<if test="newerBidCount !=null">
+				NEWERBIDCOUNT = #{newerBidCount,jdbcType=DECIMAL},
+			</if>
+			<if test="newerBidAmount !=null">
+				NEWERBIDAMOUNT = #{newerBidAmount,jdbcType=DECIMAL},
+			</if>
+			<if test="newerBidDayLimit !=null">
+				NEWERBIDDAYLIMIT = #{newerBidDayLimit,jdbcType=DECIMAL},
+			</if>
+			<if test="failTTime !=null">
+				FAILTTIME = #{failTTime,jdbcType=DECIMAL}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+ 
+
+	<select id="allData" resultMap="BaseResultMap">
+		select * from
+		GlobalSetting order
+		by id 
+	</select>
+</mapper>

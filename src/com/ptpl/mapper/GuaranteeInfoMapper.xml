@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.GuaranteeInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.GuaranteeInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="REGFUNDS" property="regfunds" jdbcType="FLOAT" />
+		<result column="REGTIME" property="regtime" jdbcType="TIMESTAMP" />
+		<result column="WEBSITE" property="website" jdbcType="VARCHAR" />
+		<result column="ADDR" property="addr" jdbcType="VARCHAR" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="QUALIFICATIONSPIC" property="qualificationspic"
+			jdbcType="VARCHAR" />
+		<result column="LICENCEPIC" property="licencepic" jdbcType="VARCHAR" />
+		<result column="ORGCODEPIC" property="orgcodepic" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, DESCRIPTION, REGFUNDS, REGTIME, WEBSITE, ADDR,
+		PHONE,
+		QUALIFICATIONSPIC,
+		LICENCEPIC, ORGCODEPIC, ADDTIME, REMARK
+	</sql>
+
+	<!-- 根据主键查询担保公司资料详情 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from GUARANTEEINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- （条件）获取担保公司资料列表信息 -->
+	<select id="findGuaranteeList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.GuaranteeInfo">
+		select
+		<include refid="Base_Column_List" />
+		from GUARANTEEINFO
+		<trim prefix="where" prefixOverrides="and">
+			<if test="name != null">
+				name like '%'||#{name}||'%'
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据主键删除担保公司资料 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		GUARANTEEINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.GuaranteeInfo">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GUARANTEEINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GUARANTEEINFO (ID, NAME, DESCRIPTION,
+		REGFUNDS, REGTIME,
+		WEBSITE,
+		ADDR, PHONE, QUALIFICATIONSPIC,
+		LICENCEPIC, ORGCODEPIC,
+		ADDTIME,
+		REMARK)
+		values (#{id,jdbcType=DECIMAL},
+		#{name,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{regfunds,jdbcType=FLOAT}, #{regtime,jdbcType=TIMESTAMP},
+		#{website,jdbcType=VARCHAR},
+		#{addr,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{qualificationspic,jdbcType=VARCHAR},
+		#{licencepic,jdbcType=VARCHAR}, #{orgcodepic,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.GuaranteeInfo">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GUARANTEEINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GUARANTEEINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="regfunds != null">
+				REGFUNDS,
+			</if>
+			<if test="regtime != null">
+				REGTIME,
+			</if>
+			<if test="website != null">
+				WEBSITE,
+			</if>
+			<if test="addr != null">
+				ADDR,
+			</if>
+			<if test="phone != null">
+				PHONE,
+			</if>
+			<if test="qualificationspic != null">
+				QUALIFICATIONSPIC,
+			</if>
+			<if test="licencepic != null">
+				LICENCEPIC,
+			</if>
+			<if test="orgcodepic != null">
+				ORGCODEPIC,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="regfunds != null">
+				#{regfunds,jdbcType=FLOAT},
+			</if>
+			<if test="regtime != null">
+				#{regtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="website != null">
+				#{website,jdbcType=VARCHAR},
+			</if>
+			<if test="addr != null">
+				#{addr,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="qualificationspic != null">
+				#{qualificationspic,jdbcType=VARCHAR},
+			</if>
+			<if test="licencepic != null">
+				#{licencepic,jdbcType=VARCHAR},
+			</if>
+			<if test="orgcodepic != null">
+				#{orgcodepic,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.GuaranteeInfo">
+		update GUARANTEEINFO
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				DESCRIPTION = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="regfunds != null">
+				REGFUNDS = #{regfunds,jdbcType=FLOAT},
+			</if>
+			<if test="regtime != null">
+				REGTIME = #{regtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="website != null">
+				WEBSITE = #{website,jdbcType=VARCHAR},
+			</if>
+			<if test="addr != null">
+				ADDR = #{addr,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				PHONE = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="qualificationspic != null">
+				QUALIFICATIONSPIC =
+				#{qualificationspic,jdbcType=VARCHAR},
+			</if>
+			<if test="licencepic != null">
+				LICENCEPIC = #{licencepic,jdbcType=VARCHAR},
+			</if>
+			<if test="orgcodepic != null">
+				ORGCODEPIC = #{orgcodepic,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.GuaranteeInfo">
+		update
+		GUARANTEEINFO
+		set NAME = #{name,jdbcType=VARCHAR},
+		DESCRIPTION =
+		#{description,jdbcType=VARCHAR},
+		REGFUNDS = #{regfunds,jdbcType=FLOAT},
+		REGTIME = #{regtime,jdbcType=TIMESTAMP},
+		WEBSITE =
+		#{website,jdbcType=VARCHAR},
+		ADDR = #{addr,jdbcType=VARCHAR},
+		PHONE =
+		#{phone,jdbcType=VARCHAR},
+		QUALIFICATIONSPIC =
+		#{qualificationspic,jdbcType=VARCHAR},
+		LICENCEPIC =
+		#{licencepic,jdbcType=VARCHAR},
+		ORGCODEPIC =
+		#{orgcodepic,jdbcType=VARCHAR},
+		ADDTIME =
+		#{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

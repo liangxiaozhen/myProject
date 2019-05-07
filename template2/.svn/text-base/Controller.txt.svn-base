@@ -1,0 +1,131 @@
+package com.ptpl.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.alibaba.fastjson.JSON;
+import com.github.miemiedev.mybatis.paginator.domain.Order;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.StringUtil;
+import com.ptpl.model.Pojo;
+import com.ptpl.service.PojoServiceI;
+/**
+ * @author:author
+ * @date:date
+ * @description:description
+ */
+@Controller
+@RequestMapping("/pojo")
+public class PojoController {
+	@Autowired
+	private PojoServiceI pojoService;
+
+
+	// 转发到增加xx页面
+	@RequestMapping(value = "/insert_Pojo_Ui", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView insert_Pojo_Ui() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/pojo/Pojo_Insert");
+		return modelAndView;
+	}
+
+	// 增加xx
+	@RequestMapping(value = "/insertPojo", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView insertPojo(Pojo pojo) {
+		System.out.println(pojo);
+		pojoService.insert(pojo);
+		return  new ModelAndView("redirect:/pojo/selectPojoByCondition.action");
+	}
+	
+	// 根据条件查找xx并转发到xx列表页面
+	@RequestMapping(value = "/selectPojoByCondition", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView selectPojoByCondition(HttpServletRequest request,Pojo pojo) {
+
+		// 处理分页请求
+		String pageNum = request.getParameter("pageNum");
+		String pageSize = request.getParameter("pageSize");
+		int num = 1;
+		int size = 9;
+		if (pageNum != null && !"".equals(pageNum)) {
+			num = Integer.parseInt(pageNum);
+		}
+		if (pageSize != null && !"".equals(pageSize)) {
+			size = Integer.parseInt(pageSize);
+		}
+		String sortString = "id.desc";
+		Order.formString(sortString);
+
+		PageHelper.startPage(num, size);
+
+		
+		
+		// 调用service层的方法得到对象列表
+		List<Pojo> PojoList = pojoService.selectByCondition(pojo);
+		PageInfo<Pojo> pagehelper = new PageInfo<Pojo>(PojoList);
+		pagehelper.setFirstPage(1);
+
+		int lastPageNum = 0;
+		if (pagehelper.getTotal() % size == 0) {
+			lastPageNum = (int) pagehelper.getTotal() / size;
+		} else {
+			lastPageNum = (int) pagehelper.getTotal() / size + 1;
+		}
+		pagehelper.setLastPage(lastPageNum);
+		// 把对象放进modelAndView中
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pagehelper", pagehelper);
+		modelAndView.addObject("pojo", pojo);
+		// 指定视图
+		modelAndView.setViewName("admin/pojo/Pojo_List");
+		return modelAndView;
+	}
+
+	// 根据id查找xx并返回xx的详细页面
+	@RequestMapping(value = "/selectPojoByPrimaryKey", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView selectPojoByPrimaryKey(String id) {
+		Pojo pojo = new Pojo();
+		pojo.setId(new BigDecimal(id));
+		List<Pojo> pojos = pojoService.selectByCondition(pojo);
+		Pojo pojo1 =null;
+		if(pojos.size()>0){
+			pojo1 = pojos.get(0);
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pojo", pojo1);
+		modelAndView.setViewName("admin/pojo/Pojo_Detail");
+		return modelAndView;
+	}
+
+	// 转发到修改xx页面
+	@RequestMapping(value = "/toUpdateUi", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView toUpdateUi(String id) {
+		ModelAndView modelAndView = selectPojoByPrimaryKey(id);
+		modelAndView.setViewName("admin/pojo/Pojo_Update");
+		return modelAndView;
+	}
+
+	// 修改xx
+	@RequestMapping(value = "/updatePojo", method = { RequestMethod.POST, RequestMethod.GET })
+	public String updatePojo(Pojo pojo) {
+		System.out.println(pojo);
+		pojoService.update(pojo);
+		return "redirect:/pojo/selectPojoByCondition.action";
+	}
+	
+
+}

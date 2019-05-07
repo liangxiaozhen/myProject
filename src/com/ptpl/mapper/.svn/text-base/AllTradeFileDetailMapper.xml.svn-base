@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AllTradeFileDetailMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AllTradeFileDetail">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BANK" property="bank" jdbcType="VARCHAR" />
+		<result column="CARDNBR" property="cardnbr" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+		<result column="CUR_NUM" property="curNum" jdbcType="DECIMAL" />
+		<result column="CRFLAG" property="crflag" jdbcType="VARCHAR" />
+		<result column="VALDATE" property="valdate" jdbcType="VARCHAR" />
+		<result column="INPDATE" property="inpdate" jdbcType="VARCHAR" />
+		<result column="RELDATE" property="reldate" jdbcType="VARCHAR" />
+		<result column="INPTIME" property="inptime" jdbcType="VARCHAR" />
+		<result column="TRANNO" property="tranno" jdbcType="VARCHAR" />
+		<result column="ORI_TRANNO" property="oriTranno" jdbcType="VARCHAR" />
+		<result column="TRANSTYPE" property="transtype" jdbcType="VARCHAR" />
+		<result column="DESLINE" property="desline" jdbcType="VARCHAR" />
+		<result column="CURR_BAL" property="currBal" jdbcType="DECIMAL" />
+		<result column="FORCARDNBR" property="forcardnbr" jdbcType="VARCHAR" />
+		<result column="REVIND" property="revind" jdbcType="DECIMAL" />
+		<result column="RESV" property="resv" jdbcType="VARCHAR" />
+		<result column="FILENAME" property="filename" jdbcType="VARCHAR" />
+		<result column="ENTERTIME" property="entertime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BANK, CARDNBR, AMOUNT, CUR_NUM, CRFLAG, VALDATE,
+		INPDATE, RELDATE,
+		INPTIME, TRANNO,
+		ORI_TRANNO, TRANSTYPE, DESLINE,
+		CURR_BAL, FORCARDNBR, REVIND, RESV, FILENAME,
+		ENTERTIME,
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from ALLTRADEFILEDETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="listAllTradeFileDetail" parameterType="com.ptpl.model.AllTradeFileDetail"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ALLTRADEFILEDETAIL
+		<where>
+			<if test="bank != null">
+				AND BANK = #{bank,jdbcType=VARCHAR}
+			</if>
+			<if test="cardnbr != null">
+				AND CARDNBR = #{cardnbr,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null">
+				AND AMOUNT = #{amount,jdbcType=DECIMAL}
+			</if>
+			<if test="curNum != null">
+				AND CUR_NUM = #{curNum,jdbcType=DECIMAL}
+			</if>
+			<if test="crflag != null">
+				AND CRFLAG = #{crflag,jdbcType=VARCHAR}
+			</if>
+			<if test="valdate != null">
+				AND VALDATE = #{valdate,jdbcType=VARCHAR}
+			</if>
+			<if test="inpdate != null">
+				AND INPDATE = #{inpdate,jdbcType=VARCHAR}
+			</if>
+			<if test="reldate != null">
+				AND RELDATE = #{reldate,jdbcType=VARCHAR}
+			</if>
+			<if test="inptime != null">
+				AND INPTIME = #{inptime,jdbcType=VARCHAR}
+			</if>
+			<if test="tranno != null">
+				AND TRANNO = #{tranno,jdbcType=VARCHAR}
+			</if>
+			<if test="oriTranno != null">
+				AND ORI_TRANNO = #{oriTranno,jdbcType=VARCHAR}
+			</if>
+			<if test="transtype != null">
+				AND TRANSTYPE = #{transtype,jdbcType=VARCHAR}
+			</if>
+			<if test="desline != null">
+				AND DESLINE = #{desline,jdbcType=VARCHAR}
+			</if>
+			<if test="currBal != null">
+				AND CURR_BAL = #{currBal,jdbcType=DECIMAL}
+			</if>
+			<if test="forcardnbr != null">
+				AND FORCARDNBR = #{forcardnbr,jdbcType=VARCHAR}
+			</if>
+			<if test="revind != null">
+				AND REVIND = #{revind,jdbcType=DECIMAL}
+			</if>
+			<if test="resv != null">
+				AND RESV = #{resv,jdbcType=VARCHAR}
+			</if>
+			<if test="filename != null">
+				AND FILENAME = #{filename,jdbcType=VARCHAR}
+			</if>
+			<if test="entertime != null">
+				AND ENTERTIME = #{entertime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		ALLTRADEFILEDETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.AllTradeFileDetail">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select ALLTRADEFILEDETAIL_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into ALLTRADEFILEDETAIL (ID, BANK, CARDNBR,
+		AMOUNT, CUR_NUM,
+		CRFLAG,
+		VALDATE, INPDATE, RELDATE,
+		INPTIME, TRANNO, ORI_TRANNO,
+		TRANSTYPE, DESLINE, CURR_BAL,
+		FORCARDNBR, REVIND, RESV,
+		FILENAME,
+		ENTERTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL},
+		#{bank,jdbcType=VARCHAR},
+		#{cardnbr,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL}, #{curNum,jdbcType=DECIMAL},
+		#{crflag,jdbcType=VARCHAR},
+		#{valdate,jdbcType=VARCHAR},
+		#{inpdate,jdbcType=VARCHAR},
+		#{reldate,jdbcType=VARCHAR},
+		#{inptime,jdbcType=VARCHAR}, #{tranno,jdbcType=VARCHAR},
+		#{oriTranno,jdbcType=VARCHAR},
+		#{transtype,jdbcType=VARCHAR},
+		#{desline,jdbcType=VARCHAR},
+		#{currBal,jdbcType=DECIMAL},
+		#{forcardnbr,jdbcType=VARCHAR}, #{revind,jdbcType=DECIMAL},
+		#{resv,jdbcType=VARCHAR},
+		#{filename,jdbcType=VARCHAR}, #{entertime},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AllTradeFileDetail">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select ALLTRADEFILEDETAIL_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into ALLTRADEFILEDETAIL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="bank != null">
+				BANK,
+			</if>
+			<if test="cardnbr != null">
+				CARDNBR,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="curNum != null">
+				CUR_NUM,
+			</if>
+			<if test="crflag != null">
+				CRFLAG,
+			</if>
+			<if test="valdate != null">
+				VALDATE,
+			</if>
+			<if test="inpdate != null">
+				INPDATE,
+			</if>
+			<if test="reldate != null">
+				RELDATE,
+			</if>
+			<if test="inptime != null">
+				INPTIME,
+			</if>
+			<if test="tranno != null">
+				TRANNO,
+			</if>
+			<if test="oriTranno != null">
+				ORI_TRANNO,
+			</if>
+			<if test="transtype != null">
+				TRANSTYPE,
+			</if>
+			<if test="desline != null">
+				DESLINE,
+			</if>
+			<if test="currBal != null">
+				CURR_BAL,
+			</if>
+			<if test="forcardnbr != null">
+				FORCARDNBR,
+			</if>
+			<if test="revind != null">
+				REVIND,
+			</if>
+			<if test="resv != null">
+				RESV,
+			</if>
+			<if test="filename != null">
+				FILENAME,
+			</if>
+			<if test="entertime != null">
+				ENTERTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="bank != null">
+				#{bank,jdbcType=VARCHAR},
+			</if>
+			<if test="cardnbr != null">
+				#{cardnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="curNum != null">
+				#{curNum,jdbcType=DECIMAL},
+			</if>
+			<if test="crflag != null">
+				#{crflag,jdbcType=VARCHAR},
+			</if>
+			<if test="valdate != null">
+				#{valdate,jdbcType=VARCHAR},
+			</if>
+			<if test="inpdate != null">
+				#{inpdate,jdbcType=VARCHAR},
+			</if>
+			<if test="reldate != null">
+				#{reldate,jdbcType=VARCHAR},
+			</if>
+			<if test="inptime != null">
+				#{inptime,jdbcType=VARCHAR},
+			</if>
+			<if test="tranno != null">
+				#{tranno,jdbcType=VARCHAR},
+			</if>
+			<if test="oriTranno != null">
+				#{oriTranno,jdbcType=VARCHAR},
+			</if>
+			<if test="transtype != null">
+				#{transtype,jdbcType=VARCHAR},
+			</if>
+			<if test="desline != null">
+				#{desline,jdbcType=VARCHAR},
+			</if>
+			<if test="currBal != null">
+				#{currBal,jdbcType=DECIMAL},
+			</if>
+			<if test="forcardnbr != null">
+				#{forcardnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="revind != null">
+				#{revind,jdbcType=DECIMAL},
+			</if>
+			<if test="resv != null">
+				#{resv,jdbcType=VARCHAR},
+			</if>
+			<if test="filename != null">
+				#{filename,jdbcType=VARCHAR},
+			</if>
+			<if test="entertime != null">
+				#{entertime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.AllTradeFileDetail">
+		update ALLTRADEFILEDETAIL
+		<set>
+			<if test="bank != null">
+				BANK = #{bank,jdbcType=VARCHAR},
+			</if>
+			<if test="cardnbr != null">
+				CARDNBR = #{cardnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="curNum != null">
+				CUR_NUM = #{curNum,jdbcType=DECIMAL},
+			</if>
+			<if test="crflag != null">
+				CRFLAG = #{crflag,jdbcType=VARCHAR},
+			</if>
+			<if test="valdate != null">
+				VALDATE = #{valdate,jdbcType=VARCHAR},
+			</if>
+			<if test="inpdate != null">
+				INPDATE = #{inpdate,jdbcType=VARCHAR},
+			</if>
+			<if test="reldate != null">
+				RELDATE = #{reldate,jdbcType=VARCHAR},
+			</if>
+			<if test="inptime != null">
+				INPTIME = #{inptime,jdbcType=VARCHAR},
+			</if>
+			<if test="tranno != null">
+				TRANNO = #{tranno,jdbcType=VARCHAR},
+			</if>
+			<if test="oriTranno != null">
+				ORI_TRANNO = #{oriTranno,jdbcType=VARCHAR},
+			</if>
+			<if test="transtype != null">
+				TRANSTYPE = #{transtype,jdbcType=VARCHAR},
+			</if>
+			<if test="desline != null">
+				DESLINE = #{desline,jdbcType=VARCHAR},
+			</if>
+			<if test="currBal != null">
+				CURR_BAL = #{currBal,jdbcType=DECIMAL},
+			</if>
+			<if test="forcardnbr != null">
+				FORCARDNBR = #{forcardnbr,jdbcType=VARCHAR},
+			</if>
+			<if test="revind != null">
+				REVIND = #{revind,jdbcType=DECIMAL},
+			</if>
+			<if test="resv != null">
+				RESV = #{resv,jdbcType=VARCHAR},
+			</if>
+			<if test="filename != null">
+				FILENAME = #{filename,jdbcType=VARCHAR},
+			</if>
+			<if test="entertime != null">
+				ENTERTIME = #{entertime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.AllTradeFileDetail">
+		update
+		ALLTRADEFILEDETAIL
+		set BANK = #{bank,jdbcType=VARCHAR},
+		CARDNBR =
+		#{cardnbr,jdbcType=VARCHAR},
+		AMOUNT = #{amount,jdbcType=DECIMAL},
+		CUR_NUM = #{curNum,jdbcType=DECIMAL},
+		CRFLAG =
+		#{crflag,jdbcType=VARCHAR},
+		VALDATE = #{valdate,jdbcType=VARCHAR},
+		INPDATE = #{inpdate,jdbcType=VARCHAR},
+		RELDATE =
+		#{reldate,jdbcType=VARCHAR},
+		INPTIME = #{inptime,jdbcType=VARCHAR},
+		TRANNO = #{tranno,jdbcType=VARCHAR},
+		ORI_TRANNO =
+		#{oriTranno,jdbcType=VARCHAR},
+		TRANSTYPE =
+		#{transtype,jdbcType=VARCHAR},
+		DESLINE = #{desline,jdbcType=VARCHAR},
+		CURR_BAL = #{currBal,jdbcType=DECIMAL},
+		FORCARDNBR =
+		#{forcardnbr,jdbcType=VARCHAR},
+		REVIND = #{revind,jdbcType=DECIMAL},
+		RESV = #{resv,jdbcType=VARCHAR},
+		FILENAME =
+		#{filename,jdbcType=VARCHAR},
+		ENTERTIME = #{entertime},
+		REMARK =
+		#{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

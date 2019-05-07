@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.SMSChannelMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.SMSChannel">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="SMSCNO" property="smscno" jdbcType="VARCHAR" />
+		<result column="SMSCNAME" property="smscname" jdbcType="VARCHAR" />
+		<result column="SMSCCOMPANY" property="smsccompany" jdbcType="VARCHAR" />
+		<result column="SMSVERTION" property="smsvertion" jdbcType="VARCHAR" />
+		<result column="SMSURL" property="smsurl" jdbcType="VARCHAR" />
+		<result column="SERIALNO" property="serialno" jdbcType="VARCHAR" />
+		<result column="KEY" property="key" jdbcType="VARCHAR" />
+		<result column="PASS" property="pass" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ACTION" property="action" jdbcType="VARCHAR"/>
+		<result column="EXTNO" property="extno" jdbcType="VARCHAR"/>
+		<result column="PUSERNAME" property="pusername" jdbcType="VARCHAR"/>
+		<result column="PPASSWORD" property="ppassword" jdbcType="VARCHAR"/>
+		<result column="CHANNELREMARK" property="channelremark" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, SMSCNO, SMSCNAME, SMSCCOMPANY, SMSVERTION, SMSURL,
+		SERIALNO,
+		KEY,PASS,
+		ISUSE,ADDTIME,ADDMAN,Remark,ACTION,EXTNO,PUSERNAME,PPASSWORD,CHANNELREMARK
+	</sql>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.SMSChannel">
+		update SMSCHANNEL
+		<set>
+			<if test="smscno != null">
+				SMSCNO = #{smscno,jdbcType=DECIMAL},
+			</if>
+			<if test="smscname != null">
+				SMSCNAME = #{smscname,jdbcType=DECIMAL},
+			</if>
+			<if test="smsccompany != null">
+				SMSCCOMPANY = #{smsccompany,jdbcType=DECIMAL},
+			</if>
+			<if test="smsvertion != null">
+				SMSVERTION = #{smsvertion,jdbcType=FLOAT},
+			</if>
+			<if test="smsurl != null">
+				SMSURL = #{smsurl,jdbcType=DECIMAL},
+			</if>
+			<if test="serialno != null">
+				SERIALNO = #{serialno,jdbcType=VARCHAR},
+			</if>
+			<if test="key != null">
+				KEY = #{key,jdbcType=VARCHAR},
+			</if>
+			<if test="pass != null">
+				PASS = #{pass,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="action != null">
+				ACTION = #{action,jdbcType=VARCHAR},
+			</if>
+			<if test="extno != null">
+				EXTNO = #{extno,jdbcType=VARCHAR},
+			</if>
+			<if test="pusername != null">
+				PUSERNAME = #{pusername,jdbcType=VARCHAR},
+			</if>
+			<if test="ppassword != null">
+				PPASSWORD = #{ppassword,jdbcType=VARCHAR},
+			</if>
+			<if test="channelremark != null">
+				CHAENNELREMARK = #{channelremark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<insert id="insert" parameterType="com.ptpl.model.SMSChannel">
+		insert into SMSCHANNEL (ID, SMSCNO, SMSCNAME,
+		SMSCCOMPANY, SMSVERTION, SMSURL,
+		SERIALNO, KEY, PASS,
+		ISUSE, ADDTIME, ADDMAN,
+		REMARK,ACTION,EXTNO,PUSERNAME,PPASSWORD,CHANNELREMARK)
+		values (#{id,jdbcType=DECIMAL}, #{smscno,jdbcType=VARCHAR},
+		#{smscname,jdbcType=VARCHAR},
+		#{smsccompany,jdbcType=VARCHAR}, #{smsvertion,jdbcType=VARCHAR}, #{smsurl,jdbcType=VARCHAR},
+		#{serialno,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
+		#{pass,jdbcType=VARCHAR},
+		#{isuse,jdbcType=DECIMAL}, #{addtime,jdbcType=TIMESTAMP}, #{addman,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},#{action,jdbcType=VARCHAR},#{extno,jdbcType=VARCHAR},
+		#{pusername,jdbcType=VARCHAR},#{ppassword,jdbcType=VARCHAR},#{channelremark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.SMSChannel">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT SMSCHANNEL_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into SMSCHANNEL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="smscno != null">
+				SMSCNO,
+			</if>
+			<if test="smscname != null">
+				SMSCNAME,
+			</if>
+			<if test="smsccompany != null">
+				SMSCCOMPANY,
+			</if>
+			<if test="smsvertion != null">
+				SMSVERTION,
+			</if>
+			<if test="smsurl != null">
+				SMSURL,
+			</if>
+			<if test="serialno != null">
+				SERIALNO,
+			</if>
+			<if test="key != null">
+				KEY,
+			</if>
+			<if test="pass != null">
+				PASS,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+				<if test="action != null">
+				ACTION ,
+			</if>
+			<if test="extno != null">
+				EXTNO ,
+			</if>
+			<if test="pusername != null">
+				PUSERNAME ,
+			</if>
+			<if test="ppassword != null">
+				PPASSWORD ,
+			</if>
+			<if test="channelremark != null">
+				CHAENNELREMARK ,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="smscno != null">
+				#{smscno,jdbcType=VARCHAR},
+			</if>
+			<if test="smscname != null">
+				#{smscname,jdbcType=VARCHAR},
+			</if>
+			<if test="smsccompany != null">
+				#{smsccompany,jdbcType=VARCHAR},
+			</if>
+			<if test="smsvertion != null">
+				#{smsvertion,jdbcType=VARCHAR},
+			</if>
+			<if test="smsurl != null">
+				#{smsurl,jdbcType=VARCHAR},
+			</if>
+			<if test="serialno != null">
+				#{serialno,jdbcType=VARCHAR},
+			</if>
+			<if test="key != null">
+				#{key,jdbcType=VARCHAR},
+			</if>
+			<if test="pass != null">
+				#{pass,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="action != null">
+				#{action,jdbcType=VARCHAR},
+			</if>
+			<if test="extno != null">
+				 #{extno,jdbcType=VARCHAR},
+			</if>
+			<if test="pusername != null">
+				#{pusername,jdbcType=VARCHAR},
+			</if>
+			<if test="ppassword != null">
+				#{ppassword,jdbcType=VARCHAR},
+			</if>
+			<if test="channelremark != null">
+				#{channelremark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.SMSChannel">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM SMSCHANNEL WHERE ID=#{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		DELETE FROM SMSCHANNEL WHERE ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<select id="selective" resultMap="BaseResultMap" parameterType="com.ptpl.model.SMSChannel">
+		select
+		<include refid="Base_Column_List" />
+		from SMSCHANNEL
+		<where>
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="smscno != null">
+				AND SMSCNO = #{smscno,jdbcType=VARCHAR}
+			</if>
+			<if test="smscname != null">
+				AND SMSCNAME = #{smscname,jdbcType=VARCHAR}
+			</if>
+			<if test="smsccompany != null">
+				AND SMSCCOMPANY = #{smsccompany,jdbcType=VARCHAR}
+			</if>
+			<if test="smsvertion != null">
+				AND SMSVERTION = #{smsvertion,jdbcType=VARCHAR}
+			</if>
+			<if test="smsurl != null">
+				AND SMSURL = #{smsurl,jdbcType=VARCHAR}
+			</if>
+			<if test="serialno != null">
+				AND SERIALNO = #{serialno,jdbcType=VARCHAR}
+			</if>
+			<if test="key != null">
+				AND KEY = #{key,jdbcType=VARCHAR}
+			</if>
+			<if test="pass != null">
+				AND PASS = #{pass,jdbcType=VARCHAR}
+			</if>
+			<if test="isuse != null">
+				AND ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="action != null">
+				AND ACTION = #{action,jdbcType=VARCHAR}
+			</if>
+			<if test="extno != null">
+				AND EXTNO = #{extno,jdbcType=VARCHAR}
+			</if>
+			<if test="pusername != null">
+				AND PUSERNAME = #{pusername,jdbcType=VARCHAR}
+			</if>
+			<if test="ppassword != null">
+				AND PPASSWORD = #{ppassword,jdbcType=VARCHAR}
+			</if>
+			<if test="channelremark != null">
+				AND CHAENNELREMARK = #{channelremark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id
+	</select>
+</mapper>

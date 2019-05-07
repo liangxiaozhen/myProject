@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RechargeRstrMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RechargeRstr">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<id column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="RECHARTYPE" property="rechartype" jdbcType="DECIMAL" />
+		<result column="DAYMONEYREST" property="daymoneyrest" jdbcType="FLOAT" />
+		<result column="LOWESTMONEY" property="lowestmoney" jdbcType="FLOAT" />
+		<result column="HIGHTESTMONEY" property="hightestmoney"
+			jdbcType="FLOAT" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="PROXYPAYMAN" property="proxypayman" jdbcType="VARCHAR" />
+		<result column="SELFPAYRATIO" property="selfpayratio" jdbcType="FLOAT" />
+		<result column="PROXYPAYRATIO" property="proxypayratio" jdbcType="FLOAT" />
+		<result column="FEETYPE" property="feetype" jdbcType="DECIMAL" />
+		<result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, UGRADE, ISTEMPLET,RECHARTYPE, DAYMONEYREST, LOWESTMONEY,
+		HIGHTESTMONEY, PAYCOMPANY, ISUSE,
+		REMOVENAMENO, ADDMAN, ADDTIME, AUDITMAN, AUDITTIME, REMARK,
+		ISAUDIT,PROXYPAYMAN,SELFPAYRATIO,PROXYPAYRATIO,FEETYPE,SNLID
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from RECHARGERSTR
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 查询已经通过审核的对象 -->
+	<select id="getIsAudit" resultMap="BaseResultMap">
+		select * from RECHARGERSTR where isaudit=1
+	</select>
+	<!-- 查询已经通过审核的会员等级+充值方式 +启用 -->
+	<select id="getUgradeAndRecharTypeAndIsuseForRechargeRstr"
+		resultMap="BaseResultMap" parameterType="com.ptpl.model.RechargeRstr">
+		select
+		<include refid="Base_Column_List" />
+		from RECHARGERSTR
+		<where>
+			<if test="ugrade != null and ugrade!=''">
+				ugrade like #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="rechartype != null">
+				and rechartype = #{rechartype,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse != null">
+				and isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+
+	<select id="getAll" parameterType="com.ptpl.model.RechargeRstr"
+		resultMap="BaseResultMap">
+		select * from RECHARGERSTR
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="istemplet != null">
+				and istemplet = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null and ugrade!=''">
+				and ugrade like #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="rechartype != null">
+				and rechartype =#{rechartype,jdbcType=DECIMAL}
+			</if>
+			<if test="daymoneyrest != null and daymoneyrest!=''">
+				and daymoneyrest &lt;= #{daymoneyrest,jdbcType=FLOAT}
+			</if>
+			<if test="lowestmoney != null and lowestmoney!=''">
+				and lowestmoney &gt;= #{lowestmoney,jdbcType=FLOAT}
+			</if>
+			<if test="hightestmoney != null and hightestmoney!=''">
+				and hightestmoney &lt;= #{hightestmoney,jdbcType=FLOAT}
+			</if>
+			<if test="paycompany != null and paycompany!=''">
+				and paycompany = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="isuse != null">
+				and isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="removenameno != null">
+				and removenameno = #{removenameno,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				and addman = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and addtime &gt;= #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="auditman != null and auditman!=''">
+				and auditman = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				and audittime &gt;= #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isaudit != null">
+				and isaudit = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="proxypayman != null">
+				and proxypayman = #{proxypayman,jdbcType=VARCHAR}
+			</if>
+			<if test="selfpayratio != null">
+				and selfpayratio = #{selfpayratio,jdbcType=FLOAT}
+			</if>
+			<if test="proxypayratio != null">
+				and proxypayratio = #{proxypayratio,jdbcType=FLOAT}
+			</if>
+			<if test="feetype != null">
+				and feetype = #{feetype,jdbcType=DECIMAL}
+			</if>
+			<if test="snlid != null">
+				and snlid = #{snlid,jdbcType=DECIMAL}
+			</if>
+		</where>
+
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from RECHARGERSTR
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RechargeRstr">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGERSTR_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into RECHARGERSTR
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="rechartype != null">
+				RECHARTYPE,
+			</if>
+			<if test="daymoneyrest != null">
+				DAYMONEYREST,
+			</if>
+			<if test="lowestmoney != null">
+				LOWESTMONEY,
+			</if>
+			<if test="hightestmoney != null">
+				HIGHTESTMONEY,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="proxypayman != null">
+				proxypayman,
+			</if>
+			<if test="selfpayratio != null">
+				selfpayratio,
+			</if>
+			<if test="proxypayratio != null">
+				proxypayratio,
+			</if>
+			<if test="feetype != null">
+				feetype,
+			</if>
+			<if test="snlid != null">
+				snlid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="rechartype != null">
+				#{rechartype,jdbcType=DECIMAL},
+			</if>
+			<if test="daymoneyrest != null">
+				#{daymoneyrest,jdbcType=FLOAT},
+			</if>
+			<if test="lowestmoney != null">
+				#{lowestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="hightestmoney != null">
+				#{hightestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="removenameno != null">
+				#{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="proxypayman != null">
+				#{proxypayman,jdbcType=VARCHAR},
+			</if>
+			<if test="selfpayratio != null">
+				#{selfpayratio,jdbcType=FLOAT},
+			</if>
+			<if test="proxypayratio != null">
+				#{proxypayratio,jdbcType=FLOAT},
+			</if>
+			<if test="feetype != null">
+				#{feetype,jdbcType=DECIMAL},
+			</if>
+			<if test="snlid != null">
+				#{snlid,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RechargeRstr">
+		update RECHARGERSTR
+		<set>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="rechartype != null">
+				RECHARTYPE = #{rechartype,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="daymoneyrest != null">
+				DAYMONEYREST = #{daymoneyrest,jdbcType=FLOAT},
+			</if>
+			<if test="lowestmoney != null">
+				LOWESTMONEY = #{lowestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="hightestmoney != null">
+				HIGHTESTMONEY = #{hightestmoney,jdbcType=FLOAT},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="removenameno != null">
+				REMOVENAMENO = #{removenameno,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="proxypayman != null">
+				PROXYPAYMAN = #{proxypayman,jdbcType=VARCHAR},
+			</if>
+			<if test="selfpayratio != null">
+				SELFPAYRATIO = #{selfpayratio,jdbcType=FLOAT},
+			</if>
+			<if test="proxypayratio != null">
+				PROXYPAYRATIO = #{proxypayratio,jdbcType=FLOAT},
+			</if>
+			<if test="feetype != null">
+				FEETYPE = #{feetype,jdbcType=DECIMAL},
+			</if>
+			<if test="snlid != null">
+				SNLID = #{snlid,jdbcType=DECIMAL}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

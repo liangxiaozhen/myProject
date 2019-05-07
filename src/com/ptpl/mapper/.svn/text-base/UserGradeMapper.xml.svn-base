@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserGradeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserGrade">
+		<id column="id" property="id" jdbcType="DECIMAL" />
+		<result column="ugrade" property="ugrade" jdbcType="DECIMAL" />
+		<result column="ugradename" property="ugradename" jdbcType="VARCHAR" />
+		<result column="addman" property="addman" jdbcType="VARCHAR" />
+		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,ugrade,ugradename,addman,addtime,remark
+	</sql>
+	<insert id="insertUserGrade" parameterType="com.ptpl.model.UserGrade">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERGRADE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERGRADE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="ugradename != null">
+				UGRADENAME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="ugradename != null">
+				#{ugradename,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateUserGrade" parameterType="com.ptpl.model.UserGrade">
+		update USERGRADE
+		<set>
+			<if test="ugrade !=null and ugrade !=''">
+				ugrade = #{ugrade,jdbcType=DECIMAL},
+			</if>
+			<if test="ugradename !=null and ugradename !=''">
+				ugradename = #{ugradename,jdbcType=VARCHAR},
+			</if>
+			<if test="addman !=null and addman !=''">
+				addman = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime !=null and addtime !=''">
+				addtime = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark !=null and remark !=''">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="getByUgrade" parameterType="java.math.BigDecimal"
+		resultType="java.lang.Integer">
+		select count(*) from USERGRADE where ugrade =
+		#{ugrade,jdbcType=DECIMAL}
+	</select>
+	<select id="getByUgradeName" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from USERGRADE where ugradename =
+		#{ugradename,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getUserGradeAll" parameterType="com.ptpl.model.UserGrade"
+		resultMap="BaseResultMap">
+		select * from USERGRADE
+		<where>
+			<if test="ugrade !=null">
+				ugrade = #{ugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="ugradename !=null">
+				and ugradename = #{ugradename,jdbcType=VARCHAR}
+			</if>
+			<if test="addman !=null">
+				and addman = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime !=null">
+				and addtime &gt;= #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark !=null">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by ugrade
+	</select>
+
+	<!-- 根据会员等级编号查询会员等级的名称 -->
+	<select id="getCodeByUserGradeName" parameterType="java.math.BigDecimal"
+		resultType="java.lang.String">
+		select ugradeName from USERGRADE where
+		ugrade=#{ugrade,jdbcType=DECIMAL}
+		<!-- <where> <if test="ugrade != null and ugrade!= ''" > ugrade=#{ugrade,jdbcType=DECIMAL} 
+			</if> </where> -->
+	</select>
+	<select id="getById" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select * from USERGRADE where id=#{id,jdbcType=DECIMAL}
+		<!-- <where> <if test="ugrade != null and ugrade!= ''" > ugrade=#{ugrade,jdbcType=DECIMAL} 
+			</if> </where> -->
+	</select>
+	<!-- 根据等级编号查询对应的会员等级资源 cjm -->
+	<select id="selectByUgrade" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select * from USERGRADE where ugrade=#{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据页面的等级编号选取剩下的会员等级 liuj -->
+	<select id="getGradeList" resultMap="BaseResultMap">
+		select * from USERGRADE where ugrade not in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getusergrade" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select * from USERGRADE where ugrade=#{code}
+	</select>
+	<!--*********************会员等级需求变更后***************************** -->
+	<!--*********************会员等级需求变更后***************************** -->
+	<!--*********************会员等级需求变更后***************************** -->
+	<!--*********************会员等级需求变更后***************************** -->
+	<!-- 分组查询Mapper -->
+	<resultMap id="groupMap" type="com.ptpl.model.UserGrade">
+		<result column="ugrade" property="ugrade" jdbcType="DECIMAL" />
+		<result column="ugradename" property="ugradename" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMap" type="com.ptpl.model.UserGrade">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="DECIMAL" />
+		<result column="UGRADENAME" property="ugradename" jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISSPECIFY" property="isspecify" jdbcType="DECIMAL" />
+		<result column="NEEDPOINTS" property="needpoints" jdbcType="DECIMAL" />
+		<result column="NEEDAMOUNT" property="needamount" jdbcType="FLOAT" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="RANKNO" property="rankno" jdbcType="DECIMAL" />
+		<result column="ISCANUSEPOINTS" property="iscanusepoints"
+			jdbcType="DECIMAL" />
+		<result column="ISCANUSEAMOUNT" property="iscanuseamount"
+			jdbcType="DECIMAL" />
+		<result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+	</resultMap>
+	<resultMap id="SelectMap" type="com.ptpl.model.UserGrade">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="UGRADENAME" property="ugradename" jdbcType="VARCHAR" />
+		<result column="NEEDPOINTS" property="needpoints" jdbcType="DECIMAL" />
+		<result column="RANKNO" property="rankno" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="New_Column_List">
+		ID, UGRADE, UGRADENAME, ADDMAN, ADDTIME, REMARK, ISSPECIFY,
+		NEEDPOINTS,
+		NEEDAMOUNT, STATUS, RANKNO, ISCANUSEPOINTS,
+		ISCANUSEAMOUNT,SNLID
+	</sql>
+	<sql id="Select_Column_List">
+		ID,UGRADENAME,NEEDPOINTS,NEEDAMOUNT,RANKNO,SNLID
+	</sql>
+	<!-- 分组查询会员等级和会员名称 -->
+	<select id="getGroupByUgradeAndUgradeName" resultMap="groupMap">
+		select
+		ugrade,ugradename FROM USERGRADE group by ugrade,ugradename order by
+		ugrade
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="New_Column_List" />
+		from USERGRADE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="verifyName" parameterType="com.ptpl.model.UserGrade"
+		resultType="Integer">
+		select count(*) from usergrade where id !=
+		#{id,jdbcType=DECIMAL} AND
+		ugradename =#{ugradename,jdbcType=VARCHAR}
+	</select>
+	<select id="selective" parameterType="com.ptpl.model.UserGrade"
+		resultMap="ResultMap">
+		select
+		<include refid="New_Column_List"></include>
+		from USERGRADE
+		<where>
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null">
+				AND UGRADE = #{ugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="ugradename != null">
+				AND UGRADENAME = #{ugradename,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isspecify != null">
+				AND ISSPECIFY = #{isspecify,jdbcType=DECIMAL}
+			</if>
+			<if test="needpoints != null">
+				AND NEEDPOINTS = #{needpoints,jdbcType=DECIMAL}
+			</if>
+			<if test="needamount != null">
+				AND NEEDAMOUNT = #{needamount,jdbcType=FLOAT}
+			</if>
+			<if test="status != null">
+				AND STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="rankno != null">
+				AND RANKNO = #{rankno,jdbcType=DECIMAL}
+			</if>
+			<if test="iscanusepoints != null">
+				AND ISCANUSEPOINTS = #{iscanusepoints,jdbcType=DECIMAL}
+			</if>
+			<if test="iscanuseamount != null">
+				AND ISCANUSEAMOUNT = #{iscanuseamount,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by rankno
+	</select>
+	<select id="selectiveForNormal" parameterType="com.ptpl.model.UserGrade"
+		resultMap="ResultMap">
+		select
+		<include refid="New_Column_List"></include>
+		from USERGRADE
+		<where>
+			STATUS != 2
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null">
+				AND UGRADE = #{ugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="ugradename != null and ugradename != ''">
+				AND UGRADENAME = #{ugradename,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isspecify != null">
+				AND ISSPECIFY = #{isspecify,jdbcType=DECIMAL}
+			</if>
+			<if test="needpoints != null">
+				AND NEEDPOINTS = #{needpoints,jdbcType=DECIMAL}
+			</if>
+			<if test="needamount != null">
+				AND NEEDAMOUNT = #{needamount,jdbcType=FLOAT}
+			</if>
+			<if test="status != null">
+				AND STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="rankno != null">
+				AND RANKNO = #{rankno,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by rankno
+	</select>
+	<select id="selectiveForStop" parameterType="com.ptpl.model.UserGrade"
+		resultMap="ResultMap">
+		select
+		<include refid="New_Column_List"></include>
+		from USERGRADE
+		<where>
+			STATUS = 2
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null">
+				AND UGRADE = #{ugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="ugradename != null">
+				AND UGRADENAME = #{ugradename,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isspecify != null">
+				AND ISSPECIFY = #{isspecify,jdbcType=DECIMAL}
+			</if>
+			<if test="needpoints != null">
+				AND NEEDPOINTS = #{needpoints,jdbcType=DECIMAL}
+			</if>
+			<if test="needamount != null">
+				AND NEEDAMOUNT = #{needamount,jdbcType=FLOAT}
+			</if>
+		</where>
+	</select>
+	<select id="selectForBonusPointsAndCash" parameterType="java.lang.Short"
+		resultMap="SelectMap">
+		SELECT
+		<include refid="New_Column_List"></include>
+		FROM USERGRADE
+		WHERE STATUS = 1 AND RANKNO >#{rankno,jdbcType=DECIMAL}
+		ORDER BY RANKNO
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserGrade">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT COUNT(*) FROM USERGRADE
+		</selectKey>
+		insert into USERGRADE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,UGRADE,
+			</if>
+			<if test="ugradename != null">
+				UGRADENAME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="isspecify != null">
+				ISSPECIFY,
+			</if>
+			<if test="needpoints != null">
+				NEEDPOINTS,
+			</if>
+			<if test="needamount != null">
+				NEEDAMOUNT,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="rankno != null">
+				RANKNO,
+			</if>
+			<if test="iscanusepoints != null">
+				ISCANUSEPOINTS,
+			</if>
+			<if test="iscanuseamount != null">
+				ISCANUSEAMOUNT,
+			</if>
+			<if test="snlid != null">
+				SNLID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ugradename != null">
+				#{ugradename,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isspecify != null">
+				#{isspecify,jdbcType=DECIMAL},
+			</if>
+			<if test="needpoints != null">
+				#{needpoints,jdbcType=DECIMAL},
+			</if>
+			<if test="needamount != null">
+				#{needamount,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="rankno != null">
+				#{rankno,jdbcType=DECIMAL},
+			</if>
+			<if test="iscanusepoints != null">
+				#{iscanusepoints,jdbcType=DECIMAL},
+			</if>
+			<if test="iscanuseamount != null">
+				#{iscanuseamount,jdbcType=DECIMAL},
+			</if>
+			<if test="snlid != null">
+				#{snlid,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserGrade">
+		update USERGRADE
+		<set>
+			<if test="ugradename != null">
+				UGRADENAME = #{ugradename,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isspecify != null">
+				ISSPECIFY = #{isspecify,jdbcType=DECIMAL},
+			</if>
+			<if test="needpoints != null">
+				NEEDPOINTS = #{needpoints,jdbcType=DECIMAL},
+			</if>
+			<if test="needamount != null">
+				NEEDAMOUNT = #{needamount,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="rankno != null">
+				RANKNO = #{rankno,jdbcType=DECIMAL},
+			</if>
+			<if test="iscanusepoints != null">
+				ISCANUSEPOINTS = #{iscanusepoints,jdbcType=DECIMAL},
+			</if>
+			<if test="iscanuseamount != null">
+				ISCANUSEAMOUNT = #{iscanuseamount,jdbcType=DECIMAL},
+			</if>
+			<if test="snlid != null">
+				SNLID = #{snlid,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserGrade">
+		update USERGRADE
+		set
+		UGRADENAME = #{ugradename,jdbcType=VARCHAR},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=DATE},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		ISSPECIFY = #{isspecify,jdbcType=DECIMAL},
+		NEEDPOINTS = #{needpoints,jdbcType=DECIMAL},
+		NEEDAMOUNT =#{needamount,jdbcType=FLOAT},
+		RANKNO = #{rankno,jdbcType=DECIMAL},
+		ISCANUSEPOINTS = #{iscanusepoints,jdbcType=DECIMAL},
+		ISCANUSEAMOUNT =#{iscanuseamount,jdbcType=DECIMAL},
+		SNLID = #{snlid,jdbcType=DECIMAL},
+		STATUS = #{status,jdbcType=DECIMAL}
+		where ID =#{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateToStop" parameterType="com.ptpl.model.UserGrade">
+		UPDATE USERGRADE SET
+		STATUS = 2,RANKNO = NULL,ADDMAN = #{addman,jdbcType=VARCHAR},ADDTIME =
+		#{addtime} WHERE ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

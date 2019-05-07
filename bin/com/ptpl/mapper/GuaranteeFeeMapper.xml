@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.GuaranteeFeeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.GuaranteeFee">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="GUARANTEEFEENO" property="guaranteefeeno"
+			jdbcType="VARCHAR" />
+		<result column="GFRECMAN" property="gfrecman" jdbcType="VARCHAR" />
+		<result column="CHARGETYPE" property="chargetype" jdbcType="DECIMAL" />
+		<result column="MINNMMONEY" property="minnmmoney" jdbcType="FLOAT" />
+		<result column="MAXNMMONEY" property="maxnmmoney" jdbcType="FLOAT" />
+		<result column="GFQUOTA" property="gfquota" jdbcType="FLOAT" />
+		<result column="GFPERCENT" property="gfpercent" jdbcType="FLOAT" />
+		<result column="MINGFFEE" property="mingffee" jdbcType="FLOAT" />
+		<result column="MAXGFFEE" property="maxgffee" jdbcType="FLOAT" />
+		<result column="GFRATE" property="gfrate" jdbcType="FLOAT" />
+		<result column="MINGFAMOUNT" property="mingfamount" jdbcType="FLOAT" />
+		<result column="MAXGFAMOUNT" property="maxgfamount" jdbcType="FLOAT" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="GFRECMANID" property="gfrecmanid" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR"/>
+		<result column="GFITYPE" property="GFIType" jdbcType="DECIMAL" />
+		<result column="TTYPE" property="TType" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ptpl.model.GuaranteeFee">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GUARANTEEFEE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GUARANTEEFEE (ID, GUARANTEEFEENO,
+		GFRECMAN, CHARGETYPE, MINNMMONEY,
+		MAXNMMONEY, GFQUOTA, GFPERCENT,
+		MINGFFEE, MAXGFFEE, GFRATE,
+		MINGFAMOUNT, MAXGFAMOUNT, ISTEMPLET,TID,ISAUDIT,GFRECMANID,ADDMAN,ADDTIME,REMARK,UGRADE,GFITYPE,TTYPE
+		)
+		values (#{id,jdbcType=DECIMAL}, #{guaranteefeeno,jdbcType=VARCHAR},
+		#{gfrecman,jdbcType=VARCHAR}, #{chargetype,jdbcType=DECIMAL}, #{minnmmoney,jdbcType=FLOAT},
+		#{maxnmmoney,jdbcType=FLOAT}, #{gfquota,jdbcType=FLOAT},
+		#{gfpercent,jdbcType=FLOAT},
+		#{mingffee,jdbcType=FLOAT}, #{maxgffee,jdbcType=FLOAT}, #{gfrate,jdbcType=FLOAT},
+		#{mingfamount,jdbcType=FLOAT}, #{maxgfamount,jdbcType=FLOAT},
+		#{istemplet,jdbcType=DECIMAL},
+		#{tid,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL}, #{gfrecmanid,jdbcType=DECIMAL},
+		#{addman,jdbcType=VARCHAR},#{addtime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{ugrade,jdbcType=VARCHAR},
+		#{GFIType,jdbcType=DECIMAL},#{TType,jdbcType=VARCHAR}
+		)
+	</insert>
+
+
+	<select id="selectByCondition" parameterType="com.ptpl.model.GuaranteeFee"
+		resultMap="BaseResultMap">
+		select * from GUARANTEEFEE
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="guaranteefeeno != null and guaranteefeeno!=''">
+				and GUARANTEEFEENO = #{guaranteefeeno,jdbcType=VARCHAR}
+			</if>
+
+			<if test="gfrecman != null and gfrecman!=''">
+				and GFRECMAN = #{gfrecman,jdbcType=VARCHAR}
+			</if>
+			<if test="chargetype != null and chargetype!=''">
+				and CHARGETYPE = #{chargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="minnmmoney != null and minnmmoney!=''">
+				and MINNMMONEY = #{minnmmoney,jdbcType=FLOAT}
+			</if>
+			<if test="maxnmmoney != null and maxnmmoney!=''">
+				and MAXNMMONEY = #{maxnmmoney,jdbcType=FLOAT}
+			</if>
+			<if test="gfquota != null and gfquota!=''">
+				and GFQUOTA = #{gfquota,jdbcType=FLOAT}
+			</if>
+			<if test="gfpercent != null and gfpercent!=''">
+				and GFPERCENT = #{gfpercent,jdbcType=FLOAT}
+			</if>
+			<if test="mingffee != null and mingffee!=''">
+				and MINGFFEE = #{mingffee,jdbcType=FLOAT}
+			</if>
+			<if test="maxgffee != null and maxgffee!=''">
+				and MAXGFFEE = #{maxgffee,jdbcType=FLOAT}
+			</if>
+			<if test="gfrate != null and gfrate!=''">
+				and GFRATE = #{gfrate,jdbcType=FLOAT}
+			</if>
+			<if test="mingfamount != null and mingfamount!=''">
+				and MINGFAMOUNT = #{mingfamount,jdbcType=FLOAT}
+			</if>
+			<if test="maxgfamount != null and maxgfamount!=''">
+				and MAXGFAMOUNT = #{maxgfamount,jdbcType=FLOAT}
+			</if>
+			<if test="istemplet != null and istemplet!=''">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null and tid!=''">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null and isaudit!=''">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="gfrecmanid != null and gfrecmanid!=''">
+				and GFRECMANID = #{gfrecmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null and addman!=''">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="ugrade != null and ugrade!=''">
+				and UGRADE = #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="GFIType != null and GFIType!=''">
+				and GFITYPE = #{GFIType,jdbcType=DECIMAL}
+			</if>
+			<if test="TType != null and TType!=''">
+				and TTYPE = #{TType,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+	<update id="update" parameterType="com.ptpl.model.GuaranteeFee">
+		update GUARANTEEFEE
+		<set>
+			<trim suffixOverrides=",">
+			<if test="guaranteefeeno != null">
+				GUARANTEEFEENO = #{guaranteefeeno,jdbcType=VARCHAR},
+			</if>
+
+			<if test="gfrecmanid != null">
+				GFRECMANID = #{gfrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="gfrecman != null">
+				GFRECMAN = #{gfrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE = #{chargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="minnmmoney != null">
+				MINNMMONEY = #{minnmmoney,jdbcType=DECIMAL},
+			</if>
+			<if test="maxnmmoney != null">
+				MAXNMMONEY = #{maxnmmoney,jdbcType=DECIMAL},
+			</if>
+			<if test="gfquota != null">
+				GFQUOTA = #{gfquota,jdbcType=DECIMAL},
+			</if>
+			<if test="gfpercent != null">
+				GFPERCENT = #{gfpercent,jdbcType=DECIMAL},
+			</if>
+			<if test="mingffee != null">
+				MINGFFEE = #{mingffee,jdbcType=DECIMAL},
+			</if>
+			<if test="maxgffee != null">
+				MAXGFFEE = #{maxgffee,jdbcType=DECIMAL},
+			</if>
+			<if test="gfrate != null">
+				GFRATE = #{gfrate,jdbcType=DECIMAL},
+			</if>
+			<if test="mingfamount != null">
+				MINGFAMOUNT = #{mingfamount,jdbcType=DECIMAL},
+			</if>
+			<if test="maxgfamount != null">
+				MAXGFAMOUNT = #{maxgfamount,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="GFIType != null">
+				GFITYPE = #{GFIType,jdbcType=DECIMAL},
+			</if>
+			<if test="TType != null">
+				TTYPE = #{TType,jdbcType=VARCHAR},
+			</if>
+			</trim>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from GUARANTEEFEE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据主键ID查询标的担保费设置详情 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		*
+		from
+		GUARANTEEFEE
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据tid查询信息 -->
+	<select id="selectgurfeeBytid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		SELECT * FROM GUARANTEEFEE WHERE TID = #{tid,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据tid查询等级 -->
+	<select id="selectGradeBytid" resultType="java.lang.String">
+		SELECT DISTINCT (UGRADE) FROM GUARANTEEFEE WHERE TID = #{tid,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据tid查询等级 -->
+	<select id="selectAllWithoutOne" resultMap="BaseResultMap" >
+		SELECT * FROM GUARANTEEFEE WHERE 1=1
+		<if test="id !=null">
+		  ID != #{id,jdbcType=DECIMAL}
+        </if>
+	</select>
+</mapper>

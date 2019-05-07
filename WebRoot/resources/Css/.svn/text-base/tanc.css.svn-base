@@ -1,0 +1,65 @@
+ #mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: #666;
+  opacity: 0.5;
+  filter: alpha(opacity=50)-moz-opacity: 0.5;
+  -khtml-opacity: 0.5;
+  display: none;
+  }
+.popup {
+  position: absolute;
+  /*top: 40%;*/
+  left: 50%;
+  min-width: 350px; 
+  max-width: 450px; 
+  height: 200px;
+  background: #fff;
+  z-index: 1000;
+   -moz-border-radius: 5px; 
+  -webkit-border-radius: 5px; 
+  border-radius: 5px; 
+  display: none;
+  }
+  .popup .yqtx{
+  	color: #333;
+  	padding-left:15px;
+  	border-bottom:1px solid #ccc ;
+  	
+  	height: 46px;
+  	line-height: 46px;
+  }
+ .popup .yqtx .yqtx_right{
+ 	color: #CCC;
+ 	float: right;
+ 	margin-right:15px ;
+ 	cursor: pointer;
+  }
+  .popup  .tsnr{
+  	text-align: center;
+  }
+  .popup  .tsnr .tsnr_nr{
+  	margin-top: 30px;
+  	padding: 0 20px;
+  }
+    .popup  .tsnr .tsnr_queding{
+    	position: absolute;
+    	left: 77px;
+    	bottom: 26px;
+    }
+  .popup  .tsnr .tsnr_queding p{
+  	color: #FFFFFF;
+  	height: 30px;
+  	padding:0 20px;
+  	line-height: 30px;
+  	display: inline-block;
+  	background: #2577E3;
+  	-moz-border-radius: 3px; 
+    -webkit-border-radius: 3px; 
+    border-radius: 3px; 
+    cursor: pointer;
+  }

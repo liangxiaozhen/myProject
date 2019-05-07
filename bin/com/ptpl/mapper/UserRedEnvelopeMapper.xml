@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserRedEnvelopeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserRedEnvelope">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="RECTYPE" property="rectype" jdbcType="DECIMAL" />
+		<result column="RESTIME" property="restime" jdbcType="TIMESTAMP" />
+		<result column="REDENVELOPE" property="redenvelope" jdbcType="FLOAT" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="REDEALTIME" property="redealtime" jdbcType="TIMESTAMP" />
+		<result column="REFAILTIME" property="refailtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PURPOSE" property="purpose" jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="RETYPE" property="retype" jdbcType="DECIMAL" />
+		<result column="URENO" property="ureno" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="USEDATE" property="usedate" jdbcType="TIMESTAMP" />
+		<!-- 关联用户基本信息表 -->
+		<association property="name" resultMap="UserBaseInfoMap" />
+		<association property="award" javaType="com.ptpl.model.Award">
+			<result column="ANAME" property="aname" jdbcType="VARCHAR" />
+			<result column="ATTRIBUTE" property="attribute" jdbcType="DECIMAL" />
+		</association>
+	</resultMap>
+
+	<!-- 用户基本信息 -->
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="UserBaseInfoMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 用户红包表 -->
+	<sql id="Base_Column_List">
+		u.ID, u.BASEID, u.RECTYPE, u.RESTIME, u.REDENVELOPE, u.STATUS,
+		u.REDEALTIME, u.REFAILTIME, u.REMARK,
+		u.PURPOSE, u.ISAUDIT, u.AUDITMAN, u.AUDITTIME,
+		u.RETYPE,u.URENO,u.ISUSE,u.USEDATE,a.ANAME,a.ATTRIBUTE
+	</sql>
+
+	<!-- 用户红包表、用户基本信息表 -->
+	<sql id="Association_Column_List">
+		URE.ID, URE.BASEID, URE.RECTYPE, URE.RESTIME, URE.REDENVELOPE, URE.STATUS,
+		URE.REDEALTIME,
+		URE.REFAILTIME, URE.REMARK, URE.PURPOSE, URE.ISAUDIT, URE.AUDITMAN, URE.AUDITTIME,
+		URE.RETYPE,
+		URE.URENO, URE.ISUSE, URE.USEDATE, UBAI.LOGINNAME
+	</sql>
+
+	<!-- 获取用户红包表列表（关联用户基本信息表） -->
+	<select id="findRedEnvelopeList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserRedEnvelope">
+		select
+		<include refid="Association_Column_List" />
+		from
+		userredenvelope ure,
+		userbaseaccountinfo ubai
+		<where>
+			ure.baseid=ubai.id
+			<if test="rectype != null">
+				and ure.rectype = #{rectype}
+			</if>
+			<if test="retype != null">
+				and ure.retype = #{retype}
+			</if>
+			<if test="id != null">
+				and ure.id like '%'||#{id}||'%'
+			</if>
+			<if test="name != null">
+				and ubai.loginname like '%'||#{name.loginname}||'%'
+			</if>
+			<if test="refailtime != null">
+				and ure.refailtime &lt;= #{refailtime}
+			</if>
+			<if test="isuse != null">
+				and ure.isuse = #{isuse}
+			</if>
+			<if test="status != null">
+				and ure.status = #{status}
+			</if>
+		</where>
+		order by ure.id
+	</select>
+
+	<!-- 根据主键查询用户红包详情（关联用户基本信息表） -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Association_Column_List" />
+		from
+		userredenvelope ure,
+		userbaseaccountinfo ubai
+		where
+		ure.baseid=ubai.id
+		and ure.id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据baseid查询用户红包列表 -->
+	<select id="selectByBaseid" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserRedEnvelope">
+		select
+		<include refid="Base_Column_List" />
+		from USERREDENVELOPE u,Award a
+		<trim prefix="where" prefixOverrides="and">
+			u.URENO = a.ano
+			<if test="baseid != null">
+				and u.baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse != null">
+				and u.isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="retype != null">
+				and u.retype = #{retype,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据主键ID删除用户红包记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from USERREDENVELOPE where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 新增红包记录 -->
+	<insert id="insert" parameterType="com.ptpl.model.UserRedEnvelope">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERUPGRADERULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERREDENVELOPE (ID, BASEID, RECTYPE,
+		RESTIME, REDENVELOPE, STATUS,
+		REDEALTIME, REFAILTIME, REMARK,
+		PURPOSE, ISAUDIT, AUDITMAN,
+		AUDITTIME, RETYPE, URENO,
+		ISUSE, USEDATE)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{rectype,jdbcType=DECIMAL},
+		#{restime,jdbcType=TIMESTAMP}, #{redenvelope,jdbcType=OTHER}, #{status,jdbcType=DECIMAL},
+		#{redealtime,jdbcType=TIMESTAMP}, #{refailtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},
+		#{purpose,jdbcType=VARCHAR}, #{isaudit,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP}, #{retype,jdbcType=DECIMAL},
+		#{ureno,jdbcType=VARCHAR},
+		#{isuse,jdbcType=DECIMAL}, #{usedate,jdbcType=TIMESTAMP})
+	</insert>
+
+	<!-- 新增红包记录（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserRedEnvelope">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERREDENVELOPE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERREDENVELOPE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="rectype != null">
+				RECTYPE,
+			</if>
+			<if test="restime != null">
+				RESTIME,
+			</if>
+			<if test="redenvelope != null">
+				REDENVELOPE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="redealtime != null">
+				REDEALTIME,
+			</if>
+			<if test="refailtime != null">
+				REFAILTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="purpose != null">
+				PURPOSE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="retype != null">
+				RETYPE,
+			</if>
+			<if test="ureno != null">
+				URENO,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="usedate != null">
+				USEDATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="rectype != null">
+				#{rectype,jdbcType=DECIMAL},
+			</if>
+			<if test="restime != null">
+				#{restime},
+			</if>
+			<if test="redenvelope != null">
+				#{redenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="redealtime != null">
+				#{redealtime},
+			</if>
+			<if test="refailtime != null">
+				#{refailtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="purpose != null">
+				#{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime},
+			</if>
+			<if test="retype != null">
+				#{retype,jdbcType=DECIMAL},
+			</if>
+			<if test="ureno != null">
+				#{ureno,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="usedate != null">
+				#{usedate},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 更新红包记录（参数可选） -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserRedEnvelope">
+		update USERREDENVELOPE
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="rectype != null">
+				RECTYPE = #{rectype,jdbcType=DECIMAL},
+			</if>
+			<if test="restime != null">
+				RESTIME = #{restime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="redenvelope != null">
+				REDENVELOPE = #{redenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="redealtime != null">
+				REDEALTIME = #{redealtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="refailtime != null">
+				REFAILTIME = #{refailtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="purpose != null">
+				PURPOSE = #{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="retype != null">
+				RETYPE = #{retype,jdbcType=DECIMAL},
+			</if>
+			<if test="ureno != null">
+				URENO = #{ureno,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="usedate != null">
+				USEDATE = #{usedate,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 更新红包记录 -->
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserRedEnvelope">
+		update USERREDENVELOPE
+		set BASEID = #{baseid,jdbcType=DECIMAL},
+		RECTYPE = #{rectype,jdbcType=DECIMAL},
+		RESTIME = #{restime,jdbcType=TIMESTAMP},
+		REDENVELOPE = #{redenvelope,jdbcType=FLOAT},
+		STATUS = #{status,jdbcType=DECIMAL},
+		REDEALTIME = #{redealtime,jdbcType=TIMESTAMP},
+		REFAILTIME = #{refailtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		PURPOSE = #{purpose,jdbcType=VARCHAR},
+		ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+		AUDITMAN = #{auditman,jdbcType=VARCHAR},
+		AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+		RETYPE = #{retype,jdbcType=DECIMAL},
+		URENO = #{ureno,jdbcType=VARCHAR},
+		ISUSE = #{isuse,jdbcType=DECIMAL},
+		USEDATE = #{usedate,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="getselectAll" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserRedEnvelope">
+		select
+		ure.*,ubai.loginname
+		from
+		userredenvelope ure,
+		userbaseaccountinfo ubai
+		<where>
+			ure.baseid=ubai.id
+			<if test="retype!=null">
+				and ure.retype=#{retype}
+			</if>
+			<if test="rectype!=null">
+				and ure.rectype=#{rectype}
+			</if>
+			<if test="isuse !=null">
+				and ure.isuse=#{isuse}
+			</if>
+			<if test="status !=null">
+				and ure.status=#{status}
+			</if>
+			<if test="ureno!=null and ureno!=''">
+				and ure.ureno = #{ureno}
+			</if>
+			<if test="name !=null and name.loginname!=null and name.loginname!=''">
+				and ubai.loginname = #{name.loginname}
+			</if>
+		</where>
+	</select>
+
+	<!-- pxl 将某些红包作废 -->
+	<update id="updateRedEnvById" parameterType="com.ptpl.model.UserRedEnvelope">
+		update USERREDENVELOPE
+		<set>
+			<if test="isuse!=null">
+				isuse=#{isuse,jdbcType=DECIMAL}
+			</if>
+		</set>
+		where id=#{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<!-- 根据ID查询用户红包记录 -->
+	<select id="findUserRedEnvelopeById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		*
+		from
+		userredenvelope
+		where
+		id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据红包编号查询详情 -->
+	<select id="selectByUreNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		*
+		from
+		userredenvelope
+		where
+		ureno = #{ureno,jdbcType=VARCHAR}
+	</select>
+<!-- 根据登陆的用户名查询用户红包详情（关联用户基本信息表） -->
+	<select id="getUserRedBaoByLoginName" resultMap="BaseResultMap"
+		parameterType="string">
+		select
+		<include refid="Association_Column_List" />
+		from
+		userredenvelope ure,
+		userbaseaccountinfo ubai
+		where
+		ure.baseid=ubai.id
+		and ubai.loginname = #{loginname,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 查找时间段已领取的红包 -->
+	<select id="findUserRedEnvelope" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserRedEnvelope">
+		select * from userredenvelope
+		<where>
+			<if test="baseid !=null">
+				and baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="status !=null">
+				and status = #{status,jdbcType=DECIMAL}
+			</if>
+			and redealtime between to_date(#{startdate,jdbcType=VARCHAR},'yyyy-mm-dd') 
+			and to_date(#{enddate,jdbcType=VARCHAR},'yyyy-mm-dd')+1-1/24/3600
+		</where>
+	</select>
+	
+	<!-- 查找最近三个月的已领取的红包  -->
+	<select id="findRedEnvelopeListThreeMonths" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserRedEnvelope">
+		select * from userredenvelope
+		<where>
+			<if test="baseid !=null">
+				and baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="status !=null">
+				and status = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="period !=null and period !=''">
+				<if test="period == '最近三个月'">
+					and redealtime >= add_months(sysdate,-3)
+				</if>
+				<if test="period == '最近一周'">
+					and redealtime >= sysdate-7
+				</if>
+				<if test="period == '最近一个月'">
+					and redealtime >= add_months(sysdate,-1)
+				</if>
+			</if>
+		</where>
+	</select>
+	
+	<!-- 判断领取后的红包券是否到期 -->
+	<select id="findRedEnvelopeListByStatus" resultMap="BaseResultMap">
+		select * from USERREDENVELOPE where ISUSE in(1,2)
+	</select>
+</mapper>

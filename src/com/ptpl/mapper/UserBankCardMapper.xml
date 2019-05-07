@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserBankCardMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserBankCard">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="CARDTYPE" property="cardtype" jdbcType="DECIMAL" />
+		<result column="BANKNAME" property="bankname" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="CARDNO" property="cardno" jdbcType="VARCHAR" />
+		<result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+		<result column="CITY" property="city" jdbcType="VARCHAR" />
+		<result column="SUBBRANCH" property="subbranch" jdbcType="VARCHAR" />
+		<result column="BINDTIME" property="bindtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="BINDMODE" property="bindmode" jdbcType="DECIMAL" />
+		<result column="ISFASTBINDCARD" property="isfastbindcard"
+			jdbcType="DECIMAL" />
+		<result column="BINDSTATUS" property="bindstatus" jdbcType="DECIMAL" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="ISDEFAULTCARD" property="isdefaultcard"
+			jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.China" id="ChinaResultMap">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="PID" property="pid" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ptpl.model.UserBankCard">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERBANKCARD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERBANKCARD (ID, BASEID, CARDTYPE,
+		BANKNAME, USERNAME,
+		CARDNO,
+		PROVINCE, CITY, SUBBRANCH,
+		BINDTIME, REMARK, BINDMODE,
+		ISFASTBINDCARD,BINDSTATUS,
+		PAYCOMPANY,ISDEFAULTCARD
+		)
+		values
+		(#{id,jdbcType=DECIMAL},
+		#{baseid,jdbcType=DECIMAL},
+		#{cardtype,jdbcType=DECIMAL},
+		#{bankname,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{cardno,jdbcType=VARCHAR},
+		#{province,jdbcType=VARCHAR},
+		#{city,jdbcType=VARCHAR},
+		#{subbranch,jdbcType=VARCHAR},
+		#{bindtime},
+		#{remark,jdbcType=VARCHAR},
+		#{bindmode,jdbcType=DECIMAL},#{isfastbindcard,jdbcType=DECIMAL},
+		#{bindstatus,jdbcType=DECIMAL},#{paycompany,jdbcType=VARCHAR},
+		#{isdefaultcard,jdbcType=DECIMAL}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserBankCard">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERBANKCARD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERBANKCARD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="cardtype != null">
+				CARDTYPE,
+			</if>
+			<if test="bankname != null">
+				BANKNAME,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="cardno != null">
+				CARDNO,
+			</if>
+			<if test="province != null">
+				PROVINCE,
+			</if>
+			<if test="city != null">
+				CITY,
+			</if>
+			<if test="subbranch != null">
+				SUBBRANCH,
+			</if>
+			<if test="bindtime != null">
+				BINDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="bindmode != null">
+				BINDMODE,
+			</if>
+			<if test="isfastbindcard != null">
+				ISFASTBINDCARD,
+			</if>
+			<if test="bindstatus != null">
+				BINDSTATUS,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="isdefaultcard != null">
+				ISDEFAULTCARD,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="cardtype != null">
+				#{cardtype,jdbcType=DECIMAL},
+			</if>
+			<if test="bankname != null">
+				#{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="cardno != null">
+				#{cardno,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="subbranch != null">
+				#{subbranch,jdbcType=VARCHAR},
+			</if>
+			<if test="bindtime != null">
+				#{bindtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="bindmode != null">
+				#{bindmode,jdbcType=DECIMAL},
+			</if>
+			<if test="isfastbindcard != null">
+				#{isfastbindcard,jdbcType=DECIMAL},
+			</if>
+			<if test="bindstatus != null">
+				#{bindstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="isdefaultcard != null">
+				#{isdefaultcard,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="Base_Column_List">
+		id,baseid,cardtype,bankname,username,cardno,province,city,subbranch,bindtime,remark,bindmode,isfastbindcard,bindstatus,paycompany,isdefaultcard
+	</sql>
+
+	<!-- 根据ID查询省份列表 -->
+	<select id="findProvinceByPid" resultMap="ChinaResultMap">
+		select
+		*
+		from
+		china
+		<where>
+			pid = '0' and id != '0'
+		</where>
+	</select>
+
+	<!-- 根据省份name查询省份id -->
+	<select id="findIdByName" resultMap="ChinaResultMap"
+		parameterType="java.lang.String">
+		select
+		*
+		from
+		china
+		<where>
+			name = #{province}
+		</where>
+	</select>
+
+	<!-- 根据省份ID查询相应的城市列表 -->
+	<select id="findCityByPid" resultMap="ChinaResultMap"
+		parameterType="java.lang.Long">
+		select
+		*
+		from
+		china
+		<where>
+			pid = #{pid}
+		</where>
+	</select>
+
+	<!-- 获取用户银行卡信息列表 -->
+	<select id="findUserBankInfo" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBankCard">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userbankcard
+		<trim prefix="where" prefixOverrides="and">
+			<if test="username != null and username != ''">
+				and username = #{username,jdbcType=VARCHAR}
+			</if>
+			<if test="baseid != null and baseid != ''">
+				and baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="isfastbindcard != null and isfastbindcard != ''">
+				and isfastbindcard = #{isfastbindcard,jdbcType=DECIMAL}
+			</if>
+			<if test="isdefaultcard != null and isdefaultcard != ''">
+				and isdefaultcard = #{isdefaultcard,jdbcType=DECIMAL}
+			</if>
+			<if test="bindstatus != null and bindstatus != ''">
+				and bindstatus = #{bindstatus,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据ID查询用户银行卡详情信息 -->
+	<select id="findDetailById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userbankcard
+		<where>
+			id = #{id}
+		</where>
+	</select>
+
+	<!-- 根据卡号查询用户银行卡详情信息 -->
+	<select id="findDetailByCardNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userbankcard
+		<where>
+			cardno = #{cardno}
+		</where>
+	</select>
+
+	<!-- 查询用户是否绑定快捷卡 -->
+	<select id="findIsFastBindCard" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBankCard">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userbankcard
+		<where>
+			<if test="baseid != null">
+				baseid = #{baseid}
+			</if>
+			<if test="isfastbindcard != null">
+				and isfastbindcard = #{isfastbindcard}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询用户默认取现卡 -->
+	<select id="findIsDefaultCard" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBankCard">
+		select
+		<include refid="Base_Column_List" />
+		from
+		userbankcard
+		<where>
+			<if test="baseid != null">
+				baseid = #{baseid}
+			</if>
+			<if test="isdefaultcard != null">
+				and isdefaultcard = #{isdefaultcard}
+			</if>
+		</where>
+	</select>
+
+	<!-- 删除用户银行卡信息 -->
+	<delete id="deleteUserBankInfo" parameterType="java.lang.Long">
+		delete from
+		userbankcard where id = #{id}
+	</delete>
+
+	<!-- 根据id修改用户银行卡信息 -->
+	<update id="updateUserBankInfo" parameterType="com.ptpl.model.UserBankCard">
+		update
+		userbankcard
+		<set>
+			<if test="cardtype != null">
+				cardtype =#{cardtype},
+			</if>
+			<if test="bankname != null">
+				bankname =#{bankname},
+			</if>
+			<if test="username != null">
+				username =#{username},
+			</if>
+			<if test="cardno != null">
+				cardno =#{cardno},
+			</if>
+			<if test="province != null">
+				province =#{province},
+			</if>
+			<if test="city != null">
+				city =#{city},
+			</if>
+			<if test="subbranch != null">
+				subbranch =#{subbranch},
+			</if>
+			<if test="bindtime != null">
+				bindtime =#{bindtime},
+			</if>
+			<if test="bindmode != null">
+				bindmode =#{bindmode},
+			</if>
+			<if test="remark != null">
+				remark =#{remark},
+			</if>
+			<if test="isfastbindcard != null">
+				isfastbindcard =#{isfastbindcard},
+			</if>
+			<if test="bindstatus != null">
+				bindstatus =#{bindstatus},
+			</if>
+			<if test="paycompany != null">
+				paycompany =#{paycompany},
+			</if>
+			<if test="isdefaultcard != null">
+				isdefaultcard = #{isdefaultcard,jdbcType=DECIMAL}
+			</if>
+		</set>
+		<where>
+			id=#{id}
+		</where>
+	</update>
+
+	<!-- 根据baseid修改用户默认银行卡信息 -->
+	<update id="updateDefaultCard" parameterType="com.ptpl.model.UserBankCard">
+		update
+		userbankcard
+		<set>
+			<if test="isdefaultcard != null">
+				isdefaultcard = #{isdefaultcard,jdbcType=DECIMAL}
+			</if>
+		</set>
+		<where>
+			baseid=#{baseid,jdbcType=DECIMAL}
+			and cardno != #{cardno}
+		</where>
+	</update>
+
+	<!-- 根据baseid修改用户银行卡绑定状态（绑定快捷卡，将其余卡绑定状态改为已解绑） -->
+	<update id="updateBindStatus" parameterType="com.ptpl.model.UserBankCard">
+		update
+		userbankcard
+		<set>
+			<if test="bindstatus != null">
+				bindstatus = #{bindstatus,jdbcType=DECIMAL}
+			</if>
+		</set>
+		<where>
+			baseid=#{baseid,jdbcType=DECIMAL}
+			and cardno != #{cardno}
+		</where>
+	</update>
+	
+	<!-- 根据baseid和卡号查询用户银行卡信息 -->
+	<select id="selectByBaseIdAndCardNo" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserBankCard">
+		select
+			<include refid="Base_Column_List" />
+		from
+			userbankcard
+		<where>
+				baseid = #{baseid,jdbcType=DECIMAL}
+				and cardno = #{cardno}
+		</where>
+	</select>
+	
+	<!-- 根据baseid查询用户当前绑定银行卡信息（徽商银行） -->
+	<select id="selectBoundCardByBaseId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select
+			<include refid="Base_Column_List" />
+		from
+			userbankcard
+		<where>
+				baseid = #{baseid,jdbcType=DECIMAL}
+				and bindstatus = '1'
+		</where>
+	</select>
+	
+	<!-- 根据baseid查询用户已解绑的银行卡信息（徽商银行） -->
+	<select id="selectUnBoundCardByBaseId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select
+			<include refid="Base_Column_List" />
+		from
+			userbankcard
+		<where>
+				baseid = #{baseid,jdbcType=DECIMAL}
+				and bindstatus = '2'
+		</where>
+	</select>
+	
+	<!-- 根据baseid查询用户 -->
+	<select id="getInfoByBaseid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select
+			<include refid="Base_Column_List" />
+		from
+			userbankcard
+		<where>
+				baseid = #{baseid,jdbcType=DECIMAL}
+		</where>
+	</select>
+
+</mapper>

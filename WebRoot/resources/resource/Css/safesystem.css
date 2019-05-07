@@ -1,0 +1,166 @@
+﻿@charset "UTF-8";
+
+.titleCon1 h2{
+	top: -10px;	
+}
+.titleCon-long h2{
+	width: 310px;
+	margin-left: -155px;
+}
+.wind-box{
+	margin-top: 45px;
+}
+.wind-box-l,.wind-box-r{
+	width: 540px;
+	float: left;
+}
+.wind-box-l{
+	color: #666;
+	font-size: 16px;
+	line-height: 1.8
+}
+.wind-box-l h2{
+	margin-bottom: 10px;
+}
+.wind-box-r{
+	text-align: center;
+}
+/**/
+.borderLeft{
+	border-left: 1px solid #a8c8f3;
+    padding: 20px 0 70px 20px;
+    margin-top: -10px;
+}
+.titleBox2{
+	font-size: 22px;
+	color: #2577e3;
+	margin: 0px 0 -10px -9px;
+}
+.titleBox2 .icon{
+	display: inline-block;
+	width: 19px;
+	height: 19px;
+	background: url(../Images/yuan.png) no-repeat left center;
+	padding-left: 10px;
+}
+.titleBox2 .lbl{
+	display: inline-block;
+	background: #2577e3;
+	border-radius: 20px;
+	width: 90px;
+	color: #fff;
+	height: 37px;
+	padding:0 10px;
+	line-height: 37px;
+	text-align: center;
+	margin-right: 10px;
+	margin-left: 0px;
+}
+.tuwen{
+	margin-left: 40px;
+}
+.tuwen .img{
+	float: left;
+}
+.tuwen .txt{
+	margin-left: 70px;
+}
+
+.tuFive{
+	padding: 0 30px 0 50px;
+}
+.tuFive li{
+	float: left;
+	width: 20%;
+	text-align: center;
+}
+.tuFiveTl{
+	padding-left: 100px;
+}
+.tuFiveTl li{
+	text-align: left;
+}
+.tuFiveTl li span{
+	display: inline-block;
+	background: #c0dbf0;
+	border-radius:7px;
+	font-size: 20px;
+	color: #2f509b;
+	padding: 3px 8px;
+}
+.tuFiveTl li img{
+	vertical-align: baseline;
+	margin-left: 45px;
+}
+.mt_f10{
+	margin-top: -10px;
+}
+.safeFour{
+	padding: 30px 0 0 0;
+}
+.safeBankTx{
+	padding: 40px 30px;
+}
+.safeFour li,.safeBankTx li{
+	width: 25%;
+}
+.safeThree{
+	padding-left: 70px;
+	padding-bottom: 50px;
+}
+.safeFour{
+	padding: 30px 0 0 0;
+}
+.safeBankTx{
+	padding: 40px 30px;
+}
+.safeFour li,.safeBankTx li{
+	width: 25%;
+}
+.safeBank li{
+	width: 25%;
+	float: left;
+	text-align: center;
+}
+
+/*安全体系*/
+.fond-box{
+	margin-top: 45px;
+	padding-bottom: 20px
+}
+.fond-box .line-h2{
+	line-height: 2
+}
+.fond-box .picConUl{width: 100%;}
+.fond-box .picConUl li{float: left; width: 33.3%; padding-top: 10px;text-align: center;}
+.fond-box .picConUl li img{display: block; margin: 0 auto;}
+.fond-box .picConUl li p{padding-top: 15px; color: #333; font-size: 16px; line-height: 28px;}
+.fond-left-z,.fond-right-z{
+	width: 600px;
+	float: left;
+}
+.fond-left-z dl,.fond-right-z dl{
+	line-height: 2.2
+}
+.fond-left-z dt,.fond-right-z dt{
+	background: url(../Images/fundimg8.png) left center no-repeat;
+    padding-left: 15px;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px
+}
+.fond-right-t,.fond-left-t{
+	width: 480px;
+	float: left;
+	text-align: center;
+}
+.depositorymoney{
+	height: 360px;
+    width: 1180px;
+}
+.fond-box .CGlistshow{
+	overflow: hidden;
+}
+.fond-box .CGlistshow li{
+	margin-bottom:-1px; 
+}

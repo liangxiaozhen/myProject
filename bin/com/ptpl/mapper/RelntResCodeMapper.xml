@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RelntResCodeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RelntResCode">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ECRESP_CODE" property="ecrespCode" jdbcType="VARCHAR" />
+		<result column="SECRESP_DESC" property="secrespDesc" jdbcType="VARCHAR" />
+		<result column="COMPANY" property="company" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ECRESP_CODE, SECRESP_DESC, COMPANY
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from REINTRESCODE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from REINTRESCODE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.RelntResCode">
+		insert into REINTRESCODE (ID, ECRESP_CODE, SECRESP_DESC,
+		COMPANY)
+		values (#{id,jdbcType=DECIMAL}, #{ecrespCode,jdbcType=VARCHAR},
+		#{secrespDesc,jdbcType=VARCHAR},
+		#{company,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RelntResCode">
+		insert into REINTRESCODE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="ecrespCode != null">
+				ECRESP_CODE,
+			</if>
+			<if test="secrespDesc != null">
+				SECRESP_DESC,
+			</if>
+			<if test="company != null">
+				COMPANY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ecrespCode != null">
+				#{ecrespCode,jdbcType=VARCHAR},
+			</if>
+			<if test="secrespDesc != null">
+				#{secrespDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RelntResCode">
+		update REINTRESCODE
+		<set>
+			<if test="ecrespCode != null">
+				ECRESP_CODE = #{ecrespCode,jdbcType=VARCHAR},
+			</if>
+			<if test="secrespDesc != null">
+				SECRESP_DESC = #{secrespDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.RelntResCode">
+		update REINTRESCODE
+		set ECRESP_CODE = #{ecrespCode,jdbcType=VARCHAR},
+		SECRESP_DESC = #{secrespDesc,jdbcType=VARCHAR},
+		COMPANY = #{company,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

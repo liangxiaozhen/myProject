@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.PromoLevelRestrictMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.PromoLevelRestrict">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PROMOLEVEL" property="promolevel" jdbcType="DECIMAL" />
+		<result column="LEVELLIMITNUM" property="levellimitnum"
+			jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROMOLEVEL, LEVELLIMITNUM
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from PROMOLEVELRESTRICT
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from PROMOLEVELRESTRICT
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<select id="selective" parameterType="com.ptpl.model.PromoLevelRestrict"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PROMOLEVELRESTRICT
+		<where>
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="promolevel != null">
+				AND PROMOLEVEL = #{promolevel,jdbcType=DECIMAL}
+			</if>
+			<if test="levellimitnum != null">
+				AND LEVELLIMITNUM = #{levellimitnum,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by PROMOLEVEL
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.PromoLevelRestrict">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT PROMOLEVELRESTRICT_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into PROMOLEVELRESTRICT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="promolevel != null">
+				PROMOLEVEL,
+			</if>
+			<if test="levellimitnum != null">
+				LEVELLIMITNUM,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="promolevel != null">
+				#{promolevel,jdbcType=DECIMAL},
+			</if>
+			<if test="levellimitnum != null">
+				#{levellimitnum,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.PromoLevelRestrict">
+		update PROMOLEVELRESTRICT
+		<set>
+			<if test="promolevel != null">
+				PROMOLEVEL = #{promolevel,jdbcType=DECIMAL},
+			</if>
+			<if test="levellimitnum != null">
+				LEVELLIMITNUM = #{levellimitnum,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

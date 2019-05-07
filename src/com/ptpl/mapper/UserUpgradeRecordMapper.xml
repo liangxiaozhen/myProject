@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserUpgradeRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserUpgradeRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="GRADE" property="grade" jdbcType="DECIMAL" />
+		<result column="PAYAMOUNT" property="payamount" jdbcType="FLOAT" />
+		<result column="BONUSPOINTS" property="bonuspoints" jdbcType="DECIMAL" />
+		<result column="DEDUCTBONUSPOINTS" property="deductbonuspoints"
+			jdbcType="DECIMAL" />
+		<result column="DEALTIME" property="dealtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="OLDGRADE" property="oldgrade" jdbcType="DECIMAL" />
+		<result column="PAYTYPE" property="paytype" jdbcType="DECIMAL" />
+		<result column="DEALMODE" property="dealmode" jdbcType="DECIMAL" />
+		<result column="EXPIRYDATE" property="expirydate" jdbcType="TIMESTAMP" />
+		<result column="ISNEWFLAG" property="isnewflag" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<result column="UGRADENAME" property="ugradename" jdbcType="VARCHAR" />
+		<result column="OLDUGRADENAME" property="oldugradename"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID,GRADE, PAYAMOUNT,
+		BONUSPOINTS,DEDUCTBONUSPOINTS,DEALTIME, REMARK,
+		OLDGRADE,
+		PAYTYPE,DEALMODE, EXPIRYDATE, ISNEWFLAG, ISBLENDING, ISMANBLENDING,
+		SYSBTIME,
+		MANBTIME, PAYCOMPANY, SYSRECTIME, RECEIVETIME, REQQUERYDATA,
+		RECRESULTDATA
+	</sql>
+	<sql id="Select_Column_list">
+		t1.ID, t1.BASEID, t2.LOGINNAME,t1.GRADE, t1.PAYAMOUNT,
+		t1.BONUSPOINTS,t1.DEDUCTBONUSPOINTS,t1.DEALTIME, t1.REMARK,
+		t1.OLDGRADE,t1.PAYTYPE,t1.DEALMODE, t1.EXPIRYDATE, t1.ISNEWFLAG,
+		t1.ISBLENDING, t1.ISMANBLENDING,
+		t1.SYSBTIME,
+		t1.MANBTIME,
+		t1.PAYCOMPANY, t1.SYSRECTIME, t1.RECEIVETIME, t1.REQQUERYDATA,
+		t1.RECRESULTDATA,t3.ugradename,t4.ugradename as oldugradename
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERUPGRADERECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectByBaseID" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select t1.ID, t1.BASEID,t1.GRADE, t1.PAYAMOUNT,
+		t1.BONUSPOINTS,t1.DEDUCTBONUSPOINTS,t1.DEALTIME, t1.REMARK,
+		t1.OLDGRADE,t1.PAYTYPE,t1.DEALMODE, t1.EXPIRYDATE, t1.ISNEWFLAG,
+		t1.ISBLENDING, t1.ISMANBLENDING,
+		t1.SYSBTIME,
+		t1.MANBTIME,
+		t1.PAYCOMPANY, t1.SYSRECTIME, t1.RECEIVETIME, t1.REQQUERYDATA,
+		t1.RECRESULTDATA,t2.ugradename,t3.ugradename as
+		oldugradename FROM
+		USERUPGRADERECORD t1,usergrade t2,usergrade t3
+		where
+		BASEID=#{baseid,jdbcType=DECIMAL} AND t1.grade=t2.ugrade AND
+		t1.oldgrade=t3.ugrade
+		order by t1.id desc
+	</select>
+	<select id="selective" parameterType="com.ptpl.model.UserUpgradeRecord"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Select_Column_list"></include>
+		from USERUPGRADERECORD t1,USERBASEACCOUNTINFO t2,USERGRADE
+		t3,USERGRADE t4
+		<where>
+			t1.baseid=t2.id
+			AND t1.grade=t3.ugrade
+			AND t1.oldgrade=t4.ugrade
+			<if test="id != null">
+				AND t1.ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="baseid != null">
+				AND BASEID = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="grade != null">
+				AND GRADE = #{grade,jdbcType=DECIMAL}
+			</if>
+			<if test="payamount != null">
+				AND PAYAMOUNT = #{payamount,jdbcType=FLOAT}
+			</if>
+			<if test="bonuspoints != null">
+				AND BONUSPOINTS = #{bonuspoints,jdbcType=DECIMAL}
+			</if>
+			<if test="deductbonuspoints != null">
+				AND DEDUCTBONUSPOINTS =
+				#{deductbonuspoints,jdbcType=DECIMAL}
+			</if>
+			<if test="dealtime != null">
+				AND DEALTIME = #{dealtime}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="oldgrade != null">
+				AND OLDGRADE = #{oldgrade,jdbcType=DECIMAL}
+			</if>
+			<if test="paytype != null">
+				AND PAYTYPE = #{paytype,jdbcType=DECIMAL}
+			</if>
+			<if test="dealmode != null">
+				AND DEALMODE = #{dealmode,jdbcType=DECIMAL}
+			</if>
+			<if test="expirydate != null">
+				AND EXPIRYDATE = #{expirydate}
+			</if>
+			<if test="isnewflag != null">
+				AND ISNEWFLAG = #{isnewflag,jdbcType=DECIMAL}
+			</if>
+			<if test="isblending != null">
+				AND ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null">
+				AND ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="sysbtime != null">
+				AND SYSBTIME = #{sysbtime}
+			</if>
+			<if test="manbtime != null">
+				AND MANBTIME = #{manbtime}
+			</if>
+			<if test="paycompany != null">
+				AND PAYCOMPANY = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="sysrectime != null">
+				AND SYSRECTIME = #{sysrectime}
+			</if>
+			<if test="receivetime != null">
+				AND RECEIVETIME = #{receivetime}
+			</if>
+			<if test="reqquerydata != null">
+				AND REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR}
+			</if>
+			<if test="recresultdata != null">
+				AND RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by t1.id
+	</select>
+	<select id="selectOlduGradeByBaseID" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from userUpgradeRecord where baseid =#{baseid,jdbcType=DECIMAL} AND
+		dealmode !=2 order by id desc
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		USERUPGRADERECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.UserUpgradeRecord">
+		insert into USERUPGRADERECORD
+		(ID, BASEID, GRADE,
+		PAYAMOUNT, BONUSPOINTS,DEDUCTBONUSPOINTS,
+		DEALTIME,
+		REMARK,
+		OLDGRADE, PAYTYPE,DEALMODE,
+		EXPIRYDATE, ISNEWFLAG, ISBLENDING,
+		ISMANBLENDING, SYSBTIME, MANBTIME,
+		PAYCOMPANY, SYSRECTIME, RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA)
+		values (#{id,jdbcType=DECIMAL},
+		#{baseid,jdbcType=DECIMAL},
+		#{grade,jdbcType=DECIMAL},
+		#{payamount,jdbcType=FLOAT}, #{bonuspoints,jdbcType=DECIMAL},
+		#{deductbonuspoints,jdbcType=DECIMAL},
+		#{dealtime},
+		#{remark,jdbcType=VARCHAR},
+		#{oldgrade,jdbcType=DECIMAL},
+		#{paytype,jdbcType=DECIMAL},
+		#{dealmode,jdbcType=DECIMAL},
+		#{expirydate}, #{isnewflag,jdbcType=DECIMAL},
+		#{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL},
+		#{sysbtime}, #{manbtime},
+		#{paycompany,jdbcType=VARCHAR},
+		#{sysrectime}, #{receivetime},
+		#{reqquerydata,jdbcType=VARCHAR},
+		#{recresultdata,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserUpgradeRecord">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT USERUPGRADERECORD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into USERUPGRADERECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="payamount != null">
+				PAYAMOUNT,
+			</if>
+			<if test="bonuspoints != null">
+				BONUSPOINTS,
+			</if>
+			<if test="deductbonuspoints != null">
+				DEDUCTBONUSPOINTS,
+			</if>
+			<if test="dealtime != null">
+				DEALTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="oldgrade != null">
+				OLDGRADE,
+			</if>
+			<if test="paytype != null">
+				PAYTYPE,
+			</if>
+			<if test="dealmode != null">
+				DEALMODE,
+			</if>
+			<if test="expirydate != null">
+				EXPIRYDATE,
+			</if>
+			<if test="isnewflag != null">
+				ISNEWFLAG,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=DECIMAL},
+			</if>
+			<if test="payamount != null">
+				#{payamount,jdbcType=FLOAT},
+			</if>
+			<if test="bonuspoints != null">
+				#{bonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="deductbonuspoints != null">
+				#{deductbonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="dealtime != null">
+				#{dealtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="oldgrade != null">
+				#{oldgrade,jdbcType=DECIMAL},
+			</if>
+			<if test="paytype != null">
+				#{paytype,jdbcType=DECIMAL},
+			</if>
+			<if test="dealmode != null">
+				#{dealmode,jdbcType=DECIMAL},
+			</if>
+			<if test="expirydate != null">
+				#{expirydate},
+			</if>
+			<if test="isnewflag != null">
+				#{isnewflag,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserUpgradeRecord">
+		update USERUPGRADERECORD
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=DECIMAL},
+			</if>
+			<if test="payamount != null">
+				PAYAMOUNT = #{payamount,jdbcType=FLOAT},
+			</if>
+			<if test="bonuspoints != null">
+				BONUSPOINTS = #{bonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="deductbonuspoints != null">
+				DEDUCTBONUSPOINTS =
+				#{deductbonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="dealtime != null">
+				DEALTIME = #{dealtime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="oldgrade != null">
+				OLDGRADE = #{oldgrade,jdbcType=DECIMAL},
+			</if>
+			<if test="paytype != null">
+				PAYTYPE = #{paytype,jdbcType=DECIMAL},
+			</if>
+			<if test="dealmode != null">
+				DEALMODE = #{dealmode,jdbcType=DECIMAL},
+			</if>
+			<if test="expirydate != null">
+				EXPIRYDATE = #{expirydate},
+			</if>
+			<if test="isnewflag != null">
+				ISNEWFLAG = #{isnewflag,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserUpgradeRecord">
+		update
+		USERUPGRADERECORD
+		set BASEID = #{baseid,jdbcType=DECIMAL},
+		GRADE =
+		#{grade,jdbcType=DECIMAL},
+		PAYAMOUNT = #{payamount,jdbcType=FLOAT},
+		BONUSPOINTS = #{bonuspoints,jdbcType=DECIMAL},
+		DEDUCTBONUSPOINTS =
+		#{deductbonuspoints,jdbcType=DECIMAL},
+		DEALTIME = #{dealtime},
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		OLDGRADE = #{oldgrade,jdbcType=DECIMAL},
+		PAYTYPE = #{paytype,jdbcType=DECIMAL},
+		DEALMODE =
+		#{dealmode,jdbcType=DECIMAL},
+		EXPIRYDATE = #{expirydate},
+		ISNEWFLAG =
+		#{isnewflag,jdbcType=DECIMAL},
+		ISBLENDING =
+		#{isblending,jdbcType=DECIMAL},
+		ISMANBLENDING =
+		#{ismanblending,jdbcType=DECIMAL},
+		SYSBTIME = #{sysbtime},
+		MANBTIME =
+		#{manbtime},
+		PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+		SYSRECTIME =
+		#{sysrectime},
+		RECEIVETIME = #{receivetime},
+		REQQUERYDATA =
+		#{reqquerydata,jdbcType=VARCHAR},
+		RECRESULTDATA =
+		#{recresultdata,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

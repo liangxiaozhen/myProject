@@ -1,0 +1,165 @@
+
+body{ background-color: #f1f1f1;}
+a:hover{text-decoration: none}
+
+/*å€Ÿæ¬¾é¦–é¡µ*/
+#bannerWrap{ width:100%; height:300px; overflow:hidden; line-height:0; position:relative;min-width: 1180px;}
+#bannerWrap ul.imgToggle{ width:1920px; height:300px; position:absolute; top:0; left:50%; margin-left:-960px;}
+#bannerWrap ul.imgToggle li{ position:absolute; top:0; left:0;}
+#bannerWrap ul.buttonDot{ position:absolute; bottom:10px; left:50%; z-index:2;}
+#bannerWrap ul.buttonDot li{ width:15px; height:15px; background-color:#666; color:white; line-height:20px; text-align:center; float:left; margin-right:10px;cursor: pointer;border-radius: 15px;}
+#bannerWrap ul.buttonDot li.choice{ background-color:#F60;}
+#bannerWrap .prev,#bannerWrap .next{z-index: 9999;width: 50px;height: 300px;background-color: #0000A1;opacity: .3;position: absolute;cursor: pointer}
+#bannerWrap .prev{ top:0;left: 0;background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/arrow-left-light.png") 20px 125px no-repeat;  }
+#bannerWrap .next{ top: 0;right: 0;background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/arrow-right-light.png") 1px 125px no-repeat}
+#bannerWrap .prev a:hover{opacity: 1}
+#bannerWrap .next a:hover{opacity: 1}
+
+.column{ width: 100%;height: 100px;background-color: #fff;box-shadow:0 1px 2px #eee;min-width: 1180px;}
+.column ul.columnTitle{ width: 1180px;margin: 0 auto;position: relative;height: 100px;}
+.column ul.columnTitle li{ padding: 25px 30px; width: 235px; height: 50px;float: left}
+.column ul.columnTitle li .tagsText,.column ul.columnTitle li .tagsImg{float: left;}
+.column ul.columnTitle li .tagsText{ padding-left: 20px;}
+.column ul.columnTitle li .tagsText h3.textStyle{font-size: 20px; color: #333;font-weight: normal}
+.column ul.columnTitle li .tagsText p{color: #666;font-size: 14px;}
+.column ul.columnTitle li .tagsImg{padding-top: 3px;}
+
+#loanMain{ min-width: 1180px;margin: 20px auto 0 auto;overflow: hidden;width: 1180px}
+#loanMain .explainPro{width: 100%;background-color: #fff;box-shadow:0 1px 2px #eee;}
+
+.products_description{ width: 1180px;height: 240px;margin: 20px auto 0 auto;}
+.products_description .leftProducts{ width: 580px;height: 240px;margin-right: 20px;background-color: #fff;float: left;box-shadow:0 1px 2px #eee;position: relative;cursor: pointer;}
+.products_description .rightProducts{ width: 580px;height: 240px;background-color: #fff;float: left;box-shadow:0 1px 2px #eee;position: relative;cursor: pointer;}
+.products_description .leftProducts .textTil,.products_description .rightProducts .textTil{font-size: 20px;padding: 30px 0 20px 30px;color: #333;}
+.products_description .leftProducts .textTil .orange,.products_description .rightProducts .textTil .orange{color: #2577e3}
+.products_description .leftProducts .textExp,.products_description .rightProducts .textExp{font-size: 16px;color: #666;padding: 0 0 20px 38px}
+.products_description .leftProducts .btnApply{ width: 260px;height: 40px;margin: 15px 0 0 38px;}
+.btnApply .textWord{ border-radius: 4px;display: inline-block;color: #2577e3;text-align: center;font-size: 16px;line-height: 40px;width: 160px;background-color: #fff; border: 1px solid #2577e3}
+.btnApply .textMore{display: inline-block;margin-left: 20px;font-size: 16px;}
+.btnApply .textMore:hover{color:#ff7a0e }
+.products_description .leftProducts .imgMon,.products_description .rightProducts .imgHouse{position: absolute;right: 60px; top:50%;margin-top: -50px;}
+.products_description .rightProducts .btnApply{ width: 260px;height: 40px;margin: 34px 0 0 38px;}
+.borrowingPro{ width: 1180px;height: 240px;background-color: #fff;box-shadow:0 1px 2px #eee;margin:20px auto 0 auto}
+.borrowingPro .topPro{height: 54px;width: 1180px;border-bottom: 1px solid #eee;}
+.borrowingPro .topPro h3{font-size: 20px;float: left;padding-left: 40px;line-height: 55px;}
+.borrowingPro .topPro .textEx{float: right;line-height: 55px;padding-right: 30px;color: #999;font-size: 14px;}
+.markIc{background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/icon.png") -217px 0 no-repeat;width: 22px;height: 22px;vertical-align: middle;margin-right: 10px;}
+
+.textTecProcess{height: 185px;width: 1180px;}
+.textTecProcess ul.process li{float: left; width: 295px;position: relative;}
+.textTecProcess ul.process li .fillInApp{background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/icon.png") -74px -31px no-repeat;width: 29px;height: 30px;margin: 50px auto 0 auto;}
+.textTecProcess ul.process li .fillInCon{background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/icon.png") -111px -31px no-repeat;width: 31px;height: 30px;margin: 50px auto 0 auto;}
+.textTecProcess ul.process li .fillInMat{background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/icon.png") -152px -31px no-repeat;width: 28px;height: 29px;margin: 50px auto 0 auto;}
+.textTecProcess ul.process li .fillInEnd{background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/icon.png") -188px -31px no-repeat;width: 28px;height: 30px;margin: 50px auto 0 auto;}
+.textTecProcess ul.process li .text_fillInApp{text-align: center;padding-top: 30px;font-size: 16px;}
+.textTecProcess ul.process li .right_Arrow{position: absolute;background: url("http://www.niwodai.com/Public/Static/201404/event/daikuan/images/icon.png") -246px 0 no-repeat;width: 44px;height: 12px;right: 0;top:50%;margin-top:-6px;}
+
+#loanMain .faqsPro{width: 1180px;background-color: #fff;margin: 20px auto 2px auto;box-shadow: 0 1px 2px #eee;}
+.faqsPro .text_faqsTop{width: 1180px;height: 54px;border-bottom: 1px solid #eee}
+.faqsPro .text_faqsTop h3.textQues{ float: left;padding-left: 40px;line-height: 55px;font-size: 20px;}
+.faqsPro .text_faqsTop .more{ float: right;line-height: 55px;padding-right: 40px;font-size: 16px;display: inline-block}
+.faqsPro .text_faqsTop .more a:active{color: #2577e3}
+.faqsPro .text_faqsTop .more a{color: #2577e3}
+#loanMain .faqsPro .textWord{ width: 1180px; text-align: left}
+#loanMain .faqsPro .textWord dl.text_master{ width: 320px;line-height: 1.8;padding: 30px 20px 30px 40px;float: left;height: 140px;}
+#loanMain .faqsPro .textWord dl.text_master dt.text_themes{ padding-bottom: 10px;font-size: 16px;color: #333;}
+#loanMain .faqsPro .textWord dl.text_master dd{font-size: 14px;color: #666;}
+#loanMain .faqsPro .textWord dl.text_master dd a{color: #2577e3}
+.bannerImg{display:inline-block;}
+
+/*2017/3/3*/
+.leftDetails{width: 416px;float: left;}
+.leftDetails .headerText{padding: 48px 0 60px 0;color: #333;font-size: 20px;}
+.productTop{border-bottom: 1px solid #f1f1f1;margin-bottom: 37px}
+.loanWhole{margin-left: 35px;overflow: hidden;margin-right: 35px;border-bottom: 1px solid #f1f1f1;}
+.productTop .topTitle,.productBon .topTitle{font-size: 20px;display: inline-block;vertical-align:middle;}
+.textBlod{font-weight: 700;}
+.markText{display: inline-block;text-align: center;border-radius: 30px;height: 20px;line-height: 20px;margin-left: 10px;font-size: 12px;}
+.productTop .miaolaRight{width: 82px;border: 1px solid #2577e3;color: #2577e3;}
+.productTop .CreditRgiht{width: 100px;border: 1px solid #2577e3;color: #2577e3;}
+.productBon .fundRight{width: 80px;border: 1px solid #fb8b2b;color: #fb8b2b;}
+.textWritten{font-size: 20px;padding-top: 10px;padding-bottom: 45px;text-indent:8px;}
+.textBlue{color: #2577e3;}
+.explainPro .processLoan{width: 100%;height: 200px;}
+.processLoan ul.process li{width: 370px;float: left;position: relative;text-align: center;padding-top: 115px;height: 85px;}
+.fillInApp{position: absolute;background: url(http://static5.niwodai.com/cms/image/08d313cb-6c86-41a0-b016-b07357d60d58.png) no-repeat 0 0;width: 46px;height: 46px;left: 50%;margin-left: -23px;top: 56px;}
+.text_fillInApp{font-size: 16px;color: #666}
+.processLoan .right_Arrow{position: absolute;background: url(http://static5.niwodai.com/cms/image/08d313cb-6c86-41a0-b016-b07357d60d58.png) no-repeat 0 -147px;width: 40px;height: 24px;right: 0;top: 50%;margin-top: -12px;}
+.text_dataIcon{position: absolute;background: url(http://static5.niwodai.com/cms/image/08d313cb-6c86-41a0-b016-b07357d60d58.png) no-repeat 0 -47px;width: 46px;height: 46px;left: 50%;margin-left: -23px;top: 56px;}
+.text_overIcon{position: absolute;background: url(http://static5.niwodai.com/cms/image/08d313cb-6c86-41a0-b016-b07357d60d58.png) no-repeat 0 -95px;width: 46px;height: 46px;left: 50%;margin-left: -23px;top: 56px;}
+.processLoan .process{margin-left: 35px;}
+.loanWhole .rightCodeWX{float: left;width: 694px;background:url(http://static5.niwodai.com/cms/image/51d13c74-c69a-417e-a6b7-e2b57f8d56c9.png) no-repeat  center 45px;height: 559px;position: relative;}
+.numPeople{position: absolute;top: 122px;left: 193px;font-size: 14px;color: #fb8b2b;text-align: center}
+#myTargetElement{color: #fb8b2b;font-size: 22px;font-weight: 700;}
+.downAppLoan{position: absolute;bottom:80px;left: 104px;}
+.downAppLoan .leftAPPdown{float: left;}
+.downAppLoan .rightWXDown{float: left;margin-left:20px;}
+.downAppLoan .leftAPPdown a,.downAppLoan .rightWXDown a{display: inline-block;}
+.contentCode{position:  absolute;top: 185px;left: 165px;}
+#btnWord{position: absolute;top: 362px;left: 168px;font-size: 14px;color: #666;width: 160px;text-align: center}
+
+    /* Float Shadow */
+.leftProducts,.rightProducts {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    -webkit-transition-property: all;
+    transition-property: all;
+
+}
+.leftProducts:hover, .leftProducts:focus, .leftProducts:active,.rightProducts:hover, .rightProducts:focus, .rightProducts:active  {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    box-shadow:0 8px 10px 0 #ccc;
+}
+
+/* Sweep To Top */
+.hvr-sweep-to-top {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+.hvr-sweep-to-top:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #2577e3;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -webkit-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.hvr-sweep-to-top:hover{
+    color: white;
+}
+.hvr-sweep-to-top:hover:before {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+}

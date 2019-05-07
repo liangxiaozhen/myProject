@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.InterestExpenseMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.InterestExpense">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="INTEXPNO" property="intexpno" jdbcType="VARCHAR" />
+		<result column="IERECMAN" property="ierecman" jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="IEPERCENT" property="iepercent" jdbcType="FLOAT" />
+		<result column="MINIEFEE" property="miniefee" jdbcType="FLOAT" />
+		<result column="MAXIEFEE" property="maxiefee" jdbcType="FLOAT" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="IERECMANID" property="ierecmanid" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="GFITYPE" property="gfitype" jdbcType="DECIMAL" />
+		<result column="TTYPE" property="ttype" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,INTEXPNO,IERECMAN,UGRADE,IEPERCENT,MINIEFEE,MAXIEFEE,ISTEMPLET,TID,IERECMANID,ISAUDIT,
+		ADDMAN,ADDTIME,REMARK,GFITYPE,TTYPE
+	</sql>
+
+	<insert id="insert" parameterType="com.ptpl.model.InterestExpense">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT INTERESTEXPENSE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into INTERESTEXPENSE (ID,INTEXPNO,IERECMAN,
+		UGRADE,IEPERCENT,
+		MINIEFEE,MAXIEFEE,ISTEMPLET,TID,IERECMANID,ISAUDIT,ADDMAN,
+		ADDTIME,REMARK,GFITYPE,TTYPE
+		)
+		values (#{id,jdbcType=DECIMAL},
+		#{intexpno,jdbcType=VARCHAR},
+		#{ierecman,jdbcType=VARCHAR},
+		#{ugrade,jdbcType=VARCHAR},#{iepercent,jdbcType=FLOAT},
+		#{miniefee,jdbcType=FLOAT}, #{maxiefee,jdbcType=FLOAT},
+		#{istemplet,jdbcType=DECIMAL},
+		#{tid,jdbcType=DECIMAL},#{ierecmanid,jdbcType=DECIMAL},#{isaudit,jdbcType=DECIMAL},
+		#{addman,jdbcType=VARCHAR},#{addtime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},
+		#{gfitype,jdbcType=DECIMAL},#{ttype,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.InterestExpense">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT INTERESTEXPENSE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into INTERESTEXPENSE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="intexpno != null">
+				INTEXPNO,
+			</if>
+			<if test="ierecman != null">
+				IERECMAN,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="iepercent != null">
+				IEPERCENT,
+			</if>
+			<if test="miniefee != null">
+				MINIEFEE,
+			</if>
+			<if test="maxiefee != null">
+				MAXIEFEE,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="ierecmanid != null">
+				IERECMANID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="gfitype != null">
+				GFITYPE,
+			</if>
+			<if test="ttype != null">
+				TTYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="intexpno != null">
+				#{intexpno,jdbcType=VARCHAR},
+			</if>
+			<if test="ierecman != null">
+				#{ierecman,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="iepercent != null">
+				#{iepercent,jdbcType=OTHER},
+			</if>
+			<if test="miniefee != null">
+				#{miniefee,jdbcType=OTHER},
+			</if>
+			<if test="maxiefee != null">
+				#{maxiefee,jdbcType=OTHER},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="ierecmanid != null">
+				#{ierecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="gfitype != null">
+				#{gfitype,jdbcType=DECIMAL},
+			</if>
+			<if test="ttype != null">
+				#{ttype,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.ptpl.model.InterestExpense">
+		update INTERESTEXPENSE
+		<set>
+			<if test="intexpno != null">
+				INTEXPNO = #{intexpno,jdbcType=VARCHAR},
+			</if>
+			<if test="ierecman != null">
+				IERECMAN = #{ierecman,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="iepercent != null">
+				IEPERCENT = #{iepercent,jdbcType=OTHER},
+			</if>
+			<if test="miniefee != null">
+				MINIEFEE = #{miniefee,jdbcType=OTHER},
+			</if>
+			<if test="maxiefee != null">
+				MAXIEFEE = #{maxiefee,jdbcType=OTHER},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="ierecmanid != null">
+				IERECMANID = #{ierecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="gfitype != null">
+				GFITYPE = #{gfitype,jdbcType=DECIMAL},
+			</if>
+			<if test="ttype != null">
+				TTYPE = #{ttype,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<select id="selectInterestExpenseById" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from INTERESTEXPENSE where id = #{id,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="selectByCondition" parameterType="com.ptpl.model.InterestExpense"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from INTERESTEXPENSE
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="intexpno != null and intexpno!=''">
+				and INTEXPNO = #{intexpno,jdbcType=VARCHAR}
+			</if>
+			<if test="ierecman != null and ierecman!=''">
+				and IERECMAN = #{ierecman,jdbcType=VARCHAR}
+			</if>
+			<if test="ugrade != null and ugrade!=''">
+				and UGRADE = #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="iepercent != null and iepercent!=''">
+				and IEPERCENT = #{iepercent,jdbcType=FLOAT}
+			</if>
+			<if test="miniefee != null and miniefee!=''">
+				and MINIEFEE = #{miniefee,jdbcType=FLOAT}
+			</if>
+			<if test="maxiefee != null and maxiefee!=''">
+				and MAXIEFEE = #{maxiefee,jdbcType=FLOAT}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null and tid!=''">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="ierecmanid != null and ierecmanid!=''">
+				and IERECMANID = #{ierecmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null and addman!=''">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="gfitype != null">
+				and GFITYPE = #{gfitype,jdbcType=DECIMAL}
+			</if>
+			<if test="ttype != null">
+				and TTYPE = #{ttype,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+	<update id="update" parameterType="com.ptpl.model.InterestExpense">
+		update INTERESTEXPENSE
+		<trim prefix="set" suffixOverrides=",">
+			<if test="intexpno != null">
+				INTEXPNO = #{intexpno,jdbcType=VARCHAR},
+			</if>
+			IERECMAN = #{ierecman,jdbcType=VARCHAR},
+			UGRADE =
+			#{ugrade,jdbcType=VARCHAR},
+			IEPERCENT = #{iepercent,jdbcType=FLOAT},
+			MINIEFEE = #{miniefee,jdbcType=FLOAT},
+			MAXIEFEE =
+			#{maxiefee,jdbcType=FLOAT},
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="ierecmanid != null">
+				IERECMANID = #{ierecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from INTERESTEXPENSE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据标ID获取信息 -->
+	<select id="selectExpensebytid" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.InterestExpense">
+		select * from INTERESTEXPENSE t where
+		t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+
+	<select id="selectGradebyTid" resultType="java.lang.String">
+		select distinct(UGRADE)
+		from INTERESTEXPENSE t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

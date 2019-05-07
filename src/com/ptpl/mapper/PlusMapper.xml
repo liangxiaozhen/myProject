@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.PlusMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.Plus">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PLUSNO" property="plusno" jdbcType="VARCHAR" />
+		<result column="ISAINT" property="isaint" jdbcType="DECIMAL" />
+		<result column="AONCEINT" property="aonceint" jdbcType="DECIMAL" />
+		<result column="ATOTALINT" property="atotalint" jdbcType="DECIMAL" />
+		<result column="AONEQROFIT" property="aoneqrofit" jdbcType="FLOAT" />
+		<result column="ISAVOUCHER" property="isavoucher" jdbcType="DECIMAL" />
+		<result column="AONCEVOUCHER" property="aoncevoucher" jdbcType="DECIMAL" />
+		<result column="ATOTALVOUCHER" property="atotalvoucher"
+			jdbcType="DECIMAL" />
+		<result column="AONEVAMOUNT" property="aonevamount" jdbcType="FLOAT" />
+		<result column="ISALIKEVOUCHER" property="isalikevoucher"
+			jdbcType="DECIMAL" />
+		<result column="AONCELIKEVOUCHER" property="aoncelikevoucher"
+			jdbcType="DECIMAL" />
+		<result column="ATOTALLIKEVOUCHER" property="atotallikevoucher"
+			jdbcType="DECIMAL" />
+		<result column="AONELVAMOUNT" property="aonelvamount" jdbcType="FLOAT" />
+		<result column="AONCEPLUSMODE" property="aonceplusmode"
+			jdbcType="DECIMAL" />
+		<result column="ATOTALPLUSMODE" property="atotalplusmode"
+			jdbcType="DECIMAL" />
+		<result column="PAYFORPLUSMAN" property="payforplusman"
+			jdbcType="VARCHAR" />
+		<result column="CLEARMODE" property="clearmode" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="findPlusByTid" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select * from PLUS where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+
+	<insert id="insert" parameterType="com.ptpl.model.Plus">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT PLUS_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into PLUS (ID, PLUSNO, ISAINT,
+		AONCEINT, ATOTALINT, AONEQROFIT,
+		ISAVOUCHER, AONCEVOUCHER, ATOTALVOUCHER,
+		AONEVAMOUNT, ISALIKEVOUCHER, AONCELIKEVOUCHER,
+		ATOTALLIKEVOUCHER, AONELVAMOUNT, AONCEPLUSMODE,
+		ATOTALPLUSMODE, PAYFORPLUSMAN, CLEARMODE,
+		ISTEMPLET,TID,ISAUDIT,ADDMAN,ADDTIME,REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{plusno,jdbcType=VARCHAR},
+		#{isaint,jdbcType=DECIMAL},
+		#{aonceint,jdbcType=DECIMAL}, #{atotalint,jdbcType=DECIMAL}, #{aoneqrofit,jdbcType=FLOAT},
+		#{isavoucher,jdbcType=DECIMAL}, #{aoncevoucher,jdbcType=DECIMAL},
+		#{atotalvoucher,jdbcType=DECIMAL},
+		#{aonevamount,jdbcType=FLOAT}, #{isalikevoucher,jdbcType=DECIMAL},
+		#{aoncelikevoucher,jdbcType=DECIMAL},
+		#{atotallikevoucher,jdbcType=DECIMAL}, #{aonelvamount,jdbcType=FLOAT},
+		#{aonceplusmode,jdbcType=DECIMAL},
+		#{atotalplusmode,jdbcType=DECIMAL}, #{payforplusman,jdbcType=VARCHAR}, #{clearmode,jdbcType=DECIMAL},
+		#{istemplet,jdbcType=DECIMAL},#{tid,jdbcType=DECIMAL},#{isaudit,jdbcType=DECIMAL},#{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="selectByCondition" parameterType="com.ptpl.model.Plus"
+		resultMap="BaseResultMap">
+		select * from PLUS
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="plusno != null and plusno!=''">
+				and PLUSNO = #{plusno,jdbcType=VARCHAR}
+			</if>
+			<if test="isaint != null and isaint!=''">
+				and ISAINT = #{isaint,jdbcType=DECIMAL}
+			</if>
+			<if test="aonceint != null and aonceint!=''">
+				and AONCEINT = #{aonceint,jdbcType=DECIMAL}
+			</if>
+			<if test="atotalint != null and atotalint!=''">
+				and ATOTALINT = #{atotalint,jdbcType=DECIMAL}
+			</if>
+			<if test="aoneqrofit != null and aoneqrofit!=''">
+				and AONEQROFIT = #{aoneqrofit,jdbcType=FLOAT}
+			</if>
+			<if test="isavoucher != null and isavoucher!=''">
+				and ISAVOUCHER = #{isavoucher,jdbcType=DECIMAL}
+			</if>
+			<if test="aoncevoucher != null and aoncevoucher!=''">
+				and AONCEVOUCHER = #{aoncevoucher,jdbcType=DECIMAL}
+			</if>
+			<if test="atotalvoucher != null and atotalvoucher!=''">
+				and ATOTALVOUCHER = #{atotalvoucher,jdbcType=DECIMAL}
+			</if>
+			<if test="aonevamount != null and aonevamount!=''">
+				and AONEVAMOUNT = #{aonevamount,jdbcType=FLOAT}
+			</if>
+			<if test="isalikevoucher != null and isalikevoucher!=''">
+				and ISALIKEVOUCHER = #{isalikevoucher,jdbcType=DECIMAL}
+			</if>
+			<if test="aoncelikevoucher != null and aoncelikevoucher!=''">
+				and AONCELIKEVOUCHER = #{aoncelikevoucher,jdbcType=DECIMAL}
+			</if>
+			<if test="atotallikevoucher != null and atotallikevoucher!=''">
+				and ATOTALLIKEVOUCHER = #{atotallikevoucher,jdbcType=DECIMAL}
+			</if>
+			<if test="aonelvamount != null and aonelvamount!=''">
+				and AONELVAMOUNT = #{aonelvamount,jdbcType=FLOAT}
+			</if>
+			<if test="aonceplusmode != null and aonceplusmode!=''">
+				and AONCEPLUSMODE = #{aonceplusmode,jdbcType=DECIMAL}
+			</if>
+			<if test="atotalplusmode != null and atotalplusmode!=''">
+				and ATOTALPLUSMODE = #{atotalplusmode,jdbcType=DECIMAL}
+			</if>
+			<if test="payforplusman != null and payforplusman!=''">
+				and PAYFORPLUSMAN = #{payforplusman,jdbcType=VARCHAR}
+			</if>
+			<if test="clearmode != null and clearmode!=''">
+				and CLEARMODE = #{clearmode,jdbcType=DECIMAL}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+	<update id="update" parameterType="com.ptpl.model.Plus">
+		update PLUS
+		<trim prefix="set" suffixOverrides=",">
+			<if test="plusno != null">
+				PLUSNO = #{plusno,jdbcType=VARCHAR},
+			</if>
+			ISAINT = #{isaint,jdbcType=DECIMAL},
+			AONCEINT = #{aonceint,jdbcType=DECIMAL},
+			ATOTALINT = #{atotalint,jdbcType=DECIMAL},
+			AONEQROFIT = #{aoneqrofit,jdbcType=FLOAT},
+			ISAVOUCHER = #{isavoucher,jdbcType=DECIMAL},
+			AONCEVOUCHER = #{aoncevoucher,jdbcType=DECIMAL},
+			ATOTALVOUCHER = #{atotalvoucher,jdbcType=DECIMAL},
+			AONEVAMOUNT = #{aonevamount,jdbcType=FLOAT},
+			ISALIKEVOUCHER = #{isalikevoucher,jdbcType=DECIMAL},
+			AONCELIKEVOUCHER = #{aoncelikevoucher,jdbcType=DECIMAL},
+			ATOTALLIKEVOUCHER = #{atotallikevoucher,jdbcType=DECIMAL},
+			AONELVAMOUNT = #{aonelvamount,jdbcType=FLOAT},
+			AONCEPLUSMODE = #{aonceplusmode,jdbcType=DECIMAL},
+			ATOTALPLUSMODE = #{atotalplusmode,jdbcType=DECIMAL},
+			PAYFORPLUSMAN = #{payforplusman,jdbcType=VARCHAR},
+			CLEARMODE = #{clearmode,jdbcType=DECIMAL},
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from PLUS
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+</mapper>

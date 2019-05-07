@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.LoaninfoauditMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.Loaninfoaudit">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="EDUCATION" property="education" jdbcType="DECIMAL" />
+		<result column="GRADINST" property="gradinst" jdbcType="VARCHAR" />
+		<result column="MARITALSTATUS" property="maritalstatus"
+			jdbcType="DECIMAL" />
+		<result column="COMPANY" property="company" jdbcType="VARCHAR" />
+		<result column="SALARY" property="salary" jdbcType="OTHER" />
+		<result column="SALARYINFO" property="salaryinfo" jdbcType="VARCHAR" />
+		<result column="ISCAROW" property="iscarow" jdbcType="DECIMAL" />
+		<result column="CARINFO" property="carinfo" jdbcType="VARCHAR" />
+		<result column="ISHOUSEOW" property="ishouseow" jdbcType="DECIMAL" />
+		<result column="HOUSEINFO" property="houseinfo" jdbcType="VARCHAR" />
+		<result column="OTHER" property="other" jdbcType="VARCHAR" />
+		<result column="CONTACTSMAN" property="contactsman" jdbcType="VARCHAR" />
+		<result column="CONTACTSPHONE" property="contactsphone"
+			jdbcType="VARCHAR" />
+		<result column="CONTACTSRATION" property="contactsration"
+			jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="AUDITSTATUS" property="auditstatus" jdbcType="DECIMAL" />
+		<result column="LIANO" property="liano" jdbcType="VARCHAR" />
+		<association property="userbaseAccountInfo" column="baseid"
+			select="com.ptpl.mapper.UserBaseAccountInfoMapper.getUserBaseAccountInfoById">
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, EDUCATION, GRADINST, MARITALSTATUS, COMPANY, SALARY,
+		SALARYINFO, ISCAROW,
+		CARINFO, ISHOUSEOW, HOUSEINFO, OTHER, CONTACTSMAN, CONTACTSPHONE,
+		CONTACTSRATION,
+		ADDTIME, AUDITMAN, AUDITTIME, REMARK, AUDITSTATUS, LIANO
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from LOANINFOAUDIT
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from LOANINFOAUDIT
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.Loaninfoaudit">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT Loau_Seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into LOANINFOAUDIT (ID, BASEID, EDUCATION,
+		GRADINST, MARITALSTATUS, COMPANY,
+		SALARY, SALARYINFO, ISCAROW,
+		CARINFO, ISHOUSEOW, HOUSEINFO,
+		OTHER, CONTACTSMAN, CONTACTSPHONE,
+		CONTACTSRATION, ADDTIME, AUDITMAN,
+		AUDITTIME, REMARK, AUDITSTATUS,
+		LIANO)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{education,jdbcType=DECIMAL},
+		#{gradinst,jdbcType=VARCHAR}, #{maritalstatus,jdbcType=DECIMAL}, #{company,jdbcType=VARCHAR},
+		#{salary,jdbcType=OTHER}, #{salaryinfo,jdbcType=VARCHAR},
+		#{iscarow,jdbcType=DECIMAL},
+		#{carinfo,jdbcType=VARCHAR}, #{ishouseow,jdbcType=DECIMAL}, #{houseinfo,jdbcType=VARCHAR},
+		#{other,jdbcType=VARCHAR}, #{contactsman,jdbcType=VARCHAR},
+		#{contactsphone,jdbcType=VARCHAR},
+		#{contactsration,jdbcType=DECIMAL}, #{addtime,jdbcType=TIMESTAMP}, #{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+		#{auditstatus,jdbcType=DECIMAL},
+		#{liano,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.Loaninfoaudit">
+		insert into LOANINFOAUDIT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="education != null">
+				EDUCATION,
+			</if>
+			<if test="gradinst != null">
+				GRADINST,
+			</if>
+			<if test="maritalstatus != null">
+				MARITALSTATUS,
+			</if>
+			<if test="company != null">
+				COMPANY,
+			</if>
+			<if test="salary != null">
+				SALARY,
+			</if>
+			<if test="salaryinfo != null">
+				SALARYINFO,
+			</if>
+			<if test="iscarow != null">
+				ISCAROW,
+			</if>
+			<if test="carinfo != null">
+				CARINFO,
+			</if>
+			<if test="ishouseow != null">
+				ISHOUSEOW,
+			</if>
+			<if test="houseinfo != null">
+				HOUSEINFO,
+			</if>
+			<if test="other != null">
+				OTHER,
+			</if>
+			<if test="contactsman != null">
+				CONTACTSMAN,
+			</if>
+			<if test="contactsphone != null">
+				CONTACTSPHONE,
+			</if>
+			<if test="contactsration != null">
+				CONTACTSRATION,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="auditstatus != null">
+				AUDITSTATUS,
+			</if>
+			<if test="liano != null">
+				LIANO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="education != null">
+				#{education,jdbcType=DECIMAL},
+			</if>
+			<if test="gradinst != null">
+				#{gradinst,jdbcType=VARCHAR},
+			</if>
+			<if test="maritalstatus != null">
+				#{maritalstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="company != null">
+				#{company,jdbcType=VARCHAR},
+			</if>
+			<if test="salary != null">
+				#{salary,jdbcType=OTHER},
+			</if>
+			<if test="salaryinfo != null">
+				#{salaryinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="iscarow != null">
+				#{iscarow,jdbcType=DECIMAL},
+			</if>
+			<if test="carinfo != null">
+				#{carinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="ishouseow != null">
+				#{ishouseow,jdbcType=DECIMAL},
+			</if>
+			<if test="houseinfo != null">
+				#{houseinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="other != null">
+				#{other,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsman != null">
+				#{contactsman,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsphone != null">
+				#{contactsphone,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsration != null">
+				#{contactsration,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="auditstatus != null">
+				#{auditstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="liano != null">
+				#{liano,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.Loaninfoaudit">
+		update LOANINFOAUDIT
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="education != null">
+				EDUCATION = #{education,jdbcType=DECIMAL},
+			</if>
+			<if test="gradinst != null">
+				GRADINST = #{gradinst,jdbcType=VARCHAR},
+			</if>
+			<if test="maritalstatus != null">
+				MARITALSTATUS = #{maritalstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="company != null">
+				COMPANY = #{company,jdbcType=VARCHAR},
+			</if>
+			<if test="salary != null">
+				SALARY = #{salary,jdbcType=OTHER},
+			</if>
+			<if test="salaryinfo != null">
+				SALARYINFO = #{salaryinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="iscarow != null">
+				ISCAROW = #{iscarow,jdbcType=DECIMAL},
+			</if>
+			<if test="carinfo != null">
+				CARINFO = #{carinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="ishouseow != null">
+				ISHOUSEOW = #{ishouseow,jdbcType=DECIMAL},
+			</if>
+			<if test="houseinfo != null">
+				HOUSEINFO = #{houseinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="other != null">
+				OTHER = #{other,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsman != null">
+				CONTACTSMAN = #{contactsman,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsphone != null">
+				CONTACTSPHONE = #{contactsphone,jdbcType=VARCHAR},
+			</if>
+			<if test="contactsration != null">
+				CONTACTSRATION = #{contactsration,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="auditstatus != null">
+				AUDITSTATUS = #{auditstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="liano != null">
+				LIANO = #{liano,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.Loaninfoaudit">
+		update LOANINFOAUDIT
+		set BASEID = #{baseid,jdbcType=DECIMAL},
+		EDUCATION = #{education,jdbcType=DECIMAL},
+		GRADINST = #{gradinst,jdbcType=VARCHAR},
+		MARITALSTATUS = #{maritalstatus,jdbcType=DECIMAL},
+		COMPANY = #{company,jdbcType=VARCHAR},
+		SALARY = #{salary,jdbcType=OTHER},
+		SALARYINFO = #{salaryinfo,jdbcType=VARCHAR},
+		ISCAROW = #{iscarow,jdbcType=DECIMAL},
+		CARINFO = #{carinfo,jdbcType=VARCHAR},
+		ISHOUSEOW = #{ishouseow,jdbcType=DECIMAL},
+		HOUSEINFO = #{houseinfo,jdbcType=VARCHAR},
+		OTHER = #{other,jdbcType=VARCHAR},
+		CONTACTSMAN = #{contactsman,jdbcType=VARCHAR},
+		CONTACTSPHONE = #{contactsphone,jdbcType=VARCHAR},
+		CONTACTSRATION = #{contactsration,jdbcType=DECIMAL},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		AUDITMAN = #{auditman,jdbcType=VARCHAR},
+		AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		AUDITSTATUS = #{auditstatus,jdbcType=DECIMAL},
+		LIANO = #{liano,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectBaseByid" resultMap="BaseResultMap"
+		parameterType="int">
+		select t.* from LOANINFOAUDIT t where BASEID = #{id}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select u.realname,u.loginname ,t.* from LOANINFOAUDIT t,USERBASEACCOUNTINFO
+		u where t.baseid=u.id order by t.ADDTIME asc
+	</select>
+	<select id="selectIdAndauditstatus" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.Loaninfoaudit">
+		select * from LOANINFOAUDIT where 1=1
+		<if test="auditstatus != null">
+			and AUDITSTATUS = #{auditstatus,jdbcType=DECIMAL}
+		</if>
+		<if test="baseid != null">
+			and BASEID = #{baseid,jdbcType=DECIMAL}
+		</if>
+		order by ADDTIME asc
+	</select>
+	<select id="selectminute" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select u.realname , u.loginname , t.* from LOANINFOAUDIT t ,
+		USERBASEACCOUNTINFO u where t.baseid=u.id and t.ID =
+		#{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectliano" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select t.* from LOANINFOAUDIT t where t.baseid=#{baseid} and t.auditstatus=1
+	</select>
+	<select id="selectloaninfo" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.*, t.rowid from LOANINFOAUDIT t where t.liano=#{liano}
+	</select>
+</mapper>

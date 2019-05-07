@@ -1,0 +1,89 @@
+package com.ptpl.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import com.ptpl.model.[entity];
+
+/**
+ * 
+ * [description]业务层
+ * [entity]ServiceI
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public interface [entity]ServiceI {
+
+	/**
+	 * 
+	* @Title: insert 
+	* @Description: TODO([description]数据增加方法) 
+	* @param @param [lowEntity]
+	* @param @return  参数说明 
+	* @return int    返回类型 
+	* @author [author]
+	* @throws
+	 */
+    int insert([entity] [lowEntity]);
+
+    /**
+     * 
+    * @Title: insertSelective 
+    * @Description: TODO([description]数据增加方法，非空值) 
+    * @param @param [lowEntity]
+    * @param @return  参数说明 
+    * @return int    返回类型 
+    * @author [author]
+    * @throws
+     */
+    int insertSelective([entity] [lowEntity]);
+     /**
+     * 
+     * @Title: deleteById 
+     * @Description: TODO([description]根据Id 删除方法) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author [author]
+     * @throws
+     */
+    int deleteById(BigDecimal id);
+      /**
+     * 
+     * @Title: updateById 
+     * @Description: TODO([description]更新方法) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author [author]
+     * @throws
+     */
+     int  updateById([entity] [lowEntity]); 
+     /**
+     * 
+     * @Title: find[entity]s
+     * @Description: TODO([description]查询全部) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author [author]
+     * @throws
+     */
+    List<[entity]> find[entity]s([entity] [lowEntity]);
+    
+     /**
+     * 
+    * @Title: find[entity]ById
+    * @Description: TODO(根据Id查询对应的[description]信息) 
+    * @param @param id
+    * @param @return  参数说明 
+    * @return [entity]    返回类型 
+    * @author [author]
+    * @throws
+     */
+    [entity] find[entity]ById(BigDecimal id);
+  
+   
+}

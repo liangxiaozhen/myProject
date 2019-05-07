@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AheadRepayAwardRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AheadRepayAwardRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="ARORDERNO" property="arorderno" jdbcType="VARCHAR" />
+		<result column="ARID" property="arid" jdbcType="DECIMAL" />
+		<result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+		<result column="PAWARDNAME" property="pawardname" jdbcType="VARCHAR" />
+		<result column="PAWARDNO" property="pawardno" jdbcType="VARCHAR" />
+		<result column="PAWARDCOUNT" property="pawardcount" jdbcType="FLOAT" />
+		<result column="PLUSPOORINT" property="pluspoorint" jdbcType="FLOAT" />
+		<result column="PLUSPPENALTY" property="plusppenalty" jdbcType="FLOAT" />
+		<result column="PLUSPAWARD" property="pluspaward" jdbcType="VARCHAR" />
+		<result column="PLUSPAWARDCOUNT" property="pluspawardcount" jdbcType="FLOAT" />
+		<result column="ISGRANT" property="isgrant" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="PAYOUTDATE" property="payoutdate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="INVESTORID" property="investorid" jdbcType="DECIMAL" />
+		<result column="PLUSPAWARDNO" property="pluspawardno" jdbcType="VARCHAR" />
+		<result column="ARBATCHNO" property="arbatchno" jdbcType="VARCHAR" />
+ 	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TENDERID, ARORDERNO, ARID, RORDERNO, PAWARDNAME, PAWARDNO,
+		PAWARDCOUNT, PLUSPOORINT,PLUSPPENALTY, PLUSPAWARD, PLUSPAWARDCOUNT, 
+		ISGRANT, ISAUDIT, AUDITTIME, AUDITMAN,MADETIME, PAYOUTDATE, 
+		REMARK,INVESTORID,PLUSPAWARDNO,ARBATCHNO
+	</sql>
+	<select id="findAheadRepayAwardRecords" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.AheadRepayAwardRecord">
+		select
+		<include refid="Base_Column_List" />
+		from AHEADREPAYAWARDRECORD
+	</select>
+	<select id="findAheadRepayAwardRecordById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AHEADREPAYAWARDRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from AHEADREPAYAWARDRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	
+	<delete id="deleteByArbatchno" parameterType="java.lang.String">
+		delete from AHEADREPAYAWARDRECORD
+		where ARBATCHNO = #{arbatchno,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.AheadRepayAwardRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT AHEADREPAYAWARDRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AHEADREPAYAWARDRECORD (ID, TENDERID, ARORDERNO,
+		ARID, RORDERNO, PAWARDNAME,
+		PAWARDNO, PAWARDCOUNT, PLUSPOORINT,
+		PLUSPPENALTY, PLUSPAWARD, PLUSPAWARDCOUNT,
+		ISGRANT, ISAUDIT, AUDITTIME,
+		AUDITMAN, MADETIME, PAYOUTDATE,
+		REMARK,INVESTORID,PLUSPAWARDNO,ARBATCHNO)
+		values (#{id,jdbcType=DECIMAL}, #{tenderid,jdbcType=DECIMAL},
+		#{arorderno,jdbcType=VARCHAR},
+		#{arid,jdbcType=DECIMAL}, #{rorderno,jdbcType=VARCHAR}, #{pawardname,jdbcType=VARCHAR},
+		#{pawardno,jdbcType=VARCHAR}, #{pawardcount,jdbcType=FLOAT},
+		#{pluspoorint,jdbcType=FLOAT},
+		#{plusppenalty,jdbcType=FLOAT}, #{pluspaward,jdbcType=VARCHAR}, #{pluspawardcount,jdbcType=FLOAT},
+		#{isgrant,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL},
+		#{audittime,jdbcType=TIMESTAMP},
+		#{auditman,jdbcType=VARCHAR}, #{madetime,jdbcType=TIMESTAMP}, #{payoutdate,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},#{investorid,jdbcType=DECIMAL},#{pluspawardno,jdbcType=VARCHAR},
+		#{arbatchno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AheadRepayAwardRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT AHEADREPAYAWARDRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AHEADREPAYAWARDRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="arorderno != null">
+				ARORDERNO,
+			</if>
+			<if test="arid != null">
+				ARID,
+			</if>
+			<if test="rorderno != null">
+				RORDERNO,
+			</if>
+			<if test="pawardname != null">
+				PAWARDNAME,
+			</if>
+			<if test="pawardno != null">
+				PAWARDNO,
+			</if>
+			<if test="pawardcount != null">
+				PAWARDCOUNT,
+			</if>
+			<if test="pluspoorint != null">
+				PLUSPOORINT,
+			</if>
+			<if test="plusppenalty != null">
+				PLUSPPENALTY,
+			</if>
+			<if test="pluspaward != null">
+				PLUSPAWARD,
+			</if>
+			<if test="pluspawardcount != null">
+				PLUSPAWARDCOUNT,
+			</if>
+			<if test="isgrant != null">
+				ISGRANT,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="investorid != null">
+				INVESTORID,
+			</if>
+			<if test="pluspawardno != null">
+				PLUSPAWARDNO,
+			</if>
+			<if test="arbatchno != null">
+				ARBATCHNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="arorderno != null">
+				#{arorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="arid != null">
+				#{arid,jdbcType=DECIMAL},
+			</if>
+			<if test="rorderno != null">
+				#{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="pawardname != null">
+				#{pawardname,jdbcType=VARCHAR},
+			</if>
+			<if test="pawardno != null">
+				#{pawardno,jdbcType=VARCHAR},
+			</if>
+			<if test="pawardcount != null">
+				#{pawardcount,jdbcType=FLOAT},
+			</if>
+			<if test="pluspoorint != null">
+				#{pluspoorint,jdbcType=FLOAT},
+			</if>
+			<if test="plusppenalty != null">
+				#{plusppenalty,jdbcType=FLOAT},
+			</if>
+			<if test="pluspaward != null">
+				#{pluspaward,jdbcType=VARCHAR},
+			</if>
+			<if test="pluspawardcount != null">
+				#{pluspawardcount,jdbcType=FLOAT},
+			</if>
+			<if test="isgrant != null">
+				#{isgrant,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				#{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="investorid != null">
+				#{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="pluspawardno != null">
+				#{pluspawardno,jdbcType=VARCHAR},
+			</if>
+			<if test="arbatchno != null">
+				#{arbatchno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="com.ptpl.model.AheadRepayAwardRecord">
+		update AHEADREPAYAWARDRECORD
+		<set>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="arorderno != null">
+				ARORDERNO = #{arorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="arid != null">
+				ARID = #{arid,jdbcType=DECIMAL},
+			</if>
+			<if test="rorderno != null">
+				RORDERNO = #{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="pawardname != null">
+				PAWARDNAME = #{pawardname,jdbcType=VARCHAR},
+			</if>
+			<if test="pawardno != null">
+				PAWARDNO = #{pawardno,jdbcType=VARCHAR},
+			</if>
+			<if test="pawardcount != null">
+				PAWARDCOUNT = #{pawardcount,jdbcType=FLOAT},
+			</if>
+			<if test="pluspoorint != null">
+				PLUSPOORINT = #{pluspoorint,jdbcType=FLOAT},
+			</if>
+			<if test="plusppenalty != null">
+				PLUSPPENALTY = #{plusppenalty,jdbcType=FLOAT},
+			</if>
+			<if test="pluspaward != null">
+				PLUSPAWARD = #{pluspaward,jdbcType=VARCHAR},
+			</if>
+			<if test="pluspawardcount != null">
+				PLUSPAWARDCOUNT = #{pluspawardcount,jdbcType=FLOAT},
+			</if>
+			<if test="isgrant != null">
+				ISGRANT = #{isgrant,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="investorid != null">
+				INVESTORID = #{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="pluspawardno != null">
+				PLUSPAWARDNO = #{pluspawardno,jdbcType=VARCHAR},
+			</if>
+			<if test="arbatchno != null">
+				ARBATCHNO = #{arbatchno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

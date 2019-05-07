@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.MultiContentSetMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.MultiContentSet" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="MULTINO" property="multino" jdbcType="VARCHAR" />
+    <result column="OPTIONNAME" property="optionname" jdbcType="VARCHAR" />
+    <result column="ISNEED" property="isneed" jdbcType="DECIMAL" />
+    <result column="ISCITE" property="iscite" jdbcType="DECIMAL"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, MULTINO, OPTIONNAME, ISNEED,ISCITE
+  </sql>
+
+  <sql id="Base_Column_List2">
+   t.optionname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from MULTICONTENTSET
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+
+  <!-- 查询所有的信息 -->
+  <select id="selectAllMult" resultMap="BaseResultMap">
+     select t.* from MULTICONTENTSET t order by t.multino
+  </select>
+  <!-- 根据编号查询信息 -->
+  <select id="selectByMultiNo" resultMap="BaseResultMap">
+      select * from MULTICONTENTSET t where t.MULTINO=#{multino}
+  </select>
+
+<!-- 根据编号查询信息（封装给海网用的，所以字段会少一些） -->
+   <select id="selectByMultiNo2" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List2"/> from MULTICONTENTSET t where t.MULTINO=#{multino}
+  </select>
+  <!-- 添加时获取前一个编号 -->
+  <select id="selectLastNo" resultType="string">
+     select max(t.multino) from MULTICONTENTSET t
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from MULTICONTENTSET
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.MultiContentSet" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+    SELECT MULTICONTENTSET_SEQ.NEXTVAL as id FROM DUAL
+  </selectKey>
+    insert into MULTICONTENTSET (ID, MULTINO, OPTIONNAME, 
+      ISNEED)
+    values (#{id,jdbcType=DECIMAL}, #{multino,jdbcType=VARCHAR}, #{optionname,jdbcType=VARCHAR}, 
+      #{isneed,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.MultiContentSet" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+    SELECT MULTICONTENTSET_SEQ.NEXTVAL as id FROM DUAL
+  </selectKey>
+    insert into MULTICONTENTSET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="multino != null" >
+        MULTINO,
+      </if>
+      <if test="optionname != null" >
+        OPTIONNAME,
+      </if>
+      <if test="isneed != null" >
+        ISNEED,
+      </if>
+      <if test="iscite != null" >
+        ISCITE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="multino != null" >
+        #{multino,jdbcType=VARCHAR},
+      </if>
+      <if test="optionname != null" >
+        #{optionname,jdbcType=VARCHAR},
+      </if>
+      <if test="isneed != null" >
+        #{isneed,jdbcType=DECIMAL},
+      </if>
+      <if test="iscite != null" >
+        #{iscite,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.MultiContentSet" >
+    update MULTICONTENTSET
+    <set >
+      <if test="multino != null" >
+        MULTINO = #{multino,jdbcType=VARCHAR},
+      </if>
+      <if test="optionname != null" >
+        OPTIONNAME = #{optionname,jdbcType=VARCHAR},
+      </if>
+      <if test="isneed != null" >
+        ISNEED = #{isneed,jdbcType=DECIMAL},
+      </if>
+       <if test="iscite != null" >
+       ISCITE = #{iscite,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.MultiContentSet" >
+    update MULTICONTENTSET
+    set MULTINO = #{multino,jdbcType=VARCHAR},
+      OPTIONNAME = #{optionname,jdbcType=VARCHAR},
+      ISNEED = #{isneed,jdbcType=DECIMAL},
+      ISCITE = #{iscite,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <update id="updateByMultiNo" parameterType="com.ptpl.model.MultiContentSet" >
+    update MULTICONTENTSET
+    <set >
+       <if test="iscite != null" >
+       ISCITE = #{iscite,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where MULTINO = #{multino,jdbcType=VARCHAR}
+  </update>
+  
+   <!-- 查询所有的启用的子项目 且没有被引用的项目-->
+  <select id="selectALLisneedmult" resultMap="BaseResultMap">
+    SELECT * FROM MULTICONTENTSET T WHERE T.ISNEED=1 and t.iscite=0
+  </select>
+</mapper>

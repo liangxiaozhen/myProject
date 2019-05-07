@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.EmailRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.EmailRecord">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="SENDTIME" property="sendtime" jdbcType="TIMESTAMP" />
+		<result column="EMAILCONTENT" property="emailcontent" jdbcType="VARCHAR" />
+		<result column="SENDTYPE" property="sendtype" jdbcType="DECIMAL" />
+		<result column="REISSUETIME" property="reissuetime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="SENDEMAIL" property="sendemail" jdbcType="VARCHAR" />
+ 		<result column="MESSAGETYPE" property="messagetype" jdbcType="DECIMAL" />
+ 		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,BASEID,USERNAME,EMAIL,SENDTIME,EMAILCONTENT,SENDTYPE,REISSUETIME,REMARK,MESSAGETYPE,SENDEMAIL,STATUS
+	</sql>
+
+	<!-- 根据条件 更新 -->
+	<update id="updateById" parameterType="com.ptpl.model.EmailRecord">
+		update EMAILRECORD
+		<set>
+			<if test="reissuetime != null">
+				REISSUETIME=#{reissuetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据ID查询信息 -->
+	<select id="findEmailRecordById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"></include>
+		from EMAILRECORD where id =#{id,jdbcType=DECIMAL}
+		order by sendtime desc
+	</select>
+
+	<!-- 邮件发送记录ID删除 -->
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from EMAILRECORD where id = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 查询全部信息 -->
+	<select id="findEmailRecords" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.EmailRecord">
+		select
+		<include refid="Base_Column_List"></include>
+		from EMAILRECORD
+		<where>
+			<if test="username != null">
+				USERNAME like '%${username}%'
+			</if>
+		</where>
+		order by sendtime desc
+	</select>
+
+	<!-- 数据新增 insert -->
+	<insert id="insert" parameterType="com.ptpl.model.EmailRecord">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT EMAILRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into EMAILRECORD (ID, BASEID, USERNAME,
+		EMAIL, SENDTIME, EMAILCONTENT,
+		SENDTYPE, REISSUETIME, REMARK,MESSAGETYPE,SENDEMAIL,STATUS
+		)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{username,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{emailcontent,jdbcType=VARCHAR},
+		#{sendtype,jdbcType=DECIMAL}, #{reissuetime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},#{messagetype,jdbcType=DECIMAL},#{sendemail,jdbcType=VARCHAR},,#{status,jdbcType=DECIMAL}
+		)
+	</insert>
+
+	<!-- 数据新增 insertSelective -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.EmailRecord">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT EMAILRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into EMAILRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="sendtime != null">
+				SENDTIME,
+			</if>
+			<if test="emailcontent != null">
+				EMAILCONTENT,
+			</if>
+			<if test="sendtype != null">
+				SENDTYPE,
+			</if>
+			<if test="reissuetime != null">
+				REISSUETIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="messagetype != null">
+				MESSAGETYPE,
+			</if>
+			<if test="sendemail != null">
+				SENDEMAIL,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="sendtime != null">
+				#{sendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="emailcontent != null">
+				#{emailcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="sendtype != null">
+				#{sendtype,jdbcType=DECIMAL},
+			</if>
+			<if test="reissuetime != null">
+				#{reissuetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="messagetype != null">
+				#{messagetype,jdbcType=DECIMAL},
+			</if>
+			<if test="sendemail != null">
+				#{sendemail,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+</mapper>

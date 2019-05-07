@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserMakeALoanMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserMakeALoan">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="ORDERNO" property="orderno" jdbcType="VARCHAR" />
+		<result column="MLOANORDERNO" property="mloanorderno" jdbcType="VARCHAR" />
+		<result column="OUTACCOUNTID" property="outaccountid" jdbcType="DECIMAL" />
+		<result column="INACCOUNTID" property="inaccountid" jdbcType="DECIMAL" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="MALBEGINTIME" property="malbegintime" jdbcType="TIMESTAMP" />
+		<result column="MALENDTIME" property="malendtime" jdbcType="TIMESTAMP" />
+		<result column="FEE" property="fee" jdbcType="OTHER" />
+		<result column="MEDIACYFEE" property="mediacyfee" jdbcType="FLOAT" />
+		<result column="GUARANTEEFEE" property="guaranteefee" jdbcType="FLOAT" />
+		<result column="RISKGUARANTYFEE" property="riskguarantyfee"
+			jdbcType="FLOAT" />
+		<result column="ISTHAW" property="isthaw" jdbcType="DECIMAL" />
+		<result column="UNFREEZEORDID" property="unfreezeordid"
+			jdbcType="VARCHAR" />
+		<result column="FREEZETRXID" property="freezetrxid" jdbcType="VARCHAR" />
+		<result column="MALSTATUS" property="malstatus" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<association property="outaccount" resultMap="OutAccountMap" />
+		<association property="inaccount" resultMap="InAccountMap" />
+		<association property="tenderitem" resultMap="TenderItemMap" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="OutAccountMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="OUTACCOUNT" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="InAccountMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="INACCOUNT" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.TenderItem" id="TenderItemMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TNO" property="tno" jdbcType="VARCHAR" />
+		<result column="TNAME" property="tname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 投标放款记录表 -->
+	<sql id="Base_Column_List">
+		ID, TENDERID, ORDERNO, MLOANORDERNO, OUTACCOUNTID, INACCOUNTID, AMOUNT,
+		MALBEGINTIME,
+		MALENDTIME, FEE, MEDIACYFEE, GUARANTEEFEE, RISKGUARANTYFEE, ISTHAW,
+		UNFREEZEORDID,
+		FREEZETRXID, MALSTATUS, ISBLENDING, ISMANBLENDING, SYSBTIME, MANBTIME, PAYCOMPANY,
+		SYSRECTIME, RECEIVETIME, REQQUERYDATA, RECRESULTDATA, ISAUDIT,
+		AUDITMAN, AUDITTIME,
+		REMARK
+	</sql>
+
+	<!-- 投标放款记录表、用户基本信息表、标的设置表 -->
+	<sql id="Association_Column_List">
+		UMAL.ID, UMAL.TENDERID, UMAL.ORDERNO, UMAL.MLOANORDERNO, UMAL.OUTACCOUNTID,
+		UMAL.INACCOUNTID, UMAL.AMOUNT, UMAL.MALBEGINTIME,
+		UMAL.MALENDTIME, UMAL.FEE, UMAL.MEDIACYFEE, UMAL.GUARANTEEFEE, UMAL.RISKGUARANTYFEE,
+		UMAL.ISTHAW, UMAL.UNFREEZEORDID,
+		UMAL.FREEZETRXID, UMAL.MALSTATUS, UMAL.ISBLENDING, UMAL.ISMANBLENDING, UMAL.SYSBTIME,
+		UMAL.MANBTIME, UMAL.PAYCOMPANY,
+		UMAL.SYSRECTIME, UMAL.RECEIVETIME, UMAL.REQQUERYDATA, UMAL.RECRESULTDATA,
+		UMAL.ISAUDIT, UMAL.AUDITMAN, UMAL.AUDITTIME,
+		UMAL.REMARK,U1.LOGINNAME OUTACCOUNT,U2.LOGINNAME INACCOUNT,TI.TNAME,TI.TNO
+	</sql>
+
+	<!-- 根据主键ID查询投标放款记录（关联用户基本信息表、标的设置表） -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Association_Column_List" />
+		from
+		USERMAKEALOAN UMAL
+		LEFT JOIN USERBASEACCOUNTINFO U1 ON
+		UMAL.OUTACCOUNTID=U1.ID
+		LEFT JOIN USERBASEACCOUNTINFO U2 ON
+		UMAL.INACCOUNTID=U2.ID
+		LEFT JOIN TENDERITEM TI ON UMAL.TENDERID=TI.ID
+		where
+		UMAL.ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据主键ID删除投标放款记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from USERMAKEALOAN
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 新增投标放款记录 -->
+	<insert id="insert" parameterType="com.ptpl.model.UserMakeALoan">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERMAKEALOAN_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERMAKEALOAN (ID, TENDERID, ORDERNO,
+		MLOANORDERNO, OUTACCOUNTID, INACCOUNTID,
+		AMOUNT, MALBEGINTIME, MALENDTIME,
+		FEE, MEDIACYFEE, GUARANTEEFEE,
+		RISKGUARANTYFEE, ISTHAW, UNFREEZEORDID,
+		FREEZETRXID, MALSTATUS, ISBLENDING,
+		ISMANBLENDING, SYSBTIME, MANBTIME,
+		PAYCOMPANY, SYSRECTIME, RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA, ISAUDIT,
+		AUDITMAN, AUDITTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{tenderid,jdbcType=DECIMAL},
+		#{orderno,jdbcType=VARCHAR},
+		#{mloanorderno,jdbcType=VARCHAR}, #{outaccountid,jdbcType=DECIMAL}, #{inaccountid,jdbcType=DECIMAL},
+		#{amount,jdbcType=FLOAT}, #{malbegintime,jdbcType=TIMESTAMP},
+		#{malendtime,jdbcType=TIMESTAMP},
+		#{fee,jdbcType=FLOAT}, #{mediacyfee,jdbcType=FLOAT}, #{guaranteefee,jdbcType=FLOAT},
+		#{riskguarantyfee,jdbcType=FLOAT}, #{isthaw,jdbcType=DECIMAL},
+		#{unfreezeordid,jdbcType=VARCHAR},
+		#{freezetrxid,jdbcType=VARCHAR}, #{malstatus,jdbcType=DECIMAL}, #{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP},
+		#{paycompany,jdbcType=VARCHAR}, #{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR},
+		#{isaudit,jdbcType=DECIMAL},
+		#{auditman,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 新增投标放款记录（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserMakeALoan">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERMAKEALOAN_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERMAKEALOAN
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="orderno != null">
+				ORDERNO,
+			</if>
+			<if test="mloanorderno != null">
+				MLOANORDERNO,
+			</if>
+			<if test="outaccountid != null">
+				OUTACCOUNTID,
+			</if>
+			<if test="inaccountid != null">
+				INACCOUNTID,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="malbegintime != null">
+				MALBEGINTIME,
+			</if>
+			<if test="malendtime != null">
+				MALENDTIME,
+			</if>
+			<if test="fee != null">
+				FEE,
+			</if>
+			<if test="mediacyfee != null">
+				MEDIACYFEE,
+			</if>
+			<if test="guaranteefee != null">
+				GUARANTEEFEE,
+			</if>
+			<if test="riskguarantyfee != null">
+				RISKGUARANTYFEE,
+			</if>
+			<if test="isthaw != null">
+				ISTHAW,
+			</if>
+			<if test="unfreezeordid != null">
+				UNFREEZEORDID,
+			</if>
+			<if test="freezetrxid != null">
+				FREEZETRXID,
+			</if>
+			<if test="malstatus != null">
+				MALSTATUS,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="orderno != null">
+				#{orderno,jdbcType=VARCHAR},
+			</if>
+			<if test="mloanorderno != null">
+				#{mloanorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="outaccountid != null">
+				#{outaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="inaccountid != null">
+				#{inaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=FLOAT},
+			</if>
+			<if test="malbegintime != null">
+				#{malbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="malendtime != null">
+				#{malendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="fee != null">
+				#{fee,jdbcType=FLOAT},
+			</if>
+			<if test="mediacyfee != null">
+				#{mediacyfee,jdbcType=FLOAT},
+			</if>
+			<if test="guaranteefee != null">
+				#{guaranteefee,jdbcType=FLOAT},
+			</if>
+			<if test="riskguarantyfee != null">
+				#{riskguarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="isthaw != null">
+				#{isthaw,jdbcType=DECIMAL},
+			</if>
+			<if test="unfreezeordid != null">
+				#{unfreezeordid,jdbcType=VARCHAR},
+			</if>
+			<if test="freezetrxid != null">
+				#{freezetrxid,jdbcType=VARCHAR},
+			</if>
+			<if test="malstatus != null">
+				#{malstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据主键ID更新投标放款记录（参数可选） -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserMakeALoan">
+		update USERMAKEALOAN
+		<set>
+			<if test="malendtime != null">
+				MALENDTIME = #{malendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="fee != null">
+				FEE = #{fee,jdbcType=FLOAT},
+			</if>
+			<if test="mediacyfee != null">
+				MEDIACYFEE = #{mediacyfee,jdbcType=FLOAT},
+			</if>
+			<if test="guaranteefee != null">
+				GUARANTEEFEE = #{guaranteefee,jdbcType=FLOAT},
+			</if>
+			<if test="riskguarantyfee != null">
+				RISKGUARANTYFEE = #{riskguarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="isthaw != null">
+				ISTHAW = #{isthaw,jdbcType=DECIMAL},
+			</if>
+			<if test="unfreezeordid != null">
+				UNFREEZEORDID = #{unfreezeordid,jdbcType=VARCHAR},
+			</if>
+			<if test="freezetrxid != null">
+				FREEZETRXID = #{freezetrxid,jdbcType=VARCHAR},
+			</if>
+			<if test="malstatus != null">
+				MALSTATUS = #{malstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据放款订单号更新投标放款记录（参数可选） -->
+	<update id="updateByMLoanOrderNoSelective" parameterType="com.ptpl.model.UserMakeALoan">
+		update USERMAKEALOAN
+		<set>
+			<if test="malendtime != null">
+				MALENDTIME = #{malendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="fee != null">
+				FEE = #{fee,jdbcType=FLOAT},
+			</if>
+			<if test="mediacyfee != null">
+				MEDIACYFEE = #{mediacyfee,jdbcType=FLOAT},
+			</if>
+			<if test="guaranteefee != null">
+				GUARANTEEFEE = #{guaranteefee,jdbcType=FLOAT},
+			</if>
+			<if test="riskguarantyfee != null">
+				RISKGUARANTYFEE = #{riskguarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="isthaw != null">
+				ISTHAW = #{isthaw,jdbcType=DECIMAL},
+			</if>
+			<if test="unfreezeordid != null">
+				UNFREEZEORDID = #{unfreezeordid,jdbcType=VARCHAR},
+			</if>
+			<if test="freezetrxid != null">
+				FREEZETRXID = #{freezetrxid,jdbcType=VARCHAR},
+			</if>
+			<if test="malstatus != null">
+				MALSTATUS = #{malstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where MLOANORDERNO = #{mloanorderno,jdbcType=VARCHAR}
+	</update>
+
+	<!-- 获取投标放款记录列表（关联用户基本信息表、标的设置表） -->
+	<select id="selectAllLoansRecord" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserMakeALoan">
+		select
+		<include refid="Association_Column_List" />
+		from
+		USERMAKEALOAN UMAL
+		LEFT JOIN USERBASEACCOUNTINFO U1 ON UMAL.OUTACCOUNTID=U1.ID
+		LEFT JOIN USERBASEACCOUNTINFO U2 ON UMAL.INACCOUNTID=U2.ID
+		LEFT JOIN TENDERITEM TI ON UMAL.TENDERID=TI.ID
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="tenderid != null and tenderid != ''">
+				AND UMAL.TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="orderno != null and orderno != ''">
+				AND UMAL.ORDERNO = #{orderno,jdbcType=VARCHAR}
+			</if>
+			<if test="mloanorderno != null and mloanorderno != ''">
+				AND UMAL.MLOANORDERNO = #{mloanorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="outaccountid != null and outaccountid != ''">
+				AND UMAL.OUTACCOUNTID = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="inaccountid != null and inaccountid != ''">
+				AND UMAL.INACCOUNTID = #{inaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="amount != null and amount != ''">
+				AND UMAL.AMOUNT = #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="malbegintime != null and malbegintime != ''">
+				AND UMAL.MALBEGINTIME = #{malbegintime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="malendtime != null and malendtime != ''">
+				AND UMAL.MALENDTIME = #{malendtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="fee != null and fee != ''">
+				AND UMAL.FEE = #{fee,jdbcType=FLOAT}
+			</if>
+			<if test="mediacyfee != null and mediacyfee != ''">
+				AND UMAL.MEDIACYFEE = #{mediacyfee,jdbcType=FLOAT}
+			</if>
+			<if test="guaranteefee != null and guaranteefee != ''">
+				AND UMAL.GUARANTEEFEE = #{guaranteefee,jdbcType=FLOAT}
+			</if>
+			<if test="riskguarantyfee != null and riskguarantyfee != ''">
+				AND UMAL.RISKGUARANTYFEE = #{riskguarantyfee,jdbcType=FLOAT}
+			</if>
+			<if test="isthaw != null and isthaw != ''">
+				AND UMAL.ISTHAW = #{isthaw,jdbcType=DECIMAL}
+			</if>
+			<if test="unfreezeordid != null and unfreezeordid != ''">
+				AND UMAL.UNFREEZEORDID = #{unfreezeordid,jdbcType=VARCHAR}
+			</if>
+			<if test="freezetrxid != null and freezetrxid != ''">
+				AND UMAL.FREEZETRXID = #{freezetrxid,jdbcType=VARCHAR}
+			</if>
+			<if test="malstatus != null and malstatus != ''">
+				AND UMAL.MALSTATUS = #{malstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="isblending != null and isblending != ''">
+				AND UMAL.ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null and ismanblending != ''">
+				AND UMAL.ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="sysbtime != null and sysbtime != ''">
+				AND UMAL.SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="manbtime != null and manbtime != ''">
+				AND UMAL.MANBTIME = #{manbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="paycompany != null and paycompany != ''">
+				AND UMAL.PAYCOMPANY = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="sysrectime != null and sysrectime != ''">
+				AND UMAL.SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="receivetime != null and receivetime != ''">
+				AND UMAL.RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isaudit != null and isaudit != ''">
+				AND UMAL.ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null and auditman != ''">
+				AND UMAL.AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null and audittime != ''">
+				AND UMAL.AUDITTIME = #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="tenderitem != null and tenderitem.tno != ''">
+				AND TI.TNO = #{tenderitem.tno,jdbcType=VARCHAR}
+			</if>
+			<if test="outaccount != null and outaccount.loginname != ''">
+				AND = U1.LOGINNAME = #{outaccount.loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="inaccount != null and inaccount.loginname != ''">
+				AND = U2.LOGINNAME = #{inaccount.loginname}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 获取投标放款记录 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserMakeALoan">
+		select
+		<include refid="Base_Column_List" />
+		from
+		USERMAKEALOAN
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="tenderid != null and tenderid != ''">
+				AND TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="orderno != null and orderno != ''">
+				AND ORDERNO = #{orderno,jdbcType=VARCHAR}
+			</if>
+			<if test="mloanorderno != null and mloanorderno != ''">
+				AND MLOANORDERNO = #{mloanorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="outaccountid != null and outaccountid != ''">
+				AND OUTACCOUNTID = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="inaccountid != null and inaccountid != ''">
+				AND INACCOUNTID = #{inaccountid,jdbcType=DECIMAL}
+			</if>
+			<if test="amount != null and amount != ''">
+				AND AMOUNT = #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="malbegintime != null and malbegintime != ''">
+				AND MALBEGINTIME = #{malbegintime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="malendtime != null and malendtime != ''">
+				AND MALENDTIME = #{malendtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="fee != null and fee != ''">
+				AND FEE = #{fee,jdbcType=FLOAT}
+			</if>
+			<if test="mediacyfee != null and mediacyfee != ''">
+				AND MEDIACYFEE = #{mediacyfee,jdbcType=FLOAT}
+			</if>
+			<if test="guaranteefee != null and guaranteefee != ''">
+				AND GUARANTEEFEE = #{guaranteefee,jdbcType=FLOAT}
+			</if>
+			<if test="riskguarantyfee != null and riskguarantyfee != ''">
+				AND RISKGUARANTYFEE = #{riskguarantyfee,jdbcType=FLOAT}
+			</if>
+			<if test="isthaw != null and isthaw != ''">
+				AND ISTHAW = #{isthaw,jdbcType=DECIMAL}
+			</if>
+			<if test="unfreezeordid != null and unfreezeordid != ''">
+				AND UNFREEZEORDID = #{unfreezeordid,jdbcType=VARCHAR}
+			</if>
+			<if test="freezetrxid != null and freezetrxid != ''">
+				AND FREEZETRXID = #{freezetrxid,jdbcType=VARCHAR}
+			</if>
+			<if test="malstatus != null and malstatus != ''">
+				AND MALSTATUS = #{malstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="isblending != null and isblending != ''">
+				AND ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null and ismanblending != ''">
+				AND ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="sysbtime != null and sysbtime != ''">
+				AND SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="manbtime != null and manbtime != ''">
+				AND MANBTIME = #{manbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="paycompany != null and paycompany != ''">
+				AND PAYCOMPANY = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="sysrectime != null and sysrectime != ''">
+				AND SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="receivetime != null and receivetime != ''">
+				AND RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isaudit != null and isaudit != ''">
+				AND ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null and auditman != ''">
+				AND AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null and audittime != ''">
+				AND AUDITTIME = #{audittime,jdbcType=TIMESTAMP}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据投标订单号查询投标放款记录 -->
+	<select id="selectByOrderNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		USERMAKEALOAN
+		where
+		orderno = #{orderno,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据放款订单号查询投标放款记录 -->
+	<select id="selectByMLoanOrderNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		USERMAKEALOAN
+		where
+		mloanorderno = #{mloanorderno,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

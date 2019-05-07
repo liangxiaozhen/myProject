@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RemoveNameMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RemoveName">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAMETYPE" property="nametype" jdbcType="VARCHAR" />
+		<result column="NAMENO" property="nameno" jdbcType="VARCHAR" />
+		<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<association property="ugrade" javaType="com.ptpl.model.UserGrade">
+			<result column="UGRADENAME" property="ugradename" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<resultMap id="NameResultMap" type="com.ptpl.model.RemoveName">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAMETYPE" property="nametype" jdbcType="VARCHAR" />
+		<result column="NAMENO" property="nameno" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+	</resultMap>
+	<resultMap id="groupResultMap" type="com.ptpl.model.RemoveName">
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="NAMETYPE" property="nametype" jdbcType="VARCHAR" />
+		<result column="NAMENO" property="nameno" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="selectUserResultMap" type="com.ptpl.model.RemoveName">
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<association property="ugrade" javaType="com.ptpl.model.UserGrade">
+			<result column="UGRADENAME" property="ugradename" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAMETYPE, NAMENO, NAME, REALNAME, ADDTIME, ADDMAN,
+		REMARK,
+		LOGINNAME,
+		BASEID
+	</sql>
+	<sql id="Query_Column_List">
+		r.ID,r.NAMETYPE, r.NAMENO, r.NAME, r.REALNAME, r.ADDTIME,
+		r.ADDMAN,r.REMARK,r.LOGINNAME,r.BASEID,ug.ugradename
+	</sql>
+	<!-- 查询名单名称，名单编号 条件：名单类型 -->
+	<select id="getNameNoAndName" resultMap="groupResultMap"
+		resultType="String">
+		select
+		name,nameno
+		from REMOVENAME
+		where
+		nametype=#{nametype,jdbcType=VARCHAR}
+		group by
+		name,nameno
+	</select>
+	<!-- 查询名单名称，名单类型。 条件：名单编号 -->
+	<select id="selectNameAndNameType" resultType="com.ptpl.model.RemoveName"
+		parameterType="String">
+		select
+		name,nametype
+		from REMOVENAME
+		where
+		nameno=#{nameno,jdbcType=VARCHAR}
+		and rownum = 1
+	</select>
+	<!-- 查询名单名称 条件：名单编号 -->
+	<select id="selectNameForNameNo" parameterType="String"
+		resultType="String">
+		select name
+		from REMOVENAME
+		where nameno =
+		#{nameno,jdbcType=VARCHAR} and rownum = 1
+	</select>
+	<!-- 查询名单编号 条件：名单名称 -->
+	<select id="selectNameNoForName" parameterType="String"
+		resultType="String">
+		select nameno
+		from REMOVENAME
+		where name =
+		#{name,jdbcType=VARCHAR}
+		and rownum = 1
+	</select>
+	<!-- 查询排出人名单 条件：订单编号 -->
+	<select id="getRemove" parameterType="String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from REMOVENAME
+		where nameno = #{nameno,jdbcType=VARCHAR}
+		AND realname is not null
+	</select>
+	<!-- 查询名单编号是否存在 名单名称 名单类型 可以合并 查询名单编号 ↑ -->
+	<select id="selectNameNoForNT" parameterType="String"
+		resultType="String">
+		select nameno
+		from REMOVENAME
+		where name =
+		#{0,jdbcType=VARCHAR}
+		and nametype=#{1,jdbcType=VARCHAR}
+		and rownum= 1
+	</select>
+	<!-- 名单名称和名单编号分组查询 -->
+	<select id="selectNameAndNameNo" resultMap="groupResultMap">
+		select
+		name ,nameno
+		from REMOVENAME
+		group by
+		name,nameno
+	</select>
+	<!-- 名单名称,名单编号,名单类型分组查询 -->
+	<select id="selectNameNamNoNameType" resultMap="groupResultMap">
+		select
+		name
+		,nameno,nametype
+		from REMOVENAME
+		group by
+		name,nameno,nametype
+	</select>
+	<!-- 名单名称,名单编号,名单类型分组查询 -->
+	<select id="getGroupNameno" resultMap="groupResultMap">
+		select
+		name
+		,nameno,nametype
+		from REMOVENAME
+		group by
+		name,nameno,nametype
+	</select>
+	<!-- 查询小名单主目录 -->
+	<select id="getGroupNameType" resultMap="groupResultMap">
+		select nametype from
+		REMOVENAME group by nametype
+	</select>
+	<!-- 查询小名单子目录 -->
+	<select id="getGroupName" resultMap="groupResultMap"
+		parameterType="String">
+		select name from REMOVENAME
+		where nametype =#{0}
+		group by
+		name
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from REMOVENAME
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		REMOVENAME
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 删除子目录 -->
+	<delete id="deleteName" parameterType="String">
+		delete from REMOVENAME
+		where nameno=#{nameno}
+	</delete>
+	<select id="selective" resultMap="BaseResultMap" parameterType="com.ptpl.model.RemoveName">
+		select
+		<include refid="Query_Column_List" />
+		from REMOVENAME r,USERGRADE ug,USERACCOUNTSAFEINFO uasi
+		where
+		r.baseid=uasi.baseid AND uasi.ugrade=ug.ugrade
+		<if test="id != null">
+			AND r.ID= #{id,jdbcType=DECIMAL}
+		</if>
+		<if test="nametype != null and nametype!=''">
+			AND r.NAMETYPE = #{nametype,jdbcType=VARCHAR}
+		</if>
+		<if test="nameno != null and nameno!=''">
+			AND r.NAMENO = #{nameno,jdbcType=VARCHAR}
+		</if>
+		<if test="name != null and name!=''">
+			AND r.NAME = #{name,jdbcType=VARCHAR}
+		</if>
+		<if test="realname != null and realname!=''">
+			AND r.REALNAME = #{realname,jdbcType=VARCHAR}
+		</if>
+		<if test="addtime != null">
+			AND r.ADDTIME = #{addtime}
+		</if>
+		<if test="addman != null and addman!=''">
+			AND r.ADDMAN = #{addman,jdbcType=VARCHAR}
+		</if>
+		<if test="remark != null and remark!=''">
+			AND r.REMARK like '%'||#{remark,jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="loginname != null and loginname!=''">
+			AND r.LOGINNAME = #{loginname,jdbcType=VARCHAR}
+		</if>
+		<if test="baseid != null">
+			AND r.BASEID = #{baseid,jdbcType=DECIMAL}
+		</if>
+		order by r.NAMETYPE
+	</select>
+	<!-- 查询 小名单目录 -->
+	<select id="selectiveNameType" parameterType="com.ptpl.model.RemoveName"
+		resultMap="NameResultMap">
+		select id, nametype ,name,nameno,isuse,addman,addtime from
+		REMOVENAME
+		where realname is null
+		AND loginname is null
+		<if test="name != null and name != ''">
+			AND name=#{name,jdbcType=VARCHAR}
+		</if>
+		<if test="nametype != null and nametype != ''">
+			AND nametype=#{nametype,jdbcType=VARCHAR}
+		</if>
+		group by id,nametype,name,nameno,isuse,addman,addtime
+	</select>
+	<!-- 获取 启用状态 小名单目录 -->
+	<select id="getRemoveName" resultMap="NameResultMap">
+		select id,nametype
+		,name,nameno,isuse,addman,addtime from
+		REMOVENAME where realname is
+		null
+		AND loginname is null
+		AND isuse =1
+		group by
+		id,nametype,name,nameno,isuse,addman,addtime
+	</select>
+	<!-- 获取 标的设置 排除名单编号列表 -->
+	<select id="getTenderitemRemoveNameNo" resultType="String">
+		select
+		removenameno from TENDERITEM
+	</select>
+	<!-- 获取 充值设置 排除名单编号列表 -->
+	<select id="getRechargeRstrRemoveNameNo" resultType="String">
+		select
+		removenameno from RECHARGERSTR
+	</select>
+	<!-- 获取 提现设置 排除名单编号列表 -->
+	<select id="getWithdrawsCashRstrRemoveNameNo" resultType="String">
+		select
+		removenameno from WITHDRAWSCASHRSTR
+	</select>
+	<!-- 获取 标的债权转让 排除名单编号列表 -->
+	<select id="getDebtAttornRemoveNameNo" resultType="String">
+		select
+		removenameno from DEBTATTORN
+	</select>
+	<!-- 获取 手动颁奖设置 获奖用户名列表编号 -->
+	<select id="getManualAwardRewardLNNo" resultType="String">
+		select
+		rewardLNNo from MANUALAWARD
+	</select>
+	<!-- 查询存在并启用的小名单 -->
+	<select id="selectRemoveName" parameterType="String"
+		resultType="com.ptpl.model.RemoveName">
+		select id, nametype
+		,name,nameno,isuse,addman,addtime from
+		REMOVENAME where realname is null
+		AND loginname is null
+		AND isuse = 1
+		AND nameno = #{0}
+		group by
+		id,nametype,name,nameno,isuse,addman,addtime
+	</select>
+	<!-- 查询子目录下 用户 -->
+	<select id="selectByNameTypeName" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Query_Column_List"></include>
+		from REMOVENAME r,USERGRADE ug,USERACCOUNTSAFEINFO uasi
+		where
+		r.baseid=uasi.baseid
+		AND uasi.ugrade=ug.ugrade
+		AND r.name=#{0}
+		AND
+		r.nametype =#{1}
+		AND r.realname is not null
+	</select>
+	<!-- 查询人数 -->
+	<select id="selectCount" parameterType="com.ptpl.model.RemoveName"
+		resultType="Integer">
+		select count(*) from REMOVENAME
+		<where>
+			<if test="name != null and name != ''">
+				NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="nametype !=null and nametype != ''">
+				AND NAMETYPE=#{nametype,jdbcType=VARCHAR}
+			</if>
+		</where>
+		AND realname is not null
+	</select>
+	<!-- 查询小名单中的用户 -->
+	<select id="selectListForInsert" parameterType="com.ptpl.model.RemoveName"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from removename
+		where nameno=#{nameno,jdbcType=VARCHAR}
+		AND realname is
+		not null
+		<if test="loginname !=null and loginname!=''">
+			AND loginname like '%'||#{loginname,jdbcType=VARCHAR}||'%'
+		</if>
+	</select>
+	<!-- 查询所有用户 -->
+	<select id="selectUserForInsert" parameterType="String"
+		resultMap="selectUserResultMap">
+		select t.baseid,
+		ubai.loginname,
+		ubai.realname,
+		t.ugradename
+		from USERBASEACCOUNTINFO ubai,
+		(select ug.ugradename,uasi.baseid from
+		usergrade ug ,useraccountsafeinfo uasi where ug.ugrade=uasi.ugrade) t
+		where ubai.id=t.baseid
+		AND ubai.loginname like '%'||#{0}||'%'
+	</select>
+	<!-- 批量增加时查询用户 会员等级 -->
+	<select id="selectUserUgradeForInsert" parameterType="String"
+		resultMap="selectUserResultMap">
+		select t.baseid,
+		ubai.loginname,
+		ubai.realname,
+		t.ugradename
+		from USERBASEACCOUNTINFO ubai,
+		(select ug.ugradename,uasi.baseid from
+		usergrade ug ,useraccountsafeinfo uasi where ug.ugrade=uasi.ugrade AND
+		ug.ugrade=#{0}) t
+		where ubai.id=t.baseid
+	</select>
+	<!-- 查询baseID -->
+	<select id="selectByBaseID" parameterType="String"
+		resultType="com.ptpl.model.RemoveName">
+		select
+		<include refid="Base_Column_List"></include>
+		from REMOVENAME
+		where baseid =#{0}
+		AND name=#{1}
+		AND nametype=#{2}
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RemoveName">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT REMOVENAME_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into REMOVENAME
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="nametype != null">
+				NAMETYPE,
+			</if>
+			<if test="nameno != null">
+				NAMENO,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="realname != null">
+				REALNAME,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="loginname != null">
+				LOGINNAME,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="nametype != null">
+				#{nametype,jdbcType=VARCHAR},
+			</if>
+			<if test="nameno != null">
+				#{nameno,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="realname != null">
+				#{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				#{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateIsUse" parameterType="String">
+		update REMOVENAME set
+		isuse =1 where name=#{0} AND nametype =#{1}
+	</update>
+	<update id="updateCancelUse" parameterType="String">
+		update REMOVENAME set
+		isuse =0 where name=#{0} AND nametype =#{1}
+	</update>
+	<update id="updateNameType" parameterType="com.ptpl.model.RemoveName">
+		update REMOVENAME
+		<set>
+			<if test="nameno != null">
+				NAMENO = #{nameno,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where NAMENO = #{oldnameno,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RemoveName">
+		update REMOVENAME
+		<set>
+			<if test="nametype != null">
+				NAMETYPE = #{nametype,jdbcType=VARCHAR},
+			</if>
+			<if test="nameno != null">
+				NAMENO = #{nameno,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="realname != null">
+				REALNAME = #{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				LOGINNAME = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectbyRewardlnno" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RemoveName">
+		select t.* from REMOVENAME t where nameno=#{rewardlnno}
+	</select>
+	<select id="selectloginname" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.* from REMOVENAME t where
+		loginname=#{loginname}
+	</select>
+
+	<!-- 查询用户是否存在小名单中 -->
+	<select id="selectByNameNoAndBaseId" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RemoveName">
+		select
+		<include refid="Base_Column_List" />
+		from
+		removename
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="nameno != null">
+				and nameno = #{nameno,jdbcType=VARCHAR}
+			</if>
+			<if test="baseid != null">
+				and baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<select id="getUser" resultMap="BaseResultMap" parameterType="String">
+		select t.* from REMOVENAME t where name=#{name} AND t.realname is not
+		null AND t.loginname is not null
+	</select>
+	<select id="getUserNameMax" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.* from REMOVENAME t where
+		t.nametype=#{rewardname_nameType1} AND t.realname is not null AND
+		t.loginname is not null
+	</select>
+	<select id="getUserNameMin" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.* from REMOVENAME t where
+		t.name=#{rewardname_name1} AND t.realname is not null AND t.loginname
+		is not null
+	</select>
+	<select id="getBaseId" resultMap="BaseResultMap" parameterType="String">
+		select m.* from REMOVENAME m where m.loginname=#{name} AND m.realname
+		is not null AND m.loginname is not null
+	</select>
+
+	<!-- pxl 2016-11-15 根据名单编号 找出RemoveName -->
+	<select id="getRemoveNameByNameNo" resultMap="BaseResultMap"
+		parameterType="String">
+		select m.* from REMOVENAME m where
+		m.NAMENO=#{nameContent} AND m.realname is not null AND m.loginname is
+		not null
+	</select>
+	
+	<!-- pxl根据大名单查询其所有的启用小名单 -->
+	<select id="getGroupNameByNameType" resultMap="groupResultMap" parameterType="String">
+		select name,nameno from REMOVENAME where nametype = #{addOrDebarText} 
+		and isuse=1
+		and loginname is null
+		and realname is null
+		group by name,nameno
+	</select>
+	
+</mapper>

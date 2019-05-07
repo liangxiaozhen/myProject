@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserRechargeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserRecharge">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="AMOUNT" property="amount" jdbcType="DOUBLE" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="RECHARGENO" property="rechargeno" jdbcType="VARCHAR" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="BANKRETURNNO" property="bankreturnno" jdbcType="VARCHAR" />
+		<result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+		<result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+		<result column="SYSCHKTIME" property="syschktime" jdbcType="TIMESTAMP" />
+		<result column="APPLYMAN" property="applyman" jdbcType="VARCHAR" />
+		<result column="CHECKTIME" property="checktime" jdbcType="TIMESTAMP" />
+		<result column="CHECKMAN" property="checkman" jdbcType="VARCHAR" />
+		<result column="RECHARGETYPE" property="rechargetype" jdbcType="DECIMAL" />
+		<result column="BANKNAME" property="bankname" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="ISEXCEPTIONS" property="isexceptions" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ORIGINCLIENT" property="originclient" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="FEEOBJFLAG" property="feeobjflag" jdbcType="VARCHAR" />
+		<result column="RECHARFEE" property="recharfee" jdbcType="FLOAT" />
+		<result column="RECHARRATE" property="recharrate" jdbcType="FLOAT" />
+		<result column="MERCUSTID" property="mercustid" jdbcType="VARCHAR" />
+		<result column="CARDNO" property="cardno" jdbcType="VARCHAR" />
+		<result column="UUID" property="uuid" jdbcType="VARCHAR" />
+		<result column="URID" property="urid" jdbcType="VARCHAR" />
+		<association property="ubai" column="id"
+			javaType="com.ptpl.model.UserBaseAccountInfo">
+			<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, AMOUNT,RECHARGENO,PAYCOMPANY,
+		BANKRETURNNO, STARTTIME, ENDTIME,
+		SYSCHKTIME, APPLYMAN, CHECKTIME,
+		CHECKMAN, RECHARGETYPE, BANKNAME,
+		SYSRECTIME,RECEIVETIME, ISBLENDING,
+		ISMANBLENDING, ISEXCEPTIONS, STATUS,
+		ORIGINCLIENT, REMARK, REQQUERYDATA,
+		RECRESULTDATA, RECHARFEE, RECHARRATE,MERCUSTID,CARDNO,UUID,FEEOBJFLAG,URID
+	</sql>
+
+	<insert id="insert" parameterType="com.ptpl.model.UserRecharge">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERRECHARGE_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERRECHARGE (ID,PAYCOMPANY,BASEID, AMOUNT,RECHARGENO,
+		BANKRETURNNO, STARTTIME, ENDTIME,
+		SYSCHKTIME, APPLYMAN, CHECKTIME,
+		CHECKMAN, RECHARGETYPE, BANKNAME,
+		SYSRECTIME,RECEIVETIME, ISBLENDING,
+		ISMANBLENDING, ISEXCEPTIONS, STATUS,
+		ORIGINCLIENT, REMARK, REQQUERYDATA,
+		RECRESULTDATA, RECHARFEE, RECHARRATE,MERCUSTID,CARDNO,UUID,FEEOBJFLAG,URID
+		)
+		values (#{id,jdbcType=DECIMAL},#{paycompany,jdbcType=VARCHAR},
+		#{baseid,jdbcType=DECIMAL},#{amount,jdbcType=DOUBLE},
+		#{rechargeno,jdbcType=VARCHAR},
+		#{bankreturnno,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP},
+		#{syschktime,jdbcType=TIMESTAMP}, #{applyman,jdbcType=VARCHAR},
+		#{checktime,jdbcType=TIMESTAMP},
+		#{checkman,jdbcType=VARCHAR}, #{rechargetype,jdbcType=DECIMAL}, #{bankname,jdbcType=VARCHAR},
+		#{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL}, #{isexceptions,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL},
+		#{originclient,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
+		#{reqquerydata,jdbcType=VARCHAR},
+		#{recresultdata,jdbcType=VARCHAR}, #{recharfee,jdbcType=FLOAT}, #{recharrate,jdbcType=FLOAT},
+		#{mercustid,jdbcType=VARCHAR},#{cardno,jdbcType=VARCHAR},#{uuid,jdbcType=VARCHAR},#{feeobjflag,jdbcType=VARCHAR},#{urid,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserRecharge">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERRECHARGE_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERRECHARGE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="rechargeno != null">
+				RECHARGENO,
+			</if>
+			<if test="bankreturnno != null">
+				BANKRETURNNO,
+			</if>
+			<if test="starttime != null">
+				STARTTIME,
+			</if>
+			<if test="endtime != null">
+				ENDTIME,
+			</if>
+			<if test="syschktime != null">
+				SYSCHKTIME,
+			</if>
+			<if test="applyman != null">
+				APPLYMAN,
+			</if>
+			<if test="checktime != null">
+				CHECKTIME,
+			</if>
+			<if test="checkman != null">
+				CHECKMAN,
+			</if>
+			<if test="rechargetype != null">
+				RECHARGETYPE,
+			</if>
+			<if test="bankname != null">
+				BANKNAME,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="isexceptions != null">
+				ISEXCEPTIONS,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="feeobjflag != null">
+				FEEOBJFLAG,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="recharfee != null">
+				RECHARFEE,
+			</if>
+			<if test="recharrate != null">
+				RECHARRATE,
+			</if>
+			<if test="mercustid != null">
+				MERCUSTID,
+			</if>
+			<if test="cardno != null">
+				CARDNO,
+			</if>
+			<if test="uuid != null">
+				UUID,
+			</if>
+			<if test="urid != null">
+				URID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="rechargeno != null">
+				#{rechargeno,jdbcType=VARCHAR},
+			</if>
+			<if test="bankreturnno != null">
+				#{bankreturnno,jdbcType=VARCHAR},
+			</if>
+			<if test="starttime != null">
+				#{starttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endtime != null">
+				#{endtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="syschktime != null">
+				#{syschktime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="applyman != null">
+				#{applyman,jdbcType=VARCHAR},
+			</if>
+			<if test="checktime != null">
+				#{checktime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="checkman != null">
+				#{checkman,jdbcType=VARCHAR},
+			</if>
+			<if test="rechargetype != null">
+				#{rechargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="bankname != null">
+				#{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="isexceptions != null">
+				#{isexceptions,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="originclient != null">
+				#{originclient,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="feeobjflag != null">
+				#{feeobjflag,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="recharfee != null">
+				#{recharfee,jdbcType=FLOAT},
+			</if>
+			<if test="recharrate != null">
+				#{recharrate,jdbcType=FLOAT},
+			</if>
+			<if test="mercustid != null">
+				#{mercustid,jdbcType=VARCHAR},
+			</if>
+			<if test="cardno != null">
+				#{cardno,jdbcType=VARCHAR},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="urid != null">
+				#{urid,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</insert>
+
+	<select id="queryKey" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserRecharge">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where id = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="getRechargeNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where rechargeno = #{rechargeno,jdbcType=VARCHAR}
+	</select>
+	<select id="getUuidAndId" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserRecharge">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where uuid = #{uuid,jdbcType=VARCHAR} and id=#{id,jdbcType=DECIMAL}
+	</select>
+	<select id="getUuid" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where uuid = #{uuid,jdbcType=VARCHAR}
+	</select>
+	<select id="getUrid" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where urid = #{urid,jdbcType=VARCHAR}
+	</select>
+	<select id="getAllList" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where baseid = #{baseid,jdbcType=DECIMAL}
+	</select>
+	<select id="getIsblendingAndIsmanblendingAndStatus" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserRecharge">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE where (ISBLENDING=1 or ISMANBLENDING=1) and STATUS=3
+	</select>
+	<select id="getBankReturnNo" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserRecharge">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		where
+		<if test="rechargeno != null">
+			rechargeno = #{rechargeno,jdbcType=VARCHAR}
+		</if>
+		<if test="bankreturnno != null">
+			and bankreturnno = #{bankreturnno,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from USERRECHARGE where rechargeno=#{rechargeno,jdbcType=VARCHAR}
+	</delete>
+
+	<select id="selectContrast" parameterType="com.ptpl.model.UserRecharge"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE
+		<trim prefix="where" prefixOverrides="and">
+			<if test="isblending != null">
+				AND ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="isexceptions != null">
+				AND ISEXCEPTIONS = #{isexceptions,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null">
+				AND ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				AND STATUS not in (#{status,jdbcType=DECIMAL})
+			</if>
+		</trim>
+		order by ID
+	</select>
+	<!-- 查询每天的充值总金额 -->
+	<select id="selectAmountList" resultMap="BaseResultMap"
+		resultType="com.ptpl.model.UserRecharge">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERRECHARGE where to_char(starttime,'yyyy-MM-dd
+		hh24:mi:ss')&gt;to_char(trunc(sysdate),'yyyy-MM-dd hh24:mi:ss')
+		and to_char(starttime,'yyyy-MM-dd
+		hh24:mi:ss')&lt;to_char(trunc(sysdate+1),'yyyy-MM-dd hh24:mi:ss')
+		and status=1 and baseid =#{baseid,jdbcType=DECIMAL} and rechargetype
+		=#{rechargetype,jdbcType=DECIMAL}
+
+	</select>
+
+	<select id="getAll" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserRecharge">
+
+		select
+		rech.id,rech.rechargeno,rech.bankreturnno,rech.baseid,rech.amount,rech.recharfee,rech.recharrate,rech.starttime,
+		rech.endtime,rech.syschktime,rech.applyman,rech.checktime,rech.checkman,rech.rechargetype,rech.paycompany,rech.mercustid,
+		rech.bankname,rech.sysrectime,rech.receivetime,rech.isblending,rech.ismanblending,rech.isexceptions,rech.status,rech.originclient,
+		rech.feeobjflag,rech.cardno,rech.uuid,rech.urid,
+		rech.reqquerydata,rech.recresultdata,rech.remark,ubai.realname
+		from
+		USERRECHARGE rech, USERBASEACCOUNTINFO ubai
+		<trim prefix="where" prefixOverrides="and">
+			rech.baseid=ubai.id
+			<if test="ubai.id != null and ubai.id!=''">
+				and ubai.id = #{ubai.id,jdbcType=DECIMAL}
+			</if>
+			<if test="amount != null">
+				and rech.amount = #{amount,jdbcType=DOUBLE}
+			</if>
+			<if test="paycompany != null and paycompany!=''">
+				and rech.paycompany =#{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="rechargeno != null and rechargeno!=''">
+				and rech.rechargeno =#{rechargeno,jdbcType=VARCHAR}
+			</if>
+			<if test="bankreturnno != null and bankreturnno!=''">
+				and rech.bankreturnno =#{bankreturnno,jdbcType=VARCHAR}
+			</if>
+			<if test="starttime != null and starttime!=''">
+				and rech.starttime&gt;=#{starttime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="endtime != null and endtime!=''">
+				and rech.endtime&lt;=#{endtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="syschktime != null and  syschktime!=''">
+				and rech.syschktime&gt;=#{syschktime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="applyman != null">
+				and rech.applyman = #{applyman,jdbcType=VARCHAR}
+			</if>
+			<if test="checktime != null and checktime!=''">
+				and rech.checktime &gt;= #{checktime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="checkman != null">
+				and rech.checkman = #{checkman,jdbcType=VARCHAR}
+			</if>
+			<if test="rechargetype != null">
+				and rech.rechargetype =#{rechargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="bankname != null and bankname!=''">
+				and rech.bankname = #{bankname,jdbcType=VARCHAR}
+			</if>
+			<if test="sysrectime != null">
+				and rech.sysrectime = #{sysrectime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="receivetime != null">
+				and rech.receivetime = #{receivetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isblending != null">
+				and rech.isblending =#{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null">
+				and rech.ismanblending =#{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="isexceptions != null">
+				and rech.isexceptions = #{isexceptions,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				and rech.status = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="originclient != null">
+				and rech.originclient = #{originclient,jdbcType=DECIMAL}
+			</if>
+			<if test="remark != null">
+				and rech.remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="reqquerydata != null">
+				and rech.reqquerydata = #{reqquerydata,jdbcType=VARCHAR}
+			</if>
+			<if test="feeobjflag != null">
+				and rech.feeobjflag = #{feeobjflag,jdbcType=VARCHAR}
+			</if>
+			<if test="recresultdata != null">
+				and rech.recresultdata = #{recresultdata,jdbcType=VARCHAR}
+			</if>
+			<if test="recharfee != null">
+				and rech.recharfee = #{recharfee,jdbcType=FLOAT}
+			</if>
+			<if test="recharrate != null">
+				and rech.recharrate = #{recharrate,jdbcType=FLOAT}
+			</if>
+			<if test="mercustid != null">
+				and rech.mercustid = #{mercustid,jdbcType=VARCHAR}
+			</if>
+			<if test="cardno != null">
+				and rech.cardno = #{cardno,jdbcType=VARCHAR}
+			</if>
+			<if test="uuid != null">
+				and rech.uuid = #{uuid,jdbcType=VARCHAR}
+			</if>
+			<if test="urid != null">
+				and rech.urid = #{urid,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		order by starttime desc
+
+	</select>
+	
+	<select id="getAllCode" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserRecharge">
+
+		select
+		rech.id,rech.rechargeno,rech.bankreturnno,rech.baseid,rech.amount,rech.recharfee,rech.recharrate,rech.starttime,
+		rech.endtime,rech.syschktime,rech.applyman,rech.checktime,rech.checkman,rech.rechargetype,rech.paycompany,rech.mercustid,
+		rech.bankname,rech.sysrectime,rech.receivetime,rech.isblending,rech.ismanblending,rech.isexceptions,rech.status,rech.originclient,
+		rech.feeobjflag,rech.cardno,rech.uuid,rech.urid,
+		rech.reqquerydata,rech.recresultdata,rech.remark,ubai.realname
+		from
+		USERRECHARGE rech, USERBASEACCOUNTINFO ubai
+		<trim prefix="where" prefixOverrides="and">
+			rech.baseid=ubai.id
+			<if test="ubai.id != null and ubai.id!=''">
+				and ubai.id = #{ubai.id,jdbcType=DECIMAL}
+			</if>
+			<if test="ubai.realname != null and ubai.realname!=''">
+				and ubai.REALNAME like '%'||#{ubai.realname,jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="amount != null">
+				and rech.amount = #{amount,jdbcType=DOUBLE}
+			</if>
+			<if test="paycompany != null and paycompany!=''">
+				and rech.paycompany =#{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="rechargeno != null and rechargeno!=''">
+				and rech.rechargeno =#{rechargeno,jdbcType=VARCHAR}
+			</if>
+			<if test="bankreturnno != null and bankreturnno!=''">
+				and rech.bankreturnno =#{bankreturnno,jdbcType=VARCHAR}
+			</if>
+			<if test="start != null">
+				and rech.starttime&gt;=#{start,jdbcType=TIMESTAMP}
+			</if>
+			<if test="end != null">
+				and rech.starttime&lt;=#{end,jdbcType=TIMESTAMP}
+			</if>
+			<if test="syschktime != null and  syschktime!=''">
+				and rech.syschktime&gt;=#{syschktime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="applyman != null">
+				and rech.applyman = #{applyman,jdbcType=VARCHAR}
+			</if>
+			<if test="checktime != null and checktime!=''">
+				and rech.checktime &gt;= #{checktime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="checkman != null">
+				and rech.checkman = #{checkman,jdbcType=VARCHAR}
+			</if>
+			<if test="rechargetype != null">
+				and rech.rechargetype =#{rechargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="bankname != null and bankname!=''">
+				and rech.bankname = #{bankname,jdbcType=VARCHAR}
+			</if>
+			<if test="sysrectime != null">
+				and rech.sysrectime = #{sysrectime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="receivetime != null">
+				and rech.receivetime = #{receivetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isblending != null">
+				and rech.isblending =#{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null">
+				and rech.ismanblending =#{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="isexceptions != null">
+				and rech.isexceptions = #{isexceptions,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				and rech.status = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="originclient != null">
+				and rech.originclient = #{originclient,jdbcType=DECIMAL}
+			</if>
+			<if test="remark != null">
+				and rech.remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="reqquerydata != null">
+				and rech.reqquerydata = #{reqquerydata,jdbcType=VARCHAR}
+			</if>
+			<if test="feeobjflag != null">
+				and rech.feeobjflag = #{feeobjflag,jdbcType=VARCHAR}
+			</if>
+			<if test="recresultdata != null">
+				and rech.recresultdata = #{recresultdata,jdbcType=VARCHAR}
+			</if>
+			<if test="recharfee != null">
+				and rech.recharfee = #{recharfee,jdbcType=FLOAT}
+			</if>
+			<if test="recharrate != null">
+				and rech.recharrate = #{recharrate,jdbcType=FLOAT}
+			</if>
+			<if test="mercustid != null">
+				and rech.mercustid = #{mercustid,jdbcType=VARCHAR}
+			</if>
+			<if test="cardno != null">
+				and rech.cardno = #{cardno,jdbcType=VARCHAR}
+			</if>
+			<if test="uuid != null">
+				and rech.uuid = #{uuid,jdbcType=VARCHAR}
+			</if>
+			<if test="urid != null">
+				and rech.urid = #{urid,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		order by starttime desc
+
+	</select>
+	
+	
+	<select id="getLableSelect" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserRecharge">
+		select
+		<include refid="Base_Column_List"></include>
+		from  USERRECHARGE 
+		<trim prefix="where" prefixOverrides="and">
+			<if test="baseid != null">
+				baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				AND status=#{status,jdbcType=DECIMAL}
+			</if>
+			<if test="start!=null">
+				AND starttime&gt;=#{start}
+			</if>
+			<if test="end!=null">
+				AND starttime&lt;=#{end}
+			</if>
+			<if test="sign == 'today'">
+				and starttime >= sysdate-1
+			</if>
+			<if test="sign == 'week'">
+				and starttime >= sysdate-7
+			</if>
+			<if test="sign == 'oneMonth'">
+				and starttime >=add_months(sysdate,-1)
+			</if>
+			<if test="sign == 'threeMonth'">
+				and starttime >=add_months(sysdate,-3)
+			</if>
+			<if test="sign == 'sixMonth'">
+				and starttime >=add_months(sysdate,-6)
+			</if>
+		</trim>
+		order by starttime desc
+
+	</select>
+
+	<update id="update" parameterType="com.ptpl.model.UserRecharge">
+		update USERRECHARGE
+		<set>
+			<if test="amount != null">
+				amount = #{amount,jdbcType=DOUBLE},
+			</if>
+			<if test="baseid != null">
+				baseid =#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null and paycompany!=''">
+				paycompany =#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="bankreturnno != null and bankreturnno!=''">
+				bankreturnno =#{bankreturnno,jdbcType=VARCHAR},
+			</if>
+			<if test="starttime != null and starttime!=''">
+				starttime =#{starttime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endtime != null and endtime!=''">
+				endtime = #{endtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="syschktime != null and  syschktime!=''">
+				syschktime=#{syschktime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="applyman != null">
+				applyman = #{applyman,jdbcType=VARCHAR},
+			</if>
+			<if test="checktime != null and checktime!=''">
+				checktime = #{checktime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="checkman != null">
+				checkman = #{checkman,jdbcType=VARCHAR},
+			</if>
+			<if test="rechargetype != null">
+				rechargetype =#{rechargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="bankname != null and bankname!=''">
+				bankname = #{bankname,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				sysrectime = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				receivetime = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblending != null">
+				isblending =#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ismanblending =#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="isexceptions != null">
+				isexceptions = #{isexceptions,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="originclient != null">
+				originclient = #{originclient,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="reqquerydata != null">
+				reqquerydata = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="feeobjflag != null">
+				feeobjflag = #{feeobjflag,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				recresultdata = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="recharfee != null">
+				recharfee = #{recharfee,jdbcType=FLOAT},
+			</if>
+			<if test="recharrate != null">
+				recharrate = #{recharrate,jdbcType=FLOAT},
+			</if>
+			<if test="mercustid != null">
+				mercustid = #{mercustid,jdbcType=VARCHAR},
+			</if>
+			<if test="cardno != null">
+				cardno = #{cardno,jdbcType=VARCHAR},
+			</if>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="urid != null">
+				urid = #{urid,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where rechargeno =#{rechargeno,jdbcType=VARCHAR}
+	</update>
+
+
+</mapper>

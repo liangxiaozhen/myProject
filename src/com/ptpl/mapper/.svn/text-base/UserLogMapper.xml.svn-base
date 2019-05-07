@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserLogMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserLog">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="USERTYPE" property="usertype" jdbcType="DECIMAL" />
+		<result column="IP" property="ip" jdbcType="VARCHAR" />
+		<result column="COOKIE" property="cookie" jdbcType="VARCHAR" />
+		<result column="LOGINTIME" property="logintime" jdbcType="TIMESTAMP" />
+		<result column="OPERCONTENT" property="opercontent" jdbcType="VARCHAR" />
+		<result column="OPERTIME" property="opertime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		ID,BASEID,USERNAME,USERTYPE,IP,COOKIE,LOGINTIME,OPERCONTENT,OPERTIME,REMARK
+ 	</sql>
+ 	
+ 	<select id="findUserLogs" parameterType="com.ptpl.model.UserLog" resultMap="BaseResultMap">
+ 		select
+		<include refid="Base_Column_List"></include>
+		from UserLog  
+		<where>
+			<if test="usertype != null">
+				AND usertype = #{usertype,jdbcType=DECIMAL}
+			</if>
+			<if test="username != null and username != ''">
+				AND username = #{username,jdbcType=VARCHAR}
+			</if>
+ 			<if test="cookie != null and cookie != ''">
+				AND cookie = #{cookie,jdbcType=VARCHAR}
+			</if>
+			<if test="ip != null and ip != ''">
+				AND ip = #{ip,jdbcType=VARCHAR}
+			</if>
+			
+		</where>
+		order by  id desc
+ 	</select>
+ 	
+ 	<select id="findUserLogById" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+ 		select
+		<include refid="Base_Column_List"></include>
+		from UserLog  where ID = #{id,jdbcType=DECIMAL}
+ 	</select>
+ 	
+	<!-- 动态更新 方法 -->
+	<update id="updateById" parameterType="com.ptpl.model.UserLog">
+		update USERLOG
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				USERNAME = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="usertype != null">
+				USERTYPE = #{usertype,jdbcType=DECIMAL},
+			</if>
+			<if test="ip != null">
+				IP = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="cookie != null">
+				COOKIE = #{cookie,jdbcType=VARCHAR},
+			</if>
+			<if test="logintime != null">
+				LOGINTIME = #{logintime},
+			</if>
+			<if test="opercontent != null">
+				OPERCONTENT = #{opercontent,jdbcType=VARCHAR},
+			</if>
+			<if test="opertime != null">
+				OPERTIME = #{opertime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+	<insert id="insert" parameterType="com.ptpl.model.UserLog">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select USERLOG_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERLOG (ID, BASEID, USERNAME,
+		USERTYPE, IP, COOKIE,
+		LOGINTIME, OPERCONTENT, OPERTIME,
+		REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{username,jdbcType=VARCHAR},
+		#{usertype,jdbcType=DECIMAL}, #{ip,jdbcType=VARCHAR}, #{cookie,jdbcType=VARCHAR},
+		#{logintime,jdbcType=TIMESTAMP}, #{opercontent,jdbcType=VARCHAR}, #{opertime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserLog">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select USERLOG_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERLOG
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="usertype != null">
+				USERTYPE,
+			</if>
+			<if test="ip != null">
+				IP,
+			</if>
+			<if test="cookie != null">
+				COOKIE,
+			</if>
+			<if test="logintime != null">
+				LOGINTIME,
+			</if>
+			<if test="opercontent != null">
+				OPERCONTENT,
+			</if>
+			<if test="opertime != null">
+				OPERTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="usertype != null">
+				#{usertype,jdbcType=DECIMAL},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="cookie != null">
+				#{cookie,jdbcType=VARCHAR},
+			</if>
+			<if test="logintime != null">
+				#{logintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="opercontent != null">
+				#{opercontent,jdbcType=VARCHAR},
+			</if>
+			<if test="opertime != null">
+				#{opertime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

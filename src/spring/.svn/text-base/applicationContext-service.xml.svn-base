@@ -1,0 +1,339 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+	<!-- user的service -->
+	
+	<!-- 全局设置 -->
+	<!-- <bean id="globalSettingService" class="com.ptpl.service.impl.GlobalSrttingServiceImpl"></bean> -->
+	<bean id="globalSettingService" class="com.ptpl.service.impl.GlobalSrttingServiceImpl"></bean>
+	<!-- com.ptpl.service.impl -->
+	<bean id="userService" class="com.ptpl.service.impl.UserServiceImpl" />
+	<!-- 标的设置 -->
+	<bean id="tenderItemService" class="com.ptpl.service.impl.TenderItemServiceImpl" />
+	<!-- 标的站岗利息设置 -->
+	<bean id="gfundsIntService" class="com.ptpl.service.impl.GfundsIntServiceImpl"></bean>
+	<!-- 流标补偿设置 -->
+	<bean id="failTCompensateService" class="com.ptpl.service.impl.FailTCompensateServiceImpl"></bean>
+	<!-- 标的提前还款设置 -->
+	<bean id="aheadRepayService" class="com.ptpl.service.impl.AheadRepayServiceImpl" />
+	<!-- 标的债权转让设置 -->
+	<bean id="debtAttornService" class="com.ptpl.service.impl.DebtAttornServiceImpl"></bean>
+	<!-- 标的担保费率设置 -->
+	<bean id="guaranteeFeeService" class="com.ptpl.service.impl.GuaranteeFeeServiceImpl" />
+	<!-- 标的利息管理费设置 -->
+	<bean id="interestExpenseService" class="com.ptpl.service.impl.InterestExpenseServiceImpl" />
+	<!-- 标的居间费设置 -->
+	<bean id="mediacyFeeService" class="com.ptpl.service.impl.MediacyFeeServiceImpl" />
+	<!-- 标的逾期代偿设置 -->
+	<bean id="overdueCompensateService" class="com.ptpl.service.impl.OverdueCompensateServiceImpl" />
+	<!-- 标的增益设置 -->
+	<bean id="plusService" class="com.ptpl.service.impl.PlusServiceImpl" />
+	<!-- 标的风险保证金设置 -->
+	<bean id="riskGuarantyMoneyService" class="com.ptpl.service.impl.RiskGuarantyMoneyServiceImpl" />
+	<!--标的前端信息-->
+	<bean id="tenderFrontEndService" class="com.ptpl.service.impl.TenderFrontEndServiceImpl" />
+	<!--单标前端信息-->
+	<bean id="tenderFrontEndSingleService" class="com.ptpl.service.impl.TenderFrontEndSingleServiceImpl" />
+	<!--标的前端信息类别设置-->
+	<bean id="tenderFeiTypeService" class="com.ptpl.service.impl.TenderFeiTypeServiceImpl"/>
+
+
+
+	<!-- 奖品 -->
+	<bean id="awardService" class="com.ptpl.service.impl.AwardServiceImpl"></bean>
+	<!-- 获奖人名单 -->
+	<bean id="activityAwardListService" class="com.ptpl.service.impl.ActivityAwardListServiceImpl"></bean>
+	<!-- 奖品包 -->
+	<bean id="awardPackageService" class="com.ptpl.service.impl.AwardPackageServiceImpl"></bean>
+	<!-- 手动颁奖 ManualAwardServiceI -->
+	<bean id="manualawardService" class="com.ptpl.service.impl.ManualAwardServiceImpl"></bean>
+	<!-- 投标记录 userTenderService -->
+	<bean id="userTenderService" class="com.ptpl.service.impl.UserTenderServiceImpl"></bean>
+	<!-- 用户银行卡 userbankcardService -->
+	<bean id="userbankcardService" class="com.ptpl.service.impl.UserBankCardServiceImpl"></bean>
+	<!-- 用户提现记录 userWithdrawsCashService -->
+	<bean id="userWithdrawsCashService" class="com.ptpl.service.impl.UserWithdrawsCashServiceImpl" />
+	<!-- 提现费率设置 withdrawsCashRateService -->
+	<bean id="withdrawsCashRateService" class="com.ptpl.service.impl.WithdrawsCashRateServiceImpl" />
+	<!-- 排除名单 removeNameService -->
+	<bean id="removeNameService" class="com.ptpl.service.impl.RemoveNameServiceImpl"></bean>
+	<!-- 关闭时间 closeTimeService -->
+	<bean id="closeTimeService" class="com.ptpl.service.impl.CloseTimeServiceImpl"></bean>
+	<!-- 特定时间 specialTimeService -->
+	<bean id="specialTimeService" class="com.ptpl.service.impl.SpecialTimeServiceImpl"></bean>
+	<!-- 提现限制设置 withdrawsCashRstrService -->
+	<bean id="withdrawsCashRstrService" class="com.ptpl.service.impl.WithdrawsCashRstrServiceImpl"></bean>
+	<!-- 用户基本信息 -->
+	<bean id="userBaseAccountInfoService" class="com.ptpl.service.impl.UserBaseAccountInfoServiceImpl" />
+	<!-- 用户安全信息 -->
+	<bean id="userAccountSafeInfoService" class="com.ptpl.service.impl.UserAccountSafeInfoServiceImpl" />
+	<!-- 用户账户 信息 -->
+	<bean id="userAccountService" class="com.ptpl.service.impl.UserAccountServiceImpl" />
+	<!-- 用户收支记录 -->
+	<bean id="accInExRecordService" class="com.ptpl.service.impl.AccInExRecordServiceImpl" />
+	<!-- 用户名规则设置 -->
+	<bean id="userNameRuleModuleService" class="com.ptpl.service.impl.UserNameRuleModuleServiceImpl" />
+	<!-- 获取行业/职业数据 -->
+	<bean id="dataDescService" class="com.ptpl.service.impl.DataDescServiceImpl" />
+	<!-- 充值费率设置rechargeRateService -->
+	<bean id="rechargeRateService" class="com.ptpl.service.impl.RechargeRateServiceImpl" />
+	<!-- 充值记录设置userRechargeService -->
+	<bean id="userRechargeService" class="com.ptpl.service.impl.UserRechargeServiceImpl" />
+	<!-- 充值设置限制rechargeRstrService -->
+	<bean id="rechargeRstrService" class="com.ptpl.service.impl.RechargeRstrServiceImpl" />
+	<!-- 会员等级设置 userGradeService -->
+	<bean id="userGradeService" class="com.ptpl.service.impl.UserGradeServiceImpl" />
+	<!-- 用户红包 userRedEnvelopeService -->
+	<bean id="userRedEnvelopeService" class="com.ptpl.service.impl.UserRedEnvelopeServiceImpl" />
+	<!-- 现金红包对账 redEnveLopeItemService -->
+	<bean id="redEnveLopeItemService" class="com.ptpl.service.impl.RedEnveLopeItemServiceImpl" />
+	<!-- 用户积分 userBonusPointsService -->
+	<bean id="userBonusPointsService" class="com.ptpl.service.impl.UserBonusPointsServiceImpl" />
+	<!-- 用户使用券 userInterestRateCouponService -->
+	<bean id="userInterestRateCouponService" class="com.ptpl.service.impl.UserInterestRateCouponServiceImpl" />
+	<!-- 系统管理员 adminUserservice -->
+	<bean id="adminUserService" class="com.ptpl.service.impl.AdminUserServiceImpl" />
+	<!-- 系统管理员角色 roleUserservice -->
+	<bean id="roleUserService" class="com.ptpl.service.impl.RoleUserServiceImpl" />
+	<!-- 系统管理员角色systemRoleservice -->
+	<bean id="systemRoleService" class="com.ptpl.service.impl.SystemRoleServiceImpl" />
+	<!--角色资源 systemResourceService -->
+	<bean id="systemResourceService" class="com.ptpl.service.impl.SystemResourceServiceImpl" />
+	<!--角色和角色资源 RoleResource -->
+	<bean id="RoleResourceService" class="com.ptpl.service.impl.RoleResourceServiceImpl" />
+	<!-- 担保公司资料 guaranteeInfoService -->
+	<bean id="guaranteeInfoService" class="com.ptpl.service.impl.GuaranteeInfoServiceImpl" />
+	<!-- 提抵卷奖励规则设置 wCCAwardRuleService -->
+	<bean id="wCCAwardRuleService" class="com.ptpl.service.impl.WCCAwardRuleServiceImpl" />
+	<!-- 提抵卷活动规则 设置 withdrawsCashCouponService -->
+	<bean id="withdrawsCashCouponService" class="com.ptpl.service.impl.WithdrawsCashCouponServiceImpl" />
+	<!-- 注册活动规则 regActivityRuleService -->
+	<bean id="regActivityRuleService" class="com.ptpl.service.impl.RegActivityRuleServiceImpl" />
+	<!-- 注册活动奖励规则 regActAwardRuleService -->
+	<bean id="regActAwardRuleService" class="com.ptpl.service.impl.RegActAwardRuleServiceImpl" />
+	<!-- 用户日志信息 userLogService -->
+	<bean id="userLogService" class="com.ptpl.service.impl.UserLogServiceImpl" />
+	<!-- 第三方登录 thirdPbLoginService -->
+	<bean id="thirdPbLoginService" class="com.ptpl.service.impl.ThirdPbLoginServiceImpl" />
+	<!-- 用户托管账户信息 userFsAccountInfoService -->
+	<bean id="userFsAccountInfoService" class="com.ptpl.service.impl.UserFsAccountInfoServiceImpl" />
+	<!-- 用户奖品信息 userOutsideAwardService -->
+	<bean id="userOutsideAwardService" class="com.ptpl.service.impl.UserOutsideAwardServiceImpl" />
+	<!-- 用户奖品邮寄地址 userPostAddressService -->
+	<bean id="userPostAddressService" class="com.ptpl.service.impl.UserPostAddressImpl" />
+	<!-- 借贷人资料审核 loanInfoAuditService -->
+	<bean id="loanInfoAuditService" class="com.ptpl.service.impl.LoaninfoauditServiceImpl" />
+	<!-- 借贷人借款审核 loanappService -->
+	<bean id="loanappService" class="com.ptpl.service.impl.loanappServiceImpl" />
+	<!-- 借贷人图片资料 loanCertPicpathService -->
+	<bean id="loanCertPicpathService" class="com.ptpl.service.impl.LoanCertPicpathServiceImpl" />
+	<!-- 邮件发送记录 emailRecordService -->
+	<bean id="emailRecordService" class="com.ptpl.service.impl.EmailRecordServiceImpl" />
+	<!-- 邮件通道设置 emailchannelservice -->
+	<bean id="emailchannelservice" class="com.ptpl.service.impl.EmailChannelServiceImpl" />
+	<!-- 短信发送记录 sMSSendRecordService -->
+	<bean id="sMSSendRecordService" class="com.ptpl.service.impl.SMSSendRecordServiceImpl" />
+	<!-- 标的活动规则 activityRuleService -->
+	<bean id="activityRuleService" class="com.ptpl.service.impl.ActivityRuleServiceImpl" />
+	<!-- 标的活动奖励规则 activityAwardRuleService -->
+	<bean id="activityAwardRuleService" class="com.ptpl.service.impl.ActivityAwardRuleServiceImpl" />
+	<!-- 用户等级升级规则 userUpgradeRuleService -->
+	<bean id="userUpgradeRuleService" class="com.ptpl.service.impl.UserUpgradeRuleServiceImpl" />
+	<!-- 用户等级升级记录 -->
+	<bean id="userUpgradeRecordService" class="com.ptpl.service.impl.UserUpgradeRecordServiceImpl" />
+	<!-- 用户风控记录 userRiskService -->
+	<bean id="userRiskService" class="com.ptpl.service.impl.UserRiskServiceImpl" />
+	<!-- 短信通道设置 sMSChannelService -->
+	<bean id="sMSChannelService" class="com.ptpl.service.impl.SMSChannelServiceImpl" />
+	<!-- 还款记录 repayMentService -->
+	<bean id="repayMentService" class="com.ptpl.service.impl.RepayMentServiceImpl" />
+	<!-- 标的站岗利息记录 gfundsIntRecordService -->
+	<bean id="gfundsIntRecordService" class="com.ptpl.service.impl.GfundsIntRecordServiceImpl" />
+	<!-- 短信模板 messageTemplateService -->
+	<bean id="messageTemplateService" class="com.ptpl.service.impl.MessageTemplateServiceImpl" />
+	<!-- 标的流标补偿记录failTCRecordService -->
+	<bean id="failTCRecordService" class="com.ptpl.service.impl.FailTCRecordServiceImpl" />
+	<!-- 标的分期还款计划dividedPaymentsService -->
+	<bean id="dividedPaymentsService" class="com.ptpl.service.impl.DividedPaymentsServiceImpl" />
+	<!-- 冻结解冻accountFreezeThawService -->
+	<bean id="accountFreezeThawService" class="com.ptpl.service.impl.AccountFreezeThawServiceImpl" />
+	<!-- 更新汇付数据到本地数据库userBalanceQueryService -->
+	<bean id="userBalanceQueryService" class="com.ptpl.service.impl.UserBalanceQueryServiceImpl" />
+	<!--用户推广设置 userPromoServiceI -->
+	<bean id="userPromoService" class="com.ptpl.service.impl.UserPromoServiceImpl"></bean>
+	<!-- 用户推广第三方公司设置 userPromoThirdPartyService -->
+	<bean id="userPromoThirdPartyService" class="com.ptpl.service.impl.UserPromoThirdPartyServiceImpl"></bean>
+	<!-- 推广代理资质等级分润设置 promoAgentGradeProfitService -->
+	<bean id="promoAgentGradeProfitService" class="com.ptpl.service.impl.PromoAgentGradeProfitServiceImpl"></bean>
+	<!-- 投标放款记录userMakeALoanService -->
+	<bean id="userMakeALoanService" class="com.ptpl.service.impl.UserMakeALoanServiceImpl" />
+	<!-- 用户债权设置userDebtAttornService -->
+	<bean id="userDebtAttornService" class="com.ptpl.service.impl.UserDebtAttornServiceImpl" />
+	<!-- 标的利息管理费记录interestExpenseRecordService -->
+	<bean id="interestExpenseRecordService" class="com.ptpl.service.impl.InterestExpenseRecordServiceImpl" />
+	<!-- 自动投标计划 userAutoTenderService -->
+	<bean id="userAutoTenderService" class="com.ptpl.service.impl.UserAutoTenderServiceImpl" />
+	<!-- 活动对象名单设置 ActiveObjectListService -->
+	<bean id="activeObjectListService" class="com.ptpl.service.impl.ActiveobjectListServiceImpl"></bean>
+	<!-- 投标排除名单关联 tltemRNameLinkService -->
+	<bean id="tltemRNameLinkService" class="com.ptpl.service.impl.TltemRNameLinkServiceImpl" />
+	<!-- 推广限制设置promoTotalRestrictService -->
+	<bean id="promoTotalRestrictService" class="com.ptpl.service.impl.PromoTotalRestrictServiceImpl"></bean>
+	<!-- 推广各层人数限制 promoLevelRestrictService -->
+	<bean id="promoLevelRestrictService" class="com.ptpl.service.impl.PromoLevelRestrictServiceImpl"></bean>
+	<!-- 标的提前还款奖励单个投资人记录aheadRepayOneRecordService -->
+	<bean id="aheadRepayOneRecordService" class="com.ptpl.service.impl.AheadRepayOneRecordServiceImpl" />
+	<!-- 标的提前还款奖品补偿记录aheadRepayAwardRecordService -->
+	<bean id="aheadRepayAwardRecordService" class="com.ptpl.service.impl.AheadRepayAwardRecordServiceImpl" />
+	<!-- 标的提前还款奖励平台记录aheadRepayPlatformRecordService -->
+	<bean id="aheadRepayPlatformRecordService"
+		class="com.ptpl.service.impl.AheadRepayPlatformRecordServiceImpl" />
+	<!-- 代理级别的推广权限（第三方推广设置） agentGradePromoAuthService -->
+	<bean id="agentGradePromoAuthService" class="com.ptpl.service.impl.AgentGradePromoAuthServiceImpl" />
+	<!-- 代理级别推广公司关联 AGTPLinkService -->
+	<bean id="AGTPLinkService" class="com.ptpl.service.impl.AGTPLinkServiceImpl" />
+	<!-- 标的债转记录表 debtAttornRecordService -->
+	<bean id="debtAttornRecordService" class="com.ptpl.service.impl.DebtAttornRecordServiceImpl" />
+	<!-- 投标增益使用关联实体类 userTenderPlusLinkService -->
+	<bean id="userTenderPlusLinkService" class="com.ptpl.service.impl.UserTenderPlusLinkServiceImpl" />
+	<!-- 活动列表 activityListService -->
+	<bean id="activityListService" class="com.ptpl.service.impl.ActivityListServiceImpl" />
+	<!-- 屏蔽安全验证设置CancelValidate -->
+	<bean id="cancelValidateService" class="com.ptpl.service.impl.CancelValidateServiceImpl" />
+	<!-- 手动颁奖主活动列表 -->
+	<bean id="manualAwardMainService" class="com.ptpl.service.impl.ManualAwardMainServiceImpl" />
+
+	<!-- 定向名单列表 -->
+	<bean id="specialNameListService" class="com.ptpl.service.impl.SpecialNameListServiceImpl" />
+	<!-- 奖品包内容列表 -->
+	<bean id="awardPackageDetailService" class="com.ptpl.service.impl.AwardPackageDetailServiceImpl" />
+	<!-- 奖品设置指定标号关联 -->
+	<bean id="awardTenderLinkService" class="com.ptpl.service.impl.AwardTenderLinkServiceImpl" />
+	<!-- 奖品特定时间关联表 -->
+	<bean id="awardSTimeLinkService" class="com.ptpl.service.impl.AwardSTimeLinkServiceImpl" />
+	<!-- 分类奖品总开关 -->
+	<bean id="diffAwardSwitchService" class="com.ptpl.service.impl.DiffAwardSwitchServiceImpl" />
+
+	<!-- 债转排除名单关联表 -->
+	<bean id="dattornRNameLinkService" class="com.ptpl.service.impl.DattornRNameLinkServiceImpl" />
+	<!-- 债权转让购买人设置表 -->
+	<bean id="debtAttornBuyerService" class="com.ptpl.service.impl.DebtAttornBuyerServiceImpl" />
+	<!-- 债权转让手续费设置表 -->
+	<bean id="debtAttornFeeService" class="com.ptpl.service.impl.DebtAttornFeeServiceImpl" />
+	<!-- 标的增益清算记录 Service -->
+	<bean id="plusPayoutRecordService" class="com.ptpl.service.impl.PlusPayoutRecordServiceImpl" />
+	<!-- 标的居间费记录表 mediacyFeeRecordService -->
+	<bean id="mediacyFeeRecordService" class="com.ptpl.service.impl.MediacyFeeRecordServiceImpl" />
+	<!-- 标的担保费记录表guaranteeFeeRecordService -->
+	<bean id="guaranteeFeeRecordService" class="com.ptpl.service.impl.GuaranteeFeeRecordServiceImpl" />
+	<!-- 标的风险保证金记录表 riskGuarantyFeeRecordService -->
+	<bean id="riskGuarantyFeeRecordService" class="com.ptpl.service.impl.RiskGuarantyFeeRecordServiceImpl" />
+	<!-- 体验会员设置 userGradeExpService -->
+	<bean id="userGradeExpService" class="com.ptpl.service.impl.UserGradeExpServiceImpl" />
+	<!-- 提前还款方式设置 -->
+	<bean id="aheadRepayModeService" class="com.ptpl.service.impl.AheadRepayModeServiceImpl" />
+	<!-- 提前还款个人奖品奖励设置表 -->
+	<bean id="aheadRepayAwardService" class="com.ptpl.service.impl.AheadRepayAwardServiceImpl" />
+	<!-- 提前还款奖励平台设置表 -->
+	<bean id="aheadRepayPlatformService" class="com.ptpl.service.impl.AheadRepayPlatformServiceImpl" />
+	<!-- 标的逾期平台追偿设置 -->
+	<bean id="overdueRecoveryService" class="com.ptpl.service.impl.OverdueRecoveryServiceImpl" />
+	<!-- 标的流标奖品补偿设置 -->
+	<bean id="failTAwardCompensateService" class="com.ptpl.service.impl.FailTAwardCompensateServiceImpl" />
+ 	<!-- 企业用户资料信息 -->
+	<bean id="enterpriseUsersInfoService" class="com.ptpl.service.impl.EnterpriseUsersInfoServiceImpl" />
+	<!-- 逾期滞纳金费率设置 -->
+	<bean id="overdueFeeRateService" class="com.ptpl.service.impl.OverdueFeeRateServiceImpl" />
+	<!--借款资料自填类选项设置 -->
+	<bean id="loanInfoNeedMapperService" class="com.ptpl.service.impl.LoanInfoNeedMapperServiceImpl" />
+	<!-- 借款资料项目引用设置 -->
+	<bean id="loanInfoPresetService" class="com.ptpl.service.impl.LoanInfoPresetServiceImpl" />
+	<!-- 借款资料项目引用设置 -->
+	<bean id="loanItemQuoteService" class="com.ptpl.service.impl.LoanItemQuoteServiceImpl" />
+	<!-- 借款类型对象设置 -->
+	<bean id="loanTypeObjectQuoteService" class="com.ptpl.service.impl.LoanTypeObjectQuoteServiceImpl" />
+	<!--常用借款人名单-->
+	<bean id="oftenLoanListService" class="com.ptpl.service.impl.OftenLoanListServiceImpl"/>
+	<!-- 选择类多选内容设置表 -->
+	<bean id="multiContentSetService" class="com.ptpl.service.impl.MultiContentSetServiceImpl" />
+	<!-- 用户借款审核资料记录 -->
+	<bean id="userLoanMaterialService" class="com.ptpl.service.impl.UserLoanMaterialServiceImpl" />
+	<!-- 用户公共资料记录 -->
+	<bean id="userCommonMaterialService" class="com.ptpl.service.impl.UserCommonMaterialServiceImpl" />
+	<!-- 系统通知业务设置sysNoticeBizService -->
+	<bean id="sysNoticeBizService" class="com.ptpl.service.impl.SysNoticeBizServiceImpl" />
+	<!-- 还款模块 提前还款 逻辑处理Service -->
+	<bean id="aheadRepayMentLogicImpl" class="com.ptpl.service.impl.AheadRepayMentLogicImpl" />
+  	<!-- 还款模块 提前还款 提前实际还款记录Service -->
+	<bean id="aheadRealRepaymentService" class="com.ptpl.service.impl.AheadRealRepaymentServiceImpl" />
+	<!-- 工具类还款模块 逾期还款 逻辑处理service -->
+	<bean id="overdueRepayMentLogicDealImpl" class="com.ptpl.service.impl.OverdueRepayMentLogicDealImpl" />
+	<!-- 推广码注册用户记录(无根注册) -->
+	<bean id="promoRegInfoService" class="com.ptpl.service.impl.PromoRegInfoServiceImpl" />
+	<!-- 图文项目设置 -->
+	<bean id="imageTextItemService" class="com.ptpl.service.impl.ImageTextItemServiceImpl" />
+	<!-- 图文内容添加 -->
+	<bean id="imageTextSettingService" class="com.ptpl.service.impl.ImageTextSettingServiceImpl" />
+ 	<!--标的逾期代还款记录 service -->
+	<bean id="overdueRecordService" class="com.ptpl.service.impl.OverdueRecordServiceImpl" />
+	<!--用户授权记录 service -->
+	<bean id="userAuthorizationService" class="com.ptpl.service.impl.UserAuthorizationServiceImpl" />
+	<!-- 标的详情说明 -->
+	<bean id="itemDetailDescService" class="com.ptpl.service.impl.ItemDetailDescServiceImpl"/>
+	<!--用户消息通知设置 service -->
+	<bean id="userMsgSetService" class="com.ptpl.service.impl.UserMsgSetServiceImpl" />
+	<!--用户站内消息 service -->
+	<bean id="userIntMsgService" class="com.ptpl.service.impl.UserIntMsgServiceImpl" />
+	<!--批量文件记录表 service -->
+	<bean id="bacthFileRecordService" class="com.ptpl.service.impl.BacthFileRecordServiceImpl" />
+ 	<!--还款冻结解冻 service -->
+	<bean id="repaymentFrzService" class="com.ptpl.service.impl.RepaymentFrzServiceImpl" />
+	<!--第三方支付/银行  还款处理工具类 -->
+	<bean id="thirdRepayMentDealImpl" class="com.ptpl.service.impl.ThirdRepayMentDealImpl" />
+	<!--代偿还款处理工具类 -->
+	<bean id="compensatoryRepayMentDealImpl" class="com.ptpl.service.impl.CompensatoryRepayMentDealImpl" />
+   	<!-- 定额手续费表 -->
+	<bean id="rechargeQuotaFeeService" class="com.ptpl.service.impl.RechargeQuotaFeeServiceImpl" />
+	<!-- 排出人名单表-->
+	<bean id="rechargeSNLLinkService" class="com.ptpl.service.impl.RechargeSNLLinkServiceImpl" />
+ 	 <!-- 正常还款  收支记录处理接口-->
+	<bean id="repayMentNormalInsertAccInExRecordImpl" class="com.ptpl.service.impl.RepayMentNormalInsertAccInExRecordImpl" />
+ 	<!-- 提前还款  收支记录处理接口-->
+	<bean id="repayMentAheadInsertAccInExRecordImpl" class="com.ptpl.service.impl.RepayMentAheadInsertAccInExRecordImpl" />
+ 	<!-- 逾期还款 收支记录处理接口-->
+	<bean id="repayMentOverDueInsertAccInExRecordImpl" class="com.ptpl.service.impl.RepayMentOverDueInsertAccInExRecordImpl" />
+	<!-- 批量接口 交易流水明细Service -->
+	<bean id="tradeFileDetailService"  class="com.ptpl.service.impl.TradeFileDetailServiceImpl"/>
+	<!-- 批量接口 全流水明细Service -->
+	<bean id="allTradeFileDetailService" class="com.ptpl.service.impl.AllTradeFileDetailServiceImpl"/>
+  	<!-- app 接口-->
+	<bean id="appMasterImpl" class="com.ptpl.controller.ui.service.impl.UIAppMasterImpl" />
+ 	 <!-- app 安全中心接口-->
+	<bean id="appSecurityCenterServiceImpl" class="com.ptpl.controller.ui.service.impl.UIAppSecurityCenterServiceImpl" />
+     <!-- app 手机修改密码接口-->
+	<bean id="uiAppFindPasswordService" class="com.ptpl.controller.ui.service.impl.UIAppFindPasswordServiceImpl" />
+	 <!-- app 账号开立 交易密码设置/修改接口-->
+	<bean id="appOpenAnAccountServiceImpl" class="com.ptpl.controller.ui.service.impl.UIAppOpenAnAccountServiceImpl" />
+	 <!-- app 账号开立 交易密码设置/修改接口-->
+	<bean id="uIAppUserRechargeService" class="com.ptpl.controller.ui.service.impl.UIAppUserRechargeServiceImpl" />
+	<!-- 短信发送Service  -->
+	<bean id="smsSendService" class="com.ptpl.service.impl.SMSSendServiceImpl"/>
+	 <!-- 余额查询接口-->
+	<bean id="queryBlaneService" class="com.ptpl.service.impl.QueryBlaneServiceImpl" />
+	 <!-- 还款逻辑处理接口-->
+	<bean id="repayMentBaseDealImpl" class="com.ptpl.service.impl.RepayMentBaseDealImpl" />
+	 <!-- 还款批量详情记录  Service-->
+	<bean id="repaymentDetailServiceImpl" class="com.ptpl.service.impl.RepaymentDetailServiceImpl" />
+</beans> 
+  

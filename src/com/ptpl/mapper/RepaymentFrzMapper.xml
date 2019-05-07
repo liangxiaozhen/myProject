@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RepaymentFrzMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.RepaymentFrz" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+    <result column="FRZTIME" property="frztime" jdbcType="TIMESTAMP" />
+    <result column="RETURNTIME" property="returntime" jdbcType="TIMESTAMP" />
+    <result column="CARDNBR" property="cardnbr" jdbcType="VARCHAR" />
+    <result column="SERI_NO" property="serino" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="PRODUCT" property="product" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="THAWSERINO" property="thawserino" jdbcType="VARCHAR" />
+    <result column="THAWTIME" property="thawtime" jdbcType="TIMESTAMP" />
+    <result column="THAWRETURNTIME" property="thawreturntime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="SUCCESSCOUNT" property="successcount" jdbcType="DECIMAL" />
+    <result column="FAILCOUNT" property="failcount" jdbcType="DECIMAL" />
+    <result column="ISSUBMIT" property="issubmit" jdbcType="DECIMAL" />
+    <result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+    <result column="ISMANBLENDING" property="ismanblending" jdbcType="DECIMAL" />
+    <result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+    <result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+    <result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+    <result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+    <result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+    <result column="RECRESULTDATA" property="recresultdata" jdbcType="VARCHAR" />
+    <result column="SUBMITTIME" property="submittime" jdbcType="TIMESTAMP" />
+    <result column="RPREALTIME" property="rprealtime" jdbcType="TIMESTAMP" />
+    <result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+    <result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+    <result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+    <result column="RETCODE" property="retcode" jdbcType="VARCHAR" />
+    <result column="THAWRETCODE" property="thawretcode" jdbcType="VARCHAR" />
+    <result column="BATCHNO" property="batchno" jdbcType="VARCHAR" />
+    <result column="ISAHEAD" property="isahead" jdbcType="DECIMAL" />
+    <result column="ISPROXYREPAY" property="isproxyrepay" jdbcType="DECIMAL" />
+    <result column="ISOVERDUE" property="isoverdue" jdbcType="DECIMAL" />
+    <result column="ISDAREPAY" property="isdarepay" jdbcType="DECIMAL" />
+      
+     <association property="useroutaccountid" resultMap="useroutaccountid" />
+     <association property="tenderitemtenderid" resultMap="tenderitemtenderid" />
+  </resultMap>
+  
+  <!-- 借款人 -->
+  <resultMap type="com.ptpl.model.UserBaseAccountInfo" id="useroutaccountid">
+  		 <id column="t1_ID" property="id" jdbcType="DECIMAL" />
+    	<result column="t1_realname" property="realname" jdbcType="VARCHAR" />
+    	<result column="t1_loginname" property="loginname" jdbcType="VARCHAR" />
+  </resultMap>
+   
+  <!-- 标的信息-->
+  <resultMap type="com.ptpl.model.TenderItem" id="tenderitemtenderid">
+  		 <id column="t2_ID" property="id" jdbcType="DECIMAL" />
+    	 <result column="t2_tno" property="tno" jdbcType="VARCHAR" />
+   		 <result column="t2_tname" property="tname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List_left" >
+    t.ID, t.BASEID, t.FRZTIME, t.RETURNTIME, t.CARDNBR, t.SERI_NO, t.AMOUNT, t.PRODUCT, t.REMARK, t.THAWSERINO, 
+    t.THAWTIME, t.THAWRETURNTIME, t.STATUS, t.SUCCESSCOUNT, t.FAILCOUNT, t.ISSUBMIT, t.ISBLENDING, 
+    t.ISMANBLENDING, t.SYSBTIME, t.MANBTIME, t.SYSRECTIME, t.RECEIVETIME, t.REQQUERYDATA, t.RECRESULTDATA, 
+    t.SUBMITTIME, t.RPREALTIME, t.ISAUDIT, t.AUDITMAN, t.AUDITTIME, t.RETCODE, t.BATCHNO,t.THAWRETCODE,
+    t.ISAHEAD,t.ISPROXYREPAY,t.ISOVERDUE,t.ISDAREPAY,
+    t1.id as t1_id,t1.realname as t1_realname,t1.loginname as t1_loginname,
+    t2.id as t2_id,t2.tno as t2_tno,t2.tname as t2_tname
+   </sql>
+  
+  <sql id="Base_Column_List" >
+    ID, BASEID, FRZTIME, RETURNTIME, CARDNBR, SERI_NO, AMOUNT, PRODUCT, REMARK, THAWSERINO, 
+    THAWTIME, THAWRETURNTIME, STATUS, SUCCESSCOUNT, FAILCOUNT, ISSUBMIT, ISBLENDING, 
+    ISMANBLENDING, SYSBTIME, MANBTIME, SYSRECTIME, RECEIVETIME, REQQUERYDATA, RECRESULTDATA, 
+    SUBMITTIME, RPREALTIME, ISAUDIT, AUDITMAN, AUDITTIME, RETCODE, BATCHNO,THAWRETCODE,
+    ISAHEAD,ISPROXYREPAY,ISOVERDUE,ISDAREPAY
+  </sql>
+  
+    <select id="findRepaymentFrzById" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+     select 
+    <include refid="Base_Column_List_left" />
+    from REPAYMENTFRZ t
+    left join UserBaseAccountInfo t1 on t1.id = t.baseid
+ 	left join Tenderitem t2 on t2.tno = t.product
+    where t.ID = #{id,jdbcType=DECIMAL} 
+  </select>
+  
+  <select id="findRepaymentFrzs" resultMap="BaseResultMap" parameterType="com.ptpl.model.RepaymentFrz" >
+    select 
+    <include refid="Base_Column_List_left" />
+    from REPAYMENTFRZ t
+    left join UserBaseAccountInfo t1 on t1.id = t.baseid
+ 	left join Tenderitem t2 on t2.tno = t.product
+    <where>
+	     <if test="baseid != null" >
+	        	AND t.BASEID = #{baseid,jdbcType=DECIMAL}
+	      </if>
+ 	      <if test="batchno != null and batchno !=''" >
+	        	AND t.BATCHNO = #{batchno,jdbcType=VARCHAR}
+	      </if>
+	      <if test="cardnbr != null and cardnbr !=''" >
+	        	AND t.CARDNBR = #{cardnbr,jdbcType=VARCHAR}
+	      </if>
+ 	      <if test="serino != null and serino !=''" >
+	        	AND t.SERI_NO = #{serino,jdbcType=VARCHAR}
+	      </if>
+	      <if test="amount != null" >
+	        	AND t.AMOUNT = #{amount,jdbcType=DECIMAL}
+	      </if>
+ 	      <if test="product != null and product !=''" >
+	        	AND t.PRODUCT = #{product,jdbcType=VARCHAR}
+	      </if>
+ 	      <if test="thawserino != null and thawserino !=''" >
+	        	AND t.THAWSERINO = #{thawserino,jdbcType=VARCHAR}
+	      </if>
+	      
+ 	      <if test="status != null" >
+	        	AND t.STATUS = #{status,jdbcType=DECIMAL}
+	      </if>
+ 	      
+	      <if test="isaudit != null" >
+	        	AND t.ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="ismanblending != null" >
+	        	AND t.ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isblending != null" >
+	        	AND t.ISBLENDING = #{isblending,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="issubmit != null" >
+	        	AND t.ISSUBMIT = #{issubmit,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isahead != null" >
+	        	AND t.ISAHEAD = #{isahead,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isproxyrepay != null" >
+	        	AND t.ISPROXYREPAY = #{isproxyrepay,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isoverdue != null" >
+	        	AND t.ISOVERDUE = #{isoverdue,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isdarepay != null" >
+	        	AND t.ISDAREPAY = #{isdarepay,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="outloginname != null and outloginname !=''" >
+	        	AND (t1.loginname = #{outloginname,jdbcType=VARCHAR} or t1.realname = #{outloginname,jdbcType=VARCHAR}) 
+	      </if>
+	      
+	       <if test="statusisaudanddealwait != null and statusisaudanddealwait ==1" >
+	        	AND (t.STATUS = 3 or t.STATUS = 4 or t.STATUS = 0 or t.STATUS = 1 ) 
+	      </if>
+	      
+	       <if test="failandwaitstatus != null and failandwaitstatus ==1" >
+	        	AND (t.STATUS = 1 or t.STATUS = 0) 
+	      </if>
+      </where>
+     order by id desc
+    </select>
+   
+   <select id="findRepaymentFrz" resultMap="BaseResultMap" parameterType="com.ptpl.model.RepaymentFrz" >
+     select 
+     <include refid="Base_Column_List_left" />
+     from REPAYMENTFRZ t
+     left join UserBaseAccountInfo t1 on t1.id = t.baseid
+ 	 left join Tenderitem t2 on t2.tno = t.product
+    <where>
+	     <if test="baseid != null" >
+	        	AND t.BASEID = #{baseid,jdbcType=DECIMAL}
+	      </if>
+ 	      <if test="batchno != null and batchno !=''" >
+	        	AND t.BATCHNO = #{batchno,jdbcType=VARCHAR}
+	      </if>
+	      <if test="cardnbr != null and cardnbr !=''" >
+	        	AND t.CARDNBR = #{cardnbr,jdbcType=VARCHAR}
+	      </if>
+ 	      <if test="serino != null and serino !=''" >
+	        	AND t.SERI_NO = #{serino,jdbcType=VARCHAR}
+	      </if>
+	      <if test="amount != null" >
+	        	AND t.AMOUNT = #{amount,jdbcType=DECIMAL}
+	      </if>
+ 	      <if test="product != null and product !=''" >
+	        	AND t.PRODUCT = #{product,jdbcType=VARCHAR}
+	      </if>
+ 	      <if test="thawserino != null and thawserino !=''" >
+	        	AND t.THAWSERINO = #{thawserino,jdbcType=VARCHAR}
+	      </if>
+ 	      <if test="status != null" >
+	        	AND t.STATUS = #{status,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isaudit != null" >
+	        	AND t.ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="ismanblending != null" >
+	        	AND t.ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isblending != null" >
+	        	AND t.ISBLENDING = #{isblending,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="issubmit != null" >
+	        	AND t.ISSUBMIT = #{issubmit,jdbcType=DECIMAL}
+	      </if>
+	      
+	       <if test="isahead != null" >
+	        	AND t.ISAHEAD = #{isahead,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isproxyrepay != null" >
+	        	AND t.ISPROXYREPAY = #{isproxyrepay,jdbcType=DECIMAL}
+	      </if>
+	      
+	      <if test="isoverdue != null" >
+	        	AND t.ISOVERDUE = #{isoverdue,jdbcType=DECIMAL}
+	      </if>
+	      <if test="isdarepay != null" >
+	        	AND t.ISDAREPAY = #{isdarepay,jdbcType=DECIMAL}
+	      </if>
+     </where>
+   </select>
+  
+  <delete id="deleteById" parameterType="java.math.BigDecimal" >
+    delete from REPAYMENTFRZ
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+   
+  <insert id="insert" parameterType="com.ptpl.model.RepaymentFrz" >
+   <selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+  		SELECT REPAYMENTFRZ_SEQ.NEXTVAL AS id from dual
+   </selectKey>
+    insert into REPAYMENTFRZ (ID, BASEID, FRZTIME, 
+      RETURNTIME, CARDNBR, SERI_NO, 
+      AMOUNT, PRODUCT, REMARK, 
+      THAWSERINO, THAWTIME, THAWRETURNTIME, 
+      STATUS, SUCCESSCOUNT, FAILCOUNT, 
+      ISSUBMIT, ISBLENDING, ISMANBLENDING, 
+      SYSBTIME, MANBTIME, SYSRECTIME, 
+      RECEIVETIME, REQQUERYDATA, RECRESULTDATA, 
+      SUBMITTIME, RPREALTIME, ISAUDIT, 
+      AUDITMAN, AUDITTIME, RETCODE, BATCHNO,
+      THAWRETCODE,ISAHEAD,ISPROXYREPAY,ISOVERDUE,ISDAREPAY)
+    values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL}, #{frztime,jdbcType=TIMESTAMP}, 
+      #{returntime,jdbcType=TIMESTAMP}, #{cardnbr,jdbcType=VARCHAR}, #{serino,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{product,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{thawserino,jdbcType=VARCHAR}, #{thawtime,jdbcType=TIMESTAMP}, #{thawreturntime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=DECIMAL}, #{successcount,jdbcType=DECIMAL}, #{failcount,jdbcType=DECIMAL}, 
+      #{issubmit,jdbcType=DECIMAL}, #{isblending,jdbcType=DECIMAL}, #{ismanblending,jdbcType=DECIMAL}, 
+      #{sysbtime,jdbcType=TIMESTAMP}, #{manbtime,jdbcType=TIMESTAMP}, #{sysrectime,jdbcType=TIMESTAMP}, 
+      #{receivetime,jdbcType=TIMESTAMP}, #{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR}, 
+      #{submittime,jdbcType=TIMESTAMP}, #{rprealtime,jdbcType=TIMESTAMP}, #{isaudit,jdbcType=DECIMAL}, 
+      #{auditman,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP}, #{retcode,jdbcType=VARCHAR}, #{batchno,jdbcType=VARCHAR},
+      #{thawretcode,jdbcType=VARCHAR}, #{isahead,jdbcType=DECIMAL}, #{isproxyrepay,jdbcType=DECIMAL}, 
+      #{isoverdue,jdbcType=DECIMAL}, #{isdarepay,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.RepaymentFrz" >
+   <selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+  		SELECT REPAYMENTFRZ_SEQ.NEXTVAL AS id from dual
+   </selectKey>
+    insert into REPAYMENTFRZ
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="baseid != null" >
+        BASEID,
+      </if>
+      <if test="frztime != null" >
+        FRZTIME,
+      </if>
+      <if test="returntime != null" >
+        RETURNTIME,
+      </if>
+      <if test="cardnbr != null" >
+        CARDNBR,
+      </if>
+      <if test="serino != null" >
+        SERI_NO,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="product != null" >
+        PRODUCT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="thawserino != null" >
+        THAWSERINO,
+      </if>
+      <if test="thawtime != null" >
+        THAWTIME,
+      </if>
+      <if test="thawreturntime != null" >
+        THAWRETURNTIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="successcount != null" >
+        SUCCESSCOUNT,
+      </if>
+      <if test="failcount != null" >
+        FAILCOUNT,
+      </if>
+      <if test="issubmit != null" >
+        ISSUBMIT,
+      </if>
+      <if test="isblending != null" >
+        ISBLENDING,
+      </if>
+      <if test="ismanblending != null" >
+        ISMANBLENDING,
+      </if>
+      <if test="sysbtime != null" >
+        SYSBTIME,
+      </if>
+      <if test="manbtime != null" >
+        MANBTIME,
+      </if>
+      <if test="sysrectime != null" >
+        SYSRECTIME,
+      </if>
+      <if test="receivetime != null" >
+        RECEIVETIME,
+      </if>
+      <if test="reqquerydata != null" >
+        REQQUERYDATA,
+      </if>
+      <if test="recresultdata != null" >
+        RECRESULTDATA,
+      </if>
+      <if test="submittime != null" >
+        SUBMITTIME,
+      </if>
+      <if test="rprealtime != null" >
+        RPREALTIME,
+      </if>
+      <if test="isaudit != null" >
+        ISAUDIT,
+      </if>
+      <if test="auditman != null" >
+        AUDITMAN,
+      </if>
+      <if test="audittime != null" >
+        AUDITTIME,
+      </if>
+      <if test="retcode != null" >
+        RETCODE,
+      </if>
+      <if test="batchno != null" >
+        BATCHNO,
+      </if>
+      <if test="thawretcode != null" >
+        THAWRETCODE,
+      </if>
+      <if test="isahead != null" >
+        ISAHEAD,
+      </if>
+      <if test="isproxyrepay != null" >
+        ISPROXYREPAY,
+      </if>
+      <if test="isoverdue != null" >
+        ISOVERDUE,
+      </if>
+       <if test="isdarepay != null" >
+        ISDAREPAY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="baseid != null" >
+        #{baseid,jdbcType=DECIMAL},
+      </if>
+      <if test="frztime != null" >
+        #{frztime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returntime != null" >
+        #{returntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardnbr != null" >
+        #{cardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="serino != null" >
+        #{serino,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="product != null" >
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="thawserino != null" >
+        #{thawserino,jdbcType=VARCHAR},
+      </if>
+      <if test="thawtime != null" >
+        #{thawtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thawreturntime != null" >
+        #{thawreturntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="successcount != null" >
+        #{successcount,jdbcType=DECIMAL},
+      </if>
+      <if test="failcount != null" >
+        #{failcount,jdbcType=DECIMAL},
+      </if>
+      <if test="issubmit != null" >
+        #{issubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="isblending != null" >
+        #{isblending,jdbcType=DECIMAL},
+      </if>
+      <if test="ismanblending != null" >
+        #{ismanblending,jdbcType=DECIMAL},
+      </if>
+      <if test="sysbtime != null" >
+        #{sysbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manbtime != null" >
+        #{manbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysrectime != null" >
+        #{sysrectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivetime != null" >
+        #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqquerydata != null" >
+        #{reqquerydata,jdbcType=VARCHAR},
+      </if>
+      <if test="recresultdata != null" >
+        #{recresultdata,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        #{submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rprealtime != null" >
+        #{rprealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isaudit != null" >
+        #{isaudit,jdbcType=DECIMAL},
+      </if>
+      <if test="auditman != null" >
+        #{auditman,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retcode != null" >
+        #{retcode,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null" >
+        #{batchno,jdbcType=VARCHAR},
+      </if>
+      <if test="thawretcode != null" >
+        #{thawretcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isahead != null" >
+        #{isahead,jdbcType=DECIMAL},
+      </if>
+      <if test="isproxyrepay != null" >
+        #{isproxyrepay,jdbcType=DECIMAL},
+      </if>
+      <if test="isoverdue != null" >
+        #{isoverdue,jdbcType=DECIMAL},
+      </if>
+      <if test="isdarepay != null" >
+        #{isdarepay,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateById" parameterType="com.ptpl.model.RepaymentFrz" >
+    update REPAYMENTFRZ
+    <set >
+      <if test="baseid != null" >
+        BASEID = #{baseid,jdbcType=DECIMAL},
+      </if>
+      <if test="frztime != null" >
+        FRZTIME = #{frztime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returntime != null" >
+        RETURNTIME = #{returntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardnbr != null" >
+        CARDNBR = #{cardnbr,jdbcType=VARCHAR},
+      </if>
+      <if test="serino != null" >
+        SERI_NO = #{serino,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="product != null" >
+        PRODUCT = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="thawserino != null" >
+        THAWSERINO = #{thawserino,jdbcType=VARCHAR},
+      </if>
+      <if test="thawtime != null" >
+        THAWTIME = #{thawtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thawreturntime != null" >
+        THAWRETURNTIME = #{thawreturntime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="successcount != null" >
+        SUCCESSCOUNT = #{successcount,jdbcType=DECIMAL},
+      </if>
+      <if test="failcount != null" >
+        FAILCOUNT = #{failcount,jdbcType=DECIMAL},
+      </if>
+      <if test="issubmit != null" >
+        ISSUBMIT = #{issubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="isblending != null" >
+        ISBLENDING = #{isblending,jdbcType=DECIMAL},
+      </if>
+      <if test="ismanblending != null" >
+        ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+      </if>
+      <if test="sysbtime != null" >
+        SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manbtime != null" >
+        MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysrectime != null" >
+        SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivetime != null" >
+        RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reqquerydata != null" >
+        REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+      </if>
+      <if test="recresultdata != null" >
+        RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        SUBMITTIME = #{submittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rprealtime != null" >
+        RPREALTIME = #{rprealtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isaudit != null" >
+        ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+      </if>
+      <if test="auditman != null" >
+        AUDITMAN = #{auditman,jdbcType=VARCHAR},
+      </if>
+      <if test="audittime != null" >
+        AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="retcode != null" >
+        RETCODE = #{retcode,jdbcType=VARCHAR},
+      </if>
+      <if test="batchno != null" >
+        BATCHNO = #{batchno,jdbcType=VARCHAR},
+      </if>
+       <if test="thawretcode != null" >
+        THAWRETCODE = #{thawretcode,jdbcType=VARCHAR},
+      </if>
+      <if test="isahead != null" >
+        ISAHEAD = #{isahead,jdbcType=DECIMAL},
+      </if>
+      <if test="isproxyrepay != null" >
+        ISPROXYREPAY = #{isproxyrepay,jdbcType=DECIMAL},
+      </if>
+      <if test="isoverdue != null" >
+        ISOVERDUE = #{isoverdue,jdbcType=DECIMAL},
+      </if>
+      <if test="isdarepay != null" >
+        ISDAREPAY = #{isdarepay,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+ </mapper>

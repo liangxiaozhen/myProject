@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserCommonMaterialMapper">
+    <resultMap id="BaseResultMap" type="com.ptpl.model.UserCommonMaterial">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="BASEID" property="baseid" jdbcType="DECIMAL"/>
+        <result column="LIQNO" property="liqno" jdbcType="VARCHAR"/>
+        <result column="MATERIALNAME" property="materialname" jdbcType="VARCHAR"/>
+        <result column="MATERIALCONTENT" property="materialcontent" jdbcType="VARCHAR"/>
+        <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="MATERIALPIC" property="materialpic" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, BASEID, LIQNO, MATERIALNAME, MATERIALCONTENT, ADDTIME, REMARK, MATERIALPIC
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        <include refid="Base_Column_List"/>
+        from USERCOMMONMATERIAL
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <select id="selectByTenderitemId" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        u.*
+        from tenderitem t ,loanapp l,usercommonmaterial u  where t.loanappid=l.id and l.baseid=u.baseid and t.id=#{id,jdbcType=DECIMAL}
+    </select>
+
+    <!-- 通过用户id查询信息 -->
+    <select id="selectAllByBaseid" resultMap="BaseResultMap">
+    select * from USERCOMMONMATERIAL t where t.baseid= #{baseid,jdbcType=DECIMAL}
+  </select>
+
+    <!-- 通过用户id删除信息 -->
+    <delete id="delectBybaseid" parameterType="java.math.BigDecimal">
+     delete from usercommonmaterial t where t.baseid=#{baseid,jdbcType=DECIMAL} 
+  </delete>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from USERCOMMONMATERIAL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.ptpl.model.UserCommonMaterial">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select USERCOMMONMATERIAL_SEQ.Nextval as id from dual
+        </selectKey>
+        insert into USERCOMMONMATERIAL (ID, BASEID, LIQNO,
+        MATERIALNAME, MATERIALCONTENT, ADDTIME,
+        REMARK, MATERIALPIC)
+        values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL}, #{liqno,jdbcType=VARCHAR},
+        #{materialname,jdbcType=VARCHAR}, #{materialcontent,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+        #{remark,jdbcType=VARCHAR}, #{materialpic,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ptpl.model.UserCommonMaterial">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select USERCOMMONMATERIAL_SEQ.Nextval as id from dual
+        </selectKey>
+        insert into USERCOMMONMATERIAL
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="baseid != null">
+                BASEID,
+            </if>
+            <if test="liqno != null">
+                LIQNO,
+            </if>
+            <if test="materialname != null">
+                MATERIALNAME,
+            </if>
+            <if test="materialcontent != null">
+                MATERIALCONTENT,
+            </if>
+            <if test="addtime != null">
+                ADDTIME,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="materialpic != null">
+                MATERIALPIC,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="baseid != null">
+                #{baseid,jdbcType=DECIMAL},
+            </if>
+            <if test="liqno != null">
+                #{liqno,jdbcType=VARCHAR},
+            </if>
+            <if test="materialname != null">
+                #{materialname,jdbcType=VARCHAR},
+            </if>
+            <if test="materialcontent != null">
+                #{materialcontent,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="materialpic != null">
+                #{materialpic,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserCommonMaterial">
+        update USERCOMMONMATERIAL
+        <set>
+            <if test="baseid != null">
+                BASEID = #{baseid,jdbcType=DECIMAL},
+            </if>
+            <if test="liqno != null">
+                LIQNO = #{liqno,jdbcType=VARCHAR},
+            </if>
+            <if test="materialname != null">
+                MATERIALNAME = #{materialname,jdbcType=VARCHAR},
+            </if>
+            <if test="materialcontent != null">
+                MATERIALCONTENT = #{materialcontent,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="materialpic != null">
+                MATERIALPIC = #{materialpic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserCommonMaterial">
+    update USERCOMMONMATERIAL
+    set BASEID = #{baseid,jdbcType=DECIMAL},
+      LIQNO = #{liqno,jdbcType=VARCHAR},
+      MATERIALNAME = #{materialname,jdbcType=VARCHAR},
+      MATERIALCONTENT = #{materialcontent,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MATERIALPIC = #{materialpic,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+    <!-- 通过用户id查询信息 -->
+    <select id="selectByLIQNo" resultMap="BaseResultMap" parameterType="string">
+    select * from USERCOMMONMATERIAL t where t.liqno= #{liqno,jdbcType=DECIMAL}
+  </select>
+</mapper>

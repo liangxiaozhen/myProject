@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserTenderPlusLinkMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserTenderPlusLink">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="UTID" property="utid" jdbcType="DECIMAL" />
+		<result column="ICID" property="icid" jdbcType="DECIMAL" />
+		<result column="REID" property="reid" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		ID, UTID, ICID, REID, BASEID, TID
+	</sql>
+
+	<!-- 根据投标记录ID查找使用增益记录 -->
+	<select id="findUserTenderPlusLinkByUtId" resultMap="BaseResultMap" 
+		parameterType="java.math.BigDecimal">
+		select
+			<include refid="Base_Column_List" />
+		from
+			USERTENDERPLUSLINK
+		where
+			UTID = #{utid,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据标ID和baseid查找使用增益记录 -->
+	<select id="selectByTidAndBaseid" resultMap="BaseResultMap" 
+		parameterType="com.ptpl.model.UserTenderPlusLink">
+		select
+			<include refid="Base_Column_List" />
+		from
+			USERTENDERPLUSLINK
+		where
+			TID = #{tid,jdbcType=DECIMAL}
+		and BASEID = #{baseid,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据ID查看投标增益使用关联记录 -->
+	<select id="findUserTenderPlusLinkById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+			<include refid="Base_Column_List" />
+		from
+			USERTENDERPLUSLINK
+		where
+			ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 查看投标增益使用关联记录 -->
+	<select id="findUserTenderPlusLinks" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+			<include refid="Base_Column_List" />
+		from
+			USERTENDERPLUSLINK
+	</select>
+	
+	<!-- 根据ID删除投标增益使用关联记录 -->
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from USERTENDERPLUSLINK where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	
+	<!-- 新增投标增益使用关联记录 -->
+	<insert id="insert" parameterType="com.ptpl.model.UserTenderPlusLink">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT USERTENDERPLUSLINK_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERTENDERPLUSLINK (ID, UTID, ICID, REID, BASEID, TID) values
+		(#{id,jdbcType=DECIMAL}, #{utid,jdbcType=DECIMAL}, #{icid,jdbcType=DECIMAL},#{reid,jdbcType=DECIMAL},#{baseid,jdbcType=DECIMAL},#{tid,jdbcType=DECIMAL})
+	</insert>
+	
+	<!-- 新增投标增益使用关联记录（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserTenderPlusLink">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT USERTENDERPLUSLINK_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERTENDERPLUSLINK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="utid != null">
+				UTID,
+			</if>
+			<if test="icid != null">
+				ICID,
+			</if>
+			<if test="reid != null">
+				REID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="utid != null">
+				#{utid,jdbcType=DECIMAL},
+			</if>
+			<if test="icid != null">
+				#{icid,jdbcType=DECIMAL},
+			</if>
+			<if test="reid != null">
+				#{reid,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{BASEID,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{TID,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 根据ID更新投标增益使用关联记录 -->
+	<update id="updateById" parameterType="com.ptpl.model.UserTenderPlusLink">
+		update USERTENDERPLUSLINK
+		<set>
+			<if test="utid != null">
+				UTID = #{utid,jdbcType=DECIMAL},
+			</if>
+			<if test="icid != null">
+				ICID = #{icid,jdbcType=DECIMAL},
+			</if>
+			<if test="reid != null">
+				REID = #{reid,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

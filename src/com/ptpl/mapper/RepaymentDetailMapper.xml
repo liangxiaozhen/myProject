@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RepaymentDetailMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RepaymentDetail">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+		<result column="RBATCHNO" property="rbatchno" jdbcType="VARCHAR" />
+		<result column="OUTACCOUNTID" property="outaccountid" jdbcType="DECIMAL" />
+		<result column="INACCOUNTID" property="inaccountid" jdbcType="DECIMAL" />
+		<result column="PROXYACCOUNTID" property="proxyaccountid"
+			jdbcType="DECIMAL" />
+		<result column="PMISCRECMANID" property="pmiscrecmanid"
+			jdbcType="DECIMAL" />
+		<result column="UTORDERNO" property="utorderno" jdbcType="VARCHAR" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="PERIODS" property="periods" jdbcType="DECIMAL" />
+		<result column="ISDAREPAY" property="isdarepay" jdbcType="DECIMAL" />
+		<result column="RMODE" property="rmode" jdbcType="DECIMAL" />
+		<result column="RPRINCIPALINT" property="rprincipalint"
+			jdbcType="FLOAT" />
+		<result column="RPTOTALAMOUNT" property="rptotalamount"
+			jdbcType="FLOAT" />
+		<result column="RPTOTALINT" property="rptotalint" jdbcType="FLOAT" />
+		<result column="RAMOUNT" property="ramount" jdbcType="FLOAT" />
+		<result column="RINTEREST" property="rinterest" jdbcType="FLOAT" />
+		<result column="RVOUCHER" property="rvoucher" jdbcType="FLOAT" />
+		<result column="RVOUCHERINT" property="rvoucherint" jdbcType="FLOAT" />
+		<result column="RLVOUCHER" property="rlvoucher" jdbcType="FLOAT" />
+		<result column="RLVOUCHERINT" property="rlvoucherint" jdbcType="FLOAT" />
+		<result column="RINTFEE" property="rintfee" jdbcType="FLOAT" />
+		<result column="RESTPRINCIPAL" property="restprincipal"
+			jdbcType="FLOAT" />
+		<result column="TRANSFERPRINCIPAL" property="transferprincipal"
+			jdbcType="FLOAT" />
+		<result column="RESTVOUCHER" property="restvoucher" jdbcType="FLOAT" />
+		<result column="DISABLEVOUCHER" property="disablevoucher"
+			jdbcType="FLOAT" />
+		<result column="DISABLEVOUCHERINT" property="disablevoucherint"
+			jdbcType="FLOAT" />
+		<result column="RESTLVOUCHER" property="restlvoucher" jdbcType="FLOAT" />
+		<result column="DISABLELVOUCHER" property="disablelvoucher"
+			jdbcType="FLOAT" />
+		<result column="RESTOCAMOUNT" property="restocamount" jdbcType="FLOAT" />
+		<result column="DISABLEOCAMOUNT" property="disableocamount"
+			jdbcType="FLOAT" />
+		<result column="VRESTOCAMOUNT" property="vrestocamount"
+			jdbcType="FLOAT" />
+		<result column="DISABLEVOCAMOUNT" property="disablevocamount"
+			jdbcType="FLOAT" />
+		<result column="RESTINTPROFIT" property="restintprofit"
+			jdbcType="FLOAT" />
+		<result column="DISABLEINTPROFIT" property="disableintprofit"
+			jdbcType="FLOAT" />
+		<result column="RESTAMOUNTINTPROFIT" property="restamountintprofit"
+			jdbcType="FLOAT" />
+		<result column="RESTVOUCHERINTPROFIT" property="restvoucherintprofit"
+			jdbcType="FLOAT" />
+		<result column="RESTLVOUCHERINTPROFIT" property="restlvoucherintprofit"
+			jdbcType="FLOAT" />
+		<result column="AUTHCODE" property="authcode" jdbcType="VARCHAR" />
+		<result column="OVERDUEAMOUNT" property="overdueamount"
+			jdbcType="FLOAT" />
+		<result column="INTERESTEXPENSE" property="interestexpense"
+			jdbcType="FLOAT" />
+		<result column="ISPROXYREPAY" property="isproxyrepay" jdbcType="DECIMAL" />
+		<result column="ISOVERDUE" property="isoverdue" jdbcType="DECIMAL" />
+		<result column="ISAHEAD" property="isahead" jdbcType="DECIMAL" />
+		<result column="REPAYSTATUS" property="repaystatus" jdbcType="DECIMAL" />
+		<result column="RETCODE" property="retcode" jdbcType="VARCHAR" />
+		<result column="ISSUBMIT" property="issubmit" jdbcType="DECIMAL" />
+		<result column="RTIME" property="rtime" jdbcType="TIMESTAMP" />
+		<result column="SUBMITTIME" property="submittime" jdbcType="TIMESTAMP" />
+		<result column="OPERATETIME" property="operatetime" jdbcType="TIMESTAMP" />
+		<result column="RPREALTIME" property="rprealtime" jdbcType="TIMESTAMP" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<association property="outaccount" resultMap="outaccount" />
+		<association property="inaccount" resultMap="inaccount" />
+		<association property="proxyaccount" resultMap="proxyaccount" />
+		<association property="tenderItem" resultMap="tenderItem" />
+		<association property="repayment" resultMap="repayment" />
+ 	</resultMap>
+ 	<!--借款人 -->
+ 	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="outaccount">
+ 		<id column="t1_id" property="id" jdbcType="DECIMAL" />
+ 		<result column="t1_loginname" property="loginname" jdbcType="VARCHAR" />
+ 		<result column="t1_realname" property="realname" jdbcType="VARCHAR" />
+ 		
+ 	</resultMap>
+ 	<!--投资用户 -->
+ 	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="inaccount">
+ 		<id column="t2_id" property="id" jdbcType="DECIMAL" />
+ 		<result column="t2_loginname" property="loginname" jdbcType="VARCHAR" />
+ 		<result column="t2_realname" property="realname" jdbcType="VARCHAR" />
+ 	</resultMap>
+ 	<!--代还款人-->
+ 	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="proxyaccount">
+ 		<id column="t3_id" property="id" jdbcType="DECIMAL" />
+ 		<result column="t3_loginname" property="loginname" jdbcType="VARCHAR" />
+ 		<result column="t3_realname" property="realname" jdbcType="VARCHAR" />
+ 	</resultMap>
+ 	<!--标的 -->
+ 	<resultMap type="com.ptpl.model.TenderItem" id="tenderItem">
+ 		<id column="t4_id" property="id" jdbcType="DECIMAL" />
+ 		<result column="t4_tno" property="tno" jdbcType="VARCHAR" />
+ 		<result column="t4_tname" property="tname" jdbcType="VARCHAR" />
+  		
+ 	</resultMap>
+ 	<!--具体还款计划 -->
+ 	<resultMap type="com.ptpl.model.RepayMent" id="repayment">
+ 		<id column="t5_id" property="id" jdbcType="DECIMAL" />
+  	</resultMap>
+ 	 
+	<sql id="Base_Column_List">
+		ID, RORDERNO, RBATCHNO, OUTACCOUNTID, INACCOUNTID, PROXYACCOUNTID,
+		PMISCRECMANID,
+		UTORDERNO, TENDERID, PERIODS, ISDAREPAY, RMODE, RPRINCIPALINT, RPTOTALAMOUNT,
+		RPTOTALINT,
+		RAMOUNT, RINTEREST, RVOUCHER, RVOUCHERINT, RLVOUCHER, RLVOUCHERINT, RINTFEE,
+		RESTPRINCIPAL,
+		TRANSFERPRINCIPAL, RESTVOUCHER, DISABLEVOUCHER, DISABLEVOUCHERINT, RESTLVOUCHER,
+		DISABLELVOUCHER, RESTOCAMOUNT, DISABLEOCAMOUNT, VRESTOCAMOUNT,
+		DISABLEVOCAMOUNT,
+		RESTINTPROFIT, DISABLEINTPROFIT, RESTAMOUNTINTPROFIT, RESTVOUCHERINTPROFIT,
+		RESTLVOUCHERINTPROFIT,
+		AUTHCODE, OVERDUEAMOUNT, INTERESTEXPENSE, ISPROXYREPAY, ISOVERDUE, ISAHEAD,
+		REPAYSTATUS,
+		RETCODE, ISSUBMIT, RTIME, SUBMITTIME, OPERATETIME, RPREALTIME, ISAUDIT,
+		AUDITMAN,
+		AUDITTIME, ADDTIME, REMARK
+	</sql>
+	
+	<sql id="Base_Column_List_left">
+		t.ID, t.RORDERNO, t.RBATCHNO, t.OUTACCOUNTID, t.INACCOUNTID, t.PROXYACCOUNTID,t.PMISCRECMANID,
+		t.UTORDERNO, t.TENDERID, t.PERIODS, t.ISDAREPAY, t.RMODE, t.RPRINCIPALINT, t.RPTOTALAMOUNT,t.RPTOTALINT,
+		t.RAMOUNT, t.RINTEREST, t.RVOUCHER, t.RVOUCHERINT, t.RLVOUCHER, t.RLVOUCHERINT, t.RINTFEE,t.RESTPRINCIPAL,
+		t.TRANSFERPRINCIPAL, t.RESTVOUCHER, t.DISABLEVOUCHER, t.DISABLEVOUCHERINT, t.RESTLVOUCHER,
+		t.DISABLELVOUCHER, t.RESTOCAMOUNT, t.DISABLEOCAMOUNT, t.VRESTOCAMOUNT,t.DISABLEVOCAMOUNT,
+		t.RESTINTPROFIT, t.DISABLEINTPROFIT, t.RESTAMOUNTINTPROFIT, t.RESTVOUCHERINTPROFIT,t.RESTLVOUCHERINTPROFIT,
+		t.AUTHCODE, t.OVERDUEAMOUNT, t.INTERESTEXPENSE, t.ISPROXYREPAY, t.ISOVERDUE, t.ISAHEAD,t.REPAYSTATUS,
+		t.RETCODE, t.ISSUBMIT, t.RTIME, t.SUBMITTIME, t.OPERATETIME, t.RPREALTIME, t.ISAUDIT,t.AUDITMAN,
+		t.AUDITTIME, t.ADDTIME, t.REMARK,
+		t1.id as t1_id,t1.realname as t1_realname,t1.loginname as t1_loginname,
+		t2.id as t2_id,t2.realname as t2_realname,t2.loginname as t2_loginname,
+		t3.id as t3_id,t3.realname as t3_realname,t3.loginname as t3_loginname,
+		t4.id as t4_id,t4.tno as t4_tno,t4.tname as t4_tname,
+		t5.id as t5_id
+   	</sql>
+
+	<select id="findRepaymentDetail" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RepaymentDetail">
+		select
+		<include refid="Base_Column_List_left" />
+		from REPAYMENTDETAIL t
+		left join Userbaseaccountinfo t1 on t1.id = t.outaccountid
+		left join Userbaseaccountinfo t2 on t2.id = t.inaccountid
+		left join Userbaseaccountinfo t3 on t3.id = t.proxyaccountid
+		left join TenderItem t4 on t4.id = t.tenderid
+		left join RepayMent t5 on t5.rorderno = t.rorderno
+		<where>
+			<if test="id != null">
+				AND t.ID = #{id,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="rorderno != null">
+				AND t.RORDERNO = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="rbatchno != null">
+				AND t.RBATCHNO = #{rbatchno,jdbcType=VARCHAR}
+			</if>
+			 
+			 <if test="outaccountid != null">
+				AND t.OUTACCOUNTID = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="inaccountid != null">
+				AND t.INACCOUNTID = #{inaccountid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="proxyaccountid != null">
+				AND t.PROXYACCOUNTID = #{proxyaccountid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="pmiscrecmanid != null">
+				AND t.PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="utorderno != null">
+				AND t.UTORDERNO = #{utorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="tenderid != null">
+				AND t.TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="periods != null">
+				AND t.PERIODS = #{periods,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isdarepay != null">
+				AND t.ISDAREPAY = #{isdarepay,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="rmode != null">
+				AND t.RMODE = #{rmode,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isproxyrepay != null">
+				AND t.ISPROXYREPAY = #{isproxyrepay,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isoverdue != null">
+				AND t.ISOVERDUE = #{isoverdue,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isahead != null">
+				AND t.ISAHEAD = #{isahead,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="repaystatus != null">
+				AND t.REPAYSTATUS = #{repaystatus,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="issubmit != null">
+				AND t.ISSUBMIT = #{issubmit,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findRepaymentDetails" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RepaymentDetail">
+		select
+		<include refid="Base_Column_List_left" />
+		from REPAYMENTDETAIL t
+ 		left join Userbaseaccountinfo t1 on t1.id = t.outaccountid
+		left join Userbaseaccountinfo t2 on t2.id = t.inaccountid
+		left join Userbaseaccountinfo t3 on t3.id = t.proxyaccountid
+		left join TenderItem t4 on t4.id = t.tenderid
+		left join RepayMent t5 on t5.rorderno = t.rorderno
+		<where>
+			<if test="id != null">
+				AND t.ID = #{id,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="rorderno != null and rorderno != ''">
+				AND t.RORDERNO = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="rbatchno != null and rbatchno != ''">
+				AND t.RBATCHNO = #{rbatchno,jdbcType=VARCHAR}
+			</if>
+			 
+			 <if test="outaccountid != null">
+				AND t.OUTACCOUNTID = #{outaccountid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="inaccountid != null">
+				AND t.INACCOUNTID = #{inaccountid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="proxyaccountid != null">
+				AND t.PROXYACCOUNTID = #{proxyaccountid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="pmiscrecmanid != null">
+				AND t.PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="utorderno != null and utorderno != ''">
+				AND t.UTORDERNO = #{utorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="tenderid != null">
+				AND t.TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="periods != null">
+				AND t.PERIODS = #{periods,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isdarepay != null">
+				AND t.ISDAREPAY = #{isdarepay,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="rmode != null">
+				AND t.RMODE = #{rmode,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isproxyrepay != null">
+				AND t.ISPROXYREPAY = #{isproxyrepay,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isoverdue != null">
+				AND t.ISOVERDUE = #{isoverdue,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isahead != null">
+				AND t.ISAHEAD = #{isahead,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="repaystatus != null">
+				AND t.REPAYSTATUS = #{repaystatus,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="issubmit != null">
+				AND t.ISSUBMIT = #{issubmit,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="tno != null and tno != ''">
+				AND t4.tno = #{tno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="tname != null and tname != ''">
+				AND t4.tname = #{tname,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="outloginname != null and outloginname != ''">
+				AND t1.loginname = #{outloginname,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="inloginname != null and inloginname != ''">
+				AND t2.loginname = #{inloginname,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="proxyloginname != null and proxyloginname != ''">
+				AND t3.loginname = #{proxyloginname,jdbcType=VARCHAR}
+			</if>
+ 		</where>
+	</select>
+
+
+	<select id="findRepaymentDetailById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List_left" />
+		from REPAYMENTDETAIL t
+ 		left join Userbaseaccountinfo t1 on t1.id = t.outaccountid
+		left join Userbaseaccountinfo t2 on t2.id = t.inaccountid
+		left join Userbaseaccountinfo t3 on t3.id = t.proxyaccountid
+		left join TenderItem t4 on t4.id = t.tenderid
+		left join RepayMent t5 on t5.rorderno = t.rorderno
+ 		where t.ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from REPAYMENTDETAIL
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.RepaymentDetail">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT REPAYMENTDETAIL_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into REPAYMENTDETAIL (ID, RORDERNO, RBATCHNO,
+		OUTACCOUNTID, INACCOUNTID, PROXYACCOUNTID,
+		PMISCRECMANID, UTORDERNO, TENDERID,
+		PERIODS, ISDAREPAY, RMODE,
+		RPRINCIPALINT, RPTOTALAMOUNT, RPTOTALINT,
+		RAMOUNT, RINTEREST, RVOUCHER,
+		RVOUCHERINT, RLVOUCHER, RLVOUCHERINT,
+		RINTFEE, RESTPRINCIPAL, TRANSFERPRINCIPAL,
+		RESTVOUCHER, DISABLEVOUCHER, DISABLEVOUCHERINT,
+		RESTLVOUCHER, DISABLELVOUCHER, RESTOCAMOUNT,
+		DISABLEOCAMOUNT, VRESTOCAMOUNT, DISABLEVOCAMOUNT,
+		RESTINTPROFIT, DISABLEINTPROFIT, RESTAMOUNTINTPROFIT,
+		RESTVOUCHERINTPROFIT, RESTLVOUCHERINTPROFIT,
+		AUTHCODE, OVERDUEAMOUNT, INTERESTEXPENSE,
+		ISPROXYREPAY, ISOVERDUE, ISAHEAD,
+		REPAYSTATUS, RETCODE, ISSUBMIT,
+		RTIME, SUBMITTIME, OPERATETIME,
+		RPREALTIME, ISAUDIT, AUDITMAN,
+		AUDITTIME, ADDTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{rorderno,jdbcType=VARCHAR},
+		#{rbatchno,jdbcType=VARCHAR},
+		#{outaccountid,jdbcType=DECIMAL}, #{inaccountid,jdbcType=DECIMAL}, #{proxyaccountid,jdbcType=DECIMAL},
+		#{pmiscrecmanid,jdbcType=DECIMAL}, #{utorderno,jdbcType=VARCHAR},
+		#{tenderid,jdbcType=DECIMAL},
+		#{periods,jdbcType=DECIMAL}, #{isdarepay,jdbcType=DECIMAL}, #{rmode,jdbcType=DECIMAL},
+		#{rprincipalint,jdbcType=FLOAT}, #{rptotalamount,jdbcType=FLOAT},
+		#{rptotalint,jdbcType=FLOAT},
+		#{ramount,jdbcType=FLOAT}, #{rinterest,jdbcType=FLOAT}, #{rvoucher,jdbcType=FLOAT},
+		#{rvoucherint,jdbcType=FLOAT}, #{rlvoucher,jdbcType=FLOAT},
+		#{rlvoucherint,jdbcType=FLOAT},
+		#{rintfee,jdbcType=FLOAT}, #{restprincipal,jdbcType=FLOAT}, #{transferprincipal,jdbcType=FLOAT},
+		#{restvoucher,jdbcType=FLOAT}, #{disablevoucher,jdbcType=FLOAT},
+		#{disablevoucherint,jdbcType=FLOAT},
+		#{restlvoucher,jdbcType=FLOAT}, #{disablelvoucher,jdbcType=FLOAT}, #{restocamount,jdbcType=FLOAT},
+		#{disableocamount,jdbcType=FLOAT}, #{vrestocamount,jdbcType=FLOAT},
+		#{disablevocamount,jdbcType=FLOAT},
+		#{restintprofit,jdbcType=FLOAT}, #{disableintprofit,jdbcType=FLOAT},
+		#{restamountintprofit,jdbcType=FLOAT},
+		#{restvoucherintprofit,jdbcType=FLOAT},
+		#{restlvoucherintprofit,jdbcType=FLOAT},
+		#{authcode,jdbcType=VARCHAR}, #{overdueamount,jdbcType=FLOAT}, #{interestexpense,jdbcType=FLOAT},
+		#{isproxyrepay,jdbcType=DECIMAL}, #{isoverdue,jdbcType=DECIMAL},
+		#{isahead,jdbcType=DECIMAL},
+		#{repaystatus,jdbcType=DECIMAL}, #{retcode,jdbcType=VARCHAR}, #{issubmit,jdbcType=DECIMAL},
+		#{rtime,jdbcType=TIMESTAMP}, #{submittime,jdbcType=TIMESTAMP},
+		#{operatetime,jdbcType=TIMESTAMP},
+		#{rprealtime,jdbcType=TIMESTAMP}, #{isaudit,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP}, #{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RepaymentDetail">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT REPAYMENTDETAIL_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into REPAYMENTDETAIL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="rorderno != null">
+				RORDERNO,
+			</if>
+			<if test="rbatchno != null">
+				RBATCHNO,
+			</if>
+			<if test="outaccountid != null">
+				OUTACCOUNTID,
+			</if>
+			<if test="inaccountid != null">
+				INACCOUNTID,
+			</if>
+			<if test="proxyaccountid != null">
+				PROXYACCOUNTID,
+			</if>
+			<if test="pmiscrecmanid != null">
+				PMISCRECMANID,
+			</if>
+			<if test="utorderno != null">
+				UTORDERNO,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="periods != null">
+				PERIODS,
+			</if>
+			<if test="isdarepay != null">
+				ISDAREPAY,
+			</if>
+			<if test="rmode != null">
+				RMODE,
+			</if>
+			<if test="rprincipalint != null">
+				RPRINCIPALINT,
+			</if>
+			<if test="rptotalamount != null">
+				RPTOTALAMOUNT,
+			</if>
+			<if test="rptotalint != null">
+				RPTOTALINT,
+			</if>
+			<if test="ramount != null">
+				RAMOUNT,
+			</if>
+			<if test="rinterest != null">
+				RINTEREST,
+			</if>
+			<if test="rvoucher != null">
+				RVOUCHER,
+			</if>
+			<if test="rvoucherint != null">
+				RVOUCHERINT,
+			</if>
+			<if test="rlvoucher != null">
+				RLVOUCHER,
+			</if>
+			<if test="rlvoucherint != null">
+				RLVOUCHERINT,
+			</if>
+			<if test="rintfee != null">
+				RINTFEE,
+			</if>
+			<if test="restprincipal != null">
+				RESTPRINCIPAL,
+			</if>
+			<if test="transferprincipal != null">
+				TRANSFERPRINCIPAL,
+			</if>
+			<if test="restvoucher != null">
+				RESTVOUCHER,
+			</if>
+			<if test="disablevoucher != null">
+				DISABLEVOUCHER,
+			</if>
+			<if test="disablevoucherint != null">
+				DISABLEVOUCHERINT,
+			</if>
+			<if test="restlvoucher != null">
+				RESTLVOUCHER,
+			</if>
+			<if test="disablelvoucher != null">
+				DISABLELVOUCHER,
+			</if>
+			<if test="restocamount != null">
+				RESTOCAMOUNT,
+			</if>
+			<if test="disableocamount != null">
+				DISABLEOCAMOUNT,
+			</if>
+			<if test="vrestocamount != null">
+				VRESTOCAMOUNT,
+			</if>
+			<if test="disablevocamount != null">
+				DISABLEVOCAMOUNT,
+			</if>
+			<if test="restintprofit != null">
+				RESTINTPROFIT,
+			</if>
+			<if test="disableintprofit != null">
+				DISABLEINTPROFIT,
+			</if>
+			<if test="restamountintprofit != null">
+				RESTAMOUNTINTPROFIT,
+			</if>
+			<if test="restvoucherintprofit != null">
+				RESTVOUCHERINTPROFIT,
+			</if>
+			<if test="restlvoucherintprofit != null">
+				RESTLVOUCHERINTPROFIT,
+			</if>
+			<if test="authcode != null">
+				AUTHCODE,
+			</if>
+			<if test="overdueamount != null">
+				OVERDUEAMOUNT,
+			</if>
+			<if test="interestexpense != null">
+				INTERESTEXPENSE,
+			</if>
+			<if test="isproxyrepay != null">
+				ISPROXYREPAY,
+			</if>
+			<if test="isoverdue != null">
+				ISOVERDUE,
+			</if>
+			<if test="isahead != null">
+				ISAHEAD,
+			</if>
+			<if test="repaystatus != null">
+				REPAYSTATUS,
+			</if>
+			<if test="retcode != null">
+				RETCODE,
+			</if>
+			<if test="issubmit != null">
+				ISSUBMIT,
+			</if>
+			<if test="rtime != null">
+				RTIME,
+			</if>
+			<if test="submittime != null">
+				SUBMITTIME,
+			</if>
+			<if test="operatetime != null">
+				OPERATETIME,
+			</if>
+			<if test="rprealtime != null">
+				RPREALTIME,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="rorderno != null">
+				#{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rbatchno != null">
+				#{rbatchno,jdbcType=VARCHAR},
+			</if>
+			<if test="outaccountid != null">
+				#{outaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="inaccountid != null">
+				#{inaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="proxyaccountid != null">
+				#{proxyaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecmanid != null">
+				#{pmiscrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="utorderno != null">
+				#{utorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="periods != null">
+				#{periods,jdbcType=DECIMAL},
+			</if>
+			<if test="isdarepay != null">
+				#{isdarepay,jdbcType=DECIMAL},
+			</if>
+			<if test="rmode != null">
+				#{rmode,jdbcType=DECIMAL},
+			</if>
+			<if test="rprincipalint != null">
+				#{rprincipalint,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalamount != null">
+				#{rptotalamount,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalint != null">
+				#{rptotalint,jdbcType=FLOAT},
+			</if>
+			<if test="ramount != null">
+				#{ramount,jdbcType=FLOAT},
+			</if>
+			<if test="rinterest != null">
+				#{rinterest,jdbcType=FLOAT},
+			</if>
+			<if test="rvoucher != null">
+				#{rvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="rvoucherint != null">
+				#{rvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucher != null">
+				#{rlvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucherint != null">
+				#{rlvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rintfee != null">
+				#{rintfee,jdbcType=FLOAT},
+			</if>
+			<if test="restprincipal != null">
+				#{restprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="transferprincipal != null">
+				#{transferprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="restvoucher != null">
+				#{restvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="disablevoucher != null">
+				#{disablevoucher,jdbcType=FLOAT},
+			</if>
+			<if test="disablevoucherint != null">
+				#{disablevoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="restlvoucher != null">
+				#{restlvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="disablelvoucher != null">
+				#{disablelvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="restocamount != null">
+				#{restocamount,jdbcType=FLOAT},
+			</if>
+			<if test="disableocamount != null">
+				#{disableocamount,jdbcType=FLOAT},
+			</if>
+			<if test="vrestocamount != null">
+				#{vrestocamount,jdbcType=FLOAT},
+			</if>
+			<if test="disablevocamount != null">
+				#{disablevocamount,jdbcType=FLOAT},
+			</if>
+			<if test="restintprofit != null">
+				#{restintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="disableintprofit != null">
+				#{disableintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="restamountintprofit != null">
+				#{restamountintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="restvoucherintprofit != null">
+				#{restvoucherintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="restlvoucherintprofit != null">
+				#{restlvoucherintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="authcode != null">
+				#{authcode,jdbcType=VARCHAR},
+			</if>
+			<if test="overdueamount != null">
+				#{overdueamount,jdbcType=FLOAT},
+			</if>
+			<if test="interestexpense != null">
+				#{interestexpense,jdbcType=FLOAT},
+			</if>
+			<if test="isproxyrepay != null">
+				#{isproxyrepay,jdbcType=DECIMAL},
+			</if>
+			<if test="isoverdue != null">
+				#{isoverdue,jdbcType=DECIMAL},
+			</if>
+			<if test="isahead != null">
+				#{isahead,jdbcType=DECIMAL},
+			</if>
+			<if test="repaystatus != null">
+				#{repaystatus,jdbcType=DECIMAL},
+			</if>
+			<if test="retcode != null">
+				#{retcode,jdbcType=VARCHAR},
+			</if>
+			<if test="issubmit != null">
+				#{issubmit,jdbcType=DECIMAL},
+			</if>
+			<if test="rtime != null">
+				#{rtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="submittime != null">
+				#{submittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operatetime != null">
+				#{operatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rprealtime != null">
+				#{rprealtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="com.ptpl.model.RepaymentDetail">
+		update REPAYMENTDETAIL
+		<set>
+			<if test="rorderno != null">
+				RORDERNO = #{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rbatchno != null">
+				RBATCHNO = #{rbatchno,jdbcType=VARCHAR},
+			</if>
+			<if test="outaccountid != null">
+				OUTACCOUNTID = #{outaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="inaccountid != null">
+				INACCOUNTID = #{inaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="proxyaccountid != null">
+				PROXYACCOUNTID = #{proxyaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecmanid != null">
+				PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="utorderno != null">
+				UTORDERNO = #{utorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="periods != null">
+				PERIODS = #{periods,jdbcType=DECIMAL},
+			</if>
+			<if test="isdarepay != null">
+				ISDAREPAY = #{isdarepay,jdbcType=DECIMAL},
+			</if>
+			<if test="rmode != null">
+				RMODE = #{rmode,jdbcType=DECIMAL},
+			</if>
+			<if test="rprincipalint != null">
+				RPRINCIPALINT = #{rprincipalint,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalamount != null">
+				RPTOTALAMOUNT = #{rptotalamount,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalint != null">
+				RPTOTALINT = #{rptotalint,jdbcType=FLOAT},
+			</if>
+			<if test="ramount != null">
+				RAMOUNT = #{ramount,jdbcType=FLOAT},
+			</if>
+			<if test="rinterest != null">
+				RINTEREST = #{rinterest,jdbcType=FLOAT},
+			</if>
+			<if test="rvoucher != null">
+				RVOUCHER = #{rvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="rvoucherint != null">
+				RVOUCHERINT = #{rvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucher != null">
+				RLVOUCHER = #{rlvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucherint != null">
+				RLVOUCHERINT = #{rlvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rintfee != null">
+				RINTFEE = #{rintfee,jdbcType=FLOAT},
+			</if>
+			<if test="restprincipal != null">
+				RESTPRINCIPAL = #{restprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="transferprincipal != null">
+				TRANSFERPRINCIPAL = #{transferprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="restvoucher != null">
+				RESTVOUCHER = #{restvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="disablevoucher != null">
+				DISABLEVOUCHER = #{disablevoucher,jdbcType=FLOAT},
+			</if>
+			<if test="disablevoucherint != null">
+				DISABLEVOUCHERINT = #{disablevoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="restlvoucher != null">
+				RESTLVOUCHER = #{restlvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="disablelvoucher != null">
+				DISABLELVOUCHER = #{disablelvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="restocamount != null">
+				RESTOCAMOUNT = #{restocamount,jdbcType=FLOAT},
+			</if>
+			<if test="disableocamount != null">
+				DISABLEOCAMOUNT = #{disableocamount,jdbcType=FLOAT},
+			</if>
+			<if test="vrestocamount != null">
+				VRESTOCAMOUNT = #{vrestocamount,jdbcType=FLOAT},
+			</if>
+			<if test="disablevocamount != null">
+				DISABLEVOCAMOUNT = #{disablevocamount,jdbcType=FLOAT},
+			</if>
+			<if test="restintprofit != null">
+				RESTINTPROFIT = #{restintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="disableintprofit != null">
+				DISABLEINTPROFIT = #{disableintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="restamountintprofit != null">
+				RESTAMOUNTINTPROFIT = #{restamountintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="restvoucherintprofit != null">
+				RESTVOUCHERINTPROFIT = #{restvoucherintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="restlvoucherintprofit != null">
+				RESTLVOUCHERINTPROFIT = #{restlvoucherintprofit,jdbcType=FLOAT},
+			</if>
+			<if test="authcode != null">
+				AUTHCODE = #{authcode,jdbcType=VARCHAR},
+			</if>
+			<if test="overdueamount != null">
+				OVERDUEAMOUNT = #{overdueamount,jdbcType=FLOAT},
+			</if>
+			<if test="interestexpense != null">
+				INTERESTEXPENSE = #{interestexpense,jdbcType=FLOAT},
+			</if>
+			<if test="isproxyrepay != null">
+				ISPROXYREPAY = #{isproxyrepay,jdbcType=DECIMAL},
+			</if>
+			<if test="isoverdue != null">
+				ISOVERDUE = #{isoverdue,jdbcType=DECIMAL},
+			</if>
+			<if test="isahead != null">
+				ISAHEAD = #{isahead,jdbcType=DECIMAL},
+			</if>
+			<if test="repaystatus != null">
+				REPAYSTATUS = #{repaystatus,jdbcType=DECIMAL},
+			</if>
+			<if test="retcode != null">
+				RETCODE = #{retcode,jdbcType=VARCHAR},
+			</if>
+			<if test="issubmit != null">
+				ISSUBMIT = #{issubmit,jdbcType=DECIMAL},
+			</if>
+			<if test="rtime != null">
+				RTIME = #{rtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="submittime != null">
+				SUBMITTIME = #{submittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operatetime != null">
+				OPERATETIME = #{operatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rprealtime != null">
+				RPREALTIME = #{rprealtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+</mapper>

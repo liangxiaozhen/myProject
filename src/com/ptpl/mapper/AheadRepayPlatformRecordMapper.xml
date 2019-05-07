@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AheadRepayPlatformRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AheadRepayPlatformRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="SPECIALTENDERID" property="specialtenderid"
+			jdbcType="DECIMAL" />
+		<result column="ARORDERNO" property="arorderno" jdbcType="VARCHAR" />
+		<result column="ARID" property="arid" jdbcType="DECIMAL" />
+		<result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+		<result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR" />
+		<result column="BMANID" property="bmanid" jdbcType="DECIMAL" />
+		<result column="PROXYACCOUNTID" property="proxyaccountid"
+			jdbcType="DECIMAL" />
+		<result column="ALLNORECIEVEINT" property="allnorecieveint"
+			jdbcType="FLOAT" />
+		<result column="AMENDSPAMOUNT" property="amendspamount"
+			jdbcType="FLOAT" />
+		<result column="ISDEAL" property="isdeal" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="PAYOUTDATE" property="payoutdate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TENDERID, SPECIALTENDERID, ARORDERNO, ARID, RORDERNO, PMISCRECMAN,
+		BMANID, PROXYACCOUNTID,
+		ALLNORECIEVEINT, AMENDSPAMOUNT, ISDEAL, ISAUDIT, ISBLENDING, ISMANBLENDING, SYSBTIME,
+		MANBTIME, PAYCOMPANY, SYSRECTIME, RECEIVETIME, REQQUERYDATA,
+		RECRESULTDATA, AUDITTIME,
+		AUDITMAN, MADETIME, PAYOUTDATE, REMARK
+	</sql>
+	<select id="findAheadRepayPlatformRecords" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.AheadRepayPlatformRecord">
+		select
+		<include refid="Base_Column_List" />
+		from AHEADREPAYPLATFORMRECORD
+	</select>
+	<select id="findAheadRepayPlatformRecordById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AHEADREPAYPLATFORMRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from AHEADREPAYPLATFORMRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	
+	<delete id="deleteByRorderno" parameterType="java.lang.String">
+		delete from AHEADREPAYPLATFORMRECORD
+		where rorderno = #{Rorderno,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.ptpl.model.AheadRepayPlatformRecord">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT AHEADREPAYPLATFORMRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AHEADREPAYPLATFORMRECORD (ID, TENDERID, SPECIALTENDERID,
+		ARORDERNO, ARID, RORDERNO,
+		PMISCRECMAN, BMANID, PROXYACCOUNTID,
+		ALLNORECIEVEINT, AMENDSPAMOUNT, ISDEAL,
+		ISAUDIT, ISBLENDING, ISMANBLENDING,
+		SYSBTIME, MANBTIME, PAYCOMPANY,
+		SYSRECTIME, RECEIVETIME, REQQUERYDATA,
+		RECRESULTDATA, AUDITTIME, AUDITMAN,
+		MADETIME, PAYOUTDATE, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{tenderid,jdbcType=DECIMAL},
+		#{specialtenderid,jdbcType=DECIMAL},
+		#{arorderno,jdbcType=VARCHAR}, #{arid,jdbcType=DECIMAL}, #{rorderno,jdbcType=VARCHAR},
+		#{pmiscrecman,jdbcType=VARCHAR}, #{bmanid,jdbcType=DECIMAL},
+		#{proxyaccountid,jdbcType=DECIMAL},
+		#{allnorecieveint,jdbcType=FLOAT}, #{amendspamount,jdbcType=FLOAT}, #{isdeal,jdbcType=DECIMAL},
+		#{isaudit,jdbcType=DECIMAL}, #{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL},
+		#{sysbtime,jdbcType=TIMESTAMP}, #{manbtime,jdbcType=TIMESTAMP}, #{paycompany,jdbcType=VARCHAR},
+		#{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{reqquerydata,jdbcType=VARCHAR},
+		#{recresultdata,jdbcType=VARCHAR}, #{audittime,jdbcType=TIMESTAMP}, #{auditman,jdbcType=VARCHAR},
+		#{madetime,jdbcType=TIMESTAMP}, #{payoutdate,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AheadRepayPlatformRecord">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT AHEADREPAYPLATFORMRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AHEADREPAYPLATFORMRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="specialtenderid != null">
+				SPECIALTENDERID,
+			</if>
+			<if test="arorderno != null">
+				ARORDERNO,
+			</if>
+			<if test="arid != null">
+				ARID,
+			</if>
+			<if test="rorderno != null">
+				RORDERNO,
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN,
+			</if>
+			<if test="bmanid != null">
+				BMANID,
+			</if>
+			<if test="proxyaccountid != null">
+				PROXYACCOUNTID,
+			</if>
+			<if test="allnorecieveint != null">
+				ALLNORECIEVEINT,
+			</if>
+			<if test="amendspamount != null">
+				AMENDSPAMOUNT,
+			</if>
+			<if test="isdeal != null">
+				ISDEAL,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="specialtenderid != null">
+				#{specialtenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="arorderno != null">
+				#{arorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="arid != null">
+				#{arid,jdbcType=DECIMAL},
+			</if>
+			<if test="rorderno != null">
+				#{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="pmiscrecman != null">
+				#{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="bmanid != null">
+				#{bmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="proxyaccountid != null">
+				#{proxyaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="allnorecieveint != null">
+				#{allnorecieveint,jdbcType=FLOAT},
+			</if>
+			<if test="amendspamount != null">
+				#{amendspamount,jdbcType=FLOAT},
+			</if>
+			<if test="isdeal != null">
+				#{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				#{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="com.ptpl.model.AheadRepayPlatformRecord">
+		update AHEADREPAYPLATFORMRECORD
+		<set>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="specialtenderid != null">
+				SPECIALTENDERID = #{specialtenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="arorderno != null">
+				ARORDERNO = #{arorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="arid != null">
+				ARID = #{arid,jdbcType=DECIMAL},
+			</if>
+			<if test="rorderno != null">
+				RORDERNO = #{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="bmanid != null">
+				BMANID = #{bmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="proxyaccountid != null">
+				PROXYACCOUNTID = #{proxyaccountid,jdbcType=DECIMAL},
+			</if>
+			<if test="allnorecieveint != null">
+				ALLNORECIEVEINT = #{allnorecieveint,jdbcType=FLOAT},
+			</if>
+			<if test="amendspamount != null">
+				AMENDSPAMOUNT = #{amendspamount,jdbcType=FLOAT},
+			</if>
+			<if test="isdeal != null">
+				ISDEAL = #{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

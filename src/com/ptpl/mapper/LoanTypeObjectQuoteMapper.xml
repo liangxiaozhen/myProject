@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.LoanTypeObjectQuoteMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.LoanTypeObjectQuote" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SERIALNO" property="serialno" jdbcType="DECIMAL" />
+    <result column="OBJECTNAME" property="objectname" jdbcType="VARCHAR" />
+    <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+    <result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SERIALNO, OBJECTNAME, ADDTIME, REMARK, ADDMAN,ISUSE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from LOANTYPEOBJECTQUOTE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectBySerialNo" resultMap="BaseResultMap">
+     select * from LOANTYPEOBJECTQUOTE t where t.serialno=#{serialno,jdbcType=DECIMAL}
+  </select>
+  
+
+  <insert id="insert" parameterType="com.ptpl.model.LoanTypeObjectQuote" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+     SELECT LOANTYPEOBJECTQUOTE_SEQ.NEXTVAL as id FROM DUAL
+  </selectKey>
+    insert into LOANTYPEOBJECTQUOTE (ID, SERIALNO, OBJECTNAME, 
+      ADDTIME, REMARK, ADDMAN,ISUSE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{serialno,jdbcType=DECIMAL}, #{objectname,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{addman,jdbcType=VARCHAR},#{isuse,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.LoanTypeObjectQuote" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+     SELECT LOANTYPEOBJECTQUOTE_SEQ.NEXTVAL as id FROM DUAL
+  </selectKey>
+    insert into LOANTYPEOBJECTQUOTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="serialno != null" >
+        SERIALNO,
+      </if>
+      <if test="objectname != null" >
+        OBJECTNAME,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="addman != null" >
+        ADDMAN,
+      </if>
+      <if test="isuse != null" >
+        ISUSE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="serialno != null" >
+        #{serialno,jdbcType=DECIMAL},
+      </if>
+      <if test="objectname != null" >
+        #{objectname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addman != null" >
+        #{addman,jdbcType=VARCHAR},
+      </if>
+       <if test="isuse != null" >
+        #{isuse,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.LoanTypeObjectQuote" >
+    update LOANTYPEOBJECTQUOTE
+    <set >
+      <if test="serialno != null" >
+        SERIALNO = #{serialno,jdbcType=DECIMAL},
+      </if>
+      <if test="objectname != null" >
+        OBJECTNAME = #{objectname,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addman != null" >
+        ADDMAN = #{addman,jdbcType=VARCHAR},
+      </if>
+      <if test="isuse != null" >
+       ISUSE = #{isuse,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.LoanTypeObjectQuote" >
+    update LOANTYPEOBJECTQUOTE
+    set SERIALNO = #{serialno,jdbcType=DECIMAL},
+      OBJECTNAME = #{objectname,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ADDMAN = #{addman,jdbcType=VARCHAR},
+      ISUSE = #{isuse,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="gettypeObjectQuotes" resultMap="BaseResultMap" >
+     select <include refid="Base_Column_List" />
+     from LOANTYPEOBJECTQUOTE
+     <where>
+       <if test="serialno != null" >
+        SERIALNO = #{serialno,jdbcType=DECIMAL}
+      </if>
+      <if test="objectname != null" >
+        and OBJECTNAME = #{objectname,jdbcType=VARCHAR}
+      </if>
+      <if test="addtime != null" >
+        and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="remark != null" >
+        and REMARK = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="addman != null" >
+        and ADDMAN = #{addman,jdbcType=VARCHAR}
+      </if>
+      <if test="isuse != null" >
+        and ISUSE = #{isuse,jdbcType=DECIMAL}
+      </if>
+     </where>
+     order by SERIALNO asc
+  </select>
+  
+  <select id="selectIsuse" resultMap="BaseResultMap">
+     select * from LOANTYPEOBJECTQUOTE t where t.isuse=1
+  </select>
+
+     <!-- 获取最后一个序号 -->
+    <select id="selectMaxSerialNo" resultType="Short">
+    select max(t.serialno) from LOANTYPEOBJECTQUOTE t
+  </select>
+</mapper>

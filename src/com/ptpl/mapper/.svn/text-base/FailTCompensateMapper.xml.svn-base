@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.FailTCompensateMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.FailTCompensate">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="FAILTCNO" property="failtcno" jdbcType="VARCHAR" />
+		<result column="ISINTCOMPENSATEON" property="isintcompensateon"
+			jdbcType="DECIMAL" />
+		<result column="INTUGRADE" property="intugrade" jdbcType="DECIMAL" />
+		<result column="MINMONEY" property="minmoney" jdbcType="FLOAT" />
+		<result column="MAXMONEY" property="maxmoney" jdbcType="FLOAT" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="DAYAWARDRATE" property="dayawardrate" jdbcType="FLOAT" />
+		<result column="MAXCOMPENSATE" property="maxcompensate"
+			jdbcType="FLOAT" />
+		<result column="ISAWARDCOMPENSATEON" property="isawardcompensateon"
+			jdbcType="DECIMAL" />
+		<result column="AWARDNAME" property="awardname" jdbcType="VARCHAR" />
+		<result column="AWARDQUOTA" property="awardquota" jdbcType="FLOAT" />
+		<result column="AWARDRATE" property="awardrate" jdbcType="FLOAT" />
+		<result column="AWARDMAXMONEY" property="awardmaxmoney"
+			jdbcType="FLOAT" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="AWARDNO" property="awardno" jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AWARDUGRADE" property="awardugrade" jdbcType="VARCHAR" />
+		<result column="MINMONEYAWARD" property="minmoneyaward"
+			jdbcType="DECIMAL" />
+		<result column="MAXMONEYAWARD" property="maxmoneyaward"
+			jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ptpl.model.FailTCompensate">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT FAILTCOMPENSATE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into FAILTCOMPENSATE (ID,FAILTCNO,ISINTCOMPENSATEON,
+		INTUGRADE,MINMONEY,MAXMONEY,
+		QUOTA,DAYAWARDRATE,MAXCOMPENSATE,
+		ISAWARDCOMPENSATEON,AWARDNAME,AWARDQUOTA,
+		AWARDRATE,AWARDMAXMONEY,ISTEMPLET,TID,AWARDNO,ISAUDIT,AWARDUGRADE,MINMONEYAWARD,MAXMONEYAWARD,
+		ADDMAN,ADDTIME,REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{failtcno,jdbcType=VARCHAR},
+		#{isintcompensateon,jdbcType=DECIMAL},
+		#{intugrade,jdbcType=DECIMAL}, #{minmoney,jdbcType=FLOAT}, #{maxmoney,jdbcType=FLOAT},
+		#{quota,jdbcType=FLOAT}, #{dayawardrate,jdbcType=FLOAT},
+		#{maxcompensate,jdbcType=FLOAT},
+		#{isawardcompensateon,jdbcType=DECIMAL},
+		#{awardname,jdbcType=VARCHAR}, #{awardquota,jdbcType=FLOAT},
+		#{awardrate,jdbcType=FLOAT}, #{awardmaxmoney,jdbcType=FLOAT},
+		#{istemplet,jdbcType=DECIMAL},
+		#{tid,jdbcType=DECIMAL},#{awardno,jdbcType=VARCHAR},#{isaudit,jdbcType=DECIMAL},#{awardugrade,jdbcType=VARCHAR},
+		#{minmoneyaward,jdbcType=DECIMAL},#{maxmoneyaward,jdbcType=DECIMAL},#{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<select id="selectByCondition" parameterType="com.ptpl.model.FailTCompensate"
+		resultMap="BaseResultMap">
+		select * from FAILTCOMPENSATE
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id}
+			</if>
+			<if test="failtcno != null and failtcno!=''">
+				and FAILTCNO = #{failtcno,jdbcType=VARCHAR}
+			</if>
+			<if test="isintcompensateon != null and isintcompensateon!=''">
+				and ISINTCOMPENSATEON = #{isintcompensateon,jdbcType=DECIMAL}
+			</if>
+			<if test="intugrade != null and intugrade!=''">
+				and INTUGRADE = #{intugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="minmoney != null and minmoney!=''">
+				and MINMONEY = #{minmoney,jdbcType=FLOAT}
+			</if>
+			<if test="maxmoney != null and maxmoney!=''">
+				and MAXMONEY = #{maxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="quota != null and quota!=''">
+				and QUOTA = #{quota,jdbcType=FLOAT}
+			</if>
+			<if test="dayawardrate != null and dayawardrate!=''">
+				and DAYAWARDRATE = #{dayawardrate,jdbcType=FLOAT}
+			</if>
+			<if test="maxcompensate != null and maxcompensate!=''">
+				and MAXCOMPENSATE = #{maxcompensate,jdbcType=FLOAT}
+			</if>
+			<if test="isawardcompensateon != null and isawardcompensateon!=''">
+				and ISAWARDCOMPENSATEON = #{isawardcompensateon,jdbcType=DECIMAL}
+			</if>
+			<if test="awardname != null and awardname!=''">
+				and AWARDNAME = #{awardname,jdbcType=VARCHAR}
+			</if>
+			<if test="awardquota != null and awardquota!=''">
+				and AWARDQUOTA = #{awardquota,jdbcType=FLOAT}
+			</if>
+			<if test="awardrate != null and awardrate!=''">
+				and AWARDRATE = #{awardrate,jdbcType=FLOAT}
+			</if>
+			<if test="awardmaxmoney != null and awardmaxmoney!=''">
+				and AWARDMAXMONEY = #{awardmaxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="istemplet != null and istemplet!=''">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null and tid!=''">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="awardno != null and awardno!=''">
+				and AWARDNO = #{awardno,jdbcType=VARCHAR}
+			</if>
+			<if test="isaudit != null and isaudit!=''">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="awardugrade != null and awardugrade!=''">
+				and AWARDUGRADE = #{awardugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="minmoneyaward != null and minmoneyaward!=''">
+				and MINMONEYAWARD = #{minmoneyaward,jdbcType=DECIMAL}
+			</if>
+			<if test="maxmoneyaward != null and maxmoneyaward!=''">
+				and MAXMONEYAWARD = #{maxmoneyaward,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null and addman!=''">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		order by id asc
+	</select>
+
+
+
+	<update id="update" parameterType="com.ptpl.model.FailTCompensate">
+		update FAILTCOMPENSATE
+		<set>
+			<if test="failtcno != null">
+				FAILTCNO = #{failtcno,jdbcType=VARCHAR},
+			</if>
+			ISINTCOMPENSATEON = #{isintcompensateon,jdbcType=DECIMAL},
+			INTUGRADE = #{intugrade,jdbcType=DECIMAL},
+			MINMONEY = #{minmoney,jdbcType=FLOAT},
+			MAXMONEY = #{maxmoney,jdbcType=FLOAT},
+			QUOTA = #{quota,jdbcType=FLOAT},
+			DAYAWARDRATE = #{dayawardrate,jdbcType=FLOAT},
+			MAXCOMPENSATE = #{maxcompensate,jdbcType=FLOAT},
+			ISAWARDCOMPENSATEON = #{isawardcompensateon,jdbcType=DECIMAL},
+			AWARDNAME = #{awardname,jdbcType=VARCHAR},
+			AWARDQUOTA = #{awardquota,jdbcType=FLOAT},
+			AWARDRATE = #{awardrate,jdbcType=FLOAT},
+			AWARDMAXMONEY = #{awardmaxmoney,jdbcType=FLOAT},
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardno != null">
+				AWARDNO = #{awardno,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="awardugrade != null">
+				AWARDUGRADE = #{awardugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="minmoneyaward != null">
+				MINMONEYAWARD = #{minmoneyaward,jdbcType=DECIMAL},
+			</if>
+			<if test="maxmoneyaward != null">
+				MAXMONEYAWARD = #{maxmoneyaward,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from FAILTCOMPENSATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据tid查询信息 -->
+	<select id="selectefatlpenBytid" resultMap="BaseResultMap">
+		select * from FAILTCOMPENSATE t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据tid查询等级信息 -->
+	<select id="selectGradeByTid" resultType="java.lang.String">
+		select DISTINCT(INTUGRADE) from FAILTCOMPENSATE t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

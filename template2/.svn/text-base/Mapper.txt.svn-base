@@ -1,0 +1,12 @@
+package com.ptpl.mapper;
+
+import com.ptpl.model.Pojo;
+
+/**
+ * @author:author
+ * @date:date
+ * @description:description
+ */
+public interface PojoMapper extends BaseMapper<Pojo>{
+	
+}

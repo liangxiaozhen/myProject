@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserPostAddressMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserPostAddress">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="AWARDNO" property="awardno" jdbcType="VARCHAR" />
+		<result column="ADDRESS_PROVINCE" property="addressProvince"
+			jdbcType="VARCHAR" />
+		<result column="ADDRESS_CITY" property="addressCity" jdbcType="VARCHAR" />
+		<result column="ADDRESS_DISTRICT" property="addressDistrict"
+			jdbcType="VARCHAR" />
+		<result column="ADDRESS_STREET" property="addressStreet"
+			jdbcType="VARCHAR" />
+		<result column="ZIPCODE" property="zipcode" jdbcType="VARCHAR" />
+		<result column="RECIPIENTS" property="recipients" jdbcType="VARCHAR" />
+		<result column="MOBLIEPHONE" property="mobliephone" jdbcType="VARCHAR" />
+		<result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISDEFADDRESS" property="isdefaddress" jdbcType="DECIMAL" />
+		<association property="userBaseAccountInfo" resultMap="BaseRecordMap" />
+	</resultMap>
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="BaseRecordMap">
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, AWARDNO, ADDRESS_PROVINCE, ADDRESS_CITY, ADDRESS_DISTRICT,
+		ADDRESS_STREET,
+		ZIPCODE, RECIPIENTS, MOBLIEPHONE, TELEPHONE, REMARK,ISDEFADDRESS
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		SELECT U.LOGINNAME,T.* FROM USERPOSTADDRESS T LEFT JOIN USERBASEACCOUNTINFO
+		U ON T.BASEID=U.ID WHERE T.ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据用户id查信息 -->
+	<select id="selectByuserID" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERPOSTADDRESS
+		where BASEID = #{baseid,jdbcType=DECIMAL}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from USERPOSTADDRESS
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.UserPostAddress">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERPOSTADDRESS_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into USERPOSTADDRESS (ID, BASEID, AWARDNO,
+		ADDRESS_PROVINCE, ADDRESS_CITY, ADDRESS_DISTRICT,
+		ADDRESS_STREET, ZIPCODE, RECIPIENTS,
+		MOBLIEPHONE, TELEPHONE, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{awardno,jdbcType=VARCHAR},
+		#{addressProvince,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, #{addressDistrict,jdbcType=VARCHAR},
+		#{addressStreet,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR},
+		#{recipients,jdbcType=VARCHAR},
+		#{mobliephone,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserPostAddress">
+
+		insert into USERPOSTADDRESS(ID, BASEID, AWARDNO, ADDRESS_PROVINCE,
+		ADDRESS_CITY, ADDRESS_DISTRICT, ADDRESS_STREET,
+		ZIPCODE, RECIPIENTS, MOBLIEPHONE, TELEPHONE, REMARK,ISDEFADDRESS)
+		select
+		userpostaddress_seq.nextval,t.c1,t.c2,t.c3,t.c4,t.c5,t.c6,t.c7,t.c8,t.c9,t.c10,t.c11,t.c12
+		from(select #{baseid,jdbcType=DECIMAL} c1,#{awardno,jdbcType=VARCHAR}
+		c2,#{addressProvince,jdbcType=VARCHAR}
+		c3,#{addressCity,jdbcType=VARCHAR}
+		c4,#{addressDistrict,jdbcType=VARCHAR}
+		c5,#{addressStreet,jdbcType=VARCHAR} c6,#{zipcode,jdbcType=VARCHAR}
+		c7,#{recipients,jdbcType=VARCHAR} c8,#{mobliephone,jdbcType=VARCHAR}
+		c9,#{telephone,jdbcType=VARCHAR} c10,#{remark,jdbcType=VARCHAR}
+		c11,#{isdefaddress,jdbcType=DECIMAL} c12 from dual) t
+
+		<!-- <selectKey resultType="java.math.BigDecimal" keyProperty="id" order="BEFORE"> 
+			SELECT USERPOSTADDRESS_SEQ.NEXTVAL AS id FROM DUAL </selectKey> INSERT INTO 
+			USERPOSTADDRESS <trim prefix="(" suffix=")" suffixOverrides="," > <if test="id 
+			!= null" > ID, </if> <if test="baseid != null" > BASEID, </if> <if test="awardno 
+			!= null" > AWARDNO, </if> <if test="addressProvince != null" > ADDRESS_PROVINCE, 
+			</if> <if test="addressCity != null" > ADDRESS_CITY, </if> <if test="addressDistrict 
+			!= null" > ADDRESS_DISTRICT, </if> <if test="addressStreet != null" > ADDRESS_STREET, 
+			</if> <if test="zipcode != null" > ZIPCODE, </if> <if test="recipients != 
+			null" > RECIPIENTS, </if> <if test="mobliephone != null" > MOBLIEPHONE, </if> 
+			<if test="telephone != null" > TELEPHONE, </if> <if test="remark != null" 
+			> REMARK, </if> <if test="isdefaddress != null" > ISDEFADDRESS, </if> </trim> 
+			<trim prefix="values (" suffix=")" suffixOverrides="," > <if test="id != 
+			null" > #{id,jdbcType=DECIMAL}, </if> <if test="baseid != null" > #{baseid,jdbcType=DECIMAL}, 
+			</if> <if test="awardno != null" > #{awardno,jdbcType=VARCHAR}, </if> <if 
+			test="addressProvince != null" > #{addressProvince,jdbcType=VARCHAR}, </if> 
+			<if test="addressCity != null" > #{addressCity,jdbcType=VARCHAR}, </if> <if 
+			test="addressDistrict != null" > #{addressDistrict,jdbcType=VARCHAR}, </if> 
+			<if test="addressStreet != null" > #{addressStreet,jdbcType=VARCHAR}, </if> 
+			<if test="zipcode != null" > #{zipcode,jdbcType=VARCHAR}, </if> <if test="recipients 
+			!= null" > #{recipients,jdbcType=VARCHAR}, </if> <if test="mobliephone != 
+			null" > #{mobliephone,jdbcType=VARCHAR}, </if> <if test="telephone != null" 
+			> #{telephone,jdbcType=VARCHAR}, </if> <if test="remark != null" > #{remark,jdbcType=VARCHAR}, 
+			</if> <if test="isdefaddress != null" > #{isdefaddress, jdbcType=DECIMAL}, 
+			</if> </trim> -->
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserPostAddress">
+		update USERPOSTADDRESS
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardno != null">
+				AWARDNO = #{awardno,jdbcType=VARCHAR},
+			</if>
+			<if test="addressProvince != null">
+				ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="addressCity != null">
+				ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+			</if>
+			<if test="addressDistrict != null">
+				ADDRESS_DISTRICT = #{addressDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="addressStreet != null">
+				ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR},
+			</if>
+			<if test="zipcode != null">
+				ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+			</if>
+			<if test="recipients != null">
+				RECIPIENTS = #{recipients,jdbcType=VARCHAR},
+			</if>
+			<if test="mobliephone != null">
+				MOBLIEPHONE = #{mobliephone,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				TELEPHONE = #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isdefaddress != null">
+				ISDEFADDRESS = #{isdefaddress,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserPostAddress">
+		update USERPOSTADDRESS
+		set BASEID = #{baseid,jdbcType=DECIMAL},
+		AWARDNO = #{awardno,jdbcType=VARCHAR},
+		ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR},
+		ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+		ADDRESS_DISTRICT = #{addressDistrict,jdbcType=VARCHAR},
+		ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR},
+		ZIPCODE = #{zipcode,jdbcType=VARCHAR},
+		RECIPIENTS = #{recipients,jdbcType=VARCHAR},
+		MOBLIEPHONE = #{mobliephone,jdbcType=VARCHAR},
+		TELEPHONE = #{telephone,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- getall 根据条件查找 -->
+	<select id="selectAllAddress" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserPostAddress">
+		SELECT U.LOGINNAME,T.* FROM USERPOSTADDRESS T LEFT JOIN
+		USERBASEACCOUNTINFO U ON T.BASEID=U.ID
+		<where>
+			<if test="id != null">
+				T.ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="baseid!= null">
+				AND T.BASEID = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="awardno != null">
+				AND T.AWARDNO = #{awardno,jdbcType=VARCHAR}
+			</if>
+			<if test="addressProvince != null">
+				AND T.ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR}
+			</if>
+			<if test="addressCity != null">
+				AND T.ADDRESS_CITY = #{addressCity,jdbcType=DECIMAL}
+			</if>
+			<if test="addressDistrict != null">
+				AND T.ADDRESS_DISTRICT = #{addressDistrict,jdbcType=TIMESTAMP}
+			</if>
+			<if test="addressStreet != null">
+				AND T.ADDRESS_STREET = #{addressStreet,jdbcType=DECIMAL}
+			</if>
+			<if test="zipcode != null">
+				AND T.ZIPCODE = #{zipcode,jdbcType=DECIMAL}
+			</if>
+			<if test="recipients != null">
+				AND T.RECIPIENTS = #{recipients,jdbcType=VARCHAR}
+			</if>
+			<if test="mobliephone != null">
+				AND T.MOBLIEPHONE = #{mobliephone,jdbcType=DECIMAL}
+			</if>
+			<if test="telephone != null">
+				AND T.TELEPHONE = #{telephone,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND T.REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isdefaddress != null">
+				AND T.ISDEFADDRESS = #{isdefaddress,jdbcType=VARCHAR}
+			</if>
+			<!-- 模糊查询 -->
+			<if test="userBaseAccountInfo != null">
+				AND U.LOGINNAME like
+				'%'||#{userBaseAccountInfo.loginname,jdbcType=VARCHAR}||'%'
+			</if>
+		</where>
+	</select>
+</mapper>

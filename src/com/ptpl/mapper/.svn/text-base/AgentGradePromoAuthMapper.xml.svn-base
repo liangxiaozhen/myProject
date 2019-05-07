@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AgentGradePromoAuthMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AgentGradePromoAuth">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PROXYGRADE" property="proxygrade" jdbcType="DECIMAL" />
+		<result column="THIRDPARTYCODE" property="thirdpartycode"
+			jdbcType="VARCHAR" />
+		<result column="THIRDPARTYNAME" property="thirdpartyname"
+			jdbcType="VARCHAR" />
+		<result column="ISOPEN" property="isopen" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROXYGRADE, THIRDPARTYCODE, THIRDPARTYNAME, ISOPEN,
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AGENTGRADEPROMOAUTH
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		AGENTGRADEPROMOAUTH
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<select id="selective" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.AgentGradePromoAuth">
+		select
+		<include refid="Base_Column_List"></include>
+		from AGENTGRADEPROMOAUTH
+		<where>
+			<if test="proxygrade != null">
+				AND PROXYGRADE = #{proxygrade,jdbcType=DECIMAL}
+			</if>
+			<if test="thirdpartycode != null">
+				AND THIRDPARTYCODE = #{thirdpartycode,jdbcType=VARCHAR}
+			</if>
+			<if test="thirdpartyname != null and thirdpartyname != ''">
+				AND THIRDPARTYNAME = #{thirdpartyname,jdbcType=VARCHAR}
+			</if>
+			<if test="isopen != null">
+				AND ISOPEN = #{isopen,jdbcType=DECIMAL}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AgentGradePromoAuth">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT AGENTGRADEPROMOAUTH_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into AGENTGRADEPROMOAUTH
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="proxygrade != null">
+				PROXYGRADE,
+			</if>
+			<if test="thirdpartycode != null">
+				THIRDPARTYCODE,
+			</if>
+			<if test="thirdpartyname != null">
+				THIRDPARTYNAME,
+			</if>
+			<if test="isopen != null">
+				ISOPEN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="proxygrade != null">
+				#{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpartycode != null">
+				#{thirdpartycode,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpartyname != null">
+				#{thirdpartyname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopen != null">
+				#{isopen,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.AgentGradePromoAuth">
+		update AGENTGRADEPROMOAUTH
+		<set>
+			<if test="proxygrade != null">
+				PROXYGRADE = #{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="thirdpartycode != null">
+				THIRDPARTYCODE = #{thirdpartycode,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpartyname != null">
+				THIRDPARTYNAME = #{thirdpartyname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopen != null">
+				ISOPEN = #{isopen,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

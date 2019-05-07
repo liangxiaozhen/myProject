@@ -1,0 +1,108 @@
+package com.ptpl.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import java.math.BigDecimal;
+import com.ptpl.mapper.[entity]Mapper;
+ import com.ptpl.model.[entity];
+import com.ptpl.service.[entity]ServiceI;
+/**
+ * 
+ * [description]业务层
+ * [entity]ServiceI
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public class [entity]ServiceImpl implements [entity]ServiceI{
+	
+	@Autowired
+	private [entity]Mapper [lowEntity]Mapper;
+	
+	/**
+	 * 
+	* @Title: insert 
+	* @Description: TODO([description]数据增加方法) 
+	* @param @param [lowEntity]
+	* @param @return  参数说明 
+	* @return int    返回类型 
+	* @author [author]
+	* @throws
+	 */
+	@Override
+	public int insert([entity] [lowEntity]) {
+ 		return [lowEntity]Mapper.insert([lowEntity]);
+	}
+	/**
+     * 
+    * @Title: insertSelective 
+    * @Description: TODO([description]数据增加方法，非空值) 
+    * @param @param [lowEntity]
+    * @param @return  参数说明 
+    * @return int    返回类型 
+    * @author [author]
+    * @throws
+     */
+	@Override
+	public int insertSelective([entity] [lowEntity]) {
+ 		return [lowEntity]Mapper.insertSelective([lowEntity]);
+	}
+  	/**
+     * 
+     * @Title: deleteById 
+     * @Description: TODO([description]根据Id 删除方法) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author [author]
+     * @throws
+     */
+	@Override
+	public int deleteById(BigDecimal id) {
+ 		return [lowEntity]Mapper.deleteById(id);
+	}
+	/**
+     * 
+     * @Title: updateById 
+     * @Description: TODO([description]更新方法) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author [author]
+     * @throws
+     */
+	@Override
+	public int updateById([entity] [lowEntity]) {
+ 		return [lowEntity]Mapper.updateById([lowEntity]);
+	}
+	 /**
+     * 
+     * @Title: find[entity]s
+     * @Description: TODO([description]查询全部) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author [author]
+     * @throws
+     */
+	@Override
+	public List<[entity]> find[entity]s([entity] [lowEntity]) {
+ 		return [lowEntity]Mapper.find[entity]s([lowEntity]);
+	}
+  	/**
+     * 
+    * @Title: find[entity]ById
+    * @Description: TODO(根据Id查询对应的[description]信息) 
+    * @param @param id
+    * @param @return  参数说明 
+    * @return [entity]    返回类型 
+    * @author [author]
+    * @throws
+     */
+	@Override
+	public [entity] find[entity]ById(BigDecimal id) {
+ 		return [lowEntity]Mapper.find[entity]ById(id);
+	}
+}

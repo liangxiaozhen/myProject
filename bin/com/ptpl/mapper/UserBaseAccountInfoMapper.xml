@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserBaseAccountInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserBaseAccountInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="IMAGEPATH" property="imagepath" jdbcType="VARCHAR" />
+		<result column="ACCOUNTNUMBER" property="accountnumber"
+				jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+		<result column="ACCOUNTTYPE" property="accounttype" jdbcType="DECIMAL" />
+		<result column="CERTIFICATIONTYPE" property="certificationtype"
+				jdbcType="VARCHAR" />
+		<result column="CERTIFICATIONNUMBER" property="certificationnumber"
+				jdbcType="VARCHAR" />
+		<result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+		<result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+		<result column="LOGINTYPE" property="logintype" jdbcType="DECIMAL" />
+		<result column="REGTYPE" property="regtype" jdbcType="DECIMAL" />
+		<result column="REGDATE" property="regdate" jdbcType="TIMESTAMP" />
+		<result column="EMAILVERIFYDATE" property="emailverifydate"
+				jdbcType="TIMESTAMP" />
+		<result column="MOBILEVERIFYDATE" property="mobileverifydate"
+				jdbcType="TIMESTAMP" />
+		<result column="ISMOBILEVERIFY" property="ismobileverify"
+				jdbcType="DECIMAL" />
+		<result column="ISEMAILVERIFY" property="isemailverify"
+				jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISACTIVE" property="isactive" jdbcType="DECIMAL" />
+		<result column="ISREALLY" property="isreally" jdbcType="DECIMAL" />
+		<result column="PROFESSION" property="profession" jdbcType="DECIMAL" />
+		<result column="ADDRESS_PROVINCE" property="addressProvince"
+				jdbcType="VARCHAR" />
+		<result column="ADDRESS_CITY" property="addressCity" jdbcType="VARCHAR" />
+		<result column="ADDRESS_DISTRICT" property="addressDistrict"
+				jdbcType="VARCHAR" />
+		<result column="ADDRESS_STREET" property="addressStreet"
+				jdbcType="VARCHAR" />
+		<result column="REFERRALINFO" property="referralinfo" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ORIGINCLIENT" property="originclient" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<result column="REFERRALSELFNO" property="referralselfno"
+				jdbcType="VARCHAR" />
+		<result column="REFERRALNO" property="referralno" jdbcType="VARCHAR" />
+		<result column="REGIP" property="regip" jdbcType="VARCHAR" />
+		<result column="REGCOOKIE" property="regcookie" jdbcType="VARCHAR" />
+		<result column="SEX" property="sex"
+				jdbcType="DECIMAL" />
+		<result column="ISCANCHEATTENDER" property="iscancheattender"
+				jdbcType="DECIMAL" />
+		<association property="userfsaccountinfo" resultMap="userfsaccountinfomap"></association>
+		<association property="uasi" resultMap="uasimap"></association>
+	</resultMap>
+	<!-- 关联信息安全表 -->
+	<resultMap type="com.ptpl.model.UserAccountSafeInfo" id="uasimap">
+		<id column="a_id" property="id" jdbcType="DECIMAL" />
+		<result column="a_baseid" property="baseid" jdbcType="DECIMAL" />
+		<result column="a_question1" property="question1" jdbcType="VARCHAR" />
+		<result column="a_answer1" property="answer1" jdbcType="VARCHAR" />
+		<result column="ugrade" property="ugrade" jdbcType="DECIMAL"/>
+		<result column="ugradename" property="ugradenamestr" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserFsAccountInfo" id="userfsaccountinfomap">
+		<id column="t1_id" property="id" jdbcType="DECIMAL" />
+		<result column="t1_baseid" property="baseid" jdbcType="DECIMAL" />
+		<result column="t1_usrcustid" property="usrcustid" jdbcType="VARCHAR" />
+		<result column="t1_mercustid" property="mercustid" jdbcType="VARCHAR" />
+		<result column="t1_respcode" property="respcode" jdbcType="VARCHAR" />
+		<result column="t1_respdesc" property="respdesc" jdbcType="VARCHAR" />
+		<result column="t1_channelidentifier" property="channelidentifier"
+				jdbcType="VARCHAR" />
+		<result column="t1_isopenfsinfo" property="isopenfsinfo"
+				jdbcType="DECIMAL" />
+		<result column="t1_openingtime" property="openingtime"
+				jdbcType="TIMESTAMP" />
+		<result column="t1_remark" property="remark" jdbcType="VARCHAR" />
+		<result column="t1_usrloginname" property="usrloginname"
+				jdbcType="VARCHAR" />
+		<result column="t1_usrname" property="usrname" jdbcType="VARCHAR" />
+		<result column="t1_accounttype" property="accounttype"
+				jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, IMAGEPATH, ACCOUNTNUMBER, EMAIL, MOBILEPHONE, ACCOUNTTYPE,
+		CERTIFICATIONTYPE,
+		CERTIFICATIONNUMBER, REALNAME, TELEPHONE, LOGINTYPE, REGTYPE, REGDATE, EMAILVERIFYDATE,
+		MOBILEVERIFYDATE, ISMOBILEVERIFY, ISEMAILVERIFY, STATUS, ISACTIVE,
+		ISREALLY, PROFESSION,
+		ADDRESS_PROVINCE, ADDRESS_CITY, ADDRESS_DISTRICT, ADDRESS_STREET, REFERRALINFO, REMARK,
+		ORIGINCLIENT, LOGINNAME, REFERRALSELFNO,
+		REFERRALNO,REGIP,REGCOOKIE,ISCANCHEATTENDER,SEX
+	</sql>
+
+	<sql id="Base_Column_List_Blurred">
+		t.ID, t.IMAGEPATH, t.ACCOUNTNUMBER, t.EMAIL, t.MOBILEPHONE, t.ACCOUNTTYPE,
+		t.CERTIFICATIONTYPE,
+		t.CERTIFICATIONNUMBER, t.REALNAME, t.TELEPHONE, t.LOGINTYPE, t.REGTYPE, t.REGDATE,
+		t.EMAILVERIFYDATE,
+		t.MOBILEVERIFYDATE, t.ISMOBILEVERIFY, t.ISEMAILVERIFY, t.STATUS, t.ISACTIVE, t.ISREALLY,
+		t.PROFESSION,
+		t.ADDRESS_PROVINCE, t.ADDRESS_CITY, t.ADDRESS_DISTRICT, t.ADDRESS_STREET, t.REFERRALINFO,
+		t.REMARK,
+		t.ORIGINCLIENT, t.LOGINNAME, t.REFERRALSELFNO, t.REFERRALNO,t.REGIP,t.REGCOOKIE,t.SEX
+	</sql>
+
+	<sql id="Base_Column_List_FSAccountInfo">
+		t.ID, t.IMAGEPATH, t.ACCOUNTNUMBER, t.EMAIL, t.MOBILEPHONE, t.ACCOUNTTYPE,
+		t.CERTIFICATIONTYPE,
+		t.CERTIFICATIONNUMBER, t.REALNAME, t.TELEPHONE, t.LOGINTYPE, t.REGTYPE, t.REGDATE,
+		t.EMAILVERIFYDATE,
+		t.MOBILEVERIFYDATE, t.ISMOBILEVERIFY, t.ISEMAILVERIFY, t.STATUS, t.ISACTIVE, t.ISREALLY,
+		t.PROFESSION,
+		t.ADDRESS_PROVINCE, t.ADDRESS_CITY, t.ADDRESS_DISTRICT, t.ADDRESS_STREET, t.REFERRALINFO,
+		t.REMARK,
+		t.ORIGINCLIENT, t.LOGINNAME, t.REFERRALSELFNO, t.REFERRALNO,t.REGIP,t.REGCOOKIE ,
+		t1.ID AS t1_ID , t1.BASEID AS t1_BASEID ,t1.USRCUSTID AS t1_USRCUSTID,
+		t1.MERCUSTID AS t1_MERCUSTID, t1.TRXID AS t1_TRXID,
+		t1.RESPCODE AS t1_RESPCODE, t1.RESPDESC AS t1_RESPDESC, t1.CHANNELIDENTIFIER AS
+		t1_CHANNELIDENTIFIER,
+		t1.ISOPENFSINFO AS t1_ISOPENFSINFO,t1.OPENINGTIME AS t1_OPENINGTIME, t1.REMARK AS
+		t1_REMARK,t1.USRLOGINNAME AS t1_USRLOGINNAME,
+		t1.USRNAME AS t1_USRNAME,t1.ACCOUNTTYPE AS t1_ACCOUNTTYPE
+	</sql>
+	<!-- 关联用户托管账号信息查询全部用户信息 开户情况 -->
+	<select id="getUserBaseAccountInfoAndUserFSAccountInfo"
+			resultMap="BaseResultMap" parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select
+		<include refid="Base_Column_List_FSAccountInfo" />
+		from USERBASEACCOUNTINFO t left join UserFSAccountInfo t1 on t.id =
+		t1.baseid
+		<where>
+			<if test="loginname != null and loginname != ''">
+				AND t.loginname like '%${loginname}%'
+			</if>
+			<if test="realname != null and realname != ''">
+				AND t.realname like '%${realname}%'
+			</if>
+			<if test="mobilephone != null and mobilephone != ''">
+				AND t.mobilephone like '%${mobilephone}%'
+			</if>
+			<if test="email != null and email != ''">
+				AND t.email like '%${email}%'
+			</if>
+			<if test="accounttype != null">
+				AND t.accounttype = #{accounttype}
+			</if>
+			<if test="isopenfsinfo != null">
+				AND t1.isopenfsinfo = #{isopenfsinfo}
+			</if>
+			<if test="startregdate != null and startregdate != '' and endregdate != null and endregdate!= '' ">
+				<![CDATA[AND to_char(t.regdate,'YYYY-MM-DD' ) >= to_char(#{startregdate},'YYYY-MM-DD' ) AND to_char(t.regdate,'YYYY-MM-DD') <= to_char(#{endregdate},'YYYY-MM-DD')]]>
+			</if>
+		</where>
+		order by t.regdate asc
+	</select>
+
+	<!-- 根据用户主键ID关联用户托管账号信息查询全部用户信息 开户情况 -->
+	<select id="getUserBaseAccountInfoAndUserFSAccountInfoById"
+			resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List_FSAccountInfo" />
+		from USERBASEACCOUNTINFO t left join UserFSAccountInfo t1 on t.id =
+		t1.baseid
+		where t.id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- <select id="getUserBaseAccountInfoById" resultMap="BaseResultMap" parameterType="java.math.BigDecimal"
+		> -->
+	<!-- select -->
+	<!-- <include refid="Base_Column_List" /> -->
+	<!-- from USERBASEACCOUNTINFO -->
+	<!-- where ID = #{id,jdbcType=DECIMAL} and loginname is not null and realname
+		is not null -->
+	<!-- </select> -->
+
+	<select id="getUserBaseAccountInfoById" resultMap="BaseResultMap"
+			parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERBASEACCOUNTINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 查询全部 手机号,用户名,邮箱 模糊搜索 -->
+	<select id="getUserBaseAccountInfosBlurred" resultMap="BaseResultMap"
+			parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select
+		<include refid="Base_Column_List_Blurred"></include>
+		from USERBASEACCOUNTINFO t left join USERACCOUNTSAFEINFO t1 on t.id =
+		t1.baseid and t1.risklevel = 1
+		<where>
+			<if test="email != null">
+				or t.EMAIL like '%${email}%'
+			</if>
+			<if test="realname != null">
+				or t.REALNAME like '%${realname}%'
+			</if>
+			<if test="mobilephone != null">
+				or t.MOBILEPHONE like '%${mobilephone}%'
+			</if>
+			<if test="loginname != null">
+				or t.LOGINNAME like '%${loginname}%'
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询全部 -->
+	<select id="getUserBaseAccountInfos" resultMap="BaseResultMap"
+			parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERBASEACCOUNTINFO
+		<where>
+			<if test="id != null">
+				and ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="imagepath != null">
+				and IMAGEPATH = #{imagepath,,jdbcType=VARCHAR}
+			</if>
+			<if test="accountnumber != null">
+				and ACCOUNTNUMBER = #{accountnumber,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null">
+				and EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null">
+				and MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="accounttype != null">
+				and ACCOUNTTYPE = #{accounttype,jdbcType=DECIMAL}
+			</if>
+			<if test="certificationtype != null">
+				and CERTIFICATIONTYPE = #{certificationtype,jdbcType=VARCHAR}
+			</if>
+			<if test="certificationnumber != null">
+				and CERTIFICATIONNUMBER = #{certificationnumber,jdbcType=VARCHAR}
+			</if>
+			<if test="realname != null">
+				and REALNAME = #{realname,jdbcType=VARCHAR}
+			</if>
+			<if test="telephone != null">
+				and TELEPHONE = #{telephone,jdbcType=VARCHAR}
+			</if>
+			<if test="logintype != null">
+				and LOGINTYPE = #{logintype,jdbcType=DECIMAL}
+			</if>
+			<if test="regtype != null">
+				and REGTYPE = #{regtype,jdbcType=DECIMAL}
+			</if>
+			<if test="regdate != null">
+				and REGDATE = #{regdate,jdbcType=DATE}
+			</if>
+			<if test="emailverifydate != null">
+				and EMAILVERIFYDATE = #{emailverifydate,jdbcType=DATE}
+			</if>
+			<if test="mobileverifydate != null">
+				and MOBILEVERIFYDATE = #{mobileverifydate,jdbcType=DATE}
+			</if>
+			<if test="ismobileverify != null">
+				and ISMOBILEVERIFY = #{ismobileverify,jdbcType=DECIMAL}
+			</if>
+			<if test="isemailverify != null">
+				and ISEMAILVERIFY = #{isemailverify,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				and STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="isactive != null">
+				and ISACTIVE = #{isactive,jdbcType=DECIMAL}
+			</if>
+			<if test="isreally != null">
+				and ISREALLY = #{isreally,jdbcType=DECIMAL}
+			</if>
+			<if test="profession != null">
+				and PROFESSION = #{profession,jdbcType=DECIMAL}
+			</if>
+			<if test="addressProvince != null">
+				and ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR}
+			</if>
+			<if test="addressCity != null">
+				and ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR}
+			</if>
+			<if test="addressDistrict != null">
+				and ADDRESS_DISTRICT = #{addressDistrict,jdbcType=VARCHAR}
+			</if>
+			<if test="addressStreet != null">
+				and ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR}
+			</if>
+			<if test="referralinfo != null">
+				and REFERRALINFO = #{referralinfo,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="originclient != null">
+				and ORIGINCLIENT = #{originclient,jdbcType=DECIMAL}
+			</if>
+			<if test="loginname != null">
+				and LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="referralselfno != null">
+				and REFERRALSELFNO = #{referralselfno,jdbcType=VARCHAR}
+			</if>
+			<if test="referralno != null">
+				and REFERRALNO = #{referralno,jdbcType=VARCHAR}
+			</if>
+			<if test="regip != null">
+				and REGIP = #{regip,jdbcType=VARCHAR}
+			</if>
+			<if test="regcookie != null">
+				and REGCOOKIE = #{regcookie,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询部分 -->
+	<select id="getByUserBaseAccountInfo" resultMap="BaseResultMap"
+			parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERBASEACCOUNTINFO
+		<where>
+			<if test="id != null and id !=''">
+				and ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="email != null and email !=''">
+				and EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null and mobilephone != ''">
+				and MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="loginname != null and loginname!=''">
+				and LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="regip != null and regip!=''">
+				and REGIP = #{regip,jdbcType=VARCHAR}
+			</if>
+			<if test="regcookie != null and regcookie !=''">
+				and REGCOOKIE = #{regcookie,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- 条件查询 返回单个 -->
+	<select id="getUserBaseAccountInfoByOneCondition" resultMap="BaseResultMap"
+			parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select
+		<include refid="Base_Column_List" />
+		from USERBASEACCOUNTINFO
+		<where>
+			<if test="id != null">
+				and ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="imagepath != null">
+				and IMAGEPATH = #{imagepath,,jdbcType=VARCHAR}
+			</if>
+			<if test="accountnumber != null">
+				and ACCOUNTNUMBER = #{accountnumber,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null">
+				and EMAIL = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone != null">
+				and MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="accounttype != null">
+				and ACCOUNTTYPE = #{accounttype,jdbcType=DECIMAL}
+			</if>
+			<if test="certificationtype != null">
+				and CERTIFICATIONTYPE = #{certificationtype,jdbcType=DECIMAL}
+			</if>
+			<if test="certificationnumber != null">
+				and CERTIFICATIONNUMBER = #{certificationnumber,jdbcType=VARCHAR}
+			</if>
+			<if test="realname != null">
+				and REALNAME = #{realname,jdbcType=VARCHAR}
+			</if>
+			<if test="telephone != null">
+				and TELEPHONE = #{telephone,jdbcType=VARCHAR}
+			</if>
+			<if test="logintype != null">
+				and LOGINTYPE = #{logintype,jdbcType=DECIMAL}
+			</if>
+			<if test="regtype != null">
+				and REGTYPE = #{regtype,jdbcType=DECIMAL}
+			</if>
+			<if test="regdate != null">
+				and REGDATE = #{regdate,jdbcType=DATE}
+			</if>
+			<if test="emailverifydate != null">
+				and EMAILVERIFYDATE = #{emailverifydate,jdbcType=DATE}
+			</if>
+			<if test="mobileverifydate != null">
+				and MOBILEVERIFYDATE = #{mobileverifydate,jdbcType=DATE}
+			</if>
+			<if test="ismobileverify != null">
+				and ISMOBILEVERIFY = #{ismobileverify,jdbcType=DECIMAL}
+			</if>
+			<if test="isemailverify != null">
+				and ISEMAILVERIFY = #{isemailverify,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				and STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="isactive != null">
+				and ISACTIVE = #{isactive,jdbcType=DECIMAL}
+			</if>
+			<if test="isreally != null">
+				and ISREALLY = #{isreally,jdbcType=DECIMAL}
+			</if>
+			<if test="profession != null">
+				and PROFESSION = #{profession,jdbcType=DECIMAL}
+			</if>
+			<if test="addressProvince != null">
+				and ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR}
+			</if>
+			<if test="addressCity != null">
+				and ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR}
+			</if>
+			<if test="addressDistrict != null">
+				and ADDRESS_DISTRICT = #{addressDistrict,jdbcType=VARCHAR}
+			</if>
+			<if test="addressStreet != null">
+				and ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR}
+			</if>
+			<if test="referralinfo != null">
+				and REFERRALINFO = #{referralinfo,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="originclient != null">
+				and ORIGINCLIENT = #{originclient,jdbcType=DECIMAL}
+			</if>
+			<if test="loginname != null">
+				and LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="referralselfno != null">
+				and REFERRALSELFNO = #{referralselfno,jdbcType=VARCHAR}
+			</if>
+			<if test="referralno != null">
+				and REFERRALNO = #{referralno,jdbcType=VARCHAR}
+			</if>
+			<if test="regip != null">
+				and REGIP = #{regip,jdbcType=VARCHAR}
+			</if>
+			<if test="regcookie != null">
+				and REGCOOKIE = #{regcookie,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from USERBASEACCOUNTINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insert" parameterType="com.ptpl.model.UserBaseAccountInfo">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+				   order="BEFORE">
+			SELECT USERBASEACCOUNTINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERBASEACCOUNTINFO (ID, IMAGEPATH, ACCOUNTNUMBER,
+		EMAIL, MOBILEPHONE, ACCOUNTTYPE,
+		CERTIFICATIONTYPE, CERTIFICATIONNUMBER,
+		REALNAME, TELEPHONE, LOGINTYPE,
+		REGTYPE, REGDATE, EMAILVERIFYDATE,
+		MOBILEVERIFYDATE, ISMOBILEVERIFY, ISEMAILVERIFY,
+		STATUS, ISACTIVE, ISREALLY,
+		PROFESSION, ADDRESS_PROVINCE, ADDRESS_CITY,
+		ADDRESS_DISTRICT, ADDRESS_STREET, REFERRALINFO,
+		REMARK, ORIGINCLIENT, LOGINNAME,
+		REFERRALSELFNO, REFERRALNO,REGIP,REGCOOKIE,SEX)
+		values (#{id,jdbcType=DECIMAL}, #{imagepath,jdbcType=VARCHAR},
+		#{accountnumber,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR}, #{mobilephone,jdbcType=CHAR}, #{accounttype,jdbcType=DECIMAL},
+		#{certificationtype,jdbcType=VARCHAR},
+		#{certificationnumber,jdbcType=VARCHAR},
+		#{realname,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{logintype,jdbcType=DECIMAL},
+		#{regtype,jdbcType=DECIMAL}, #{regdate}, #{emailverifydate},
+		#{mobileverifydate}, #{ismobileverify,jdbcType=DECIMAL},
+		#{isemailverify,jdbcType=DECIMAL},
+		#{status,jdbcType=DECIMAL}, #{isactive,jdbcType=DECIMAL}, #{isreally,jdbcType=DECIMAL},
+		#{profession,jdbcType=DECIMAL}, #{addressProvince,jdbcType=VARCHAR},
+		#{addressCity,jdbcType=VARCHAR},
+		#{addressDistrict,jdbcType=VARCHAR}, #{addressStreet,jdbcType=VARCHAR}, #{referralinfo,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{originclient,jdbcType=DECIMAL},
+		#{loginname,jdbcType=VARCHAR},
+		#{referralselfno,jdbcType=VARCHAR}, #{referralno,jdbcType=VARCHAR}, #{regip,jdbcType=VARCHAR},
+		#{regcookie,jdbcType=VARCHAR},#{sex,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserBaseAccountInfo">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+				   order="BEFORE">
+			SELECT USERBASEACCOUNTINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERBASEACCOUNTINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="imagepath != null">
+				IMAGEPATH,
+			</if>
+			<if test="accountnumber != null">
+				ACCOUNTNUMBER,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="mobilephone != null">
+				MOBILEPHONE,
+			</if>
+			<if test="accounttype != null">
+				ACCOUNTTYPE,
+			</if>
+			<if test="certificationtype != null">
+				CERTIFICATIONTYPE,
+			</if>
+			<if test="certificationnumber != null">
+				CERTIFICATIONNUMBER,
+			</if>
+			<if test="realname != null">
+				REALNAME,
+			</if>
+			<if test="telephone != null">
+				TELEPHONE,
+			</if>
+			<if test="logintype != null">
+				LOGINTYPE,
+			</if>
+			<if test="regtype != null">
+				REGTYPE,
+			</if>
+			<if test="regdate != null">
+				REGDATE,
+			</if>
+			<if test="emailverifydate != null">
+				EMAILVERIFYDATE,
+			</if>
+			<if test="mobileverifydate != null">
+				MOBILEVERIFYDATE,
+			</if>
+			<if test="ismobileverify != null">
+				ISMOBILEVERIFY,
+			</if>
+			<if test="isemailverify != null">
+				ISEMAILVERIFY,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="isactive != null">
+				ISACTIVE,
+			</if>
+			<if test="isreally != null">
+				ISREALLY,
+			</if>
+			<if test="profession != null">
+				PROFESSION,
+			</if>
+			<if test="addressProvince != null">
+				ADDRESS_PROVINCE,
+			</if>
+			<if test="addressCity != null">
+				ADDRESS_CITY,
+			</if>
+			<if test="addressDistrict != null">
+				ADDRESS_DISTRICT,
+			</if>
+			<if test="addressStreet != null">
+				ADDRESS_STREET,
+			</if>
+			<if test="referralinfo != null">
+				REFERRALINFO,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT,
+			</if>
+			<if test="loginname != null">
+				LOGINNAME,
+			</if>
+			<if test="referralselfno != null">
+				REFERRALSELFNO,
+			</if>
+			<if test="referralno != null">
+				REFERRALNO,
+			</if>
+			<if test="regip != null">
+				REGIP,
+			</if>
+			<if test="regcookie != null">
+				REGCOOKIE,
+			</if>
+			<if test="sex != null">
+				SEX,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="imagepath != null">
+				#{imagepath,jdbcType=VARCHAR},
+			</if>
+			<if test="accountnumber != null">
+				#{accountnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilephone != null">
+				#{mobilephone,jdbcType=CHAR},
+			</if>
+			<if test="accounttype != null">
+				#{accounttype,jdbcType=DECIMAL},
+			</if>
+			<if test="certificationtype != null">
+				#{certificationtype,jdbcType=VARCHAR},
+			</if>
+			<if test="certificationnumber != null">
+				#{certificationnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="realname != null">
+				#{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="logintype != null">
+				#{logintype,jdbcType=DECIMAL},
+			</if>
+			<if test="regtype != null">
+				#{regtype,jdbcType=DECIMAL},
+			</if>
+			<if test="regdate != null">
+				#{regdate},
+			</if>
+			<if test="emailverifydate != null">
+				#{emailverifydate},
+			</if>
+			<if test="mobileverifydate != null">
+				#{mobileverifydate},
+			</if>
+			<if test="ismobileverify != null">
+				#{ismobileverify,jdbcType=DECIMAL},
+			</if>
+			<if test="isemailverify != null">
+				#{isemailverify,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isactive != null">
+				#{isactive,jdbcType=DECIMAL},
+			</if>
+			<if test="isreally != null">
+				#{isreally,jdbcType=DECIMAL},
+			</if>
+			<if test="profession != null">
+				#{profession,jdbcType=DECIMAL},
+			</if>
+			<if test="addressProvince != null">
+				#{addressProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="addressCity != null">
+				#{addressCity,jdbcType=VARCHAR},
+			</if>
+			<if test="addressDistrict != null">
+				#{addressDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="addressStreet != null">
+				#{addressStreet,jdbcType=VARCHAR},
+			</if>
+			<if test="referralinfo != null">
+				#{referralinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="originclient != null">
+				#{originclient,jdbcType=DECIMAL},
+			</if>
+			<if test="loginname != null">
+				#{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="referralselfno != null">
+				#{referralselfno,jdbcType=VARCHAR},
+			</if>
+			<if test="referralno != null">
+				#{referralno,jdbcType=VARCHAR},
+			</if>
+			<if test="regip != null">
+				#{regip,jdbcType=VARCHAR},
+			</if>
+			<if test="regcookie != null">
+				#{regcookie,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.ptpl.model.UserBaseAccountInfo">
+		update USERBASEACCOUNTINFO
+		<set>
+			<if test="imagepath != null">
+				IMAGEPATH = #{imagepath,jdbcType=VARCHAR},
+			</if>
+			<if test="accountnumber != null">
+				ACCOUNTNUMBER = #{accountnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilephone != null">
+				MOBILEPHONE = #{mobilephone,jdbcType=VARCHAR},
+			</if>
+			<if test="accounttype != null">
+				ACCOUNTTYPE = #{accounttype,jdbcType=DECIMAL},
+			</if>
+			<if test="certificationtype != null">
+				CERTIFICATIONTYPE = #{certificationtype,jdbcType=VARCHAR},
+			</if>
+			<if test="certificationnumber != null">
+				CERTIFICATIONNUMBER = #{certificationnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="realname != null">
+				REALNAME = #{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="telephone != null">
+				TELEPHONE = #{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="logintype != null">
+				LOGINTYPE = #{logintype,jdbcType=DECIMAL},
+			</if>
+			<if test="regtype != null">
+				REGTYPE = #{regtype,jdbcType=DECIMAL},
+			</if>
+			<if test="regdate != null">
+				REGDATE = #{regdate},
+			</if>
+			<if test="emailverifydate != null">
+				EMAILVERIFYDATE = #{emailverifydate},
+			</if>
+			<if test="mobileverifydate != null">
+				MOBILEVERIFYDATE = #{mobileverifydate},
+			</if>
+			<if test="ismobileverify != null">
+				ISMOBILEVERIFY = #{ismobileverify,jdbcType=DECIMAL},
+			</if>
+			<if test="isemailverify != null">
+				ISEMAILVERIFY = #{isemailverify,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isactive != null">
+				ISACTIVE = #{isactive,jdbcType=DECIMAL},
+			</if>
+			<if test="isreally != null">
+				ISREALLY = #{isreally,jdbcType=DECIMAL},
+			</if>
+			<if test="profession != null">
+				PROFESSION = #{profession,jdbcType=DECIMAL},
+			</if>
+			<if test="addressProvince != null">
+				ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR},
+			</if>
+			<if test="addressCity != null">
+				ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+			</if>
+			<if test="addressDistrict != null">
+				ADDRESS_DISTRICT = #{addressDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="addressStreet != null">
+				ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR},
+			</if>
+			<if test="referralinfo != null">
+				REFERRALINFO = #{referralinfo,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="originclient != null">
+				ORIGINCLIENT = #{originclient,jdbcType=DECIMAL},
+			</if>
+			<if test="loginname != null">
+				LOGINNAME = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="referralselfno != null">
+				REFERRALSELFNO = #{referralselfno,jdbcType=VARCHAR},
+			</if>
+			<if test="referralno != null">
+				REFERRALNO = #{referralno,jdbcType=VARCHAR},
+			</if>
+			<if test="regip != null">
+				REGIP = #{regip,jdbcType=VARCHAR},
+			</if>
+			<if test="regcookie != null">
+				REGCOOKIE = #{regcookie,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				SEX = #{sex,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserBaseAccountInfo">
+		update USERBASEACCOUNTINFO
+		set IMAGEPATH = #{imagepath,jdbcType=VARCHAR},
+		ACCOUNTNUMBER = #{accountnumber,jdbcType=VARCHAR},
+		EMAIL = #{email,jdbcType=VARCHAR},
+		MOBILEPHONE = #{mobilephone,jdbcType=CHAR},
+		ACCOUNTTYPE = #{accounttype,jdbcType=DECIMAL},
+		CERTIFICATIONTYPE = #{certificationtype,jdbcType=VARCHAR},
+		CERTIFICATIONNUMBER = #{certificationnumber,jdbcType=VARCHAR},
+		REALNAME = #{realname,jdbcType=VARCHAR},
+		TELEPHONE = #{telephone,jdbcType=VARCHAR},
+		LOGINTYPE = #{logintype,jdbcType=DECIMAL},
+		REGTYPE = #{regtype,jdbcType=DECIMAL},
+		REGDATE = #{regdate,jdbcType=DATE},
+		EMAILVERIFYDATE = #{emailverifydate,jdbcType=DATE},
+		MOBILEVERIFYDATE = #{mobileverifydate,jdbcType=DATE},
+		ISMOBILEVERIFY = #{ismobileverify,jdbcType=DECIMAL},
+		ISEMAILVERIFY = #{isemailverify,jdbcType=DECIMAL},
+		STATUS = #{status,jdbcType=DECIMAL},
+		ISACTIVE = #{isactive,jdbcType=DECIMAL},
+		ISREALLY = #{isreally,jdbcType=DECIMAL},
+		PROFESSION = #{profession,jdbcType=DECIMAL},
+		ADDRESS_PROVINCE = #{addressProvince,jdbcType=VARCHAR},
+		ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+		ADDRESS_DISTRICT = #{addressDistrict,jdbcType=VARCHAR},
+		ADDRESS_STREET = #{addressStreet,jdbcType=VARCHAR},
+		REFERRALINFO = #{referralinfo,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		ORIGINCLIENT = #{originclient,jdbcType=DECIMAL},
+		LOGINNAME = #{loginname,jdbcType=VARCHAR},
+		REFERRALSELFNO = #{referralselfno,jdbcType=VARCHAR},
+		REFERRALNO = #{referralno,jdbcType=VARCHAR},
+		REGIP = #{regip,jdbcType=VARCHAR},
+		REGCOOKIE = #{regcookie,jdbcType=VARCHAR}
+		SEX = #{sex,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="getAllUserBaseAccountInfo" resultMap="BaseResultMap"
+			parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from USERBASEACCOUNTINFO
+		<where>
+			<if test="accountnumber!=null and accountnumber!=''">
+				and accountnumber = #{accountnumber,jdbcType=VARCHAR}
+			</if>
+			<if test="mobilephone!=null and mobilephone!=''">
+				and mobilephone = #{mobilephone,jdbcType=VARCHAR}
+			</if>
+			<if test="loginname!=null and loginname!=''">
+				and loginname = #{loginname,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id asc
+	</select>
+
+	<select id="userbase" resultMap="BaseResultMap" resultType="String">
+		select t.* from USERBASEACCOUNTINFO t where t.loginname=#{loginname}
+	</select>
+	<select id="getuserloginname" resultMap="BaseResultMap"
+			resultType="java.lang.String">
+		select t.* from USERBASEACCOUNTINFO t where t.loginname=#{loginname}
+	</select>
+	<!-- 查询指定普通会员等级中的用户 -->
+	<select id="selectUsersByNormaluGrade" resultMap="BaseResultMap"
+			parameterType="Short">
+		select
+		<include refid="Base_Column_List_Blurred"></include>
+		FROM USERBASEACCOUNTINFO t,USERACCOUNTSAFEINFO t2
+		WHERE t.id=t2.baseid AND t2.ugrade=#{ugrade,jdbcType=DECIMAL} AND
+		t2.ugradetype=1 order by t.id
+	</select>
+	<!-- 查询指定体验会员等级中的用户 -->
+	<select id="selectUsersBysTasteuGrade" resultMap="BaseResultMap"
+			parameterType="Short">
+		select
+		<include refid="Base_Column_List_Blurred"></include>
+		FROM USERBASEACCOUNTINFO t,USERACCOUNTSAFEINFO t2
+		WHERE t.id=t2.baseid AND t2.ugrade=#{ugrade,jdbcType=DECIMAL} AND
+		t2.ugradetype=2 order by t.id
+	</select>
+	<!-- 用户根据用户的登陆名来修改头像 -->
+	<update id="updateHeaderImg" parameterType="com.ptpl.model.UserBaseAccountInfo">
+		update USERBASEACCOUNTINFO
+		<set>
+			IMAGEPATH = #{imagepath,jdbcType=VARCHAR} where LOGINNAME = #{loginname,jdbcType=VARCHAR}
+		</set>
+	</update>
+	<select id="getHeadImg" parameterType="string" resultMap="BaseResultMap">
+		select * from USERBASEACCOUNTINFO where LOGINNAME = #{loginname,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getBaseInfoAll" resultMap="BaseResultMap">
+		select * from userbaseaccountinfo where 1=1
+	</select>
+	
+	<select id="getUbaiAndUasiById" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select u.*,a.id as a_id,a.baseid as a_baseid,a.question1 as a_question1,a.answer1 as a_answer1 from USERBASEACCOUNTINFO u ,USERACCOUNTSAFEINFO a where u.ID = a.BASEID
+		and u.ID = #{id,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="getUbaiAndUasiByPhone" resultMap="BaseResultMap" parameterType="string">
+		select u.*,a.id as a_id,a.baseid as a_baseid,a.question1 as a_question1,a.answer1 as a_answer1 from USERBASEACCOUNTINFO u ,USERACCOUNTSAFEINFO a where u.ID = a.BASEID
+		and u.MOBILEPHONE = #{mobilephone,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="getByUsername1" resultMap="BaseResultMap" parameterType="java.util.Map">
+	     <!-- select u.loginName,a.loginPassword from userBaseAccountInfo u,userAccountSafeInfo a where u.id=a.baseId -->
+	     select u.*,b.* from userBaseAccountInfo u,userAccountSafeInfo b where 1=1
+	       <if test="loginName!=null and loginName!='' ">
+	       and u.loginName = #{loginName,jdbcType=VARCHAR}
+	       </if>
+	       <if test="loginPassword!=null and loginPassword!='' ">
+	        and b.loginPassword = #{Password,jdbcType=VARCHAR}
+	       </if>
+	</select>
+	<!--  查询是否有此手机号码  6/5 -->
+	<select id="getmobliepho" parameterType="string" resultMap="BaseResultMap">
+		select t.* from USERBASEACCOUNTINFO t where t.mobilephone=#{mobilephone,jdbcType=VARCHAR}
+	</select>
+	<!-- 用于用户等级编辑 UserGradeEditorManager -->
+	<!-- 查询用户名 真实姓名 会员等级 -->
+	<select id="listUserforUserGradeEditor" resultMap="BaseResultMap" parameterType="map">
+		select t.id,t.loginname,t.realname,t1.ugrade,t2.ugradename from USERBASEACCOUNTINFO t ,
+		USERACCOUNTSAFEINFO t1 , usergrade t2
+		<where>
+				t.id=t1.baseid AND t1.ugrade=t2.ugrade
+			<if test="loginname != null and loginname != ''">
+				AND t.loginname = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="realname != null and realname != ''">
+				AND t.realname = #{realname,jdbcType=VARCHAR}
+			</if>
+			<if test="ugrade != null">
+			    AND t1.ugrade = #{ugrade,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by t.id
+	</select>
+	
+	<select id="getUserforUserGradeEditor" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+		select t.id,t.loginname,t.realname,t1.ugrade,t2.ugradename 
+		from USERBASEACCOUNTINFO t ,USERACCOUNTSAFEINFO t1 , usergrade t2
+		where t.id=t1.baseid AND t1.ugrade=t2.ugrade AND t.id= #{id,jdbcType=DECIMAL}
+	</select>
+</mapper>

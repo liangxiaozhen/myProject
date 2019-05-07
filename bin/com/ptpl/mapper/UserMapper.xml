@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="CHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="user_birthday" property="userBirthday"
+			jdbcType="TIMESTAMP" />
+		<result column="user_salary" property="userSalary" jdbcType="DOUBLE" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, user_id, user_name, user_birthday, user_salary
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from t_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.User">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="BEFORE">
+			SELECT TUSER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into t_user (id,user_id, user_name, user_birthday,
+		user_salary)
+		values (#{id,jdbcType=INTEGER},#{userId,jdbcType=CHAR},
+		#{userName,jdbcType=VARCHAR}, #{userBirthday},
+		#{userSalary,jdbcType=DOUBLE})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.User">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="BEFORE">
+			SELECT TUSER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="userBirthday != null">
+				user_birthday,
+			</if>
+			<if test="userSalary != null">
+				user_salary,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=CHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userBirthday != null">
+				#{userBirthday},
+			</if>
+			<if test="userSalary != null">
+				#{userSalary,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.User">
+		update t_user
+		<set>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userBirthday != null">
+				user_birthday = #{userBirthday},
+			</if>
+			<if test="userSalary != null">
+				user_salary = #{userSalary,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.User">
+		update t_user
+		set user_name = #{userName,jdbcType=VARCHAR},
+		user_birthday = #{userBirthday},
+		user_salary = #{userSalary,jdbcType=DOUBLE}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- ==============以下内容是根据自身业务扩展的内容======================= -->
+	<!-- select标签的id属性与UserMapper接口中定义的getAllUser方法要一模一样 -->
+	<select id="getAllUser" resultMap="BaseResultMap" parameterType="map">
+		<!-- select tt.* from ( select a.*, rownum rnum from ( select t.* from 
+			t_user t order by t.id asc, rowid) a ) tt <where> <if test="startIndex!=null"> 
+			rnum > #{startIndex,jdbcType=INTEGER} </if> <if test="endIndex!=null"> and 
+			rnum <![CDATA[ <= ]]> #{endIndex,jdbcType=INTEGER} </if> </where> -->
+
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		<where>
+			<if test="name!=null">
+				and user_name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="usalary!=null">
+				and user_salary = #{usalary,jdbcType=DOUBLE}
+			</if>
+		</where>
+		order by id asc
+	</select>
+
+	<!-- 分页查询总数 -->
+	<select id="findUserCount" parameterType="Map" resultType="java.lang.Integer">
+		SELECT COUNT(1) FROM t_user
+	</select>
+</mapper>

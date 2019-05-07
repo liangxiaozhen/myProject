@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DebtAttornBuyerMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DebtAttornBuyer">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="DEBTATTORNBNO" property="debtattornbno"
+			jdbcType="VARCHAR" />
+		<result column="APURCHASERGRADE" property="apurchasergrade"
+			jdbcType="VARCHAR" />
+		<result column="NOAPNAMENO" property="noapnameno" jdbcType="VARCHAR" />
+		<result column="ISABUYALLORPART" property="isabuyallorpart"
+			jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ptpl.model.DebtAttornBuyer">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select DEBTATTORNBUYER_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into DEBTATTORNBUYER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="debtattornbno != null">
+				DEBTATTORNBNO,
+			</if>
+			<if test="apurchasergrade != null">
+				APURCHASERGRADE,
+			</if>
+			<if test="noapnameno != null">
+				NOAPNAMENO,
+			</if>
+			<if test="isabuyallorpart != null">
+				ISABUYALLORPART,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="snlid != null">
+				SNLID
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="debtattornbno != null">
+				#{debtattornbno,jdbcType=VARCHAR},
+			</if>
+			<if test="apurchasergrade != null">
+				#{apurchasergrade,jdbcType=VARCHAR},
+			</if>
+			<if test="noapnameno != null">
+				#{noapnameno,jdbcType=VARCHAR},
+			</if>
+			<if test="isabuyallorpart != null">
+				#{isabuyallorpart,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="snlid != null">
+				#{snlid,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</insert>
+	<select id="selectByTid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select * from DEBTATTORNBUYER where tid= #{tid,jdbcType=DECIMAL}
+	</select>
+
+	<select id="selectListByTid" resultMap="BaseResultMap"
+			parameterType="java.math.BigDecimal">
+		select * from DEBTATTORNBUYER where tid= #{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

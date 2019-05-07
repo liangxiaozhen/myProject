@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.TenderFrontEndSingleMapper">
+    <resultMap id="BaseResultMap" type="com.ptpl.model.TenderFrontEndSingle">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="TNO" property="tno" jdbcType="VARCHAR"/>
+        <result column="TTYPENAME" property="ttypename" jdbcType="VARCHAR"/>
+        <result column="SNO" property="sno" jdbcType="DECIMAL"/>
+        <result column="INFONO" property="infono" jdbcType="VARCHAR"/>
+        <result column="INFONAME" property="infoname" jdbcType="VARCHAR"/>
+        <result column="SOURCE" property="source" jdbcType="DECIMAL"/>
+        <result column="CONTENT" property="content" jdbcType="VARCHAR"/>
+        <result column="ISDISPLAY" property="isdisplay" jdbcType="DECIMAL"/>
+        <result column="INFOATTRIBUTE" property="infoattribute" jdbcType="DECIMAL"/>
+        <result column="PICTITLE" property="pictitle" jdbcType="VARCHAR"/>
+        <result column="ISFIXED" property="isfixed" jdbcType="DECIMAL"/>
+        <result column="ISEDIT" property="isedit" jdbcType="DECIMAL"/>
+        <result column="INFOTYPE" property="infotype" jdbcType="DECIMAL"/>
+        <!--多对一关联-->
+        <association property="tenderFeiType" column="infotype"
+                     select="com.ptpl.mapper.TenderFeiTypeMapper.selectByPrimaryKey"></association>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, TNO, TTYPENAME, SNO, INFONO, INFONAME, SOURCE, CONTENT, ISDISPLAY,INFOATTRIBUTE,PICTITLE,ISFIXED,ISEDIT,INFOTYPE
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        <include refid="Base_Column_List"/>
+        from TENDERFRONTENDSINGLE
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from TENDERFRONTENDSINGLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.ptpl.model.TenderFrontEndSingle">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select TENDERFRONTENDSINGLE_SEQ.NEXTVAL as id from dual
+        </selectKey>
+        insert into TENDERFRONTENDSINGLE (ID, TNO, TTYPENAME,
+        SNO, INFONO, INFONAME,
+        SOURCE, CONTENT, ISDISPLAY,INFOATTRIBUTE,PICTITLE,ISFIXED,ISEDIT,INFOTYPE
+        )
+        values (#{id,jdbcType=DECIMAL}, #{tno,jdbcType=VARCHAR}, #{ttypename,jdbcType=VARCHAR},
+        #{sno,jdbcType=DECIMAL}, #{infono,jdbcType=VARCHAR}, #{infoname,jdbcType=VARCHAR},
+        #{source,jdbcType=DECIMAL}, #{content,jdbcType=VARCHAR},
+        #{isdisplay,jdbcType=DECIMAL},#{infoattribute,jdbcType=DECIMAL},#{pictitle,jdbcType=VARCHAR},#{isfixed,jdbcType=VARCHAR},#{isedit,jdbcType=DECIMAL},#{infotype,jdbcType=DECIMAL}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ptpl.model.TenderFrontEndSingle">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select TENDERFRONTENDSINGLE_SEQ.NEXTVAL as id from dual
+        </selectKey>
+        insert into TENDERFRONTENDSINGLE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="tno != null">
+                TNO,
+            </if>
+            <if test="ttypename != null">
+                TTYPENAME,
+            </if>
+            <if test="sno != null">
+                SNO,
+            </if>
+            <if test="infono != null">
+                INFONO,
+            </if>
+            <if test="infoname != null">
+                INFONAME,
+            </if>
+            <if test="source != null">
+                SOURCE,
+            </if>
+            <if test="content != null">
+                CONTENT,
+            </if>
+            <if test="isdisplay != null">
+                ISDISPLAY,
+            </if>
+            <if test="infoattribute != null">
+                INFOATTRIBUTE,
+            </if>
+            <if test="pictitle != null">
+                PICTITLE,
+            </if>
+            <if test="isfixed!= null">
+                ISFIXED,
+            </if>
+            <if test="isedit!= null">
+                ISEDIT,
+            </if>
+            <if test="infotype!= null">
+                INFOTYPE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="tno != null">
+                #{tno,jdbcType=VARCHAR},
+            </if>
+            <if test="ttypename != null">
+                #{ttypename,jdbcType=VARCHAR},
+            </if>
+            <if test="sno != null">
+                #{sno,jdbcType=DECIMAL},
+            </if>
+            <if test="infono != null">
+                #{infono,jdbcType=VARCHAR},
+            </if>
+            <if test="infoname != null">
+                #{infoname,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=DECIMAL},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isdisplay != null">
+                #{isdisplay,jdbcType=DECIMAL},
+            </if>
+            <if test="infoattribute != null">
+                #{infoattribute,jdbcType=DECIMAL},
+            </if>
+            <if test="pictitle != null">
+                #{pictitle,jdbcType=VARCHAR},
+            </if>
+            <if test="isfixed!= null">
+                #{isfixed,jdbcType=DECIMAL},
+            </if>
+            <if test="isedit!= null">
+                #{isedit,jdbcType=DECIMAL},
+            </if>
+            <if test="infotype!= null">
+                #{infotype,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.TenderFrontEndSingle">
+        update TENDERFRONTENDSINGLE
+        <set>
+            <if test="tno != null">
+                TNO = #{tno,jdbcType=VARCHAR},
+            </if>
+            <if test="ttypename != null">
+                TTYPENAME = #{ttypename,jdbcType=VARCHAR},
+            </if>
+            <if test="sno != null">
+                SNO = #{sno,jdbcType=DECIMAL},
+            </if>
+            <if test="infono != null">
+                INFONO = #{infono,jdbcType=VARCHAR},
+            </if>
+            <if test="infoname != null">
+                INFONAME = #{infoname,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                SOURCE = #{source,jdbcType=DECIMAL},
+            </if>
+            <if test="content != null">
+                CONTENT = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isdisplay != null">
+                ISDISPLAY = #{isdisplay,jdbcType=DECIMAL},
+            </if>
+            <if test="infoattribute != null">
+                INFOATTRIBUTE = #{infoattribute,jdbcType=DECIMAL},
+            </if>
+            <if test="pictitle != null">
+                PICTITLE = #{pictitle,jdbcType=VARCHAR},
+            </if>
+            <if test="isfixed!= null">
+                ISFIXED = #{isfixed,jdbcType=DECIMAL},
+            </if>
+            <if test="isedit!= null">
+                ISEDIT = #{isedit,jdbcType=DECIMAL},
+            </if>
+            <if test="infotype!= null">
+                INFOTYPE = #{infotype,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.ptpl.model.TenderFrontEndSingle">
+    update TENDERFRONTENDSINGLE
+    set TNO = #{tno,jdbcType=VARCHAR},
+      TTYPENAME = #{ttypename,jdbcType=VARCHAR},
+      SNO = #{sno,jdbcType=DECIMAL},
+      INFONO = #{infono,jdbcType=VARCHAR},
+      INFONAME = #{infoname,jdbcType=VARCHAR},
+      SOURCE = #{source,jdbcType=DECIMAL},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      ISDISPLAY = #{isdisplay,jdbcType=DECIMAL},
+      INFOATTRIBUTE = #{infoattribute,jdbcType=DECIMAL},
+      PICTITLE = #{pictitle,jdbcType=VARCHAR},
+      ISFIXED = #{isfixed,jdbcType=DECIMAL},
+      ISEDIT = #{isedit,jdbcType=DECIMAL},
+      INFOTYPE = #{infotype,jdbcType=DECIMAL},
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <select id="selectByCondition" parameterType="com.ptpl.model.TenderFrontEndSingle"
+            resultMap="BaseResultMap">
+        select * from TenderFrontEndSingle
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id!=null and id!=''">
+                id=#{id,jdbcType=DECIMAL}
+            </if>
+            <if test="tno!=null and tno!=''">
+                and tno=#{tno,jdbcType=VARCHAR}
+            </if>
+            <if test="ttypename!=null and ttypename!=''">
+                and ttypename=#{ttypename,jdbcType=VARCHAR}
+            </if>
+            <if test="sno!=null and sno!=''">
+                and sno=#{sno,jdbcType=DECIMAL}
+            </if>
+            <if test="infono!=null and infono!=''">
+                and infono=#{infono,jdbcType=DECIMAL}
+            </if>
+            <if test="infoname!=null and infoname!=''">
+                and infoname=#{infoname,jdbcType=VARCHAR}
+            </if>
+            <if test="source!=null and source!=''">
+                and source=#{source,jdbcType=DECIMAL}
+            </if>
+            <if test="content!=null and content!=''">
+                and content=#{content,jdbcType=VARCHAR}
+            </if>
+            <if test="isdisplay!=null and isdisplay!=''">
+                and isdisplay=#{isdisplay,jdbcType=DECIMAL}
+            </if>
+            <if test="infoattribute!=null and infoattribute!=''">
+                and infoattribute=#{infoattribute,jdbcType=DECIMAL}
+            </if>
+            <if test="pictitle!=null and pictitle!=''">
+                and pictitle=#{pictitle,jdbcType=VARCHAR}
+            </if>
+            <if test="isfixed!=null and isfixed!=''">
+                and isfixed=#{isfixed,jdbcType=DECIMAL}
+            </if>
+            <if test="isedit!=null and isedit!=''">
+                and isedit=#{isedit,jdbcType=DECIMAL}
+            </if>
+            <if test="infotype!=null and infotype!=''">
+                and infotype=#{infotype,jdbcType=DECIMAL}
+            </if>
+        </trim>
+        ORDER by sno
+    </select>
+    <select id="selectByTno" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select t.infoname,t.content,t.infotype from TenderFrontEndSingle t where t.tno=#{tno,jdbcType=VARCHAR} and t.content is not null
+    </select>
+    <!-- 获取最后一个排序号 -->
+    <select id="selectMaxSno" resultType="Integer" parameterType="String">
+        select max(t.sno) from TENDERFRONTENDSINGLE t where t.tno=#{tno}
+    </select>
+    <!--查询来源为引用且内容不为空的对象 合并查询 来源为新增应用范围为通用的对象  合并查询  来源为新增应用范围为唯一的对象-->
+    <select id="selectByCondition2" parameterType="String" resultMap="BaseResultMap">
+        select t.* from (
+        select t.* from TENDERFRONTENDSINGLE t where t.source=2 and t.tno=#{tno,jdbcType=VARCHAR} and t.content is not null
+        union
+        select t.* from TENDERFRONTENDSINGLE t where t.source=1 and  t.isfixed=2 and t.tno=#{tno,jdbcType=VARCHAR}
+        union
+        select t.* from TENDERFRONTENDSINGLE t where t.source=1 and t.isfixed=1 and t.tno=#{tno,jdbcType=VARCHAR}
+        ) t
+        order by t.sno asc
+
+    </select>
+
+    <!--查询来源为新增且内容为null的对象-->
+    <select id="selectContentIsNotNull" parameterType="String" resultMap="BaseResultMap">
+        select t.* from TENDERFRONTENDSINGLE t where  t.tno=#{tno,jdbcType=VARCHAR} and t.content is not null order by t.sno asc
+    </select>
+</mapper>

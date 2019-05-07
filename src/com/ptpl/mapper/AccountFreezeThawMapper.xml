@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AccountFreezeThawMapper"><!--对应mapper接口 -->
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AccountFreezeThaw">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="AFTORDERNO" property="aftorderno" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="THAWMAN" property="thawman" jdbcType="VARCHAR" />
+		<result column="TRXID" property="trxid" jdbcType="VARCHAR" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="BALANCE" property="balance" jdbcType="FLOAT" />
+		<result column="AVLBALANCE" property="avlbalance" jdbcType="FLOAT" />
+		<result column="FREEZEBALANCE" property="freezebalance"
+			jdbcType="FLOAT" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISDEAL" property="isdeal" jdbcType="DECIMAL" />
+		<result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+		<result column="RECORDTIME" property="recordtime" jdbcType="TIMESTAMP" />
+		<result column="OPTIME" property="optime" jdbcType="TIMESTAMP" />
+		<result column="THAWTIME" property="thawtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ptpl.model.AccountFreezeThaw">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ACCOUNTFREEZETHAW_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACCOUNTFREEZETHAW
+		(ID,BASEID,AFTORDERNO,USERNAME,LOGINNAME,OPERATOR,THAWMAN,TRXID,
+		AMOUNT,BALANCE,AVLBALANCE,FREEZEBALANCE,STATUS,ISDEAL,DESCRIPTION,RECORDTIME,THAWTIME,REMARK,OPTIME)
+		values
+		(#{id,jdbcType=DECIMAL},#{baseid,jdbcType=DECIMAL},#{aftorderno,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{loginname,jdbcType=VARCHAR},
+		#{operator,jdbcType=VARCHAR},#{thawman,jdbcType=VARCHAR},
+		#{trxid,jdbcType=VARCHAR},#{amount,jdbcType=FLOAT},#{balance,jdbcType=FLOAT},#{avlbalance,jdbcType=FLOAT},#{freezebalance,jdbcType=FLOAT},
+		#{status,jdbcType=DECIMAL},
+		#{isdeal,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR},
+		#{recordtime,jdbcType=TIMESTAMP},#{thawtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}),#{optime,jdbcType=TIMESTAMP}
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.AccountFreezeThaw">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ACCOUNTFREEZETHAW_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACCOUNTFREEZETHAW
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="aftorderno != null">
+				AFTORDERNO,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="loginname != null">
+				LOGINNAME,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="thawman != null">
+				THAWMAN,
+			</if>
+			<if test="trxid != null">
+				TRXID,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="balance != null">
+				BALANCE,
+			</if>
+			<if test="avlbalance != null">
+				AVLBALANCE,
+			</if>
+			<if test="freezebalance != null">
+				FREEZEBALANCE,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="isdeal != null">
+				ISDEAL,
+			</if>
+			<if test="description != null">
+				DESCRIPTION,
+			</if>
+			<if test="recordtime != null">
+				RECORDTIME,
+			</if>
+			<if test="thawtime != null">
+				THAWTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="optime != null">
+				OPTIME
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="aftorderno != null">
+				#{aftorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				#{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="thawman != null">
+				#{thawman,jdbcType=VARCHAR},
+			</if>
+			<if test="trxid != null">
+				#{trxid,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null ">
+				#{amount,jdbcType=FLOAT},
+			</if>
+			<if test="balance != null ">
+				#{balance,jdbcType=FLOAT},
+			</if>
+			<if test="avlbalance != null ">
+				#{avlbalance,jdbcType=FLOAT},
+			</if>
+			<if test="freezebalance != null ">
+				#{freezebalance,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				#{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="recordtime != null">
+				#{recordtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="thawtime != null">
+				#{thawtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="optime != null">
+				#{optime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<!-- 根据trxid查询冻结 -->
+	<select id="getByTrxid" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from ACCOUNTFREEZETHAW where trxid=#{trxid,jdbcType=VARCHAR}
+	</select>
+	<!-- 根据订单号查询冻结记录 -->
+	<select id="getByOrdId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from ACCOUNTFREEZETHAW where
+		aftorderno=#{aftorderno,jdbcType=VARCHAR}
+	</select>
+	<select id="queryAll" parameterType="com.ptpl.model.AccountFreezeThaw"
+		resultMap="BaseResultMap">
+		select * from ACCOUNTFREEZETHAW
+		<trim prefix="where" prefixOverrides="and">
+			<if test="baseid != null">
+				baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="aftorderno != null and aftorderno != ''">
+				and aftorderno = #{aftorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="username != null and username!=''">
+				and username = #{username,jdbcType=VARCHAR}
+			</if>
+			<if test="loginname != null and loginname!=''">
+				and loginname = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="operator != null and operator!=''">
+				and operator = #{operator,jdbcType=VARCHAR}
+			</if>
+			<if test="thawman != null and thawman!=''">
+				and thawman = #{thawman,jdbcType=VARCHAR}
+			</if>
+			<if test="trxid != null and trxid!=''">
+				and trxid =#{trxid,jdbcType=VARCHAR}
+			</if>
+			<if test="amount != null">
+				and amount = #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="balance != null ">
+				and balance = #{balance,jdbcType=FLOAT}
+			</if>
+			<if test="avlbalance != null ">
+				and avlbalance = #{avlbalance,jdbcType=FLOAT}
+			</if>
+			<if test="freezebalance != null ">
+				and freezebalance = #{freezebalance,jdbcType=FLOAT}
+			</if>
+			<if test="status != null">
+				and status =#{status,jdbcType=DECIMAL}
+			</if>
+			<if test="isdeal != null">
+				and isdeal= #{isdeal,jdbcType=DECIMAL}
+			</if>
+			<if test="description != null and description!=''">
+				and description =#{description,jdbcType=VARCHAR}
+			</if>
+			<if test="recordtime != null and recordtime != ''">
+				and recordtime =#{recordtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="optime != null and optime != ''">
+				and optime =#{optime,jdbcType=TIMESTAMP}
+			</if>
+			<if
+				test="startrecordtime != null and startrecordtime != '' and endrecordtime != null and endrecordtime != '' ">
+   			<![CDATA[AND to_char(recordtime,'YYYY-MM-DD hh-mm-ss' ) >= to_char(#{startrecordtime},'YYYY-MM-DD hh-mm-ss' ) AND to_char(recordtime,'YYYY-MM-DD hh-mm-ss') <= to_char(#{endrecordtime},'YYYY-MM-DD hh-mm-ss')]]>
+			</if>
+			<if test="thawtime != null">
+				and thawtime = #{thawtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		order by recordtime desc
+	</select>
+	<!-- 冻结解冻记录条件查询 -->
+	<select id="getLableSelect" resultMap="BaseResultMap" parameterType="com.ptpl.model.AccountFreezeThaw">
+		select * from  ACCOUNTFREEZETHAW 
+		<trim prefix="where" prefixOverrides="and">
+			<if test="baseid != null">
+				baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="isdeal != null">
+				AND isdeal=#{isdeal,jdbcType=DECIMAL}
+			</if>
+			<if test="start !=null">
+				AND optime&gt;=#{start}
+			</if>
+			<if test="end!=null">
+				AND optime&lt;=#{end}
+			</if>
+			<if test="sign == 'today'">
+				and optime >= sysdate-1
+			</if>
+			<if test="sign == 'week'">
+				and optime >= sysdate-7
+			</if>
+			<if test="sign == 'oneMonth'">
+				and optime >=add_months(sysdate,-1)
+			</if>
+			<if test="sign == 'threeMonth'">
+				and optime >=add_months(sysdate,-3)
+			</if>
+		</trim>
+		order by id desc
+
+	</select>
+	
+	<update id="update" parameterType="com.ptpl.model.AccountFreezeThaw">
+		update ACCOUNTFREEZETHAW
+		<set>
+			<if test="baseid != null">
+				baseid = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="aftorderno != null">
+				aftorderno = #{aftorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				loginname = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="operator != null">
+				operator = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="thawman != null">
+				thawman = #{thawman,jdbcType=VARCHAR},
+			</if>
+			<if test="trxid != null">
+				trxid =#{trxid,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null ">
+				amount = #{amount,jdbcType=FLOAT},
+			</if>
+			<if test="balance != null ">
+				balance = #{balance,jdbcType=FLOAT},
+			</if>
+			<if test="avlbalance != null ">
+				avlbalance = #{avlbalance,jdbcType=FLOAT},
+			</if>
+			<if test="freezebalance != null ">
+				freezebalance = #{freezebalance,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				status =#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				isdeal= #{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="description != null">
+				description =#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="recordtime != null">
+				recordtime =#{recordtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="thawtime != null">
+				thawtime =#{thawtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="optime != null">
+				optime =#{optime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+
+</mapper>

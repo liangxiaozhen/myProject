@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RechargeRateMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RechargeRate">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="RECHARTYPE" property="rechartype" jdbcType="DECIMAL" />
+		<result column="MINMONEY" property="minmoney" jdbcType="FLOAT" />
+		<result column="MAXMONEY" property="maxmoney" jdbcType="FLOAT" />
+		<result column="CHARGETYPE" property="chargetype" jdbcType="DECIMAL" />
+		<result column="CHARRATE" property="charrate" jdbcType="FLOAT" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="BANKCODE" property="bankcode" jdbcType="VARCHAR" />
+		<result column="MINFEE" property="minfee" jdbcType="FLOAT" />
+		<result column="MAXFEE" property="maxfee" jdbcType="FLOAT" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="SELFPAYRATIO" property="selfpayratio" jdbcType="FLOAT" />
+		<result column="PROXYPAYRATIO" property="proxypayratio" jdbcType="FLOAT" />
+		<!-- 关联定额手续费表 -->
+		<!-- <association property="rechargeQuotaFee" resultMap="rechargeQuotaFeeMap" /> -->
+		<!-- 关联排出人名单表 -->
+		<!-- <association property="rechargeSNLLink" resultMap="rechargeSNLLinkMap" /> -->
+	</resultMap>
+	
+		<!--关联定额手续费表 -->
+	<resultMap type="com.ptpl.model.RechargeQuotaFee" id="rechargeQuotaFeeMap">
+		<result column="RRID" property="brrid" jdbcType="DECIMAL" />
+		<result column="MINMONEY" property="minmoney" jdbcType="FLOAT" />
+		<result column="MAXMONEY" property="maxmoney" jdbcType="FLOAT" />
+		<result column="QUOTAFEE" property="quotafee" jdbcType="FLOAT" />
+	</resultMap>
+	
+		<!-- 关联排出人名单表 -->
+	<resultMap type="com.ptpl.model.RechargeSNLLink" id="rechargeSNLLinkMap">
+		<result column="RRID" property="crrid" jdbcType="DECIMAL" />
+		<result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+	</resultMap>
+	
+		<select id="getAll" resultMap="BaseResultMap">
+			select * from RECHARGERATE
+		</select>
+		<!-- 连表查询 -->
+		<select id="getAll3" resultMap="BaseResultMap">
+			select
+			a.id,a.isuse,a.isaudit,a.istemplet,a.paycompany,a.ugrade, a.rechartype,
+			a.minmoney, a.maxmoney, a.chargetype,
+			a.charrate, a.quota, a.bankcode,
+			a.minfee, a.maxfee, a.addman,
+			a.addtime, a.auditman, a.audittime,
+			a.remark,a.selfpayratio,a.proxypayratio,
+			b.rrid as brrid, b.minmoney as bminmoney, b.maxmoney as bmaxmoney, b.quotafee, 
+			c.rrid as crrid, c.snlid
+			from
+			RECHARGERATE a 
+			left join RECHARGEQUOTAFEE b on (a.id=b.rrid) 
+			left join RECHARGESNLLINK c on (a.id=c.rrid)
+	</select>
+	
+	<insert id="insert" parameterType="com.ptpl.model.RechargeRate">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGERATE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into RECHARGERATE
+		(ID,ISUSE,ISAUDIT,ISTEMPLET,PAYCOMPANY,UGRADE, RECHARTYPE,
+		MINMONEY, MAXMONEY, CHARGETYPE,
+		CHARRATE, QUOTA, BANKCODE,
+		MINFEE, MAXFEE, ADDMAN,
+		ADDTIME, AUDITMAN, AUDITTIME,
+		REMARK,SELFPAYRATIO,PROXYPAYRATIO)
+		values
+		(#{id,jdbcType=DECIMAL},#{isuse,jdbcType=DECIMAL},#{isaudit,jdbcType=DECIMAL},#{istemplet,jdbcType=DECIMAL},
+		#{paycompany,jdbcType=VARCHAR},#{ugrade,jdbcType=VARCHAR},
+		#{rechartype,jdbcType=DECIMAL},
+		#{minmoney,jdbcType=FLOAT}, #{maxmoney,jdbcType=FLOAT}, #{chargetype,jdbcType=DECIMAL},
+		#{charrate,jdbcType=FLOAT}, #{quota,jdbcType=FLOAT},
+		#{bankcode,jdbcType=VARCHAR},
+		#{minfee,jdbcType=FLOAT}, #{maxfee,jdbcType=FLOAT}, #{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP}, #{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},#{selfpayratio,jdbcType=FLOAT},#{proxypayratio,jdbcType=FLOAT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RechargeRate">
+		<selectKey resultType="java.lang.Long" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGERATE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into RECHARGERATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="rechartype != null">
+				RECHARTYPE,
+			</if>
+			<if test="minmoney != null">
+				MINMONEY,
+			</if>
+			<if test="maxmoney != null">
+				MAXMONEY,
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE,
+			</if>
+			<if test="charrate != null">
+				CHARRATE,
+			</if>
+			<if test="quota != null">
+				QUOTA,
+			</if>
+			<if test="bankcode != null">
+				BANKCODE,
+			</if>
+			<if test="minfee != null">
+				MINFEE,
+			</if>
+			<if test="maxfee != null">
+				MAXFEE,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="selfpayratio != null">
+				SELFPAYRATIO,
+			</if>
+			<if test="proxypayratio != null">
+				PROXYPAYRATIO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="paycompany != null and paycompany !='' ">
+				#{paycompany,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null and ugrade !=''">
+				#{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="rechartype != null and rechartype !=''">
+				#{rechartype,jdbcType=DECIMAL},
+			</if>
+			<if test="minmoney != null and minmoney !=''">
+				#{minmoney,jdbcType=FLOAT},
+			</if>
+			<if test="maxmoney != null and maxmoney !=''">
+				#{maxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="chargetype != null and chargetype!=''">
+				#{chargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="charrate != null and charrate!=''">
+				#{charrate,jdbcType=FLOAT},
+			</if>
+			<if test="quota != null and quota!=''">
+				#{quota,jdbcType=FLOAT},
+			</if>
+			<if test="bankcode != null and bankcode!=''">
+				#{bankcode,jdbcType=VARCHAR},
+			</if>
+			<if test="minfee != null and minfee!=''">
+				#{minfee,jdbcType=FLOAT},
+			</if>
+			<if test="maxfee != null and maxfee !=''">
+				#{maxfee,jdbcType=FLOAT},
+			</if>
+			<if test="addman != null and addman!=''">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null and addtime !=''">
+				#{addtime},
+			</if>
+			<if test="auditman != null and auditman!=''">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null and audittime !=''">
+				#{audittime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="selfpayratio != null">
+				#{selfpayratio,jdbcType=FLOAT},
+			</if>
+			<if test="proxypayratio != null">
+				#{proxypayratio,jdbcType=FLOAT},
+			</if>
+		</trim>
+	</insert>
+	<select id="getById" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<!-- <include refid="Base_Column_List" /> -->
+		* from RECHARGERATE where id=#{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据会员等级,充值类型,充值银行,最低最高金额来判断重复数据 -->
+	<select id="getByTerm" parameterType="com.ptpl.model.RechargeRate"
+		resultType="java.lang.Integer">
+		<!-- select * from RECHARGERATE where ugrade=#{ugrade,jdbcType=DECIMAL} 
+			AND rechartype=#{rechartype,jdbcType=DECIMAL} AND bankcode = #{bankcode,jdbcType=VARCHAR} 
+			AND minmoney= #{minmoney,jdbcType=FLOAT} AND maxmoney= #{maxmoney,jdbcType=FLOAT} -->
+		select count(*) from RECHARGERATE
+		<where>
+			<if test="ugrade!=null and ugrade!=''">ugrade=#{ugrade,jdbcType=VARCHAR}</if>
+			<if test="rechartype!=null and rechartype!=''">and rechartype=#{rechartype,jdbcType=DECIMAL}</if>
+			<if test="bankcode!=null and bankcode!=''">and bankcode = #{bankcode,jdbcType=VARCHAR}</if>
+			<if test="minmoney!=null and minmoney!=''">AND minmoney= #{minmoney,jdbcType=FLOAT}</if>
+			<if test="maxmoney!=null and maxmoney!=''">AND maxmoney= #{maxmoney,jdbcType=FLOAT}</if>
+		</where>
+	</select>
+	<!-- 根据会员等级,充值类型,充值银行,最低最高金额来判断重复数据 -->
+	<select id="selectRechartypeByRechargeRate" parameterType="java.lang.Short" resultType="com.ptpl.model.RechargeRate">
+		select * from RECHARGERATE where rechartype=#{rechartype,jdbcType=DECIMAL}
+	
+	</select>
+	<!-- 判断需要删除的那条数据的最大金额是不是当前会员等级,收费类型 -->
+	<select id="getByTermMaxMoney" resultType="java.lang.Integer">
+		select count(*) from RECHARGERATE
+		where ugrade=#{0,jdbcType=VARCHAR}
+		and chargetype=#{1,jdbcType=DECIMAL}
+		and rechartype=#{2,jdbcType=DECIMAL}
+		and bankcode = #{3,jdbcType=VARCHAR}
+		AND maxmoney > #{4,jdbcType=FLOAT}
+
+	</select>
+
+	<select id="getByUgrade" resultType="java.lang.String">
+		select ugrade from RECHARGERATE
+	</select>
+	<!-- 查询应景通过审核的会员等级+充值方式+充值银行 ,rechartype,bankcode -->
+	<select id="getIsAudit" resultMap="BaseResultMap" parameterType="com.ptpl.model.RechargeRate">
+		select * from RECHARGERATE where isaudit =1
+	</select>
+	<select id="getUgrade" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from RECHARGERATE where ugrade = #{ugrade,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据会员等级,充值方式,银行卡查询到最大金额,并逆向排序,取到最大的金额 -->
+	<select id="getByMaxMoney" parameterType="com.ptpl.model.RechargeRate"
+		resultMap="BaseResultMap">
+		select * from
+		( select maxmoney from RECHARGERATE
+		<where>
+			<if test="ugrade !=null">
+				ugrade like #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="rechartype !=null">
+				and rechartype=#{rechartype,jdbcType=DECIMAL}
+			</if>
+			<if test="bankcode !=null">
+				and bankcode = #{bankcode,jdbcType=VARCHAR}
+			</if>
+			ORDER BY maxmoney desc
+		</where>
+		) where rownum=1
+	</select>
+	
+
+	<select id="getAll2" parameterType="com.ptpl.model.RechargeRate"
+		resultMap="BaseResultMap">
+		select * from RECHARGERATE
+		<where>
+			<if test="ugrade != null and ugrade!= ''">
+				ugrade like #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="paycompany != null and paycompany!= ''">
+				and paycompany = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="rechartype != null and rechartype!=''">
+				and rechartype = #{rechartype,jdbcType=DECIMAL}
+			</if>
+			<if test="istemplet != null and istemplet!=''">
+				and istemplet = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse != null">
+				and isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and isaudit = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="minmoney != null">
+				and minmoney &gt;= #{minmoney,jdbcType=FLOAT}
+			</if>
+			<if test="maxmoney != null">
+				and maxmoney &lt;= #{maxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="chargetype != null and chargetype != ''">
+				and chargetype = #{chargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="charrate != null">
+				and charrate = #{charrate,jdbcType=FLOAT}
+			</if>
+			<if test="quota != null">
+				and quota = #{quota,jdbcType=FLOAT}
+			</if>
+			<if test="bankcode != null and bankcode!=''">
+				and bankcode = #{bankcode,jdbcType=VARCHAR}
+			</if>
+			<if test="minfee != null">
+				and minfee = #{minfee,jdbcType=FLOAT}
+			</if>
+			<if test="maxfee != null">
+				and maxfee = #{maxfee,jdbcType=FLOAT}
+			</if>
+			<if test="addman != null">
+				and addman = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and addtime &gt;= #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="auditman != null">
+				and auditman = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				and audittime &gt;= #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="selfpayratio != null">
+				and selfpayratio = #{selfpayratio,jdbcType=FLOAT}
+			</if>
+			<if test="proxypayratio != null">
+				and proxypayratio = #{proxypayratio,jdbcType=FLOAT}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询已经通过审核的会员等级+充值方式 +启用 -->
+	<select id="getUgradeAndRecharTypeAndIsuseForRechargeRate"
+		resultMap="BaseResultMap" parameterType="com.ptpl.model.RechargeRate">
+		select * from RECHARGERATE
+		<where>
+			<if test="ugrade != null and ugrade!=''">
+				ugrade like #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="rechartype != null">
+				and rechartype = #{rechartype,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse != null">
+				and isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+	<!-- 根据会员编号查询会员等级 -->
+	<select id="getCodeByUgrade" parameterType="com.ptpl.model.RechargeRate"
+		resultMap="BaseResultMap">
+		select * from RECHARGERATE where ugrade= (select ugradename from USERGRADE)
+
+	</select>
+
+	<!-- <select id="getTremAll" parameterType="com.ptpl.model.RechargeRate" 
+		resultMap="BaseResultMap"> select * from RECHARGERATE <trim prefix="where" 
+		prefixOverrides="and |or"> <if test="ugrade != null and ugrade!= ''" > ugrade 
+		= #{ugrade,jdbcType=DECIMAL} </if> <if test="rechartype != null and rechartype!=''" 
+		> and rechartype = #{rechartype,jdbcType=DECIMAL} </if> <if test="chargetype 
+		!= null and chargetype != ''" > and chargetype = #{chargetype,jdbcType=DECIMAL} 
+		</if> <if test="bankcode != null and bankcode!=''" > and bankcode = #{bankcode,jdbcType=VARCHAR} 
+		</if> </trim> </select> -->
+
+	<update id="update" parameterType="com.ptpl.model.RechargeRate">
+		update RECHARGERATE
+		<set>
+			<if test="ugrade != null">
+				ugrade = #{ugrade,jdbcType=VARCHAR},
+			</if>
+			<if test="paycompany != null and paycompany !=''">
+				paycompany = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="rechartype != null">
+				rechartype = #{rechartype,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				isuse = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				istemplet = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				isaudit = #{isaudit,jdbcType=DECIMAL},
+			</if>
+				minmoney = #{minmoney,jdbcType=FLOAT},
+			
+				maxmoney = #{maxmoney,jdbcType=FLOAT},
+			
+			<if test="chargetype != null">
+				chargetype = #{chargetype,jdbcType=DECIMAL},
+			</if>
+				charrate = #{charrate,jdbcType=FLOAT},
+			<if test="quota != null">
+				quota = #{quota,jdbcType=FLOAT},
+			</if>
+			<if test="bankcode != null">
+				bankcode = #{bankcode,jdbcType=VARCHAR},
+			</if>
+				minfee = #{minfee,jdbcType=FLOAT},
+				maxfee = #{maxfee,jdbcType=FLOAT},
+			<if test="addman != null and addman !=''">
+				addman = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null and auditman !=''">
+				auditman = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				audittime= #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="selfpayratio != null">
+				selfpayratio = #{selfpayratio,jdbcType=FLOAT},
+			</if>
+			<if test="proxypayratio != null">
+				proxypayratio = #{proxypayratio,jdbcType=FLOAT}
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from RECHARGERATE where id=#{id,jdbcType=DECIMAL}
+
+	</delete>
+</mapper>

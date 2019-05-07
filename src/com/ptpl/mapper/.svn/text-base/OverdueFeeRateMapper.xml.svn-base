@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.OverdueFeeRateMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.OverdueFeeRate">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="FEERATETYPE" property="feeratetype" jdbcType="DECIMAL" />
+		<result column="BEGINDAY" property="beginday" jdbcType="DECIMAL" />
+		<result column="ENDDAY" property="endday" jdbcType="DECIMAL" />
+		<result column="FEERATE" property="feerate" jdbcType="FLOAT" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TID, FEERATETYPE, BEGINDAY, ENDDAY, FEERATE, ADDMAN, ADDTIME, REMARK
+	</sql>
+	
+	<!-- 根据标ID查询逾期滞纳金费率设置-->
+	<select id="findOverdueFeeRatesByTid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from OVERDUEFEERATE
+		where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from OVERDUEFEERATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from OVERDUEFEERATE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.OverdueFeeRate">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT OVERDUEFEERATE_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into OVERDUEFEERATE (ID, TID, FEERATETYPE,
+		BEGINDAY, ENDDAY, FEERATE,
+		ADDMAN, ADDTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{tid,jdbcType=DECIMAL},
+		#{feeratetype,jdbcType=DECIMAL},
+		#{beginday,jdbcType=DECIMAL}, #{endday,jdbcType=DECIMAL}, #{feerate,jdbcType=FLOAT},
+		#{addman,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.OverdueFeeRate">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT OVERDUEFEERATE_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into OVERDUEFEERATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="feeratetype != null">
+				FEERATETYPE,
+			</if>
+			<if test="beginday != null">
+				BEGINDAY,
+			</if>
+			<if test="endday != null">
+				ENDDAY,
+			</if>
+			<if test="feerate != null">
+				FEERATE,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="feeratetype != null">
+				#{feeratetype,jdbcType=DECIMAL},
+			</if>
+			<if test="beginday != null">
+				#{beginday,jdbcType=DECIMAL},
+			</if>
+			<if test="endday != null">
+				#{endday,jdbcType=DECIMAL},
+			</if>
+			<if test="feerate != null">
+				#{feerate,jdbcType=FLOAT},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.OverdueFeeRate">
+		update OVERDUEFEERATE
+		<set>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="feeratetype != null">
+				FEERATETYPE = #{feeratetype,jdbcType=DECIMAL},
+			</if>
+			<if test="beginday != null">
+				BEGINDAY = #{beginday,jdbcType=DECIMAL},
+			</if>
+			<if test="endday != null">
+				ENDDAY = #{endday,jdbcType=DECIMAL},
+			</if>
+			<if test="feerate != null">
+				FEERATE = #{feerate,jdbcType=FLOAT},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.OverdueFeeRate">
+		update OVERDUEFEERATE
+		set TID = #{tid,jdbcType=DECIMAL},
+		FEERATETYPE = #{feeratetype,jdbcType=DECIMAL},
+		BEGINDAY = #{beginday,jdbcType=DECIMAL},
+		ENDDAY = #{endday,jdbcType=DECIMAL},
+		FEERATE = #{feerate,jdbcType=FLOAT},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

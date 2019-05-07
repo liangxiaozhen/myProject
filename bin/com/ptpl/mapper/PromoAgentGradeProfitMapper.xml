@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.PromoAgentGradeProfitMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.PromoAgentGradeProfit">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PROXYGRADE" property="proxygrade" jdbcType="DECIMAL" />
+		<result column="PROXYGRADENAME" property="proxygradename"
+			jdbcType="VARCHAR" />
+		<result column="PROFIT" property="profit" jdbcType="FLOAT" />
+		<result column="PROFITGRADE" property="profitgrade" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PROXYGRADE, PROXYGRADENAME, PROFIT, PROFITGRADE,
+		ADDMAN, ADDTIME,
+		REMARK
+	</sql>
+	<sql id="Grade_Column_List">
+		ID, PROXYGRADE, PROXYGRADENAME,ADDMAN, ADDTIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from PROMOAGENTGRADEPROFIT
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		PROMOAGENTGRADEPROFIT
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<select id="selective" parameterType="com.ptpl.model.PromoAgentGradeProfit"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from PROMOAGENTGRADEPROFIT
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="proxygrade != null">
+				AND proxygrade = #{proxygrade,jdbcType=DECIMAL}
+			</if>
+			<if test="proxygradename != null and proxygradename != ''">
+				AND proxygradename = #{proxygradename,jdbcType=VARCHAR}
+			</if>
+			<if test="profit != null">
+				AND profit = #{profit,jdbcType=FLOAT}
+			</if>
+			<if test="profitgrade != null">
+				AND profitgrade = #{profitgrade,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				AND addman = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND addtime = #{addtime}
+			</if>
+			<if test="remark != null">
+				AND remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by proxygrade
+	</select>
+	<select id="getGradeName" resultMap="BaseResultMap">
+		select id,
+		proxygrade,proxygradename from PROMOAGENTGRADEPROFIT
+		group by id, proxygrade,proxygradename order by proxygrade
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.PromoAgentGradeProfit">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select PROMOAGENTGRADEPROFIT_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into PROMOAGENTGRADEPROFIT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="proxygrade != null">
+				PROXYGRADE,
+			</if>
+			<if test="proxygradename != null">
+				PROXYGRADENAME,
+			</if>
+			<if test="profit != null">
+				PROFIT,
+			</if>
+			<if test="profitgrade != null">
+				PROFITGRADE,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="proxygrade != null">
+				#{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="proxygradename != null">
+				#{proxygradename,jdbcType=VARCHAR},
+			</if>
+			<if test="profit != null">
+				#{profit,jdbcType=FLOAT},
+			</if>
+			<if test="profitgrade != null">
+				#{profitgrade,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.PromoAgentGradeProfit">
+		update PROMOAGENTGRADEPROFIT
+		<set>
+			<if test="proxygrade != null">
+				PROXYGRADE = #{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="proxygradename != null">
+				PROXYGRADENAME = #{proxygradename,jdbcType=VARCHAR},
+			</if>
+			<if test="profit != null">
+				PROFIT = #{profit,jdbcType=FLOAT},
+			</if>
+			<if test="profitgrade != null">
+				PROFITGRADE = #{profitgrade,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

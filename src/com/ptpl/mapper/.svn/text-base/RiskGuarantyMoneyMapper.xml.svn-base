@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RiskGuarantyMoneyMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RiskGuarantyMoney">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RISKGMNO" property="riskgmno" jdbcType="VARCHAR" />
+		<result column="RGMRECMAN" property="rgmrecman" jdbcType="VARCHAR" />
+		<result column="CHARGETYPE" property="chargetype" jdbcType="DECIMAL" />
+		<result column="MINRGMMONEY" property="minrgmmoney" jdbcType="FLOAT" />
+		<result column="MAXRGMMONEY" property="maxrgmmoney" jdbcType="FLOAT" />
+		<result column="RGMQUOTA" property="rgmquota" jdbcType="FLOAT" />
+		<result column="RGMPERCENT" property="rgmpercent" jdbcType="FLOAT" />
+		<result column="MAXRGMFEE" property="maxrgmfee" jdbcType="FLOAT" />
+		<result column="UGRADE" property="ugrade" jdbcType="VARCHAR" />
+		<result column="RGMRATE" property="rgmrate" jdbcType="FLOAT" />
+		<result column="MAXRGMAMOUNT" property="maxrgmamount" jdbcType="FLOAT" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="RGMRECMANID" property="rgmrecmanid" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.ptpl.model.RiskGuarantyMoney">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RISKGUARANTYMONEY_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into RISKGUARANTYMONEY (ID, RISKGMNO, RGMRECMAN,
+		CHARGETYPE, MINRGMMONEY, MAXRGMMONEY,
+		RGMQUOTA, RGMPERCENT, MAXRGMFEE,
+		UGRADE, RGMRATE, MAXRGMAMOUNT,
+		ISTEMPLET,TID,RGMRECMANID,ISAUDIT,ADDMAN,ADDTIME,REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{riskgmno,jdbcType=VARCHAR},
+		#{rgmrecman,jdbcType=VARCHAR},
+		#{chargetype,jdbcType=DECIMAL}, #{minrgmmoney,jdbcType=FLOAT}, #{maxrgmmoney,jdbcType=FLOAT},
+		#{rgmquota,jdbcType=FLOAT}, #{rgmpercent,jdbcType=FLOAT},
+		#{maxrgmfee,jdbcType=FLOAT},
+		#{ugrade,jdbcType=VARCHAR}, #{rgmrate,jdbcType=FLOAT}, #{maxrgmamount,jdbcType=FLOAT},
+		#{istemplet,jdbcType=DECIMAL},#{tid,jdbcType=DECIMAL},#{rgmrecmanid,jdbcType=DECIMAL},
+		#{isaudit,jdbcType=DECIMAL},#{addman,jdbcType=VARCHAR},#{addtime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR})
+	</insert>
+	<select id="selectByCondition" parameterType="com.ptpl.model.RiskGuarantyMoney"
+		resultMap="BaseResultMap">
+		select * from RISKGUARANTYMONEY
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="riskgmno != null and riskgmno!=''">
+				and RISKGMNO = #{riskgmno,jdbcType=VARCHAR}
+			</if>
+			<if test="rgmrecman != null and rgmrecman!=''">
+				and RGMRECMAN = #{rgmrecman,jdbcType=VARCHAR}
+			</if>
+			<if test="chargetype != null and chargetype!=''">
+				and CHARGETYPE = #{chargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="minrgmmoney != null and minrgmmoney!=''">
+				and MINRGMMONEY = #{minrgmmoney,jdbcType=FLOAT}
+			</if>
+			<if test="maxrgmmoney != null and maxrgmmoney!=''">
+				and MAXRGMMONEY = #{maxrgmmoney,jdbcType=FLOAT}
+			</if>
+			<if test="rgmquota != null and rgmquota!=''">
+				and RGMQUOTA = #{rgmquota,jdbcType=FLOAT}
+			</if>
+			<if test="rgmpercent != null and rgmpercent!=''">
+				and RGMPERCENT = #{rgmpercent,jdbcType=FLOAT}
+			</if>
+			<if test="maxrgmfee != null and maxrgmfee!=''">
+				and MAXRGMFEE = #{maxrgmfee,jdbcType=FLOAT}
+			</if>
+			<if test="ugrade != null and ugrade!=''">
+				and UGRADE = #{ugrade,jdbcType=VARCHAR}
+			</if>
+			<if test="rgmrate != null and rgmrate!=''">
+				and RGMRATE = #{rgmrate,jdbcType=FLOAT}
+			</if>
+			<if test="maxrgmamount != null and maxrgmamount!=''">
+				and MAXRGMAMOUNT = #{maxrgmamount,jdbcType=FLOAT}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="tid != null">
+				and TID = #{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="rgmrecmanid != null">
+				and RGMRECMANID = #{RGMRECMANID,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+
+	<update id="update" parameterType="com.ptpl.model.RiskGuarantyMoney">
+		update RISKGUARANTYMONEY
+		<trim prefix="set" suffixOverrides=",">
+			<if test="riskgmno != null">
+				RISKGMNO = #{riskgmno,jdbcType=VARCHAR},
+			</if>
+			RGMRECMAN = #{rgmrecman,jdbcType=VARCHAR},
+			CHARGETYPE = #{chargetype,jdbcType=DECIMAL},
+			MINRGMMONEY = #{minrgmmoney,jdbcType=FLOAT},
+			MAXRGMMONEY = #{maxrgmmoney,jdbcType=FLOAT},
+			RGMQUOTA = #{rgmquota,jdbcType=FLOAT},
+			RGMPERCENT = #{rgmpercent,jdbcType=FLOAT},
+			MAXRGMFEE = #{maxrgmfee,jdbcType=FLOAT},
+			UGRADE = #{ugrade,jdbcType=VARCHAR},
+			RGMRATE = #{rgmrate,jdbcType=FLOAT},
+			MAXRGMAMOUNT = #{maxrgmamount,jdbcType=FLOAT},
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="rgmrecmanid != null">
+				RGMRECMANID = #{rgmrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from RISKGUARANTYMONEY
+		where ID = #{id}
+	</delete>
+
+	<!-- 根据主键ID查询标的风险保证金设置详情 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		*
+		from
+		RISKGUARANTYMONEY
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据tid查询信息 -->
+	<select id="selectRiskBytid" resultMap="BaseResultMap">
+		select * from riskguarantymoney where tid=#{tid,jdbcType=DECIMAL}
+	</select>
+
+	<select id="selectGradebyTid" resultType="java.lang.String">
+		select distinct(UGRADE) from riskguarantymoney t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

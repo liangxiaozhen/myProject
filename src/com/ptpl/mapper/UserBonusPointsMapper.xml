@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserBonusPointsMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserBonusPoints">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="BPTYPE" property="bptype" jdbcType="DECIMAL" />
+		<result column="BPUSETYPE" property="bpUseType" jdbcType="DECIMAL" />
+		<result column="BPSTIME" property="bpstime" jdbcType="TIMESTAMP" />
+		<result column="BONUSPOINTS" property="bonuspoints" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="PURPOSE" property="purpose" jdbcType="VARCHAR" />
+		<result column="BPDEALTIME" property="bpdealtime" jdbcType="TIMESTAMP" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="UBPNO" property="ubpno" jdbcType="VARCHAR" />
+		<association property="userBaseAccountInfo" resultMap="UserBaseInfoMap" />
+		<association property="award" javaType="com.ptpl.model.Award">
+			<result column="ANAME" property="aname" jdbcType="VARCHAR" />
+			<result column="ATTRIBUTE" property="attribute" jdbcType="DECIMAL" />
+		</association>
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="UserBaseInfoMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ptpl.model.UserBonusPoints">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERBONUSPOINTS_seq.Nextval AS id from dual
+		</selectKey>
+		insert into USERBONUSPOINTS
+		(ID, BASEID, BPTYPE,BPUSETYPE,
+		BPSTIME, BONUSPOINTS,
+		STATUS,
+		PURPOSE, BPDEALTIME,
+		ISAUDIT,
+		AUDITMAN, AUDITTIME, REMARK,
+		UBPNO)
+		values (#{id,jdbcType=DECIMAL},
+		#{baseid,jdbcType=DECIMAL},
+		#{bptype,jdbcType=DECIMAL},
+		#{bpUseType,jdbcType=DECIMAL},
+		#{bpstime,jdbcType=TIMESTAMP},
+		#{bonuspoints,jdbcType=DECIMAL},
+		#{status,jdbcType=DECIMAL},
+		#{purpose,jdbcType=VARCHAR},
+		#{bpdealtime,jdbcType=TIMESTAMP},
+		#{isaudit,jdbcType=DECIMAL},
+		#{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},
+		#{ubpno,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserBonusPoints">
+		insert into USERBONUSPOINTS
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="bptype != null">
+				BPTYPE,
+			</if>
+			<if test="bpUseType != null">
+				BPUSETYPE,
+			</if>
+			<if test="bpstime != null">
+				BPSTIME,
+			</if>
+			<if test="bonuspoints != null">
+				BONUSPOINTS,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="purpose != null">
+				PURPOSE,
+			</if>
+			<if test="bpdealtime != null">
+				BPDEALTIME,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="ubpno != null">
+				UBPNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="bptype != null">
+				#{bptype,jdbcType=DECIMAL},
+			</if>
+			<if test="bpUseType != null">
+				#{bpUseType,jdbcType=DECIMAL},
+			</if>
+			<if test="bpstime != null">
+				#{bpstime},
+			</if>
+			<if test="bonuspoints != null">
+				#{bonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="purpose != null">
+				#{purpose,jdbcType=VARCHAR},
+			</if>
+			<if test="bpdealtime != null">
+				#{bpdealtime},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ubpno != null">
+				#{ubpno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="Base_Column_List">
+		u.ID,u.BASEID,u.BPTYPE,u.BPUSETYPE,u.BPSTIME,u.BONUSPOINTS,u.STATUS,u.BPDEALTIME,u.PURPOSE,u.ISAUDIT,
+		u.AUDITMAN,u.AUDITTIME,u.REMARK,u.UBPNO,a.ANAME,a.ATTRIBUTE
+	</sql>
+
+	<!-- （条件）查询用户积分列表 -->
+	<select id="findBonusPointsList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBonusPoints">
+		select
+		ubp.*,ubai.loginname
+		from
+		userbonuspoints ubp,
+		userbaseaccountinfo
+		ubai
+		<where>
+			ubp.baseid = ubai.id
+			<if test="bptype != null">
+				and ubp.bptype = #{bptype}
+			</if>
+			<if test="status != null">
+				and ubp.status = #{status}
+			</if>
+			<if test="isaudit != null">
+				and ubp.isaudit = #{isaudit}
+			</if>
+			<if test="id != null">
+				and ubp.id = #{id}
+			</if>
+			<if test="userBaseAccountInfo != null">
+				and ubai.loginname like
+				'%'||#{userBaseAccountInfo.loginname}||'%'
+			</if>
+		</where>
+		order by ubp.id
+	</select>
+
+	<!-- 根据主键查看用户积分详情 -->
+	<select id="findPointsDetailById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		ubp.*,ubai.loginname
+		from
+		userbonuspoints ubp,
+		userbaseaccountinfo
+		ubai
+		<where>
+			ubp.baseid = ubai.id
+			and ubp.id = #{id,jdbcType=DECIMAL}
+		</where>
+	</select>
+	
+	<!-- 根据主键查看用户积分详情 -->
+	<select id="getUserBounsPointsByLoginName" resultMap="BaseResultMap"
+		parameterType="string">
+		select
+		ubp.*,ubai.loginname
+		from
+		userbonuspoints ubp,
+		userbaseaccountinfo
+		ubai
+		<where>
+			ubp.baseid = ubai.id
+			and ubai.loginname = #{loginname,jdbcType=DECIMAL}
+		</where>
+	</select>
+
+	<!-- 根据baseid查看用户积分列表 -->
+	<select id="findPointsByBaseid" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBonusPoints">
+		select
+		<include refid="Base_Column_List" />
+		from userbonuspoints u,Award a
+
+		<trim prefix="where" prefixOverrides="and">
+			u.ubpno = a.ano
+			<if test="baseid != null">
+				and u.baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				and u.status = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="period == 'threeMonths'">
+				and u.bpdealtime >= add_months(sysdate,-3)
+			</if>
+		</trim>
+	</select>
+
+	<!-- 更新用户积分记录 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserBonusPoints">
+		update userbonuspoints
+		<set>
+			<if test="bonuspoints != null">
+				BONUSPOINTS = #{bonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime},
+			</if>
+			<if test="remark">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="getfindBonusPointsList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBonusPoints">
+		select
+		ubp.*,ubai.loginname
+		from
+		userbonuspoints ubp,
+		userbaseaccountinfo
+		ubai
+		<trim prefix="where" prefixOverrides="and|or">
+			ubp.baseid = ubai.id
+			<if test="id !=null and id!=''">
+				and ubp.id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="bptype !=null and bptype!=''">
+				and ubp.bptype=#{bptype,jdbcType=DECIMAL}
+			</if>
+			<if test="status !=null and status!=''">
+				and ubp.status=#{status,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit !=null and isaudit!='' or isaudit==0 ">
+				and ubp.isaudit=#{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="userBaseAccountInfo !=null and userBaseAccountInfo!=''">
+				and ubai.loginname like
+				'%'||#{userBaseAccountInfo.loginname,}||'%'
+			</if>
+		</trim>
+	</select>
+	 
+	<select id="findPointsByPeriod" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserBonusPoints">
+		select * from userbonuspoints 
+		where trunc(bpdealtime,'dd') between to_date(#{startdate,jdbcType=VARCHAR},'yyyy-mm-dd') and to_date(#{enddate,jdbcType=VARCHAR},'yyyy-mm-dd')
+		and baseid = #{baseid,jdbcType=DECIMAL}
+	</select>	 
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.OftenLoanListMapper">
+    <resultMap id="BaseResultMap" type="com.ptpl.model.OftenLoanList">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="BASEID" property="baseid" jdbcType="DECIMAL"/>
+        <result column="LOANAPPID" property="loanappid" jdbcType="DECIMAL"/>
+        <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, BASEID, LOANAPPID, ADDTIME
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        <include refid="Base_Column_List"/>
+        from OFTENLOANLIST
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from OFTENLOANLIST
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.ptpl.model.OftenLoanList">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select OFTENLOANLIST_SEQ.NEXTVAL as id from dual
+        </selectKey>
+        insert into OFTENLOANLIST (ID, BASEID, LOANAPPID,
+        ADDTIME)
+        values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL}, #{loanappid,jdbcType=DECIMAL},
+        #{addtime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ptpl.model.OftenLoanList">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select OFTENLOANLIST_SEQ.NEXTVAL as id from dual
+        </selectKey>
+        insert into OFTENLOANLIST
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="baseid != null">
+                BASEID,
+            </if>
+            <if test="loanappid != null">
+                LOANAPPID,
+            </if>
+            <if test="addtime != null">
+                ADDTIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="baseid != null">
+                #{baseid,jdbcType=DECIMAL},
+            </if>
+            <if test="loanappid != null">
+                #{loanappid,jdbcType=DECIMAL},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.OftenLoanList">
+        update OFTENLOANLIST
+        <set>
+            <if test="baseid != null">
+                BASEID = #{baseid,jdbcType=DECIMAL},
+            </if>
+            <if test="loanappid != null">
+                LOANAPPID = #{loanappid,jdbcType=DECIMAL},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ptpl.model.OftenLoanList">
+    update OFTENLOANLIST
+    set BASEID = #{baseid,jdbcType=DECIMAL},
+      LOANAPPID = #{loanappid,jdbcType=DECIMAL},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <select id="selectOftenLoanListByCondition" resultMap="BaseResultMap" parameterType="com.ptpl.model.OftenLoanList">
+        select *
+        from OFTENLOANLIST
+        <where>
+            <if test="baseid != null">
+                BASEID = #{baseid,jdbcType=DECIMAL}
+            </if>
+            <if test="loanappid != null">
+              and  LOANAPPID = #{loanappid,jdbcType=DECIMAL}
+            </if>
+            <if test="addtime != null">
+              and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>

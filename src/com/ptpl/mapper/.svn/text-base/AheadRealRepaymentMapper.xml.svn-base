@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AheadRealRepaymentMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AheadRealRepayment">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+		<result column="RREALBATCHNO" property="rrealbatchno" jdbcType="VARCHAR" />
+		<result column="RPRINCIPALINT" property="rprincipalint"
+			jdbcType="FLOAT" />
+		<result column="RPTOTALAMOUNT" property="rptotalamount"
+			jdbcType="FLOAT" />
+		<result column="RPTOTALINT" property="rptotalint" jdbcType="FLOAT" />
+		<result column="NORECTOTALINT" property="norectotalint"
+			jdbcType="FLOAT" />
+		<result column="RINTEREST" property="rinterest" jdbcType="FLOAT" />
+		<result column="NORECRINTEREST" property="norecrinterest"
+			jdbcType="FLOAT" />
+		<result column="RVOUCHERINT" property="rvoucherint" jdbcType="FLOAT" />
+		<result column="NORECRVOUCHERINT" property="norecrvoucherint"
+			jdbcType="FLOAT" />
+		<result column="RLVOUCHERINT" property="rlvoucherint" jdbcType="FLOAT" />
+		<result column="NORECRLVOUCHERINT" property="norecrlvoucherint"
+			jdbcType="FLOAT" />
+		<result column="RINTFEE" property="rintfee" jdbcType="FLOAT" />
+		<result column="NORECRINTFEE" property="norecrintfee" jdbcType="FLOAT" />
+		<result column="OWEINTPENALTY" property="oweintpenalty"
+			jdbcType="FLOAT" />
+		<result column="INTERESTEXPENSE" property="interestexpense"
+			jdbcType="FLOAT" />
+		<result column="REPAYSTATUS" property="repaystatus" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="RVOUCHER" property="rvoucher" jdbcType="FLOAT" />
+		<result column="HFBATCHNO" property="hfbatchno" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="DISCARDVOUCHERINT" property="discardvoucherint" jdbcType="FLOAT" />
+		<result column="NORECDISCARDVOUCHERINT" property="norecdiscardvoucherint" jdbcType="FLOAT" />
+
+	</resultMap>
+	<sql id="Base_Column_list">
+		t.ID,t.RORDERNO,t.RREALBATCHNO,t.RPRINCIPALINT,t.RPTOTALAMOUNT,t.RPTOTALINT,t.NORECTOTALINT,t.RINTEREST,t.NORECRINTEREST,t.RVOUCHERINT,t.NORECRVOUCHERINT,
+		t.RLVOUCHERINT,t.NORECRLVOUCHERINT,t.RINTFEE,t.NORECRINTFEE,t.OWEINTPENALTY,t.INTERESTEXPENSE,t.REPAYSTATUS,t.ISBLENDING,t.ISMANBLENDING,
+		t.SYSBTIME,t.MANBTIME,t.PAYCOMPANY,t.SYSRECTIME,t.RECEIVETIME,t.REQQUERYDATA,t.RECRESULTDATA,t.REMARK,
+		t.RVOUCHER,t.HFBATCHNO,t.ADDTIME,t.DISCARDVOUCHERINT,t.NORECDISCARDVOUCHERINT
+	</sql>
+
+	<select id="findAheadRealRepaymentByRordernoAndBacthNo" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_list"></include>
+		from AHEADREALREPAYMENT t 
+		<where>
+			<if test="rorderno != null">
+				AND t.rorderno = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="bacthno != null">
+				AND t.rrealbatchno = #{bacthno,jdbcType=VARCHAR}
+			</if>
+		</where>
+ 	</select>
+ 	
+ 	<select id="findAheadRealRepaymentByConditions" parameterType="com.ptpl.model.AheadRealRepayment"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_list"></include>
+		from AHEADREALREPAYMENT t 
+		<where>
+			<if test="rorderno != null">
+				AND t.rorderno = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="rrealbatchno != null">
+				AND t.rrealbatchno = #{rrealbatchno,jdbcType=VARCHAR}
+			</if>
+		</where>
+ 	</select>
+
+	<select id="findAheadRealRepaymentById" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_list"></include>
+		from AHEADREALREPAYMENT t where t.id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<select id="findAheadRealRepayments" parameterType="com.ptpl.model.AheadRealRepayment"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_list"></include>
+		from AHEADREALREPAYMENT t
+		left join repaymentDetail t1 on t.rorderno = t1.rorderno and t1.rbatchno = t.rrealbatchno
+		<where>
+			<if test="rorderno != null and rorderno !=''">
+				AND t.rorderno = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="rrealbatchno != null and rrealbatchno !=''">
+				AND t.rrealbatchno = #{rrealbatchno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="isblending != null">
+				AND t.isblending = #{isblending,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="ismanblending != null">
+				AND t.ismanblending = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			 
+			 <if test="repaystatus != null">
+				AND t1.repaystatus = #{repaystatus,jdbcType=DECIMAL}
+			</if>
+ 		</where>
+	</select>
+
+	<insert id="insert" parameterType="com.ptpl.model.AheadRealRepayment">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT AHEADREALREPAYMENT_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AHEADREALREPAYMENT (ID, RORDERNO, RREALBATCHNO,
+		RPRINCIPALINT, RPTOTALAMOUNT, RPTOTALINT,
+		NORECTOTALINT, RINTEREST, NORECRINTEREST,
+		RVOUCHERINT, NORECRVOUCHERINT, RLVOUCHERINT,
+		NORECRLVOUCHERINT, RINTFEE, NORECRINTFEE,
+		OWEINTPENALTY, INTERESTEXPENSE, REPAYSTATUS,
+		ISBLENDING, ISMANBLENDING, SYSBTIME,
+		MANBTIME, PAYCOMPANY, SYSRECTIME,
+		RECEIVETIME, REQQUERYDATA, RECRESULTDATA,
+		REMARK, RVOUCHER,HFBATCHNO,ADDTIME,DISCARDVOUCHERINT,NORECDISCARDVOUCHERINT)
+		values (#{id,jdbcType=DECIMAL}, #{rorderno,jdbcType=VARCHAR},
+		#{rrealbatchno,jdbcType=VARCHAR},
+		#{rprincipalint,jdbcType=FLOAT}, #{rptotalamount,jdbcType=FLOAT}, #{rptotalint,jdbcType=FLOAT},
+		#{norectotalint,jdbcType=FLOAT}, #{rinterest,jdbcType=FLOAT},
+		#{norecrinterest,jdbcType=FLOAT},
+		#{rvoucherint,jdbcType=FLOAT}, #{norecrvoucherint,jdbcType=FLOAT}, #{rlvoucherint,jdbcType=FLOAT},
+		#{norecrlvoucherint,jdbcType=FLOAT}, #{rintfee,jdbcType=FLOAT},
+		#{norecrintfee,jdbcType=FLOAT},
+		#{oweintpenalty,jdbcType=FLOAT}, #{interestexpense,jdbcType=FLOAT}, #{repaystatus,jdbcType=DECIMAL},
+		#{isblending,jdbcType=DECIMAL}, #{ismanblending,jdbcType=DECIMAL},
+		#{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP}, #{paycompany,jdbcType=VARCHAR}, #{sysrectime,jdbcType=TIMESTAMP},
+		#{receivetime,jdbcType=TIMESTAMP}, #{reqquerydata,jdbcType=VARCHAR},
+		#{recresultdata,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{rvoucher,jdbcType=FLOAT}, #{hfbatchno,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP}, #{discardvoucherint,jdbcType=FLOAT}, #{norecdiscardvoucherint,jdbcType=FLOAT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AheadRealRepayment">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT AHEADREALREPAYMENT_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AHEADREALREPAYMENT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="rorderno != null">
+				RORDERNO,
+			</if>
+			<if test="rrealbatchno != null">
+				RREALBATCHNO,
+			</if>
+			<if test="rprincipalint != null">
+				RPRINCIPALINT,
+			</if>
+			<if test="rptotalamount != null">
+				RPTOTALAMOUNT,
+			</if>
+			<if test="rptotalint != null">
+				RPTOTALINT,
+			</if>
+			<if test="norectotalint != null">
+				NORECTOTALINT,
+			</if>
+			<if test="rinterest != null">
+				RINTEREST,
+			</if>
+			<if test="norecrinterest != null">
+				NORECRINTEREST,
+			</if>
+			<if test="rvoucherint != null">
+				RVOUCHERINT,
+			</if>
+			<if test="norecrvoucherint != null">
+				NORECRVOUCHERINT,
+			</if>
+			<if test="rlvoucherint != null">
+				RLVOUCHERINT,
+			</if>
+			<if test="norecrlvoucherint != null">
+				NORECRLVOUCHERINT,
+			</if>
+			<if test="rintfee != null">
+				RINTFEE,
+			</if>
+			<if test="norecrintfee != null">
+				NORECRINTFEE,
+			</if>
+			<if test="oweintpenalty != null">
+				OWEINTPENALTY,
+			</if>
+			<if test="interestexpense != null">
+				INTERESTEXPENSE,
+			</if>
+			<if test="repaystatus != null">
+				REPAYSTATUS,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="rvoucher != null">
+				RVOUCHER,
+			</if>
+			<if test="hfbatchno != null">
+				HFBATCHNO,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="discardvoucherint != null">
+				DISCARDVOUCHERINT,
+			</if>
+			<if test="norecdiscardvoucherint != null">
+				NORECDISCARDVOUCHERINT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="rorderno != null">
+				#{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rrealbatchno != null">
+				#{rrealbatchno,jdbcType=VARCHAR},
+			</if>
+			<if test="rprincipalint != null">
+				#{rprincipalint,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalamount != null">
+				#{rptotalamount,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalint != null">
+				#{rptotalint,jdbcType=FLOAT},
+			</if>
+			<if test="norectotalint != null">
+				#{norectotalint,jdbcType=FLOAT},
+			</if>
+			<if test="rinterest != null">
+				#{rinterest,jdbcType=FLOAT},
+			</if>
+			<if test="norecrinterest != null">
+				#{norecrinterest,jdbcType=FLOAT},
+			</if>
+			<if test="rvoucherint != null">
+				#{rvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="norecrvoucherint != null">
+				#{norecrvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucherint != null">
+				#{rlvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="norecrlvoucherint != null">
+				#{norecrlvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rintfee != null">
+				#{rintfee,jdbcType=FLOAT},
+			</if>
+			<if test="norecrintfee != null">
+				#{norecrintfee,jdbcType=FLOAT},
+			</if>
+			<if test="oweintpenalty != null">
+				#{oweintpenalty,jdbcType=FLOAT},
+			</if>
+			<if test="interestexpense != null">
+				#{interestexpense,jdbcType=FLOAT},
+			</if>
+			<if test="repaystatus != null">
+				#{repaystatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="rvoucher != null">
+				#{rvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="hfbatchno != null">
+				#{hfbatchno,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="discardvoucherint != null">
+				#{discardvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="norecdiscardvoucherint != null">
+				#{norecdiscardvoucherint,jdbcType=FLOAT},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.ptpl.model.AheadRealRepayment">
+		update AHEADREALREPAYMENT
+		<set>
+			<if test="rorderno != null">
+				RORDERNO = #{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rrealbatchno != null">
+				RREALBATCHNO = #{rrealbatchno,jdbcType=VARCHAR},
+			</if>
+			<if test="rprincipalint != null">
+				RPRINCIPALINT = #{rprincipalint,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalamount != null">
+				RPTOTALAMOUNT = #{rptotalamount,jdbcType=FLOAT},
+			</if>
+			<if test="rptotalint != null">
+				RPTOTALINT = #{rptotalint,jdbcType=FLOAT},
+			</if>
+			<if test="norectotalint != null">
+				NORECTOTALINT = #{norectotalint,jdbcType=FLOAT},
+			</if>
+			<if test="rinterest != null">
+				RINTEREST = #{rinterest,jdbcType=FLOAT},
+			</if>
+			<if test="norecrinterest != null">
+				NORECRINTEREST = #{norecrinterest,jdbcType=FLOAT},
+			</if>
+			<if test="rvoucherint != null">
+				RVOUCHERINT = #{rvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="norecrvoucherint != null">
+				NORECRVOUCHERINT = #{norecrvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucherint != null">
+				RLVOUCHERINT = #{rlvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="norecrlvoucherint != null">
+				NORECRLVOUCHERINT = #{norecrlvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rintfee != null">
+				RINTFEE = #{rintfee,jdbcType=FLOAT},
+			</if>
+			<if test="norecrintfee != null">
+				NORECRINTFEE = #{norecrintfee,jdbcType=FLOAT},
+			</if>
+			<if test="oweintpenalty != null">
+				OWEINTPENALTY = #{oweintpenalty,jdbcType=FLOAT},
+			</if>
+			<if test="interestexpense != null">
+				INTERESTEXPENSE = #{interestexpense,jdbcType=FLOAT},
+			</if>
+			<if test="repaystatus != null">
+				REPAYSTATUS = #{repaystatus,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="rvoucher != null">
+				RVOUCHER = #{rvoucher,jdbcType=FLOAT},
+			</if>
+			<if test="hfbatchno != null">
+				HFBATCHNO = #{hfbatchno,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				addtime = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="discardvoucherint != null">
+				DISCARDVOUCHERINT = #{discardvoucherint,jdbcType=FLOAT},
+			</if>
+			<if test="rlvoucherint != null">
+				NORECDISCARDVOUCHERINT = #{norecdiscardvoucherint,jdbcType=FLOAT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from
+		AHEADREALREPAYMENT t where t.id = #{id,jdbcType=DECIMAL}
+	</delete>
+	
+	<delete id="deleteByRrealbatchno" parameterType="java.lang.String">
+		delete from
+		AHEADREALREPAYMENT t where t.rrealbatchno = #{rrealbatchno,jdbcType=VARCHAR}
+	</delete>
+</mapper>

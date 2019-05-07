@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DattornRNameLinkMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DattornRNameLink">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="OWNERRNNO" property="ownerrnno" jdbcType="VARCHAR" />
+		<result column="NOAPNNO" property="noapnno" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TID, OWNERRNNO, NOAPNNO
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from DATTORNRNAMELINK
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectByTid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from DATTORNRNAMELINK
+		where tid = #{tid,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from DATTORNRNAMELINK
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.DattornRNameLink">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select DATTORNRNAMELINK_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into DATTORNRNAMELINK (ID, TID, OWNERRNNO,
+		NOAPNNO)
+		values (#{id,jdbcType=DECIMAL}, #{TID,jdbcType=DECIMAL},
+		#{ownerrnno,jdbcType=VARCHAR},
+		#{noapnno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.DattornRNameLink">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select DATTORNRNAMELINK_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into DATTORNRNAMELINK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="ownerrnno != null">
+				OWNERRNNO,
+			</if>
+			<if test="noapnno != null">
+				NOAPNNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="ownerrnno != null">
+				#{ownerrnno,jdbcType=VARCHAR},
+			</if>
+			<if test="noapnno != null">
+				#{noapnno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.DattornRNameLink">
+		update DATTORNRNAMELINK
+		<set>
+			<if test="ownerrnno != null">
+				OWNERRNNO = #{ownerrnno,jdbcType=VARCHAR},
+			</if>
+			<if test="noapnno != null">
+				NOAPNNO = #{noapnno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where TID = #{tid,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.DattornRNameLink">
+		update DATTORNRNAMELINK
+		set TID = #{tid,jdbcType=DECIMAL},
+		OWNERRNNO = #{ownerrnno,jdbcType=VARCHAR},
+		NOAPNNO = #{noapnno,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link
+            href="/bootstrap/3.3.5/css/bootstrap.min.css"
+            rel="stylesheet" type="text/css">
+    <link href="/js/sg/css/sg.css"
+          rel="stylesheet" type="text/css">
+    <script type="text/javascript"
+            src="/jquery/1.11.3/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript"
+            src="/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+            src="/calendar/WdatePicker.js"></script>
+    <script type="text/javascript"
+            src="/js/sg/sgutil.js"></script>
+    <script type="text/javascript"
+            src="/js/sg/sg.js"></script>
+    <script type="text/javascript"
+            src="/js/common/common.js"></script>
+    <script type="text/javascript"
+            src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript"
+            src="/ueditor/ueditor.all.js"></script>
+
+    <link href="/fileinput/css/fileinput.css" media="all" rel="stylesheet"
+          type="text/css"/>
+    <script src="/fileinput/js/fileinput.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="row" style="height: 500px">
+           <input id="file-Portrait" type="file">
+    </div>
+<script>
+    //初始化fileinput控件（第一次初始化）
+//初始化fileinput控件（第一次初始化）
+            $('#file-Portrait').fileinput({
+                language: 'zh', //设置语言
+                uploadUrl: "/FileUpload/Upload", //上传的地址
+                allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀,
+                maxFileCount: 100,
+                enctype: 'multipart/form-data',
+                showUpload: true, //是否显示上传按钮
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            });
+//初始化fileinput控件（第一次初始化）
+
+</script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AheadRepayPlatformMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AheadRepayPlatform">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="AHEADREPAYPNO" property="aheadrepaypno"
+			jdbcType="VARCHAR" />
+		<result column="ISFORPLATFORMON" property="isforplatformon"
+			jdbcType="DECIMAL" />
+		<result column="AWARDRECMAN" property="awardrecman" jdbcType="VARCHAR" />
+		<result column="MINALLNORECEIVEINT" property="minallnoreceiveint"
+			jdbcType="FLOAT" />
+		<result column="MAXALLNORECEIVEINT" property="maxallnoreceiveint"
+			jdbcType="FLOAT" />
+		<result column="AWARDPLATQUOTA" property="awardplatquota"
+			jdbcType="FLOAT" />
+		<result column="AWARDPLATRATE" property="awardplatrate"
+			jdbcType="FLOAT" />
+		<result column="AWARDPLATMINMONEY" property="awardplatminmoney"
+			jdbcType="FLOAT" />
+		<result column="AWARDPLATMAXMONEY" property="awardplatmaxmoney"
+			jdbcType="FLOAT" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TID, AHEADREPAYPNO, ISFORPLATFORMON, AWARDRECMAN, MINALLNORECEIVEINT,
+		MAXALLNORECEIVEINT,
+		AWARDPLATQUOTA, AWARDPLATRATE, AWARDPLATMINMONEY, AWARDPLATMAXMONEY, ISAUDIT,
+		ISTEMPLET,
+		ADDMAN, ADDTIME, REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AHEADREPAYPLATFORM
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据tid查询信息 -->
+	<select id="selectPayplatBytid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from AHEADREPAYPLATFORM
+		where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from AHEADREPAYPLATFORM
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.AheadRepayPlatform">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select AHEADREPAYPLATFORM_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into AHEADREPAYPLATFORM (ID, TID, AHEADREPAYPNO,
+		ISFORPLATFORMON, AWARDRECMAN, MINALLNORECEIVEINT,
+		MAXALLNORECEIVEINT, AWARDPLATQUOTA, AWARDPLATRATE,
+		AWARDPLATMINMONEY, AWARDPLATMAXMONEY, ISAUDIT,
+		ISTEMPLET, ADDMAN, ADDTIME,
+		REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{tid,jdbcType=DECIMAL},
+		#{aheadrepaypno,jdbcType=VARCHAR},
+		#{isforplatformon,jdbcType=DECIMAL}, #{awardrecman,jdbcType=VARCHAR},
+		#{minallnoreceiveint,jdbcType=FLOAT},
+		#{maxallnoreceiveint,jdbcType=FLOAT},
+		#{awardplatquota,jdbcType=FLOAT}, #{awardplatrate,jdbcType=FLOAT},
+		#{awardplatminmoney,jdbcType=FLOAT},
+		#{awardplatmaxmoney,jdbcType=FLOAT}, #{isaudit,jdbcType=DECIMAL},
+		#{istemplet,jdbcType=DECIMAL}, #{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AheadRepayPlatform">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select AHEADREPAYPLATFORM_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into AHEADREPAYPLATFORM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="aheadrepaypno != null">
+				AHEADREPAYPNO,
+			</if>
+			<if test="isforplatformon != null">
+				ISFORPLATFORMON,
+			</if>
+			<if test="awardrecman != null">
+				AWARDRECMAN,
+			</if>
+			<if test="minallnoreceiveint != null">
+				MINALLNORECEIVEINT,
+			</if>
+			<if test="maxallnoreceiveint != null">
+				MAXALLNORECEIVEINT,
+			</if>
+			<if test="awardplatquota != null">
+				AWARDPLATQUOTA,
+			</if>
+			<if test="awardplatrate != null">
+				AWARDPLATRATE,
+			</if>
+			<if test="awardplatminmoney != null">
+				AWARDPLATMINMONEY,
+			</if>
+			<if test="awardplatmaxmoney != null">
+				AWARDPLATMAXMONEY,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="aheadrepaypno != null">
+				#{aheadrepaypno,jdbcType=VARCHAR},
+			</if>
+			<if test="isforplatformon != null">
+				#{isforplatformon,jdbcType=DECIMAL},
+			</if>
+			<if test="awardrecman != null">
+				#{awardrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="minallnoreceiveint != null">
+				#{minallnoreceiveint,jdbcType=FLOAT},
+			</if>
+			<if test="maxallnoreceiveint != null">
+				#{maxallnoreceiveint,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatquota != null">
+				#{awardplatquota,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatrate != null">
+				#{awardplatrate,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatminmoney != null">
+				#{awardplatminmoney,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatmaxmoney != null">
+				#{awardplatmaxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.AheadRepayPlatform">
+		update AHEADREPAYPLATFORM
+		<set>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="aheadrepaypno != null">
+				AHEADREPAYPNO = #{aheadrepaypno,jdbcType=VARCHAR},
+			</if>
+			<if test="isforplatformon != null">
+				ISFORPLATFORMON = #{isforplatformon,jdbcType=DECIMAL},
+			</if>
+			<if test="awardrecman != null">
+				AWARDRECMAN = #{awardrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="minallnoreceiveint != null">
+				MINALLNORECEIVEINT = #{minallnoreceiveint,jdbcType=FLOAT},
+			</if>
+			<if test="maxallnoreceiveint != null">
+				MAXALLNORECEIVEINT = #{maxallnoreceiveint,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatquota != null">
+				AWARDPLATQUOTA = #{awardplatquota,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatrate != null">
+				AWARDPLATRATE = #{awardplatrate,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatminmoney != null">
+				AWARDPLATMINMONEY = #{awardplatminmoney,jdbcType=FLOAT},
+			</if>
+			<if test="awardplatmaxmoney != null">
+				AWARDPLATMAXMONEY = #{awardplatmaxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.AheadRepayPlatform">
+		update AHEADREPAYPLATFORM
+		set TID = #{tid,jdbcType=DECIMAL},
+		AHEADREPAYPNO = #{aheadrepaypno,jdbcType=VARCHAR},
+		ISFORPLATFORMON = #{isforplatformon,jdbcType=DECIMAL},
+		AWARDRECMAN = #{awardrecman,jdbcType=VARCHAR},
+		MINALLNORECEIVEINT = #{minallnoreceiveint,jdbcType=FLOAT},
+		MAXALLNORECEIVEINT = #{maxallnoreceiveint,jdbcType=FLOAT},
+		AWARDPLATQUOTA = #{awardplatquota,jdbcType=FLOAT},
+		AWARDPLATRATE = #{awardplatrate,jdbcType=FLOAT},
+		AWARDPLATMINMONEY = #{awardplatminmoney,jdbcType=FLOAT},
+		AWARDPLATMAXMONEY = #{awardplatmaxmoney,jdbcType=FLOAT},
+		ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+		ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 查询所有奖励平台的信息 -->
+	<select id="selectAheadRepayByStyle" parameterType="com.ptpl.model.AheadRepayPlatform" resultMap="BaseResultMap">
+	  select * from Aheadrepayplatform where 1=1
+	</select>
+	
+	 <!-- 查询 -->
+	<select id="selectAheadPlatMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+	 select * from Aheadrepayplatform where 1=1
+	    <if test="aheadrepaypno!=null and aheadrepaypno!='' ">
+        and aheadrepaypno=#{aheadrepaypno}
+       </if>
+        <if test="startAppTime != null and startAppTime != '' ">
+			and addtime &gt;= #{startAppTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endAppTime !=null and endAppTime!= ''">
+			and addtime &lt;= #{endAppTime,jdbcType=TIMESTAMP}
+		</if>
+	
+	</select>
+</mapper>

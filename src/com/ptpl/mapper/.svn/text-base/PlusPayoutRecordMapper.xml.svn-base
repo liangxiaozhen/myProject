@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.PlusPayoutRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.PlusPayoutRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PPORDERNO" property="pporderno" jdbcType="VARCHAR" />
+		<result column="PPID" property="ppid" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="USETENDERID" property="usetenderid" jdbcType="DECIMAL" />
+		<result column="PAYMANID" property="paymanid" jdbcType="DECIMAL" />
+		<result column="INVESTORID" property="investorid" jdbcType="DECIMAL" />
+		<result column="INTPROFIT" property="intprofit" jdbcType="FLOAT" />
+		<result column="VOUCHERPROFIT" property="voucherprofit"
+			jdbcType="FLOAT" />
+		<result column="LIKEVOUCHERPROFIT" property="likevoucherprofit"
+			jdbcType="FLOAT" />
+		<result column="CLEARMODE" property="clearmode" jdbcType="DECIMAL" />
+		<result column="ISGRANT" property="isgrant" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="PAYOUTDATE" property="payoutdate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PPORDERNO, PPID, TENDERID, USETENDERID, PAYMANID, INVESTORID,
+		INTPROFIT, VOUCHERPROFIT,LIKEVOUCHERPROFIT, CLEARMODE, ISGRANT, 
+		ISBLENDING, ISMANBLENDING, SYSBTIME, MANBTIME,PAYCOMPANY, 
+		SYSRECTIME, RECEIVETIME, REQQUERYDATA, RECRESULTDATA,MADETIME, 
+		ISAUDIT,AUDITTIME, AUDITMAN, PAYOUTDATE, REMARK, RORDERNO
+	</sql>
+	
+	<sql id="Base_Column_List2">
+		t1.ID, t1.PPORDERNO, t1.PPID, t1.TENDERID, t1.USETENDERID, t1.PAYMANID, t1.INVESTORID,
+		t1.INTPROFIT, t1.VOUCHERPROFIT,t1.LIKEVOUCHERPROFIT, t1.CLEARMODE, t1.ISGRANT, 
+		t1.ISBLENDING, t1.ISMANBLENDING, t1.SYSBTIME, t1.MANBTIME,t1.PAYCOMPANY, 
+		t1.SYSRECTIME, t1.RECEIVETIME, t1.REQQUERYDATA, t1.RECRESULTDATA,t1.MADETIME, 
+		t1.ISAUDIT,t1.AUDITTIME, t1.AUDITMAN, t1.PAYOUTDATE, t1.REMARK, t1.RORDERNO
+	</sql>
+	<select id="findPlusPayoutRecordByRorderno" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from PLUSPAYOUTRECORD where RORDERNO = #{rorderno,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findPlusPayoutRecordByPporderno" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from PLUSPAYOUTRECORD where PPORDERNO = #{pporderno,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findPlusPayoutRecords" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.PlusPayoutRecord">
+		select
+		<include refid="Base_Column_List2" />
+		from PLUSPAYOUTRECORD t1 left join USERBASEACCOUNTINFO t2 on t1.investorid = t2.id
+		<where>
+			<if test="inname != null">
+				 AND t2.loginname like '%${inname}%'
+			</if>
+			
+			<if test="isaudit != null">
+				AND ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isgrant != null">
+				AND ISGRANT = #{isgrant,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="lgisaudit != null">
+    	   		AND <![CDATA[ISAUDIT > #{lgisaudit,jdbcType=DECIMAL}]]>
+			</if>
+			
+  		</where>
+	</select>
+	<select id="findPlusPayoutRecordById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from PLUSPAYOUTRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from PLUSPAYOUTRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.PlusPayoutRecord">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT PLUSPAYOUTRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into PLUSPAYOUTRECORD (ID, PPORDERNO, PPID,
+		TENDERID, USETENDERID, PAYMANID,
+		INVESTORID, INTPROFIT, VOUCHERPROFIT,
+		LIKEVOUCHERPROFIT, CLEARMODE, ISGRANT,
+		ISBLENDING, ISMANBLENDING, SYSBTIME,
+		MANBTIME, PAYCOMPANY, SYSRECTIME,
+		RECEIVETIME, REQQUERYDATA, RECRESULTDATA,
+		MADETIME, ISAUDIT, AUDITTIME,
+		AUDITMAN, PAYOUTDATE, REMARK,
+		RORDERNO)
+		values (#{id,jdbcType=DECIMAL}, #{pporderno,jdbcType=VARCHAR},
+		#{ppid,jdbcType=DECIMAL},
+		#{tenderid,jdbcType=DECIMAL}, #{usetenderid,jdbcType=DECIMAL}, #{paymanid,jdbcType=DECIMAL},
+		#{investorid,jdbcType=DECIMAL}, #{intprofit,jdbcType=FLOAT},
+		#{voucherprofit,jdbcType=FLOAT},
+		#{likevoucherprofit,jdbcType=FLOAT}, #{clearmode,jdbcType=DECIMAL}, #{isgrant,jdbcType=DECIMAL},
+		#{isblending,jdbcType=DECIMAL}, #{ismanblending,jdbcType=DECIMAL},
+		#{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP}, #{paycompany,jdbcType=VARCHAR}, #{sysrectime,jdbcType=TIMESTAMP},
+		#{receivetime,jdbcType=TIMESTAMP}, #{reqquerydata,jdbcType=VARCHAR},
+		#{recresultdata,jdbcType=VARCHAR},
+		#{madetime,jdbcType=TIMESTAMP}, #{isaudit,jdbcType=DECIMAL}, #{audittime,jdbcType=TIMESTAMP},
+		#{auditman,jdbcType=VARCHAR}, #{payoutdate,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR},
+		#{rorderno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.PlusPayoutRecord">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT PLUSPAYOUTRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into PLUSPAYOUTRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="pporderno != null">
+				PPORDERNO,
+			</if>
+			<if test="ppid != null">
+				PPID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="usetenderid != null">
+				USETENDERID,
+			</if>
+			<if test="paymanid != null">
+				PAYMANID,
+			</if>
+			<if test="investorid != null">
+				INVESTORID,
+			</if>
+			<if test="intprofit != null">
+				INTPROFIT,
+			</if>
+			<if test="voucherprofit != null">
+				VOUCHERPROFIT,
+			</if>
+			<if test="likevoucherprofit != null">
+				LIKEVOUCHERPROFIT,
+			</if>
+			<if test="clearmode != null">
+				CLEARMODE,
+			</if>
+			<if test="isgrant != null">
+				ISGRANT,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="rorderno != null">
+				RORDERNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="pporderno != null">
+				#{pporderno,jdbcType=VARCHAR},
+			</if>
+			<if test="ppid != null">
+				#{ppid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="usetenderid != null">
+				#{usetenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="paymanid != null">
+				#{paymanid,jdbcType=DECIMAL},
+			</if>
+			<if test="investorid != null">
+				#{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="intprofit != null">
+				#{intprofit,jdbcType=FLOAT},
+			</if>
+			<if test="voucherprofit != null">
+				#{voucherprofit,jdbcType=FLOAT},
+			</if>
+			<if test="likevoucherprofit != null">
+				#{likevoucherprofit,jdbcType=FLOAT},
+			</if>
+			<if test="clearmode != null">
+				#{clearmode,jdbcType=DECIMAL},
+			</if>
+			<if test="isgrant != null">
+				#{isgrant,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="payoutdate != null">
+				#{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="rorderno != null">
+				#{rorderno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="com.ptpl.model.PlusPayoutRecord">
+		update PLUSPAYOUTRECORD
+		<set>
+			<if test="pporderno != null">
+				PPORDERNO = #{pporderno,jdbcType=VARCHAR},
+			</if>
+			<if test="ppid != null">
+				PPID = #{ppid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="usetenderid != null">
+				USETENDERID = #{usetenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="paymanid != null">
+				PAYMANID = #{paymanid,jdbcType=DECIMAL},
+			</if>
+			<if test="investorid != null">
+				INVESTORID = #{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="intprofit != null">
+				INTPROFIT = #{intprofit,jdbcType=FLOAT},
+			</if>
+			<if test="voucherprofit != null">
+				VOUCHERPROFIT = #{voucherprofit,jdbcType=FLOAT},
+			</if>
+			<if test="likevoucherprofit != null">
+				LIKEVOUCHERPROFIT = #{likevoucherprofit,jdbcType=FLOAT},
+			</if>
+			<if test="clearmode != null">
+				CLEARMODE = #{clearmode,jdbcType=DECIMAL},
+			</if>
+			<if test="isgrant != null">
+				ISGRANT = #{isgrant,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="rorderno != null">
+				RORDERNO = #{rorderno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

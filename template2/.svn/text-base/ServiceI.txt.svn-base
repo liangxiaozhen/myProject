@@ -1,0 +1,12 @@
+package com.ptpl.service;
+
+import com.ptpl.model.Pojo;
+
+/**
+ * @author:author
+ * @date:date
+ * @description:description
+ */
+public interface PojoServiceI extends BaseService<Pojo>{
+
+}

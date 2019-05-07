@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DataDescMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DataDesc">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ITEMNO" property="itemno" jdbcType="DECIMAL" />
+		<result column="ITEMNAME" property="itemname" jdbcType="VARCHAR" />
+		<result column="ITEMTYPE" property="itemtype" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="DATE" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ITEMNO, ITEMNAME, ITEMTYPE, ADDTIME, ADDMAN, REMARK
+	</sql>
+	<insert id="insert" parameterType="com.ptpl.model.DataDesc">
+		insert into DATADESC (ID, ITEMNO, ITEMNAME,
+		ITEMTYPE, ADDTIME, ADDMAN,
+		REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{itemno,jdbcType=DECIMAL},
+		#{itemname,jdbcType=VARCHAR},
+		#{itemtype,jdbcType=VARCHAR}, #{addtime,jdbcType=DATE}, #{addman,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.DataDesc">
+		insert into DATADESC
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="itemno != null">
+				ITEMNO,
+			</if>
+			<if test="itemname != null">
+				ITEMNAME,
+			</if>
+			<if test="itemtype != null">
+				ITEMTYPE,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="itemno != null">
+				#{itemno,jdbcType=DECIMAL},
+			</if>
+			<if test="itemname != null">
+				#{itemname,jdbcType=VARCHAR},
+			</if>
+			<if test="itemtype != null">
+				#{itemtype,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=DATE},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="getDataDesc" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM DATADESC
+		<where>
+			<if test="_parameter != null">
+				and ITEMTYPE = #{itemtype,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by ITEMNO asc
+	</select>
+</mapper>

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AwardPackageMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AwardPackage">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="APNAME" property="apname" jdbcType="VARCHAR" />
+		<result column="APNO" property="apno" jdbcType="VARCHAR" />
+		<result column="ISCANCEL" property="iscancel" jdbcType="DECIMAL" />
+		<result column="QUANTITYALL" property="quantityall" jdbcType="DECIMAL" />
+		<result column="QUANTITYREST" property="quantityrest" jdbcType="DECIMAL" />
+		<result column="INVIRTSEQ" property="invirtseq" jdbcType="VARCHAR" />
+		<result column="INVIRTQTY" property="invirtqty" jdbcType="DECIMAL" />
+		<result column="INVIRTNO" property="invirtno" jdbcType="VARCHAR" />
+		<result column="INVIRTATTR" property="invirtattr" jdbcType="DECIMAL" />
+		<result column="INVIRTNAME" property="invirtname" jdbcType="VARCHAR" />
+		<result column="OUTVIRTSEQ" property="outvirtseq" jdbcType="VARCHAR" />
+		<result column="OUTVIRTQTY" property="outvirtqty" jdbcType="DECIMAL" />
+		<result column="OUTVIRTNO" property="outvirtno" jdbcType="VARCHAR" />
+		<result column="OUTVIRTATTR" property="outvirtattr" jdbcType="DECIMAL" />
+		<result column="OUTVIRTNAME" property="outvirtname" jdbcType="VARCHAR" />
+		<result column="OUTREALSEQ" property="outrealseq" jdbcType="VARCHAR" />
+		<result column="OUTREALQTY" property="outrealqty" jdbcType="DECIMAL" />
+		<result column="OUTREALNO" property="outrealno" jdbcType="VARCHAR" />
+		<result column="OUTREALATTR" property="outrealattr" jdbcType="DECIMAL" />
+		<result column="OUTREALNAME" property="outrealname" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISTEMPLET" property="isTemplet" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<insert id="insert" parameterType="com.ptpl.model.AwardPackage">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT AWARDPACKAGE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AWARDPACKAGE (ID, APNAME, APNO,
+		ISCANCEL, QUANTITYALL, QUANTITYREST,
+		INVIRTSEQ, INVIRTQTY, INVIRTNO,
+		INVIRTATTR, INVIRTNAME, OUTVIRTSEQ,
+		OUTVIRTQTY, OUTVIRTNO, OUTVIRTATTR,
+		OUTVIRTNAME, OUTREALSEQ, OUTREALQTY,
+		OUTREALNO, OUTREALATTR, OUTREALNAME,
+		ADDTIME, ADDMAN, REMARK,ISTEMPLET
+		)
+		values (#{id,jdbcType=DECIMAL}, #{apname,jdbcType=VARCHAR},
+		#{apno,jdbcType=VARCHAR},
+		#{iscancel,jdbcType=DECIMAL}, #{quantityall,jdbcType=DECIMAL}, #{quantityrest,jdbcType=DECIMAL},
+		#{invirtseq,jdbcType=VARCHAR}, #{invirtqty,jdbcType=DECIMAL},
+		#{invirtno,jdbcType=VARCHAR},
+		#{invirtattr,jdbcType=DECIMAL}, #{invirtname,jdbcType=VARCHAR}, #{outvirtseq,jdbcType=VARCHAR},
+		#{outvirtqty,jdbcType=DECIMAL}, #{outvirtno,jdbcType=VARCHAR},
+		#{outvirtattr,jdbcType=DECIMAL},
+		#{outvirtname,jdbcType=VARCHAR}, #{outrealseq,jdbcType=VARCHAR}, #{outrealqty,jdbcType=DECIMAL},
+		#{outrealno,jdbcType=VARCHAR}, #{outrealattr,jdbcType=DECIMAL},
+		#{outrealname,jdbcType=VARCHAR},
+		#{addtime}, #{addman,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{isTemplet,jdbcType=DECIMAL}
+		)
+	</insert>
+
+	<select id="selectByCondition" parameterType="com.ptpl.model.AwardPackage"
+		resultMap="BaseResultMap">
+		select * from AWARDPACKAGE
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id != null and id!=''">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="apname != null and apname!=''">
+				and apname like #{apname,jdbcType=VARCHAR}
+			</if>
+			<if test="apno != null and apno!=''">
+				and apno=#{apno,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancel != null">
+				and iscancel=#{iscancel,jdbcType=DECIMAL}
+			</if>
+			<if test="quantityall != null and quantityall!=''">
+				and quantityall=#{quantityall,jdbcType=DECIMAL}
+			</if>
+			<if test="quantityrest != null and quantityrest!=''">
+				and quantityrest=#{quantityrest,jdbcType=DECIMAL}
+			</if>
+			<if test="invirtseq != null and invirtseq!=''">
+				and invirtseq=#{invirtseq,jdbcType=VARCHAR}
+			</if>
+			<if test="invirtqty != null and invirtqty!=''">
+				and invirtqty=#{invirtqty,jdbcType=DECIMAL}
+			</if>
+			<if test="invirtno != null and invirtno!=''">
+				and invirtno=#{invirtno,jdbcType=VARCHAR}
+			</if>
+			<if test="invirtattr != null and invirtattr!=''">
+				and invirtattr=#{invirtattr,jdbcType=DECIMAL}
+			</if>
+			<if test="invirtname != null and invirtname!=''">
+				and invirtname=#{invirtname,jdbcType=VARCHAR}
+			</if>
+			<if test="outvirtseq != null and outvirtseq!=''">
+				and outvirtseq=#{outvirtseq,jdbcType=VARCHAR}
+			</if>
+			<if test="outvirtqty != null and outvirtqty!=''">
+				and outvirtqty=#{outvirtqty,jdbcType=DECIMAL}
+			</if>
+			<if test="outvirtno != null and outvirtno!=''">
+				and outvirtno=#{outvirtno,jdbcType=VARCHAR}
+			</if>
+			<if test="outvirtattr != null and outvirtattr!=''">
+				and outvirtattr=#{outvirtattr,jdbcType=DECIMAL}
+			</if>
+			<if test="outvirtname != null and outvirtname!=''">
+				and outvirtname=#{outvirtname,jdbcType=VARCHAR}
+			</if>
+			<if test="outrealseq != null and outrealseq!=''">
+				and outrealseq=#{outrealseq,jdbcType=VARCHAR}
+			</if>
+			<if test="outrealqty != null and outrealqty!=''">
+				and outrealqty=#{outrealqty,jdbcType=DECIMAL}
+			</if>
+			<if test="outrealno != null and outrealno!=''">
+				and outrealno=#{outrealno,jdbcType=VARCHAR}
+			</if>
+			<if test="outrealattr != null and outrealattr!=''">
+				and outrealattr=#{outrealattr,jdbcType=DECIMAL}
+			</if>
+			<if test="outrealname != null and outrealname!=''">
+				and outrealname=#{outrealname,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and addtime=#{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="addman != null and addman!=''">
+				and addman=#{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark!=''">
+				and remark=#{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isTemplet != null and outrealattr!=''">
+				and isTemplet=#{isTemplet,jdbcType=DECIMAL}
+			</if>
+		</trim>
+		order by id desc
+	</select>
+
+	<update id="update" parameterType="com.ptpl.model.AwardPackage">
+		update AWARDPACKAGE
+		<set>
+			<if test="apname != null and apname != ''">
+				APNAME = #{apname,jdbcType=VARCHAR},
+			</if>
+			<if test="iscancel != null">
+				ISCANCEL = #{iscancel,jdbcType=DECIMAL},
+			</if>
+			<if test="quantityall != null">
+				QUANTITYALL = #{quantityall,jdbcType=DECIMAL},
+			</if>
+			<if test="quantityrest != null">
+				QUANTITYREST = #{quantityrest,jdbcType=DECIMAL},
+			</if>
+			<if test="invirtseq != null and invirtseq != ''">
+				INVIRTSEQ = #{invirtseq,jdbcType=VARCHAR},
+			</if>
+			<if test="invirtqty != null">
+				INVIRTQTY = #{invirtqty,jdbcType=DECIMAL},
+			</if>
+			<if test="invirtno != null and invirtno != ''">
+				INVIRTNO = #{invirtno,jdbcType=VARCHAR},
+			</if>
+			<if test="invirtattr != null">
+				INVIRTATTR = #{invirtattr,jdbcType=DECIMAL},
+			</if>
+			<if test="invirtname != null and invirtname != ''">
+				INVIRTNAME = #{invirtname,jdbcType=VARCHAR},
+			</if>
+			<if test="outvirtseq != null and outvirtseq != ''">
+				OUTVIRTSEQ = #{outvirtseq,jdbcType=VARCHAR},
+			</if>
+			<if test="outvirtqty != null">
+				OUTVIRTQTY = #{outvirtqty,jdbcType=DECIMAL},
+			</if>
+			<if test="outvirtno != null and outvirtno != ''">
+				OUTVIRTNO = #{outvirtno,jdbcType=VARCHAR},
+			</if>
+			<if test="outvirtattr != null">
+				OUTVIRTATTR = #{outvirtattr,jdbcType=DECIMAL},
+			</if>
+			<if test="outvirtname != null and outvirtname != ''">
+				OUTVIRTNAME = #{outvirtname,jdbcType=VARCHAR},
+			</if>
+			<if test="outrealseq != null and outrealseq != ''">
+				OUTREALSEQ = #{outrealseq,jdbcType=VARCHAR},
+			</if>
+			<if test="outrealqty != null">
+				OUTREALQTY = #{outrealqty,jdbcType=DECIMAL},
+			</if>
+			<if test="outrealno != null and outrealno != ''">
+				OUTREALNO = #{outrealno,jdbcType=VARCHAR},
+			</if>
+			<if test="outrealattr != null">
+				OUTREALATTR = #{outrealattr,jdbcType=DECIMAL},
+			</if>
+			<if test="outrealname != null and outrealname != ''">
+				OUTREALNAME = #{outrealname,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null and addman != ''">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isTemplet != null">
+				ISTEMPLET = #{isTemplet,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where APNO = #{apno,jdbcType=VARCHAR}
+	</update>
+
+	<delete id="delete" parameterType="java.math.BigDecimal">
+		delete from AWARDPACKAGE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<select id="seletAwardPackage" parameterType="com.ptpl.model.AwardPackage"
+		resultMap="BaseResultMap">
+		select t.* from AWARDPACKAGE t where apno=#{apno}
+	</select>
+	<select id="selectapnoAndapname" parameterType="com.ptpl.model.AwardPackage"
+		resultMap="BaseResultMap">
+		select t.* from AWARDPACKAGE t where apno=#{apno} and apname=#{apname}
+	</select>
+
+	<select id="getAwardPackage" parameterType="com.ptpl.model.AwardPackage"
+		resultMap="BaseResultMap">
+		select * from AWARDPACKAGE
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id != null">
+				id=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="apname != null and apname!=''">
+				and apname = #{apname,jdbcType=VARCHAR}
+			</if>
+			<if test="apno != null and apno!=''">
+				and apno=#{apno,jdbcType=VARCHAR}
+			</if>
+			<if test="iscancel != null">
+				and iscancel=#{iscancel,jdbcType=DECIMAL}
+			</if>
+			<if test="quantityall != null">
+				and quantityall=#{quantityall,jdbcType=DECIMAL}
+			</if>
+			<if test="quantityrest != null">
+				and quantityrest=#{quantityrest,jdbcType=DECIMAL}
+			</if>
+			<if test="invirtseq != null and invirtseq!=''">
+				and invirtseq=#{invirtseq,jdbcType=VARCHAR}
+			</if>
+			<if test="invirtqty != null">
+				and invirtqty=#{invirtqty,jdbcType=DECIMAL}
+			</if>
+			<if test="invirtno != null and invirtno!=''">
+				and invirtno=#{invirtno,jdbcType=VARCHAR}
+			</if>
+			<if test="invirtattr != null">
+				and invirtattr=#{invirtattr,jdbcType=DECIMAL}
+			</if>
+			<if test="invirtname != null and invirtname!=''">
+				and invirtname=#{invirtname,jdbcType=VARCHAR}
+			</if>
+			<if test="outvirtseq != null and outvirtseq!=''">
+				and outvirtseq=#{outvirtseq,jdbcType=VARCHAR}
+			</if>
+			<if test="outvirtqty != null">
+				and outvirtqty=#{outvirtqty,jdbcType=DECIMAL}
+			</if>
+			<if test="outvirtno != null and outvirtno!=''">
+				and outvirtno=#{outvirtno,jdbcType=VARCHAR}
+			</if>
+			<if test="outvirtattr != null">
+				and outvirtattr=#{outvirtattr,jdbcType=DECIMAL}
+			</if>
+			<if test="outvirtname != null and outvirtname!=''">
+				and outvirtname=#{outvirtname,jdbcType=VARCHAR}
+			</if>
+			<if test="outrealseq != null and outrealseq!=''">
+				and outrealseq=#{outrealseq,jdbcType=VARCHAR}
+			</if>
+			<if test="outrealqty != null">
+				and outrealqty=#{outrealqty,jdbcType=DECIMAL}
+			</if>
+			<if test="outrealno != null and outrealno!=''">
+				and outrealno=#{outrealno,jdbcType=VARCHAR}
+			</if>
+			<if test="outrealattr != null">
+				and outrealattr=#{outrealattr,jdbcType=DECIMAL}
+			</if>
+			<if test="outrealname != null and outrealname!=''">
+				and outrealname=#{outrealname,jdbcType=VARCHAR}
+			</if>
+			<!-- <if test="addtime != null and addtime!=''">
+				and addtime=#{addtime,jdbcType=TIMESTAMP}
+			</if> -->
+			<if test="addman != null and addman!=''">
+				and addman=#{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null and remark!=''">
+				and remark=#{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isTemplet != null">
+				and ISTEMPLET = #{isTemplet,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据奖品包名称获取对应的奖品包 但不等于本身 -->
+	<select id="gainAwardPackage" parameterType="com.ptpl.model.AwardPackage"
+		resultMap="BaseResultMap">
+		select a.apname from AwardPackage a
+		<where>
+			<if test="apname !=null and apname!=''">
+				and a.APNAME = #{apname,jdbcType=VARCHAR}
+			</if>
+			<if test="id!=null and id!=''">
+				and a.ID !=#{id,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+</mapper>

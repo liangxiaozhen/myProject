@@ -1,0 +1,205 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/common/taglib.jsp"%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>干将系统-后台登录页面</title>
+<%@include file="/WEB-INF/jsp/common/public.jsp"%>
+<style type="text/css">
+.box {
+	width: 100%;
+	height: 100%;
+}
+
+.box .login-box {
+	width: 100%;
+	max-width: 480px;
+	margin: 240px auto;
+}
+
+.box .login-box .login-title {
+	height: 45px;
+	background: #666;
+}
+
+.box .login-box .login-title h1 {
+	line-height: 45px;
+	font-size: 16px;
+	color: #fff !important;
+	font-family: "宋体" !important;
+}
+
+.box .register-box .login-title small {
+	line-height: 45px;
+	font-size: 16px;
+	color: #fff !important;
+	font-family: "宋体" !important;
+}
+
+.box .login-content {
+	border: 1px solid #666;
+	width: 100%;
+	height: 300px;
+}
+
+.box .login-content form {
+	width: 100%;
+	max-width: 500px;
+	height: 275px;
+	margin: 10px auto 0px auto;
+	padding-top: 25px;
+}
+
+.input-group {
+	margin: 0px 0px 30px 0px !important;
+}
+</style>
+</head>
+<body>
+	<div class="box">
+		<div class="login-box">
+			<div class="login-title text-center">
+				<h1>
+					<small>登录</small>
+				</h1>
+			</div>
+			<div class="login-content ">
+				<div class="form">
+					<form id="gj_user">
+						<div class="form-group">
+							<div class="col-xs-12  ">
+								<div class="input-group">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-user"></span></span> <input type="text"
+										id="username" name="username" value="管理员" style="width:200px;"
+										class="form-control" placeholder="用户名">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-12  ">
+								<div class="input-group">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-lock"></span></span> <input
+										type="password" id="password" name="password" value="123456a"
+										class="form-control" placeholder="密码">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-8">
+								<div class="input-group">
+									<span class="input-group-addon"><span
+										class="glyphicon glyphicon-record"></span></span> <input type="text"
+										id="code" name="code" value="111111" class="form-control"
+										placeholder="验证码"> <img src="${basePath}/Kaptcha.jpg"
+										id="kaptchaImage"
+										onclick="this.src=basePath+'/Kaptcha.jpg?d='+new Date().getTime();"
+										style="position: absolute; top: 2px; right: 8px; z-index: 2;" />
+								</div>
+							</div>
+							<div class="col-xs-4">
+								<a href="javascript:void(0)" onclick="changeCode(this)">看不清?换一张</a>
+							</div>
+						</div>
+						<div class="form-group form-actions">
+							<div class="col-xs-4 col-xs-offset-5 ">
+								<button type="button" class="btn btn-sm btn-info"
+									onclick="gj_login(this)" id="login">
+									<span class="glyphicon glyphicon-off"></span> 登录
+								</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-6 link">
+								<p class="text-center remove-margin">
+									<small>忘记密码？</small> <a href="${basePath}/forget.action"><small>找回</small></a>
+								</p>
+							</div>
+							<div class="col-xs-6 link">
+								<p class="text-center remove-margin">
+									<small>还没注册?</small> <a href="${basePath}/reg.action"><small>注册</small></a>
+								</p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+  $(function(){
+	  
+		//按回车登录  
+	   	$(document).keydown(function(e){
+	  		 if(e.keyCode ==13){
+	 			gj_login();
+	 		 }
+	 	});
+   });
+ 
+  		//登录
+  	 function gj_login(obj){
+  		var username = $("#username").val();
+  		var password = $("#password").val();
+  		var code = $("#code").val();
+  		
+       if(isEmpty(username)){
+  			 loading("请输入用户名",4);
+   			 $("#username").select();
+  			  return false;
+   		  }
+   		  if(isEmpty(password)){
+			  loading("请输入用户密码",4);
+			  $("#password").select();
+			  return false;
+ 		  }
+   		  if(isEmpty(code)){
+			  loading("请输入验证码",4);
+			  $("#code").select();
+			  return false;
+ 		  }
+   		  var params = {"username":username,"password":password,"code":code,"email":username};
+  		  $(obj).removeAttr("onclick").text("登录中.....");
+ 		  $.ajax({
+ 			  type:"post",
+ 			  url:basePath+"/logined.action",
+ 			  data:params,
+ 			  error:function(){$("#login").attr("onclick","gj_login(this)").text("登录");},
+ 			  success:function(data){
+   				 $("#login").attr("onclick","gj_login(this)").text("登录");
+  				 var obj = $.parseJSON(data);
+	 		   		if(obj.result=="code_null"){
+	 		 			loading("请输入验证码",4);
+	 				 }else if(obj.result=="account_error"){
+	 					 loading("你输入账号不存在",4);
+	 		 		 }else if(obj.result=="password_error"){
+	 		 			 if(obj.errorCount =="5"){
+	 		 				 loading("你的账号有异常已经被禁止登录,请联系管理员或等待30分钟后登录",4);
+	 		 			 }else{
+	 			  			 loading("登录失败，您还可以登录"+(5-obj.errorCount)+"次",4);
+	 		  			 }
+	 		 		 }else if(obj.result=="code_error"){
+	 		 			loading("你输入验证码有误",4);
+	 		 		 }else if(obj.result=="forbid_error"){
+	 		 			loading("你的账号有异常已经被禁止登录,请联系管理员或等待30分钟后登录",4);
+	 		 		 }else if(obj.result=="success"){
+    	 		   			window.top.location = basePath+"/admin/login.action";
+	 		 		 }else{
+	 		 			loading("网络异常，请稍后再试",4);
+	 		 		 } 
+ 			  }
+   		  });
+ 	 }
+   	 
+ 	 //刷新验证码
+  	 function changeCode(obj){
+ 		 $("#kaptchaImage").attr("src",basePath+'/Kaptcha.jpg?d='+new Date().getTime());
+ 	 }
+      
+ </script>
+</body>
+</html>

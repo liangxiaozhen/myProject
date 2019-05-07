@@ -1,0 +1,87 @@
+package com.ptpl.mapper;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import com.ptpl.model.[entity];
+
+/**
+ * 
+ * [description]Dao接口层
+ * [entity]Mapper
+ * 创建人:[author]
+ * 时间：[date]
+ * @version 1.0.0
+ *
+ */
+public interface [entity]Mapper {
+
+	/**
+	 * 
+	* @Title: insert 
+	* @Description: TODO([description]数据增加方法) 
+	* @param @param [lowEntity]
+	* @param @return  参数说明 
+	* @return int    返回类型 
+	* @author chenjiaming
+	* @throws
+	 */
+    int insert([entity] [lowEntity]);
+
+    /**
+     * 
+    * @Title: insertSelective 
+    * @Description: TODO([description]数据增加方法，非空值) 
+    * @param @param [lowEntity]
+    * @param @return  参数说明 
+    * @return int    返回类型 
+    * @author chenjiaming
+    * @throws
+     */
+    int insertSelective([entity] [lowEntity]);
+     /**
+     * 
+     * @Title: deleteById 
+     * @Description: TODO([description]根据Id 删除方法) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author chenjiaming
+     * @throws
+     */
+    int deleteById(BigDecimal id);
+      /**
+     * 
+     * @Title: updateById 
+     * @Description: TODO([description] 更新方法) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author chenjiaming
+     * @throws
+     */
+     int  updateById([entity] [lowEntity]); 
+     /**
+     * 
+     * @Title: find[entity]s
+     * @Description: TODO([description] 查询全部) 
+     * @param @param [lowEntity]
+     * @param @return  参数说明 
+     * @return int    返回类型 
+     * @author chenjiaming
+     * @throws
+     */
+    List<[entity]> find[entity]s([entity] [lowEntity]);
+    
+     /**
+     * 
+    * @Title: find[entity]ById 
+    * @Description: TODO(根据Id查询对应的[description] 信息) 
+    * @param @param id
+    * @param @return  参数说明 
+    * @return WCCAwardRule    返回类型 
+    * @author chenjiaming
+    * @throws
+     */
+    [entity] find[entity]ById(BigDecimal id);
+}

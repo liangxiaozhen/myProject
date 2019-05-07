@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ptpjx:war">
+    <output-path>$PROJECT_DIR$/classes/artifacts/ptpjx_war</output-path>
+    <root id="archive" name="ptpjx_war.war">
+      <element id="artifact" artifact-name="ptpjx:war exploded" />
+    </root>
+  </artifact>
+</component>

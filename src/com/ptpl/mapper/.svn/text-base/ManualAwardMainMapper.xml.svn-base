@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ManualAwardMainMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ManualAwardMain">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="activityNo" jdbcType="VARCHAR" />
+		<result column="ACTNAME" property="activityName" jdbcType="VARCHAR" />
+		<result column="ACTMTYPE" property="actMType" jdbcType="DECIMAL" />
+		<result column="ACTTIME" property="activityTime" jdbcType="TIMESTAMP" />
+		<result column="ISMANUAL" property="isManual" jdbcType="DECIMAL" />
+		<result column="ISDEAL" property="isDealMain" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addTimeMain" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addManMain" jdbcType="VARCHAR" />
+		<result column="ISTEMPLET" property="isTempletMain" jdbcType="DECIMAL" />
+		<result column="SUBACTIVITYNUM" property="subActivityNum"
+			jdbcType="DECIMAL" />
+		<result column="EXECUTESTATUS" property="executeStatus"
+			jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISAUDIT" property="isAudit" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ACTNO, ACTNAME, ACTMTYPE,ACTTIME,ISMANUAL,ISDEAL,ADDTIME,ADDMAN,
+		ISTEMPLET,SUBACTIVITYNUM,EXECUTESTATUS,REMARK,ISAUDIT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from MANUALAWARDMAIN
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from MANUALAWARDMAIN
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.ManualAwardMain">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT MANUALAWARDMAIN_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into MANUALAWARDMAIN (ID, ACTNO, ACTNAME,
+		ACTMTYPE,ACTTIME,ISMANUAL,ISDEAL,
+		ADDTIME,ADDMAN,ISTEMPLET,SUBACTIVITYNUM,EXECUTESTATUS,REMARK,ISAUDIT)
+		values (#{id,jdbcType=DECIMAL}, #{activityNo,jdbcType=VARCHAR},
+		#{activityName,jdbcType=VARCHAR},
+		#{actMType,jdbcType=DECIMAL}, #{activityTime,jdbcType=TIMESTAMP}, #{isManual,jdbcType=DECIMAL},
+		#{isDealMain,jdbcType=DECIMAL}, #{addTimeMain,jdbcType=TIMESTAMP},
+		#{addManMain,jdbcType=VARCHAR},
+		#{isTempletMain,jdbcType=DECIMAL},#{subActivityNum,jdbcType=DECIMAL},#{executeStatus,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR}, #{isAudit,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ManualAwardMain">
+		insert into MANUALAWARDMAIN
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT MANUALAWARDMAIN_seq.NEXTVAL AS id from dual
+		</selectKey>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="activityNo != null">
+				ACTNO,
+			</if>
+			<if test="activityName != null">
+				ACTNAME,
+			</if>
+			<if test="actMType != null">
+				ACTMTYPE,
+			</if>
+			<if test="activityTime != null">
+				ACTTIME,
+			</if>
+			<if test="isManual != null">
+				ISMANUAL,
+			</if>
+			<if test="isDealMain != null">
+				ISDEAL,
+			</if>
+			<if test="addTimeMain != null">
+				ADDTIME,
+			</if>
+			<if test="addManMain != null">
+				ADDMAN,
+			</if>
+			<if test="isTempletMain != null">
+				ISTEMPLET,
+			</if>
+			<if test="subActivityNum != null">
+				SUBACTIVITYNUM,
+			</if>
+			<if test="executeStatus != null">
+				EXECUTESTATUS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="isAudit != null">
+				ISAUDIT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="activityNo != null">
+				#{activityNo,jdbcType=VARCHAR},
+			</if>
+			<if test="activityName != null">
+				#{activityName,jdbcType=VARCHAR},
+			</if>
+			<if test="actMType != null">
+				#{actMType,jdbcType=DECIMAL},
+			</if>
+			<if test="activityTime != null">
+				#{activityTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isManual != null">
+				#{isManual,jdbcType=DECIMAL},
+			</if>
+			<if test="isDealMain != null">
+				#{isDealMain,jdbcType=DECIMAL},
+			</if>
+			<if test="addTimeMain != null">
+				#{addTimeMain,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addManMain != null">
+				#{addManMain,jdbcType=VARCHAR},
+			</if>
+			<if test="isTempletMain != null">
+				#{isTempletMain,jdbcType=DECIMAL},
+			</if>
+			<if test="subActivityNum != null">
+				#{subActivityNum,jdbcType=DECIMAL},
+			</if>
+			<if test="executeStatus != null">
+				#{executeStatus,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isAudit != null">
+				#{isAudit,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ManualAwardMain">
+		update MANUALAWARDMAIN
+		<set>
+			<if test="activityName != null">
+				ACTNAME = #{activityName,jdbcType=VARCHAR},
+			</if>
+			<if test="actMType != null">
+				ACTMTYPE = #{actMType,jdbcType=DECIMAL},
+			</if>
+			<if test="activityTime != null">
+				ACTTIME = #{activityTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isManual != null">
+				ISMANUAL = #{isManual,jdbcType=DECIMAL},
+			</if>
+			<if test="isDealMain != null">
+				ISDEAL = #{isDealMain,jdbcType=DECIMAL},
+			</if>
+			<if test="addTimeMain != null">
+				ADDTIME = #{addTimeMain,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addManMain != null">
+				ADDMAN = #{addManMain,jdbcType=VARCHAR},
+			</if>
+			<if test="isTempletMain != null">
+				ISTEMPLET = #{isTempletMain,jdbcType=DECIMAL},
+			</if>
+			<if test="subActivityNum != null">
+				SUBACTIVITYNUM = #{subActivityNum,jdbcType=DECIMAL},
+			</if>
+			<if test="executeStatus != null">
+				EXECUTESTATUS = #{executeStatus,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isAudit != null">
+				ISAUDIT = #{isAudit,jdbcType=DECIMAL}
+			</if>
+		</set>
+		where ACTNO = #{activityNo,jdbcType=DECIMAL}
+	</update>
+
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.ManualAwardMain">
+		update MANUALAWARDMAIN set
+		ACTNO = #{activityNo,jdbcType=VARCHAR},
+		ACTNAME = #{activityName,jdbcType=VARCHAR},
+		ACTMTYPE = #{actMType,jdbcType=DECIMAL},
+		ACTTIME = #{activityTime,jdbcType=TIMESTAMP},
+		ISMANUAL = #{isManual,jdbcType=DECIMAL},
+		ISDEAL = #{isDealMain,jdbcType=DECIMAL},
+		ADDTIME = #{addTimeMain,jdbcType=TIMESTAMP},
+		ADDMAN = #{addManMain,jdbcType=VARCHAR},
+		ISTEMPLET = #{isTempletMain,jdbcType=DECIMAL},
+		SUBACTIVITYNUM = #{subActivityNum,jdbcType=DECIMAL},
+		EXECUTESTATUS = #{executeStatus,jdbcType=DECIMAL},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		ISAUDIT = #{isAudit,jdbcType=DECIMAL}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectone" resultMap="BaseResultMap" parameterType="String">
+		select * from ManualawardMain where actNo=#{activityNo}
+	</select>
+
+	<select id="getManualAwardMainList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ManualAwardMain">
+		select
+		<include refid="Base_Column_List" />
+		from ManualawardMain
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id !=null and id!=''">
+				and ID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="activityNo !=null and activityNo!=''">
+				and ACTNO=#{activityNo,jdbcType=VARCHAR}
+			</if>
+			<if test="activityName !=null and activityName !=''">
+				and ACTNAME like '%'||#{activityName,jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="actMType !=null and actMType !=''">
+				and ACTMTYPE = #{actMType,jdbcType=DECIMAL}
+			</if>
+			<if test="activityTime !=null and activityTime !=''">
+				and ACTTIME = #{activityTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isManual != null and isManual!=''">
+				and ISMANUAL = #{isManual,jdbcType=DECIMAL}
+			</if>
+			<if test="isDealMain !=null and isDealMain!='' or isDealMain==0">
+				and ISDEAL = #{isDealMain,jdbcType=DECIMAL}
+			</if>
+			<if test="addTimeMain !=null and addTimeMain!=''">
+				and ADDTIME = #{addTimeMain,jdbcType=TIMESTAMP}
+			</if>
+			<if test="addManMain !=null and addManMain!=''">
+				and ADDMAN = #{addManMain,jdbcType=VARCHAR}
+			</if>
+			<if test="isTempletMain !=null and isTempletMain!=''">
+				and ISTEMPLET = #{isTempletMain,jdbcType=DECIMAL}
+			</if>
+			<if test="subActivityNum !=null and subActivityNum!=''">
+				and SUBACTIVITYNUM = #{subActivityNum,jdbcType=DECIMAL}
+			</if>
+			<if test="executeStatus !=null and executeStatus!=''">
+				and EXECUTESTATUS = #{executeStatus,jdbcType=DECIMAL}
+			</if>
+			<if test="remark!= null and remark!=''">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isAudit!= null and isAudit!=''">
+				and ISAUDIT = #{isAudit,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+	<select id="selectlist" resultMap="BaseResultMap">
+		select * from ManualawardMain where id in (select min(id) from
+		ManualawardMain group by ACTNO) and ISTEMPLET=0
+	</select>
+
+	<!-- pxl 2016-11-26 根据属性查出主活动的数据 -->
+	<select id="getManualAwardMain" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ManualAwardMain">
+		select
+		<include refid="Base_Column_List" />
+		from ManualawardMain
+		<where>
+			<if test="id !=null and id!=''">
+				and ID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="activityNo !=null and activityNo!=''">
+				and ACTNO = #{activityNo,jdbcType=VARCHAR}
+			</if>
+			<if test="activityName !=null and activityName !=''">
+				and ACTNAME = #{activityName,jdbcType=VARCHAR}
+			</if>
+			<if test="actMType != null">
+				and ACTMTYPE = #{actMType,jdbcType=DECIMAL}
+			</if>
+			<if test="activityTime !=null and activityTime !=''">
+				and ACTTIME = #{activityTime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isManual != null">
+				and ISMANUAL = #{isManual,jdbcType=DECIMAL}
+			</if>
+			<if test="isDealMain !=null">
+				and ISDEAL = #{isDealMain,jdbcType=DECIMAL}
+			</if>
+			<if test="addTimeMain !=null and addTimeMain!=''">
+				and ADDTIME = #{addTimeMain,jdbcType=TIMESTAMP}
+			</if>
+			<if test="addManMain !=null and addManMain!=''">
+				and ADDMAN = #{addManMain,jdbcType=VARCHAR}
+			</if>
+			<if test="isTempletMain !=null">
+				and ISTEMPLET = #{isTempletMain,jdbcType=DECIMAL}
+			</if>
+			<if test="subActivityNum !=null">
+				and SUBACTIVITYNUM = #{subActivityNum,jdbcType=DECIMAL}
+			</if>
+			<if test="executeStatus !=null">
+				and EXECUTESTATUS = #{executeStatus,jdbcType=DECIMAL}
+			</if>
+			<if test="remark!= null and remark!=''">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="isAudit!= null and isAudit!=''">
+				and ISAUDIT = #{isAudit,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- pxl 2016-11-28 删除手动颁奖主活动 -->
+  	<delete id="deleteManualAwardMain" parameterType="com.ptpl.model.ManualAwardMain" >
+	    delete from MANUALAWARDMAIN
+	    <where>
+	 	 	<if test="id !=null and id!=''">
+	 	 		and ID=#{id,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="activityNo !=null and activityNo!=''">
+	 	 		and ACTNO = #{activityNo,jdbcType=VARCHAR}
+	 	 	</if>
+	 	 	<if test="activityName !=null and activityName !=''">
+	 	 		and ACTNAME = #{activityName,jdbcType=VARCHAR}
+	 	 	</if>
+	 	 	<if test="actMType != null and actMType!=''">
+	 	 		and ACTMTYPE = #{actMType,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="activityTime !=null and activityTime !=''">
+	 	 		and ACTTIME = #{activityTime,jdbcType=TIMESTAMP}
+	 	 	</if>
+	 	 	<if test="isManual != null and isManual!=''">
+	 	 		and ISMANUAL = #{isManual,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="isDealMain !=null and isDealMain!=''">
+	 	 		and ISDEAL = #{isDealMain,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="addTimeMain !=null and addTimeMain!=''">
+	 	 		and ADDTIME = #{addTimeMain,jdbcType=TIMESTAMP}
+	 	 	</if>
+	 	 	<if test="addManMain !=null and addManMain!=''">
+	 	 		and ADDMAN = #{addManMain,jdbcType=VARCHAR}
+	 	 	</if>
+	 	 	<if test="isTempletMain !=null and isTempletMain!=''">
+	 	 		and ISTEMPLET = #{isTempletMain,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="subActivityNum !=null and subActivityNum!=''">
+	 	 		and SUBACTIVITYNUM = #{subActivityNum,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="executeStatus !=null and executeStatus!=''">
+	 	 		and EXECUTESTATUS = #{executeStatus,jdbcType=DECIMAL}
+	 	 	</if>
+	 	 	<if test="remark!= null and remark!=''">
+	 	 		and REMARK = #{remark,jdbcType=VARCHAR}
+	 	 	</if>
+	 	 	<if test="isAudit!= null and isAudit!=''">
+	 	 		and ISAUDIT = #{isAudit,jdbcType=VARCHAR}
+	 	 	</if>
+	 	</where> 
+  </delete>
+  
+  <!-- 查询活动名称   但又不等于本身 -->
+  <select id="getManualAwardMainOnly" resultMap="BaseResultMap" parameterType="com.ptpl.model.ManualAwardMain">
+  		select * from MANUALAWARDMAIN where ACTNAME = #{activityName,jdbcType=VARCHAR} and ACTNO != #{activityNo,jdbcType=VARCHAR}
+  </select>
+</mapper>

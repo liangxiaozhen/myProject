@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RechargeSNLLinkMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.RechargeSNLLink" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="RRID" property="rrid" jdbcType="DECIMAL" />
+    <result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RRID, SNLID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from RECHARGESNLLINK
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByrrid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from RECHARGESNLLINK
+    where rrid = #{rrid,jdbcType=DECIMAL} order  by id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from RECHARGESNLLINK
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.RechargeSNLLink" >
+  	<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGESNLLINK_SEQ.NEXTVAL AS id from dual
+	</selectKey>
+    insert into RECHARGESNLLINK (ID, RRID, SNLID
+      )
+    values (#{id,jdbcType=DECIMAL}, #{rrid,jdbcType=DECIMAL}, #{snlid,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.RechargeSNLLink" >
+    	<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGESNLLINK_SEQ.NEXTVAL AS id from dual
+	</selectKey>
+    insert into RECHARGESNLLINK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="rrid != null" >
+        RRID,
+      </if>
+      <if test="snlid != null" >
+        SNLID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="rrid != null" >
+        #{rrid,jdbcType=DECIMAL},
+      </if>
+      <if test="snlid != null" >
+        #{snlid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RechargeSNLLink" >
+    update RECHARGESNLLINK
+    <set >
+      <if test="rrid != null" >
+        RRID = #{rrid,jdbcType=DECIMAL},
+      </if>
+      <if test="snlid != null" >
+        SNLID = #{snlid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.RechargeSNLLink" >
+    update RECHARGESNLLINK
+    set RRID = #{rrid,jdbcType=DECIMAL},
+      SNLID = #{snlid,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

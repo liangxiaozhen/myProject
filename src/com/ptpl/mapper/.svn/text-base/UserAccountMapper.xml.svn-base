@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserAccountMapper">
+	<resultMap id="UserBaseAndAccountResultMap" type="com.ptpl.model.UserAccount">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="ACCOUNTTYPEID" property="accounttypeid"
+			jdbcType="DECIMAL" />
+		<result column="BALANCE" property="balance" jdbcType="FLOAT" />
+		<result column="AVLBALANCE" property="avlbalance" jdbcType="FLOAT" />
+		<result column="FREEZEBALANCE" property="freezebalance"
+			jdbcType="FLOAT" />
+		<result column="BONUSPOINTS" property="bonuspoints" jdbcType="DECIMAL" />
+		<result column="AVLBONUSPOINTS" property="avlbonuspoints"
+			jdbcType="DECIMAL" />
+		<result column="FREEZEBONUSPOINTS" property="freezebonuspoints"
+			jdbcType="DECIMAL" />
+		<result column="REDENVELOPE" property="redenvelope" jdbcType="FLOAT" />
+		<result column="AVLREDENVELOPE" property="avlredenvelope"
+			jdbcType="FLOAT" />
+		<result column="FREEZEREDENVELOPE" property="freezeredenvelope"
+			jdbcType="FLOAT" />
+		<result column="PENDINGPRINCIPAL" property="pendingprincipal"
+			jdbcType="FLOAT" />
+		<result column="INVESTPROFIT" property="investProfit" jdbcType="FLOAT" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+
+		<result column="TRADEPOINTS" property="tradePoints" jdbcType="DECIMAL" />
+		<result column="AVLTRADEPOINTS" property="avlTradePoints"
+			jdbcType="DECIMAL" />
+		<result column="FREEZETRADEPOINTS" property="freezeTradePoints"
+			jdbcType="DECIMAL" />
+
+		<association property="ubai" column="ID"
+			javaType="com.ptpl.model.UserBaseAccountInfo">
+			<result column="mobilephone" property="mobilephone" jdbcType="VARCHAR" />
+			<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+			<result column="realname" property="realname" jdbcType="VARCHAR" />
+			<result column="loginname" property="loginname" jdbcType="VARCHAR" />
+			<result column="accountnumber" property="accountnumber"
+				jdbcType="VARCHAR" />
+		</association>
+
+	</resultMap>
+
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserAccount">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="ACCOUNTTYPEID" property="accounttypeid"
+			jdbcType="DECIMAL" />
+		<result column="BALANCE" property="balance" jdbcType="FLOAT" />
+		<result column="AVLBALANCE" property="avlbalance" jdbcType="FLOAT" />
+		<result column="FREEZEBALANCE" property="freezebalance"
+			jdbcType="FLOAT" />
+		<result column="BONUSPOINTS" property="bonuspoints" jdbcType="DECIMAL" />
+		<result column="AVLBONUSPOINTS" property="avlbonuspoints"
+			jdbcType="DECIMAL" />
+		<result column="FREEZEBONUSPOINTS" property="freezebonuspoints"
+			jdbcType="DECIMAL" />
+		<result column="REDENVELOPE" property="redenvelope" jdbcType="FLOAT" />
+		<result column="AVLREDENVELOPE" property="avlredenvelope"
+			jdbcType="FLOAT" />
+		<result column="FREEZEREDENVELOPE" property="freezeredenvelope"
+			jdbcType="FLOAT" />
+		<result column="PENDINGPRINCIPAL" property="pendingprincipal"
+			jdbcType="FLOAT" />
+		<result column="INVESTPROFIT" property="investProfit" jdbcType="FLOAT" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+
+		<result column="TRADEPOINTS" property="tradePoints" jdbcType="DECIMAL" />
+		<result column="AVLTRADEPOINTS" property="avlTradePoints"
+			jdbcType="DECIMAL" />
+		<result column="FREEZETRADEPOINTS" property="freezeTradePoints"
+			jdbcType="DECIMAL" />
+
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,baseid,accounttypeid,balance,avlbalance,freezebalance,bonuspoints,freezebonuspoints,redenvelope,
+		avlredenvelope,freezeredenvelope,pendingprincipal,investProfit,status,remark,tradePoints,avlTradePoints,freezeTradePoints
+	</sql>
+
+	<!-- 根据用户IDbaseID 查询对应的实体信息 -->
+	<select id="getUserAccountByBaseId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERACCOUNT where baseid = #{baseid,jdbcType=DECIMAL}
+	</select>
+	<insert id="insert" parameterType="com.ptpl.model.UserAccount">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERACCOUNT_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERACCOUNT (ID, BASEID, ACCOUNTTYPEID,
+		BALANCE, AVLBALANCE, FREEZEBALANCE,
+		BONUSPOINTS, AVLBONUSPOINTS, FREEZEBONUSPOINTS,
+		REDENVELOPE, AVLREDENVELOPE, FREEZEREDENVELOPE,
+		PENDINGPRINCIPAL,INVESTPROFIT,
+		STATUS, REMARK,TRADEPOINTS,AVLTRADEPOINTS,FREEZETRADEPOINTS)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{accounttypeid,jdbcType=DECIMAL},
+		#{balance,jdbcType=FLOAT}, #{avlbalance,jdbcType=FLOAT}, #{freezebalance,jdbcType=FLOAT},
+		#{bonuspoints,jdbcType=DECIMAL}, #{avlbonuspoints,jdbcType=DECIMAL},
+		#{freezebonuspoints,jdbcType=DECIMAL},
+		#{redenvelope,jdbcType=FLOAT}, #{avlredenvelope,jdbcType=FLOAT},
+		#{freezeredenvelope,jdbcType=FLOAT},
+		#{pendingprincipal,jdbcType=FLOAT},#{investProfit,jdbcType=FLOAT},#{status,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR}, #{tradePoints,jdbcType=DECIMAL},
+		#{avlTradePoints,jdbcType=DECIMAL},
+		#{freezeTradePoints,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserAccount">
+		insert into USERACCOUNT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="accounttypeid != null">
+				ACCOUNTTYPEID,
+			</if>
+			<if test="balance != null">
+				BALANCE,
+			</if>
+			<if test="avlbalance != null">
+				AVLBALANCE,
+			</if>
+			<if test="freezebalance != null">
+				FREEZEBALANCE,
+			</if>
+			<if test="bonuspoints != null">
+				BONUSPOINTS,
+			</if>
+			<if test="avlbonuspoints != null">
+				AVLBONUSPOINTS,
+			</if>
+			<if test="freezebonuspoints != null">
+				FREEZEBONUSPOINTS,
+			</if>
+			<if test="redenvelope != null">
+				REDENVELOPE,
+			</if>
+			<if test="avlredenvelope != null">
+				AVLREDENVELOPE,
+			</if>
+			<if test="freezeredenvelope != null">
+				FREEZEREDENVELOPE,
+			</if>
+			<if test="pendingprincipal != null">
+				PENDINGPRINCIPAL,
+			</if>
+			<if test="investProfit != null">
+				INVESTPROFIT,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="tradePoints != null">
+				TRADEPOINTS,
+			</if>
+			<if test="avlTradePoints != null">
+				AVLTRADEPOINTS,
+			</if>
+			<if test="freezeTradePoints != null">
+				FREEZETRADEPOINTS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="accounttypeid != null">
+				#{accounttypeid,jdbcType=DECIMAL},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=FLOAT},
+			</if>
+			<if test="avlbalance != null">
+				#{avlbalance,jdbcType=FLOAT},
+			</if>
+			<if test="freezebalance != null">
+				#{freezebalance,jdbcType=FLOAT},
+			</if>
+			<if test="bonuspoints != null">
+				#{bonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="avlbonuspoints != null">
+				#{avlbonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="freezebonuspoints != null">
+				#{freezebonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="redenvelope != null">
+				#{redenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="avlredenvelope != null">
+				#{avlredenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="freezeredenvelope != null">
+				#{freezeredenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="pendingprincipal != null">
+				#{pendingprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="investProfit != null">
+				#{investProfit,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="tradePoints != null">
+				#{tradePoints,jdbcType=DECIMAL},
+			</if>
+			<if test="avlTradePoints != null">
+				#{avlTradePoints,jdbcType=DECIMAL},
+			</if>
+			<if test="freezeTradePoints != null">
+				#{freezeTradePoints,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<delete id="deleteByBaseId" parameterType="java.math.BigDecimal">
+		delete from USERACCOUNT
+		where BASEID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<select id="queryAllUserAccount" resultMap="UserBaseAndAccountResultMap"
+		parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select
+		ua.id, ua.baseid, ua.accounttypeid, ua.balance,
+		ua.avlbalance, ua.freezebalance, ua.bonuspoints, ua.freezebonuspoints,
+		ua.redenvelope, ua.avlredenvelope, ua.freezeredenvelope,
+		ua.pendingprincipal,
+		ua.investProfit, ua.status, ua.remark,
+		ubai.mobilephone,ubai.email,ubai.realname,ubai.accountnumber,ubai.loginname
+		from USERACCOUNT ua , USERBASEACCOUNTINFO ubai
+
+		where ubai.id = ua.baseid
+
+		<if test="realname!=null and realname != ''">
+			and ubai.realname = #{realname,jdbcType=VARCHAR}
+		</if>
+		<if test="accountnumber!=null and accountnumber!=''">
+			and ubai.accountnumber = #{accountnumber,jdbcType=VARCHAR}
+		</if>
+		<if test="mobilephone!=null and mobilephone != ''">
+			and ubai.mobilephone = #{mobilephone,jdbcType=VARCHAR}
+		</if>
+		<if test="loginname !=null and loginname !=''">
+			and ubai.loginname =#{loginname,jdbcType=VARCHAR}
+		</if>
+		order by ua.id asc
+	</select>
+	
+	<!-- 通过资金来查询资金情况fck -->
+<select id="getUserAccountByLoginName" resultMap="UserBaseAndAccountResultMap"
+		parameterType="string">
+		select
+		ua.id, ua.baseid, ua.accounttypeid, ua.balance,
+		ua.avlbalance, ua.freezebalance, ua.bonuspoints, ua.freezebonuspoints,
+		ua.redenvelope, ua.avlredenvelope, ua.freezeredenvelope,
+		ua.pendingprincipal,
+		ua.investProfit, ua.status, ua.remark,
+		ubai.mobilephone,ubai.email,ubai.realname,ubai.accountnumber
+		from USERACCOUNT ua , USERBASEACCOUNTINFO ubai
+
+		where ubai.id = ua.baseid and ubai.loginname=#{loginname,jdbcType=VARCHAR}
+</select>
+	<!-- 修改账户信息 -->
+	<update id="updateUseraccount" parameterType="com.ptpl.model.UserAccount">
+		update USERACCOUNT
+		<set>
+			<if test="accounttypeid != null">
+				accounttypeid = #{accounttypeid,jdbcType=DECIMAL},
+			</if>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=FLOAT},
+			</if>
+			<if test="avlbalance != null">
+				avlbalance = #{avlbalance,jdbcType=FLOAT},
+			</if>
+			<if test="freezebalance != null">
+				freezebalance = #{freezebalance,jdbcType=FLOAT},
+			</if>
+			<if test="bonuspoints != null">
+				bonuspoints = #{bonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="avlbonuspoints != null">
+				avlbonuspoints = #{avlbonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="freezebonuspoints != null">
+				freezebonuspoints = #{freezebonuspoints,jdbcType=DECIMAL},
+			</if>
+			<if test="redenvelope != null">
+				redenvelope = #{redenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="avlredenvelope != null">
+				avlredenvelope = #{avlredenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="freezeredenvelope != null">
+				freezeredenvelope = #{freezeredenvelope,jdbcType=FLOAT},
+			</if>
+			<if test="pendingprincipal != null">
+				pendingprincipal = #{pendingprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="investProfit != null">
+				investProfit = #{investProfit,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where baseid = #{baseid,jdbcType=DECIMAL}
+	</update>
+	<update id="updategetuseraccount" parameterType="com.ptpl.model.UserAccount">
+		update USERACCOUNT t set t.balance=t.balance +
+		#{balance},t.avlbalance=t.avlbalance + #{avlbalance} where
+		t.baseid=#{baseid}
+	</update>
+
+	<!-- 更新用户积分 -->
+	<update id="updateUserAccountPoint" parameterType="com.ptpl.model.UserAccount">
+		update USERACCOUNT u
+		<set>
+			<if test="tradePoints !=null">
+				u.TRADEPOINTS = NVL(u.TRADEPOINTS,0) + #{tradePoints,jdbcType=DECIMAL},
+			</if>
+			<if test="avlTradePoints !=null">
+				u.AVLTRADEPOINTS = NVL(u.TRADEPOINTS,0) + #{avlTradePoints,jdbcType=DECIMAL},
+			</if>
+			<if test="bonuspoints !=null">
+				u.BONUSPOINTS = NVL(u.BONUSPOINTS,0) + #{bonuspoints,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where u.BASEID = #{baseid,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 更新用户红包（类现金 假现金） -->
+	<update id="updateUserAccountEnvelope" parameterType="com.ptpl.model.UserAccount">
+		update USERACCOUNT u
+		<set>
+			<if test="redenvelope !=null">
+				u.redenvelope = u.redenvelope + #{redenvelope,jdbcType=DECIMAL},
+			</if>
+			<if test="avlredenvelope !=null">
+				u.avlredenvelope = u.avlredenvelope + #{avlredenvelope,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where u.baseid = #{baseid,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 只更新用户账号的账户余额,可用余额和冻结余额 -->
+	<update id="updateUserAccountBalAvl" parameterType="com.ptpl.model.UserAccount">
+		update USERACCOUNT
+		<set>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=FLOAT},
+			</if>
+			<if test="avlbalance != null">
+				avlbalance = #{avlbalance,jdbcType=FLOAT},
+			</if>
+			<if test="freezebalance != null">
+				freezebalance = #{freezebalance,jdbcType=FLOAT}
+			</if>
+		</set>
+		where baseid = #{baseid,jdbcType=DECIMAL}
+	</update>
+	
+</mapper>

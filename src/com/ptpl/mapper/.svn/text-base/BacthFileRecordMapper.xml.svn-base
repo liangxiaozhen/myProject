@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.BacthFileRecordMapper">
+	<resultMap type="com.ptpl.model.BacthFileRecord" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="FILEPATH" property="filePath" jdbcType="VARCHAR" />
+		<result column="SENDFILENAME" property="sendFileName" jdbcType="VARCHAR" />
+		<result column="GETFILENAME" property="getFileName" jdbcType="VARCHAR" />
+		<result column="COINSTCODE" property="coinstCode" jdbcType="VARCHAR" />
+		<result column="PNAME" property="PName" jdbcType="VARCHAR" />
+		<result column="SUBMITTIME" property="submitTime" jdbcType="TIMESTAMP" />
+		<result column="DEALTIME" property="dealTime" jdbcType="TIMESTAMP" />
+		<result column="FILETYPE" property="fileType" jdbcType="DECIMAL" />
+		<result column="ISSEND" property="isSend" jdbcType="DECIMAL" />
+		<result column="SENDRESULT" property="sendResult" jdbcType="DECIMAL" />
+		<result column="ISDEALRESULT" property="isDealResult" jdbcType="DECIMAL" />
+		<result column="DEALRESULT" property="dealResult" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="BATCHNO" property="batchNo" jdbcType="VARCHAR" />
+		<result column="UPRESULTCODE" property="upResultCode" jdbcType="VARCHAR" />
+		<result column="DOWNRESULTCODE" property="downResultCode" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.ptpl.model.BacthFileRecord">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select BACTHFILERECORD_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into BACTHFILERECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="filePath != null">
+				FILEPATH,
+			</if>
+			<if test="sendFileName != null">
+				SENDFILENAME,
+			</if>
+			<if test="getFileName != null">
+				GETFILENAME,
+			</if>
+			<if test="coinstCode != null">
+				COINSTCODE,
+			</if>
+			<if test="PName != null">
+				PNAME,
+			</if>
+			<if test="submitTime != null">
+				SUBMITTIME,
+			</if>
+			<if test="dealTime != null">
+				DEALTIME,
+			</if>
+			<if test="fileType != null">
+				FILETYPE,
+			</if>
+			<if test="isSend != null">
+				ISSEND,
+			</if>
+			<if test="sendResult != null">
+				SENDRESULT,
+			</if>
+			<if test="isDealResult != null">
+				ISDEALRESULT,
+			</if>
+			<if test="dealResult != null">
+				DEALRESULT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="batchNo != null">
+				BATCHNO,
+			</if>
+			<if test="upResultCode != null">
+				UPRESULTCODE,
+			</if>
+			<if test="downResultCode != null">
+				DOWNRESULTCODE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="filePath != null">
+				#{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="sendFileName != null">
+				#{sendFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="getFileName != null">
+				#{getFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="coinstCode != null">
+				#{coinstCode,jdbcType=VARCHAR},
+			</if>
+			<if test="PName != null">
+				#{PName,jdbcType=VARCHAR},
+			</if>
+			<if test="submitTime != null">
+				#{submitTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dealTime != null">
+				#{dealTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="fileType != null">
+				#{fileType,jdbcType=DECIMAL},
+			</if>
+			<if test="isSend != null">
+				#{isSend,jdbcType=DECIMAL},
+			</if>
+			<if test="sendResult != null">
+				#{sendResult,jdbcType=DECIMAL},
+			</if>
+			<if test="isDealResult != null">
+				#{isDealResult,jdbcType=DECIMAL},
+			</if>
+			<if test="dealResult != null">
+				#{dealResult,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="batchNo != null">
+				#{batchNo,jdbcType=VARCHAR},
+			</if>
+			<if test="upResultCode != null">
+				#{upResultCode,jdbcType=VARCHAR},
+			</if>
+			<if test="downResultCode != null">
+				#{downResultCode,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="update" parameterType="com.ptpl.model.BacthFileRecord">
+		update BACTHFILERECORD
+		<set>
+			<if test="filePath != null and filePath != ''">
+				FILEPATH = #{filePath,jdbcType=VARCHAR},
+			</if>
+			<if test="sendFileName != null and sendFileName != ''">
+				SENDFILENAME = #{sendFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="getFileName != null and getFileName != ''">
+				GETFILENAME = #{getFileName,jdbcType=VARCHAR},
+			</if>
+			<if test="coinstCode != null and coinstCode != ''">
+				COINSTCODE = #{coinstCode,jdbcType=VARCHAR},
+			</if>
+			<if test="PName != null and PName != ''">
+				PNAME = #{PName,jdbcType=VARCHAR},
+			</if>			
+			<if test="submitTime != null">
+				SUBMITTIME = #{submitTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dealTime != null">
+				DEALTIME = #{dealTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="fileType != null">
+				FILETYPE = #{fileType,jdbcType=DECIMAL},
+			</if>
+			<if test="isSend != null">
+				ISSEND = #{isSend,jdbcType=DECIMAL},
+			</if>
+			<if test="sendResult != null">
+				SENDRESULT = #{sendResult,jdbcType=DECIMAL},
+			</if>
+			<if test="isDealResult != null">
+				ISDEALRESULT = #{isDealResult,jdbcType=DECIMAL},
+			</if>
+			<if test="dealResult != null">
+				DEALRESULT = #{dealResult,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null and remark != ''">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="upResultCode != null and upResultCode!=''">
+				UPRESULTCODE = #{upResultCode,jdbcType=VARCHAR},
+			</if>
+			<if test="downResultCode != null and downResultCode != ''">
+				DOWNRESULTCODE = #{downResultCode,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<select id="getBacthFileRecords" parameterType="com.ptpl.model.BacthFileRecord" resultMap="BaseResultMap">
+		select * from BACTHFILERECORD
+		<where>
+			<if test="coinstCode !=null and coinstCode!=''">
+				AND COINSTCODE = #{coinstCode,jdbcType=VARCHAR}
+			</if>
+			<if test="fileType !=null">
+  				AND FILETYPE = #{fileType,jdbcType=DECIMAL}
+  			</if>
+  			<if test="sendResult !=null">
+  				AND SENDRESULT = #{sendResult,jdbcType=DECIMAL}
+  			</if>
+  			<if test="isDealResult !=null">
+  				AND ISDEALRESULT = #{isDealResult,jdbcType=DECIMAL}
+  			</if>
+  			<if test="sendFileName !=null and sendFileName!=''">
+  				AND SENDFILENAME = #{sendFileName,jdbcType=VARCHAR}
+  			</if>
+  			<if test="getFileName !=null and getFileName!=''">
+  				AND GETFILENAME = #{getFileName,jdbcType=VARCHAR}
+  			</if>
+		</where>
+	</select>
+	
+	<!-- 获取所有的文件记录 -->
+	<select id="getAllBacthFileRecord" parameterType="com.ptpl.model.BacthFileRecord" resultMap="BaseResultMap">
+		select * from BACTHFILERECORD
+		<where>
+			<if test="filePath !=null and filePath!=''">
+				AND FILEPATH = #{filePath,jdbcType=VARCHAR}
+			</if>
+			<if test="sendFileName !=null and sendFileName!=''">
+				AND SENDFILENAME = #{sendFileName,jdbcType=VARCHAR}
+			</if>
+			<if test="getFileName !=null and getFileName!=''">
+				AND GETFILENAME = #{getFileName,jdbcType=VARCHAR}
+			</if>
+			<if test="coinstCode !=null and coinstCode!=''">
+				AND COINSTCODE = #{coinstCode,jdbcType=VARCHAR}
+			</if>
+			<if test="fileType !=null">
+  				AND FILETYPE = #{fileType,jdbcType=DECIMAL}
+  			</if>
+  			<if test="isSend !=null">
+  				AND ISSEND = #{isSend,jdbcType=DECIMAL}
+  			</if>
+  			<if test="sendResult !=null">
+  				AND SENDRESULT = #{sendResult,jdbcType=DECIMAL}
+  			</if>
+  			<if test="isDealResult !=null">
+  				AND ISDEALRESULT = #{isDealResult,jdbcType=DECIMAL}
+  			</if>
+  			<if test="dealResult !=null">
+  				AND DEALRESULT = #{dealResult,jdbcType=DECIMAL}
+  			</if>
+  			<if test="batchNo !=null and batchNo!=''">
+  				AND BATCHNO = #{batchNo,jdbcType=VARCHAR}
+  			</if>
+		</where>
+	  	order by ID DESC
+	</select>
+	
+	<!-- 通过id来获取记录 -->
+	<select id="getBacthFileRecordById" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+		select * from BACTHFILERECORD where id=#{id,jdbcType=DECIMAL}
+	</select>
+	
+</mapper>
+	
+	

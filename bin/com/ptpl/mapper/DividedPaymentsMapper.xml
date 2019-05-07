@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.DividedPaymentsMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.DividedPayments">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="DPORDERNO" property="dporderno" jdbcType="VARCHAR" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="PERIODS" property="periods" jdbcType="DECIMAL" />
+		<result column="REPAYDAY" property="repayday" jdbcType="TIMESTAMP" />
+		<result column="CURRENTPI" property="currentpi" jdbcType="FLOAT" />
+		<result column="CPPRINCIPAL" property="cpprincipal" jdbcType="FLOAT" />
+		<result column="CPINTEREST" property="cpinterest" jdbcType="FLOAT" />
+		<result column="ISCOMPLETE" property="iscomplete" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISOVERDUE" property="isoverdue" jdbcType="DECIMAL" />
+		<result column="RESTPRINCIPAL" property="restprincipal" jdbcType="FLOAT" />
+		<result column="RSUBMITTYPE" property="rsubmittype" jdbcType="DECIMAL" />
+		<result column="OPERATETIME" property="operatetime" jdbcType="TIMESTAMP" />
+		<result column="RPTIMES" property="rptimes" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="FILESTATUS" property="filestatus" jdbcType="DECIMAL" />
+		
+		
+		
+		<association property="baseAccountInfo" resultMap="baseAccountInfo" />
+		<association property="tenderItem" resultMap="tenderItem" />
+		<association property="ment" resultMap="ment" />
+		
+ 	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="baseAccountInfo">
+		<result column="u_id" property="id" jdbcType="DECIMAL"/>
+		<result column="u_loginname" property="loginname" jdbcType="VARCHAR"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="com.ptpl.model.RepayMent" id="ment">
+		<result column="r_id" property="id" jdbcType="DECIMAL"/>
+		<result column="r_repaystatus" property="repaystatus" jdbcType="DECIMAL"/>
+ 	</resultMap>
+	
+	<resultMap type="com.ptpl.model.TenderItem" id="tenderItem">
+		<result column="t1_id" property="id" jdbcType="DECIMAL" />
+		<result column="t1_tname" property="tname" jdbcType="VARCHAR" />
+		<result column="t1_tno" property="tno" jdbcType="VARCHAR" />
+ 	</resultMap>
+	
+	<sql id="Base_Column_List">
+		ID, DPORDERNO, TENDERID, PERIODS, REPAYDAY, CURRENTPI, CPPRINCIPAL,
+		CPINTEREST, ISCOMPLETE,REMARK, ISOVERDUE,RESTPRINCIPAL,ISAUDIT,
+		RSUBMITTYPE,OPERATETIME,RPTIMES,FILESTATUS
+	</sql>
+	
+	<sql id="Base_Column_AuditList">
+		t.ID, t.DPORDERNO, t.TENDERID, t.PERIODS, t.REPAYDAY, t.CURRENTPI, t.CPPRINCIPAL,
+		t.CPINTEREST, t.ISCOMPLETE,t.REMARK, t.ISOVERDUE,t.RESTPRINCIPAL,t.ISAUDIT,t.RSUBMITTYPE,
+		t.OPERATETIME,t.RPTIMES,t.FILESTATUS,
+		t1.id as t1_id,
+		t1.tname as t1_tname,
+		t1.tno as t1_tno,
+		u.id as u_id,
+		u.loginname as u_loginname,
+ 		r.repaystatus as r_repaystatus 
+	</sql>
+	
+	<select id="findDividedPaymentsByRepayMentAudit" resultMap="BaseResultMap" parameterType="com.ptpl.model.DividedPayments">
+		select 
+		<include refid="Base_Column_AuditList" />
+		from Dividedpayments t 
+		left join tenderitem t1 on t1.id = t.tenderid
+		left join RepayMent r on t.tenderid = r.tenderid and t.periods = r.periods
+		left join userbaseaccountinfo u on u.id = r.outaccountid
+		<where>
+ 			<if test="tenderid != null">
+				 AND t1.id = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="id != null">
+				 AND t.id = #{id,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="tno != null and tno != '' ">
+				 AND t1.tno  = #{tno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="tname != null">
+				 AND t1.tname = #{tname,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="username != null">
+				 AND u.loginname = #{username,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="iscomplete != null">
+				 AND t.iscomplete = #{iscomplete,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isoverdue != null">
+				 AND t.isoverdue = #{isoverdue,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="periods != null">
+				 AND t.periods = #{periods,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="repaystatus != null">
+				 AND r.repaystatus = #{repaystatus,jdbcType=DECIMAL}
+			</if>
+			<if test="repaystatusor != null">
+				 AND (r.repaystatus = 8 or r.repaystatus = 4 or r.repaystatus = 6)
+			</if>
+  			
+			<if test="planstatus != null">
+				 AND r.planstatus = #{planstatus,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="repayisaudit != null">
+				 AND r.isaudit = #{repayisaudit,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="repayisauditor != null">
+				 AND (r.isaudit = 1 or r.isaudit = 2)
+			</if>
+  		</where>
+  		 group by 
+			t.ID ,
+			t.DPORDERNO ,
+			t.TENDERID, 
+			t.PERIODS, 
+			t.REPAYDAY, 
+			t.CURRENTPI, 
+			t.CPPRINCIPAL, 
+			t.CPINTEREST,
+			t.ISCOMPLETE,
+			t.REMARK,
+			t.ISOVERDUE,
+			t.RSUBMITTYPE,
+			t.OPERATETIME,
+			t.RPTIMES,
+			t.RESTPRINCIPAL,
+			t.ISAUDIT,
+			t.FILESTATUS,
+			t1.id,
+			t1.tname,
+			t1.tno,
+			u.id,
+			u.loginname,
+ 			r.repaystatus
+  	</select>
+ 
+	<select id="findDividedPaymentsByConditions" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from DIVIDEDPAYMENTS
+		<where>
+			<if test="tenderid != null">
+				AND TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+
+			<if test="periods != null">
+				AND PERIODS = #{periods,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="iscomplete != null">
+				AND ISCOMPLETE = #{iscomplete,jdbcType=DECIMAL}
+			</if>
+			
+			<if test="isoverdue != null">
+				AND ISOVERDUE = #{isoverdue,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+ 
+	<select id="findDividedPaymentsById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from DIVIDEDPAYMENTS
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<select id="findisoverdue" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.DividedPayments">
+		select
+		<include refid="Base_Column_List" />
+		from DIVIDEDPAYMENTS
+		<where>
+			<if test="tenderid != null">
+				AND TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			AND ISOVERDUE = 1
+
+		</where>
+		order by periods asc
+	</select>
+	
+	<select id="findDividedPaymentss" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.DividedPayments">
+		select
+		<include refid="Base_Column_List" />
+		from DIVIDEDPAYMENTS
+		<where>
+			<if test="tenderid != null">
+				AND TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="periods != null">
+				AND PERIODS = #{periods,jdbcType=DECIMAL}
+			</if>
+			<if test="iscomplete != null">
+				AND ISCOMPLETE = #{iscomplete,jdbcType=DECIMAL}
+			</if>
+			<if test="isoverdue != null">
+				AND ISOVERDUE = #{isoverdue,jdbcType=DECIMAL}
+			</if>
+			<if test="lgperiods != null">
+				AND PERIODS &lt; #{lgperiods,jdbcType=DECIMAL}
+			</if>
+			<if test="notequalsiscomplete != null">
+				AND ISCOMPLETE != #{notequalsiscomplete,jdbcType=DECIMAL} AND
+				ISCOMPLETE != 2
+			</if>
+		</where>
+		order by periods asc
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from DIVIDEDPAYMENTS
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insert" parameterType="com.ptpl.model.DividedPayments">
+		<selectKey keyProperty="id" resultType="java.math.BigDecimal"
+			order="BEFORE">
+			SELECT DIVIDEDPAYMENTS_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into DIVIDEDPAYMENTS (ID, DPORDERNO, TENDERID,
+		PERIODS, REPAYDAY, CURRENTPI,
+		CPPRINCIPAL, CPINTEREST, ISCOMPLETE,
+		REMARK, ISOVERDUE,RESTPRINCIPAL,ISAUDIT,RSUBMITTYPE,OPERATETIME,RPTIMES,FILESTATUS)
+		values (#{id,jdbcType=DECIMAL}, #{dporderno,jdbcType=VARCHAR},#{tenderid,jdbcType=DECIMAL},
+		#{periods,jdbcType=DECIMAL}, #{repayday,jdbcType=TIMESTAMP}, #{currentpi,jdbcType=FLOAT},
+		#{cpprincipal,jdbcType=FLOAT}, #{cpinterest,jdbcType=FLOAT},#{iscomplete,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR}, #{isoverdue,jdbcType=DECIMAL}, #{restprincipal,jdbcType=DECIMAL},
+		#{isaudit,jdbcType=DECIMAL},#{rsubmittype,jdbcType=DECIMAL},#{operatetime,jdbcType=TIMESTAMP},
+		#{rptimes,jdbcType=DECIMAL},#{filestatus,jdbcType=DECIMAL})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.DividedPayments">
+		<selectKey keyProperty="id" resultType="java.math.BigDecimal"
+			order="BEFORE">
+			SELECT DIVIDEDPAYMENTS_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into DIVIDEDPAYMENTS
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="dporderno != null">
+				DPORDERNO,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="periods != null">
+				PERIODS,
+			</if>
+			<if test="repayday != null">
+				REPAYDAY,
+			</if>
+			<if test="currentpi != null">
+				CURRENTPI,
+			</if>
+			<if test="cpprincipal != null">
+				CPPRINCIPAL,
+			</if>
+			<if test="cpinterest != null">
+				CPINTEREST,
+			</if>
+			<if test="iscomplete != null">
+				ISCOMPLETE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="isoverdue != null">
+				ISOVERDUE,
+			</if>
+			<if test="restprincipal != null">
+				RESTPRINCIPAL,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="rsubmittype != null">
+				RSUBMITTYPE,
+			</if>
+			<if test="operatetime != null">
+				OPERATETIME,
+			</if>
+			<if test="rptimes != null">
+				RPTIMES,
+			</if>
+			<if test="filestatus != null">
+				FILESTATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="dporderno != null">
+				#{dporderno,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="periods != null">
+				#{periods,jdbcType=DECIMAL},
+			</if>
+			<if test="repayday != null">
+				#{repayday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="currentpi != null">
+				#{currentpi,jdbcType=FLOAT},
+			</if>
+			<if test="cpprincipal != null">
+				#{cpprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="cpinterest != null">
+				#{cpinterest,jdbcType=FLOAT},
+			</if>
+			<if test="iscomplete != null">
+				#{iscomplete,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isoverdue != null">
+				#{isoverdue,jdbcType=DECIMAL},
+			</if>
+			<if test="restprincipal != null">
+				#{restprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="rsubmittype != null">
+				#{rsubmittype,jdbcType=DECIMAL},
+			</if>
+			<if test="operatetime != null">
+				#{operatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rptimes != null">
+				#{rptimes,jdbcType=DECIMAL},
+			</if>
+			<if test="filestatus != null">
+				#{filestatus,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.ptpl.model.DividedPayments">
+		update DIVIDEDPAYMENTS
+		<set>
+			<if test="dporderno != null">
+				DPORDERNO = #{dporderno,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="periods != null">
+				PERIODS = #{periods,jdbcType=DECIMAL},
+			</if>
+			<if test="repayday != null">
+				REPAYDAY = #{repayday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="currentpi != null">
+				CURRENTPI = #{currentpi,jdbcType=FLOAT},
+			</if>
+			<if test="cpprincipal != null">
+				CPPRINCIPAL = #{cpprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="cpinterest != null">
+				CPINTEREST = #{cpinterest,jdbcType=FLOAT},
+			</if>
+			<if test="iscomplete != null">
+				ISCOMPLETE = #{iscomplete,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isoverdue != null">
+				ISOVERDUE = #{isoverdue,jdbcType=DECIMAL},
+			</if>
+			<if test="restprincipal != null">
+				RESTPRINCIPAL = #{restprincipal,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="rsubmittype != null">
+				RSUBMITTYPE = #{rsubmittype,jdbcType=DECIMAL},
+			</if>
+			<if test="operatetime != null">
+				OPERATETIME = #{operatetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="rptimes != null">
+				RPTIMES = #{rptimes,jdbcType=DECIMAL},
+			</if>
+			<if test="filestatus != null">
+				FILESTATUS = #{filestatus,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+</mapper>

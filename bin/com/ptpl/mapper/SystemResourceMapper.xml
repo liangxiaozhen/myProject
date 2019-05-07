@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.SystemResourceMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.SystemResource">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RESOURCEURL" property="resourceurl" jdbcType="VARCHAR" />
+		<result column="NUMBERCODE" property="numbercode" jdbcType="VARCHAR" />
+		<result column="FATHERNUMBER" property="fathernumber" jdbcType="VARCHAR" />
+		<result column="MENUNAME" property="menuname" jdbcType="VARCHAR" />
+		<result column="CHECKFLAG" property="checkflag" jdbcType="VARCHAR" />
+		<result column="OPERATORTYPE" property="operatortype" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete SYSTEMRESOURCE where id = #{id,jdbcType=DECIMAL}
+	</delete>
+	
+	<delete id="deleteByFathernumber" parameterType="java.lang.String">
+		delete SYSTEMRESOURCE where fathernumber = #{fathernumber,jdbcType=VARCHAR}
+	</delete>
+
+	<update id="updateById" parameterType="com.ptpl.model.SystemResource">
+		update SYSTEMRESOURCE
+		<set>
+			<if test="resourceurl !=null">
+				RESOURCEURL = #{resourceurl,jdbcType=VARCHAR},
+			</if>
+			<if test="numbercode !=null">
+				NUMBERCODE = #{numbercode,jdbcType=VARCHAR},
+			</if>
+			<if test="fathernumber !=null">
+				FATHERNUMBER = #{fathernumber,jdbcType=VARCHAR},
+			</if>
+			<if test="menuname !=null">
+				MENUNAME = #{menuname,jdbcType=VARCHAR},
+			</if>
+			<if test="checkflag !=null">
+				CHECKFLAG = #{checkflag,jdbcType=VARCHAR},
+			</if>
+			<if test="operatortype !=null">
+				OPERATORTYPE = #{operatortype,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+	<insert id="insert" parameterType="com.ptpl.model.SystemResource">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT SYSTEMRESOURCE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into SYSTEMRESOURCE (ID, RESOURCEURL, NUMBERCODE,
+		FATHERNUMBER, MENUNAME, CHECKFLAG,
+		OPERATORTYPE)
+		values (#{id,jdbcType=DECIMAL}, #{resourceurl,jdbcType=VARCHAR},
+		#{numbercode,jdbcType=VARCHAR},
+		#{fathernumber,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, #{checkflag,jdbcType=VARCHAR},
+		#{operatortype,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.SystemResource">
+		<selectKey keyProperty="id" resultType="java.math.BigDecimal"
+			order="BEFORE">
+			SELECT SYSTEMRESOURCE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into SYSTEMRESOURCE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="resourceurl != null">
+				RESOURCEURL,
+			</if>
+			<if test="numbercode != null">
+				NUMBERCODE,
+			</if>
+			<if test="fathernumber != null">
+				FATHERNUMBER,
+			</if>
+			<if test="menuname != null">
+				MENUNAME,
+			</if>
+			<if test="checkflag != null">
+				CHECKFLAG,
+			</if>
+			<if test="operatortype != null">
+				OPERATORTYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="resourceurl != null">
+				#{resourceurl,jdbcType=VARCHAR},
+			</if>
+			<if test="numbercode != null">
+				#{numbercode,jdbcType=VARCHAR},
+			</if>
+			<if test="fathernumber != null">
+				#{fathernumber,jdbcType=VARCHAR},
+			</if>
+			<if test="menuname != null">
+				#{menuname,jdbcType=VARCHAR},
+			</if>
+			<if test="checkflag != null">
+				#{checkflag,jdbcType=VARCHAR},
+			</if>
+			<if test="operatortype != null">
+				#{operatortype,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 查找全部角色资源 -->
+	<select id="findSystemResources" resultMap="BaseResultMap">
+		select
+		t.id,
+		t.resourceurl,
+		t.numbercode,
+		t.fathernumber,
+		t.menuname,
+		t.checkflag,
+		t.operatortype
+		from SYSTEMRESOURCE t where t.fathernumber is null
+	</select>
+
+	<!-- 根据fathernumber查询全部子角色资源 -->
+	<select id="findChildrenSystemResources" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		t.id,
+		t.resourceurl,
+		t.numbercode,
+		t.fathernumber,
+		t.menuname,
+		t.checkflag,
+		t.operatortype
+		from SYSTEMRESOURCE t where t.fathernumber = #{id}
+		order by t.numbercode asc
+	</select>
+
+	<!--根据用户ID 查找拥有的全部父角色资源 -->
+	<select id="getSystemResources" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.AdminUser">
+		select
+		t.id,
+		t.resourceurl,
+		t.numbercode,
+		t.fathernumber,
+		t.menuname,
+		t.checkflag,
+		t.operatortype
+		from systemresource t
+		left join roleresource t1 on t1.resource_id = t.id
+		left join systemrole t2 on t2.id = t1.role_id
+		left join roleuser t3 on t3.role_id = t2.id
+		left join adminuser t4 on t3.user_id = t4.id
+		where t.fathernumber is null
+		and t4.id = #{id}
+		order by t.numbercode asc
+	</select>
+</mapper>

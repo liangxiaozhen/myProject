@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AwardSTimeLinkMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AwardSTimeLink">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="AWARDID" property="awardId" jdbcType="DECIMAL" />
+		<result column="STIMENO" property="sTimeNo" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.AwardSTimeLink">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT AWARDSTIMELINK_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into AWARDSTIMELINK
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="awardId != null">
+				AWARDID,
+			</if>
+			<if test="sTimeNo != null">
+				STIMENO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="awardId != null">
+				#{awardId,jdbcType=VARCHAR},
+			</if>
+			<if test="sTimeNo != null">
+				#{sTimeNo,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据奖品表的id查询 -->
+	<select id="getAwardSTimeLinkByAwardId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select * from AWARDSTIMELINK where AWARDID = #{awardId,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据奖品的id更新 -->
+	<update id="updateAwardSTimeLinkByAwardId" parameterType="com.ptpl.model.AwardSTimeLink">
+		update AwardSTimeLink
+		<set>
+			<if test="sTimeNo != null and sTimeNo!=''">
+				STIMENO = #{sTimeNo,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where AWARDID = #{awardId,jdbcType=DECIMAL}
+	</update>
+</mapper>

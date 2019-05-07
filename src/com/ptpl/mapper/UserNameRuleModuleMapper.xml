@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserNameRuleModuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserNameRuleModule">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="MODULE" property="module" jdbcType="VARCHAR" />
+		<result column="NEEDTYPE" property="needtype" jdbcType="VARCHAR" />
+		<result column="SETRULE" property="setrule" jdbcType="VARCHAR" />
+		<result column="SETRULEDETAIL" property="setruledetail"
+			jdbcType="VARCHAR" />
+		<result column="NAMERULE" property="namerule" jdbcType="VARCHAR" />
+		<result column="NAMECONTENT" property="namecontent" jdbcType="VARCHAR" />
+		<result column="PRESETSTR" property="presetstr" jdbcType="VARCHAR" />
+		<result column="RANDOMLENGTH" property="randomlength" jdbcType="DECIMAL" />
+		<result column="USERNAMELENGTH" property="usernamelength"
+			jdbcType="DECIMAL" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="REGISTERTYPE" property="registertype" jdbcType="DECIMAL" />
+		<result column="ISCHINESE" property="ischinese" jdbcType="DECIMAL" />
+		<result column="USERNAMEMAXLENGTH" property="usernamemaxlength"
+			jdbcType="DECIMAL" />
+		<result column="ISCUSTOM" property="iscustom" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, MODULE, NEEDTYPE, SETRULE, SETRULEDETAIL, NAMERULE,
+		NAMECONTENT,
+		PRESETSTR, RANDOMLENGTH,
+		USERNAMELENGTH,
+		ISUSE,REGISTERTYPE,ISCHINESE,USERNAMEMAXLENGTH,ISCUSTOM
+	</sql>
+	<select id="selective" parameterType="com.ptpl.model.UserNameRuleModule"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERNAMERULEMODULE
+		<where>
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="module != null">
+				AND MODUAL = #{module,jdbcType=VARCHAR}
+			</if>
+			<if test="needtype != null">
+				AND NEEDTYPE = #{needtype,jdbcType=VARCHAR}
+			</if>
+			<if test="setrule != null">
+				AND SETRULE = #{setrule,jdbcType=VARCHAR}
+			</if>
+			<if test="setruledetail != null">
+				AND SETRULEDETAIL =#{setruledetail,jdbcType=VARCHAR}
+			</if>
+			<if test="namerule != null">
+				AND NAMERULE =#{namerule,jdbcType=VARCHAR}
+			</if>
+			<if test="namecontent != null">
+				AND NAMECONTENT =#{namecontent,jdbcType=VARCHAR}
+			</if>
+			<if test="presetstr != null">
+				AND PRESETSTR =#{presetstr,jdbcType=VARCHAR}
+			</if>
+			<if test="randomlength != null">
+				AND RANDOMLENGTH= #{randomlength,jdbcType=DECIMAL}
+			</if>
+			<if test="usernamelength != null">
+				AND USERNAMELENGTH =#{usernamelength,jdbcType=DECIMAL}
+			</if>
+			<if test="isuse != null">
+				AND ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="registertype != null">
+				AND REGISTERTYPE = #{registertype,jdbcType=DECIMAL}
+			</if>
+			<if test="ischinese != null">
+				AND ISCHINESE = #{ischinese,jdbcType=DECIMAL}
+			</if>
+			<if test="iscustom != null">
+				AND ISCUSTOM = #{iscustom,jdbcType=DECIMAL}
+			</if>
+			<if test="usernamemaxlength != null">
+				AND USERNAMEMAXLENGTH =
+				#{usernamemaxlength,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by id
+	</select>
+	<select id="selectByPrimaryKey" resultType="com.ptpl.model.UserNameRuleModule"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERNAMERULEMODULE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserNameRuleModule">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT USERNAMERULEMODULE_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into USERNAMERULEMODULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="module != null">
+				MODULE,
+			</if>
+			<if test="needtype != null">
+				NEEDTYPE,
+			</if>
+			<if test="setrule != null">
+				SETRULE,
+			</if>
+			<if test="setruledetail != null">
+				SETRULEDETAIL,
+			</if>
+			<if test="namerule != null">
+				NAMERULE,
+			</if>
+			<if test="namecontent != null">
+				NAMECONTENT,
+			</if>
+			<if test="presetstr != null">
+				PRESETSTR,
+			</if>
+			<if test="randomlength != null">
+				RANDOMLENGTH,
+			</if>
+			<if test="usernamelength != null">
+				USERNAMELENGTH,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="registertype != null">
+				REGISTERTYPE,
+			</if>
+			<if test="ischinese != null">
+				ISCHINESE,
+			</if>
+			<if test="iscustom != null">
+				ISCUSTOM,
+			</if>
+			<if test="usernamemaxlength != null">
+				USERNAMEMAXLENGTH,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="module != null">
+				#{module,jdbcType=VARCHAR},
+			</if>
+			<if test="needtype != null">
+				#{needtype,jdbcType=VARCHAR},
+			</if>
+			<if test="setrule != null">
+				#{setrule,jdbcType=VARCHAR},
+			</if>
+			<if test="setruledetail != null">
+				#{setruledetail,jdbcType=VARCHAR},
+			</if>
+			<if test="namerule != null">
+				#{namerule,jdbcType=VARCHAR},
+			</if>
+			<if test="namecontent != null">
+				#{namecontent,jdbcType=VARCHAR},
+			</if>
+			<if test="presetstr != null">
+				#{presetstr,jdbcType=VARCHAR},
+			</if>
+			<if test="randomlength != null">
+				#{randomlength,jdbcType=DECIMAL},
+			</if>
+			<if test="usernamelength != null">
+				#{usernamelength,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="registertype != null">
+				#{registertype,jdbcType=DECIMAL},
+			</if>
+			<if test="iscustom != null">
+				#{iscustom,jdbcType=DECIMAL},
+			</if>
+			<if test="usernamemaxlength != null">
+				#{usernamemaxlength,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserNameRuleModule">
+		update USERNAMERULEMODULE
+		<set>
+			<if test="module != null">
+				MODULE = #{module,jdbcType=VARCHAR},
+			</if>
+			<if test="needtype != null">
+				NEEDTYPE = #{needtype,jdbcType=VARCHAR},
+			</if>
+			<if test="setrule != null">
+				SETRULE = #{setrule,jdbcType=VARCHAR},
+			</if>
+			<if test="setruledetail != null">
+				SETRULEDETAIL = #{setruledetail,jdbcType=VARCHAR},
+			</if>
+			<if test="namerule != null">
+				NAMERULE = #{namerule,jdbcType=VARCHAR},
+			</if>
+			<if test="namecontent != null">
+				NAMECONTENT = #{namecontent,jdbcType=VARCHAR},
+			</if>
+			<if test="presetstr != null">
+				PRESETSTR = #{presetstr,jdbcType=VARCHAR},
+			</if>
+			<if test="randomlength != null">
+				RANDOMLENGTH = #{randomlength,jdbcType=DECIMAL},
+			</if>
+			<if test="usernamelength != null">
+				USERNAMELENGTH = #{usernamelength,jdbcType=DECIMAL},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="registertype != null">
+				REGISTERTYPE = #{registertype,jdbcType=DECIMAL},
+			</if>
+			<if test="ischinese != null">
+				ISCHINESE = #{ischinese,jdbcType=DECIMAL},
+			</if>
+			<if test="iscustom != null">
+				ISCUSTOM = #{iscustom,jdbcType=DECIMAL},
+			</if>
+			<if test="usernamemaxlength != null">
+				USERNAMEMAXLENGTH =
+				#{usernamemaxlength,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserNameRuleModule">
+		update
+		USERNAMERULEMODULE
+		set MODULE = #{module,jdbcType=VARCHAR},
+		NEEDTYPE =
+		#{needtype,jdbcType=DECIMAL},
+		SETRULE = #{setrule,jdbcType=VARCHAR},
+		SETRULEDETAIL = #{setruledetail,jdbcType=VARCHAR},
+		NAMERULE =
+		#{namerule,jdbcType=VARCHAR},
+		NAMECONTENT =
+		#{namecontent,jdbcType=VARCHAR},
+		PRESETSTR =
+		#{presetstr,jdbcType=VARCHAR},
+		RANDOMLENGTH =
+		#{randomlength,jdbcType=DECIMAL},
+		USERNAMELENGTH =
+		#{usernamelength,jdbcType=DECIMAL},
+		ISUSE = #{isuse,jdbcType=DECIMAL},
+		REGISTERTYPE = #{registertype,jdbcType=DECIMAL},
+		ISCHINESE =
+		#{ischinese,jdbcType=DECIMAL},
+		USERNAMEMAXLENGTH =
+		#{usernamemaxlength,jdbcType=DECIMAL},
+		ISCUSTOM =
+		#{iscustom,jdbcType=DECIMAL}
+		where ID =
+		#{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

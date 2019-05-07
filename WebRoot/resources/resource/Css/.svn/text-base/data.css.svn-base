@@ -1,0 +1,9 @@
+﻿.pagination .page-select{display:inline-block;width:78px;text-align:left;position:relative;z-index:9;vertical-align:middle;*display:inline;zoom:1;background: #f8f8f8;}
+.pagination .page-select .icon-down{float:right;background:url(../Images/bottom.png) no-repeat 0 0;float:right;width:9px;height:6px;margin:12px 0 0;font-size:0;}
+.pagination .page-select.active .icon-down{background-position:0 0;}
+.pagination .page-select dt{border:1px solid #ccc;height:28px;padding:0 8px;line-height:28px;background: #f8f8f8;}
+.pagination .page-select dt span{float:left;}
+.pagination .page-select dd{border:1px solid #ddd;background:#FFF; position:absolute;top:29px;left:0;width:76px;max-height:100px;overflow-x:hidden;overflow-y:auto;display:none;}
+.pagination .page-select dd a{display:block;height:22px;line-height:22px;text-indent:10px;color: #333;}
+.pagination .page-select a{display:block;height:20px;}
+.pagination .page-select a:hover{background:#548de7;color:#FFF;}

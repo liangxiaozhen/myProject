@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.LoanInfoNeedMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.LoanInfoNeed" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="LINNO" property="linno" jdbcType="VARCHAR" />
+    <result column="INFONAME" property="infoname" jdbcType="VARCHAR" />
+    <result column="INFOTYPE" property="infotype" jdbcType="DECIMAL" />
+    <result column="QUOTEOBJECT" property="quoteobject" jdbcType="VARCHAR" />
+    <result column="ISNEED" property="isneed" jdbcType="DECIMAL" />
+    <result column="INFODESCRIPTION" property="infodescription" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+    <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="CHARLENGTH" property="charlength" jdbcType="DECIMAL" />
+    <result column="ISCITE" property="iscite" jdbcType="DECIMAL"/>
+    <association property="itemQuote" resultMap="LoanItemQuoteMap"/>
+  </resultMap>
+  <!-- 项目引用类映射 -->
+  <resultMap type="com.ptpl.model.LoanItemQuote" id="LoanItemQuoteMap">
+      <result column="LIQNO" property="liqno" jdbcType="VARCHAR"/>
+      <result column="QUOTENAME" property="quotename" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, LINNO, INFONAME, INFOTYPE, QUOTEOBJECT, ISNEED, INFODESCRIPTION, REMARK, ADDMAN, 
+    ADDTIME, CHARLENGTH,ISCITE
+  </sql>
+
+   <sql id="Base_Column_List2" >
+    t.infotype,t.infodescription,t.charlength
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from LOANINFONEED
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+
+   <select id="selectByPrimaryKey2" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select
+    <include refid="Base_Column_List2" />
+    from LOANINFONEED t
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 查询所有的信息 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+     select * from LOANINFONEED 
+     <where>
+     <if test="id != null" >
+        ID=#{id,jdbcType=DECIMAL}
+      </if>
+    </where>
+  </select>
+  <!-- 获取最后一个编号 -->
+  <select id="selectNeedNo" resultType="string">
+    select max(t.linno) from LOANINFONEED t
+  </select>
+  
+  <!-- 通过引用资料设置查找资料本身(查找文本资料)公共资料  02-->
+  <!--项目引用设置（loanitemquote）   自填类项目设置（loaninfoneed）-->
+  <!--Liqno资料编号  quoteName引用项目名称   InfoAttribute资料属性(1公共 ，2补充)  quoteProperty引用项目属性（1自填，2预设置） infotype资料类型(1图片, 2文本)-->
+  <select id="selectloanByQuote" resultMap="BaseResultMap">
+    select t.Liqno,t.quoteName,n.* from loanitemquote t ,loaninfoneed n where t.quoteObjectId=n.id and  t.InfoAttribute=1 and t.quoteProperty=1 and
+    t.isUse=1 and n.isneed=1 and n.infotype=2
+  </select>
+  
+  <!-- 通过引用资料设置查找资料本身(查找图片资料)公共资料  01-->
+  <select id="selectloanBypic" resultMap="BaseResultMap">
+    select t.Liqno,t.quoteName,n.* from LOANITEMQUOTE t ,LOANINFONEED n where t.quoteObjectId=n.id and  t.InfoAttribute=1 and t.quoteProperty=1 and 
+    t.isUse=1 and n.isneed=1 and n.infotype=1
+  </select>
+  
+   <!-- 通过引用资料设置查找资料本身(查找文本资料)补充资料  02-->
+  <!--引用项目名称quoteName   资料属性(1公共 ，2补充)InfoAttribute  引用项目属性（1自填，2预设置）quoteProperty   1图 2文本 infotype-->
+  <select id="selectloanByQuoteyy" resultMap="BaseResultMap">
+    select t.Liqno,t.quoteName,n.* from LOANITEMQUOTE t ,LOANINFONEED n where t.quoteObjectId=n.id and  t.InfoAttribute=2 and t.quoteProperty=1 and
+    t.isUse=1 and n.isneed=1 and n.infotype=2
+  </select>
+  
+  <!-- 通过引用资料设置查找资料本身(查找图片资料)补充资料  01-->
+  <select id="selectloanBypicyy" resultMap="BaseResultMap">
+      select t.Liqno,t.quoteName,n.* from LOANITEMQUOTE t ,LOANINFONEED n where t.quoteObjectId=n.id and  t.InfoAttribute=2 and t.quoteProperty=1 and 
+      t.isUse=1 and n.isneed=1 and n.infotype=1
+  </select>
+  
+  <!-- 查询所有启用且没引用的项目 -->
+  <select id="selectNeedByiscite" resultMap="BaseResultMap">
+    select * from LOANINFONEED t where t.isneed=1 and t.iscite=0
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from LOANINFONEED
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.LoanInfoNeed" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+     SELECT LOANINFONEED_SEQ.NEXTVAL as id FROM DUAL
+  </selectKey>
+    insert into LOANINFONEED (ID, LINNO, INFONAME, 
+      INFOTYPE, QUOTEOBJECT, ISNEED, 
+      INFODESCRIPTION, REMARK, ADDMAN, 
+      ADDTIME, CHARLENGTH,ISCITE)
+    values (#{id,jdbcType=DECIMAL}, #{linno,jdbcType=VARCHAR}, #{infoname,jdbcType=VARCHAR}, 
+      #{infotype,jdbcType=DECIMAL}, #{quoteobject,jdbcType=VARCHAR}, #{isneed,jdbcType=DECIMAL}, 
+      #{infodescription,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{addman,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{charlength,jdbcType=DECIMAL},#{iscite,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.LoanInfoNeed" >
+  <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+     SELECT LOANINFONEED_SEQ.NEXTVAL as id FROM DUAL
+  </selectKey>
+    insert into LOANINFONEED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="linno != null" >
+        LINNO,
+      </if>
+      <if test="infoname != null" >
+        INFONAME,
+      </if>
+      <if test="infotype != null" >
+        INFOTYPE,
+      </if>
+      <if test="quoteobject != null" >
+        QUOTEOBJECT,
+      </if>
+      <if test="isneed != null" >
+        ISNEED,
+      </if>
+      <if test="infodescription != null" >
+        INFODESCRIPTION,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="addman != null" >
+        ADDMAN,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="charlength != null" >
+        CHARLENGTH,
+      </if>
+      <if test="iscite != null" >
+        ISCITE,
+     </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="linno != null" >
+        #{linno,jdbcType=VARCHAR},
+      </if>
+      <if test="infoname != null" >
+        #{infoname,jdbcType=VARCHAR},
+      </if>
+      <if test="infotype != null" >
+        #{infotype,jdbcType=DECIMAL},
+      </if>
+      <if test="quoteobject != null" >
+        #{quoteobject,jdbcType=VARCHAR},
+      </if>
+      <if test="isneed != null" >
+        #{isneed,jdbcType=DECIMAL},
+      </if>
+      <if test="infodescription != null" >
+        #{infodescription,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addman != null" >
+        #{addman,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="charlength != null" >
+        #{charlength,jdbcType=DECIMAL},
+      </if>
+      <if test="iscite != null" >
+        #{iscite,jdbcType=DECIMAL},
+     </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.LoanInfoNeed" >
+    update LOANINFONEED
+    <set >
+      <if test="linno != null" >
+        LINNO = #{linno,jdbcType=VARCHAR},
+      </if>
+      <if test="infoname != null" >
+        INFONAME = #{infoname,jdbcType=VARCHAR},
+      </if>
+      <if test="infotype != null" >
+        INFOTYPE = #{infotype,jdbcType=DECIMAL},
+      </if>
+      <if test="quoteobject != null" >
+        QUOTEOBJECT = #{quoteobject,jdbcType=VARCHAR},
+      </if>
+      <if test="isneed != null" >
+        ISNEED = #{isneed,jdbcType=DECIMAL},
+      </if>
+      <if test="infodescription != null" >
+        INFODESCRIPTION = #{infodescription,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addman != null" >
+        ADDMAN = #{addman,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="charlength != null" >
+        CHARLENGTH = #{charlength,jdbcType=DECIMAL},
+      </if>
+      <if test="iscite != null" >
+       ISCITE= #{iscite,jdbcType=DECIMAL},
+     </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.LoanInfoNeed" >
+    update LOANINFONEED
+    set LINNO = #{linno,jdbcType=VARCHAR},
+      INFONAME = #{infoname,jdbcType=VARCHAR},
+      INFOTYPE = #{infotype,jdbcType=DECIMAL},
+      QUOTEOBJECT = #{quoteobject,jdbcType=VARCHAR},
+      ISNEED = #{isneed,jdbcType=DECIMAL},
+      INFODESCRIPTION = #{infodescription,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ADDMAN = #{addman,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      CHARLENGTH = #{charlength,jdbcType=DECIMAL},
+      ISCITE= #{iscite,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

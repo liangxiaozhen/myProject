@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.SpecialTimeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.SpecialTime">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TIMETYPE" property="timetype" jdbcType="VARCHAR" />
+		<result column="TIMENAME" property="timename" jdbcType="VARCHAR" />
+		<result column="TIMENO" property="timeno" jdbcType="VARCHAR" />
+		<result column="BTIME" property="btime" jdbcType="TIMESTAMP" />
+		<result column="ETIME" property="etime" jdbcType="TIMESTAMP" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="MAXMONEY" property="maxmoney" jdbcType="FLOAT" />
+		<result column="WLEVEL" property="wlevel" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="MINMONEY" property="minmoney" jdbcType="FLOAT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TIMETYPE, TIMENAME, TIMENO, BTIME, ETIME, ADDTIME,
+		MAXMONEY, WLEVEL,
+		ADDMAN,
+		REMARK, MINMONEY
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from SPECIALTIME
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selectTimeNoAndTimeName" resultMap="BaseResultMap">
+		select
+		timename,timeno
+		from SPECIALTIME
+		group by
+		timename,timeno
+	</select>
+	<select id="selectTNameTNoTType" resultMap="BaseResultMap">
+		select
+		timename,timeno,timetype
+		from SPECIALTIME
+		group by
+		timename,timeno,timetype
+	</select>
+	<select id="getTimeNoAndTimeName" resultMap="BaseResultMap"
+		parameterType="String">
+		select
+		timename,timeno
+		from SPECIALTIME
+		where
+		timetype=#{timetype,jdbcType=VARCHAR}
+		group by
+		timename,timeno
+	</select>
+	<select id="selectTimeNoForTimeName" resultType="String"
+		parameterType="String">
+		select timeno
+		from SPECIALTIME
+		where
+		timename=#{0,jdbcType=VARCHAR}
+		and timetype=#{1,jdbcType=VARCHAR}
+		and
+		rownum =1
+	</select>
+	<select id="selectForTimeNo" parameterType="String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SPECIALTIME
+		where TIMENO = #{timeno,jdbcType=VARCHAR}
+		order by
+		wlevel asc
+	</select>
+	<select id="selective" parameterType="com.ptpl.model.SpecialTime"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SPECIALTIME
+		<where>
+			<if test="id != null">
+				ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="timetype != null and timetype!=''">
+				AND TIMETYPE = #{timetype,jdbcType=VARCHAR}
+			</if>
+			<if test="timename != null and timename!=''">
+				AND TIMENAME = #{timename,jdbcType=VARCHAR}
+			</if>
+			<if test="timeno != null and timeno!=''">
+				AND TIMENO = #{timeno,jdbcType=VARCHAR}
+			</if>
+			<if test="btime != null and btime!=''">
+				AND BTIME >= #{btime}
+			</if>
+			<if test="etime != null and etime!='' ">
+				AND ETIME &lt;= #{etime}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="maxmoney != null and maxmoney!=''">
+				AND MAXMONEY &lt;= #{maxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="wlevel != null and wlevel!=''">
+				AND WLEVEL = #{wlevel,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="minmoney != null and minmoney!=''">
+				AND MINMONEY >= #{minmoney,jdbcType=FLOAT}
+			</if>
+		</where>
+		order by ID
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		SPECIALTIME
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insertSelective" parameterType="com.ptpl.model.SpecialTime">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT SPECIALTIME_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into SPECIALTIME
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="timetype != null">
+				TIMETYPE,
+			</if>
+			<if test="timename != null">
+				TIMENAME,
+			</if>
+			<if test="timeno != null">
+				TIMENO,
+			</if>
+			<if test="btime != null">
+				BTIME,
+			</if>
+			<if test="etime != null">
+				ETIME,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="maxmoney != null">
+				MAXMONEY,
+			</if>
+			<if test="wlevel != null">
+				WLEVEL,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="minmoney != null">
+				MINMONEY,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="timetype != null">
+				#{timetype,jdbcType=VARCHAR},
+			</if>
+			<if test="timename != null">
+				#{timename,jdbcType=VARCHAR},
+			</if>
+			<if test="timeno != null">
+				#{timeno,jdbcType=VARCHAR},
+			</if>
+			<if test="btime != null">
+				#{btime},
+			</if>
+			<if test="etime != null">
+				#{etime},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="maxmoney != null">
+				#{maxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="wlevel != null">
+				#{wlevel,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="minmoney != null">
+				#{minmoney,jdbcType=FLOAT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.SpecialTime">
+		update SPECIALTIME
+		<set>
+			<if test="timetype != null">
+				TIMETYPE = #{timetype,jdbcType=VARCHAR},
+			</if>
+			<if test="timename != null">
+				TIMENAME = #{timename,jdbcType=VARCHAR},
+			</if>
+			<if test="timeno != null">
+				TIMENO = #{timeno,jdbcType=VARCHAR},
+			</if>
+			<if test="btime != null">
+				BTIME = #{btime},
+			</if>
+			<if test="etime != null">
+				ETIME = #{etime},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="maxmoney != null">
+				MAXMONEY = #{maxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="wlevel != null">
+				WLEVEL = #{wlevel,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="minmoney != null">
+				MINMONEY = #{minmoney,jdbcType=FLOAT},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

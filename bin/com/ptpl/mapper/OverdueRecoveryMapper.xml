@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.OverdueRecoveryMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.OverdueRecovery">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TID" property="tid" jdbcType="DECIMAL" />
+		<result column="OVERDUERNO" property="overduerno" jdbcType="VARCHAR" />
+		<result column="ISPRECOVERYON" property="isprecoveryon"
+			jdbcType="DECIMAL" />
+		<result column="PMISCRECMANID" property="pmiscrecmanid"
+			jdbcType="DECIMAL" />
+		<result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR" />
+		<result column="OCMINMONEY" property="ocminmoney" jdbcType="FLOAT" />
+		<result column="OCMAXMONEY" property="ocmaxmoney" jdbcType="FLOAT" />
+		<result column="OCCQUOTA" property="occquota" jdbcType="FLOAT" />
+		<result column="TOCCRATE" property="toccrate" jdbcType="FLOAT" />
+		<result column="MINCFEES" property="mincfees" jdbcType="FLOAT" />
+		<result column="MAXCFEES" property="maxcfees" jdbcType="FLOAT" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TID, OVERDUERNO, ISPRECOVERYON, PMISCRECMANID, PMISCRECMAN,
+		OCMINMONEY, OCMAXMONEY,
+		OCCQUOTA, TOCCRATE, MINCFEES, MAXCFEES, ISAUDIT, ISTEMPLET, ADDMAN, ADDTIME,
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from OVERDUERECOVERY
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from OVERDUERECOVERY
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.OverdueRecovery">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT OVERDUERECOVERY_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into OVERDUERECOVERY (ID, TID, OVERDUERNO,
+		ISPRECOVERYON, PMISCRECMANID, PMISCRECMAN,
+		OCMINMONEY, OCMAXMONEY, OCCQUOTA,
+		TOCCRATE, MINCFEES, MAXCFEES,
+		ISAUDIT, ISTEMPLET, ADDMAN,
+		ADDTIME, REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{tid,jdbcType=DECIMAL},
+		#{overduerno,jdbcType=VARCHAR},
+		#{isprecoveryon,jdbcType=DECIMAL}, #{pmiscrecmanid,jdbcType=DECIMAL}, #{pmiscrecman,jdbcType=VARCHAR},
+		#{ocminmoney,jdbcType=FLOAT}, #{ocmaxmoney,jdbcType=FLOAT},
+		#{occquota,jdbcType=FLOAT},
+		#{toccrate,jdbcType=FLOAT}, #{mincfees,jdbcType=FLOAT}, #{maxcfees,jdbcType=FLOAT},
+		#{isaudit,jdbcType=DECIMAL}, #{istemplet,jdbcType=DECIMAL},
+		#{addman,jdbcType=VARCHAR},
+		#{addtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.OverdueRecovery">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT OVERDUERECOVERY_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into OVERDUERECOVERY
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="overduerno != null">
+				OVERDUERNO,
+			</if>
+			<if test="isprecoveryon != null">
+				ISPRECOVERYON,
+			</if>
+			<if test="pmiscrecmanid != null">
+				PMISCRECMANID,
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN,
+			</if>
+			<if test="ocminmoney != null">
+				OCMINMONEY,
+			</if>
+			<if test="ocmaxmoney != null">
+				OCMAXMONEY,
+			</if>
+			<if test="occquota != null">
+				OCCQUOTA,
+			</if>
+			<if test="toccrate != null">
+				TOCCRATE,
+			</if>
+			<if test="mincfees != null">
+				MINCFEES,
+			</if>
+			<if test="maxcfees != null">
+				MAXCFEES,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="overduerno != null">
+				#{overduerno,jdbcType=VARCHAR},
+			</if>
+			<if test="isprecoveryon != null">
+				#{isprecoveryon,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecmanid != null">
+				#{pmiscrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecman != null">
+				#{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="ocminmoney != null">
+				#{ocminmoney,jdbcType=FLOAT},
+			</if>
+			<if test="ocmaxmoney != null">
+				#{ocmaxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="occquota != null">
+				#{occquota,jdbcType=FLOAT},
+			</if>
+			<if test="toccrate != null">
+				#{toccrate,jdbcType=FLOAT},
+			</if>
+			<if test="mincfees != null">
+				#{mincfees,jdbcType=FLOAT},
+			</if>
+			<if test="maxcfees != null">
+				#{maxcfees,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.OverdueRecovery">
+		update OVERDUERECOVERY
+		<set>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="overduerno != null">
+				OVERDUERNO = #{overduerno,jdbcType=VARCHAR},
+			</if>
+			<if test="isprecoveryon != null">
+				ISPRECOVERYON = #{isprecoveryon,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecmanid != null">
+				PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscrecman != null">
+				PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+			</if>
+			<if test="ocminmoney != null">
+				OCMINMONEY = #{ocminmoney,jdbcType=FLOAT},
+			</if>
+			<if test="ocmaxmoney != null">
+				OCMAXMONEY = #{ocmaxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="occquota != null">
+				OCCQUOTA = #{occquota,jdbcType=FLOAT},
+			</if>
+			<if test="toccrate != null">
+				TOCCRATE = #{toccrate,jdbcType=FLOAT},
+			</if>
+			<if test="mincfees != null">
+				MINCFEES = #{mincfees,jdbcType=FLOAT},
+			</if>
+			<if test="maxcfees != null">
+				MAXCFEES = #{maxcfees,jdbcType=FLOAT},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.OverdueRecovery">
+		update OVERDUERECOVERY
+		set TID = #{tid,jdbcType=DECIMAL},
+		OVERDUERNO = #{overduerno,jdbcType=VARCHAR},
+		ISPRECOVERYON = #{isprecoveryon,jdbcType=DECIMAL},
+		PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL},
+		PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+		OCMINMONEY = #{ocminmoney,jdbcType=FLOAT},
+		OCMAXMONEY = #{ocmaxmoney,jdbcType=FLOAT},
+		OCCQUOTA = #{occquota,jdbcType=FLOAT},
+		TOCCRATE = #{toccrate,jdbcType=FLOAT},
+		MINCFEES = #{mincfees,jdbcType=FLOAT},
+		MAXCFEES = #{maxcfees,jdbcType=FLOAT},
+		ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+		ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据tid查询信息 -->
+	<select id="selectoverRecBytid" resultMap="BaseResultMap">
+		select * from OVERDUERECOVERY t where t.tid=#{tid,jdbcType=DECIMAL}
+	</select>
+</mapper>

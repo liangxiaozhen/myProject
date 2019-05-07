@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AheadRepayModeMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AheadRepayMode">
+		<id column="ID" property="id" jdbcType="DECIMAL"/>
+		<result column="TID" property="tid" jdbcType="DECIMAL"/>
+		<result column="REPAYTYPE" property="repaytype" jdbcType="DECIMAL"/>
+		<result column="AREPAYMODE" property="arepaymode" jdbcType="DECIMAL"/>
+		<result column="APERIODS" property="aperiods" jdbcType="DECIMAL"/>
+		<result column="INTMODE" property="intmode" jdbcType="DECIMAL"/>
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR"/>
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP"/>
+		<result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+		<association property="tenderitem" column="tid" select="com.ptpl.mapper.TenderItemMapper.findTenderItemById"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TID, REPAYTYPE, AREPAYMODE, APERIODS, INTMODE, ADDMAN, ADDTIME,
+		REMARK
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+			parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"/>
+		from AHEADREPAYMODE
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据tid查询信息 -->
+	<select id="selectModeBytid" resultMap="BaseResultMap"
+			parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"/>
+		from AHEADREPAYMODE
+		where TID = #{tid,jdbcType=DECIMAL}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from AHEADREPAYMODE
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<delete id="deleteByTid" parameterType="java.math.BigDecimal">
+		delete from AHEADREPAYMODE
+		where TID = #{tid,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.AheadRepayMode">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select AHEADREPAYMODE_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into AHEADREPAYMODE (ID, TID, REPAYTYPE,
+		AREPAYMODE, APERIODS, INTMODE,
+		ADDMAN, ADDTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{tid,jdbcType=DECIMAL},
+		#{repaytype,jdbcType=DECIMAL},
+		#{arepaymode,jdbcType=DECIMAL}, #{aperiods,jdbcType=DECIMAL}, #{intmode,jdbcType=DECIMAL},
+		#{addman,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AheadRepayMode">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			select AHEADREPAYMODE_SEQ.NEXTVAL as id from dual
+		</selectKey>
+		insert into AHEADREPAYMODE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tid != null">
+				TID,
+			</if>
+			<if test="repaytype != null">
+				REPAYTYPE,
+			</if>
+			<if test="arepaymode != null">
+				AREPAYMODE,
+			</if>
+			<if test="aperiods != null">
+				APERIODS,
+			</if>
+			<if test="intmode != null">
+				INTMODE,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="repaytype != null">
+				#{repaytype,jdbcType=DECIMAL},
+			</if>
+			<if test="arepaymode != null">
+				#{arepaymode,jdbcType=DECIMAL},
+			</if>
+			<if test="aperiods != null">
+				#{aperiods,jdbcType=DECIMAL},
+			</if>
+			<if test="intmode != null">
+				#{intmode,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.AheadRepayMode">
+		update AHEADREPAYMODE
+		<set>
+			<if test="tid != null">
+				TID = #{tid,jdbcType=DECIMAL},
+			</if>
+			<if test="repaytype != null">
+				REPAYTYPE = #{repaytype,jdbcType=DECIMAL},
+			</if>
+			<if test="arepaymode != null">
+				AREPAYMODE = #{arepaymode,jdbcType=DECIMAL},
+			</if>
+			APERIODS = #{aperiods,jdbcType=DECIMAL},
+			<if test="intmode != null">
+				INTMODE = #{intmode,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.AheadRepayMode">
+		update AHEADREPAYMODE
+		set TID = #{tid,jdbcType=DECIMAL},
+		REPAYTYPE = #{repaytype,jdbcType=DECIMAL},
+		AREPAYMODE = #{arepaymode,jdbcType=DECIMAL},
+		APERIODS = #{aperiods,jdbcType=DECIMAL},
+		INTMODE = #{intmode,jdbcType=DECIMAL},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 查询所有 -->
+	<select id="selectModeByStyle" parameterType="com.ptpl.model.AheadRepayMode" resultMap="BaseResultMap">
+		select * from Aheadrepaymode
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="id!=null and id!=''">
+				ID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="tid!=null and tid!=''">
+				TID=#{tid,jdbcType=DECIMAL}
+			</if>
+			<if test="repaytype != null and repaytype!=''">
+				and REPAYTYPE = #{repaytype,jdbcType=DECIMAL}
+			</if>
+			<if test="arepaymode != null and arepaymode!=''">
+				and arepaymode = #{arepaymode,jdbcType=DECIMAL}
+			</if>
+			<if test="aperiods != null and aperiods!=''">
+				and aperiods = #{aperiods,jdbcType=DECIMAL}
+			</if>
+			<if test="intmode != null and intmode!=''">
+				and intmode = #{intmode,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null and addman!=''">
+				and addman = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null and addtime!=''">
+				and addtime = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				and remark like '%${remark}%'
+			</if>
+		</trim>
+	</select>
+
+
+	<!-- 查询 -->
+	<select id="selectModeByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select * from Aheadrepaymode where 1=1
+		<if test="tid!=null and tid!='' ">
+			and tid=#{tid}
+		</if>
+		<if test="startAppTime != null and startAppTime != '' ">
+			and addtime &gt;= #{startAppTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endAppTime !=null and endAppTime!= ''">
+			and addtime &lt;= #{endAppTime,jdbcType=TIMESTAMP}
+		</if>
+
+	</select>
+</mapper>

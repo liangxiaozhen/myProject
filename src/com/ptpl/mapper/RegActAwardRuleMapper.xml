@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RegActAwardRuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RegActAwardRule">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTID" property="actid" jdbcType="DECIMAL" />
+		<result column="CRESTRICT" property="crestrict" jdbcType="VARCHAR" />
+		<result column="BUSINESS" property="business" jdbcType="DECIMAL" />
+		<result column="FINISHTIME" property="finishtime" jdbcType="DECIMAL" />
+		<result column="AWARDID" property="awardid" jdbcType="DECIMAL" />
+		<result column="AWARDNAME" property="awardname" jdbcType="VARCHAR" />
+		<result column="AWARDCOPIES" property="awardcopies" jdbcType="DECIMAL" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<association property="regactivityrule" resultMap="RegActivityRuleMap" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.RegActivityRule" id="RegActivityRuleMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="actno" jdbcType="VARCHAR" />
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, ACTID, CRESTRICT, BUSINESS, FINISHTIME, AWARDID,
+		AWARDNAME,
+		AWARDCOPIES, QUOTA, STATUS, ADDMAN, ADDTIME, REMARK,
+		ISTEMPLET
+	</sql>
+
+	<sql id="Association_Column_List">
+		C.ID, C.ACTID, C.CRESTRICT, C.BUSINESS, C.FINISHTIME,
+		C.AWARDID, C.AWARDNAME,
+		C.AWARDCOPIES, C.QUOTA, C.STATUS, C.ADDMAN,
+		C.ADDTIME, C.REMARK, C.ISTEMPLET,
+		P.ACTNO, P.ACTNAME
+	</sql>
+
+	<!-- （条件）获取注册活动奖励规则列表 -->
+	<select id="findRegActAwardRuleList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RegActAwardRule">
+		select
+		<include refid="Base_Column_List" />
+		from
+		regactawardrule
+		<trim prefix="where" prefixOverrides="and">
+			<if test="actid != null">
+				and actid = #{actid,jdbcType=DECIMAL}
+			</if>
+			<if test="crestrict != null">
+				and CRESTRICT = #{crestrict,jdbcType=VARCHAR}
+			</if>
+			<if test="business != null">
+				and BUSINESS = #{business,jdbcType=DECIMAL}
+			</if>
+			<if test="finishtime != null">
+				and FINISHTIME = #{finishtime,jdbcType=DECIMAL}
+			</if>
+			<if test="awardid != null">
+				and AWARDID = #{awardid,jdbcType=DECIMAL}
+			</if>
+			<if test="awardname != null">
+				and AWARDNAME = #{awardname,jdbcType=VARCHAR}
+			</if>
+			<if test="awardcopies != null">
+				and AWARDCOPIES = #{awardcopies,jdbcType=DECIMAL}
+			</if>
+			<if test="quota != null">
+				and QUOTA = #{quota,jdbcType=FLOAT}
+			</if>
+			<if test="status != null">
+				and STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- （条件）获取注册活动奖励规则列表（关联注册活动规则表） -->
+	<select id="selectByLinkRegActivityRule" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RegActAwardRule">
+		select
+		<include refid="Association_Column_List" />
+		from
+		REGACTAWARDRULE C
+		LEFT JOIN REGACTIVITYRULE P ON C.ACTID=P.ID
+		<trim prefix="where" prefixOverrides="and">
+			<if test="regactivityrule != null and regactivityrule.actno != ''">
+				and P.ACTNO = #{regactivityrule.actno,jdbcType=VARCHAR}
+			</if>
+			<if test="business != null">
+				and C.BUSINESS = #{business,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 查看注册活动奖励规则详情 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from
+		REGACTAWARDRULE
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 删除注册活动奖励规则 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		REGACTAWARDRULE where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 新增注册活动奖励规则（参数可选） -->
+	<insert id="insertRegActAwardRuleSelective" parameterType="com.ptpl.model.RegActAwardRule">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT REGACTAWARDRULE_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into REGACTAWARDRULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actid != null">
+				ACTID,
+			</if>
+			<if test="crestrict != null">
+				CRESTRICT,
+			</if>
+			<if test="business != null">
+				BUSINESS,
+			</if>
+			<if test="finishtime != null">
+				FINISHTIME,
+			</if>
+			<if test="awardid != null">
+				AWARDID,
+			</if>
+			<if test="awardname != null">
+				AWARDNAME,
+			</if>
+			<if test="awardcopies != null">
+				AWARDCOPIES,
+			</if>
+			<if test="quota != null">
+				QUOTA,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actid != null">
+				#{actid,jdbcType=DECIMAL},
+			</if>
+			<if test="crestrict != null">
+				#{crestrict,jdbcType=VARCHAR},
+			</if>
+			<if test="business != null">
+				#{business,jdbcType=DECIMAL},
+			</if>
+			<if test="finishtime != null">
+				#{finishtime,jdbcType=DECIMAL},
+			</if>
+			<if test="awardid != null">
+				#{awardid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardname != null">
+				#{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardcopies != null">
+				#{awardcopies,jdbcType=DECIMAL},
+			</if>
+			<if test="quota != null">
+				#{quota,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 更新注册活动奖励规则（参数可选） -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RegActAwardRule">
+		update REGACTAWARDRULE
+		<set>
+			<if test="actid != null">
+				ACTID = #{actid,jdbcType=DECIMAL},
+			</if>
+			<if test="crestrict != null">
+				CRESTRICT = #{crestrict,jdbcType=VARCHAR},
+			</if>
+			<if test="business != null">
+				BUSINESS = #{business,jdbcType=DECIMAL},
+			</if>
+			<if test="finishtime != null">
+				FINISHTIME = #{finishtime,jdbcType=DECIMAL},
+			</if>
+			<if test="awardid != null">
+				AWARDID = #{awardid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardname != null">
+				AWARDNAME = #{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardcopies != null">
+				AWARDCOPIES = #{awardcopies,jdbcType=DECIMAL},
+			</if>
+			<if test="quota != null">
+				QUOTA = #{quota,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据注册活动ID批量更新注册奖励活动状态 -->
+	<update id="updateByActId" parameterType="com.ptpl.model.RegActAwardRule">
+		update
+		REGACTAWARDRULE
+		<set>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where
+		ACTID = #{actid,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据注册活动ID删除注册活动奖励规则 -->
+	<delete id="deleteByActId" parameterType="java.math.BigDecimal">
+		delete from
+		REGACTAWARDRULE where ACTID = #{actid,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据注册活动ID查看注册活动奖励规则 -->
+	<select id="selectByActId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from
+		regactawardrule
+		where
+		actid = #{actid,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据注册活动ID和指定业务查看注册活动奖励规则 -->
+	<select id="selectByActIdAndBusiness" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RegActAwardRule">
+		select
+		<include refid="Base_Column_List" />
+		from
+		regactawardrule
+		where
+		actid = #{actid,jdbcType=DECIMAL}
+		and business =
+		#{business,jdbcType=DECIMAL}
+	</select>
+</mapper>

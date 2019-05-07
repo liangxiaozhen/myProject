@@ -1,0 +1,199 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<base href="<%=basePath%>">
+<meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+<title>Pojo</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="${pageContext.request.contextPath}/jquery/1.11.3/jquery-1.11.3.min.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- 日历 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/calendar/WdatePicker.js"></script>
+<style type="text/css">
+	td{
+		text-align: center;
+	}
+	#bz{
+		text-align: left;
+	}
+</style>
+<script type="text/javascript">
+	function queryAllPerson(pageNum, pageSize){
+		selectpojoByCondition(pageNum,pageSize);
+	}
+	$(function(){
+		$(".remark-p").each(function(i) {
+			var num = $(this).text();
+			if (num.length > 5) {
+				$(this).text(num.substr(0, 5) + "...");
+			}
+		});
+		$("#reset").click(function() {
+			$("#ano").val("");
+			$("#aname").val("");
+			document.getElementById("atype1").options[0].selected = true;
+		})
+	});
+	
+	function selectpojoByCondition(pageNum, pageSize){
+		var atype=$("#atype1").val();
+		if(atype=="请选择"){
+			$("#atype1").val("");
+		}
+		
+		$("#pageNum").val(pageNum);
+		$("#pageSize").val(pageSize);
+		$("#selectpojoByCondition").submit();
+	}
+	
+	function todetailUi(id){
+			url="pojo/selectPojoByPrimaryKey.action?id="+id;
+			window.location.href=url;
+	}
+	
+	function toUpdateUi(id){
+		url="pojo/toUpdateUi.action?id="+id;
+		window.location.href=url;
+}
+	
+	
+	function insert_Pojo_Ui(){
+		var url="pojo/insert_Pojo_Ui.action";
+		window.location.href=url;
+	}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column" style="border-style:none; border-width:5px; border-color:Black; background-color:none;">
+      
+
+	<h3>所有奖品</h3>
+		<form id="selectpojoByCondition" method="post" action="pojo/selectPojoByCondition.action">
+			<input type="hidden" id="pageNum" name="pageNum"/>
+			<input type="hidden" id="pageSize" name="pageSize"/>
+			<label>奖品编号</label><input type="text" name="ano" id="ano" value="${pojo.ano }"> 
+			<label>奖品名称</label><input type="text" name="aname" id="aname" value="${pojo.aname }"> 
+			<label>奖品类型</label>
+			<select name="atype" id="atype1">
+						<option>请选择</option>
+						<c:if test="${!empty atype_map}">  
+						<c:forEach items="${atype_map }" var="at" >
+								<c:choose>
+									<c:when test="${pojo.atype==at.key }">
+										<option value="${at.key }" selected="selected">${at.value }</option>
+									</c:when>
+									<c:otherwise>
+								 		<option value="${at.key }">${at.value }</option>
+									</c:otherwise>
+								</c:choose>
+						</c:forEach>
+					</c:if> 
+			</select>
+			<div>
+			<button id="query_btn" class="btn btn-default" onclick="selectpojoByCondition(1,9)">查询</button>
+			<input type="button" value="重置" class="btn btn-default" id="reset" />
+			</div>
+			<div  class="btn btn-default" onclick="insert_Pojo_Ui()" style="margin-left: 79%">新增奖品</div>
+		</form>
+				<table class="table table-bordered table-hover" id="personList_table">
+					<thead>
+						<tr style="background:#ccc;vertical-align: text-top!important;border:1px solid #666;">
+							<td>奖品编号</td>
+							<td>奖品名称</td>
+							<td>奖品类型</td>
+							<td>奖品属性</td>
+							<td>奖品总份数</td>
+							<td>奖品剩余数</td>
+							<td>备注</td>
+							<td>操作</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${pagehelper.list }" var="pojo">
+							<tr>
+								<td>${pojo.ano }</td>
+									
+								<td>${pojo.aname }</td>
+									
+								<td>
+									<c:forEach items="${atype_map }" var="am">
+										<c:choose>
+											<c:when test="${pojo.atype==am.key }">${am.value }</c:when>
+										</c:choose>
+									</c:forEach>
+								</td>
+									
+								<td>
+									<c:forEach items="${attributeData_map }" var="at">
+										<c:choose>
+												<c:when test="${pojo.attribute==at.key }">${at.value }</c:when>
+										</c:choose>
+									</c:forEach>
+								</td>
+									
+								<td>${pojo.quantityall }</td>
+								
+								<td>${pojo.quantityrest }</td>
+								
+								<td id="bz" class="remark-p" title="${pojo.remark }">${pojo.remark }</td>
+								<td>
+								<button type="button" class="btn"  onclick="todetailUi('${pojo.id}')" >详细信息</button>
+								<button class="btn" onclick="toUpdateUi('${pojo.id}')">修改</button>
+									<button class="btn" id="modify" onclick="deleteFun('${pojo.id }');">删除</button>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<!-- 模态框 -->
+						
+				<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1"
+					role="dialog" aria-labelledby="myLargeModalLabel">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel"></h4>
+							</div>
+							<div class="modal-body" id="modal-body">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" onclick="updatePojo();" id="update">修改</button>
+								<button type="button" class="btn btn-default" onclick="insert_Pojo()" id="insert">新增</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" >取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="page_div">
+					<%@ include file="../../common/pagehelper.jsp"%>
+				</div>
+			</div>
+		</div>
+</div>
+</body>
+</html>

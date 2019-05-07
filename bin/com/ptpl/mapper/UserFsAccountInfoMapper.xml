@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserFsAccountInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserFsAccountInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="USRCUSTID" property="usrcustid" jdbcType="VARCHAR" />
+		<result column="MERCUSTID" property="mercustid" jdbcType="VARCHAR" />
+		<result column="TRXID" property="trxid" jdbcType="VARCHAR" />
+		<result column="RESPCODE" property="respcode" jdbcType="VARCHAR" />
+		<result column="RESPDESC" property="respdesc" jdbcType="VARCHAR" />
+		<result column="CHANNELIDENTIFIER" property="channelidentifier" jdbcType="VARCHAR" />
+		<result column="ISOPENFSINFO" property="isopenfsinfo" jdbcType="DECIMAL" />
+		<result column="OPENINGTIME" property="openingtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="USRLOGINNAME" property="usrloginname" jdbcType="VARCHAR" />
+		<result column="USRNAME" property="usrname" jdbcType="VARCHAR" />
+		<result column="ACCOUNTTYPE" property="accounttype" jdbcType="DECIMAL" />
+		
+		<result column="MONEYMOREMOREID" property="moneymoremoreid" jdbcType="VARCHAR" />
+		<result column="AUTHFEE" property="authfee" jdbcType="FLOAT" />
+		<result column="AUTHSTATE" property="authstate" jdbcType="FLOAT" />
+		<result column="RANDOMTIMESTAMP" property="randomtimestamp" jdbcType="VARCHAR" />
+		<result column="REGISTERTYPE" property="registertype" jdbcType="FLOAT" />
+		<result column="AUTHTIMES" property="authtimes" jdbcType="INTEGER" />
+		<result column="FSMOBILE" property="fsmobile" jdbcType="VARCHAR" />
+		<result column="TRADEPASS" property="tradepass" jdbcType="DECIMAL" />
+		<result column="ACCPURPOSE" property="accPurpose" jdbcType="DECIMAL" />
+		
+ 		
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, USRCUSTID, MERCUSTID, TRXID, RESPCODE, RESPDESC,
+		CHANNELIDENTIFIER, ISOPENFSINFO,OPENINGTIME, REMARK,
+		USRLOGINNAME,USRNAME,ACCOUNTTYPE,MONEYMOREMOREID,AUTHFEE,
+		AUTHSTATE,RANDOMTIMESTAMP,REGISTERTYPE,AUTHTIMES,FSMOBILE,TRADEPASS
+	</sql>
+
+	<select id="findUserFsAccountInfoById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERFSACCOUNTINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!--根据用户商户号查询 -->
+	<select id="findUserFsAccountInfoByUsrCustId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from USERFSACCOUNTINFO
+		where USRCUSTID = #{usrcustid,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findUserFsAccountInfoByBaseId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERFSACCOUNTINFO
+		where BASEID = #{baseid,jdbcType=DECIMAL}
+	</select>
+	
+	<select id="findUserFsAccountInfo" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserFsAccountInfo">
+		select
+		<include refid="Base_Column_List" />
+		from USERFSACCOUNTINFO
+		<where>
+ 			<if test="baseid != null">
+				AND BASEID = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="usrcustid != null">
+				AND USRCUSTID = #{usrcustid,jdbcType=VARCHAR}
+			</if>
+ 			<if test="isopenfsinfo != null">
+				AND ISOPENFSINFO = #{isopenfsinfo,jdbcType=DECIMAL}
+			</if>
+			<if test="fsmobile != null">
+				AND FSMOBILE = #{fsmobile,jdbcType=VARCHAR}
+			</if>
+			<if test="tradepass != null">
+				AND TRADEPASS = #{tradepass,jdbcType=DECIMAL}
+			</if>
+			<if test="accPurpose != null">
+				AND ACCPURPOSE = #{accPurpose,jdbcType=DECIMAL}
+			</if>
+			<if test="mercustid != null">
+				AND MERCUSTID = #{mercustid,jdbcType=VARCHAR}
+			</if>
+			<if test="tradepass != null">
+				AND TRADEPASS = #{tradepass,jdbcType=DECIMAL}
+			</if>
+		</where>
+ 	</select>
+ 	
+ 	<select id="findUserFsAccountInfos" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserFsAccountInfo">
+		select
+		<include refid="Base_Column_List" />
+		from USERFSACCOUNTINFO
+		<where>
+ 			<if test="baseid != null">
+				AND BASEID = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="usrcustid != null">
+				AND USRCUSTID = #{usrcustid,jdbcType=VARCHAR}
+			</if>
+ 			<if test="isopenfsinfo != null">
+				AND ISOPENFSINFO = #{isopenfsinfo,jdbcType=DECIMAL}
+			</if>
+			<if test="fsmobile != null">
+				AND FSMOBILE = #{fsmobile,jdbcType=VARCHAR}
+			</if>
+			<if test="tradepass != null">
+				AND TRADEPASS = #{tradepass,jdbcType=DECIMAL}
+			</if>
+			<if test="accPurpose != null">
+				AND ACCPURPOSE = #{accPurpose,jdbcType=DECIMAL}
+			</if>
+			<if test="mercustid != null">
+				AND MERCUSTID = #{mercustid,jdbcType=VARCHAR}
+			</if>
+			<if test="tradepass != null">
+				AND TRADEPASS = #{tradepass,jdbcType=DECIMAL}
+			</if>
+		</where>
+ 	</select>
+
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from USERFSACCOUNTINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insert" parameterType="com.ptpl.model.UserFsAccountInfo">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT USERFSACCOUNTINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERFSACCOUNTINFO (ID, BASEID, USRCUSTID,
+		MERCUSTID, TRXID, RESPCODE,
+		RESPDESC, CHANNELIDENTIFIER, ISOPENFSINFO,
+		OPENINGTIME, REMARK,USRLOGINNAME,USRNAME,ACCOUNTTYPE
+		MONEYMOREMOREID,AUTHFEE,AUTHSTATE,RANDOMTIMESTAMP,REGISTERTYPE,AUTHTIMES,FSMOBILE,TRADEPASS)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{usrcustid,jdbcType=VARCHAR},
+		#{mercustid,jdbcType=VARCHAR}, #{trxid,jdbcType=VARCHAR}, #{respcode,jdbcType=VARCHAR},
+		#{respdesc,jdbcType=VARCHAR}, #{channelidentifier,jdbcType=VARCHAR},
+		#{isopenfsinfo,jdbcType=DECIMAL},
+		#{openingtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{usrloginname,jdbcType=VARCHAR},
+		#{usrname,jdbcType=VARCHAR}, #{accounttype,jdbcType=DECIMAL},#{moneymoremoreid,jdbcType=VARCHAR},
+		#{authfee,jdbcType=FLOAT},#{authstate,jdbcType=FLOAT},#{randomtimestamp,jdbcType=VARCHAR},
+		#{registertype,jdbcType=FLOAT},#{authtimes,jdbcType=INTEGER},#{fsmobile,jdbcType=VARCHAR},#{tradepass,jdbcType=DECIMAL})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserFsAccountInfo">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT USERFSACCOUNTINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERFSACCOUNTINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="usrcustid != null">
+				USRCUSTID,
+			</if>
+			<if test="mercustid != null">
+				MERCUSTID,
+			</if>
+			<if test="trxid != null">
+				TRXID,
+			</if>
+			<if test="respcode != null">
+				RESPCODE,
+			</if>
+			<if test="respdesc != null">
+				RESPDESC,
+			</if>
+			<if test="channelidentifier != null">
+				CHANNELIDENTIFIER,
+			</if>
+			<if test="isopenfsinfo != null">
+				ISOPENFSINFO,
+			</if>
+			<if test="openingtime != null">
+				OPENINGTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="usrloginname != null">
+				USRLOGINNAME,
+			</if>
+			<if test="usrname != null">
+				USRNAME,
+			</if>
+			<if test="accounttype != null">
+				ACCOUNTTYPE,
+			</if>
+			<if test="moneymoremoreid != null">
+				MONEYMOREMOREID,
+			</if>
+			<if test="authfee != null">
+				AUTHFEE,
+			</if>
+			<if test="authstate != null">
+				AUTHSTATE,
+			</if>
+			<if test="randomtimestamp != null">
+				RANDOMTIMESTAMP,
+			</if>
+			<if test="registertype != null">
+				REGISTERTYPE,
+			</if>
+			<if test="authtimes != null">
+				AUTHTIMES,
+			</if>
+			<if test="fsmobile != null">
+				FSMOBILE,
+			</if>
+			<if test="tradepass != null">
+				TRADEPASS,
+			</if>
+ 		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="usrcustid != null">
+				#{usrcustid,jdbcType=VARCHAR},
+			</if>
+			<if test="mercustid != null">
+				#{mercustid,jdbcType=VARCHAR},
+			</if>
+			<if test="trxid != null">
+				#{trxid,jdbcType=VARCHAR},
+			</if>
+			<if test="respcode != null">
+				#{respcode,jdbcType=VARCHAR},
+			</if>
+			<if test="respdesc != null">
+				#{respdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="channelidentifier != null">
+				#{channelidentifier,jdbcType=VARCHAR},
+			</if>
+			<if test="isopenfsinfo != null">
+				#{isopenfsinfo,jdbcType=DECIMAL},
+			</if>
+			<if test="openingtime != null">
+				#{openingtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="usrloginname != null">
+				#{usrloginname,jdbcType=VARCHAR},
+			</if>
+			<if test="usrname != null">
+				#{usrname,jdbcType=VARCHAR},
+			</if>
+			<if test="accounttype != null">
+				#{accounttype,jdbcType=DECIMAL},
+			</if>
+			<if test="moneymoremoreid != null">
+				#{moneymoremoreid,jdbcType=VARCHAR},
+			</if>
+			<if test="authfee != null">
+				#{authfee,jdbcType=FLOAT},
+			</if>
+			<if test="authstate != null">
+				#{authstate,jdbcType=FLOAT},
+			</if>
+			<if test="randomtimestamp != null">
+				#{randomtimestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="registertype != null">
+				#{registertype,jdbcType=FLOAT},
+			</if> 
+			<if test="authtimes != null">
+				#{authtimes,jdbcType=INTEGER},
+			</if> 
+			<if test="fsmobile != null">
+				#{fsmobile,jdbcType=VARCHAR},
+			</if>
+			<if test="tradepass != null">
+				#{tradepass,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateById" parameterType="com.ptpl.model.UserFsAccountInfo">
+		update USERFSACCOUNTINFO
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="usrcustid != null">
+				USRCUSTID = #{usrcustid,jdbcType=VARCHAR},
+			</if>
+			<if test="mercustid != null">
+				MERCUSTID = #{mercustid,jdbcType=VARCHAR},
+			</if>
+			<if test="trxid != null">
+				TRXID = #{trxid,jdbcType=VARCHAR},
+			</if>
+			<if test="respcode != null">
+				RESPCODE = #{respcode,jdbcType=VARCHAR},
+			</if>
+			<if test="respdesc != null">
+				RESPDESC = #{respdesc,jdbcType=VARCHAR},
+			</if>
+			<if test="channelidentifier != null">
+				CHANNELIDENTIFIER = #{channelidentifier,jdbcType=VARCHAR},
+			</if>
+			<if test="isopenfsinfo != null">
+				ISOPENFSINFO = #{isopenfsinfo,jdbcType=DECIMAL},
+			</if>
+			<if test="openingtime != null">
+				OPENINGTIME = #{openingtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="usrloginname != null">
+				USRLOGINNAME = #{usrloginname,jdbcType=VARCHAR},
+			</if>
+			<if test="usrname != null">
+				USRNAME = #{usrname,jdbcType=VARCHAR},
+			</if>
+			<if test="accounttype != null">
+				ACCOUNTTYPE = #{accounttype,jdbcType=DECIMAL},
+			</if>
+			<if test="moneymoremoreid != null">
+				MONEYMOREMOREID = #{moneymoremoreid,jdbcType=VARCHAR},
+			</if>
+			<if test="authfee != null">
+				AUTHFEE = #{authfee,jdbcType=FLOAT},
+			</if>
+			<if test="authstate != null">
+				AUTHSTATE = #{authstate,jdbcType=FLOAT},
+			</if>
+			<if test="randomtimestamp != null">
+				RANDOMTIMESTAMP = #{randomtimestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="registertype != null">
+				REGISTERTYPE = #{registertype,jdbcType=FLOAT},
+			</if>
+			<if test="authtimes != null">
+				AUTHTIMES = #{authtimes,jdbcType=INTEGER},
+			</if> 
+			<if test="fsmobile != null">
+				FSMOBILE = #{fsmobile,jdbcType=VARCHAR},
+			</if>
+			<if test="tradepass != null">
+				TRADEPASS = #{tradepass,jdbcType=DECIMAL},
+			</if> 
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	
+	<!-- 获取徽商红包账户 -->
+	<select id="getUsrCustId" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserFsAccountInfo">
+		select usrcustid,baseid from USERFSACCOUNTINFO 
+		where ACCOUNTTYPE = #{accounttype,jdbcType=DECIMAL} 
+		and ACCPURPOSE = #{accPurpose,jdbcType=DECIMAL}
+		and MERCUSTID = #{mercustid,jdbcType=VARCHAR}
+	</select>
+ </mapper>

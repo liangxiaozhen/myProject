@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="0da03b95-4d27-4786-b6ec-ed09d3d164a5" name="myLinuxOracle" url="http://192.168.239.6">
+        <fileTransfer host="192.168.239.6" port="22" rootFolder="/usr/local/mysoft/apache-tomcat-7.0.75/webapps/ptpjx" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="c0767612-99cc-4c8c-a073-64e1cf475eff" name="my.ganjiangps.com " url="http://139.196.189.68">
+        <fileTransfer host="139.196.189.68" port="22" rootFolder="/usr/local/apache-tomcat-7.0.75/webapps/ROOT" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions controlEncoding="utf-8" dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="ce1c9552-f5a5-44d2-b50f-8220ed07437f" name="ptpAPI 服务器" url="http://106.14.80.70">
+        <fileTransfer host="106.14.80.70" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

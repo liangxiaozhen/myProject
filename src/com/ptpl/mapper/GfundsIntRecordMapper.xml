@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.GfundsIntRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.GfundsIntRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="GFIORDERNO" property="gfiorderno" jdbcType="VARCHAR" />
+		<result column="GFIID" property="gfiid" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="PMISCPAYMAN" property="pmiscpayman" jdbcType="VARCHAR" />
+		<result column="INVESTORID" property="investorid" jdbcType="DECIMAL" />
+		<result column="TENDERAMOUNT" property="tenderamount" jdbcType="FLOAT" />
+		<result column="REWARDAMOUNT" property="rewardamount" jdbcType="FLOAT" />
+		<result column="PAYOUTTYPE" property="payouttype" jdbcType="DECIMAL" />
+		<result column="CREATEWAY" property="createway" jdbcType="DECIMAL" />
+		<result column="ISGRANT" property="isgrant" jdbcType="DECIMAL" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL"/>
+		<result column="ISMANBLENDING" property="ismanblending" jdbcType="DECIMAL"/>
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata" jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="DEALDATE" property="dealdate" jdbcType="TIMESTAMP" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<association property="guardinterest" resultMap="GfundsIntMap" />
+		<association property="tender" resultMap="TenderItemMap" />
+		<association property="investor" resultMap="UserBaseInfoMap" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.GfundsInt" id="GfundsIntMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="GFUNDSINTNO" property="gfundsintno" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.TenderItem" id="TenderItemMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TNO" property="tno" jdbcType="VARCHAR" />
+		<result column="TNAME" property="tname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="UserBaseInfoMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, GFIORDERNO, GFIID, TENDERID, PMISCPAYMAN, INVESTORID, TENDERAMOUNT,
+		REWARDAMOUNT, PAYOUTTYPE, CREATEWAY, ISGRANT, ISBLENDING, ISMANBLENDING,
+		SYSBTIME, MANBTIME, PAYCOMPANY, SYSRECTIME, RECEIVETIME, REQQUERYDATA,
+		RECRESULTDATA, MADETIME, DEALDATE, ISAUDIT, AUDITMAN, AUDIT, REMARK
+	</sql>
+
+	<sql id="Association_Column_List">
+		GIR.ID, GIR.GFIORDERNO, GIR.GFIID, GIR.TENDERID, GIR.PMISCPAYMAN,
+		GIR.INVESTORID, GIR.TENDERAMOUNT, GIR.REWARDAMOUNT, GIR.PAYOUTTYPE,
+		GIR.CREATEWAY, GIR.ISGRANT, GIR.ISBLENDING, GIR.ISMANBLENDING,
+		GIR.SYSBTIME, GIR.MANBTIME, GIR.PAYCOMPANY, GIR.SYSRECTIME, GIR.RECEIVETIME,
+		GIR.REQQUERYDATA, GIR.RECRESULTDATA, GIR.MADETIME, GIR.DEALDATE, GIR.ISAUDIT,
+		GIR.AUDITMAN, GIR.AUDITTIME, GIR.REMARK, GI.GFUNDSINTNO, TI.TNO,
+		TI.TNAME, UBAI.LOGINNAME
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Association_Column_List" />
+		from
+		GFUNDSINTRECORD GIR
+		LEFT JOIN GFUNDSINT GI ON GIR.GFIID = GI.ID
+		LEFT JOIN TENDERITEM TI ON GIR.TENDERID = TI.ID
+		LEFT JOIN USERBASEACCOUNTINFO UBAI ON GIR.INVESTORID = UBAI.ID
+		where
+		GIR.ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from GFUNDSINTRECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.GfundsIntRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GFUNDSINTRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GFUNDSINTRECORD (ID, GFIORDERNO, GFIID,
+		TENDERID, PMISCPAYMAN, INVESTORID, TENDERAMOUNT, 
+		REWARDAMOUNT, PAYOUTTYPE, CREATEWAY, ISGRANT, 
+		ISBLENDING, ISMANBLENDING, SYSBTIME, MANBTIME, 
+		PAYCOMPANY, SYSRECTIME, RECEIVETIME, REQQUERYDATA,
+		RECRESULTDATA, MADETIME, DEALDATE, ISAUDIT, 
+		AUDITMAN, AUDITTIME REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{gfiorderno,jdbcType=VARCHAR},
+		#{gfiid,jdbcType=DECIMAL}, #{tenderid,jdbcType=DECIMAL}, 
+		#{pmiscpayman,jdbcType=VARCHAR}, #{investorid,jdbcType=DECIMAL},
+		#{tenderamount,jdbcType=FLOAT}, #{rewardamount,jdbcType=FLOAT},
+		#{payouttype,jdbcType=DECIMAL}, #{createway,jdbcType=DECIMAL},
+		#{isgrant,jdbcType=DECIMAL}, #{isblending,jdbcType=DECIMAL}, 
+		#{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP}, #{paycompany,jdbcType=VARCHAR},
+		#{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR},
+		#{madetime,jdbcType=TIMESTAMP}, #{dealdate,jdbcType=TIMESTAMP},
+		#{isaudit,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.GfundsIntRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT GFUNDSINTRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into GFUNDSINTRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="gfiorderno != null">
+				GFIORDERNO,
+			</if>
+			<if test="gfiid != null">
+				GFIID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="pmiscpayman != null">
+				PMISCPAYMAN,
+			</if>
+			<if test="investorid != null">
+				INVESTORID,
+			</if>
+			<if test="tenderamount != null">
+				TENDERAMOUNT,
+			</if>
+			<if test="rewardamount != null">
+				REWARDAMOUNT,
+			</if>
+			<if test="payouttype != null">
+				PAYOUTTYPE,
+			</if>
+			<if test="createway != null">
+				CREATEWAY,
+			</if>
+			<if test="isgrant != null">
+				ISGRANT,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="dealdate != null">
+				DEALDATE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="gfiorderno != null">
+				#{gfiorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="gfiid != null">
+				#{gfiid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="pmiscpayman != null">
+				#{pmiscpayman,jdbcType=VARCHAR},
+			</if>
+			<if test="investorid != null">
+				#{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderamount != null">
+				#{tenderamount,jdbcType=FLOAT},
+			</if>
+			<if test="rewardamount != null">
+				#{rewardamount,jdbcType=FLOAT},
+			</if>
+			<if test="payouttype != null">
+				#{payouttype,jdbcType=DECIMAL},
+			</if>
+			<if test="createway != null">
+				#{createway,jdbcType=DECIMAL},
+			</if>
+			<if test="isgrant != null">
+				#{isgrant,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dealdate != null">
+				#{dealdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据站岗利息流水号修改站岗利息记录表 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.GfundsIntRecord">
+		update GFUNDSINTRECORD
+		<set>
+			<if test="pmiscpayman != null">
+				PMISCPAYMAN = #{pmiscpayman,jdbcType=VARCHAR},
+			</if>
+			<if test="tenderamount != null">
+				TENDERAMOUNT = #{tenderamount,jdbcType=FLOAT},
+			</if>
+			<if test="rewardamount != null">
+				REWARDAMOUNT = #{rewardamount,jdbcType=FLOAT},
+			</if>
+			<if test="payouttype != null">
+				PAYOUTTYPE = #{payouttype,jdbcType=DECIMAL},
+			</if>
+			<if test="createway != null">
+				CREATEWAY = #{createway,jdbcType=DECIMAL},
+			</if>
+			<if test="isgrant != null">
+				ISGRANT = #{isgrant,jdbcType=DECIMAL},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dealdate != null">
+				DEALDATE = #{dealdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.GfundsIntRecord">
+		update GFUNDSINTRECORD
+		set GFIORDERNO = #{gfiorderno,jdbcType=VARCHAR},
+		GFIID = #{gfiid,jdbcType=DECIMAL},
+		TENDERID = #{tenderid,jdbcType=DECIMAL},
+		PMISCPAYMAN = #{pmiscpayman,jdbcType=VARCHAR},
+		INVESTORID = #{investorid,jdbcType=DECIMAL},
+		TENDERAMOUNT = #{tenderamount,jdbcType=FLOAT},
+		REWARDAMOUNT = #{rewardamount,jdbcType=FLOAT},
+		PAYOUTTYPE = #{payouttype,jdbcType=DECIMAL},
+		CREATEWAY = #{createway,jdbcType=DECIMAL},
+		ISGRANT = #{isgrant,jdbcType=DECIMAL},
+		ISBLENDING = #{isblending,jdbcType=DECIMAL},
+		ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+		SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+		MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+		PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+		SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+		RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+		REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+		RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+		MADETIME = #{madetime,jdbcType=TIMESTAMP},
+		DEALDATE = #{dealdate,jdbcType=TIMESTAMP},
+		ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+		AUDITMAN = #{auditman,jdbcType=VARCHAR},
+		AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 查询标的站岗利息记录列表 -->
+	<select id="findGfundsIntRecord" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.GfundsIntRecord">
+		select
+		<include refid="Association_Column_List" />
+		from
+		GFUNDSINTRECORD GIR
+		LEFT JOIN GFUNDSINT GI ON GIR.GFIID = GI.ID
+		LEFT JOIN TENDERITEM TI ON GIR.TENDERID = TI.ID
+		LEFT JOIN USERBASEACCOUNTINFO UBAI ON GIR.INVESTORID = UBAI.ID
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="gfiorderno != null">
+				AND GIR.GFIORDERNO = #{gfiorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="gfiid != null">
+				AND GIR.GFIID = #{gfiid,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderid != null">
+				AND GIR.TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="pmiscpayman != null">
+				AND GIR.PMISCPAYMAN = #{pmiscpayman,jdbcType=VARCHAR}
+			</if>
+			<if test="tenderamount != null">
+				AND GIR.TENDERAMOUNT = #{tenderamount,jdbcType=FLOAT}
+			</if>
+			<if test="rewardamount != null">
+				AND GIR.REWARDAMOUNT = #{rewardamount,jdbcType=FLOAT}
+			</if>
+			<if test="payouttype != null">
+				AND GIR.PAYOUTTYPE = #{payouttype,jdbcType=DECIMAL}
+			</if>
+			<if test="createway != null">
+				AND GIR.CREATEWAY = #{createway,jdbcType=DECIMAL}
+			</if>
+			<if test="isgrant != null">
+				AND GIR.ISGRANT = #{isgrant,jdbcType=DECIMAL}
+			</if>
+			<if test="isblending != null">
+				AND GIR.ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				AND GIR.ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				AND GIR.SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				AND GIR.MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				AND GIR.PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				AND GIR.SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				AND GIR.RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				AND GIR.REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				AND GIR.RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				AND GIR.MADETIME = #{madetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="dealdate != null">
+				AND GIR.DEALDATE = #{dealdate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isaudit != null">
+				AND GIR.ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null">
+				AND GIR.AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				AND GIR.AUDITTIME = #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="investor != null and investor.loginname != ''">
+				AND UBAI.LOGINNAME = #{investor.loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="tender != null">
+				AND TI.TNO = #{tender.tno,jdbcType=VARCHAR}
+			</if>
+			<if test="tender != null">
+				AND TI.TNAME = #{tender.tname,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据投资人id查询标的站岗利息记录 -->
+	<select id="findGfundsIntRecordByInvestorId" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.GfundsIntRecord">
+		select
+		<include refid="Association_Column_List" />
+		from
+		GFUNDSINTRECORD GIR
+		LEFT JOIN GFUNDSINT GI ON GIR.GFIID = GI.ID
+		LEFT JOIN TENDERITEM TI ON GIR.TENDERID = TI.ID
+		LEFT JOIN USERBASEACCOUNTINFO UBAI ON GIR.INVESTORID = UBAI.ID
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="gfiorderno != null">
+				AND GIR.GFIORDERNO = #{gfiorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="gfiid != null">
+				AND GIR.GFIID = #{gfiid,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderid != null">
+				AND GIR.TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="pmiscpayman != null">
+				AND GIR.PMISCPAYMAN = #{pmiscpayman,jdbcType=VARCHAR}
+			</if>
+			<if test="investorid != null">
+				AND GIR.INVESTORID = #{investorid,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderamount != null">
+				AND GIR.TENDERAMOUNT = #{tenderamount,jdbcType=FLOAT}
+			</if>
+			<if test="rewardamount != null">
+				AND GIR.REWARDAMOUNT = #{rewardamount,jdbcType=FLOAT}
+			</if>
+			<if test="payouttype != null">
+				AND GIR.PAYOUTTYPE = #{payouttype,jdbcType=DECIMAL}
+			</if>
+			<if test="createway != null">
+				AND GIR.CREATEWAY = #{createway,jdbcType=DECIMAL}
+			</if>
+			<if test="isgrant != null">
+				AND GIR.ISGRANT = #{isgrant,jdbcType=DECIMAL}
+			</if>
+			<if test="isblending != null">
+				AND GIR.ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				AND GIR.ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				AND GIR.SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				AND GIR.MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				AND GIR.PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				AND GIR.SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				AND GIR.RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				AND GIR.REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				AND GIR.RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				AND GIR.MADETIME = #{madetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="dealdate != null">
+				AND GIR.DEALDATE = #{dealdate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isaudit != null">
+				AND GIR.ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null">
+				AND GIR.AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				AND GIR.AUDITTIME = #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="investor != null and investor.loginname != ''">
+				AND UBAI.LOGINNAME = #{investor.loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="tender != null">
+				AND TI.TNO = #{tender.tno,jdbcType=VARCHAR}
+			</if>
+			<if test="tender != null">
+				AND TI.TNAME = #{tender.tname,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+</mapper>

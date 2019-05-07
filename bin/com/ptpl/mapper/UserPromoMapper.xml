@@ -1,0 +1,3115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserPromoMapper">
+	<resultMap id="IDResultMap" type="com.ptpl.model.UserPromo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+	</resultMap>
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserPromo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+		<result column="PROXYGRADE" property="proxygrade" jdbcType="DECIMAL" />
+		<result column="PROMOLEVELS" property="promolevels" jdbcType="DECIMAL" />
+		<result column="PARENTLEVELS" property="parentlevels" jdbcType="DECIMAL" />
+		<result column="SUPNAME" property="supname" jdbcType="VARCHAR" />
+		<result column="SUPLOGINNAME" property="suploginname" jdbcType="VARCHAR" />
+		<result column="ISOPENFSINFO" property="isopenfsinfo" jdbcType="DECIMAL" />
+		<result column="PROMOCODE" property="promocode" jdbcType="VARCHAR" />
+		<result column="SUPPROMOCODE" property="suppromocode" jdbcType="VARCHAR" />
+		<result column="REGDATE" property="regdate" jdbcType="TIMESTAMP" />
+		<result column="PROMONUM" property="promonum" jdbcType="DECIMAL" />
+		<result column="PROMOFEE" property="promofee" jdbcType="FLOAT" />
+		<result column="SUBREMARK" property="subremark" jdbcType="VARCHAR" />
+		<result column="ADMINREMARK" property="adminremark" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISMODIFY" property="ismodify" jdbcType="DECIMAL" />
+		<result column="VALIDNUM" property="validnum" jdbcType="DECIMAL" />
+		<result column="USERSPECIALFLAG" property="userspecialflag"
+			jdbcType="DECIMAL" />
+		<result column="SUPLEVELS2" property="suplevels2" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS3" property="suplevels3" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS4" property="suplevels4" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS5" property="suplevels5" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS6" property="suplevels6" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS7" property="suplevels7" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS8" property="suplevels8" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS9" property="suplevels9" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS10" property="suplevels10" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS11" property="suplevels11" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS12" property="suplevels12" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS13" property="suplevels13" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS14" property="suplevels14" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS15" property="suplevels15" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS16" property="suplevels16" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS17" property="suplevels17" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS18" property="suplevels18" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS19" property="suplevels19" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS20" property="suplevels20" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS21" property="suplevels21" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS22" property="suplevels22" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS23" property="suplevels23" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS24" property="suplevels24" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS25" property="suplevels25" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS26" property="suplevels26" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS27" property="suplevels27" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS28" property="suplevels28" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS29" property="suplevels29" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS30" property="suplevels30" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS31" property="suplevels31" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS32" property="suplevels32" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS33" property="suplevels33" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS34" property="suplevels34" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS35" property="suplevels35" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS36" property="suplevels36" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS37" property="suplevels37" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS38" property="suplevels38" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS39" property="suplevels39" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS40" property="suplevels40" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS41" property="suplevels41" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS42" property="suplevels42" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS43" property="suplevels43" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS44" property="suplevels44" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS45" property="suplevels45" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS46" property="suplevels46" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS47" property="suplevels47" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS48" property="suplevels48" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS49" property="suplevels49" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS50" property="suplevels50" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS51" property="suplevels51" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS52" property="suplevels52" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS53" property="suplevels53" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS54" property="suplevels54" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS55" property="suplevels55" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS56" property="suplevels56" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS57" property="suplevels57" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS58" property="suplevels58" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS59" property="suplevels59" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS60" property="suplevels60" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS61" property="suplevels61" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS62" property="suplevels62" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS63" property="suplevels63" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS64" property="suplevels64" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS65" property="suplevels65" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS66" property="suplevels66" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS67" property="suplevels67" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS68" property="suplevels68" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS69" property="suplevels69" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS70" property="suplevels70" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS71" property="suplevels71" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS72" property="suplevels72" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS73" property="suplevels73" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS74" property="suplevels74" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS75" property="suplevels75" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS76" property="suplevels76" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS77" property="suplevels77" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS78" property="suplevels78" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS79" property="suplevels79" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS80" property="suplevels80" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS81" property="suplevels81" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS82" property="suplevels82" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS83" property="suplevels83" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS84" property="suplevels84" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS85" property="suplevels85" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS86" property="suplevels86" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS87" property="suplevels87" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS88" property="suplevels88" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS89" property="suplevels89" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS90" property="suplevels90" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS91" property="suplevels91" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS92" property="suplevels92" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS93" property="suplevels93" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS94" property="suplevels94" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS95" property="suplevels95" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS96" property="suplevels96" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS97" property="suplevels97" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS98" property="suplevels98" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS99" property="suplevels99" jdbcType="VARCHAR" />
+		<result column="SUPLEVELS100" property="suplevels100" jdbcType="VARCHAR" />
+		<result column="ISVALID2" property="isvalid2" jdbcType="DECIMAL" />
+		<result column="ISVALID3" property="isvalid3" jdbcType="DECIMAL" />
+		<result column="ISVALID4" property="isvalid4" jdbcType="DECIMAL" />
+		<result column="ISVALID5" property="isvalid5" jdbcType="DECIMAL" />
+		<result column="ISVALID6" property="isvalid6" jdbcType="DECIMAL" />
+		<result column="ISVALID7" property="isvalid7" jdbcType="DECIMAL" />
+		<result column="ISVALID8" property="isvalid8" jdbcType="DECIMAL" />
+		<result column="ISVALID9" property="isvalid9" jdbcType="DECIMAL" />
+		<result column="ISVALID10" property="isvalid10" jdbcType="DECIMAL" />
+		<result column="ISVALID11" property="isvalid11" jdbcType="DECIMAL" />
+		<result column="ISVALID12" property="isvalid12" jdbcType="DECIMAL" />
+		<result column="ISVALID13" property="isvalid13" jdbcType="DECIMAL" />
+		<result column="ISVALID14" property="isvalid14" jdbcType="DECIMAL" />
+		<result column="ISVALID15" property="isvalid15" jdbcType="DECIMAL" />
+		<result column="ISVALID16" property="isvalid16" jdbcType="DECIMAL" />
+		<result column="ISVALID17" property="isvalid17" jdbcType="DECIMAL" />
+		<result column="ISVALID18" property="isvalid18" jdbcType="DECIMAL" />
+		<result column="ISVALID19" property="isvalid19" jdbcType="DECIMAL" />
+		<result column="ISVALID20" property="isvalid20" jdbcType="DECIMAL" />
+		<result column="ISVALID21" property="isvalid21" jdbcType="DECIMAL" />
+		<result column="ISVALID22" property="isvalid22" jdbcType="DECIMAL" />
+		<result column="ISVALID23" property="isvalid23" jdbcType="DECIMAL" />
+		<result column="ISVALID24" property="isvalid24" jdbcType="DECIMAL" />
+		<result column="ISVALID25" property="isvalid25" jdbcType="DECIMAL" />
+		<result column="ISVALID26" property="isvalid26" jdbcType="DECIMAL" />
+		<result column="ISVALID27" property="isvalid27" jdbcType="DECIMAL" />
+		<result column="ISVALID28" property="isvalid28" jdbcType="DECIMAL" />
+		<result column="ISVALID29" property="isvalid29" jdbcType="DECIMAL" />
+		<result column="ISVALID30" property="isvalid30" jdbcType="DECIMAL" />
+		<result column="ISVALID31" property="isvalid31" jdbcType="DECIMAL" />
+		<result column="ISVALID32" property="isvalid32" jdbcType="DECIMAL" />
+		<result column="ISVALID33" property="isvalid33" jdbcType="DECIMAL" />
+		<result column="ISVALID34" property="isvalid34" jdbcType="DECIMAL" />
+		<result column="ISVALID35" property="isvalid35" jdbcType="DECIMAL" />
+		<result column="ISVALID36" property="isvalid36" jdbcType="DECIMAL" />
+		<result column="ISVALID37" property="isvalid37" jdbcType="DECIMAL" />
+		<result column="ISVALID38" property="isvalid38" jdbcType="DECIMAL" />
+		<result column="ISVALID39" property="isvalid39" jdbcType="DECIMAL" />
+		<result column="ISVALID40" property="isvalid40" jdbcType="DECIMAL" />
+		<result column="ISVALID41" property="isvalid41" jdbcType="DECIMAL" />
+		<result column="ISVALID42" property="isvalid42" jdbcType="DECIMAL" />
+		<result column="ISVALID43" property="isvalid43" jdbcType="DECIMAL" />
+		<result column="ISVALID44" property="isvalid44" jdbcType="DECIMAL" />
+		<result column="ISVALID45" property="isvalid45" jdbcType="DECIMAL" />
+		<result column="ISVALID46" property="isvalid46" jdbcType="DECIMAL" />
+		<result column="ISVALID47" property="isvalid47" jdbcType="DECIMAL" />
+		<result column="ISVALID48" property="isvalid48" jdbcType="DECIMAL" />
+		<result column="ISVALID49" property="isvalid49" jdbcType="DECIMAL" />
+		<result column="ISVALID50" property="isvalid50" jdbcType="DECIMAL" />
+		<result column="ISVALID51" property="isvalid51" jdbcType="DECIMAL" />
+		<result column="ISVALID52" property="isvalid52" jdbcType="DECIMAL" />
+		<result column="ISVALID53" property="isvalid53" jdbcType="DECIMAL" />
+		<result column="ISVALID54" property="isvalid54" jdbcType="DECIMAL" />
+		<result column="ISVALID55" property="isvalid55" jdbcType="DECIMAL" />
+		<result column="ISVALID56" property="isvalid56" jdbcType="DECIMAL" />
+		<result column="ISVALID57" property="isvalid57" jdbcType="DECIMAL" />
+		<result column="ISVALID58" property="isvalid58" jdbcType="DECIMAL" />
+		<result column="ISVALID59" property="isvalid59" jdbcType="DECIMAL" />
+		<result column="ISVALID60" property="isvalid60" jdbcType="DECIMAL" />
+		<result column="ISVALID61" property="isvalid61" jdbcType="DECIMAL" />
+		<result column="ISVALID62" property="isvalid62" jdbcType="DECIMAL" />
+		<result column="ISVALID63" property="isvalid63" jdbcType="DECIMAL" />
+		<result column="ISVALID64" property="isvalid64" jdbcType="DECIMAL" />
+		<result column="ISVALID65" property="isvalid65" jdbcType="DECIMAL" />
+		<result column="ISVALID66" property="isvalid66" jdbcType="DECIMAL" />
+		<result column="ISVALID67" property="isvalid67" jdbcType="DECIMAL" />
+		<result column="ISVALID68" property="isvalid68" jdbcType="DECIMAL" />
+		<result column="ISVALID69" property="isvalid69" jdbcType="DECIMAL" />
+		<result column="ISVALID70" property="isvalid70" jdbcType="DECIMAL" />
+		<result column="ISVALID71" property="isvalid71" jdbcType="DECIMAL" />
+		<result column="ISVALID72" property="isvalid72" jdbcType="DECIMAL" />
+		<result column="ISVALID73" property="isvalid73" jdbcType="DECIMAL" />
+		<result column="ISVALID74" property="isvalid74" jdbcType="DECIMAL" />
+		<result column="ISVALID75" property="isvalid75" jdbcType="DECIMAL" />
+		<result column="ISVALID76" property="isvalid76" jdbcType="DECIMAL" />
+		<result column="ISVALID77" property="isvalid77" jdbcType="DECIMAL" />
+		<result column="ISVALID78" property="isvalid78" jdbcType="DECIMAL" />
+		<result column="ISVALID79" property="isvalid79" jdbcType="DECIMAL" />
+		<result column="ISVALID80" property="isvalid80" jdbcType="DECIMAL" />
+		<result column="ISVALID81" property="isvalid81" jdbcType="DECIMAL" />
+		<result column="ISVALID82" property="isvalid82" jdbcType="DECIMAL" />
+		<result column="ISVALID83" property="isvalid83" jdbcType="DECIMAL" />
+		<result column="ISVALID84" property="isvalid84" jdbcType="DECIMAL" />
+		<result column="ISVALID85" property="isvalid85" jdbcType="DECIMAL" />
+		<result column="ISVALID86" property="isvalid86" jdbcType="DECIMAL" />
+		<result column="ISVALID87" property="isvalid87" jdbcType="DECIMAL" />
+		<result column="ISVALID88" property="isvalid88" jdbcType="DECIMAL" />
+		<result column="ISVALID89" property="isvalid89" jdbcType="DECIMAL" />
+		<result column="ISVALID90" property="isvalid90" jdbcType="DECIMAL" />
+		<result column="ISVALID91" property="isvalid91" jdbcType="DECIMAL" />
+		<result column="ISVALID92" property="isvalid92" jdbcType="DECIMAL" />
+		<result column="ISVALID93" property="isvalid93" jdbcType="DECIMAL" />
+		<result column="ISVALID94" property="isvalid94" jdbcType="DECIMAL" />
+		<result column="ISVALID95" property="isvalid95" jdbcType="DECIMAL" />
+		<result column="ISVALID96" property="isvalid96" jdbcType="DECIMAL" />
+		<result column="ISVALID97" property="isvalid97" jdbcType="DECIMAL" />
+		<result column="ISVALID98" property="isvalid98" jdbcType="DECIMAL" />
+		<result column="ISVALID99" property="isvalid99" jdbcType="DECIMAL" />
+		<result column="ISVALID100" property="isvalid100" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, NAME, LOGINNAME, PROXYGRADE, PROMOLEVELS,PARENTLEVELS,
+		SUPNAME, SUPLOGINNAME,
+		ISOPENFSINFO,
+		PROMOCODE, SUPPROMOCODE, REGDATE,
+		PROMONUM, PROMOFEE, SUBREMARK, ADMINREMARK,
+		REMARK,
+		ISMODIFY,VALIDNUM,USERSPECIALFLAG,
+		SUPLEVELS2,SUPLEVELS3,SUPLEVELS4,SUPLEVELS5,SUPLEVELS6,SUPLEVELS7,SUPLEVELS8,SUPLEVELS9,SUPLEVELS10,
+		SUPLEVELS11,SUPLEVELS12,SUPLEVELS13,SUPLEVELS14,SUPLEVELS15,SUPLEVELS16,SUPLEVELS17,SUPLEVELS18,SUPLEVELS19,SUPLEVELS20,
+		SUPLEVELS21,SUPLEVELS22,SUPLEVELS23,SUPLEVELS24,SUPLEVELS25,SUPLEVELS26,SUPLEVELS27,SUPLEVELS28,SUPLEVELS29,SUPLEVELS30,
+		SUPLEVELS31,SUPLEVELS32,SUPLEVELS33,SUPLEVELS34,SUPLEVELS35,SUPLEVELS36,SUPLEVELS37,SUPLEVELS38,SUPLEVELS39,SUPLEVELS40,
+		SUPLEVELS41,SUPLEVELS42,SUPLEVELS43,SUPLEVELS44,SUPLEVELS45,SUPLEVELS46,SUPLEVELS47,SUPLEVELS48,SUPLEVELS49,SUPLEVELS50,
+		SUPLEVELS51,SUPLEVELS52,SUPLEVELS53,SUPLEVELS54,SUPLEVELS55,SUPLEVELS56,SUPLEVELS57,SUPLEVELS58,SUPLEVELS59,SUPLEVELS60,
+		SUPLEVELS61,SUPLEVELS62,SUPLEVELS63,SUPLEVELS64,SUPLEVELS65,SUPLEVELS66,SUPLEVELS67,SUPLEVELS68,SUPLEVELS69,SUPLEVELS70,
+		SUPLEVELS71,SUPLEVELS72,SUPLEVELS73,SUPLEVELS74,SUPLEVELS75,SUPLEVELS76,SUPLEVELS77,SUPLEVELS78,SUPLEVELS79,SUPLEVELS80,
+		SUPLEVELS81,SUPLEVELS82,SUPLEVELS83,SUPLEVELS84,SUPLEVELS85,SUPLEVELS86,SUPLEVELS87,SUPLEVELS88,SUPLEVELS89,SUPLEVELS90,
+		SUPLEVELS91,SUPLEVELS92,SUPLEVELS93,SUPLEVELS94,SUPLEVELS95,SUPLEVELS96,SUPLEVELS97,SUPLEVELS98,SUPLEVELS99,SUPLEVELS100,
+		ISVALID2,ISVALID3,ISVALID4,ISVALID5,ISVALID6,ISVALID7,ISVALID8,ISVALID9,ISVALID10,
+		ISVALID11,ISVALID12,ISVALID13,ISVALID14,ISVALID15,ISVALID16,ISVALID17,ISVALID18,ISVALID19,ISVALID20,
+		ISVALID21,ISVALID22,ISVALID23,ISVALID24,ISVALID25,ISVALID26,ISVALID27,ISVALID28,ISVALID29,ISVALID30,
+		ISVALID31,ISVALID32,ISVALID33,ISVALID34,ISVALID35,ISVALID36,ISVALID37,ISVALID38,ISVALID39,ISVALID40,
+		ISVALID41,ISVALID42,ISVALID43,ISVALID44,ISVALID45,ISVALID46,ISVALID47,ISVALID48,ISVALID49,ISVALID50,
+		ISVALID51,ISVALID52,ISVALID53,ISVALID54,ISVALID55,ISVALID56,ISVALID57,ISVALID58,ISVALID59,ISVALID60,
+		ISVALID61,ISVALID62,ISVALID63,ISVALID64,ISVALID65,ISVALID66,ISVALID67,ISVALID68,ISVALID69,ISVALID70,
+		ISVALID71,ISVALID72,ISVALID73,ISVALID74,ISVALID75,ISVALID76,ISVALID77,ISVALID78,ISVALID79,ISVALID80,
+		ISVALID81,ISVALID82,ISVALID83,ISVALID84,ISVALID85,ISVALID86,ISVALID87,ISVALID88,ISVALID89,ISVALID90,
+		ISVALID91,ISVALID92,ISVALID93,ISVALID94,ISVALID95,ISVALID96,ISVALID97,ISVALID98,ISVALID99,ISVALID100
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERPROMO
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="getID" resultMap="IDResultMap">
+		select id from userpromo group by
+		id order by id
+	</select>
+	<select id="selectBySupName" parameterType="String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERPROMO
+		<where>
+			SUPLEVELS2 = #{0}
+			or SUPLEVELS3 = #{0}
+			or SUPLEVELS4 = #{0}
+			or
+			SUPLEVELS5 = #{0}
+			or
+			SUPLEVELS6 = #{0}
+			or SUPLEVELS7 = #{0}
+			or SUPLEVELS8
+			= #{0}
+			or
+			SUPLEVELS9 = #{0}
+			or SUPLEVELS10 = #{0}
+			or SUPLEVELS11 = #{0}
+			or
+			SUPLEVELS12 = #{0}
+			or SUPLEVELS13 = #{0}
+			or SUPLEVELS14 = #{0}
+			or
+			SUPLEVELS15 = #{0}
+			or SUPLEVELS16 = #{0}
+			or SUPLEVELS17 = #{0}
+			or
+			SUPLEVELS18 = #{0}
+			or SUPLEVELS19 = #{0}
+			or SUPLEVELS20 = #{0}
+			or
+			SUPLEVELS21 = #{0}
+			or SUPLEVELS22 = #{0}
+			or SUPLEVELS23 = #{0}
+			or
+			SUPLEVELS24 = #{0}
+			or SUPLEVELS25 = #{0}
+			or SUPLEVELS26 = #{0}
+			or
+			SUPLEVELS27 = #{0}
+			or SUPLEVELS28 = #{0}
+			or SUPLEVELS29 = #{0}
+			or
+			SUPLEVELS30 = #{0}
+			or SUPLEVELS31 = #{0}
+			or SUPLEVELS32 = #{0}
+			or
+			SUPLEVELS33 = #{0}
+			or SUPLEVELS34 = #{0}
+			or SUPLEVELS35 = #{0}
+			or
+			SUPLEVELS36 = #{0}
+			or SUPLEVELS37 = #{0}
+			or SUPLEVELS38 = #{0}
+			or
+			SUPLEVELS39 = #{0}
+			or SUPLEVELS40 = #{0}
+			or SUPLEVELS41 = #{0}
+			or
+			SUPLEVELS42 = #{0}
+			or SUPLEVELS43 = #{0}
+			or SUPLEVELS44 = #{0}
+			or
+			SUPLEVELS45 = #{0}
+			or SUPLEVELS46 = #{0}
+			or SUPLEVELS47 = #{0}
+			or
+			SUPLEVELS48 = #{0}
+			or SUPLEVELS49 = #{0}
+			or SUPLEVELS50 = #{0}
+			or
+			SUPLEVELS51 = #{0}
+			or SUPLEVELS52 = #{0}
+			or SUPLEVELS53 = #{0}
+			or
+			SUPLEVELS54 = #{0}
+			or SUPLEVELS55 = #{0}
+			or SUPLEVELS56 = #{0}
+			or
+			SUPLEVELS57 = #{0}
+			or SUPLEVELS58 = #{0}
+			or SUPLEVELS59 = #{0}
+			or
+			SUPLEVELS60 = #{0}
+			or SUPLEVELS61 = #{0}
+			or SUPLEVELS62 = #{0}
+			or
+			SUPLEVELS63 = #{0}
+			or SUPLEVELS64 = #{0}
+			or SUPLEVELS65 = #{0}
+			or
+			SUPLEVELS66 = #{0}
+			or SUPLEVELS67 = #{0}
+			or SUPLEVELS68 = #{0}
+			or
+			SUPLEVELS69 = #{0}
+			or SUPLEVELS70 = #{0}
+			or SUPLEVELS71 = #{0}
+			or
+			SUPLEVELS72 = #{0}
+			or SUPLEVELS73 = #{0}
+			or SUPLEVELS74 = #{0}
+			or
+			SUPLEVELS75 = #{0}
+			or SUPLEVELS76 = #{0}
+			or SUPLEVELS77 = #{0}
+			or
+			SUPLEVELS78 = #{0}
+			or SUPLEVELS79 = #{0}
+			or SUPLEVELS80 = #{0}
+			or
+			SUPLEVELS81 = #{0}
+			or SUPLEVELS82 = #{0}
+			or SUPLEVELS83 = #{0}
+			or
+			SUPLEVELS84 = #{0}
+			or SUPLEVELS85 = #{0}
+			or SUPLEVELS86 = #{0}
+			or
+			SUPLEVELS87 = #{0}
+			or SUPLEVELS88 = #{0}
+			or SUPLEVELS89 = #{0}
+			or
+			SUPLEVELS90 = #{0}
+			or SUPLEVELS91 = #{0}
+			or SUPLEVELS92 = #{0}
+			or
+			SUPLEVELS93 = #{0}
+			or SUPLEVELS94 = #{0}
+			or SUPLEVELS95 = #{0}
+			or
+			SUPLEVELS96 = #{0}
+			or SUPLEVELS97 = #{0}
+			or SUPLEVELS98 = #{0}
+			or
+			SUPLEVELS99 = #{0}
+			or SUPLEVELS100 = #{0}
+		</where>
+		order by promolevels
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		USERPROMO
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserPromo">
+		insert into USERPROMO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="name != null">
+				NAME,
+			</if>
+			<if test="loginname != null">
+				LOGINNAME,
+			</if>
+			<if test="proxygrade != null">
+				PROXYGRADE,
+			</if>
+			<if test="promolevels != null">
+				PROMOLEVELS,
+			</if>
+			<if test="parentlevels != null">
+				PARENTLEVELS,
+			</if>
+			<if test="supname != null">
+				SUPNAME,
+			</if>
+			<if test="suploginname != null">
+				SUPLOGINNAME,
+			</if>
+			<if test="isopenfsinfo != null">
+				ISOPENFSINFO,
+			</if>
+			<if test="promocode != null">
+				PROMOCODE,
+			</if>
+			<if test="suppromocode != null">
+				SUPPROMOCODE,
+			</if>
+			<if test="regdate != null">
+				REGDATE,
+			</if>
+			<if test="promonum != null">
+				PROMONUM,
+			</if>
+			<if test="promofee != null">
+				PROMOFEE,
+			</if>
+			<if test="subremark != null">
+				SUBREMARK,
+			</if>
+			<if test="adminremark != null">
+				ADMINREMARK,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="ismodify != null">
+				ISMODIFY,
+			</if>
+			<if test="validnum != null">
+				VALIDNUM,
+			</if>
+			<if test="userspecialflag != null">
+				USERSPECIALFLAG,
+			</if>
+			<if test="suplevels2 !=null">
+				SUPLEVELS2,
+			</if>
+			<if test="suplevels3 !=null">
+				SUPLEVELS3,
+			</if>
+			<if test="suplevels4 !=null">
+				SUPLEVELS4,
+			</if>
+			<if test="suplevels5 !=null">
+				SUPLEVELS5,
+			</if>
+			<if test="suplevels6 !=null">
+				SUPLEVELS6,
+			</if>
+			<if test="suplevels7 !=null">
+				SUPLEVELS7,
+			</if>
+			<if test="suplevels8 !=null">
+				SUPLEVELS8,
+			</if>
+			<if test="suplevels9 !=null">
+				SUPLEVELS9,
+			</if>
+			<if test="suplevels10 !=null">
+				SUPLEVELS10,
+			</if>
+			<if test="suplevels11 !=null">
+				SUPLEVELS11,
+			</if>
+			<if test="suplevels12 !=null">
+				SUPLEVELS12,
+			</if>
+			<if test="suplevels13 !=null">
+				SUPLEVELS13,
+			</if>
+			<if test="suplevels14 !=null">
+				SUPLEVELS14,
+			</if>
+			<if test="suplevels15 !=null">
+				SUPLEVELS15,
+			</if>
+			<if test="suplevels16 !=null">
+				SUPLEVELS16,
+			</if>
+			<if test="suplevels17 !=null">
+				SUPLEVELS17,
+			</if>
+			<if test="suplevels18 !=null">
+				SUPLEVELS18,
+			</if>
+			<if test="suplevels19 !=null">
+				SUPLEVELS19,
+			</if>
+			<if test="suplevels20 !=null">
+				SUPLEVELS20,
+			</if>
+			<if test="suplevels21 !=null">
+				SUPLEVELS21,
+			</if>
+			<if test="suplevels22 !=null">
+				SUPLEVELS22,
+			</if>
+			<if test="suplevels23 !=null">
+				SUPLEVELS23,
+			</if>
+			<if test="suplevels24 !=null">
+				SUPLEVELS24,
+			</if>
+			<if test="suplevels25 !=null">
+				SUPLEVELS25,
+			</if>
+			<if test="suplevels26 !=null">
+				SUPLEVELS26,
+			</if>
+			<if test="suplevels27 !=null">
+				SUPLEVELS27,
+			</if>
+			<if test="suplevels28 !=null">
+				SUPLEVELS28,
+			</if>
+			<if test="suplevels29 !=null">
+				SUPLEVELS29,
+			</if>
+			<if test="suplevels30 !=null">
+				SUPLEVELS30,
+			</if>
+			<if test="suplevels31 !=null">
+				SUPLEVELS31,
+			</if>
+			<if test="suplevels32 !=null">
+				SUPLEVELS32,
+			</if>
+			<if test="suplevels33 !=null">
+				SUPLEVELS33,
+			</if>
+			<if test="suplevels34 !=null">
+				SUPLEVELS34,
+			</if>
+			<if test="suplevels35 !=null">
+				SUPLEVELS35,
+			</if>
+			<if test="suplevels36 !=null">
+				SUPLEVELS36,
+			</if>
+			<if test="suplevels37 !=null">
+				SUPLEVELS37,
+			</if>
+			<if test="suplevels38 !=null">
+				SUPLEVELS38,
+			</if>
+			<if test="suplevels39 !=null">
+				SUPLEVELS39,
+			</if>
+			<if test="suplevels40 !=null">
+				SUPLEVELS40,
+			</if>
+			<if test="suplevels41 !=null">
+				SUPLEVELS41,
+			</if>
+			<if test="suplevels42 !=null">
+				SUPLEVELS42,
+			</if>
+			<if test="suplevels43 !=null">
+				SUPLEVELS43,
+			</if>
+			<if test="suplevels44 !=null">
+				SUPLEVELS44,
+			</if>
+			<if test="suplevels45 !=null">
+				SUPLEVELS45,
+			</if>
+			<if test="suplevels46 !=null">
+				SUPLEVELS46,
+			</if>
+			<if test="suplevels47 !=null">
+				SUPLEVELS47,
+			</if>
+			<if test="suplevels48 !=null">
+				SUPLEVELS48,
+			</if>
+			<if test="suplevels49 !=null">
+				SUPLEVELS49,
+			</if>
+			<if test="suplevels50 !=null">
+				SUPLEVELS50,
+			</if>
+			<if test="suplevels51 !=null">
+				SUPLEVELS51,
+			</if>
+			<if test="suplevels52 !=null">
+				SUPLEVELS52,
+			</if>
+			<if test="suplevels53 !=null">
+				SUPLEVELS53,
+			</if>
+			<if test="suplevels54 !=null">
+				SUPLEVELS54,
+			</if>
+			<if test="suplevels55 !=null">
+				SUPLEVELS55,
+			</if>
+			<if test="suplevels56 !=null">
+				SUPLEVELS56,
+			</if>
+			<if test="suplevels57 !=null">
+				SUPLEVELS57,
+			</if>
+			<if test="suplevels58 !=null">
+				SUPLEVELS58,
+			</if>
+			<if test="suplevels59 !=null">
+				SUPLEVELS59,
+			</if>
+			<if test="suplevels60 !=null">
+				SUPLEVELS60,
+			</if>
+			<if test="suplevels61 !=null">
+				SUPLEVELS61,
+			</if>
+			<if test="suplevels62 !=null">
+				SUPLEVELS62,
+			</if>
+			<if test="suplevels63 !=null">
+				SUPLEVELS63,
+			</if>
+			<if test="suplevels64 !=null">
+				SUPLEVELS64,
+			</if>
+			<if test="suplevels65 !=null">
+				SUPLEVELS65,
+			</if>
+			<if test="suplevels66 !=null">
+				SUPLEVELS66,
+			</if>
+			<if test="suplevels67 !=null">
+				SUPLEVELS67,
+			</if>
+			<if test="suplevels68 !=null">
+				SUPLEVELS68,
+			</if>
+			<if test="suplevels69 !=null">
+				SUPLEVELS69,
+			</if>
+			<if test="suplevels70 !=null">
+				SUPLEVELS70,
+			</if>
+			<if test="suplevels71 !=null">
+				SUPLEVELS71,
+			</if>
+			<if test="suplevels72 !=null">
+				SUPLEVELS72,
+			</if>
+			<if test="suplevels73 !=null">
+				SUPLEVELS73,
+			</if>
+			<if test="suplevels74 !=null">
+				SUPLEVELS74,
+			</if>
+			<if test="suplevels75 !=null">
+				SUPLEVELS75,
+			</if>
+			<if test="suplevels76 !=null">
+				SUPLEVELS76,
+			</if>
+			<if test="suplevels77 !=null">
+				SUPLEVELS77,
+			</if>
+			<if test="suplevels78 !=null">
+				SUPLEVELS78,
+			</if>
+			<if test="suplevels79 !=null">
+				SUPLEVELS79,
+			</if>
+			<if test="suplevels80 !=null">
+				SUPLEVELS80,
+			</if>
+			<if test="suplevels81 !=null">
+				SUPLEVELS81,
+			</if>
+			<if test="suplevels82 !=null">
+				SUPLEVELS82,
+			</if>
+			<if test="suplevels83 !=null">
+				SUPLEVELS83,
+			</if>
+			<if test="suplevels84 !=null">
+				SUPLEVELS84,
+			</if>
+			<if test="suplevels85 !=null">
+				SUPLEVELS85,
+			</if>
+			<if test="suplevels86 !=null">
+				SUPLEVELS86,
+			</if>
+			<if test="suplevels87 !=null">
+				SUPLEVELS87,
+			</if>
+			<if test="suplevels88 !=null">
+				SUPLEVELS88,
+			</if>
+			<if test="suplevels89 !=null">
+				SUPLEVELS89,
+			</if>
+			<if test="suplevels90 !=null">
+				SUPLEVELS90,
+			</if>
+			<if test="suplevels91 !=null">
+				SUPLEVELS91,
+			</if>
+			<if test="suplevels92 !=null">
+				SUPLEVELS92,
+			</if>
+			<if test="suplevels93 !=null">
+				SUPLEVELS93,
+			</if>
+			<if test="suplevels94 !=null">
+				SUPLEVELS94,
+			</if>
+			<if test="suplevels95 !=null">
+				SUPLEVELS95,
+			</if>
+			<if test="suplevels96 !=null">
+				SUPLEVELS96,
+			</if>
+			<if test="suplevels97 !=null">
+				SUPLEVELS97,
+			</if>
+			<if test="suplevels98 !=null">
+				SUPLEVELS98,
+			</if>
+			<if test="suplevels99 !=null">
+				SUPLEVELS99,
+			</if>
+			<if test="suplevels100 !=null">
+				SUPLEVELS100,
+			</if>
+			<if test="isvalid2 != null">
+				ISVALID2,
+			</if>
+			<if test="isvalid3 != null">
+				ISVALID3,
+			</if>
+			<if test="isvalid4 != null">
+				ISVALID4,
+			</if>
+			<if test="isvalid5 != null">
+				ISVALID5,
+			</if>
+			<if test="isvalid6 != null">
+				ISVALID6,
+			</if>
+			<if test="isvalid7 != null">
+				ISVALID7,
+			</if>
+			<if test="isvalid8 != null">
+				ISVALID8,
+			</if>
+			<if test="isvalid9 != null">
+				ISVALID9,
+			</if>
+			<if test="isvalid10 != null">
+				ISVALID10,
+			</if>
+			<if test="isvalid11 != null">
+				ISVALID11,
+			</if>
+			<if test="isvalid12 != null">
+				ISVALID12,
+			</if>
+			<if test="isvalid13 != null">
+				ISVALID13,
+			</if>
+			<if test="isvalid14 != null">
+				ISVALID14,
+			</if>
+			<if test="isvalid15 != null">
+				ISVALID15,
+			</if>
+			<if test="isvalid16 != null">
+				ISVALID16,
+			</if>
+			<if test="isvalid17 != null">
+				ISVALID17,
+			</if>
+			<if test="isvalid18 != null">
+				ISVALID18,
+			</if>
+			<if test="isvalid19 != null">
+				ISVALID19,
+			</if>
+			<if test="isvalid20 != null">
+				ISVALID20,
+			</if>
+			<if test="isvalid21 != null">
+				ISVALID21,
+			</if>
+			<if test="isvalid22 != null">
+				ISVALID22,
+			</if>
+			<if test="isvalid23 != null">
+				ISVALID23,
+			</if>
+			<if test="isvalid24 != null">
+				ISVALID24,
+			</if>
+			<if test="isvalid25 != null">
+				ISVALID25,
+			</if>
+			<if test="isvalid26 != null">
+				ISVALID26,
+			</if>
+			<if test="isvalid27 != null">
+				ISVALID27,
+			</if>
+			<if test="isvalid28 != null">
+				ISVALID28,
+			</if>
+			<if test="isvalid29 != null">
+				ISVALID29,
+			</if>
+			<if test="isvalid30 != null">
+				ISVALID30,
+			</if>
+			<if test="isvalid31 != null">
+				ISVALID31,
+			</if>
+			<if test="isvalid32 != null">
+				ISVALID32,
+			</if>
+			<if test="isvalid33 != null">
+				ISVALID33,
+			</if>
+			<if test="isvalid34 != null">
+				ISVALID34,
+			</if>
+			<if test="isvalid35 != null">
+				ISVALID35,
+			</if>
+			<if test="isvalid36 != null">
+				ISVALID36,
+			</if>
+			<if test="isvalid37 != null">
+				ISVALID37,
+			</if>
+			<if test="isvalid38 != null">
+				ISVALID38,
+			</if>
+			<if test="isvalid39 != null">
+				ISVALID39,
+			</if>
+			<if test="isvalid40 != null">
+				ISVALID40,
+			</if>
+			<if test="isvalid41 != null">
+				ISVALID41,
+			</if>
+			<if test="isvalid42 != null">
+				ISVALID42,
+			</if>
+			<if test="isvalid43 != null">
+				ISVALID43,
+			</if>
+			<if test="isvalid44 != null">
+				ISVALID44,
+			</if>
+			<if test="isvalid45 != null">
+				ISVALID45,
+			</if>
+			<if test="isvalid46 != null">
+				ISVALID46,
+			</if>
+			<if test="isvalid47 != null">
+				ISVALID47,
+			</if>
+			<if test="isvalid48 != null">
+				ISVALID48,
+			</if>
+			<if test="isvalid49 != null">
+				ISVALID49,
+			</if>
+			<if test="isvalid50 != null">
+				ISVALID50,
+			</if>
+			<if test="isvalid51 != null">
+				ISVALID51,
+			</if>
+			<if test="isvalid52 != null">
+				ISVALID52,
+			</if>
+			<if test="isvalid53 != null">
+				ISVALID53,
+			</if>
+			<if test="isvalid54 != null">
+				ISVALID54,
+			</if>
+			<if test="isvalid55 != null">
+				ISVALID55,
+			</if>
+			<if test="isvalid56 != null">
+				ISVALID56,
+			</if>
+			<if test="isvalid57 != null">
+				ISVALID57,
+			</if>
+			<if test="isvalid58 != null">
+				ISVALID58,
+			</if>
+			<if test="isvalid59 != null">
+				ISVALID59,
+			</if>
+			<if test="isvalid60 != null">
+				ISVALID60,
+			</if>
+			<if test="isvalid61 != null">
+				ISVALID61,
+			</if>
+			<if test="isvalid62 != null">
+				ISVALID62,
+			</if>
+			<if test="isvalid63 != null">
+				ISVALID63,
+			</if>
+			<if test="isvalid64 != null">
+				ISVALID64,
+			</if>
+			<if test="isvalid65 != null">
+				ISVALID65,
+			</if>
+			<if test="isvalid66 != null">
+				ISVALID66,
+			</if>
+			<if test="isvalid67 != null">
+				ISVALID67,
+			</if>
+			<if test="isvalid68 != null">
+				ISVALID68,
+			</if>
+			<if test="isvalid69 != null">
+				ISVALID69,
+			</if>
+			<if test="isvalid70 != null">
+				ISVALID70,
+			</if>
+			<if test="isvalid71 != null">
+				ISVALID71,
+			</if>
+			<if test="isvalid72 != null">
+				ISVALID72,
+			</if>
+			<if test="isvalid73 != null">
+				ISVALID73,
+			</if>
+			<if test="isvalid74 != null">
+				ISVALID74,
+			</if>
+			<if test="isvalid75 != null">
+				ISVALID75,
+			</if>
+			<if test="isvalid76 != null">
+				ISVALID76,
+			</if>
+			<if test="isvalid77 != null">
+				ISVALID77,
+			</if>
+			<if test="isvalid78 != null">
+				ISVALID78,
+			</if>
+			<if test="isvalid79 != null">
+				ISVALID79,
+			</if>
+			<if test="isvalid80 != null">
+				ISVALID80,
+			</if>
+			<if test="isvalid81 != null">
+				ISVALID81,
+			</if>
+			<if test="isvalid82 != null">
+				ISVALID82,
+			</if>
+			<if test="isvalid83 != null">
+				ISVALID83,
+			</if>
+			<if test="isvalid84 != null">
+				ISVALID84,
+			</if>
+			<if test="isvalid85 != null">
+				ISVALID85,
+			</if>
+			<if test="isvalid86 != null">
+				ISVALID86,
+			</if>
+			<if test="isvalid87 != null">
+				ISVALID87,
+			</if>
+			<if test="isvalid88 != null">
+				ISVALID88,
+			</if>
+			<if test="isvalid89 != null">
+				ISVALID89,
+			</if>
+			<if test="isvalid90 != null">
+				ISVALID90,
+			</if>
+			<if test="isvalid91 != null">
+				ISVALID91,
+			</if>
+			<if test="isvalid92 != null">
+				ISVALID92,
+			</if>
+			<if test="isvalid93 != null">
+				ISVALID93,
+			</if>
+			<if test="isvalid94 != null">
+				ISVALID94,
+			</if>
+			<if test="isvalid95 != null">
+				ISVALID95,
+			</if>
+			<if test="isvalid96 != null">
+				ISVALID96,
+			</if>
+			<if test="isvalid97 != null">
+				ISVALID97,
+			</if>
+			<if test="isvalid98 != null">
+				ISVALID98,
+			</if>
+			<if test="isvalid99 != null">
+				ISVALID99,
+			</if>
+			<if test="isvalid100 != null">
+				ISVALID100,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				#{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="proxygrade != null">
+				#{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="promolevels != null">
+				#{promolevels,jdbcType=DECIMAL},
+			</if>
+			<if test="parentlevels != null">
+				#{parentlevels,jdbcType=DECIMAL},
+			</if>
+			<if test="supname != null">
+				#{supname,jdbcType=VARCHAR},
+			</if>
+			<if test="suploginname != null">
+				#{suploginname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopenfsinfo != null">
+				#{isopenfsinfo,jdbcType=DECIMAL},
+			</if>
+			<if test="promocode != null">
+				#{promocode,jdbcType=VARCHAR},
+			</if>
+			<if test="suppromocode != null">
+				#{suppromocode,jdbcType=VARCHAR},
+			</if>
+			<if test="regdate != null">
+				#{regdate},
+			</if>
+			<if test="promonum != null">
+				#{promonum,jdbcType=DECIMAL},
+			</if>
+			<if test="promofee != null">
+				#{promofee,jdbcType=FLOAT},
+			</if>
+			<if test="subremark != null">
+				#{subremark,jdbcType=VARCHAR},
+			</if>
+			<if test="adminremark != null">
+				#{adminremark,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ismodify != null">
+				#{ismodify,jdbcType=DECIMAL},
+			</if>
+			<if test="validnum != null">
+				#{validnum,jdbcType=DECIMAL},
+			</if>
+			<if test="userspecialflag != null">
+				#{userspecialflag,jdbcType=DECIMAL},
+			</if>
+			<if test="suplevels2 != null">
+				#{suplevels2,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels3 != null">
+				#{suplevels3,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels4 != null">
+				#{suplevels4,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels5 != null">
+				#{suplevels5,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels6 != null">
+				#{suplevels6,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels7 != null">
+				#{suplevels7,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels8 != null">
+				#{suplevels8,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels9 != null">
+				#{suplevels9,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels10 != null">
+				#{suplevels10,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels11 != null">
+				#{suplevels11,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels12 != null">
+				#{suplevels12,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels13 != null">
+				#{suplevels13,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels14 != null">
+				#{suplevels14,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels15 != null">
+				#{suplevels15,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels16 != null">
+				#{suplevels16,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels17 != null">
+				#{suplevels17,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels18 != null">
+				#{suplevels18,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels19 != null">
+				#{suplevels19,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels20 != null">
+				#{suplevels20,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels21 != null">
+				#{suplevels21,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels22 != null">
+				#{suplevels22,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels23 != null">
+				#{suplevels23,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels24 != null">
+				#{suplevels24,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels25 != null">
+				#{suplevels25,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels26 != null">
+				#{suplevels26,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels27 != null">
+				#{suplevels27,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels28 != null">
+				#{suplevels28,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels29 != null">
+				#{suplevels29,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels30 != null">
+				#{suplevels30,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels31 != null">
+				#{suplevels31,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels32 != null">
+				#{suplevels32,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels33 != null">
+				#{suplevels33,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels34 != null">
+				#{suplevels34,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels35 != null">
+				#{suplevels35,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels36 != null">
+				#{suplevels36,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels37 != null">
+				#{suplevels37,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels38 != null">
+				#{suplevels38,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels39 != null">
+				#{suplevels39,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels40 != null">
+				#{suplevels40,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels41 != null">
+				#{suplevels41,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels42 != null">
+				#{suplevels42,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels43 != null">
+				#{suplevels43,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels44 != null">
+				#{suplevels44,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels45 != null">
+				#{suplevels45,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels46 != null">
+				#{suplevels46,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels47 != null">
+				#{suplevels47,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels48 != null">
+				#{suplevels48,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels49 != null">
+				#{suplevels49,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels50 != null">
+				#{suplevels50,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels51 != null">
+				#{suplevels51,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels52 != null">
+				#{suplevels52,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels53 != null">
+				#{suplevels53,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels54 != null">
+				#{suplevels54,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels55 != null">
+				#{suplevels55,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels56 != null">
+				#{suplevels56,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels57 != null">
+				#{suplevels57,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels58 != null">
+				#{suplevels58,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels59 != null">
+				#{suplevels59,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels60 != null">
+				#{suplevels60,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels61 != null">
+				#{suplevels61,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels62 != null">
+				#{suplevels62,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels63 != null">
+				#{suplevels63,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels64 != null">
+				#{suplevels64,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels65 != null">
+				#{suplevels65,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels66 != null">
+				#{suplevels66,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels67 != null">
+				#{suplevels67,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels68 != null">
+				#{suplevels68,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels69 != null">
+				#{suplevels69,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels70 != null">
+				#{suplevels70,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels71 != null">
+				#{suplevels71,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels72 != null">
+				#{suplevels72,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels73 != null">
+				#{suplevels73,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels74 != null">
+				#{suplevels74,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels75 != null">
+				#{suplevels75,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels76 != null">
+				#{suplevels76,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels77 != null">
+				#{suplevels77,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels78 != null">
+				#{suplevels78,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels79 != null">
+				#{suplevels79,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels80 != null">
+				#{suplevels80,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels81 != null">
+				#{suplevels81,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels82 != null">
+				#{suplevels82,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels83 != null">
+				#{suplevels83,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels84 != null">
+				#{suplevels84,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels85 != null">
+				#{suplevels85,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels86 != null">
+				#{suplevels86,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels87 != null">
+				#{suplevels87,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels88 != null">
+				#{suplevels88,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels89 != null">
+				#{suplevels89,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels90 != null">
+				#{suplevels90,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels91 != null">
+				#{suplevels91,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels92 != null">
+				#{suplevels92,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels93 != null">
+				#{suplevels93,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels94 != null">
+				#{suplevels94,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels95 != null">
+				#{suplevels95,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels96 != null">
+				#{suplevels96,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels97 != null">
+				#{suplevels97,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels98 != null">
+				#{suplevels98,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels99 != null">
+				#{suplevels99,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels100 != null">
+				#{suplevels100,jdbcType=VARCHAR},
+			</if>
+			<if test="isvalid2 != null">
+				#{isvalid2,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid3 != null">
+				#{isvalid3,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid4 != null">
+				#{isvalid4,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid5 != null">
+				#{isvalid5,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid6 != null">
+				#{isvalid6,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid7 != null">
+				#{isvalid7,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid8 != null">
+				#{isvalid8,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid9 != null">
+				#{isvalid9,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid10 != null">
+				#{isvalid10,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid11 != null">
+				#{isvalid11,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid12 != null">
+				#{isvalid12,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid13 != null">
+				#{isvalid13,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid14 != null">
+				#{isvalid14,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid15 != null">
+				#{isvalid15,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid16 != null">
+				#{isvalid16,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid17 != null">
+				#{isvalid17,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid18 != null">
+				#{isvalid18,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid19 != null">
+				#{isvalid19,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid20 != null">
+				#{isvalid20,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid21 != null">
+				#{isvalid21,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid22 != null">
+				#{isvalid22,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid23 != null">
+				#{isvalid23,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid24 != null">
+				#{isvalid24,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid25 != null">
+				#{isvalid25,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid26 != null">
+				#{isvalid26,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid27 != null">
+				#{isvalid27,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid28 != null">
+				#{isvalid28,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid29 != null">
+				#{isvalid29,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid30 != null">
+				#{isvalid30,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid31 != null">
+				#{isvalid31,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid32 != null">
+				#{isvalid32,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid33 != null">
+				#{isvalid33,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid34 != null">
+				#{isvalid34,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid35 != null">
+				#{isvalid35,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid36 != null">
+				#{isvalid36,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid37 != null">
+				#{isvalid37,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid38 != null">
+				#{isvalid38,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid39 != null">
+				#{isvalid39,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid40 != null">
+				#{isvalid40,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid41 != null">
+				#{isvalid41,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid42 != null">
+				#{isvalid42,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid43 != null">
+				#{isvalid43,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid44 != null">
+				#{isvalid44,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid45 != null">
+				#{isvalid45,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid46 != null">
+				#{isvalid46,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid47 != null">
+				#{isvalid47,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid48 != null">
+				#{isvalid48,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid49 != null">
+				#{isvalid49,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid50 != null">
+				#{isvalid50,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid51 != null">
+				#{isvalid51,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid52 != null">
+				#{isvalid52,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid53 != null">
+				#{isvalid53,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid54 != null">
+				#{isvalid54,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid55 != null">
+				#{isvalid55,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid56 != null">
+				#{isvalid56,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid57 != null">
+				#{isvalid57,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid58 != null">
+				#{isvalid58,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid59 != null">
+				#{isvalid59,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid60 != null">
+				#{isvalid60,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid61 != null">
+				#{isvalid61,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid62 != null">
+				#{isvalid62,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid63 != null">
+				#{isvalid63,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid64 != null">
+				#{isvalid64,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid65 != null">
+				#{isvalid65,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid66 != null">
+				#{isvalid66,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid67 != null">
+				#{isvalid67,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid68 != null">
+				#{isvalid68,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid69 != null">
+				#{isvalid69,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid70 != null">
+				#{isvalid70,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid71 != null">
+				#{isvalid71,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid72 != null">
+				#{isvalid72,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid73 != null">
+				#{isvalid73,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid74 != null">
+				#{isvalid74,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid75 != null">
+				#{isvalid75,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid76 != null">
+				#{isvalid76,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid77 != null">
+				#{isvalid77,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid78 != null">
+				#{isvalid78,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid79 != null">
+				#{isvalid79,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid80 != null">
+				#{isvalid80,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid81 != null">
+				#{isvalid81,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid82 != null">
+				#{isvalid82,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid83 != null">
+				#{isvalid83,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid84 != null">
+				#{isvalid84,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid85 != null">
+				#{isvalid85,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid86 != null">
+				#{isvalid86,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid87 != null">
+				#{isvalid87,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid88 != null">
+				#{isvalid88,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid89 != null">
+				#{isvalid89,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid90 != null">
+				#{isvalid90,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid91 != null">
+				#{isvalid91,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid92 != null">
+				#{isvalid92,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid93 != null">
+				#{isvalid93,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid94 != null">
+				#{isvalid94,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid95 != null">
+				#{isvalid95,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid96 != null">
+				#{isvalid96,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid97 != null">
+				#{isvalid97,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid98 != null">
+				#{isvalid98,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid99 != null">
+				#{isvalid99,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid100 != null">
+				#{isvalid100,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<select id="selective" parameterType="com.ptpl.model.UserPromo"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM USERPROMO
+		<where>
+			LOGINNAME IS NOT NULL AND NAME IS NOT NULL
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="name != null and name != ''">
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="loginname != null and loginname != ''">
+				AND LOGINNAME = #{loginname,jdbcType=VARCHAR}
+			</if>
+			<if test="proxygrade != null">
+				AND PROXYGRADE = #{proxygrade,jdbcType=DECIMAL}
+			</if>
+			<if test="promolevels != null">
+				AND PROMOLEVELS = #{promolevels,jdbcType=DECIMAL}
+			</if>
+			<if test="parentlevels != null">
+				AND PARENTLEVELS = #{parentlevels,jdbcType=DECIMAL}
+			</if>
+			<if test="supname != null">
+				AND SUPNAME = #{supname,jdbcType=VARCHAR}
+			</if>
+			<if test="suploginname != null">
+				AND SUPLOGINNAME = #{suploginname,jdbcType=VARCHAR}
+			</if>
+			<if test="isopenfsinfo != null">
+				AND ISOPENFSINFO = #{isopenfsinfo,jdbcType=DECIMAL}
+			</if>
+			<if test="promocode != null">
+				AND PROMOCODE = #{promocode,jdbcType=VARCHAR}
+			</if>
+			<if test="suppromocode != null">
+				AND SUPPROMOCODE = #{suppromocode,jdbcType=VARCHAR}
+			</if>
+			<if test="regdate != null">
+				AND REGDATE = #{regdate}
+			</if>
+			<if test="promonum != null">
+				AND PROMONUM = #{promonum,jdbcType=DECIMAL}
+			</if>
+			<if test="promofee != null">
+				AND PROMOFEE = #{promofee,jdbcType=FLOAT}
+			</if>
+			<if test="subremark != null">
+				AND SUBREMARK = #{subremark,jdbcType=VARCHAR}
+			</if>
+			<if test="adminremark != null">
+				AND ADMINREMARK = #{adminremark,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="ismodify != null">
+				AND ISMODIFY = #{ismodify,jdbcType=DECIMAL}
+			</if>
+			<if test="userspecialflag != null">
+				AND USERSPECIALFLAG = #{userspecialflag,jdbcType=DECIMAL}
+			</if>
+			<if test="suplevels2 != null">
+				AND SUPLEVELS2 = #{suplevels2,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels3 != null">
+				AND SUPLEVELS3 = #{suplevels3,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels4 != null">
+				AND SUPLEVELS4 = #{suplevels4,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels5 != null">
+				AND SUPLEVELS5 = #{suplevels5,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels6 != null">
+				AND SUPLEVELS6 = #{suplevels6,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels7 != null">
+				AND SUPLEVELS7 = #{suplevels7,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels8 != null">
+				AND SUPLEVELS8 = #{suplevels8,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels9 != null">
+				AND SUPLEVELS9 = #{suplevels9,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels10 != null">
+				AND SUPLEVELS10 = #{suplevels10,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels11 != null">
+				AND SUPLEVELS11 = #{suplevels11,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels12 != null">
+				AND SUPLEVELS12 = #{suplevels12,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels13 != null">
+				AND SUPLEVELS13 = #{suplevels13,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels14 != null">
+				AND SUPLEVELS14 = #{suplevels14,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels15 != null">
+				AND SUPLEVELS15 = #{suplevels15,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels16 != null">
+				AND SUPLEVELS16 = #{suplevels16,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels17 != null">
+				AND SUPLEVELS17 = #{suplevels17,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels18 != null">
+				AND SUPLEVELS18 = #{suplevels18,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels19 != null">
+				AND SUPLEVELS19 = #{suplevels19,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels20 != null">
+				AND SUPLEVELS20 = #{suplevels20,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels21 != null">
+				AND SUPLEVELS21 = #{suplevels21,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels22 != null">
+				AND SUPLEVELS22 = #{suplevels22,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels23 != null">
+				AND SUPLEVELS23 = #{suplevels23,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels24 != null">
+				AND SUPLEVELS24 = #{suplevels24,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels25 != null">
+				AND SUPLEVELS25 = #{suplevels25,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels26 != null">
+				AND SUPLEVELS26 = #{suplevels26,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels27 != null">
+				AND SUPLEVELS27 = #{suplevels27,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels28 != null">
+				AND SUPLEVELS28 = #{suplevels28,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels29 != null">
+				AND SUPLEVELS29 = #{suplevels29,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels30 != null">
+				AND SUPLEVELS30 = #{suplevels30,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels31 != null">
+				AND SUPLEVELS31 = #{suplevels31,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels32 != null">
+				AND SUPLEVELS32 = #{suplevels32,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels33 != null">
+				AND SUPLEVELS33 = #{suplevels33,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels34 != null">
+				AND SUPLEVELS34 = #{suplevels34,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels35 != null">
+				AND SUPLEVELS35 = #{suplevels35,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels36 != null">
+				AND SUPLEVELS36 = #{suplevels36,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels37 != null">
+				AND SUPLEVELS37 = #{suplevels37,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels38 != null">
+				AND SUPLEVELS38 = #{suplevels38,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels39 != null">
+				AND SUPLEVELS39 = #{suplevels39,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels40 != null">
+				AND SUPLEVELS40 = #{suplevels40,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels41 != null">
+				AND SUPLEVELS41 = #{suplevels41,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels42 != null">
+				AND SUPLEVELS42 = #{suplevels42,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels43 != null">
+				AND SUPLEVELS43 = #{suplevels43,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels44 != null">
+				AND SUPLEVELS44 = #{suplevels44,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels45 != null">
+				AND SUPLEVELS45 = #{suplevels45,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels46 != null">
+				AND SUPLEVELS46 = #{suplevels46,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels47 != null">
+				AND SUPLEVELS47 = #{suplevels47,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels48 != null">
+				AND SUPLEVELS48 = #{suplevels48,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels49 != null">
+				AND SUPLEVELS49 = #{suplevels49,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels50 != null">
+				AND SUPLEVELS50 = #{suplevels50,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels51 != null">
+				AND SUPLEVELS51 = #{suplevels51,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels52 != null">
+				AND SUPLEVELS52 = #{suplevels52,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels53 != null">
+				AND SUPLEVELS53 = #{suplevels53,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels54 != null">
+				AND SUPLEVELS54 = #{suplevels54,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels55 != null">
+				AND SUPLEVELS55 = #{suplevels55,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels56 != null">
+				AND SUPLEVELS56 = #{suplevels56,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels57 != null">
+				AND SUPLEVELS57 = #{suplevels57,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels58 != null">
+				AND SUPLEVELS58 = #{suplevels58,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels59 != null">
+				AND SUPLEVELS59 = #{suplevels59,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels60 != null">
+				AND SUPLEVELS60 = #{suplevels60,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels61 != null">
+				AND SUPLEVELS61 = #{suplevels61,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels62 != null">
+				AND SUPLEVELS62 = #{suplevels62,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels63 != null">
+				AND SUPLEVELS63 = #{suplevels63,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels64 != null">
+				AND SUPLEVELS64 = #{suplevels64,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels65 != null">
+				AND SUPLEVELS65 = #{suplevels65,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels66 != null">
+				AND SUPLEVELS66 = #{suplevels66,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels67 != null">
+				AND SUPLEVELS67 = #{suplevels67,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels68 != null">
+				AND SUPLEVELS68 = #{suplevels68,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels69 != null">
+				AND SUPLEVELS69 = #{suplevels69,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels70 != null">
+				AND SUPLEVELS70 = #{suplevels70,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels71 != null">
+				AND SUPLEVELS71 = #{suplevels71,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels72 != null">
+				AND SUPLEVELS72 = #{suplevels72,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels73 != null">
+				AND SUPLEVELS73 = #{suplevels73,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels74 != null">
+				AND SUPLEVELS74 = #{suplevels74,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels75 != null">
+				AND SUPLEVELS75 = #{suplevels75,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels76 != null">
+				AND SUPLEVELS76 = #{suplevels76,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels77 != null">
+				AND SUPLEVELS77 = #{suplevels77,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels78 != null">
+				AND SUPLEVELS78 = #{suplevels78,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels79 != null">
+				AND SUPLEVELS79 = #{suplevels79,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels80 != null">
+				AND SUPLEVELS80 = #{suplevels80,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels81 != null">
+				AND SUPLEVELS81 = #{suplevels81,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels82 != null">
+				AND SUPLEVELS82 = #{suplevels82,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels83 != null">
+				AND SUPLEVELS83 = #{suplevels83,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels84 != null">
+				AND SUPLEVELS84 = #{suplevels84,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels85 != null">
+				AND SUPLEVELS85 = #{suplevels85,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels86 != null">
+				AND SUPLEVELS86 = #{suplevels86,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels87 != null">
+				AND SUPLEVELS87 = #{suplevels87,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels88 != null">
+				AND SUPLEVELS88 = #{suplevels88,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels89 != null">
+				AND SUPLEVELS89 = #{suplevels89,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels90 != null">
+				AND SUPLEVELS90 = #{suplevels90,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels91 != null">
+				AND SUPLEVELS91 = #{suplevels91,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels92 != null">
+				AND SUPLEVELS92 = #{suplevels92,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels93 != null">
+				AND SUPLEVELS93 = #{suplevels93,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels94 != null">
+				AND SUPLEVELS94 = #{suplevels94,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels95 != null">
+				AND SUPLEVELS95 = #{suplevels95,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels96 != null">
+				AND SUPLEVELS96 = #{suplevels96,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels97 != null">
+				AND SUPLEVELS97 = #{suplevels97,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels98 != null">
+				AND SUPLEVELS98 = #{suplevels98,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels99 != null">
+				AND SUPLEVELS99 = #{suplevels99,jdbcType=VARCHAR}
+			</if>
+			<if test="suplevels100 != null">
+				AND SUPLEVELS100 = #{suplevels100,jdbcType=VARCHAR}
+			</if>
+			<if test="isvalid2 != null">
+				AND ISVALID2 = #{isvalid2,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid3 != null">
+				AND ISVALID3 = #{isvalid3,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid4 != null">
+				AND ISVALID4 = #{isvalid4,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid5 != null">
+				AND ISVALID5 = #{isvalid5,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid6 != null">
+				AND ISVALID6 = #{isvalid6,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid7 != null">
+				AND ISVALID7 = #{isvalid7,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid8 != null">
+				AND ISVALID8 = #{isvalid8,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid9 != null">
+				AND ISVALID9 = #{isvalid9,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid10 != null">
+				AND ISVALID10 = #{isvalid10,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid11 != null">
+				AND ISVALID11 = #{isvalid11,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid12 != null">
+				AND ISVALID12 = #{isvalid12,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid13 != null">
+				AND ISVALID13 = #{isvalid13,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid14 != null">
+				AND ISVALID14 = #{isvalid14,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid15 != null">
+				AND ISVALID15 = #{isvalid15,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid16 != null">
+				AND ISVALID16 = #{isvalid16,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid17 != null">
+				AND ISVALID17 = #{isvalid17,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid18 != null">
+				AND ISVALID18 = #{isvalid18,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid19 != null">
+				AND ISVALID19 = #{isvalid19,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid20 != null">
+				AND ISVALID20 = #{isvalid20,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid21 != null">
+				AND ISVALID21 = #{isvalid21,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid22 != null">
+				AND ISVALID22 = #{isvalid22,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid23 != null">
+				AND ISVALID23 = #{isvalid23,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid24 != null">
+				AND ISVALID24 = #{isvalid24,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid25 != null">
+				AND ISVALID25 = #{isvalid25,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid26 != null">
+				AND ISVALID26 = #{isvalid26,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid27 != null">
+				AND ISVALID27 = #{isvalid27,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid28 != null">
+				AND ISVALID28 = #{isvalid28,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid29 != null">
+				AND ISVALID29 = #{isvalid29,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid30 != null">
+				AND ISVALID30 = #{isvalid30,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid31 != null">
+				AND ISVALID31 = #{isvalid31,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid32 != null">
+				AND ISVALID32 = #{isvalid32,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid33 != null">
+				AND ISVALID33 = #{isvalid33,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid34 != null">
+				AND ISVALID34 = #{isvalid34,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid35 != null">
+				AND ISVALID35 = #{isvalid35,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid36 != null">
+				AND ISVALID36 = #{isvalid36,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid37 != null">
+				AND ISVALID37 = #{isvalid37,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid38 != null">
+				AND ISVALID38 = #{isvalid38,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid39 != null">
+				AND ISVALID39 = #{isvalid39,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid40 != null">
+				AND ISVALID40 = #{isvalid40,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid41 != null">
+				AND ISVALID41 = #{isvalid41,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid42 != null">
+				AND ISVALID42 = #{isvalid42,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid43 != null">
+				AND ISVALID43 = #{isvalid43,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid44 != null">
+				AND ISVALID44 = #{isvalid44,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid45 != null">
+				AND ISVALID45 = #{isvalid45,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid46 != null">
+				AND ISVALID46 = #{isvalid46,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid47 != null">
+				AND ISVALID47 = #{isvalid47,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid48 != null">
+				AND ISVALID48 = #{isvalid48,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid49 != null">
+				AND ISVALID49 = #{isvalid49,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid50 != null">
+				AND ISVALID50 = #{isvalid50,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid51 != null">
+				AND ISVALID51 = #{isvalid51,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid52 != null">
+				AND ISVALID52 = #{isvalid52,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid53 != null">
+				AND ISVALID53 = #{isvalid53,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid54 != null">
+				AND ISVALID54 = #{isvalid54,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid55 != null">
+				AND ISVALID55 = #{isvalid55,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid56 != null">
+				AND ISVALID56 = #{isvalid56,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid57 != null">
+				AND ISVALID57 = #{isvalid57,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid58 != null">
+				AND ISVALID58 = #{isvalid58,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid59 != null">
+				AND ISVALID59 = #{isvalid59,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid60 != null">
+				AND ISVALID60 = #{isvalid60,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid61 != null">
+				AND ISVALID61 = #{isvalid61,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid62 != null">
+				AND ISVALID62 = #{isvalid62,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid63 != null">
+				AND ISVALID63 = #{isvalid63,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid64 != null">
+				AND ISVALID64 = #{isvalid64,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid65 != null">
+				AND ISVALID65 = #{isvalid65,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid66 != null">
+				AND ISVALID66 = #{isvalid66,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid67 != null">
+				AND ISVALID67 = #{isvalid67,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid68 != null">
+				AND ISVALID68 = #{isvalid68,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid69 != null">
+				AND ISVALID69 = #{isvalid69,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid70 != null">
+				AND ISVALID70 = #{isvalid70,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid71 != null">
+				AND ISVALID71 = #{isvalid71,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid72 != null">
+				AND ISVALID72 = #{isvalid72,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid73 != null">
+				AND ISVALID73 = #{isvalid73,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid74 != null">
+				AND ISVALID74 = #{isvalid74,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid75 != null">
+				AND ISVALID75 = #{isvalid75,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid76 != null">
+				AND ISVALID76 = #{isvalid76,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid77 != null">
+				AND ISVALID77 = #{isvalid77,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid78 != null">
+				AND ISVALID78 = #{isvalid78,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid79 != null">
+				AND ISVALID79 = #{isvalid79,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid80 != null">
+				AND ISVALID80 = #{isvalid80,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid81 != null">
+				AND ISVALID81 = #{isvalid81,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid82 != null">
+				AND ISVALID82 = #{isvalid82,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid83 != null">
+				AND ISVALID83 = #{isvalid83,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid84 != null">
+				AND ISVALID84 = #{isvalid84,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid85 != null">
+				AND ISVALID85 = #{isvalid85,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid86 != null">
+				AND ISVALID86 = #{isvalid86,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid87 != null">
+				AND ISVALID87 = #{isvalid87,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid88 != null">
+				AND ISVALID88 = #{isvalid88,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid89 != null">
+				AND ISVALID89 = #{isvalid89,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid90 != null">
+				AND ISVALID90 = #{isvalid90,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid91 != null">
+				AND ISVALID91 = #{isvalid91,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid92 != null">
+				AND ISVALID92 = #{isvalid92,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid93 != null">
+				AND ISVALID93 = #{isvalid93,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid94 != null">
+				AND ISVALID94 = #{isvalid94,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid95 != null">
+				AND ISVALID95 = #{isvalid95,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid96 != null">
+				AND ISVALID96 = #{isvalid96,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid97 != null">
+				AND ISVALID97 = #{isvalid97,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid98 != null">
+				AND ISVALID98 = #{isvalid98,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid99 != null">
+				AND ISVALID99 = #{isvalid99,jdbcType=DECIMAL}
+			</if>
+			<if test="isvalid100 != null">
+				AND ISVALID100 = #{isvalid100,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by id
+	</select>
+	<select id="selectByPromoCode" parameterType="String"
+		resultType="com.ptpl.model.UserPromo">
+		select
+		<include refid="Base_Column_List"></include>
+		from USERPROMO
+		where PROMOCODE = #{promocode,jdbcType=VARCHAR}
+	</select>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserPromo">
+		update USERPROMO
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				LOGINNAME = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="proxygrade != null">
+				PROXYGRADE = #{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="promolevels != null">
+				PROMOLEVELS = #{promolevels,jdbcType=DECIMAL},
+			</if>
+			<if test="parentlevels != null">
+				PARENTLEVELS = #{parentlevels,jdbcType=DECIMAL},
+			</if>
+			<if test="supname != null">
+				SUPNAME = #{supname,jdbcType=VARCHAR},
+			</if>
+			<if test="suploginname != null">
+				SUPLOGINNAME = #{suploginname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopenfsinfo != null">
+				ISOPENFSINFO = #{isopenfsinfo,jdbcType=DECIMAL},
+			</if>
+			<if test="promocode != null">
+				PROMOCODE = #{promocode,jdbcType=VARCHAR},
+			</if>
+			<if test="suppromocode != null">
+				SUPPROMOCODE = #{suppromocode,jdbcType=VARCHAR},
+			</if>
+			<if test="regdate != null">
+				REGDATE = #{regdate},
+			</if>
+			<if test="promonum != null">
+				PROMONUM = #{promonum,jdbcType=DECIMAL},
+			</if>
+			<if test="promofee != null">
+				PROMOFEE = #{promofee,jdbcType=FLOAT},
+			</if>
+			<if test="subremark != null ">
+				SUBREMARK = #{subremark,jdbcType=VARCHAR},
+			</if>
+			<if test="adminremark != null and adminremark != ''">
+				ADMINREMARK = #{adminremark,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ismodify != null">
+				ISMODIFY = #{ismodify,jdbcType=DECIMAL},
+			</if>
+			<if test="validnum != null">
+				VALIDNUM = #{validnum,jdbcType=DECIMAL},
+			</if>
+			<if test="userspecialflag != null">
+				USERSPECIALFLAG = #{userspecialflag,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateBySupName" parameterType="com.ptpl.model.UserPromo">
+		update USERPROMO
+		<set>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="loginname != null">
+				LOGINNAME = #{loginname,jdbcType=VARCHAR},
+			</if>
+			<if test="proxygrade != null">
+				PROXYGRADE = #{proxygrade,jdbcType=DECIMAL},
+			</if>
+			<if test="promolevels != null">
+				PROMOLEVELS = #{promolevels,jdbcType=DECIMAL},
+			</if>
+			<if test="parentlevels != null">
+				PARENTLEVELS = #{parentlevels,jdbcType=DECIMAL},
+			</if>
+			<if test="supname != null">
+				SUPNAME = #{supname,jdbcType=VARCHAR},
+			</if>
+			<if test="suploginname != null">
+				SUPLOGINNAME = #{suploginname,jdbcType=VARCHAR},
+			</if>
+			<if test="isopenfsinfo != null">
+				ISOPENFSINFO = #{isopenfsinfo,jdbcType=DECIMAL},
+			</if>
+			<if test="promocode != null">
+				PROMOCODE = #{promocode,jdbcType=VARCHAR},
+			</if>
+			<if test="suppromocode != null">
+				SUPPROMOCODE = #{suppromocode,jdbcType=VARCHAR},
+			</if>
+			<if test="regdate != null">
+				REGDATE = #{regdate},
+			</if>
+			<if test="promonum != null">
+				PROMONUM = #{promonum,jdbcType=DECIMAL},
+			</if>
+			<if test="promofee != null">
+				PROMOFEE = #{promofee,jdbcType=FLOAT},
+			</if>
+			<if test="subremark != null">
+				SUBREMARK = #{subremark,jdbcType=VARCHAR},
+			</if>
+			<if test="adminremark != null">
+				ADMINREMARK = #{adminremark,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ismodify != null">
+				ISMODIFY = #{ismodify,jdbcType=DECIMAL},
+			</if>
+			<if test="suplevels2 != null">
+				SUPLEVELS2 = #{suplevels2,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels3 != null">
+				SUPLEVELS3 = #{suplevels3,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels4 != null">
+				SUPLEVELS4 = #{suplevels4,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels5 != null">
+				SUPLEVELS5 = #{suplevels5,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels6 != null">
+				SUPLEVELS6 = #{suplevels6,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels7 != null">
+				SUPLEVELS7 = #{suplevels7,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels8 != null">
+				SUPLEVELS8 = #{suplevels8,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels9 != null">
+				SUPLEVELS9 = #{suplevels9,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels10 != null">
+				SUPLEVELS10 = #{suplevels10,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels11 != null">
+				SUPLEVELS11 = #{suplevels11,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels12 != null">
+				SUPLEVELS12 = #{suplevels12,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels13 != null">
+				SUPLEVELS13 = #{suplevels13,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels14 != null">
+				SUPLEVELS14 = #{suplevels14,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels15 != null">
+				SUPLEVELS15 = #{suplevels15,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels16 != null">
+				SUPLEVELS16 = #{suplevels16,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels17 != null">
+				SUPLEVELS17 = #{suplevels17,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels18 != null">
+				SUPLEVELS18 = #{suplevels18,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels19 != null">
+				SUPLEVELS19 = #{suplevels19,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels20 != null">
+				SUPLEVELS20 = #{suplevels20,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels21 != null">
+				SUPLEVELS21 = #{suplevels21,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels22 != null">
+				SUPLEVELS22 = #{suplevels22,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels23 != null">
+				SUPLEVELS23 = #{suplevels23,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels24 != null">
+				SUPLEVELS24 = #{suplevels24,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels25 != null">
+				SUPLEVELS25 = #{suplevels25,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels26 != null">
+				SUPLEVELS26 = #{suplevels26,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels27 != null">
+				SUPLEVELS27 = #{suplevels27,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels28 != null">
+				SUPLEVELS28 = #{suplevels28,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels29 != null">
+				SUPLEVELS29 = #{suplevels29,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels30 != null">
+				SUPLEVELS30 = #{suplevels30,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels31 != null">
+				SUPLEVELS31 = #{suplevels31,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels32 != null">
+				SUPLEVELS32 = #{suplevels32,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels33 != null">
+				SUPLEVELS33 = #{suplevels33,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels34 != null">
+				SUPLEVELS34 = #{suplevels34,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels35 != null">
+				SUPLEVELS35 = #{suplevels35,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels36 != null">
+				SUPLEVELS36 = #{suplevels36,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels37 != null">
+				SUPLEVELS37 = #{suplevels37,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels38 != null">
+				SUPLEVELS38 = #{suplevels38,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels39 != null">
+				SUPLEVELS39 = #{suplevels39,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels40 != null">
+				SUPLEVELS40 = #{suplevels40,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels41 != null">
+				SUPLEVELS41 = #{suplevels41,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels42 != null">
+				SUPLEVELS42 = #{suplevels42,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels43 != null">
+				SUPLEVELS43 = #{suplevels43,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels44 != null">
+				SUPLEVELS44 = #{suplevels44,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels45 != null">
+				SUPLEVELS45 = #{suplevels45,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels46 != null">
+				SUPLEVELS46 = #{suplevels46,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels47 != null">
+				SUPLEVELS47 = #{suplevels47,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels48 != null">
+				SUPLEVELS48 = #{suplevels48,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels49 != null">
+				SUPLEVELS49 = #{suplevels49,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels50 != null">
+				SUPLEVELS50 = #{suplevels50,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels51 != null">
+				SUPLEVELS51 = #{suplevels51,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels52 != null">
+				SUPLEVELS52 = #{suplevels52,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels53 != null">
+				SUPLEVELS53 = #{suplevels53,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels54 != null">
+				SUPLEVELS54 = #{suplevels54,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels55 != null">
+				SUPLEVELS55 = #{suplevels55,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels56 != null">
+				SUPLEVELS56 = #{suplevels56,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels57 != null">
+				SUPLEVELS57 = #{suplevels57,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels58 != null">
+				SUPLEVELS58 = #{suplevels58,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels59 != null">
+				SUPLEVELS59 = #{suplevels59,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels60 != null">
+				SUPLEVELS60 = #{suplevels60,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels61 != null">
+				SUPLEVELS61 = #{suplevels61,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels62 != null">
+				SUPLEVELS62 = #{suplevels62,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels63 != null">
+				SUPLEVELS63 = #{suplevels63,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels64 != null">
+				SUPLEVELS64 = #{suplevels64,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels65 != null">
+				SUPLEVELS65 = #{suplevels65,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels66 != null">
+				SUPLEVELS66 = #{suplevels66,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels67 != null">
+				SUPLEVELS67 = #{suplevels67,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels68 != null">
+				SUPLEVELS68 = #{suplevels68,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels69 != null">
+				SUPLEVELS69 = #{suplevels69,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels70 != null">
+				SUPLEVELS70 = #{suplevels70,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels71 != null">
+				SUPLEVELS71 = #{suplevels71,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels72 != null">
+				SUPLEVELS72 = #{suplevels72,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels73 != null">
+				SUPLEVELS73 = #{suplevels73,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels74 != null">
+				SUPLEVELS74 = #{suplevels74,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels75 != null">
+				SUPLEVELS75 = #{suplevels75,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels76 != null">
+				SUPLEVELS76 = #{suplevels76,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels77 != null">
+				SUPLEVELS77 = #{suplevels77,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels78 != null">
+				SUPLEVELS78 = #{suplevels78,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels79 != null">
+				SUPLEVELS79 = #{suplevels79,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels80 != null">
+				SUPLEVELS80 = #{suplevels80,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels81 != null">
+				SUPLEVELS81 = #{suplevels81,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels82 != null">
+				SUPLEVELS82 = #{suplevels82,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels83 != null">
+				SUPLEVELS83 = #{suplevels83,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels84 != null">
+				SUPLEVELS84 = #{suplevels84,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels85 != null">
+				SUPLEVELS85 = #{suplevels85,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels86 != null">
+				SUPLEVELS86 = #{suplevels86,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels87 != null">
+				SUPLEVELS87 = #{suplevels87,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels88 != null">
+				SUPLEVELS88 = #{suplevels88,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels89 != null">
+				SUPLEVELS89 = #{suplevels89,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels90 != null">
+				SUPLEVELS90 = #{suplevels90,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels91 != null">
+				SUPLEVELS91 = #{suplevels91,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels92 != null">
+				SUPLEVELS92 = #{suplevels92,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels93 != null">
+				SUPLEVELS93 = #{suplevels93,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels94 != null">
+				SUPLEVELS94 = #{suplevels94,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels95 != null">
+				SUPLEVELS95 = #{suplevels95,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels96 != null">
+				SUPLEVELS96 = #{suplevels96,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels97 != null">
+				SUPLEVELS97 = #{suplevels97,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels98 != null">
+				SUPLEVELS98 = #{suplevels98,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels99 != null">
+				SUPLEVELS99 = #{suplevels99,jdbcType=VARCHAR},
+			</if>
+			<if test="suplevels100 != null">
+				SUPLEVELS100 = #{suplevels100,jdbcType=VARCHAR},
+			</if>
+			<if test="isvalid2 != null">
+				ISVALID2 = #{isvalid2,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid3 != null">
+				ISVALID3 = #{isvalid3,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid4 != null">
+				ISVALID4 = #{isvalid4,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid5 != null">
+				ISVALID5 = #{isvalid5,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid6 != null">
+				ISVALID6 = #{isvalid6,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid7 != null">
+				ISVALID7 = #{isvalid7,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid8 != null">
+				ISVALID8 = #{isvalid8,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid9 != null">
+				ISVALID9 = #{isvalid9,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid10 != null">
+				ISVALID10 = #{isvalid10,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid11 != null">
+				ISVALID11 = #{isvalid11,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid12 != null">
+				ISVALID12 = #{isvalid12,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid13 != null">
+				ISVALID13 = #{isvalid13,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid14 != null">
+				ISVALID14 = #{isvalid14,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid15 != null">
+				ISVALID15 = #{isvalid15,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid16 != null">
+				ISVALID16 = #{isvalid16,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid17 != null">
+				ISVALID17 = #{isvalid17,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid18 != null">
+				ISVALID18 = #{isvalid18,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid19 != null">
+				ISVALID19 = #{isvalid19,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid20 != null">
+				ISVALID20 = #{isvalid20,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid21 != null">
+				ISVALID21 = #{isvalid21,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid22 != null">
+				ISVALID22 = #{isvalid22,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid23 != null">
+				ISVALID23 = #{isvalid23,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid24 != null">
+				ISVALID24 = #{isvalid24,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid25 != null">
+				ISVALID25 = #{isvalid25,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid26 != null">
+				ISVALID26 = #{isvalid26,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid27 != null">
+				ISVALID27 = #{isvalid27,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid28 != null">
+				ISVALID28 = #{isvalid28,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid29 != null">
+				ISVALID29 = #{isvalid29,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid30 != null">
+				ISVALID30 = #{isvalid30,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid31 != null">
+				ISVALID31 = #{isvalid31,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid32 != null">
+				ISVALID32 = #{isvalid32,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid33 != null">
+				ISVALID33 = #{isvalid33,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid34 != null">
+				ISVALID34 = #{isvalid34,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid35 != null">
+				ISVALID35 = #{isvalid35,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid36 != null">
+				ISVALID36 = #{isvalid36,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid37 != null">
+				ISVALID37 = #{isvalid37,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid38 != null">
+				ISVALID38 = #{isvalid38,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid39 != null">
+				ISVALID39 = #{isvalid39,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid40 != null">
+				ISVALID40 = #{isvalid40,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid41 != null">
+				ISVALID41 = #{isvalid41,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid42 != null">
+				ISVALID42 = #{isvalid42,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid43 != null">
+				ISVALID43 = #{isvalid43,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid44 != null">
+				ISVALID44 = #{isvalid44,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid45 != null">
+				ISVALID45 = #{isvalid45,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid46 != null">
+				ISVALID46 = #{isvalid46,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid47 != null">
+				ISVALID47 = #{isvalid47,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid48 != null">
+				ISVALID48 = #{isvalid48,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid49 != null">
+				ISVALID49 = #{isvalid49,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid50 != null">
+				ISVALID50 = #{isvalid50,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid51 != null">
+				ISVALID51 = #{isvalid51,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid52 != null">
+				ISVALID52 = #{isvalid52,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid53 != null">
+				ISVALID53 = #{isvalid53,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid54 != null">
+				ISVALID54 = #{isvalid54,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid55 != null">
+				ISVALID55 = #{isvalid55,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid56 != null">
+				ISVALID56 = #{isvalid56,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid57 != null">
+				ISVALID57 = #{isvalid57,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid58 != null">
+				ISVALID58 = #{isvalid58,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid59 != null">
+				ISVALID59 = #{isvalid59,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid60 != null">
+				ISVALID60 = #{isvalid60,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid61 != null">
+				ISVALID61 = #{isvalid61,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid62 != null">
+				ISVALID62 = #{isvalid62,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid63 != null">
+				ISVALID63 = #{isvalid63,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid64 != null">
+				ISVALID64 = #{isvalid64,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid65 != null">
+				ISVALID65 = #{isvalid65,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid66 != null">
+				ISVALID66 = #{isvalid66,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid67 != null">
+				ISVALID67 = #{isvalid67,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid68 != null">
+				ISVALID68 = #{isvalid68,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid69 != null">
+				ISVALID69 = #{isvalid69,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid70 != null">
+				ISVALID70 = #{isvalid70,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid71 != null">
+				ISVALID71 = #{isvalid71,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid72 != null">
+				ISVALID72 = #{isvalid72,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid73 != null">
+				ISVALID73 = #{isvalid73,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid74 != null">
+				ISVALID74 = #{isvalid74,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid75 != null">
+				ISVALID75 = #{isvalid75,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid76 != null">
+				ISVALID76 = #{isvalid76,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid77 != null">
+				ISVALID77 = #{isvalid77,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid78 != null">
+				ISVALID78 = #{isvalid78,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid79 != null">
+				ISVALID79 = #{isvalid79,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid80 != null">
+				ISVALID80 = #{isvalid80,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid81 != null">
+				ISVALID81 = #{isvalid81,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid82 != null">
+				ISVALID82 = #{isvalid82,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid83 != null">
+				ISVALID83 = #{isvalid83,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid84 != null">
+				ISVALID84 = #{isvalid84,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid85 != null">
+				ISVALID85 = #{isvalid85,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid86 != null">
+				ISVALID86 = #{isvalid86,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid87 != null">
+				ISVALID87 = #{isvalid87,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid88 != null">
+				ISVALID88 = #{isvalid88,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid89 != null">
+				ISVALID89 = #{isvalid89,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid90 != null">
+				ISVALID90 = #{isvalid90,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid91 != null">
+				ISVALID91 = #{isvalid91,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid92 != null">
+				ISVALID92 = #{isvalid92,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid93 != null">
+				ISVALID93 = #{isvalid93,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid94 != null">
+				ISVALID94 = #{isvalid94,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid95 != null">
+				ISVALID95 = #{isvalid95,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid96 != null">
+				ISVALID96 = #{isvalid96,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid97 != null">
+				ISVALID97 = #{isvalid97,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid98 != null">
+				ISVALID98 = #{isvalid98,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid99 != null">
+				ISVALID99 = #{isvalid99,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid100 != null">
+				ISVALID100 = #{isvalid100,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updatePromoCode" parameterType="String">
+		update USERPROMO set
+		suppromocode=#{1} where suppromocode=#{0}
+	</update>
+</mapper>

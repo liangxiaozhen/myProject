@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ActivityAwardListMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.ActivityAwardList" >
+    <result column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="ACTID" property="actid" jdbcType="VARCHAR" />
+    <result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="AWARDNO" property="awardno" jdbcType="VARCHAR" />
+    <result column="AWARDNAME" property="awardname" jdbcType="VARCHAR" />
+    <result column="AWARDMONEY" property="awardmoney" jdbcType="FLOAT" />
+    <result column="AWARDQUANTITY" property="awardquantity" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="DECIMAL" />
+    <result column="MADEMAN" property="mademan" jdbcType="VARCHAR" />
+    <result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+    <result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+    <result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+    <result column="DEALMAN" property="dealman" jdbcType="VARCHAR" />
+    <result column="DEALTIME" property="dealtime" jdbcType="TIMESTAMP" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="AWARDATTRIBUTE" property="awardattribute" jdbcType="DECIMAL" />
+    <result column="ADMINREMARK" property="adminRemark" jdbcType="VARCHAR" />
+    <result column="AWARDUNIT" property="awardUnit" jdbcType="VARCHAR" />
+    <!-- 关联奖品表 -->
+    <association property="award" resultMap="awardMap"></association>
+    <!-- 关联活动列表 -->
+    <association property="al" resultMap="alMap"></association>
+    <!-- 关联基本信息表 -->
+    <association property="userbai" resultMap="userbaiMap"></association>
+  </resultMap>
+	
+	<!-- 关联用户基本信息表 -->
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="userbaiMap">
+		<result column="REALNAME" property="realname" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 关联奖品表 -->
+	<resultMap type="com.ptpl.model.Award" id="awardMap">
+		<result column="AWARDRULES" property="awardRules" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 关联活动列表 -->
+	<resultMap type="com.ptpl.model.ActivityList" id="alMap">
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR"/>
+		<result column="ACTTYPE" property="acttype" jdbcType="DECIMAL"/>
+	</resultMap>
+	
+	<resultMap type="java.util.Map" id="CountMap">
+		<result column="AWARDTIMES" property="awardtimes" jdbcType="DECIMAL" />
+		<result column="AWARDNUMBER" property="awardnumber" jdbcType="DECIMAL" />
+	</resultMap>
+  
+  <insert id="insert" parameterType="com.ptpl.model.ActivityAwardList" >
+  	<selectKey resultType="java.math.BigDecimal" keyProperty="id" order="BEFORE">
+  		SELECT ACTIVITYAWARDLIST_SEQ.NEXTVAL AS id from dual
+  	</selectKey>
+    insert into ACTIVITYAWARDLIST (ID, ACTID, BASEID, 
+      USERNAME, AWARDNO, AWARDNAME, 
+      AWARDMONEY, AWARDQUANTITY, STATUS, 
+      MADEMAN, MADETIME, AUDITMAN, 
+      AUDITTIME, DEALMAN, DEALTIME, 
+      REMARK,ADMINREMARK, AWARDATTRIBUTE,AWARDUNIT)
+    values (#{id,jdbcType=DECIMAL}, #{actid,jdbcType=VARCHAR}, #{baseid,jdbcType=DECIMAL}, 
+      #{username,jdbcType=VARCHAR}, #{awardno,jdbcType=VARCHAR}, #{awardname,jdbcType=VARCHAR}, 
+      #{awardmoney,jdbcType=FLOAT}, #{awardquantity,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, 
+      #{mademan,jdbcType=VARCHAR}, #{madetime,jdbcType=TIMESTAMP}, #{auditman,jdbcType=VARCHAR}, 
+      #{audittime,jdbcType=TIMESTAMP}, #{dealman,jdbcType=VARCHAR}, #{dealtime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR},#{adminRemark,jdbcType=VARCHAR}, #{awardattribute,jdbcType=DECIMAL},
+      #{awardUnit,jdbcType=VARCHAR})
+  </insert>
+
+	<!-- 新增获奖名单（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.ActivityAwardList">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id" order="BEFORE">
+			SELECT ACTIVITYAWARDLIST_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYAWARDLIST
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actid != null">
+				ACTID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="awardno != null">
+				AWARDNO,
+			</if>
+			<if test="awardname != null">
+				AWARDNAME,
+			</if>
+			<if test="awardmoney != null">
+				AWARDMONEY,
+			</if>
+			<if test="awardquantity != null">
+				AWARDQUANTITY,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="mademan != null">
+				MADEMAN,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="dealman != null">
+				DEALMAN,
+			</if>
+			<if test="dealtime != null">
+				DEALTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="awardattribute != null">
+				AWARDATTRIBUTE,
+			</if>
+			<if test="adminRemark != null">
+				ADMINREMARK,
+			</if>
+			<if test="awardUnit != null">
+				awardUnit,
+			</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actid != null">
+				#{actid,jdbcType=VARCHAR},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="awardno != null">
+				#{awardno,jdbcType=VARCHAR},
+			</if>
+			<if test="awardname != null">
+				#{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardmoney != null">
+				#{awardmoney,jdbcType=OTHER},
+			</if>
+			<if test="awardquantity != null">
+				#{awardquantity,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="mademan != null">
+				#{mademan,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="dealman != null">
+				#{dealman,jdbcType=VARCHAR},
+			</if>
+			<if test="dealtime != null">
+				#{dealtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="awardattribute != null">
+				#{awardattribute,jdbcType=DECIMAL},
+			</if>
+			<if test="adminRemark != null">
+				#{adminRemark,jdbcType=VARCHAR},
+			</if>
+			<if test="awardUnit != null">
+				#{awardUnit,jdbcType=VARCHAR},
+			</if>
+			
+		</trim>
+	</insert>
+  	<!-- 奖品名单列表  获取多个  1,2,4,7 -->
+ 	<select id="selectByCondition" parameterType="com.ptpl.model.ActivityAwardList" resultMap="BaseResultMap">
+ 		select * from ACTIVITYAWARDLIST
+ 		<where>
+ 			<if test="username!=null and username!=''">
+ 				AND USERNAME = #{username,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="actid !=null and actid!=''">
+ 				AND ACTID = #{actid,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="awardno !=null and awardno!=''">
+ 				AND AWARDNO = #{awardno,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="awardname !=null and awardname!=''">
+ 				AND AWARDNAME = #{awardname,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="status !=null">
+ 				AND status = #{status,jdbcType=DECIMAL}
+ 			</if>
+ 			<if test="status ==null">
+ 				AND status in(1,2,4,7)
+ 			</if>
+ 		</where> 
+ 	</select>
+ 	
+ 	<!-- 奖品名单列表  获取多个 2 3 4 5 6 7 9-->
+ 	<select id="selectByConditionTwo" parameterType="com.ptpl.model.ActivityAwardList" resultMap="BaseResultMap">
+ 		select * from ACTIVITYAWARDLIST
+ 		<where>
+ 			<if test="username!=null and username!=''">
+ 				AND USERNAME = #{username,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="actid !=null and actid!=''">
+ 				AND ACTID = #{actid,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="awardno !=null and awardno!=''">
+ 				AND AWARDNO = #{awardno,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="awardname !=null and awardname!=''">
+ 				AND AWARDNAME = #{awardname,jdbcType=VARCHAR}
+ 			</if>
+ 			<if test="status !=null">
+ 				AND status = #{status,jdbcType=DECIMAL}
+ 			</if>
+ 			<if test="status ==null">
+ 				AND status in(2,3,4,5,6,7,9)
+ 			</if>
+ 		</where> 
+ 	</select>
+ 	
+ 	<update id="update" parameterType="com.ptpl.model.ActivityAwardList">
+ 			update ACTIVITYAWARDLIST 
+ 			<trim prefix="set" suffixOverrides=",">
+  			<if test="actid!=null">
+             actid=#{actid},
+           </if>
+           <if test="baseid!=null">
+              baseid=#{baseid},
+           </if>
+           <if test="username!=null">
+              username=#{username},
+           </if>
+             <if test="awardno!=null">
+              awardno=#{awardno},
+           </if>
+             <if test="awardname!=null">
+              awardname=#{awardname},
+           </if>
+             <if test="awardmoney!=null">
+              awardmoney=#{awardmoney},
+           </if>
+             <if test="awardquantity!=null">
+              awardquantity=#{awardquantity},
+           </if>
+             <if test="status!=null">
+              status=#{status},
+           </if>
+             <if test="mademan!=null">
+              mademan=#{mademan},
+           </if>
+             <if test="madetime!=null">
+              madetime=#{madetime},
+           </if>
+             <if test="auditman!=null">
+              auditman=#{auditman},
+           </if>
+             <if test="audittime!=null">
+              audittime=#{audittime},
+           </if>
+             <if test="dealman!=null">
+              dealman=#{dealman},
+           </if>
+             <if test="dealtime!=null">
+              dealtime=#{dealtime},
+           </if>
+             <if test="remark!=null">
+              remark=#{remark},
+           </if>
+            <if test="awardUnit!=null">
+              awardUnit=#{awardUnit},
+           </if>
+  		</trim>
+  		where id=#{id}
+ 	</update>
+ 	
+  <delete id="delete" parameterType="java.math.BigDecimal">
+  	delete from ACTIVITYAWARDLIST where id=#{id}
+  </delete>
+  <select id="getSelectstatus" resultMap="BaseResultMap">
+  	select t.* from ACTIVITYAWARDLIST t
+  </select>
+  <!-- 根据id来获取对应的单条记录 -->
+  <select id="getselectById" resultMap="BaseResultMap" parameterType="BigDecimal">
+  		select t.*,a.actname,a.acttype,u.realname from ACTIVITYAWARDLIST t,ActivityList a,UserBaseAccountInfo u
+  		where t.id=#{id,jdbcType=DECIMAL} and t.actid = a.actno and t.baseid = u.id 
+  </select>
+  <select id="getselectAwardNo" resultMap="BaseResultMap" parameterType="String">
+  		select t.* from ACTIVITYAWARDLIST t where t.awardno=#{awardno} and  rownum=1
+  </select>
+  
+  <!-- pxl  根据id更新奖品的发放状态 -->
+  <update id="updateAwardStatusById" parameterType="com.ptpl.model.ActivityAwardList">
+  	update ACTIVITYAWARDLIST
+	  	<trim prefix="set" suffixOverrides=",">
+	  		<if test="status!=null">
+	        	status=#{status},
+	        </if>
+	        <if test="auditman!=null and auditman!=''">
+	        	auditman=#{auditman },
+	        </if>
+	        <if test="audittime!=null and audittime!=''">
+	        	audittime=#{audittime},
+	        </if>
+	    </trim>    
+   where id=#{id}
+  </update>
+  
+  <!-- pxl  根据用户名查询该用户的获奖信息 -->
+  <select id="getAwardInfo" resultMap="BaseResultMap" parameterType="com.ptpl.model.ActivityAwardList">
+  	select t.* from ACTIVITYAWARDLIST t 
+  	<trim prefix="where" prefixOverrides="and|or">
+  		<if test="username !=null and username!=''">
+  			and username=#{username,jdbcType=VARCHAR}
+  		</if>
+  		<if test="awardno !=null and awardno!=''">
+  			and awardno = #{awardno,jdbcType=VARCHAR}
+  		</if>
+  		<if test="awardname !=null and awardname!=''">
+  			and awardname= #{awardname,jdbcType=VARCHAR}
+  		</if>
+  		<if test="status !=null and status!=''">
+  			and status = #{status,jdbcType=DECIMAL}
+  		</if>
+  			and awardattribute >= 31
+  	</trim> 
+  </select>
+  
+  <!-- pxl 需要将备注中的收货信息存进数据库并修改奖品发放状态-->
+  <update id="sureAwardRemark" parameterType="com.ptpl.model.ActivityAwardList">
+  	update ACTIVITYAWARDLIST
+  		<trim prefix="set" suffixOverrides=",">
+	  		<if test="remark!=null">
+	        	remark=#{remark},
+	        </if>
+	        <if test="status!=null">
+	        	status=#{status},
+	        </if>
+  		</trim>
+   where id=#{id}
+  </update>
+  
+  <!-- 用户的收货信息有问题，需要用户再次确认 -->
+  <update id="updateAwardStatusAndRemarkById" parameterType="com.ptpl.model.ActivityAwardList">
+  	update ACTIVITYAWARDLIST 
+		<trim prefix="set" suffixOverrides=",">
+	  		<if test="status!=null">
+	  			status=#{status},
+	  		</if>
+	  		<if test="adminRemark!=null">
+	        	adminRemark=#{adminRemark},
+	        </if>
+	    </trim>
+   where id=#{id}
+  </update>
+  
+  <!-- 统计获奖人次和人数 -->
+  <select id="selectTimesAndNumber" resultMap="CountMap" parameterType="java.lang.String">
+  	select count(distinct baseid) awardnumber,count(*) awardtimes from activityawardlist where actid = #{actid,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 获取需要审核的获奖名单 -->
+  <select id="selectNeedAuditByCondition" parameterType="com.ptpl.model.ActivityAwardList" resultMap="BaseResultMap">
+ 		select * from ACTIVITYAWARDLIST 
+  		<trim prefix="where" prefixOverrides="and|or">
+  	 	  <if test="id!=null and id!=''">
+             id=#{id,jdbcType=DECIMAL}
+          </if>
+          <if test="actid!=null and actid!=''">
+             and actid=#{actid,jdbcType=DECIMAL}
+           </if>
+           <if test="baseid!=null and baseid!=''">
+              and baseid=#{baseid,jdbcType=DECIMAL}
+           </if>
+            <if test="username!=null and username!=''">
+              and username like '%'||#{username,jdbcType=VARCHAR}||'%'
+           </if>
+           <if test="awardno!=null and awardno!=''">
+              and awardno=#{awardno,jdbcType=VARCHAR}
+           </if>
+             <if test="awardname!=null and awardname!=''">
+              and awardname like '%'||#{awardname,jdbcType=VARCHAR}||'%'
+           </if>
+             <if test="awardmoney!=null and awardmoney!=''">
+              and awardmoney=#{awardmoney,jdbcType=FLOAT}
+           </if>
+             <if test="awardquantity!=null and awardquantity!=''">
+              and awardquantity=#{awardquantity,jdbcType=DECIMAL}
+           </if>
+             <if test="status!=null">
+              and status=#{status,jdbcType=DECIMAL}
+           </if>
+             <if test="mademan!=null and mademan!=''">
+              and mademan=#{mademan,jdbcType=VARCHAR}
+           </if>
+             <if test="madetime!=null and madetime!=''">
+              and madetime=#{madetime,jdbcType=TIMESTAMP}
+           </if>
+             <if test="auditman!=null and auditman!=''">
+              and auditman=#{auditman,jdbcType=VARCHAR}
+           </if>
+             <if test="audittime!=null and audittime!=''">
+              and audittime=#{audittime,jdbcType=TIMESTAMP}
+           </if>
+             <if test="dealman!=null and dealman!=''">
+              and dealman=#{dealman,jdbcType=VARCHAR}
+           </if>
+             <if test="dealtime!=null and dealtime!=''">
+              and dealtime=#{dealtime,jdbcType=TIMESTAMP}
+           </if>
+             <if test="remark!=null and remark!=''">
+              and remark=#{remark,jdbcType=VARCHAR}
+           </if>
+           <if test="adminRemark!=null and adminRemark!=''">
+              and adminRemark=#{adminRemark,jdbcType=VARCHAR}
+           </if>
+  		</trim>
+  		order by id asc
+ 	</select>
+ 	<!-- 根据id来获取对应的单条记录的奖品 -->
+  <select id="getAwardattributeById" resultMap="BaseResultMap" parameterType="BigDecimal">
+  		select t.AWARDATTRIBUTE,t.STATUS,t.ID from ACTIVITYAWARDLIST t where t.ID=#{id}
+  </select>
+  
+  <!-- 根据id来获取获奖名单以及对应的奖品 -->
+  <select id="getActivityAwardListById" resultMap="BaseResultMap" parameterType="BigDecimal">
+  	select u.*,a.awardRules from ACTIVITYAWARDLIST u,AWARD a
+  	where u.AWARDNO = a.ano and u.ID = #{id,jdbcType=DECIMAL}
+  </select>
+ 
+</mapper>

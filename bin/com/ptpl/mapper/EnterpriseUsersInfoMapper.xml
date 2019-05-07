@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.EnterpriseUsersInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.EnterpriseUsersInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="USRNAME" property="usrname" jdbcType="VARCHAR" />
+		<result column="INSTUCODE" property="instucode" jdbcType="VARCHAR" />
+		<result column="BUSICODE" property="busicode" jdbcType="VARCHAR" />
+		<result column="TAXCODE" property="taxcode" jdbcType="VARCHAR" />
+		<result column="THREEINONECODE" property="threeinonecode"
+			jdbcType="VARCHAR" />
+		<result column="GUARTYPE" property="guartype" jdbcType="VARCHAR" />
+		<result column="GUARCORPEARNESTAMT" property="guarcorpearnestamt"
+			jdbcType="FLOAT" />
+		<result column="REGCAPITAL" property="regcapital" jdbcType="FLOAT" />
+		<result column="ENTERPRISETYPE" property="enterprisetype"
+			jdbcType="VARCHAR" />
+		<result column="BUSINESSSCOPE" property="businessscope"
+			jdbcType="VARCHAR" />
+		<result column="LICENSEADDRESS" property="licenseaddress"
+			jdbcType="VARCHAR" />
+		<result column="LASTYEARLYINSPECTION" property="lastyearlyinspection"
+			jdbcType="TIMESTAMP" />
+		<result column="ESTABLISHMENTDATE" property="establishmentdate"
+			jdbcType="TIMESTAMP" />
+		<result column="PERIOD" property="period" jdbcType="DECIMAL" />
+		<result column="ISCREDITREPORT" property="iscreditreport"
+			jdbcType="DECIMAL" />
+		<result column="ISACCOUNTOPENLICENSE" property="isaccountopenlicense"
+			jdbcType="DECIMAL" />
+		<result column="LEGALPERSON" property="legalperson" jdbcType="VARCHAR" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="LEGALPERSONID" property="legalpersonid"
+			jdbcType="VARCHAR" />
+		<result column="WEBSITE" property="website" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, USRNAME, INSTUCODE, BUSICODE, TAXCODE, THREEINONECODE,
+		GUARTYPE, GUARCORPEARNESTAMT,
+		REGCAPITAL, ENTERPRISETYPE, BUSINESSSCOPE, LICENSEADDRESS, LASTYEARLYINSPECTION,
+		ESTABLISHMENTDATE, PERIOD, ISCREDITREPORT, ISACCOUNTOPENLICENSE,
+		LEGALPERSON, MOBILE,
+		REMARK, LEGALPERSONID, WEBSITE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from ENTERPRISEUSERSINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 通过baseid查询信息 -->
+	<select id="selectBybaseID" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from ENTERPRISEUSERSINFO
+		where BASEID = #{baseid,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from ENTERPRISEUSERSINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.EnterpriseUsersInfo">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT ENTERPRISEUSERSINFO_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into ENTERPRISEUSERSINFO (ID, BASEID, USRNAME,
+		INSTUCODE, BUSICODE, TAXCODE,
+		THREEINONECODE, GUARTYPE, GUARCORPEARNESTAMT,
+		REGCAPITAL, ENTERPRISETYPE, BUSINESSSCOPE,
+		LICENSEADDRESS, LASTYEARLYINSPECTION,
+		ESTABLISHMENTDATE, PERIOD, ISCREDITREPORT,
+		ISACCOUNTOPENLICENSE, LEGALPERSON, MOBILE,
+		REMARK, LEGALPERSONID, WEBSITE
+		)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{usrname,jdbcType=VARCHAR},
+		#{instucode,jdbcType=VARCHAR}, #{busicode,jdbcType=VARCHAR}, #{taxcode,jdbcType=VARCHAR},
+		#{threeinonecode,jdbcType=VARCHAR}, #{guartype,jdbcType=VARCHAR},
+		#{guarcorpearnestamt,jdbcType=FLOAT},
+		#{regcapital,jdbcType=FLOAT}, #{enterprisetype,jdbcType=VARCHAR},
+		#{businessscope,jdbcType=VARCHAR},
+		#{licenseaddress,jdbcType=VARCHAR}, #{lastyearlyinspection,jdbcType=TIMESTAMP},
+		#{establishmentdate,jdbcType=TIMESTAMP}, #{period,jdbcType=DECIMAL},
+		#{iscreditreport,jdbcType=DECIMAL},
+		#{isaccountopenlicense,jdbcType=DECIMAL},
+		#{legalperson,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{legalpersonid,jdbcType=VARCHAR},
+		#{website,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.EnterpriseUsersInfo">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT ENTERPRISEUSERSINFO_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into ENTERPRISEUSERSINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="usrname != null">
+				USRNAME,
+			</if>
+			<if test="instucode != null">
+				INSTUCODE,
+			</if>
+			<if test="busicode != null">
+				BUSICODE,
+			</if>
+			<if test="taxcode != null">
+				TAXCODE,
+			</if>
+			<if test="threeinonecode != null">
+				THREEINONECODE,
+			</if>
+			<if test="guartype != null">
+				GUARTYPE,
+			</if>
+			<if test="guarcorpearnestamt != null">
+				GUARCORPEARNESTAMT,
+			</if>
+			<if test="regcapital != null">
+				REGCAPITAL,
+			</if>
+			<if test="enterprisetype != null">
+				ENTERPRISETYPE,
+			</if>
+			<if test="businessscope != null">
+				BUSINESSSCOPE,
+			</if>
+			<if test="licenseaddress != null">
+				LICENSEADDRESS,
+			</if>
+			<if test="lastyearlyinspection != null">
+				LASTYEARLYINSPECTION,
+			</if>
+			<if test="establishmentdate != null">
+				ESTABLISHMENTDATE,
+			</if>
+			<if test="period != null">
+				PERIOD,
+			</if>
+			<if test="iscreditreport != null">
+				ISCREDITREPORT,
+			</if>
+			<if test="isaccountopenlicense != null">
+				ISACCOUNTOPENLICENSE,
+			</if>
+			<if test="legalperson != null">
+				LEGALPERSON,
+			</if>
+			<if test="mobile != null">
+				MOBILE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="legalpersonid != null">
+				LEGALPERSONID,
+			</if>
+			<if test="website != null">
+				WEBSITE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="usrname != null">
+				#{usrname,jdbcType=VARCHAR},
+			</if>
+			<if test="instucode != null">
+				#{instucode,jdbcType=VARCHAR},
+			</if>
+			<if test="busicode != null">
+				#{busicode,jdbcType=VARCHAR},
+			</if>
+			<if test="taxcode != null">
+				#{taxcode,jdbcType=VARCHAR},
+			</if>
+			<if test="threeinonecode != null">
+				#{threeinonecode,jdbcType=VARCHAR},
+			</if>
+			<if test="guartype != null">
+				#{guartype,jdbcType=VARCHAR},
+			</if>
+			<if test="guarcorpearnestamt != null">
+				#{guarcorpearnestamt,jdbcType=FLOAT},
+			</if>
+			<if test="regcapital != null">
+				#{regcapital,jdbcType=FLOAT},
+			</if>
+			<if test="enterprisetype != null">
+				#{enterprisetype,jdbcType=VARCHAR},
+			</if>
+			<if test="businessscope != null">
+				#{businessscope,jdbcType=VARCHAR},
+			</if>
+			<if test="licenseaddress != null">
+				#{licenseaddress,jdbcType=VARCHAR},
+			</if>
+			<if test="lastyearlyinspection != null">
+				#{lastyearlyinspection,jdbcType=TIMESTAMP},
+			</if>
+			<if test="establishmentdate != null">
+				#{establishmentdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="period != null">
+				#{period,jdbcType=DECIMAL},
+			</if>
+			<if test="iscreditreport != null">
+				#{iscreditreport,jdbcType=DECIMAL},
+			</if>
+			<if test="isaccountopenlicense != null">
+				#{isaccountopenlicense,jdbcType=DECIMAL},
+			</if>
+			<if test="legalperson != null">
+				#{legalperson,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="legalpersonid != null">
+				#{legalpersonid,jdbcType=VARCHAR},
+			</if>
+			<if test="website != null">
+				#{website,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.EnterpriseUsersInfo">
+		update ENTERPRISEUSERSINFO
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="usrname != null">
+				USRNAME = #{usrname,jdbcType=VARCHAR},
+			</if>
+			<if test="instucode != null">
+				INSTUCODE = #{instucode,jdbcType=VARCHAR},
+			</if>
+			<if test="busicode != null">
+				BUSICODE = #{busicode,jdbcType=VARCHAR},
+			</if>
+			<if test="taxcode != null">
+				TAXCODE = #{taxcode,jdbcType=VARCHAR},
+			</if>
+			<if test="threeinonecode != null">
+				THREEINONECODE = #{threeinonecode,jdbcType=VARCHAR},
+			</if>
+			<if test="guartype != null">
+				GUARTYPE = #{guartype,jdbcType=VARCHAR},
+			</if>
+			<if test="guarcorpearnestamt != null">
+				GUARCORPEARNESTAMT = #{guarcorpearnestamt,jdbcType=FLOAT},
+			</if>
+			<if test="regcapital != null">
+				REGCAPITAL = #{regcapital,jdbcType=FLOAT},
+			</if>
+			<if test="enterprisetype != null">
+				ENTERPRISETYPE = #{enterprisetype,jdbcType=VARCHAR},
+			</if>
+			<if test="businessscope != null">
+				BUSINESSSCOPE = #{businessscope,jdbcType=VARCHAR},
+			</if>
+			<if test="licenseaddress != null">
+				LICENSEADDRESS = #{licenseaddress,jdbcType=VARCHAR},
+			</if>
+			<if test="lastyearlyinspection != null">
+				LASTYEARLYINSPECTION = #{lastyearlyinspection,jdbcType=TIMESTAMP},
+			</if>
+			<if test="establishmentdate != null">
+				ESTABLISHMENTDATE = #{establishmentdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="period != null">
+				PERIOD = #{period,jdbcType=DECIMAL},
+			</if>
+			<if test="iscreditreport != null">
+				ISCREDITREPORT = #{iscreditreport,jdbcType=DECIMAL},
+			</if>
+			<if test="isaccountopenlicense != null">
+				ISACCOUNTOPENLICENSE = #{isaccountopenlicense,jdbcType=DECIMAL},
+			</if>
+			<if test="legalperson != null">
+				LEGALPERSON = #{legalperson,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				MOBILE = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="legalpersonid != null">
+				LEGALPERSONID = #{legalpersonid,jdbcType=VARCHAR},
+			</if>
+			<if test="website != null">
+				WEBSITE = #{website,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.EnterpriseUsersInfo">
+		update ENTERPRISEUSERSINFO
+		set BASEID = #{baseid,jdbcType=DECIMAL},
+		USRNAME = #{usrname,jdbcType=VARCHAR},
+		INSTUCODE = #{instucode,jdbcType=VARCHAR},
+		BUSICODE = #{busicode,jdbcType=VARCHAR},
+		TAXCODE = #{taxcode,jdbcType=VARCHAR},
+		THREEINONECODE = #{threeinonecode,jdbcType=VARCHAR},
+		GUARTYPE = #{guartype,jdbcType=VARCHAR},
+		GUARCORPEARNESTAMT = #{guarcorpearnestamt,jdbcType=FLOAT},
+		REGCAPITAL = #{regcapital,jdbcType=FLOAT},
+		ENTERPRISETYPE = #{enterprisetype,jdbcType=VARCHAR},
+		BUSINESSSCOPE = #{businessscope,jdbcType=VARCHAR},
+		LICENSEADDRESS = #{licenseaddress,jdbcType=VARCHAR},
+		LASTYEARLYINSPECTION = #{lastyearlyinspection,jdbcType=TIMESTAMP},
+		ESTABLISHMENTDATE = #{establishmentdate,jdbcType=TIMESTAMP},
+		PERIOD = #{period,jdbcType=DECIMAL},
+		ISCREDITREPORT = #{iscreditreport,jdbcType=DECIMAL},
+		ISACCOUNTOPENLICENSE = #{isaccountopenlicense,jdbcType=DECIMAL},
+		LEGALPERSON = #{legalperson,jdbcType=VARCHAR},
+		MOBILE = #{mobile,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		LEGALPERSONID = #{legalpersonid,jdbcType=VARCHAR},
+		WEBSITE = #{website,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 查询所有的信息 -->
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from EnterpriseUsersInfo t where t.guartype='Y'
+	</select>
+</mapper>

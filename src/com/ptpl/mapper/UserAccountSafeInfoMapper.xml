@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserAccountSafeInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserAccountSafeInfo">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="LOGINPASSWORD" property="loginpassword"
+			jdbcType="VARCHAR" />
+		<result column="SALTNUMBER" property="saltnumber" jdbcType="VARCHAR" />
+		<result column="SECURITYPASSWORDONE" property="securitypasswordone"
+			jdbcType="VARCHAR" />
+		<result column="SECURITYPASSWORDTWO" property="securitypasswordtwo"
+			jdbcType="VARCHAR" />
+		<result column="QUESTION1" property="question1" jdbcType="VARCHAR" />
+		<result column="ANSWER1" property="answer1" jdbcType="VARCHAR" />
+		<result column="QUESTION2" property="question2" jdbcType="VARCHAR" />
+		<result column="ANSWER2" property="answer2" jdbcType="VARCHAR" />
+		<result column="QUESTION3" property="question3" jdbcType="VARCHAR" />
+		<result column="ANSWER3" property="answer3" jdbcType="VARCHAR" />
+		<result column="RISKLEVEL" property="risklevel" jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="CUSTQUESTION" property="custquestion" jdbcType="VARCHAR" />
+		<result column="ISFUNDSUPERVISION" property="isfundsupervision"
+			jdbcType="DECIMAL" />
+		<result column="LOGINRESTTYPE" property="loginresttype"
+			jdbcType="DECIMAL" />
+		<result column="FUNCTIONSWITCH" property="functionswitch"
+			jdbcType="VARCHAR" />
+		<result column="THIRDPBLOGIN" property="thirdpblogin" jdbcType="VARCHAR" />
+		<result column="LASTLOGINTIME" property="lastlogintime"
+			jdbcType="TIMESTAMP" />
+		<result column="LASTLOGINIP" property="lastloginip" jdbcType="VARCHAR" />
+		<result column="LASTLOGINCOOKIE" property="lastlogincookie"
+			jdbcType="VARCHAR" />
+		<result column="UGRADE" property="ugrade" jdbcType="DECIMAL" />
+		<result column="UGRADETYPE" property="ugradetype" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, BASEID, LOGINPASSWORD,
+		SALTNUMBER, SECURITYPASSWORDONE,
+		SECURITYPASSWORDTWO,
+		QUESTION1, ANSWER1, QUESTION2,
+		ANSWER2, QUESTION3,
+		ANSWER3,
+		RISKLEVEL, STATUS, REMARK,
+		CUSTQUESTION, ISFUNDSUPERVISION,
+		LOGINRESTTYPE,
+		FUNCTIONSWITCH, THIRDPBLOGIN, LASTLOGINTIME,
+		LASTLOGINIP, LASTLOGINCOOKIE,UGRADE,UGRADETYPE
+	</sql>
+
+	<delete id="deleteByBaseId" parameterType="java.math.BigDecimal">
+		delete from
+		USERACCOUNTSAFEINFO
+		where BASEID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 根据用户名查询用户账户信息安全里的密码字段 -->
+	<select id="getLoginPassWordByLoginName" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserBaseAccountInfo">
+		select * from USERACCOUNTSAFEINFO t1 left join
+		USERBASEACCOUNTINFO t2 on
+		t2.id=t1.baseid where (t2.loginName
+		=#{loginname,jdbcType=VARCHAR} or
+		t2.mobilephone
+		=#{mobilephone,jdbcType=VARCHAR} or t2.email
+		=#{email,jdbcType=VARCHAR})
+	</select>
+	<insert id="insert" parameterType="com.ptpl.model.UserAccountSafeInfo">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERACCOUNTSAFEINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERACCOUNTSAFEINFO (ID, BASEID, LOGINPASSWORD,
+		SALTNUMBER, SECURITYPASSWORDONE, SECURITYPASSWORDTWO,
+		QUESTION1,
+		ANSWER1, QUESTION2,
+		ANSWER2, QUESTION3, ANSWER3,
+		RISKLEVEL, STATUS,
+		REMARK,
+		CUSTQUESTION, ISFUNDSUPERVISION, LOGINRESTTYPE,
+		FUNCTIONSWITCH,
+		THIRDPBLOGIN, LASTLOGINTIME,
+		LASTLOGINIP,
+		LASTLOGINCOOKIE,UGRADE,UGRADETYPE)
+		values (#{id,jdbcType=DECIMAL},
+		#{baseid,jdbcType=DECIMAL},
+		#{loginpassword,jdbcType=VARCHAR},
+		#{saltnumber,jdbcType=VARCHAR},
+		#{securitypasswordone,jdbcType=VARCHAR},
+		#{securitypasswordtwo,jdbcType=VARCHAR},
+		#{question1,jdbcType=VARCHAR}, #{answer1,jdbcType=VARCHAR},
+		#{question2,jdbcType=VARCHAR},
+		#{answer2,jdbcType=VARCHAR},
+		#{question3,jdbcType=VARCHAR}, #{answer3,jdbcType=VARCHAR},
+		#{risklevel,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL},
+		#{remark,jdbcType=VARCHAR},
+		#{custquestion,jdbcType=VARCHAR},
+		#{isfundsupervision,jdbcType=DECIMAL},
+		#{loginresttype,jdbcType=DECIMAL},
+		#{functionswitch,jdbcType=VARCHAR},
+		#{thirdpblogin,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=DATE},
+		#{lastloginip,jdbcType=VARCHAR},
+		#{lastlogincookie,jdbcType=VARCHAR},#{ugrade,jdbcType=DECIMAL},#{ugradetype,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserAccountSafeInfo">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERACCOUNTSAFEINFO_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERACCOUNTSAFEINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="loginpassword != null">
+				LOGINPASSWORD,
+			</if>
+			<if test="saltnumber != null">
+				SALTNUMBER,
+			</if>
+			<if test="securitypasswordone != null">
+				SECURITYPASSWORDONE,
+			</if>
+			<if test="securitypasswordtwo != null">
+				SECURITYPASSWORDTWO,
+			</if>
+			<if test="question1 != null">
+				QUESTION1,
+			</if>
+			<if test="answer1 != null">
+				ANSWER1,
+			</if>
+			<if test="question2 != null">
+				QUESTION2,
+			</if>
+			<if test="answer2 != null">
+				ANSWER2,
+			</if>
+			<if test="question3 != null">
+				QUESTION3,
+			</if>
+			<if test="answer3 != null">
+				ANSWER3,
+			</if>
+			<if test="risklevel != null">
+				RISKLEVEL,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="custquestion != null">
+				CUSTQUESTION,
+			</if>
+			<if test="isfundsupervision != null">
+				ISFUNDSUPERVISION,
+			</if>
+			<if test="loginresttype != null">
+				LOGINRESTTYPE,
+			</if>
+			<if test="functionswitch != null">
+				FUNCTIONSWITCH,
+			</if>
+			<if test="thirdpblogin != null">
+				THIRDPBLOGIN,
+			</if>
+			<if test="lastlogintime != null">
+				LASTLOGINTIME,
+			</if>
+			<if test="lastloginip != null">
+				LASTLOGINIP,
+			</if>
+			<if test="lastlogincookie != null">
+				LASTLOGINCOOKIE,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="ugradetype != null">
+				UGRADETYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="loginpassword != null">
+				#{loginpassword,jdbcType=VARCHAR},
+			</if>
+			<if test="saltnumber != null">
+				#{saltnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="securitypasswordone != null">
+				#{securitypasswordone,jdbcType=VARCHAR},
+			</if>
+			<if test="securitypasswordtwo != null">
+				#{securitypasswordtwo,jdbcType=VARCHAR},
+			</if>
+			<if test="question1 != null">
+				#{question1,jdbcType=VARCHAR},
+			</if>
+			<if test="answer1 != null">
+				#{answer1,jdbcType=VARCHAR},
+			</if>
+			<if test="question2 != null">
+				#{question2,jdbcType=VARCHAR},
+			</if>
+			<if test="answer2 != null">
+				#{answer2,jdbcType=VARCHAR},
+			</if>
+			<if test="question3 != null">
+				#{question3,jdbcType=VARCHAR},
+			</if>
+			<if test="answer3 != null">
+				#{answer3,jdbcType=VARCHAR},
+			</if>
+			<if test="risklevel != null">
+				#{risklevel,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="custquestion != null">
+				#{custquestion,jdbcType=VARCHAR},
+			</if>
+			<if test="isfundsupervision != null">
+				#{isfundsupervision,jdbcType=DECIMAL},
+			</if>
+			<if test="loginresttype != null">
+				#{loginresttype,jdbcType=DECIMAL},
+			</if>
+			<if test="functionswitch != null">
+				#{functionswitch,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpblogin != null">
+				#{thirdpblogin,jdbcType=VARCHAR},
+			</if>
+			<if test="lastlogintime != null">
+				#{lastlogintime,jdbcType=DATE},
+			</if>
+			<if test="lastloginip != null">
+				#{lastloginip,jdbcType=VARCHAR},
+			</if>
+			<if test="lastlogincookie != null">
+				#{lastlogincookie,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				#{UGRADE,jdbcType=DECIMAL},
+			</if>
+			<if test="ugradetype != null">
+				#{UGRADETYPE,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 动态更新 无用户ID字段 baseid -->
+	<update id="update" parameterType="com.ptpl.model.UserAccountSafeInfo">
+		update USERACCOUNTSAFEINFO
+		<set>
+			<if test="loginpassword != null">
+				LOGINPASSWORD = #{loginpassword,jdbcType=VARCHAR},
+			</if>
+			<if test="saltnumber != null">
+				SALTNUMBER = #{saltnumber,jdbcType=VARCHAR},
+			</if>
+			<if test="securitypasswordone != null">
+				SECURITYPASSWORDONE =
+				#{securitypasswordone,jdbcType=VARCHAR},
+			</if>
+			<if test="securitypasswordtwo != null">
+				SECURITYPASSWORDTWO =
+				#{securitypasswordtwo,jdbcType=VARCHAR},
+			</if>
+			<if test="question1 != null">
+				QUESTION1 = #{question1,jdbcType=VARCHAR},
+			</if>
+			<if test="answer1 != null">
+				ANSWER1 = #{answer1,jdbcType=VARCHAR},
+			</if>
+			<if test="question2 != null">
+				QUESTION2 = #{question2,jdbcType=VARCHAR},
+			</if>
+			<if test="answer2 != null">
+				ANSWER2 = #{answer2,jdbcType=VARCHAR},
+			</if>
+			<if test="question3 != null">
+				QUESTION3 = #{question3,jdbcType=VARCHAR},
+			</if>
+			<if test="answer3 != null">
+				ANSWER3 = #{answer3,jdbcType=VARCHAR},
+			</if>
+			<if test="risklevel != null">
+				RISKLEVEL = #{risklevel,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="custquestion != null">
+				CUSTQUESTION = #{custquestion,jdbcType=VARCHAR},
+			</if>
+			<if test="isfundsupervision != null">
+				ISFUNDSUPERVISION =
+				#{isfundsupervision,jdbcType=DECIMAL},
+			</if>
+			<if test="loginresttype != null">
+				LOGINRESTTYPE = #{loginresttype,jdbcType=DECIMAL},
+			</if>
+			<if test="functionswitch != null">
+				FUNCTIONSWITCH = #{functionswitch,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdpblogin != null">
+				THIRDPBLOGIN = #{thirdpblogin,jdbcType=VARCHAR},
+			</if>
+			<if test="lastlogintime != null">
+				LASTLOGINTIME = #{lastlogintime},
+			</if>
+			<if test="lastloginip != null">
+				LASTLOGINIP = #{lastloginip,jdbcType=VARCHAR},
+			</if>
+			<if test="lastlogincookie != null">
+				LASTLOGINCOOKIE = #{lastlogincookie,jdbcType=VARCHAR},
+			</if>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=DECIMAL},
+			</if>
+			<if test="ugradetype != null">
+				UGRADETYPE = #{ugradetype,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据ID查询对应的信息 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERACCOUNTSAFEINFO
+		where id = #{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据用户ID查询对应的信息 -->
+	<select id="selectByBaseId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERACCOUNTSAFEINFO
+		where baseId = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据用户BASEID查询对应的信息 -->
+	<select id="selectBaseId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERACCOUNTSAFEINFO
+		where baseId = #{baseid,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据用户等级查询总数 -->
+	<select id="getUserAccountsafeInfoCountByUgrade" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(1) from userAccountsafeInfo where
+		ugrade=#{ugrade,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据用户等级查询普通会员总数 -->
+	<select id="getCountByUgrade" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(1) from userAccountsafeInfo where
+		ugrade=#{ugrade,jdbcType=DECIMAL}
+		AND ugradetype=1
+	</select>
+	<!-- 根据用户等级查询体验会员总数 -->
+	<select id="getCountByUgradeExp" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(1) from userAccountsafeInfo where
+		ugrade=#{ugrade,jdbcType=DECIMAL}
+		AND ugradetype=2
+	</select>
+	<!--查看所有用户的会员等级 -->
+	<select id="getmember" resultMap="BaseResultMap">
+		select uGrade from
+		USERACCOUNTSAFEINFO group by uGrade
+	</select>
+	<select id="getuseradmin" resultMap="BaseResultMap"
+		parameterType="java.lang.Short">
+		select t.* from USERACCOUNTSAFEINFO t where
+		t.ugrade=#{ugrade}
+	</select>
+	<!-- 根据用户密码查询用户baseid是否存在 -->
+	<select id="getIdByPwd" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select BASEID from USERACCOUNTSAFEINFO  where loginpassword=#{loginpassword,jdbcType=VARCHAR}
+	</select>
+</mapper>

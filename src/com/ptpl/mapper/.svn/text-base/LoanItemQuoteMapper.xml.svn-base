@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.LoanItemQuoteMapper">
+    <resultMap id="BaseResultMap" type="com.ptpl.model.LoanItemQuote">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="LIQNO" property="liqno" jdbcType="VARCHAR"/>
+        <result column="INFOATTRIBUTE" property="infoattribute" jdbcType="DECIMAL"/>
+        <result column="INFOTYPE" property="infotype" jdbcType="VARCHAR"/>
+        <result column="QUOTEOBJECTID" property="quoteobjectid" jdbcType="DECIMAL"/>
+        <result column="ISNEED" property="isneed" jdbcType="DECIMAL"/>
+        <result column="ISUSE" property="isuse" jdbcType="DECIMAL"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="ADDMAN" property="addman" jdbcType="VARCHAR"/>
+        <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP"/>
+        <result column="QUOTEPROPERTY" property="quoteproperty" jdbcType="DECIMAL"/>
+        <result column="QUOTENAME" property="quotename" jdbcType="VARCHAR"/>
+        <result column="ISCITE" property="iscite" jdbcType="DECIMAL"/>
+        <result column="SERIESNO" property="seriesno" jdbcType="DECIMAL"/>
+    </resultMap>
+    <resultMap id="BaseResultMap1" type="com.ptpl.model.LoanItemQuote">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+         <result column="LIQNO" property="liqno" jdbcType="VARCHAR"/>
+        <result column="ISNEED" property="isneed" jdbcType="DECIMAL"/>
+        <result column="QUOTEPROPERTY" property="quoteproperty" jdbcType="DECIMAL"/>
+        <result column="QUOTENAME" property="quotename" jdbcType="VARCHAR"/>
+        <result column="SERIESNO" property="seriesno" jdbcType="DECIMAL"/>
+        <!--多对一关联-->
+        <association property="loanInfoPreset" column="quoteobjectid"
+                     select="com.ptpl.mapper.LoanInfoPresetMapper.selectByPrimaryKey2"></association>
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.ptpl.model.LoanItemQuote">
+        <result column="LIQNO" property="liqno" jdbcType="VARCHAR"/>
+        <result column="ISNEED" property="isneed" jdbcType="DECIMAL"/>
+        <result column="QUOTEPROPERTY" property="quoteproperty" jdbcType="DECIMAL"/>
+        <result column="QUOTENAME" property="quotename" jdbcType="VARCHAR"/>
+        <result column="SERIESNO" property="seriesno" jdbcType="DECIMAL"/>
+        <!--多对一关联-->
+        <association property="loanInfoNeed" column="quoteobjectid"
+                     select="com.ptpl.mapper.LoanInfoNeedMapper.selectByPrimaryKey2"></association>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, LIQNO, INFOATTRIBUTE, INFOTYPE, QUOTEOBJECTID, ISNEED, ISUSE, REMARK, ADDMAN,
+    ADDTIME, QUOTEPROPERTY, QUOTENAME,ISCITE,SERIESNO
+  </sql>
+    <sql id="Base_Column_List1">
+    l.quotename,l.liqno,l.quoteproperty,l.seriesno,l.quoteobjectid,l.isneed
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+        select
+        <include refid="Base_Column_List"/>
+        from LOANITEMQUOTE
+        where ID = #{id,jdbcType=DECIMAL}
+    </select>
+
+    <!--//查询所有信息-->
+    <select id="selectAllQuote" resultMap="BaseResultMap">
+     select * from LOANITEMQUOTE t ORDER by t.infoattribute ,t.seriesno
+  </select>
+    <!--查询所有公共资料的信息 infoattribute资料属性(1公共 ，2补充)-->
+    <select id="selectAllQuote_GongGong" resultMap="BaseResultMap">
+     select * from LOANITEMQUOTE t where t.infoattribute=1 ORDER by t.infoattribute ,t.seriesno
+  </select>
+
+    <!--查询所有补充资料的信息-->
+    <select id="selectAllQuote_BuChong" resultMap="BaseResultMap">
+     select * from LOANITEMQUOTE t where t.infoattribute=2 ORDER by t.infoattribute ,t.seriesno
+  </select>
+
+
+    <!-- 获取最后一个编号 -->
+    <select id="selectNeedNo" resultType="string">
+    select max(t.liqno) from LOANITEMQUOTE t
+  </select>
+
+    <!-- 通过资料查询信息 -->
+    <select id="selectloanByLiqno" resultMap="BaseResultMap">
+     select * from LOANITEMQUOTE t where t.liqno=#{linno,jdbcType=VARCHAR}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from LOANITEMQUOTE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <insert id="insert" parameterType="com.ptpl.model.LoanItemQuote">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            SELECT LOANITEMQUOTE_SEQ.NEXTVAL as id FROM DUAL
+        </selectKey>
+        insert into LOANITEMQUOTE (ID, LIQNO, INFOATTRIBUTE,
+        INFOTYPE, QUOTEOBJECTID, ISNEED,
+        ISUSE, REMARK, ADDMAN,
+        ADDTIME, QUOTEPROPERTY, QUOTENAME,ISCITE,SERIESNO
+        )
+        values (#{id,jdbcType=DECIMAL}, #{liqno,jdbcType=VARCHAR}, #{infoattribute,jdbcType=DECIMAL},
+        #{infotype,jdbcType=VARCHAR}, #{quoteobjectid,jdbcType=DECIMAL}, #{isneed,jdbcType=DECIMAL},
+        #{isuse,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{addman,jdbcType=VARCHAR},
+        #{addtime,jdbcType=TIMESTAMP}, #{quoteproperty,jdbcType=DECIMAL}, #{quotename,jdbcType=VARCHAR},
+        #{iscite,jdbcType=DECIMAL},#{seriesno,jdbcType=DECIMAL}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.ptpl.model.LoanItemQuote">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            SELECT LOANITEMQUOTE_SEQ.NEXTVAL as id FROM DUAL
+        </selectKey>
+        insert into LOANITEMQUOTE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="liqno != null">
+                LIQNO,
+            </if>
+            <if test="infoattribute != null">
+                INFOATTRIBUTE,
+            </if>
+            <if test="infotype != null">
+                INFOTYPE,
+            </if>
+            <if test="quoteobjectid != null">
+                QUOTEOBJECTID,
+            </if>
+            <if test="isneed != null">
+                ISNEED,
+            </if>
+            <if test="isuse != null">
+                ISUSE,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="addman != null">
+                ADDMAN,
+            </if>
+            <if test="addtime != null">
+                ADDTIME,
+            </if>
+            <if test="quoteproperty != null">
+                QUOTEPROPERTY,
+            </if>
+            <if test="quotename != null">
+                QUOTENAME,
+            </if>
+            <if test="iscite != null">
+                ISCITE,
+            </if>
+            <if test="seriesno != null">
+                seriesno,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="liqno != null">
+                #{liqno,jdbcType=VARCHAR},
+            </if>
+            <if test="infoattribute != null">
+                #{infoattribute,jdbcType=DECIMAL},
+            </if>
+            <if test="infotype != null">
+                #{infotype,jdbcType=VARCHAR},
+            </if>
+            <if test="quoteobjectid != null">
+                #{quoteobjectid,jdbcType=DECIMAL},
+            </if>
+            <if test="isneed != null">
+                #{isneed,jdbcType=DECIMAL},
+            </if>
+            <if test="isuse != null">
+                #{isuse,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="addman != null">
+                #{addman,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="quoteproperty != null">
+                #{quoteproperty,jdbcType=DECIMAL},
+            </if>
+            <if test="quotename != null">
+                #{quotename,jdbcType=VARCHAR},
+            </if>
+            <if test="iscite != null">
+                #{iscite,jdbcType=DECIMAL},
+            </if>
+            <if test="seriesno != null">
+                #{seriesno,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.LoanItemQuote">
+        update LOANITEMQUOTE
+        <set>
+            <if test="liqno != null">
+                LIQNO = #{liqno,jdbcType=VARCHAR},
+            </if>
+            <if test="infoattribute != null">
+                INFOATTRIBUTE = #{infoattribute,jdbcType=DECIMAL},
+            </if>
+            <if test="infotype != null">
+                INFOTYPE = #{infotype,jdbcType=VARCHAR},
+            </if>
+            <if test="quoteobjectid != null">
+                QUOTEOBJECTID = #{quoteobjectid,jdbcType=DECIMAL},
+            </if>
+            <if test="isneed != null">
+                ISNEED = #{isneed,jdbcType=DECIMAL},
+            </if>
+            <if test="isuse != null">
+                ISUSE = #{isuse,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="addman != null">
+                ADDMAN = #{addman,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="quoteproperty != null">
+                QUOTEPROPERTY = #{quoteproperty,jdbcType=DECIMAL},
+            </if>
+            <if test="quotename != null">
+                QUOTENAME = #{quotename,jdbcType=VARCHAR},
+            </if>
+            <if test="iscite != null">
+                ISCITE = #{iscite,jdbcType=DECIMAL},
+            </if>
+            <if test="seriesno != null">
+                SERIESNO = #{seriesno,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ptpl.model.LoanItemQuote">
+    update LOANITEMQUOTE
+    set LIQNO = #{liqno,jdbcType=VARCHAR},
+      INFOATTRIBUTE = #{infoattribute,jdbcType=DECIMAL},
+      INFOTYPE = #{infotype,jdbcType=VARCHAR},
+      QUOTEOBJECTID = #{quoteobjectid,jdbcType=DECIMAL},
+      ISNEED = #{isneed,jdbcType=DECIMAL},
+      ISUSE = #{isuse,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ADDMAN = #{addman,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      QUOTEPROPERTY = #{quoteproperty,jdbcType=DECIMAL},
+      QUOTENAME = #{quotename,jdbcType=VARCHAR},
+      ISCITE = #{iscite,jdbcType=DECIMAL}
+      SERIESNO = #{seriesno,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+    <!--把预设置的关联查询出来
+    infoattribute;//资料属性(1公共 ，2补充)
+    isuse;//是否使用
+    quoteproperty;//引用项目属性（1自填，2预设置）
+    -->
+    <select id="public_XuanZe" resultMap="BaseResultMap1">
+    SELECT <include refid="Base_Column_List1"/> from LOANITEMQUOTE l where l.infoattribute=1 and l.isuse=1 and l.quoteproperty=2
+  </select>
+    <!--把自填的关联查询出来
+    infoattribute;//资料属性(1公共 ，2补充)
+    isuse;//是否使用
+    quoteproperty;//引用项目属性（1自填，2预设置）
+    -->
+    <select id="public_ZiTian" resultMap="BaseResultMap2">
+        SELECT <include refid="Base_Column_List1"/> from LOANITEMQUOTE l where l.infoattribute=1 and l.isuse=1 and l.quoteproperty=1
+    </select>
+
+
+    <!-- 获取最后一个排序号 -->
+    <select id="selectMaxSeriesno1" resultType="Short">
+    select max(t.seriesno) from LOANITEMQUOTE t
+  </select>
+
+
+    <update id="updateByLiqno" parameterType="com.ptpl.model.LoanItemQuote">
+        update LOANITEMQUOTE
+        <set>
+            <if test="iscite != null">
+                iscite = #{iscite,jdbcType=DECIMAL}
+            </if>
+        </set>
+        where liqno = #{liqno,jdbcType=VARCHAR}
+    </update>
+</mapper>

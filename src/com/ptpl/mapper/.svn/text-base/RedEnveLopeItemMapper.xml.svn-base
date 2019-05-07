@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RedEnveLopeItemMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RedEnveLopeItem">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ORDERNO" property="orderno" jdbcType="VARCHAR" />
+		<result column="REDENVELOPENO" property="redenvelopeno"
+			jdbcType="VARCHAR" />
+		<result column="REDENVELOPENAME" property="redenvelopename"
+			jdbcType="VARCHAR" />
+		<result column="REAMOUNT" property="reamount" jdbcType="FLOAT" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="BUSINESSTYPE" property="businesstype" jdbcType="VARCHAR" />
+		<result column="SENDTIME" property="sendtime" jdbcType="TIMESTAMP" />
+		<result column="ISBLENDING" property="isblending" jdbcType="DECIMAL" />
+		<result column="ISMANBLENDING" property="ismanblending"
+			jdbcType="DECIMAL" />
+		<result column="SYSBTIME" property="sysbtime" jdbcType="TIMESTAMP" />
+		<result column="MANBTIME" property="manbtime" jdbcType="TIMESTAMP" />
+		<result column="PAYCOMPANY" property="paycompany" jdbcType="VARCHAR" />
+		<result column="SYSRECTIME" property="sysrectime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVETIME" property="receivetime" jdbcType="TIMESTAMP" />
+		<result column="REQQUERYDATA" property="reqquerydata" jdbcType="VARCHAR" />
+		<result column="RECRESULTDATA" property="recresultdata"
+			jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ORDERNO, REDENVELOPENO, REDENVELOPENAME, REAMOUNT, BASEID,
+		BUSINESSTYPE, SENDTIME,
+		ISBLENDING, ISMANBLENDING, SYSBTIME, MANBTIME, PAYCOMPANY, SYSRECTIME,
+		RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA, REMARK,USERNAME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from REDENVELOPEITEM
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from REDENVELOPEITEM
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.RedEnveLopeItem">
+		<selectKey keyProperty="id" resultType="java.math.BigDecimal"
+			order="BEFORE">
+			SELECT Redenvelopeitem_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into REDENVELOPEITEM (ID, ORDERNO, REDENVELOPENO,
+		REDENVELOPENAME, REAMOUNT, BASEID,
+		BUSINESSTYPE, SENDTIME, ISBLENDING,
+		ISMANBLENDING, SYSBTIME, MANBTIME,
+		PAYCOMPANY, SYSRECTIME, RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA, REMARK,USERNAME
+		)
+		values (#{id,jdbcType=DECIMAL}, #{orderno,jdbcType=VARCHAR},
+		#{redenvelopeno,jdbcType=VARCHAR},
+		#{redenvelopename,jdbcType=VARCHAR}, #{reamount,jdbcType=FLOAT},
+		#{baseid,jdbcType=DECIMAL},
+		#{businesstype,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP},
+		#{paycompany,jdbcType=VARCHAR}, #{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.RedEnveLopeItem">
+		insert into REDENVELOPEITEM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="orderno != null">
+				ORDERNO,
+			</if>
+			<if test="redenvelopeno != null">
+				REDENVELOPENO,
+			</if>
+			<if test="redenvelopename != null">
+				REDENVELOPENAME,
+			</if>
+			<if test="reamount != null">
+				REAMOUNT,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="businesstype != null">
+				BUSINESSTYPE,
+			</if>
+			<if test="sendtime != null">
+				SENDTIME,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="orderno != null">
+				#{orderno,jdbcType=VARCHAR},
+			</if>
+			<if test="redenvelopeno != null">
+				#{redenvelopeno,jdbcType=VARCHAR},
+			</if>
+			<if test="redenvelopename != null">
+				#{redenvelopename,jdbcType=VARCHAR},
+			</if>
+			<if test="reamount != null">
+				#{reamount,jdbcType=FLOAT},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="businesstype != null">
+				#{businesstype,jdbcType=VARCHAR},
+			</if>
+			<if test="sendtime != null">
+				#{sendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RedEnveLopeItem">
+		update REDENVELOPEITEM
+		<set>
+			<if test="orderno != null">
+				ORDERNO = #{orderno,jdbcType=VARCHAR},
+			</if>
+			<if test="redenvelopeno != null">
+				REDENVELOPENO = #{redenvelopeno,jdbcType=VARCHAR},
+			</if>
+			<if test="redenvelopename != null">
+				REDENVELOPENAME = #{redenvelopename,jdbcType=VARCHAR},
+			</if>
+			<if test="reamount != null">
+				REAMOUNT = #{reamount,jdbcType=FLOAT},
+			</if>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="businesstype != null">
+				BUSINESSTYPE = #{businesstype,jdbcType=VARCHAR},
+			</if>
+			<if test="sendtime != null">
+				SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null and username!=''">
+				USERNAME = #{username,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.RedEnveLopeItem">
+		update REDENVELOPEITEM
+		set ORDERNO = #{orderno,jdbcType=VARCHAR},
+		REDENVELOPENO = #{redenvelopeno,jdbcType=VARCHAR},
+		REDENVELOPENAME = #{redenvelopename,jdbcType=VARCHAR},
+		REAMOUNT = #{reamount,jdbcType=FLOAT},
+		BASEID = #{baseid,jdbcType=DECIMAL},
+		BUSINESSTYPE = #{businesstype,jdbcType=VARCHAR},
+		SENDTIME = #{sendtime,jdbcType=TIMESTAMP},
+		ISBLENDING = #{isblending,jdbcType=DECIMAL},
+		ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+		SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+		MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+		PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+		SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+		RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+		REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+		RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="getByOrderNo" resultMap="BaseResultMap"
+		parameterType="String">
+		select t.* from REDENVELOPEITEM t where t.orderno=#{OrderNo,jdbcType=VARCHAR}
+	</select>
+	<!-- 查询对账记录 -->
+	<select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.ptpl.model.RedEnveLopeItem">
+		select * from REDENVELOPEITEM 
+		<where>
+			<if test="username!=null and username!=''">
+				and USERNAME = #{username,jdbcType=VARCHAR}
+			</if>
+			<if test="redenvelopename!=null and redenvelopename!=''">
+				and REDENVELOPENAME = #{redenvelopename,jdbcType=VARCHAR}
+			</if>
+			<if test="reamount!=null">
+				and REAMOUNT = #{reamount,jdbcType=FLOAT}
+			</if>
+			<if test="ismanblending!=null">
+				and ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="isblending!=null">
+				and ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+</mapper>

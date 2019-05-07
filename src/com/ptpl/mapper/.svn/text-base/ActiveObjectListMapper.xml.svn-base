@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ActiveObjectListMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ActiveObjectList">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="SNLID" property="SNLId" jdbcType="DECIMAL" />
+		<result column="ISRIGHTOREXCEPT" property="isRightOrExcept"
+			jdbcType="DECIMAL" />
+		<result column="NAMETYPE" property="nameType" jdbcType="DECIMAL" />
+		<result column="NAMECONTENT" property="nameContent" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SNLID, ISRIGHTOREXCEPT, NAMETYPE, NAMECONTENT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from ACTIVEOBJECTLIST
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from ACTIVEOBJECTLIST
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.ActiveObjectList">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT activeobjectlist_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVEOBJECTLIST (
+		ID, SNLID, ISRIGHTOREXCEPT, NAMETYPE, NAMECONTENT
+		)
+		values (#{id,jdbcType=DECIMAL}, #{SNLId,jdbcType=DECIMAL},
+		#{isRightOrExcept,jdbcType=DECIMAL},
+		#{nameType,jdbcType=DECIMAL}, #{nameContent,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ActiveObjectList">
+		insert into ACTIVEOBJECTLIST
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="SNLId != null">
+				SNLID,
+			</if>
+			<if test="isRightOrExcept != null">
+				ISRIGHTOREXCEPT,
+			</if>
+			<if test="nameType != null">
+				NAMETYPE,
+			</if>
+			<if test="nameContent != null">
+				NAMECONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="SNLId != null">
+				#{SNLId,jdbcType=DECIMAL},
+			</if>
+			<if test="isRightOrExcept != null">
+				#{isRightOrExcept,jdbcType=DECIMAL},
+			</if>
+			<if test="nameType != null">
+				#{nameType,jdbcType=DECIMAL},
+			</if>
+			<if test="nameContent != null">
+				#{nameContent,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ActiveObjectList">
+		update ACTIVEOBJECTLIST
+		<set>
+			<if test="SNLId != null">
+				SNLID = #{SNLId,jdbcType=DECIMAL},
+			</if>
+			<if test="isRightOrExcept != null">
+				ISRIGHTOREXCEPT = #{isRightOrExcept,jdbcType=DECIMAL},
+			</if>
+			<if test="nameType != null">
+				NAMETYPE = #{nameType,jdbcType=DECIMAL},
+			</if>
+			<if test="nameContent != null">
+				NAMECONTENT = #{nameContent,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.ActiveObjectList">
+		update ACTIVEOBJECTLIST set
+		SNLID = #{SNLId,jdbcType=DECIMAL},
+		ISRIGHTOREXCEPT = #{isRightOrExcept,jdbcType=DECIMAL},
+		NAMETYPE = #{nameType,jdbcType=DECIMAL},
+		NAMECONTENT = #{nameContent,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- pxl 2016-11-28 根据子活动编号删除相对应的活动对象 -->
+	<delete id="deleteActiveObject" parameterType="string">
+		delete from ACTIVEOBJECTLIST where ACTNO=#{actno,jdbcType=VARCHAR}
+	</delete>
+	<!-- 根据定向名单列表的id获得对应的业务对象名单 -->
+	<select id="selectBySNLId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from ACTIVEOBJECTLIST
+		where SNLID = #{SNLId,jdbcType=DECIMAL}
+		order by ISRIGHTOREXCEPT
+	</select>
+	<!-- jxy根据定向名单列表对象获得对应的业务对象名单 -->
+	<select id="selectObject" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.ActiveObjectList">
+		select
+		<include refid="Base_Column_List" />
+		from ACTIVEOBJECTLIST
+		where
+		<if test="SNLId != null">
+			SNLID = #{SNLId,jdbcType=DECIMAL},
+		</if>
+		<if test="isRightOrExcept != null">
+			ISRIGHTOREXCEPT = #{isRightOrExcept,jdbcType=DECIMAL},
+		</if>
+		<if test="nameType != null">
+			NAMETYPE = #{nameType,jdbcType=DECIMAL}
+		</if>
+	</select>
+	<!-- 根据定向名单的id删除对应的业务对象名单 -->
+	<delete id="deleteBySNLId" parameterType="java.math.BigDecimal">
+		delete from ACTIVEOBJECTLIST where SNLID = #{SNLId,jdbcType=DECIMAL}
+	</delete>
+	
+	<select id="selectActiveObjectLists" resultMap="BaseResultMap" parameterType="com.ptpl.model.ActiveObjectList">
+		select * from ACTIVEOBJECTLIST 
+		<where>
+			<if test="nameType != null">
+				NAMETYPE = #{nameType,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+</mapper>

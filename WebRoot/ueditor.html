@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+<textarea rows="50" cols="80" name="content" id="editor" ></textarea>
+</div>
+<input type="button" value="点我" id="abc"/>
+
+<script type="text/javascript"
+        src="jquery/1.11.3/jquery-1.11.3.min.js"></script>
+
+<script type="text/javascript"
+        src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript"
+        src="ueditor/ueditor.all.js"></script>
+<script>
+    var ue = UE.getEditor('editor');
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#abc").click(function () {
+            var content= $("#editor").val();
+            alert(ue.getContent());
+        });
+    });
+
+
+
+
+</script>
+</body>
+</html>

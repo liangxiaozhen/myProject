@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ImageTextItemMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ImageTextItem">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ITINO" property="itino" jdbcType="DECIMAL" />
+		<result column="ITINAME" property="itiname" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="SORT" property="sort" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, ITINO, ITINAME, ISUSE, ADDTIME, ADDMAN, REMARK,SORT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from IMAGETEXTITEM
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="listImageTextItem" parameterType="com.ptpl.model.ImageTextItem"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from IMAGETEXTITEM
+		<where>
+			<if test="itino != null">
+				AND ITINO = #{itino,jdbcType=DECIMAL}
+			</if>
+			<if test="itiname != null">
+				AND ITINAME = #{itiname,jdbcType=VARCHAR}
+			</if>
+			<if test="isuse != null">
+				AND ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+			order by id
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		IMAGETEXTITEM
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.ImageTextItem">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			select IMAGETEXTITEM_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into IMAGETEXTITEM (ID,
+		ITINO, ITINAME,
+		ISUSE, ADDTIME, ADDMAN,
+		REMARK,SORT)
+		values
+		(#{id,jdbcType=DECIMAL}, #{itino,jdbcType=DECIMAL},
+		#{itiname,jdbcType=VARCHAR},
+		#{isuse,jdbcType=DECIMAL}, #{addtime},
+		#{addman,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{sort,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ImageTextItem">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			select IMAGETEXTITEM_SEQ.NEXTVAL from dual
+		</selectKey>
+		insert into IMAGETEXTITEM
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="itino != null">
+				ITINO,
+			</if>
+			<if test="itiname != null">
+				ITINAME,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="sort != null">
+				SORT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="itino != null">
+				#{itino,jdbcType=DECIMAL},
+			</if>
+			<if test="itiname != null">
+				#{itiname,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ImageTextItem">
+		update IMAGETEXTITEM
+		<set>
+			<if test="itino != null">
+				ITINO = #{itino,jdbcType=DECIMAL},
+			</if>
+			<if test="itiname != null">
+				ITINAME = #{itiname,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				 SORT = #{sort,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.ImageTextItem">
+		update
+		IMAGETEXTITEM
+		set ITINO = #{itino,jdbcType=DECIMAL},
+		ITINAME =
+		#{itiname,jdbcType=VARCHAR},
+		ISUSE = #{isuse,jdbcType=DECIMAL},
+		ADDTIME
+		= #{addtime},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		REMARK =
+		#{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

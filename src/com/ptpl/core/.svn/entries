@@ -1,0 +1,37 @@
+10
+
+dir
+2951
+svn://192.168.0.250/ptpjx/src/com/ptpl/core
+svn://192.168.0.250
+
+
+
+2017-05-20T07:45:23.601251Z
+2414
+chenjm
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+889bd93f-a5d7-844a-a21d-b109dc0929eb
+
+annotation
+dir
+
+interceptor
+dir
+
+tag
+dir
+

@@ -1,0 +1,394 @@
+﻿@charset "UTF-8";
+/** 绑定页面样式 **/
+.perCerterR {
+    position: relative;
+    z-index: 1;
+    position: relative;
+}
+div {
+    display: block;
+}
+.bor_r {
+    border-right: solid 1px #eee;
+}
+.bor_l {
+    border-left: solid 1px #eee;
+}
+.fl {
+    float: left;
+}
+.wid_w900 {
+    width: 900px;
+}
+.pad_30 {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+.clearfix {
+    content: ' ';
+    display: block;
+    clear: both;
+    zoom: 1;
+}
+.loadDiv {
+    background-color: transparent;
+    background-position: 0 -11px;
+    height: 24px;
+    vertical-align: middle;
+    line-height: 24px;
+    transition: all 0.3s;
+    transition-timing-function: initial;
+    transition-delay: initial;
+    font-size: 16px;
+}
+.fc_9 {
+    color: #999;
+}
+.nwd_icon_mianbaoxie {
+    background-position: -4px -653px;
+    background-position-x: -4px;
+    background-position-y: -653px;
+    vertical-align: middle;
+    width: 19px;
+    height: 19px;
+}
+.nwd_icon {
+    background: url(${basePath}/resources/Images/qqglImg.png) no-repeat scroll left top;
+    background-image: url(../img/nwdicon.png);
+    background-position-x: left;
+    background-position-y: top;
+    background-size: initial;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: scroll;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    display: inline-block;
+}
+.pad_t20 {
+    padding-top: 20px;
+}
+.pad_b10 {
+    padding-bottom: 10px;
+}
+
+.mar_t30, .mt_30 {
+    margin-top: 30px;
+}
+.pad_l20 {
+    padding-left: 20px;
+}
+
+.txt_center {
+    text-align: center;
+}
+.fc_3 {
+    color: #333;
+}
+
+.fs_18 {
+    font-size: 18px;
+}
+.txt_center {
+    text-align: center;
+}
+.mar_b30, .mb_30 {
+    margin-bottom: 30px;
+}
+.mar_t10, .mt_10 {
+    margin-top: 10px;
+}
+.fc_9 {
+    color: #999;
+}
+.fs_14 {
+    font-size: 14px;
+}
+.accountCon .bindqq {
+    margin: 0 auto;
+}
+.wid_w360 {
+    width: 360px;
+}
+ol, ul {
+    list-style: none;
+}
+ul, menu, dir {
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.bindmanage_icon_qq {
+    background-position: 0 0;
+    background-position-x: 0px;
+    background-position-y: 0px;
+}
+.bindmanage_icon {
+    width: 120px;
+    height: 120px;
+    background-image: url(../img/bindmanage.png);
+    background-size: initial;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    vertical-align: middle;
+}
+.txt_center {
+    text-align: center;
+}
+.mar_t10, .mt_10 {
+    margin-top: 10px;
+}
+.fc_3 {
+    color: #333;
+}
+.btn, .btn_bor {
+    border-radius:3px 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 微软雅黑,arial,sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+.btn_size100, .button-100, .input_w100 {
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+}
+.btn_36c {
+    background: #2577e3;
+    color: #fff;
+    border: solid 1px #2577e3;
+}
+.mar_10 {
+    margin:10px 10px;
+}
+
+.fr {
+    float: right;
+}
+.pad_b10 {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.mar_l30, .ml_30 {
+    margin-left: 30px;
+}
+li {
+    display: list-item;
+}
+.bindmanage_icon_sina {
+    background-position-x: 0px;
+    background-position-y: -131px;
+}
+.bindmanage_icon {
+    width: 120px;
+    height: 120px;
+    background: url(../img/bindmanage.png) no-repeat;
+    background-image: url(../img/bindmanage.png);
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    vertical-align: middle;
+}
+
+.mar_t10, .mt_10 {
+    margin-top: 10px;
+}
+.fc_3 {
+    color: #333;
+}
+
+.btn, .btn_bor {
+    border-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 微软雅黑,arial,sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+.btn_size100, .button-100, .input_w100 {
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+}
+.btn_36c {
+    background: #2577e3;
+    background-image: initial;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(37, 119, 227);
+    color: #fff;
+    border: solid 1px #2577e3;
+    border-top-color: rgb(37, 119, 227);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-color: rgb(37, 119, 227);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-color: rgb(37, 119, 227);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: rgb(37, 119, 227);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+}
+.mar_10 {
+    margin:10px 10px;
+}
+
+
+/*绑定qq、微博（模态框）*/
+
+#lean_overlay {
+
+    position: fixed;
+
+    z-index:100;
+
+    top: 0px;
+
+    left: 0px;
+
+    height:100%;
+
+    width:100%;
+
+    background: #000;
+
+    display: none;
+
+}
+
+#loginmodal {
+
+  width: 600px;
+
+  padding: 15px 20px;
+
+  background: #f3f6fa;
+
+  -webkit-border-radius: 6px;
+
+  -moz-border-radius: 6px;
+
+  border-radius: 6px;
+
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+
+}
+
+#loginform { /* no default styles */ }
+
+#loginform label { display: block; font-size: 1.1em; font-weight: bold; color: #7c8291; margin-bottom: 3px; }
+
+.txtfield { 
+
+  display: block;
+
+  width: 100%;
+
+  padding: 6px 5px;
+
+  margin-bottom: 15px;
+
+  font-family: 'Helvetica Neue', Helvetica, Verdana, sans-serif;
+
+  color: #7988a3;
+
+  font-size: 1.4em;
+
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+
+  background-color: #fff;
+
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#edf3f9), to(#fff));
+
+  background-image: -webkit-linear-gradient(top, #edf3f9, #fff);
+
+  background-image: -moz-linear-gradient(top, #edf3f9, #fff);
+
+  background-image: -ms-linear-gradient(top, #edf3f9, #fff);
+
+  background-image: -o-linear-gradient(top, #edf3f9, #fff);
+
+  background-image: linear-gradient(top, #edf3f9, #fff);
+
+  border: 1px solid;
+
+  border-color: #abbce8 #c3cae0 #b9c8ef;
+
+  -webkit-border-radius: 4px;
+
+  -moz-border-radius: 4px;
+
+  border-radius: 4px;
+
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.4);
+
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.4);
+
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.4);
+
+  -webkit-transition: all 0.25s linear;
+
+  -moz-transition: all 0.25s linear;
+
+  transition: all 0.25s linear;
+
+}
+
+.txtfield:focus {
+
+  outline: none;
+
+  color: #525864;
+
+  border-color: #84c0ee;
+
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 7px #96c7ec;
+
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 7px #96c7ec;
+
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 7px #96c7ec;
+
+}

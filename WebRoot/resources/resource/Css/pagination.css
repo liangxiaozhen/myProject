@@ -1,0 +1,14 @@
+﻿@charset "utf-8";      
+
+
+/*分页条*/
+.pageList a,.pageList span {display: inline-block;width: 26px;height: 26px;line-height: 26px;text-align: center;color: #999;border-radius: 4px;vertical-align: middle;    margin-right: 5px;}
+.pageList a.current {background-color: #cfcfcf;color: #fff;}
+.pageList .current,.pageList .current {background-color: #cfcfcf;color: #fff;}
+.pageList .pre.current,.pageList .next.current {background-color: #fff;}
+.pageList a.current:hover {background-color: #eee;color: #999;}
+.pageList a:hover {background-color: #eee;color: #999;}
+.pageIcon {background: url(../Images/arrow.png) no-repeat center center;}
+.pageList a.pre,.pageList span.pre {background-position: 0 0;}
+.pageList a.next,.pageList span.next {background-position: 0 -26px;}
+.pageList a.pre:hover,.pageList a.next:hover {background-color:#eee; }

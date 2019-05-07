@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptpl.mapper.UserAutoTenderMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserAutoTender">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="TENDERID" jdbcType="DECIMAL" property="tenderid" />
+		<result column="BASEID" jdbcType="DECIMAL" property="baseid" />
+		<result column="TENDERPLANTYPE" jdbcType="VARCHAR" property="tenderplantype" />
+		<result column="TRANSAMT" jdbcType="FLOAT" property="transamt" />
+		<result column="STATUS" jdbcType="DECIMAL" property="status" />
+		<result column="UATBEGINTIME" jdbcType="TIMESTAMP" property="uatbegintime" />
+		<result column="UATENDTIME" jdbcType="TIMESTAMP" property="uatendtime" />
+		<result column="ISBLENDING" jdbcType="DECIMAL" property="isblending" />
+		<result column="ISMANBLENDING" jdbcType="DECIMAL" property="ismanblending" />
+		<result column="SYSBTIME" jdbcType="TIMESTAMP" property="sysbtime" />
+		<result column="MANBTIME" jdbcType="TIMESTAMP" property="manbtime" />
+		<result column="PAYCOMPANY" jdbcType="VARCHAR" property="paycompany" />
+		<result column="SYSRECTIME" jdbcType="TIMESTAMP" property="sysrectime" />
+		<result column="RECEIVETIME" jdbcType="TIMESTAMP" property="receivetime" />
+		<result column="REQQUERYDATA" jdbcType="VARCHAR" property="reqquerydata" />
+		<result column="RECRESULTDATA" jdbcType="VARCHAR" property="recresultdata" />
+		<result column="OPERATORMAN" jdbcType="VARCHAR" property="operatorman" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<association property="tender" resultMap="TenderItemMap" />
+		<association property="userBaseInfo" resultMap="UserBaseAccountInfoMap" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.TenderItem" id="TenderItemMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="TNO" property="tno" jdbcType="VARCHAR" />
+		<result column="TNAME" property="tname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="UserBaseAccountInfoMap">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, TENDERID, BASEID, TENDERPLANTYPE, TRANSAMT, STATUS, UATBEGINTIME,
+		UATENDTIME,
+		ISBLENDING, ISMANBLENDING, SYSBTIME, MANBTIME, PAYCOMPANY, SYSRECTIME,
+		RECEIVETIME,
+		REQQUERYDATA, RECRESULTDATA, OPERATORMAN, REMARK
+	</sql>
+
+	<sql id="Association_Column_List">
+		UAT.ID, UAT.TENDERID, UAT.BASEID, UAT.TENDERPLANTYPE, UAT.TRANSAMT,
+		UAT.STATUS, UAT.UATBEGINTIME, UAT.UATENDTIME,
+		UAT.ISBLENDING, UAT.ISMANBLENDING, UAT.SYSBTIME, UAT.MANBTIME, UAT.PAYCOMPANY,
+		UAT.SYSRECTIME, UAT.RECEIVETIME,
+		UAT.REQQUERYDATA, UAT.RECRESULTDATA, UAT.OPERATORMAN, UAT.REMARK, TI.TNO, TI.TNAME,
+		UBAI.LOGINNAME
+	</sql>
+
+	<!-- 根据主键ID查询自动投标计划 -->
+	<select id="selectByPrimaryKey" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Association_Column_List" />
+		from
+		USERAUTOTENDER UAT
+		LEFT JOIN TENDERITEM TI ON UAT.TENDERID=TI.ID
+		LEFT JOIN USERBASEACCOUNTINFO UBAI ON UAT.BASEID = UBAI.ID
+		where UAT.ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据主键ID删除自动投标计划 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from USERAUTOTENDER
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 新增自动投标计划 -->
+	<insert id="insert" parameterType="com.ptpl.model.UserAutoTender">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERAUTOTENDER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERAUTOTENDER (ID, TENDERID, BASEID, TENDERPLANTYPE,
+		TRANSAMT, STATUS, UATBEGINTIME, UATENDTIME, ISBLENDING, ISMANBLENDING,
+		SYSBTIME, MANBTIME, PAYCOMPANY, SYSRECTIME, RECEIVETIME, REQQUERYDATA,
+		RECRESULTDATA, OPERATORMAN, REMARK) values (#{id,jdbcType=DECIMAL},
+		#{tenderid,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{tenderplantype,jdbcType=VARCHAR}, #{transamt,jdbcType=FLOAT},
+		#{status,jdbcType=DECIMAL}, #{uatbegintime,jdbcType=TIMESTAMP},
+		#{uatendtime,jdbcType=TIMESTAMP}, #{isblending,jdbcType=DECIMAL},
+		#{ismanblending,jdbcType=DECIMAL}, #{sysbtime,jdbcType=TIMESTAMP},
+		#{manbtime,jdbcType=TIMESTAMP}, #{paycompany,jdbcType=VARCHAR},
+		#{sysrectime,jdbcType=TIMESTAMP}, #{receivetime,jdbcType=TIMESTAMP},
+		#{reqquerydata,jdbcType=VARCHAR}, #{recresultdata,jdbcType=VARCHAR},
+		#{operatorman,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+	</insert>
+
+	<!-- 新增自动投标计划（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserAutoTender">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USERAUTOTENDER_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into USERAUTOTENDER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="tenderplantype != null">
+				TENDERPLANTYPE,
+			</if>
+			<if test="transamt != null">
+				TRANSAMT,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="uatbegintime != null">
+				UATBEGINTIME,
+			</if>
+			<if test="uatendtime != null">
+				UATENDTIME,
+			</if>
+			<if test="isblending != null">
+				ISBLENDING,
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING,
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME,
+			</if>
+			<if test="manbtime != null">
+				MANBTIME,
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY,
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME,
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME,
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA,
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA,
+			</if>
+			<if test="operatorman != null">
+				OPERATORMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderplantype != null">
+				#{tenderplantype,jdbcType=VARCHAR},
+			</if>
+			<if test="transamt != null">
+				#{transamt,jdbcType=FLOAT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="uatbegintime != null">
+				#{uatbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uatendtime != null">
+				#{uatendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblending != null">
+				#{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				#{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				#{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				#{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				#{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				#{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				#{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				#{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				#{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorman != null">
+				#{operatorman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据BASEID更新自动投标计划（参数可选） -->
+	<update id="updateByBaseIdSelective" parameterType="com.ptpl.model.UserAutoTender">
+		update USERAUTOTENDER
+		<set>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderplantype != null">
+				TENDERPLANTYPE = #{tenderplantype,jdbcType=VARCHAR},
+			</if>
+			TRANSAMT = #{transamt,jdbcType=FLOAT},
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="uatbegintime != null">
+				UATBEGINTIME = #{uatbegintime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="uatendtime != null">
+				UATENDTIME = #{uatendtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isblending != null">
+				ISBLENDING = #{isblending,jdbcType=DECIMAL},
+			</if>
+			<if test="ismanblending != null">
+				ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+			</if>
+			<if test="sysbtime != null">
+				SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="manbtime != null">
+				MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="paycompany != null">
+				PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+			</if>
+			<if test="sysrectime != null">
+				SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receivetime != null">
+				RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reqquerydata != null">
+				REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+			</if>
+			<if test="recresultdata != null">
+				RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorman != null">
+				OPERATORMAN = #{operatorman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where BASEID = #{baseid,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据主键ID更新自动投标计划 -->
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserAutoTender">
+		update USERAUTOTENDER
+		set TENDERID = #{tenderid,jdbcType=DECIMAL},
+		BASEID = #{baseid,jdbcType=DECIMAL},
+		TENDERPLANTYPE = #{tenderplantype,jdbcType=VARCHAR},
+		TRANSAMT = #{transamt,jdbcType=FLOAT},
+		STATUS = #{status,jdbcType=DECIMAL},
+		UATBEGINTIME = #{uatbegintime,jdbcType=TIMESTAMP},
+		UATENDTIME = #{uatendtime,jdbcType=TIMESTAMP},
+		ISBLENDING = #{isblending,jdbcType=DECIMAL},
+		ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL},
+		SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP},
+		MANBTIME = #{manbtime,jdbcType=TIMESTAMP},
+		PAYCOMPANY = #{paycompany,jdbcType=VARCHAR},
+		SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP},
+		RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP},
+		REQQUERYDATA = #{reqquerydata,jdbcType=VARCHAR},
+		RECRESULTDATA = #{recresultdata,jdbcType=VARCHAR},
+		OPERATORMAN = #{operatorman,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 查询全部用户投标计划 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="com.ptpl.model.UserAutoTender">
+		select
+		<include refid="Association_Column_List" />
+		from
+		USERAUTOTENDER UAT
+		LEFT JOIN TENDERITEM TI ON UAT.TENDERID=TI.ID
+		LEFT JOIN USERBASEACCOUNTINFO UBAI ON UAT.BASEID = UBAI.ID
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="tenderplantype != null">
+				AND UAT.TENDERPLANTYPE = #{tenderplantype,jdbcType=VARCHAR}
+			</if>
+			<if test="transamt != null">
+				AND UAT.TRANSAMT = #{transamt,jdbcType=FLOAT}
+			</if>
+			<if test="status != null">
+				AND UAT.STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="uatbegintime != null">
+				AND UAT.UATBEGINTIME = #{uatbegintime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="uatendtime != null">
+				AND UAT.UATENDTIME = #{uatendtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isblending != null">
+				AND UAT.ISBLENDING = #{isblending,jdbcType=DECIMAL}
+			</if>
+			<if test="ismanblending != null">
+				AND UAT.ISMANBLENDING = #{ismanblending,jdbcType=DECIMAL}
+			</if>
+			<if test="sysbtime != null">
+				AND UAT.SYSBTIME = #{sysbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="manbtime != null">
+				AND UAT.MANBTIME = #{manbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="paycompany != null">
+				AND UAT.PAYCOMPANY = #{paycompany,jdbcType=VARCHAR}
+			</if>
+			<if test="sysrectime != null">
+				AND UAT.SYSRECTIME = #{sysrectime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="receivetime != null">
+				AND UAT.RECEIVETIME = #{receivetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="operatorman != null">
+				AND UAT.OPERATORMAN = #{operatorman,jdbcType=VARCHAR}
+			</if>
+			<if test="userBaseInfo != null and userBaseInfo.loginname != ''">
+				AND UBAI.LOGINNAME = #{userBaseInfo.loginname}
+			</if>
+			<if test="tender != null and tender.tname != ''">
+				AND TI.TNAME = #{tender.tname}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 查询当前用户投标计划 -->
+	<select id="selectTenderPlanByBaseId" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from
+		USERAUTOTENDER
+		where
+		BASEID = #{baseid,jdbcType=DECIMAL}
+	</select>
+
+</mapper>

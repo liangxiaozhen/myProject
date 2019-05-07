@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.SySNoticeBizMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.SySNoticeBiz">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BIZNAME" property="bizname" jdbcType="VARCHAR" />
+		<result column="SMSCID" property="smscid" jdbcType="DECIMAL" />
+		<result column="SNLID" property="snlid" jdbcType="DECIMAL" />
+		<result column="ISOPEN" property="isopen" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<association property="smsChannel" javaType="com.ptpl.model.SMSChannel">
+			<result column="ID" property="id" jdbcType="DECIMAL" />
+			<result column="KEY" property="key" jdbcType="VARCHAR" />
+			<result column="SMSCCOMPANY" property="smsccompany" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,BIZNAME,SMSCID,SNLID,ISOPEN,ADDTIME,ADDMAN,REMARK
+	</sql>
+	<sql id="Query_Column_List">
+		sys.ID,sys.BIZNAME,sys.SMSCID,sys.SNLID,sys.ISOPEN,sys.ADDTIME,sys.ADDMAN,sys.REMARK,
+		sms.key,sms.smsccompany
+	</sql>
+	<insert id="insert" parameterType="com.ptpl.model.SySNoticeBiz">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT SYSNOTICEBIZ_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into SYSNOTICEBIZ (ID,
+		BIZNAME, SMSCID,
+		SNLID, ISOPEN, ADDTIME,
+		ADDMAN, REMARK)
+		values
+		(#{id,jdbcType=DECIMAL},
+		#{bizname,jdbcType=VARCHAR},
+		#{smscid,jdbcType=DECIMAL},
+		#{snlid,jdbcType=DECIMAL},
+		#{isopen,jdbcType=DECIMAL}, #{addtime},
+		#{addman,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.SySNoticeBiz">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT SYSNOTICEBIZ_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into SYSNOTICEBIZ
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="bizname != null">
+				BIZNAME,
+			</if>
+			<if test="smscid != null">
+				SMSCID,
+			</if>
+			<if test="snlid != null">
+				SNLID,
+			</if>
+			<if test="isopen != null">
+				ISOPEN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="bizname != null">
+				#{bizname,jdbcType=VARCHAR},
+			</if>
+			<if test="smscid != null">
+				#{smscid,jdbcType=DECIMAL},
+			</if>
+			<if test="snlid != null">
+				#{snlid,jdbcType=DECIMAL},
+			</if>
+			<if test="isopen != null">
+				#{isopen,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from SYSNOTICEBIZ
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		SYSNOTICEBIZ
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.SySNoticeBiz">
+		update SYSNOTICEBIZ
+		<set>
+			<if test="bizname != null">
+				BIZNAME = #{bizname,jdbcType=VARCHAR},
+			</if>
+			<if test="smscid != null">
+				SMSCID = #{smscid,jdbcType=DECIMAL},
+			</if>
+			SNLID = #{snlid,jdbcType=DECIMAL},
+			<if test="isopen != null">
+				ISOPEN = #{isopen,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selective" parameterType="com.ptpl.model.SySNoticeBiz"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Query_Column_List"></include>
+		FROM SYSNOTICEBIZ sys,SMSCHANNEL sms
+		<where>
+			sys.smscid=sms.id
+			<if test="id != null">
+				AND ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="bizname != null">
+				AND BIZNAME = #{bizname,jdbcType=VARCHAR}
+			</if>
+			<if test="smscid != null">
+				AND SMSCID = #{smscid,jdbcType=DECIMAL}
+			</if>
+			<if test="snlid != null">
+				AND SNLID = #{snlid,jdbcType=DECIMAL}
+			</if>
+			<if test="isopen != null">
+				AND ISOPEN = #{isopen,jdbcType=DECIMAL}
+			</if>
+			<if test="addtime != null">
+				AND ADDTIME = #{addtime}
+			</if>
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id
+	</select>
+</mapper>

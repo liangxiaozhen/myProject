@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.InterfaceChannelMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.InterfaceChannel">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="CHANNO" property="channo" jdbcType="VARCHAR" />
+		<result column="CHANNAME" property="channame" jdbcType="VARCHAR" />
+		<result column="CHANCOMPANY" property="chancompany" jdbcType="VARCHAR" />
+		<result column="CHANVERTION" property="chanvertion" jdbcType="VARCHAR" />
+		<result column="CHANTYPE" property="chantype" jdbcType="VARCHAR" />
+		<result column="CHANURL" property="chanurl" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="DATE" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<insert id="insert" parameterType="com.ptpl.model.InterfaceChannel">
+		insert into INTERFACECHANNEL (ID, CHANNO, CHANNAME,
+		CHANCOMPANY, CHANVERTION, CHANTYPE,
+		CHANURL, ISUSE, ADDTIME,
+		ADDMAN, REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{channo,jdbcType=VARCHAR},
+		#{channame,jdbcType=VARCHAR},
+		#{chancompany,jdbcType=VARCHAR}, #{chanvertion,jdbcType=VARCHAR}, #{chantype,jdbcType=VARCHAR},
+		#{chanurl,jdbcType=VARCHAR}, #{isuse,jdbcType=DECIMAL},
+		#{addtime,jdbcType=DATE},
+		#{addman,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.InterfaceChannel">
+		insert into INTERFACECHANNEL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="channo != null">
+				CHANNO,
+			</if>
+			<if test="channame != null">
+				CHANNAME,
+			</if>
+			<if test="chancompany != null">
+				CHANCOMPANY,
+			</if>
+			<if test="chanvertion != null">
+				CHANVERTION,
+			</if>
+			<if test="chantype != null">
+				CHANTYPE,
+			</if>
+			<if test="chanurl != null">
+				CHANURL,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="channo != null">
+				#{channo,jdbcType=VARCHAR},
+			</if>
+			<if test="channame != null">
+				#{channame,jdbcType=VARCHAR},
+			</if>
+			<if test="chancompany != null">
+				#{chancompany,jdbcType=VARCHAR},
+			</if>
+			<if test="chanvertion != null">
+				#{chanvertion,jdbcType=VARCHAR},
+			</if>
+			<if test="chantype != null">
+				#{chantype,jdbcType=VARCHAR},
+			</if>
+			<if test="chanurl != null">
+				#{chanurl,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=DATE},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

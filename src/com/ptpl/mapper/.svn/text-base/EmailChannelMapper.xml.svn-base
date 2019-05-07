@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.EmailChannelMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.EmailChannel">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="EMAILCNO" property="emailcno" jdbcType="VARCHAR" />
+		<result column="EMAILCNAME" property="emailcname" jdbcType="VARCHAR" />
+		<result column="EMAILCCOMPANY" property="emailccompany"
+			jdbcType="VARCHAR" />
+		<result column="EMAILVERTION" property="emailvertion" jdbcType="VARCHAR" />
+		<result column="EMAILSMTP" property="emailsmtp" jdbcType="VARCHAR" />
+		<result column="EMAILSEND" property="emailsend" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="EMAILPASS" property="emailpass" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, EMAILCNO, EMAILCNAME, EMAILCCOMPANY, EMAILVERTION, EMAILSMTP,
+		EMAILSEND, ISUSE,
+		ADDTIME, ADDMAN, REMARK, EMAILPASS
+	</sql>
+	<select id="findEmailChannelsByEmailChannel" resultMap="BaseResultMap" parameterType="com.ptpl.model.EmailChannel">
+		select
+		<include refid="Base_Column_List" />
+		from EMAILCHANNEL
+		<where>
+			<if test="emailcno != null">
+				AND EMAILCNO = #{emailcno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="emailcname != null">
+				AND EMAILCNAME = #{emailcname,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="emailccompany != null">
+				AND EMAILCCOMPANY = #{emailccompany,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="emailvertion != null">
+				AND EMAILVERTION = #{emailvertion,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="emailsmtp != null">
+				AND EMAILSMTP = #{emailsmtp,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="emailsend != null">
+				AND EMAILSEND = #{emailsend,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="addman != null">
+				AND ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="remark != null">
+				AND REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="emailpass != null">
+				AND EMAILPASS = #{emailpass,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="isuse != null">
+				AND isuse = #{isuse,jdbcType=DECIMAL}
+			</if>
+ 		</where>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from EMAILCHANNEL
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from EMAILCHANNEL
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.EmailChannel">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT emailchannel_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into EMAILCHANNEL (ID, EMAILCNO, EMAILCNAME,
+		EMAILCCOMPANY, EMAILVERTION, EMAILSMTP,
+		EMAILSEND, ISUSE, ADDTIME,
+		ADDMAN, REMARK, EMAILPASS
+		)
+		values (#{id,jdbcType=DECIMAL}, #{emailcno,jdbcType=VARCHAR},
+		#{emailcname,jdbcType=VARCHAR},
+		#{emailccompany,jdbcType=VARCHAR}, #{emailvertion,jdbcType=VARCHAR}, #{emailsmtp,jdbcType=VARCHAR},
+		#{emailsend,jdbcType=VARCHAR}, #{isuse,jdbcType=DECIMAL},
+		#{addtime,jdbcType=TIMESTAMP},
+		#{addman,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{emailpass,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.EmailChannel">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT emailchannel_seq.NEXTVAL AS id from dual
+		</selectKey>
+		insert into EMAILCHANNEL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="emailcno != null">
+				EMAILCNO,
+			</if>
+			<if test="emailcname != null">
+				EMAILCNAME,
+			</if>
+			<if test="emailccompany != null">
+				EMAILCCOMPANY,
+			</if>
+			<if test="emailvertion != null">
+				EMAILVERTION,
+			</if>
+			<if test="emailsmtp != null">
+				EMAILSMTP,
+			</if>
+			<if test="emailsend != null">
+				EMAILSEND,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="emailpass != null">
+				EMAILPASS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="emailcno != null">
+				#{emailcno,jdbcType=VARCHAR},
+			</if>
+			<if test="emailcname != null">
+				#{emailcname,jdbcType=VARCHAR},
+			</if>
+			<if test="emailccompany != null">
+				#{emailccompany,jdbcType=VARCHAR},
+			</if>
+			<if test="emailvertion != null">
+				#{emailvertion,jdbcType=VARCHAR},
+			</if>
+			<if test="emailsmtp != null">
+				#{emailsmtp,jdbcType=VARCHAR},
+			</if>
+			<if test="emailsend != null">
+				#{emailsend,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="emailpass != null">
+				#{emailpass,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.EmailChannel">
+		update EMAILCHANNEL
+		<set>
+			<if test="emailcno != null">
+				EMAILCNO = #{emailcno,jdbcType=VARCHAR},
+			</if>
+			<if test="emailcname != null">
+				EMAILCNAME = #{emailcname,jdbcType=VARCHAR},
+			</if>
+			<if test="emailccompany != null">
+				EMAILCCOMPANY = #{emailccompany,jdbcType=VARCHAR},
+			</if>
+			<if test="emailvertion != null">
+				EMAILVERTION = #{emailvertion,jdbcType=VARCHAR},
+			</if>
+			<if test="emailsmtp != null">
+				EMAILSMTP = #{emailsmtp,jdbcType=VARCHAR},
+			</if>
+			<if test="emailsend != null">
+				EMAILSEND = #{emailsend,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="emailpass != null">
+				EMAILPASS = #{emailpass,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.EmailChannel">
+		update EMAILCHANNEL
+		set EMAILCNO = #{emailcno,jdbcType=VARCHAR},
+		EMAILCNAME = #{emailcname,jdbcType=VARCHAR},
+		EMAILCCOMPANY = #{emailccompany,jdbcType=VARCHAR},
+		EMAILVERTION = #{emailvertion,jdbcType=VARCHAR},
+		EMAILSMTP = #{emailsmtp,jdbcType=VARCHAR},
+		EMAILSEND = #{emailsend,jdbcType=VARCHAR},
+		ISUSE = #{isuse,jdbcType=DECIMAL},
+		ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		EMAILPASS = #{emailpass,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select t.* from EMAILCHANNEL t
+	</select>
+</mapper>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserGradeExpMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserGradeExp">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="UGRADE" property="ugrade" jdbcType="DECIMAL" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="EXPIRYTIME" property="expirytime" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISEXPSPECIFIC" property="isexpspecific"
+			jdbcType="DECIMAL" />
+		<result column="EXPSNLID" property="expsnlid" jdbcType="DECIMAL" />
+		<association property="userGrade" column="id"
+			javaType="com.ptpl.model.UserGrade">
+			<result column="UGRADENAME" property="ugradename" jdbcType="VARCHAR" />
+			<result column="RANKNO" property="rankno" jdbcType="DECIMAL" />
+		</association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, UGRADE, AMOUNT, EXPIRYTIME, ADDMAN,
+		ADDTIME,REMARK,STATUS,ISEXPSPECIFIC,EXPSNLID
+	</sql>
+	<sql id="Select_Column_List">
+		t1.ID,t2.ugradename,t2.rankno, t1.UGRADE, t1.AMOUNT,
+		t1.EXPIRYTIME,
+		t1.ADDMAN,
+		t1.ADDTIME,t1.REMARK,t1.STATUS,t1.isexpspecific,t1.expsnlid
+	</sql>
+	<sql id="Grade_Column_list">
+		t1.ID,t2.ugradename,t2.rankno,t1.AMOUNT
+	</sql>
+	<select id="selectByPrimaryKey" resultType="com.ptpl.model.UserGradeExp"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from USERGRADEEXP
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selective" parameterType="com.ptpl.model.UserGradeExp"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Select_Column_List" />
+		from USERGRADEEXP t1 ,USERGRADE t2
+		<where>
+			t1.ugrade=t2.ugrade
+			<if test="id != null">
+				AND t1.id= #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="ugrade != null">
+				AND t1.UGRADE = #{ugrade,jdbcType=DECIMAL}
+			</if>
+			<if test="amount != null">
+				AND t1.AMOUNT = #{amount,jdbcType=FLOAT}
+			</if>
+			<if test="expirytime != null">
+				AND t1.EXPIRYTIME = #{expirytime,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				AND t1.ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				AND t1.ADDTIME = #{addtime}
+			</if>
+			<if test="remark != null">
+				AND t1.REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null">
+				AND t1.STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="userGrade.rankno!=null">
+				AND t2.rankno= #{userGrade.rankno,jdbcType=DECIMAL}
+			</if>
+		</where>
+		order by t2.rankno
+	</select>
+	<select id="selectForUgrade" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		SELECT
+		<include refid="Select_Column_List"></include>
+		FROM USERGRADEEXP t1 ,USERGRADE t2 WHERE t1.ugrade=t2.ugrade AND
+		t2.RANKNO > #{rankno,jdbcType=DECIMAL}
+		AND t1.STATUS=1
+		ORDER BY
+		t2.RANKNO
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		USERGRADEEXP
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.UserGradeExp">
+		insert into USERGRADEEXP (ID,
+		UGRADE, AMOUNT,
+		EXPIRYTIME, ADDMAN, ADDTIME,
+		REMARK,STATUS)
+		values
+		(#{id,jdbcType=DECIMAL}, #{ugrade,jdbcType=DECIMAL},
+		#{amount,jdbcType=FLOAT},
+		#{expirytime,jdbcType=DECIMAL},
+		#{addman,jdbcType=VARCHAR}, #{addtime},
+		#{remark,jdbcType=VARCHAR},#{status,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserGradeExp">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT USERGRADEEXP_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into USERGRADEEXP
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="ugrade != null">
+				UGRADE,
+			</if>
+			<if test="amount != null">
+				AMOUNT,
+			</if>
+			<if test="expirytime != null">
+				EXPIRYTIME,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ugrade != null">
+				#{ugrade,jdbcType=DECIMAL},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=FLOAT},
+			</if>
+			<if test="expirytime != null">
+				#{expirytime,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status!= null">
+				#{status,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserGradeExp">
+		update USERGRADEEXP
+		<set>
+			<if test="ugrade != null">
+				UGRADE = #{ugrade,jdbcType=DECIMAL},
+			</if>
+			<if test="amount != null">
+				AMOUNT = #{amount,jdbcType=FLOAT},
+			</if>
+			<if test="expirytime != null">
+				EXPIRYTIME = #{expirytime,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.UserGradeExp">
+		update
+		USERGRADEEXP
+		set UGRADE = #{ugrade,jdbcType=DECIMAL},
+		AMOUNT =
+		#{amount,jdbcType=FLOAT},
+		EXPIRYTIME = #{expirytime,jdbcType=DECIMAL},
+		ADDMAN = #{addman,jdbcType=VARCHAR},
+		ADDTIME = #{addtime},
+		REMARK
+		=#{remark,jdbcType=VARCHAR},
+		STATUS =#{status,jdbcType=DECIMAL}
+		where ID
+		= #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByStatus" parameterType="com.ptpl.model.UserGradeExp">
+		UPDATE USERGRADEEXP
+		SET STATUS= #{status,jdbcType=DECIMAL} WHERE
+		UGRADE=#{ugrade,jdbcType=DECIMAL}
+	</update>
+</mapper>

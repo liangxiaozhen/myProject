@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ActivityAwardRuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ActivityAwardRule">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTID" property="actid" jdbcType="DECIMAL" />
+		<result column="TMINMONEY" property="tminmoney" jdbcType="FLOAT" />
+		<result column="TMAXMONEY" property="tmaxmoney" jdbcType="FLOAT" />
+		<result column="AWARDID" property="awardid" jdbcType="DECIMAL" />
+		<result column="AWARDCLASS" property="awardclass" jdbcType="VARCHAR" />
+		<result column="AWARDPRIZE" property="awardprize" jdbcType="VARCHAR" />
+		<result column="AWARDNAME" property="awardname" jdbcType="VARCHAR" />
+		<result column="AWARDCOPIES" property="awardcopies" jdbcType="DECIMAL" />
+		<result column="AWARDTYPE" property="awardtype" jdbcType="DECIMAL" />
+		<result column="QUOTA" property="quota" jdbcType="FLOAT" />
+		<result column="AWARDRATIO" property="awardratio" jdbcType="FLOAT" />
+		<result column="AWARDMIN" property="awardmin" jdbcType="FLOAT" />
+		<result column="AWARDMAX" property="awardmax" jdbcType="FLOAT" />
+		<result column="DISTRIBUTEMODE" property="distributemode"
+			jdbcType="DECIMAL" />
+		<result column="DISTRIBUTETYPE" property="distributetype"
+			jdbcType="DECIMAL" />
+		<result column="FIRSTTENDERTIME" property="firsttendertime"
+			jdbcType="TIMESTAMP" />
+		<result column="FIRSTTENDERMONEY" property="firsttendermoney"
+			jdbcType="FLOAT" />
+		<result column="REGEDITDAYREST" property="regeditdayrest"
+			jdbcType="DECIMAL" />
+		<result column="IPRESTRICT" property="iprestrict" jdbcType="DECIMAL" />
+		<result column="COOKIERESTRICT" property="cookierestrict"
+			jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="RANKING" property="ranking" jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID,ACTID,TMINMONEY,TMAXMONEY,AWARDID,AWARDCLASS,AWARDPRIZE,AWARDNAME,AWARDCOPIES,AWARDTYPE,QUOTA,AWARDRATIO,AWARDMIN,AWARDMAX,DISTRIBUTEMODE,DISTRIBUTETYPE,FIRSTTENDERTIME,FIRSTTENDERMONEY,REGEDITDAYREST,IPRESTRICT,COOKIERESTRICT,ISAUDIT,AUDITMAN,AUDITTIME,REMARK,RANKING,ADDMAN,ADDTIME
+	</sql>
+	<!-- 根据标的活动设置ID查询信息 -->
+	<select id="findActivityAwardRuleByActid" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACTIVITYAWARDRULE where actid = #{actid,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据ID查询信息 -->
+	<select id="findActivityAwardRuleById" parameterType="java.math.BigDecimal"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACTIVITYAWARDRULE where id =#{id,jdbcType=DECIMAL}
+	</select>
+	<!-- 根据ID删除 -->
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from ACTIVITYAWARDRULE where id = #{id,jdbcType=DECIMAL}
+	</delete>
+	<!-- 条件查询信息 -->
+	<select id="findActivityAwardRules" parameterType="com.ptpl.model.ActivityAwardRule"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACTIVITYAWARDRULE
+		<where>
+			<if test="id != null">
+				and ID=#{id,jdbcType=DECIMAL}
+			</if>
+			<if test="actid != null">
+				and ACTID=#{actid,jdbcType=DECIMAL}
+			</if>
+			<if test="tminmoney != null">
+				and TMINMONEY=#{tminmoney,jdbcType=FLOAT}
+			</if>
+			<if test="tmaxmoney != null">
+				and TMAXMONEY=#{tmaxmoney,jdbcType=FLOAT}
+			</if>
+			<if test="awardid != null">
+				and AWARDID=#{awardid,jdbcType=DECIMAL}
+			</if>
+			<if test="awardclass != null">
+				and AWARDCLASS=#{awardclass,jdbcType=VARCHAR}
+			</if>
+			<if test="awardprize != null">
+				and AWARDPRIZE=#{awardprize,jdbcType=VARCHAR}
+			</if>
+			<if test="awardname != null">
+				and AWARDNAME=#{awardname,jdbcType=VARCHAR}
+			</if>
+			<if test="awardcopies != null">
+				and AWARDCOPIES=#{awardcopies,jdbcType=DECIMAL}
+			</if>
+			<if test="awardtype != null">
+				and AWARDTYPE=#{awardtype,jdbcType=DECIMAL}
+			</if>
+			<if test="quota != null">
+				and QUOTA=#{quota,jdbcType=FLOAT}
+			</if>
+			<if test="awardratio != null">
+				and AWARDRATIO=#{awardratio,jdbcType=FLOAT}
+			</if>
+			<if test="awardmin != null">
+				and AWARDMIN=#{awardmin,jdbcType=FLOAT}
+			</if>
+			<if test="awardmax != null">
+				and AWARDMAX=#{awardmax,jdbcType=FLOAT}
+			</if>
+			<if test="distributemode != null">
+				and DISTRIBUTEMODE=#{distributemode,jdbcType=DECIMAL}
+			</if>
+			<if test="distributetype != null">
+				and DISTRIBUTETYPE=#{distributetype,jdbcType=DECIMAL}
+			</if>
+			<if test="firsttendertime != null">
+				and FIRSTTENDERTIME=#{firsttendertime}
+			</if>
+			<if test="firsttendermoney != null">
+				and FIRSTTENDERMONEY=#{firsttendermoney,jdbcType=FLOAT}
+			</if>
+			<if test="regeditdayrest != null">
+				and REGEDITDAYREST=#{regeditdayrest,jdbcType=DECIMAL}
+			</if>
+			<if test="iprestrict != null">
+				and IPRESTRICT=#{iprestrict,jdbcType=DECIMAL}
+			</if>
+			<if test="cookierestrict != null">
+				and COOKIERESTRICT=#{cookierestrict,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				and ISAUDIT=#{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null">
+				and AUDITMAN=#{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null">
+				and AUDITTIME=#{audittime}
+			</if>
+			<if test="remark != null">
+				and REMARK=#{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="ranking != null">
+				and RANKING=#{ranking,jdbcType=VARCHAR}
+			</if>
+			<if test="addman != null">
+				and ADDMAN=#{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and ADDTIME=#{addtime,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- 条件更新 -->
+	<update id="updateById" parameterType="com.ptpl.model.ActivityAwardRule">
+		update ACTIVITYAWARDRULE
+		<set>
+			<if test="actid != null">
+				ACTID=#{actid,jdbcType=DECIMAL},
+			</if>
+			<if test="tminmoney != null">
+				TMINMONEY=#{tminmoney,jdbcType=FLOAT},
+			</if>
+			<if test="tmaxmoney != null">
+				TMAXMONEY=#{tmaxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="awardid != null">
+				AWARDID=#{awardid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardclass != null">
+				AWARDCLASS=#{awardclass,jdbcType=VARCHAR},
+			</if>
+			<if test="awardprize != null">
+				AWARDPRIZE=#{awardprize,jdbcType=VARCHAR},
+			</if>
+			<if test="awardname != null">
+				AWARDNAME=#{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardcopies != null">
+				AWARDCOPIES=#{awardcopies,jdbcType=DECIMAL},
+			</if>
+			<if test="awardtype != null">
+				AWARDTYPE=#{awardtype,jdbcType=DECIMAL},
+			</if>
+			<if test="quota != null">
+				QUOTA=#{quota,jdbcType=FLOAT},
+			</if>
+			<if test="awardratio != null">
+				AWARDRATIO=#{awardratio,jdbcType=FLOAT},
+			</if>
+			<if test="awardmin != null">
+				AWARDMIN=#{awardmin,jdbcType=FLOAT},
+			</if>
+			<if test="awardmax != null">
+				AWARDMAX=#{awardmax,jdbcType=FLOAT},
+			</if>
+			<if test="distributemode != null">
+				DISTRIBUTEMODE=#{distributemode,jdbcType=DECIMAL},
+			</if>
+			<if test="distributetype != null">
+				DISTRIBUTETYPE=#{distributetype,jdbcType=DECIMAL},
+			</if>
+			<if test="firsttendertime != null">
+				FIRSTTENDERTIME=#{firsttendertime},
+			</if>
+			<if test="firsttendermoney != null">
+				FIRSTTENDERMONEY=#{firsttendermoney,jdbcType=FLOAT},
+			</if>
+			<if test="regeditdayrest != null">
+				REGEDITDAYREST=#{regeditdayrest,jdbcType=DECIMAL},
+			</if>
+			<if test="iprestrict != null">
+				IPRESTRICT=#{iprestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="cookierestrict != null">
+				COOKIERESTRICT=#{cookierestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT=#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN=#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME=#{audittime},
+			</if>
+			<if test="remark != null">
+				REMARK=#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ranking != null">
+				RANKING=#{ranking,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN=#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME=#{addtime,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+	<insert id="insert" parameterType="com.ptpl.model.ActivityAwardRule">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT ACTIVITYAWARDRULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYAWARDRULE (ID, ACTID, TMINMONEY,
+		TMAXMONEY, AWARDID, AWARDCLASS,
+		AWARDPRIZE, AWARDNAME, AWARDCOPIES,
+		AWARDTYPE, QUOTA, AWARDRATIO,
+		AWARDMIN, AWARDMAX, DISTRIBUTEMODE,
+		DISTRIBUTETYPE, FIRSTTENDERTIME, FIRSTTENDERMONEY,
+		REGEDITDAYREST, IPRESTRICT, COOKIERESTRICT,
+		ISAUDIT, AUDITMAN, AUDITTIME,
+		REMARK, RANKING,ADDMAN,ADDTIME)
+		values (#{id,jdbcType=DECIMAL}, #{actid,jdbcType=DECIMAL},
+		#{tminmoney,jdbcType=FLOAT},
+		#{tmaxmoney,jdbcType=FLOAT}, #{awardid,jdbcType=DECIMAL}, #{awardclass,jdbcType=VARCHAR},
+		#{awardprize,jdbcType=VARCHAR}, #{awardname,jdbcType=VARCHAR},
+		#{awardcopies,jdbcType=DECIMAL},
+		#{awardtype,jdbcType=DECIMAL}, #{quota,jdbcType=FLOAT}, #{awardratio,jdbcType=FLOAT},
+		#{awardmin,jdbcType=FLOAT}, #{awardmax,jdbcType=FLOAT},
+		#{distributemode,jdbcType=DECIMAL},
+		#{distributetype,jdbcType=DECIMAL}, #{firsttendertime},
+		#{firsttendermoney,jdbcType=FLOAT},
+		#{regeditdayrest,jdbcType=DECIMAL}, #{iprestrict,jdbcType=DECIMAL},
+		#{cookierestrict,jdbcType=DECIMAL},
+		#{isaudit,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR}, #{audittime},
+		#{remark,jdbcType=VARCHAR}, #{ranking,jdbcType=VARCHAR},
+		#{addman,jdbcType=VARCHAR}, #{addtime})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ActivityAwardRule">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT ACTIVITYAWARDRULE_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACTIVITYAWARDRULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actid != null">
+				ACTID,
+			</if>
+			<if test="tminmoney != null">
+				TMINMONEY,
+			</if>
+			<if test="tmaxmoney != null">
+				TMAXMONEY,
+			</if>
+			<if test="awardid != null">
+				AWARDID,
+			</if>
+			<if test="awardclass != null">
+				AWARDCLASS,
+			</if>
+			<if test="awardprize != null">
+				AWARDPRIZE,
+			</if>
+			<if test="awardname != null">
+				AWARDNAME,
+			</if>
+			<if test="awardcopies != null">
+				AWARDCOPIES,
+			</if>
+			<if test="awardtype != null">
+				AWARDTYPE,
+			</if>
+			<if test="quota != null">
+				QUOTA,
+			</if>
+			<if test="awardratio != null">
+				AWARDRATIO,
+			</if>
+			<if test="awardmin != null">
+				AWARDMIN,
+			</if>
+			<if test="awardmax != null">
+				AWARDMAX,
+			</if>
+			<if test="distributemode != null">
+				DISTRIBUTEMODE,
+			</if>
+			<if test="distributetype != null">
+				DISTRIBUTETYPE,
+			</if>
+			<if test="firsttendertime != null">
+				FIRSTTENDERTIME,
+			</if>
+			<if test="firsttendermoney != null">
+				FIRSTTENDERMONEY,
+			</if>
+			<if test="regeditdayrest != null">
+				REGEDITDAYREST,
+			</if>
+			<if test="iprestrict != null">
+				IPRESTRICT,
+			</if>
+			<if test="cookierestrict != null">
+				COOKIERESTRICT,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="ranking != null">
+				RANKING,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actid != null">
+				#{actid,jdbcType=DECIMAL},
+			</if>
+			<if test="tminmoney != null">
+				#{tminmoney,jdbcType=FLOAT},
+			</if>
+			<if test="tmaxmoney != null">
+				#{tmaxmoney,jdbcType=FLOAT},
+			</if>
+			<if test="awardid != null">
+				#{awardid,jdbcType=DECIMAL},
+			</if>
+			<if test="awardclass != null">
+				#{awardclass,jdbcType=VARCHAR},
+			</if>
+			<if test="awardprize != null">
+				#{awardprize,jdbcType=VARCHAR},
+			</if>
+			<if test="awardname != null">
+				#{awardname,jdbcType=VARCHAR},
+			</if>
+			<if test="awardcopies != null">
+				#{awardcopies,jdbcType=DECIMAL},
+			</if>
+			<if test="awardtype != null">
+				#{awardtype,jdbcType=DECIMAL},
+			</if>
+			<if test="quota != null">
+				#{quota,jdbcType=FLOAT},
+			</if>
+			<if test="awardratio != null">
+				#{awardratio,jdbcType=FLOAT},
+			</if>
+			<if test="awardmin != null">
+				#{awardmin,jdbcType=FLOAT},
+			</if>
+			<if test="awardmax != null">
+				#{awardmax,jdbcType=FLOAT},
+			</if>
+			<if test="distributemode != null">
+				#{distributemode,jdbcType=DECIMAL},
+			</if>
+			<if test="distributetype != null">
+				#{distributetype,jdbcType=DECIMAL},
+			</if>
+			<if test="firsttendertime != null">
+				#{firsttendertime},
+			</if>
+			<if test="firsttendermoney != null">
+				#{firsttendermoney,jdbcType=FLOAT},
+			</if>
+			<if test="regeditdayrest != null">
+				#{regeditdayrest,jdbcType=DECIMAL},
+			</if>
+			<if test="iprestrict != null">
+				#{iprestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="cookierestrict != null">
+				#{cookierestrict,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="ranking != null">
+				#{ranking,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime},
+			</if>
+		</trim>
+	</insert>
+</mapper>

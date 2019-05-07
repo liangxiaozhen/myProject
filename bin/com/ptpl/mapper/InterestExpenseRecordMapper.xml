@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.InterestExpenseRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.InterestExpenseRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="IEORDERNO" property="ieorderno" jdbcType="VARCHAR" />
+		<result column="RORDERNO" property="rorderno" jdbcType="VARCHAR" />
+		<result column="IEID" property="ieid" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="INTEXPMANID" property="intexpmanid" jdbcType="DECIMAL" />
+		<result column="INVESTORID" property="investorid" jdbcType="DECIMAL" />
+		<result column="INTEXPFEE" property="intexpfee" jdbcType="FLOAT" />
+		<result column="IETYPE" property="ietype" jdbcType="DECIMAL" />
+		<result column="ISDEAL" property="isdeal" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="PAYOUTDATE" property="payoutdate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="PLANSTATUS" property="planstatus" jdbcType="DECIMAL" />
+		<result column="IEPROPERTY" property="ieproperty" jdbcType="DECIMAL" />
+		<result column="BATCHNO" property="batchno" jdbcType="VARCHAR" />
+		<association property="investoridaccount" resultMap="investoridaccount" />
+		<association property="tenderItem" resultMap="tenderItem" />
+  	</resultMap>
+  	
+  	<resultMap type="com.ptpl.model.TenderItem" id="tenderItem">
+  		<id column="t2_id" property="id" jdbcType="DECIMAL" />
+  		<result column="t2_tno" property="tno" jdbcType="VARCHAR" />
+  		<result column="t2_tname" property="tname" jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+  	<resultMap type="com.ptpl.model.UserBaseAccountInfo" id="investoridaccount">
+  		<id column="t1_id" property="id" jdbcType="DECIMAL" />
+  		<result column="t1_realname" property="realname" jdbcType="VARCHAR" />
+  		<result column="t1_loginname" property="loginname" jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+	<sql id="Base_Column_List">
+		ID, IEORDERNO, RORDERNO, IEID, TENDERID, INTEXPMANID, INVESTORID,
+		INTEXPFEE, IETYPE,ISDEAL, ISAUDIT, AUDITTIME, AUDITMAN, MADETIME,
+		PAYOUTDATE, REMARK,PLANSTATUS,IEPROPERTY,BATCHNO
+	</sql>
+	 
+	<sql id="Base_Column_List_left">
+		t.ID, t.IEORDERNO, t.RORDERNO, t.IEID, t.TENDERID, t.INTEXPMANID, t.INVESTORID,
+		t.INTEXPFEE, t.IETYPE,t.ISDEAL, t.ISAUDIT, t.AUDITTIME, t.AUDITMAN, t.MADETIME,
+		t.PAYOUTDATE, t.REMARK,t.PLANSTATUS,t.IEPROPERTY,t.BATCHNO,
+		t1.id as t1_id,t1.realname as t1_realname,t1.loginname as t1_loginname,
+		t2.id as t2_id,t2.tno as t2_tno,t2.tname as t2_tname
+ 	</sql>
+	 
+	<select id="findInterestExpenseRecordByRorderno" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from INTERESTEXPENSERECORD where RORDERNO =
+		#{rorderno,jdbcType=VARCHAR}
+	</select>
+
+	<select id="findInterestExpenseRecords" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.InterestExpenseRecord">
+		select
+		<include refid="Base_Column_List_left" />
+		from INTERESTEXPENSERECORD t
+		left join UserBaseAccountInfo t1 on t1.id = t.investorid
+		left join TenderItem t2 on t2.id = t.tenderid
+		<where>
+			<if test="planstatus != null">
+				AND t.PLANSTATUS = #{planstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="ietype != null">
+				AND t.ietype = #{ietype,jdbcType=DECIMAL}
+			</if>
+			<if test="isdeal != null">
+				AND t.isdeal = #{isdeal,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				AND t.isaudit = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="ieproperty != null">
+				AND t.ieproperty = #{ieproperty,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderid != null">
+				AND t.tenderid = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="rorderno != null and rorderno != ''">
+				AND t.rorderno = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="batchno != null and batchno != ''">
+				AND t.batchno = #{batchno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="tno != null and tno != ''">
+				AND t2.tno = #{tno,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="tname != null and tname != ''">
+				AND t2.tname = #{tname,jdbcType=VARCHAR}
+			</if>
+			
+			<if test="loginname != null and loginname != ''">
+				AND (t1.loginname = #{loginname,jdbcType=VARCHAR} or t1.realname = #{loginname,jdbcType=VARCHAR}) 
+			</if>
+		</where>
+	</select>
+	
+	<select id="findInterestExpenseRecord" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.InterestExpenseRecord">
+		select
+		<include refid="Base_Column_List" />
+		from INTERESTEXPENSERECORD
+		<where>
+			<if test="planstatus != null">
+				AND PLANSTATUS = #{planstatus,jdbcType=DECIMAL}
+			</if>
+			<if test="ietype != null">
+				AND ietype = #{ietype,jdbcType=DECIMAL}
+			</if>
+			<if test="isdeal != null">
+				AND isdeal = #{isdeal,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				AND isaudit = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="ieproperty != null">
+				AND ieproperty = #{ieproperty,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderid != null">
+				AND tenderid = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="rorderno != null">
+				AND rorderno = #{rorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="batchno != null">
+				AND batchno = #{batchno,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="findInterestExpenseRecordById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List_left" />
+		from INTERESTEXPENSERECORD t
+		left join UserBaseAccountInfo t1 on t1.id = t.investorid
+		left join TenderItem t2 on t2.id = t.tenderid
+		where t.ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from INTERESTEXPENSERECORD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.InterestExpenseRecord">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT INTERESTEXPENSERECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into INTERESTEXPENSERECORD (ID, IEORDERNO, RORDERNO,
+		IEID, TENDERID, INTEXPMANID,
+		INVESTORID, INTEXPFEE, IETYPE,
+		ISDEAL, ISAUDIT, AUDITTIME,
+		AUDITMAN, MADETIME, PAYOUTDATE,
+		REMARK,PLANSTATUS,IEPROPERTY,BATCHNO)
+		values (#{id,jdbcType=DECIMAL}, #{ieorderno,jdbcType=VARCHAR},#{rorderno,jdbcType=VARCHAR},
+		#{ieid,jdbcType=DECIMAL}, #{tenderid,jdbcType=DECIMAL}, #{intexpmanid,jdbcType=DECIMAL},
+		#{investorid,jdbcType=DECIMAL}, #{intexpfee,jdbcType=FLOAT},
+		#{ietype,jdbcType=DECIMAL},#{isdeal,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL},
+		#{audittime,jdbcType=TIMESTAMP},#{auditman,jdbcType=VARCHAR}, #{madetime,jdbcType=TIMESTAMP},
+		#{payoutdate,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},#{planstatus,jdbcType=DECIMAL},
+		#{ieproperty,jdbcType=DECIMAL},#{batchno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.InterestExpenseRecord">
+		<selectKey order="BEFORE" keyProperty="id" resultType="java.math.BigDecimal">
+			SELECT INTERESTEXPENSERECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into INTERESTEXPENSERECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="ieorderno != null">
+				IEORDERNO,
+			</if>
+			<if test="rorderno != null">
+				RORDERNO,
+			</if>
+			<if test="ieid != null">
+				IEID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="intexpmanid != null">
+				INTEXPMANID,
+			</if>
+			<if test="investorid != null">
+				INVESTORID,
+			</if>
+			<if test="intexpfee != null">
+				INTEXPFEE,
+			</if>
+			<if test="ietype != null">
+				IETYPE,
+			</if>
+			<if test="isdeal != null">
+				ISDEAL,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="planstatus != null">
+				PLANSTATUS,
+			</if>
+			<if test="ieproperty != null">
+				IEPROPERTY,
+			</if>
+			<if test="batchno != null">
+				BATCHNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="ieorderno != null">
+				#{ieorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rorderno != null">
+				#{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="ieid != null">
+				#{ieid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="intexpmanid != null">
+				#{intexpmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="investorid != null">
+				#{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="intexpfee != null">
+				#{intexpfee,jdbcType=FLOAT},
+			</if>
+			<if test="ietype != null">
+				#{ietype,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				#{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				#{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="planstatus != null">
+				#{planstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="ieproperty != null">
+				#{ieproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="batchno != null">
+				#{batchno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateById" parameterType="com.ptpl.model.InterestExpenseRecord">
+		update INTERESTEXPENSERECORD
+		<set>
+			<if test="ieorderno != null">
+				IEORDERNO = #{ieorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rorderno != null">
+				RORDERNO = #{rorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="ieid != null">
+				IEID = #{ieid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="intexpmanid != null">
+				INTEXPMANID = #{intexpmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="investorid != null">
+				INVESTORID = #{investorid,jdbcType=DECIMAL},
+			</if>
+			<if test="intexpfee != null">
+				INTEXPFEE = #{intexpfee,jdbcType=FLOAT},
+			</if>
+			<if test="ietype != null">
+				IETYPE = #{ietype,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				ISDEAL = #{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="planstatus != null">
+				PLANSTATUS = #{planstatus,jdbcType=DECIMAL},
+			</if>
+			<if test="ieproperty != null">
+				IEPROPERTY = #{ieproperty,jdbcType=DECIMAL},
+			</if>
+			<if test="batchno != null">
+				BATCHNO = #{batchno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

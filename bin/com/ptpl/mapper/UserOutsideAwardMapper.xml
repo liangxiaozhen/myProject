@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.UserOutsideAwardMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.UserOutsideAward">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="UOAWARDNO" property="uoawardno" jdbcType="VARCHAR" />
+		<result column="UOAWARDNAME" property="uoawardname" jdbcType="VARCHAR" />
+		<result column="UOATYPE" property="uoatype" jdbcType="DECIMAL" />
+		<result column="UOATIME" property="uoatime" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISSEND" property="issend" jdbcType="DECIMAL" />
+		<result column="SENDNO" property="sendno" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<association property="userBaseAccountInfo" resultMap="UserBaseInfoMap" />
+	</resultMap>
+	<!--教师实体映射 -->
+	<resultMap id="UserBaseInfoMap" type="com.ptpl.model.UserBaseAccountInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="LOGINNAME" property="loginname" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, BASEID, UOAWARDNO, UOAWARDNAME, UOATYPE, UOATIME, STATUS, ISSEND,
+		SENDNO, ISUSE,
+		ISAUDIT, AUDITMAN, AUDITTIME, REMARK
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		SELECT U.LOGINNAME,A.* FROM USEROUTSIDEAWARD A LEFT JOIN USERBASEACCOUNTINFO
+		U ON A.BASEID=U.ID WHERE A.ID=#{id,jdbcType=DECIMAL}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from USEROUTSIDEAWARD
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<insert id="insert" parameterType="com.ptpl.model.UserOutsideAward">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USEROUTSIDEAWARD_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into USEROUTSIDEAWARD (ID, BASEID, UOAWARDNO,
+		UOAWARDNAME, UOATYPE, UOATIME,
+		STATUS, ISSEND, SENDNO,
+		ISUSE, ISAUDIT, AUDITMAN,
+		AUDITTIME, REMARK)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{uoawardno,jdbcType=VARCHAR},
+		#{uoawardname,jdbcType=VARCHAR}, #{uoatype,jdbcType=DECIMAL}, #{uoatime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=DECIMAL}, #{issend,jdbcType=DECIMAL},
+		#{sendno,jdbcType=VARCHAR},
+		#{isuse,jdbcType=DECIMAL}, #{isaudit,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR},
+		#{audittime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.UserOutsideAward">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT USEROUTSIDEAWARD_SEQ.NEXTVAL AS id FROM DUAL
+		</selectKey>
+		insert into USEROUTSIDEAWARD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="uoawardno != null">
+				UOAWARDNO,
+			</if>
+			<if test="uoawardname != null">
+				UOAWARDNAME,
+			</if>
+			<if test="uoatype != null">
+				UOATYPE,
+			</if>
+			<if test="uoatime != null">
+				UOATIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="issend != null">
+				ISSEND,
+			</if>
+			<if test="sendno != null">
+				SENDNO,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="uoawardno != null">
+				#{uoawardno,jdbcType=VARCHAR},
+			</if>
+			<if test="uoawardname != null">
+				#{uoawardname,jdbcType=VARCHAR},
+			</if>
+			<if test="uoatype != null">
+				#{uoatype,jdbcType=DECIMAL},
+			</if>
+			<if test="uoatime != null">
+				#{uoatime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="issend != null">
+				#{issend,jdbcType=DECIMAL},
+			</if>
+			<if test="sendno != null">
+				#{sendno,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.UserOutsideAward">
+		update USEROUTSIDEAWARD
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="uoawardno != null">
+				UOAWARDNO = #{uoawardno,jdbcType=VARCHAR},
+			</if>
+			<if test="uoawardname != null">
+				UOAWARDNAME = #{uoawardname,jdbcType=VARCHAR},
+			</if>
+			<if test="uoatype != null">
+				UOATYPE = #{uoatype,jdbcType=DECIMAL},
+			</if>
+			<if test="uoatime != null">
+				UOATIME = #{uoatime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="issend != null">
+				ISSEND = #{issend,jdbcType=DECIMAL},
+			</if>
+			<if test="sendno != null">
+				SENDNO = #{sendno,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- getall 根据条件查找 -->
+	<select id="getallUserAward" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.UserOutsideAward">
+		SELECT U.LOGINNAME,A.* FROM USEROUTSIDEAWARD A LEFT JOIN
+		USERBASEACCOUNTINFO U ON A.BASEID=U.ID
+		<where>
+			<if test="id != null">
+				ID = #{id,jdbcType=DECIMAL}
+			</if>
+			<if test="uoawardno != null and uoawardno!=''">
+				AND A.UOAWARDNO = #{uoawardno,jdbcType=VARCHAR}
+			</if>
+			<if test="uoawardname != null and uoawardname!=''">
+				AND A.UOAWARDNAME = #{uoawardname,jdbcType=VARCHAR}
+			</if>
+			<if test="uoatype != null">
+				AND A.UOATYPE = #{uoatype,jdbcType=DECIMAL}
+			</if>
+			<if test="uoatime != null and uoatime!=''">
+				AND A.UOATIME = #{uoatime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="status != null">
+				AND A.STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="issend != null">
+				AND A.ISSEND = #{issend,jdbcType=DECIMAL}
+			</if>
+			<if test="sendno != null and sendno!=''">
+				AND A.SENDNO = #{sendno,jdbcType=VARCHAR}
+			</if>
+			<if test="isuse != null">
+				AND A.ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				AND A.ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="auditman != null and auditman!=''">
+				AND A.AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="audittime != null and audittime!=''">
+				AND A.AUDITTIME = #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null and remark!=''">
+				AND A.REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<!-- 模糊查询 -->
+			<if test="userBaseAccountInfo != null and userBaseAccountInfo.loginname!=''">
+				AND U.LOGINNAME = #{userBaseAccountInfo.loginname,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+</mapper>

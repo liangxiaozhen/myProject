@@ -1,0 +1,69 @@
+@charset "utf-8";
+address, article, aside, body, button, code, dd, details, dl, dt, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, input, li, menu, nav, ol, p, pre, section, table, td, textarea, th, ul { margin: 0; padding: 0 }
+body, button, input, select, textarea { font: 14px/1.5 \5FAE\8F6F\96C5\9ED1, YaHei, tahoma, "Hiragino Sans GB", arial; border: 0 }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: 400 }
+address, caption, cite, code, dfn, em, i, strong, th, var { font-style: normal; font-weight: 400 }
+em, i { display: inline-block }
+ol, ul { list-style: none }
+img { border: 0; vertical-align: middle; }
+a{text-decoration: none;}
+
+.pad_b10 {padding-bottom: 10px;}
+.pad_b20 padding-bottom: 20px;}
+.pad_t10 {padding-top: 10px;}
+.pad_t20 {padding-top: 20px;}
+.fs_16 { font-size: 16px }
+.fs_12 { font-size: 12px }
+.pad_b10 { padding-bottom: 10px }
+.wid_w600 { width: 600px }
+.fl { float: left }
+.fr { float: right }
+.wt_1180 { width: 1180px; margin: 0 auto }
+.foot { background: #1d242f; min-width: 1180px; width: 100%;color: #666 ;position: relative; z-index: 4 }
+.foot2 { background: #171e28; min-width: 1180px; width: 100% }
+.bottom_top{width: 1180px;margin: 0 auto;}
+.bottom_top .nav_left{width: 600px;float: left;}
+.bottom_top .nav_left ul li{width: 24.8%;float: left;line-height: 32px;font-size: 14px;}
+.bottom_top .nav_left ul li a{color: #666;}
+.bottom_top .nav_left ul li .diyi{font-size: 16px;}
+.bottom_top .lxdh{width: 259px;float: left;}
+.bottom_top .lxdh .line1 {font-size: 12px;}
+.bottom_top .lxdh .line1 span{font-size: 16px;margin-right: 10px;}
+.bottom_top .lxdh .line2{padding: 15px 0;font-size: 32px;}
+.bottom_ewm {width: 239px;float: right;}
+.bottom_ewm .ewm1{margin-right:30px;float: left;padding-top: 10px;}
+.bottom_ewm .ewm2{float: left;padding-top: 10px;}
+.footlink{width: 1180px;margin: 0 auto;padding-top: 24px;text-align: center;}
+.footlink .lunbo1 a{color: #666;}
+.Code { background: url(../images/code.png); width: 80px; height: 80px; margin: 0 auto }
+.weixin_code { background-position: 0 0 }
+.app_code { background-position: 0 -90px }
+.lg_box { background: url(font/frind_link.png); width: 920px; height: 20px; display: inline-block }
+.footlink .fl_img1 { background-position: 0 0; width: 68px }
+.pad_b15 {padding: 15px 0;}
+.mar_r10{margin-right: 10px;}
+.mar_r30, .mr_30 {margin-right: 30px;}
+.pad_weixin{padding-top:5px ;color: #999;}
+.txt_center {text-align: center;}
+.police_log { background: url(../images/policelogo.png); height: 36px; display: inline-block }
+.police_img1 { background-position: 0 -38px; width: 93px }
+.police_img2 { background-position: -94px -38px; width: 99px }
+.police_img3 { background-position: -194px -38px; width: 99px }
+.police_img4 { background-position: -294px -38px; width: 93px }
+.police_img5 { background-position: -482px -38px; width: 99px }
+.police_img6 { background-position: -582px -38px; width: 95px }
+.police_img7 { background-position: -973px -38px; width: 120px }
+.police_img8 { background-position: -778px -38px; width: 101px }
+.police_img9 { background-position: -880px -38px; width: 93px }
+.police_img10 { background-position: -387px -38px; width: 94px }
+.police_img11 { background-position: -678px -38px; width: 99px }
+.bor_all { border: solid 1px #e3e3e3 }
+.box-shadow { box-shadow: 0 1px 2px #e8e8e8 }
+.dtl { height: 335px; overflow: hidden; position: relative }
+.dtl-cont { height: 290px; overflow: hidden; position: relative; z-index: 1 }
+.dtl-main { height: 456px }
+.reward-scroll { background: #dfdfdf none repeat scroll 0 0; border-radius: 10px; height: 330px; position: absolute; right: 2px; top: 0; width: 12px; z-index: 2 }
+.reward-scroll-bar { background: #999 none repeat scroll 0 0; border-radius: 10px; cursor: pointer; left: 2px; position: absolute; top: 0; width: 8px }
+
+
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ptpjx" basedir="." default="deploy">
+	<property name="dir.src" location="${basedir}\src" />
+	<property name="jdk.dir" location="D:\Java\jdk1.7.0_80" />
+	<property name="srcDic.dir" value="${basedir}\WebRoot" />
+	<property name="dir.lib" location="${srcDic.dir}\WEB-INF\lib" />
+	<property name="dir.classes" location="${srcDic.dir}\WEB-INF\classes" />
+	<property name="server.dir" value="D:\apache-tomcat-7.0.53_64" />
+	<property name="server.lib" value="${server.dir}\lib" />
+	<property name="apps.dir" value="${server.dir}\webapps\${ant.project.name}" />
+	<!--清理工程目录 -->
+	<target name="cleanwebserver" description="清理服务器端工程">
+		<delete dir="${apps.dir}">
+		</delete>
+	</target>
+	<!-- <target name="clean" description="清理编译的class文件"> <echo message=".....clean 
+		class files ...."> </echo> <delete dir="${dir.classes}"> </delete> </target> -->
+	<target name="compile" depends="cleanwebserver" description="编译Java代码">
+		<echo message="---->compile java files....">
+		</echo>
+		<mkdir dir="${dir.classes}" />
+		<javac debug="on" includes="**/*.java" includeAntRuntime="false"
+			destdir="${dir.classes}" executable="${jdk.dir}/bin/javac.exe"
+			compiler="javac1.7" source="1.7" target="1.7" fork="yes" encoding="utf-8"
+			listfiles="yes" memoryInitialSize="128m" memoryMaximumSize="256m">
+			<src path="${dir.src}">
+			</src>
+			<classpath>
+				<fileset dir="${dir.lib}" includes="**/*.jar" />
+				<fileset dir="${server.lib}" includes="**/*.jar" />
+				<fileset dir="${dir.lib}" includes="**/*.zip" />
+			</classpath>
+
+		</javac>
+	</target>
+
+	<target name="deploy" depends="compile" description="部署工程">
+		<echo message="---->deploy project....">
+		</echo>
+		<!--在tomcat下建立工程的目录 -->
+		<mkdir dir="${apps.dir}" />
+		<!--copy应用的目录到tomcat的webapps下 -->
+		<copy todir="${apps.dir}">
+			<fileset dir="${srcDic.dir}">
+			</fileset>
+		</copy>
+		<copy todir="${apps.dir}\WEB-INF\classes">
+			<fileset dir="${dir.src}" includes="**/*.xml">
+			</fileset>
+			<fileset dir="${dir.src}" includes="*.properties">
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copy-jsp" description="复制jsp">
+		<echo message="......copy jsp file....">
+		</echo>
+
+		<mkdir dir="${apps.dir}" />
+
+		<copy todir="${apps.dir}">
+			<fileset dir="${srcDic.dir}">
+			</fileset>
+		</copy>
+		<copy todir="${apps.dir}\WEB-INF\classes">
+			<fileset dir="${dir.src}" includes="**/*.xml">
+			</fileset>
+			<fileset dir="${dir.src}" includes="*.properties">
+			</fileset>
+		</copy>
+	</target>
+
+</project>

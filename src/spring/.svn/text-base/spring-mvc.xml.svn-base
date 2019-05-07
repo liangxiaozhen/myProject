@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+      http://www.springframework.org/schema/context  
+      http://www.springframework.org/schema/context/spring-context.xsd  
+      http://www.springframework.org/schema/mvc  
+      http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+
+	<!-- 可以扫描controller、service、... 这里让扫描controller，指定controller的包 -->
+	<context:component-scan base-package="com.ptpl.controller">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<context:component-scan base-package="com.ptpl.core.interceptor"></context:component-scan>
+
+
+	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置 mvc:annotation-driven默认加载很多的参数绑定方法， 
+		比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter 
+		实际开发时使用mvc:annotation-driven -->
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+
+	<!-- 静态资源文件处理 -->
+<!-- 	<mvc:resources mapping="/resources/**" location="/resources/" /> -->
+	
+	<!-- 如果使用了RESTful形式的拦截，那么对于静态资源的处理上，就需要加上此句，静态资源没有映射到的URL交给默认的web容器中的servlet进行处理 -->
+    <mvc:default-servlet-handler />
+
+	<!-- 拦截器配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 防止表单重复提交 token令牌 拦截器 -->
+			<mvc:mapping path="/**" />
+ 			<bean class="com.ptpl.core.interceptor.TokenInterceptor" />
+		</mvc:interceptor>
+	
+		<mvc:interceptor>
+			<!-- 系统管理后台拦截器 -->
+			<mvc:mapping path="/adminuser/**" />
+			<mvc:mapping path="/admin/**" />
+			<mvc:exclude-mapping path="/admin/login.action" />
+			<bean class="com.ptpl.core.interceptor.AdminUserInterceptor" />
+		</mvc:interceptor>
+
+		<!-- 普通用户后台拦截器 -->
+
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**" />
+  			<mvc:exclude-mapping path="/user/tenderBase/investing.action" />
+			<mvc:exclude-mapping path="/user/tologin.action" />
+ 			<mvc:exclude-mapping path="/user/logined.action" />
+			<mvc:exclude-mapping path="/user/register.action" />
+			<mvc:exclude-mapping path="/user/findpwd.action" />
+			<mvc:exclude-mapping path="/user/securitycenter/bindEmail.action" />
+			<mvc:exclude-mapping path="/user/securitycenter/updateEmail.action" />
+  			<bean class="com.ptpl.core.interceptor.UserInterceptor" />
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+ 			<mvc:mapping path="/ui/app/userMaster.action" />
+    			<bean class="com.ptpl.core.interceptor.UserAppInterceptor" />
+		</mvc:interceptor>
+
+	</mvc:interceptors>
+
+	<!-- 视图解析器 解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 配置jsp路径的前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<!-- 配置jsp路径的后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 自定义参数绑定 -->
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<!-- 转换器 -->
+		<property name="converters">
+			<list>
+				<!-- 日期类型转换 -->
+				<bean class="com.ptpl.controller.converter.CustomDateConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 上传文件拦截，设置最大上传文件大小 10M=10*1024*1024(B)=10485760 bytes -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760" />
+		<!--resolveLazily属性启用是为了推迟文件解析，以便在UploadAction 中捕获文件大小异常 -->
+		<property name="resolveLazily" value="true" />
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+
+	<!-- <bean id="helloWorldController" name="/hello" class="com.ssm.web.controller.HelloWorldController"> 
+		<property name="methodNameResolver" ref="paramResolver" /> </bean> <bean 
+		id="paramResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver"> 
+		<property name="paramName" value="action" /> <property name="defaultMethodName" 
+		value="hello" /> </bean> -->
+
+</beans>
+      

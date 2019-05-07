@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RechargeQuotaFeeMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.RechargeQuotaFee" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="RRID" property="rrid" jdbcType="DECIMAL" />
+    <result column="MINMONEY" property="minmoney" jdbcType="DECIMAL" />
+    <result column="MAXMONEY" property="maxmoney" jdbcType="DECIMAL" />
+    <result column="QUOTAFEE" property="quotafee" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, RRID, MINMONEY, MAXMONEY, QUOTAFEE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from RECHARGEQUOTAFEE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByrrid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from RECHARGEQUOTAFEE
+    where rrid = #{rrid,jdbcType=DECIMAL} order  by id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from RECHARGEQUOTAFEE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.RechargeQuotaFee" >
+  	<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGEQUOTAFEE_SEQ.NEXTVAL AS id from dual
+	</selectKey>
+    insert into RECHARGEQUOTAFEE (ID, RRID, MINMONEY, 
+      MAXMONEY, QUOTAFEE)
+    values (#{id,jdbcType=DECIMAL}, #{rrid,jdbcType=DECIMAL}, #{minmoney,jdbcType=DECIMAL}, 
+      #{maxmoney,jdbcType=DECIMAL}, #{quotafee,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.RechargeQuotaFee" >
+  	<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RECHARGEQUOTAFEE_SEQ.NEXTVAL AS id from dual
+	</selectKey>
+    insert into RECHARGEQUOTAFEE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="rrid != null" >
+        RRID,
+      </if>
+      <if test="minmoney != null" >
+        MINMONEY,
+      </if>
+      <if test="maxmoney != null" >
+        MAXMONEY,
+      </if>
+      <if test="quotafee != null" >
+        QUOTAFEE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="rrid != null" >
+        #{rrid,jdbcType=DECIMAL},
+      </if>
+      <if test="minmoney != null" >
+        #{minmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="maxmoney != null" >
+        #{maxmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="quotafee != null" >
+        #{quotafee,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RechargeQuotaFee" >
+    update RECHARGEQUOTAFEE
+    <set >
+      <if test="rrid != null" >
+        RRID = #{rrid,jdbcType=DECIMAL},
+      </if>
+      <if test="minmoney != null" >
+        MINMONEY = #{minmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="maxmoney != null" >
+        MAXMONEY = #{maxmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="quotafee != null" >
+        QUOTAFEE = #{quotafee,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.RechargeQuotaFee" >
+    update RECHARGEQUOTAFEE
+    set RRID = #{rrid,jdbcType=DECIMAL},
+      MINMONEY = #{minmoney,jdbcType=DECIMAL},
+      MAXMONEY = #{maxmoney,jdbcType=DECIMAL},
+      QUOTAFEE = #{quotafee,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

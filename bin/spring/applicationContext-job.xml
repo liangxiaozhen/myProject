@@ -1,0 +1,353 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+    <!-- 定时器配置 -->
+    <bean id="scheduler"
+          class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="TestJobTrigger"/>
+                <ref bean="AdminUserJonTrigger"/>
+                <ref bean="ManualAwardJonTrigger"/>
+                <ref bean="UserInterestRateCouponJonTrigger"/>
+                <ref bean="UserRedEnvelopeJonTrigger"/>
+                <ref bean="UserRedHttpDownJobTrigger"/>
+                <ref bean="UserTenderLoansHttpDownJobTrigger"/>
+                <ref bean="RepayMentDealFileTrigger"/>
+                <ref bean="TradeFileDetailFileDownTrigger"/>
+                <ref bean="AllTradeFileDetailFileDownTrigger"/>
+                <ref bean="AutoRepayMentJobTrigger"/>
+                <ref bean="RepayMentBaseDealJobTrigger"/>
+                <ref bean="judgeTenderBeginJobTrigger"/>
+                <ref bean="judgeTenderPastDueDealJobTrigger"/>
+                <ref bean="judgeTenderFailDealJobTrigger"/>
+                <ref bean="AutoRepayMentFrzStatusJobTrigger"/>
+             </list>
+        </property>
+    </bean>
+
+    <!-- ===================================test====================================== -->
+    <bean id="TestJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.TestJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="userAccountSafeInfoService" value-ref="userAccountSafeInfoService"/>
+            </map>
+        </property>
+    </bean>
+    <!-- test -->
+    <bean id="TestJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="TestJob"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/>
+    </bean>
+
+    <!-- AdminUserJob -->
+    <bean id="AdminUserJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.AdminUserJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="adminUserService" value-ref="adminUserService"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- AdminUserJonTrigger -->
+    <bean id="AdminUserJonTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="AdminUserJob"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/>
+    </bean>
+
+    <!-- ManualAwardJob -->
+    <bean id="ManualAwardJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.ManualAwardJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="manualAwardMainService" value-ref="manualAwardMainService"/>
+                <entry key="manualawardService" value-ref="manualawardService"/>
+                <entry key="specialNameListService" value-ref="specialNameListService"/>
+                <entry key="awardService" value-ref="awardService"/>
+                <entry key="activityAwardListService" value-ref="activityAwardListService"/>
+                <entry key="userBaseAccountInfoService" value-ref="userBaseAccountInfoService"/>
+                <entry key="awardPackageService" value-ref="awardPackageService"/>
+                <entry key="awardPackageDetailService" value-ref="awardPackageDetailService"/>
+                <entry key="activityListService" value-ref="activityListService"/>
+                <entry key="activeObjectListService" value-ref="activeObjectListService"/>
+                <entry key="removeNameService" value-ref="removeNameService"/>
+                <entry key="userAccountSafeInfoService" value-ref="userAccountSafeInfoService"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- ManualAwardJonTrigger -->
+    <bean id="ManualAwardJonTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ManualAwardJob"/>
+        <property name="cronExpression" value="0/8 * * * * ?"/>
+    </bean>
+
+    <!-- UserInterestRateCouponJob -->
+    <bean id="UserInterestRateCouponJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.UserCouponJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="userInterestRateCouponService" value-ref="userInterestRateCouponService"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- UserInterestRateCouponJonTrigger -->
+    <bean id="UserInterestRateCouponJonTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="UserInterestRateCouponJob"/>
+        <property name="cronExpression" value="0/8 * * * * ?"/>
+    </bean>
+
+
+    <!-- UserRedEnvelopeJob -->
+    <bean id="UserRedEnvelopeJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.UserRedJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="userRedEnvelopeService" value-ref="userRedEnvelopeService"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- UserRedEnvelopeJonTrigger -->
+    <bean id="UserRedEnvelopeJonTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="UserRedEnvelopeJob"/>
+        <property name="cronExpression" value="0/8 * * * * ?"/>
+    </bean>
+
+    <!-- UserRedHttpDownJob -->
+    <bean id="UserRedHttpDownJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.UserRedHttpDownJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="activityAwardListService" value-ref="activityAwardListService"/>
+                <entry key="userFsAccountInfoService" value-ref="userFsAccountInfoService"/>
+                <entry key="redEnveLopeItemService" value-ref="redEnveLopeItemService"/>
+                <entry key="userAccountService" value-ref="userAccountService"/>
+                <entry key="accInExRecordService" value-ref="accInExRecordService"/>
+                <entry key="userRedEnvelopeService" value-ref="userRedEnvelopeService"/>
+                <entry key="awardService" value-ref="awardService"/>
+                <entry key="bacthFileRecordService" value-ref="bacthFileRecordService"/>
+                <entry key="queryBlaneService" value-ref="queryBlaneService"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- UserRedHttpDownJobTrigger -->
+    <bean id="UserRedHttpDownJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="UserRedHttpDownJob"/>
+        <property name="cronExpression" value="0 0/30 10-22 * * ?"/>
+    </bean>
+
+    <!-- UserTenderLoansHttpDownJob -->
+    <bean id="UserTenderLoansHttpDownJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.UserTenderLoansJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="bacthFileRecordService" value-ref="bacthFileRecordService"/>
+                <entry key="userAccountService" value-ref="userAccountService"/>
+                <entry key="accInExRecordService" value-ref="accInExRecordService"/>
+                <entry key="userTenderService" value-ref="userTenderService"/>
+                <entry key="mediacyFeeRecordService" value-ref="mediacyFeeRecordService"/>
+                <entry key="guaranteeFeeRecordService" value-ref="guaranteeFeeRecordService"/>
+                <entry key="riskGuarantyFeeRecordService" value-ref="riskGuarantyFeeRecordService"/>
+                <entry key="mediacyFeeService" value-ref="mediacyFeeService"/>
+                <entry key="guaranteeFeeService" value-ref="guaranteeFeeService"/>
+                <entry key="riskGuarantyMoneyService" value-ref="riskGuarantyMoneyService"/>
+                <entry key="loanappService" value-ref="loanappService"/>
+                <entry key="tenderItemService" value-ref="tenderItemService"/>
+                <entry key="userTenderPlusLinkService" value-ref="userTenderPlusLinkService"/>
+                <entry key="userRedEnvelopeService" value-ref="userRedEnvelopeService"/>
+                <entry key="userInterestRateCouponService" value-ref="userInterestRateCouponService"/>
+                <entry key="userMakeALoanService" value-ref="userMakeALoanService"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- UserTenderLoansHttpDownJobTrigger -->
+    <bean id="UserTenderLoansHttpDownJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="UserTenderLoansHttpDownJob"/>
+        <property name="cronExpression" value="0 0/30 10-22 * * ?"/>
+    </bean>
+
+    <!-- ===================================定时处理还款文件 RepayMentDealFileJob====================================== -->
+    <bean id="RepayMentDealFileJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.RepayMentDealFileJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="thirdRepayMentDealImpl" value-ref="thirdRepayMentDealImpl"/>
+                <entry key="bacthFileRecordService" value-ref="bacthFileRecordService"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="RepayMentDealFileTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="RepayMentDealFileJob"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/>
+    </bean>
+    <!-- ====================交易流水明细任务调度 TradeFileDetailFileDownJob================ -->
+    <bean id="TradeFileDetailFileDownJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.TradeFileDetailFileDownJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="bacthFileRecordService" value-ref="bacthFileRecordService"/>
+                <entry key="tradeFileDetailService" value-ref="tradeFileDetailService"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="TradeFileDetailFileDownTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="TradeFileDetailFileDownJob"/>
+        <property name="cronExpression" value="0 0/5 * * * ?"/>
+    </bean>
+    <!-- ====================全流水明细任务调度 AllTradeFileDetailFileDownJob================ -->
+    <bean id="AllTradeFileDetailFileDownJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.AllTradeFileDetailFileDownJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="bacthFileRecordService" value-ref="bacthFileRecordService"/>
+                <entry key="allTradeFileDetailService" value-ref="allTradeFileDetailService"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="AllTradeFileDetailFileDownTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="AllTradeFileDetailFileDownJob"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/>
+    </bean>
+
+    <!-- ===================================AutoRepayMentJob  定时自动还款任务====================================== -->
+    <bean id="AutoRepayMentJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.AutoRepayMentJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="thirdRepayMentDealImpl" value-ref="thirdRepayMentDealImpl"/>
+            </map>
+        </property>
+    </bean>
+    <!-- AutoRepayMentJob -->
+    <bean id="AutoRepayMentJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="AutoRepayMentJob"/>
+        <property name="cronExpression" value="0 0/30 * * * ?"/>
+    </bean>
+
+
+    <!-- ===================================repayMentBaseDealJob  定时判断是否逾期====================================== -->
+    <bean id="repayMentBaseDealJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.RepayMentBaseDealJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="repayMentBaseDealImpl" value-ref="repayMentBaseDealImpl"/>
+            </map>
+        </property>
+    </bean>
+    <!-- repayMentBaseDealJob -->
+    <bean id="RepayMentBaseDealJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="repayMentBaseDealJob"/>
+        <property name="cronExpression" value="0 0 0 * * ?"/>
+    </bean>
+    
+    
+     <!-- ===================================AutoRepayMentFrzStatusJob  定时处理批次还款状态为【取消】/【冻结成功】任务====================================== -->
+    <bean id="autoRepayMentFrzStatusJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.AutoRepayMentFrzStatusJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="repayMentBaseDealImpl" value-ref="repayMentBaseDealImpl"/>
+                <entry key="tenderItemService" value-ref="tenderItemService"/>
+             </map>
+        </property>
+    </bean>
+    <!-- AutoRepayMentFrzStatusJob -->
+    <bean id="AutoRepayMentFrzStatusJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="autoRepayMentFrzStatusJob"/>
+        <property name="cronExpression" value="0 0/10 * * * ?"/>
+    </bean>
+    
+    <!--===================================定时判断标是否到了投标期==================================-->
+    <bean id="judgeTenderBeginDealJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.judgeTenderBeginDealJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="tenderItemService" value-ref="tenderItemService"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="judgeTenderBeginJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="judgeTenderBeginDealJob"/>
+        <property name="cronExpression" value="0 0/10 * * * ?"/>
+    </bean>
+    <!--===================================定时判断并把未录入且过期的标的状态及借款状态改为录入过期==================================-->
+    <bean id="judgeTenderPastDueDealJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.judgeTenderPastDueDealJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="tenderItemService" value-ref="tenderItemService"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="judgeTenderPastDueDealJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="judgeTenderPastDueDealJob"/>
+        <property name="cronExpression" value="0 0/10 * * * ?"/>
+    </bean>
+     <!--===================================自动流标==================================-->
+    <bean id="judgeTenderFailDealJob"
+          class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.ptpl.job.judgeTenderFailDealJob"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="tenderItemService" value-ref="tenderItemService"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="judgeTenderFailDealJobTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="judgeTenderFailDealJob"/>
+        <property name="cronExpression" value="0 0/10 * * * ?"/>
+    </bean>
+
+</beans>

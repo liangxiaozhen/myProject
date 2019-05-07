@@ -1,0 +1,650 @@
+body{
+	background:#f1f1f1;
+	margin:0;
+}
+
+div,ul,li{
+	padding:0;
+	margin:0;
+}
+li{
+	list-style:none;
+}
+table{
+	border-collapse:collapse;
+}
+
+.grid-990{
+	width:990px;
+	margin:0 auto;
+}
+.clear{
+	clear:both;
+}
+.fr{
+	float:right;
+}
+.fl{
+	float:left;
+}
+.txtr{
+	text-align:right;
+}
+.txtl{
+	text-align:left;
+}
+.hide{
+	display:none;
+}
+.cpBlue{
+	color:rgb(0,88,180);
+}
+.cpGreen{
+	color:rgb(1,157,166);
+}
+.cpRed{
+	color:rgb(237,49,45);
+}
+.model{
+	background:white;
+	border:1px solid #e0e0e0;
+}
+.detail_link{
+	font-size:13px;
+	font-weight:normal;
+	text-decoration:none;
+
+}
+
+.login_info{
+	height:33px;
+	line-height:33px;
+	border-bottom:1px solid #d2d2d2;
+	background:white;
+	text-align:right;
+	font-size:12px;
+}
+.login_info a{
+	margin:0 12px;
+}
+.login_info a.login{
+	color:#3366cc;
+}
+.login_info a.logout{
+	color:#757172;
+}
+.header{
+	padding-top:14px;
+	padding-bottom:14px;
+}
+
+.footer{
+	font-size:12px;
+	color:#757677;
+	text-align:center;
+	border-top:2px solid #d2d2d2;
+	margin-top:25px;
+	background:white;
+	padding:15px 0 25px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.footer a{
+	color:#004889;
+	text-decoration:none;
+}
+
+.logo{
+	width:249px;
+	height:68px;
+	background:url('../Images/logo.png') no-repeat;
+}
+
+/*订单信息*/
+.cpColors{
+	height:8px;
+}
+.cpColors li{
+	float:left;
+}
+.cpColors .Blue{
+	width:301px;
+	background:rgb(0,88,180);
+	height:8px;
+}
+.cpColors .Green{
+	width:353px;
+	background:rgb(1,157,166);
+	height:8px;
+}
+.cpColors .Red{
+	width:336px;
+	background:rgb(237,49,45);
+	height:8px;
+}
+
+.orderInfo {
+	padding: 20px 35px 20px;
+	width: 918px;
+	margin: 0 auto;
+}
+
+#orderInfo .orderTip{
+	color:#6c6c6c;
+	font-family:"SIMHEI";
+	font-size:14px;
+	line-height:25px;
+	margin-top:1em;
+}
+
+#orderInfo .orderTip_icon {
+	float: left;
+	width: 25px;
+	height: 25px;
+	background: url('../Images/orderTip_icon.gif');
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#orderInfo .orderTip_merName{
+	margin:0 5px;
+	font-weight:bold;
+}
+#orderInfo .commodity_info {
+	font-size: 18px;
+	font-family: "SIMHEI";
+	font-weight: bold;
+	width: 540px;
+	word-wrap: break-word;
+	float: left;
+	margin-top: 0;
+	margin-left: 34px;
+}
+#orderInfo .orderTip_icon{
+	float:left;
+	width:25px;
+	height:25px;
+	background:url('../Images/orderTip_icon.gif');
+	display:inline-block;
+	margin-right:10px;
+}
+#orderInfo .detail p {
+	font-size: 14px;
+	font-family: "SIMHEI";
+	color: #292929;
+	width: 90%;
+	margin: 10px auto 0;
+	line-height: 16px;
+}
+#orderInfo .amount_info{
+	width:309px;
+	float:right;
+	text-align:right;
+	margin-top:-10px;
+	font-family:"SIMHEI";
+	font-weight:bold;
+	font-size:18px;
+}
+#orderInfo .amount{
+	color:#ff8004;
+	font-size:28px;
+	margin-right:10px;
+}
+#orderInfo .detail_link{
+	margin-left:10px;
+}
+#orderInfo .detail{
+	border-top:1px solid #e0e0e0;
+}
+#orderInfo .detail_table{
+	font-size:14px;
+	font-family:"SIMHEI";
+	color:#6c6c6c;
+	width:90%;
+	margin:10px auto 0;
+	line-height:34px;
+}
+#orderInfo .detail_table .column1{
+	width:320px;
+}
+#orderInfo .detail_table .column2{
+	width:320px;
+}
+#orderInfo .detail_table .column3{
+	text-align:right;
+}
+/*end订单信息*/
+
+#paymode label{
+	display:inline-block;
+	line-height:40px;
+	color:#666;
+	font-family:"SIMHEI";
+	font-size:15px;
+	cursor:pointer;
+}
+#splitpay_info{
+	width:522px;
+	float:left;
+	padding:24px 24px 0;
+	min-height:131px;
+}
+#splitpay_info .splitpay_amount_label{
+	color:#777;
+	font-family:"SIMHEI";
+	font-size:15px;
+	line-height:27px;
+	display:inline;
+}
+#splitpay_info .splitpay_amount{
+	width:180px;
+	height:27px;
+	border:1px solid #d7d7d7;
+	text-align:right;
+	font-size:18px;
+	margin-left:10px;
+	padding:0 5px;
+}
+#splitpay_info .splitpay_amount::-ms-clear{
+	display:none;
+}
+#splitpay_info .splitpay_amount_btn{
+	width:85px;
+	height:27px;
+	border:none;
+	background:rgb(0,102,204);
+	color:white;
+	font-family:"SIMHEI";
+	margin-left:10px;
+	border-radius:4px;
+}
+#splitpay_info .splitpay_his_tab{
+	width:100%;
+	margin-top:20px;
+	color:#858585;
+	font-size:12px;
+}
+#splitpay_info .detailTab{
+	margin-top:0;
+}
+#splitpay_info .detailTab tr:first-child td{
+	border-top:none;
+}
+#splitpay_info .splitpay_his_tab td{
+	border-top:1px dashed rgb(180,173,162);
+	border-bottom:1px dashed rgb(180,173,162);
+	line-height:45px;
+}
+#splitpay_info .splitpay_his_tab .t1{
+	padding-left:7px;
+	width:100px;
+}
+#splitpay_info .splitpay_his_tab .t2{
+	width:120px;	
+}
+#splitpay_info .splitpay_his_tab .t2 .bank_icon{
+	width:120px;
+	height:33px;
+	overflow:hidden;
+	background:url('../Images/bank_icons.gif');
+}
+#splitpay_info .splitpay_his_tab .t3{
+	width:75px;
+}
+#splitpay_info .splitpay_his_tab .t4{
+	width:65px;	
+}
+#splitpay_info .splitpay_his_tab .t5{
+	width:65px;
+	text-align:right;
+}
+#splitpay_info .splitpay_his_tab .t6{
+	text-align:center;
+}
+#splitpay_info .cardtype{
+	color:white;
+	background:rgb(51,102,204);
+	padding:2px 3px;
+}
+#splitpay_info .repay{
+	color:#ff8004;
+}
+#splitpay_info .detail_link{
+	line-height:30px;
+}
+
+#splitpay_progress{
+	width:374px;
+	margin-left:15px;
+	float:left;
+	padding:30px 13px 10px;
+	height:115px;
+}
+#splitpay_progress table{
+	color:#5a5a5a;
+	font-size:12px;
+	width:100%;
+	font-family:"SIMSUN";
+}
+#splitpay_progress td{
+	width:50%;	
+}
+#splitpay_progress .payed{
+	color:#7da429;
+}
+#splitpay_progress .unpayed{
+	color:#ff2704;
+}
+#splitpay_progress .amount_int{
+	font-size:20px;	
+	font-weight:bold;
+}
+#splitpay_progress .amount_decimal{
+	font-size:13px;
+	font-weight:bold;
+}
+#splitpay_progress .splitpay_progress_back{
+	width:100%;
+	height:25px;
+	background:url('../Images/splitpay_progress_back.png');
+	margin-top:22px;
+}
+#splitpay_progress .tip{
+	color:#909090;
+	font-size:12px;
+	line-height:40px;
+}
+#progress_left{
+	float:left;
+	background:url('../Images/progress_left.gif');
+	width:5px;
+	height:11px;
+	margin-top:8px;
+	margin-left:3px;
+}
+#progress_middle{
+	float:left;
+	height:11px;
+	margin-top:8px;
+	background:url('../Images/progress_middle.gif');
+	width:358px;
+}
+#progress_right{
+	margin-top:8px;
+	float:left;
+	width:5px;
+	height:11px;
+	background:url('../Images/progress_right.gif');
+}
+
+#worn{
+	color:#9c9c9c;
+	font-family:"SIMHEI";
+	font-size:13px;
+	line-height:36px;
+}
+#worn .highlight{
+	color:#ff7404;
+	font-weight:bold;
+}
+
+#pay_channel{
+	border:1px solid rgb(214,233,238);
+	background:white;
+	position:relative;
+}
+#pay_channel .left{
+	width:140px;
+	background:#fff;
+	text-align:center;
+	position:absolute;
+	top:0;
+	bottom:0;
+}
+#pay_channel .left li{
+	line-height:53px;
+	font-family:"SIMHEI";
+	background:url('../Images/menu_line.gif') no-repeat;
+}
+#pay_channel .left li a{
+	color:#6c6b6b;
+	text-decoration:none;
+	display:block;
+}
+#pay_channel .left li:first-child{
+	background:none;
+}
+#pay_channel .left li.on{
+	background:white;
+	font-weight:bold;
+}
+#pay_channel .left li.on a{
+	color:#3e3e3e;
+}
+#pay_channel .left li.on+li{
+	background:none;	
+}
+
+#pay_channel .right{
+	padding:25px 80px 30px;
+	position:relative;
+	left:140px;
+	top:0;
+	/*float:right;*/
+	width:680px;
+	min-height:457px;
+}
+
+/*text input*/
+#pay_channel .right input[type=text],#pay_channel .right input[type=password]{
+	border:1px #d0cece solid;
+	width:230px;
+	height:33px;
+	font-size:16px;
+}
+#pay_channel .right select{
+	border:1px #d0cece solid;
+	width:230px;
+	height:33px;
+	font-size:16px;
+	vertical-align:middle;
+}
+/*right form table*/
+#pay_channel .right .form_tab{
+	line-height:55px;
+	font-family:"SIMHEI";
+	font-size:14px;
+	color:#504f4f;
+}
+#pay_channel .right .form_tab td{
+	vertical-align:middle;
+}
+#pay_channel .right .form_tab td.vtop{
+	vertical-align:top;
+}
+#pay_channel .right .form_tab tr td:first-child{
+	width:224px;
+	text-align:right;
+}
+#pay_channel .right .form_tab input,#pay_channel .right .form_tab button{
+	line-height:normal;
+}
+
+#pay_channel .right .bank_icons{
+	width:680px;
+	overflow:hidden;
+}
+#pay_channel .right .bank_icons ul{
+	width:726px;
+	overflow:hidden;
+}
+#pay_channel .right .bank_icons li{
+	display:block;
+	width:135px;
+	height:35px;
+	float:left;
+	margin:0 44px 13px 0;
+	border:1px solid #b2b2b2;
+	cursor:pointer;
+	background:url('../Images/bank_icons.gif');
+}
+
+#pay_channel .right .bank_icons li.on{
+	border:1px solid red;
+}
+#pay_channel .right .bank_icons li .selectedDiv{
+	height:29px;
+	width:129px;
+	border:3px red dotted;
+}
+
+#pay_channel .right li:hover{
+	border:1px solid #ffa904;
+}
+#bank_icons_hide{
+	margin-top:13px;
+}
+
+.bank_pay_btn{
+	width:148px;
+	height:39px;
+	border:0;
+	background-image:url('../Images/bank_pay_btn.gif');
+	cursor:pointer;
+	margin-top:15px;
+}
+
+#quota{
+	width:100%;
+	font-family:"SIMHEI";
+	font-size:13px;
+	text-align:center;
+	margin:30px auto 50px;
+	border:1px solid #b7e8f8;
+}
+#quota *{
+	vertical-align:middle;
+}
+#quota thead{
+	border:1px solid #b7e8f8;
+	line-height:43px;
+	background:#f6fcfe;
+	color:#6e6e6e;
+}
+#quota thead td{
+	*border-bottom:1px solid #b7e8f8;
+}
+#quota .serv_tel{
+	line-height:15px;
+}
+#quota .serv_tel .serv_tel_text{
+	background:url('../Images/serv_tel_list_icon.gif') no-repeat;
+	padding-left:14px;
+	list-style-position:inside;
+	margin-left:0px;
+}
+#hotline{
+	color:#2a84bd;
+	letter-spacing:2px;
+}
+#quota tbody{
+	border:1px solid #b7e8f8;
+	color:#3f4040;
+	line-height:39px;
+}
+#quota tbody td{
+	border-bottom:1px dashed #d1cdc6;
+}
+#quota .t1{
+	width:137px;
+}
+#quota .marginRight{
+	width:33px;
+	border:none;
+}
+#quota .bank_icon{
+	width:135px;
+	height:33px;
+	overflow:hidden;
+	background:url('../Images/bank_icons.gif');
+	margin:0 auto;
+}
+
+#ads{
+	margin-top:20px;
+	overflow:hidden;
+}
+#ads .ads_frame{
+	width:1005px;
+	overflow:hidden;
+}
+#ads .ad{
+	height:190px;
+	width:318px;
+	float:left;
+	margin-right:15px;
+}
+
+/*404、505页面*/
+#errpage{
+	width:826px;
+	margin:0 auto;
+	position:relative;
+	height:465px;
+}
+#errpage .errpage_back1{
+	background-color:#019da6;
+	width:256px;
+	float:left;
+	height:447px;
+}
+#errpage .errpage_back2{
+	background-color:#005ab4;
+	width:291px;
+	float:left;
+	height:447px;
+}
+#errpage .errpage_back3{
+	background-color:#ed3733;
+	width:279px;
+	float:left;
+	height:447px;
+}
+#errpage .errpage_info{
+	position:absolute;
+	height:429px;
+	width:795px;
+	background:white;
+	border:1px solid #b1c9d7;
+	top:9px;
+	left:14px;
+	font-family:"SIMHEI";
+	color:#95999f;
+	font-size:14px;
+}
+#errpage .err_info_img_404{
+	width:527px;
+	height:144px;
+	background:url('../Images/404.gif');
+	margin-top:67px;
+	margin-left:71px;
+}
+#errpage .err_info_img_500{
+	width:591px;
+	height:144px;
+	background:url('../Images/500.gif');
+	margin-top:67px;
+	margin-left:71px;
+}
+
+#errpage .err_info_text{
+	width:400px;
+	height:85px;
+	margin:20px 0 0 267px;
+}
+#errpage .err_info_operation{
+	width:400px;
+	margin:0 0 0 267px;
+}
+#errpage .err_info_operation a{
+	color:#135ac6;
+}

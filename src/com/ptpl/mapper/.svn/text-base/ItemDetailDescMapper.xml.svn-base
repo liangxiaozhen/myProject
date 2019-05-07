@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ItemDetailDescMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.ItemDetailDesc" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TID" property="tid" jdbcType="DECIMAL" />
+    <result column="MODULETYPE" property="moduletype" jdbcType="VARCHAR" />
+    <result column="CATEGORYNAME" property="categoryname" jdbcType="VARCHAR" />
+    <result column="CATEGORYDETAIL" property="categorydetail" jdbcType="VARCHAR" />
+    <result column="INFOTYPE" property="infotype" jdbcType="VARCHAR" />
+    <result column="INFOSERIALNO" property="infoserialno" jdbcType="DECIMAL" />
+    <result column="ISTEMPLATE" property="istemplate" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TID, MODULETYPE, CATEGORYNAME, CATEGORYDETAIL, INFOTYPE, INFOSERIALNO, ISTEMPLATE, 
+    REMARK
+  </sql>
+  
+  <!-- 乾多多 前段调用  通过模块类别来查数据-->
+  <select id="callbackitemDesc" resultMap="BaseResultMap">
+    select t.tid,t.categoryname,t.categorydetail,t.infotype,t.infoserialno from ITEMDETAILDESC t where t.moduletype=#{0} and t.tid=#{1} order by t.infoserialno 
+  </select>
+  
+  <!-- 乾多多 前端调用  查询有哪些模块-->
+  <select id="callbackmoduleType" resultMap="BaseResultMap">
+     select DISTINCT  t.moduletype from ITEMDETAILDESC t
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from ITEMDETAILDESC
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from ITEMDETAILDESC
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.ItemDetailDesc" >
+  <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+        SELECT ITEMDETAILDESC_SEQ.NEXTVAL AS id FROM DUAL
+  </selectKey>
+    insert into ITEMDETAILDESC (ID, TID, MODULETYPE, 
+      CATEGORYNAME, CATEGORYDETAIL, INFOTYPE, 
+      INFOSERIALNO, ISTEMPLATE, REMARK
+      )
+    values (#{id,jdbcType=DECIMAL}, #{tid,jdbcType=DECIMAL}, #{moduletype,jdbcType=VARCHAR}, 
+      #{categoryname,jdbcType=VARCHAR}, #{categorydetail,jdbcType=VARCHAR}, #{infotype,jdbcType=VARCHAR}, 
+      #{infoserialno,jdbcType=DECIMAL}, #{istemplate,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.ItemDetailDesc" >
+  <selectKey keyProperty="id" resultType="java.math.BigDecimal" order="BEFORE">
+        SELECT ITEMDETAILDESC_SEQ.NEXTVAL AS id FROM DUAL
+  </selectKey>
+    insert into ITEMDETAILDESC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="tid != null" >
+        TID,
+      </if>
+      <if test="moduletype != null" >
+        MODULETYPE,
+      </if>
+      <if test="categoryname != null" >
+        CATEGORYNAME,
+      </if>
+      <if test="categorydetail != null" >
+        CATEGORYDETAIL,
+      </if>
+      <if test="infotype != null" >
+        INFOTYPE,
+      </if>
+      <if test="infoserialno != null" >
+        INFOSERIALNO,
+      </if>
+      <if test="istemplate != null" >
+        ISTEMPLATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="moduletype != null" >
+        #{moduletype,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryname != null" >
+        #{categoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="categorydetail != null" >
+        #{categorydetail,jdbcType=VARCHAR},
+      </if>
+      <if test="infotype != null" >
+        #{infotype,jdbcType=VARCHAR},
+      </if>
+      <if test="infoserialno != null" >
+        #{infoserialno,jdbcType=DECIMAL},
+      </if>
+      <if test="istemplate != null" >
+        #{istemplate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ItemDetailDesc" >
+    update ITEMDETAILDESC
+    <set >
+      <if test="tid != null" >
+        TID = #{tid,jdbcType=DECIMAL},
+      </if>
+      <if test="moduletype != null" >
+        MODULETYPE = #{moduletype,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryname != null" >
+        CATEGORYNAME = #{categoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="categorydetail != null" >
+        CATEGORYDETAIL = #{categorydetail,jdbcType=VARCHAR},
+      </if>
+      <if test="infotype != null" >
+        INFOTYPE = #{infotype,jdbcType=VARCHAR},
+      </if>
+      <if test="infoserialno != null" >
+        INFOSERIALNO = #{infoserialno,jdbcType=DECIMAL},
+      </if>
+      <if test="istemplate != null" >
+        ISTEMPLATE = #{istemplate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.ItemDetailDesc" >
+    update ITEMDETAILDESC
+    set TID = #{tid,jdbcType=DECIMAL},
+      MODULETYPE = #{moduletype,jdbcType=VARCHAR},
+      CATEGORYNAME = #{categoryname,jdbcType=VARCHAR},
+      CATEGORYDETAIL = #{categorydetail,jdbcType=VARCHAR},
+      INFOTYPE = #{infotype,jdbcType=VARCHAR},
+      INFOSERIALNO = #{infoserialno,jdbcType=DECIMAL},
+      ISTEMPLATE = #{istemplate,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

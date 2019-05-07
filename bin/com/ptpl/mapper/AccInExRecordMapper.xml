@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.AccInExRecordMapper">
+	<resultMap id="UserBaseAndInOutResultMap" type="com.ptpl.model.AccInExRecord">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL" />
+		<result column="BALANCE" property="balance" jdbcType="FLOAT" />
+		<result column="FREEBALANCE" property="freebalance" jdbcType="FLOAT" />
+		<result column="TOTALBALANCE" property="totalbalance" jdbcType="FLOAT" />
+		<result column="PINAMOUNT" property="pinamount" jdbcType="FLOAT" />
+		<result column="POUTAMOUNT" property="poutamount" jdbcType="FLOAT" />
+		<result column="inamount" property="inamount" jdbcType="FLOAT" />
+		<result column="outamount" property="outamount" jdbcType="FLOAT" />
+		<result column="RECORDTIME" property="recordtime" jdbcType="TIMESTAMP" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="AIEORDERNO" property="aieorderno" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="PACCOUNT" property="paccount" jdbcType="VARCHAR" />
+		<result column="BORDERNO" property="borderno" jdbcType="VARCHAR" />
+
+		<association property="ubai" column="ID"
+			javaType="com.ptpl.model.UserBaseAccountInfo">
+			<result column="mobilephone" property="mobilephone" jdbcType="VARCHAR" />
+			<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+			<result column="realname" property="realname" jdbcType="VARCHAR" />
+			<result column="loginname" property="loginname" jdbcType="VARCHAR" />
+			<result column="accountnumber" property="accountnumber"
+				jdbcType="VARCHAR" />
+		</association>
+		<association property="ufai" column="ID"
+			javaType="com.ptpl.model.UserFsAccountInfo">
+			<result column="usrcustid" property="usrcustid" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<resultMap id="BaseResultMap" type="com.ptpl.model.AccInExRecord">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="AMOUNT" property="amount" jdbcType="FLOAT" />
+		<result column="TYPE" property="type" jdbcType="DECIMAL" />
+		<result column="BALANCE" property="balance" jdbcType="FLOAT" />
+		<result column="inamount" property="inamount" jdbcType="FLOAT" />
+		<result column="outamount" property="outamount" jdbcType="FLOAT" />
+		<result column="RECORDTIME" property="recordtime" jdbcType="TIMESTAMP" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="FREEBALANCE" property="freebalance" jdbcType="FLOAT" />
+		<result column="TOTALBALANCE" property="totalbalance" jdbcType="FLOAT" />
+		<result column="AIEORDERNO" property="aieorderno" jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="PACCOUNT" property="paccount" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,BASEID,TYPE,BALANCE,RECORDTIME,REMARK,DESCRIPTION,INAMOUNT,OUTAMOUNT,FREEBALANCE,TOTALBALANCE,PINAMOUNT,POUTAMOUNT
+		,AIEORDERNO,STATUS,PACCOUNT,BORDERNO
+	</sql>
+	<insert id="insert" parameterType="com.ptpl.model.AccInExRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ACCINEXRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACCINEXRECORD (ID, BASEID,
+		TYPE,
+		BALANCE,INAMOUNT,OUTAMOUNT, RECORDTIME,
+		description,REMARK,PACCOUNT,BORDERNO)
+		values (#{id,jdbcType=DECIMAL},
+		#{baseid,jdbcType=DECIMAL},
+		#{type,jdbcType=DECIMAL},
+		#{balance,jdbcType=FLOAT},#{inamount,jdbcType=FLOAT},#{outamount,jdbcType=FLOAT},
+		#{recordtime}, #{description,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},#{paccount,jdbcType=VARCHAR},#{borderno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.AccInExRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT ACCINEXRECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into ACCINEXRECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="type != null">
+				TYPE,
+			</if>
+			<if test="balance != null">
+				BALANCE,
+			</if>
+			<if test="inamount != null">
+				INAMOUNT,
+			</if>
+			<if test="outamount != null">
+				OUTAMOUNT,
+			</if>
+			<if test="recordtime != null">
+				RECORDTIME,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="freebalance != null">
+				FREEBALANCE,
+			</if>
+			<if test="totalbalance != null">
+				TOTALBALANCE,
+			</if>
+			<if test="pinamount != null">
+				PINAMOUNT,
+			</if>
+			<if test="poutamount != null">
+				POUTAMOUNT,
+			</if>
+			<if test="aieorderno != null">
+				AIEORDERNO,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="paccount != null">
+				PACCOUNT,
+			</if>
+			<if test="borderno != null">
+				BORDERNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=DECIMAL},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=FLOAT},
+			</if>
+			<if test="inamount != null">
+				#{inamount,jdbcType=FLOAT},
+			</if>
+			<if test="outamount != null">
+				#{outamount,jdbcType=FLOAT},
+			</if>
+			<if test="recordtime != null">
+				#{recordtime},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="freebalance != null">
+				#{freebalance,jdbcType=VARCHAR},
+			</if>
+			<if test="totalbalance != null">
+				#{totalbalance,jdbcType=VARCHAR},
+			</if>
+			<if test="pinamount != null">
+				#{pinamount,jdbcType=FLOAT},
+			</if>
+			<if test="poutamount != null">
+				#{poutamount,jdbcType=FLOAT},
+			</if>
+			<if test="aieorderno != null">
+				#{aieorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="paccount != null">
+				#{paccount,jdbcType=VARCHAR},
+			</if>
+			<if test="borderno != null">
+				#{borderno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="queryAllUserAccInExRecord" resultMap="UserBaseAndInOutResultMap"
+		parameterType="map">
+		select
+		aie.id, aie.baseid, aie.type, aie.balance,
+		aie.inamount,
+		aie.outamount, aie.recordtime, aie.description,
+		aie.remark,aie.pinamount,aie.poutamount,
+		aie.freebalance,aie.totalbalance,aie.paccount,
+		ubai.mobilephone,ubai.email,ubai.realname,ubai.loginname,ubai.accountnumber,
+		ufai.usrcustid
+		from
+		ACCINEXRECORD aie , USERBASEACCOUNTINFO ubai ,USERFSACCOUNTINFO ufai
+		where ubai.id = aie.baseid AND ubai.id =ufai.baseid
+		<if test="type != null">
+			AND type=#{type,jdbcType=DECIMAL}	
+		</if>
+		<if test="realname!=null and realname != ''">
+			and ubai.realname = #{realname,jdbcType=VARCHAR}
+		</if>
+		<if test="loginname!=null and loginname != ''">
+			and ubai.loginname = #{loginname,jdbcType=VARCHAR}
+		</if>
+		<if test="accountnumber!=null and accountnumber !=''">
+			and ubai.accountnumber = #{accountnumber,jdbcType=VARCHAR}
+		</if>
+		<if test="mobilephone!=null and mobilephone != ''">
+			and ubai.mobilephone = #{mobilephone,jdbcType=VARCHAR}
+		</if>
+		<if test="recordtimestart!=null">
+			and recordtime &gt;= #{recordtimestart,jdbcType=TIMESTAMP}
+		</if>
+		<if test="recordtimeend!=null">
+			and recordtime &lt;= #{recordtimeend,jdbcType=TIMESTAMP}
+		</if>
+		<if test="usrcustid !=null and usrcustid !=''">
+			and  ufai.usrcustid = #{usrcustid,jdbcType=VARCHAR}
+		</if>
+		order by aie.id asc
+	</select>
+
+	<!--用户后台查看资金明细，baseid -->
+	<select id="queryAllUser" parameterType="com.ptpl.model.AccInExRecord"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACCINEXRECORD
+		<where>
+			<if test="baseid!=null">
+				baseid =#{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="type!=null and type != 6">
+				AND type=#{type,jdbcType=DECIMAL}
+			</if>
+			<if test="type == 6">
+				AND (type=  6  or type = 13
+				or type = 19 or type = 20 
+				or type = 21 or type = 22 
+				or type = 23 or type = 24
+				or type = 25 or type = 26 
+				or type = 27 or type = 28 
+				or type = 29)
+			</if>
+			<if test="btime!=null">
+				AND recordtime>=#{btime}
+			</if>
+			<if test="etime!=null">
+				AND recordtime&lt;=#{etime}
+			</if>
+				<if test="sign == 'week'">
+				and recordtime >= sysdate-7
+			</if>
+			<if test="sign == 'month'">
+				and recordtime >=add_months(sysdate,-1)
+			</if>
+			<if test="sign == 'threeMonth'">
+				and recordtime >=add_months(sysdate,-3)
+			</if>
+		</where>
+		order by recordtime desc,type desc
+	</select>
+	<!-- 根据baseId,type查询账户收支记录表 -->
+	<select id="queryAccInExRecord" parameterType="com.ptpl.model.AccInExRecord"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACCINEXRECORD
+		<where>
+			<if test="baseid !=null">
+				baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="balance !=null">
+				and balance = #{balance,jdbcType=FLOAT}
+			</if>
+		</where>
+	</select>
+	<!-- 根据baseId,type查询账户收支记录表 -->
+	<select id="getAccInExRecord" parameterType="com.ptpl.model.AccInExRecord"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACCINEXRECORD
+		<where>
+			<if test="baseid !=null">
+				baseid = #{baseid,jdbcType=DECIMAL}
+			</if>
+			<if test="type !=null">
+				and type = #{type,jdbcType=DECIMAL}
+			</if>
+		</where>
+	</select>
+	<!-- 根据说明查询账户收支记录表:说明是存储的是TxdId,唯一标识,查询出来也只能是一条数据 -->
+	<select id="getAccInExRecordBydescription" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACCINEXRECORD
+		<where>
+			<if test="baseid !=null">
+				description = #{description,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<!-- 根据baseId修改 账户收支记录表 -->
+	<update id="reviseAccInExRecord" parameterType="com.ptpl.model.AccInExRecord">
+		update ACCINEXRECORD
+		<set>
+			<if test="type != null">
+				type = #{type,jdbcType=DECIMAL},
+			</if>
+			<if test="inamount != null">
+				inamount = #{inamount,jdbcType=FLOAT},
+			</if>
+			<if test="outamount != null">
+				outamount = #{outamount,jdbcType=FLOAT},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=FLOAT},
+			</if>
+			<if test="recordtime != null">
+				recordtime = #{recordtime,jdbcType=DATE},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR}
+			</if>
+		</set>
+		where baseid = #{baseid,jdbcType=DECIMAL}
+	</update>
+
+	<!--根据业务流水号查找信息 -->
+	<select id="findAccInExRecordByBorderno" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from ACCINEXRECORD where borderno = #{borderno,jdbcType=VARCHAR}
+	</select>
+</mapper>

@@ -1,0 +1,418 @@
+body {
+	font-size: 12px;
+	font-family: "微软雅黑";
+}
+
+body, ul, li, i, a, p, span, h1, h2, h3, h4, h5, h6, br, img, select,
+	input, div, option, b {
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+.box {
+	width: 100%;
+	height: 100%;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0;
+}
+
+.input-text-2 {
+	width: 240px;
+	height: 32px;
+	border: 1px solid #d2d2d2;
+	background: #fff;
+	line-height: 32px;
+	font-size: 16px;
+	color: #666;
+	padding-left: 10px;
+}
+/*安全中心盒子开始*/
+.box .box_items {
+	width: 80%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.box .box_items .security_box {
+	width: 80%;
+	height: 100%;
+}
+
+.box .box_items .security_box .li-height-auto {
+	height: auto;
+}
+
+.box .box_items .security_box ul li {
+	height: 67px;
+	border-bottom: 1px solid #e6e6e6;
+	overflow: hidden;
+	background: #fff;
+}
+/*li 样式 开始*/
+.box .box_items .security_box ul li span {
+	line-height: 67px;
+}
+/*图标 fail*/
+.box .box_items .security_box ul li span .icon-fail {
+	margin-top: 27px;
+	margin-right: 10px;
+}
+/*图标 success*/
+.box .box_items .security_box ul li span .icon-success {
+	background-position: 0 -20px;
+	float: left;
+	display: inline-block;
+	margin-top: 24px;
+	margin-right: 10px;
+}
+
+.box .box_items .security_box ul li span i {
+	width: 20px;
+	height: 20px;
+	display: block;
+	float: left;
+	background: url("./../../resources/Images/icon_verification.png")
+		no-repeat;
+}
+
+.box .box_items .security_box ul li .items-1 {
+	width: 170px;
+	display: block;
+	float: left;
+	margin-left: 120px;
+}
+
+.box .box_items .security_box ul li	.items-2 {
+	color: red;
+	font-size: 14px;
+}
+
+.box .box_items .security_box ul li	.items-3 {
+	color: #666;
+	font-size: 12px;
+}
+
+.box .box_items .security_box ul li	.items-4 {
+	width: 120px;
+	float: right;
+	margin-right: 180px;
+	padding-top: 15px;
+}
+/*立即验证 按钮 样式*/
+.box .box_items .security_box ul li	.items-4 .items-4-a {
+	border: 1px solid #f6b002;
+	background: #fcc300;
+	display: inline-block;
+	padding: 0 18px;
+	cursor: pointer;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	font-size: 12px;
+	float: left;
+	text-decoration: none !important;
+	transition: background 0.3s;
+	-moz-transition: background 0.3s;
+	-webkit-transition: background 0.3s;
+}
+/*修改按钮 样式*/
+.box .box_items .security_box ul li	.items-4 .items-4-b {
+	border: 1px solid #f6b002;
+	display: inline-block;
+	padding: 0 18px;
+	cursor: pointer;
+	height: 30px;
+	line-height: 30px;
+	color: #ff9900;
+	font-size: 12px;
+	float: left;
+	text-decoration: none !important;
+	transition: background 0.3s;
+	-moz-transition: background 0.3s;
+	-webkit-transition: background 0.3s;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+}
+
+.box .box_items .security_box ul li .items-4 .items-4-b:hover {
+	background: #fcc300;
+	color: #fff;
+}
+
+.box .box_items .security_box ul li	.items-4 .items-4-a:hover {
+	color: #fff;
+}
+
+.box .box_items .security_box ul li .items-1 span {
+	margin-left: 10px;
+	font-size: 16px;
+}
+
+.clear {
+	clear: both;
+}
+/*li 样式 结束*/
+/*修改 设置 盒子 开始*/
+.box_items .verification-box {
+	padding-top: 30px;
+	background: #fff;
+}
+/*已设置 盒子box*/
+.box_items .verification-box .edit-phone-box {
+	width: 726px;
+	margin: 0 auto 36px;
+	padding-bottom: 36px;
+}
+
+.box_items .verification-box .edit-phone-box-right {
+	width: 890px;
+	margin: 0 auto 36px;
+	padding-bottom: 36px;
+}
+
+.box_items .verification-box .selected-type {
+	background: #fff5cf;
+	border: 1px solid #f6b002 !important;
+	position: relative;
+}
+
+.box_items .verification-box .selected-type i {
+	background: url("./../../resources/Images/selected.png");
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	right: -1px;
+	bottom: -1px;
+}
+
+.box_items .verification-box .edit-phone-box .edit-phone {
+	float: left;
+	cursor: pointer;
+	width: 164px;
+	display: inline-block;
+	margin-right: 40px;
+	height: 120px;
+	padding: 26px 20px 0;
+	border-radius: 5px;
+	border: 1px solid #e6e6e6;
+}
+
+.box_items .verification-box .edit-phone:hover {
+	background: #eaeaea;
+	border: 1px solid #999999;
+}
+
+.box_items .verification-box .edit-phone-box .edit-phone .title {
+	text-align: center;
+	font-size: 16px;
+	padding-bottom: 18px;
+}
+
+.box_items .verification-box .edit-phone-box .edit-phone .description {
+	padding-bottom: 22px;
+	font-size: 12px;
+	color: #999999;
+	line-height: 24px;
+	text-align: left;
+}
+
+/*没有设置的行 盒子*/
+.verification-box .verification-from {
+	padding-left: 120px;
+}
+
+.verification-box .verification-from .item {
+	height: 43px;
+	overflow: hidden;
+	padding-bottom: 20px;
+	line-height: 43px;
+	font-size: 14px;
+}
+
+.verification-box .verification-from .item .red-star {
+	color: red;
+}
+
+.verification-box .verification-from .item .submit {
+	height: 40px;
+	display: block;
+	float: left;
+	background: #ffa019;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	line-height: 40px;
+	padding: 0 22px;
+	color: #fff;
+	text-decoration: none !important;
+}
+
+.verification-box .verification-from .item .verification-1 {
+	float: left;
+	width: 119px;
+	display: inline-block;
+	padding-right: 15px;
+	text-align: right;
+	line-height: 33px;
+	height: 33px;
+	color: #ccc;
+}
+
+.verification-box .verification-from .item .verification-2 {
+	float: left;
+	display: inline-block;
+	text-align: left;
+	line-height: 33px;
+}
+
+.verification-box .verification-from .item .verification-3 {
+	float: left;
+	display: inline-block;
+	text-align: left;
+	line-height: 33px;
+	margin-left: 15px;
+	padding-top: 1px;
+}
+
+.verification-box .verification-from .item .verification-1 span {
+	color: #666;
+}
+/*修改 设置 盒子 结束*/
+
+/*安全问题select样式*/
+.select-question {
+	height: 30px;
+	min-width: 250px;
+}
+/*短信验证*/
+.button-orange-1 {
+	border: 1px solid #ff6600;
+	background: #ff8400;
+	height: 30px;
+	margin-left: 2px;
+	line-height: 30px;
+	font-size: 12px;
+	padding: 0 18px;
+	display: inline-block;
+	color: #fff;
+	cursor: pointer;
+	float: left;
+	text-decoration: none !important;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+}
+
+.button-ash-3 {
+	border: 1px solid #b4b4b4;
+	background: #d2d2d2;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	padding: 0 18px;
+	display: inline-block;
+	color: #999999;
+	cursor: pointer;
+	float: left;
+	text-decoration: none !important;
+}
+/*安全中心盒子结束*/
+.red {
+	color: red;
+	margin-left: 10px;
+}
+
+.green {
+	color: green;
+	margin-left: 10px;
+}
+
+.custom {
+	margin-left: 10px;
+	padding: 5px 10px;
+	background: #fcc300;
+	color: #fff;
+}
+
+.choose {
+	margin-left: 10px;
+	padding: 5px 10px;
+	background: #fcc300;
+	color: #fff;
+}
+
+.step {
+	height: 42px;
+	width: 727px;
+	margin-bottom: 40px;
+	background: url("./../../resources/Images/step.png") no-repeat;
+}
+
+.step span {
+	width: 230px;
+	height: 42px;
+	color: #666;
+	overflow: hidden;
+	display: inline-block;
+	float: left;
+	text-align: center;
+	line-height: 42px !important;
+}
+
+.step-1 {
+	background-position: 0 0;
+}
+
+.step-2 {
+	background-position: 0px -42px;
+}
+
+.box .box_items .security_box .li-height-auto .loading-pic img {
+	padding-left: 400px;
+}
+
+/*邮箱验证*/
+.li-height-auto .verification-box .verification-form_email_tips {
+	color: #666;
+	font-size: 14px;
+	line-height: 18px;
+	padding-left: 108px;
+}
+
+.li-height-auto .verification-box .verification-form_email_tips .send {
+	font-size: 16px;
+	color: #333;
+	line-height: 16px;
+	margin-bottom: 10px;
+}
+
+.li-height-auto .verification-box .verification-form_email_tips .click-email
+	{
+	font-size: 14px;
+	color: #666;
+	margin: 10px 0 20px;
+}
+
+.li-height-auto .verification-box .verification-form_email_tips .address a
+	{
+	font-size: 24px;
+	color: #ff6600;
+	line-height: 24px;
+	text-decoration: none;
+	font-family: arial;
+}

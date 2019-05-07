@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RiskGuarantyFeeRecordMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RiskGuarantyFeeRecord">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="RGMORDERNO" property="rgmorderno" jdbcType="VARCHAR" />
+		<result column="UTORDERNO" property="utorderno" jdbcType="VARCHAR" />
+		<result column="RGMID" property="rgmid" jdbcType="DECIMAL" />
+		<result column="TENDERID" property="tenderid" jdbcType="DECIMAL" />
+		<result column="RGMMANID" property="rgmmanid" jdbcType="DECIMAL" />
+		<result column="BMANID" property="bmanid" jdbcType="DECIMAL" />
+		<result column="TENDERAMOUNT" property="tenderamount" jdbcType="FLOAT" />
+		<result column="GUARANTYFEE" property="guarantyfee" jdbcType="FLOAT" />
+		<result column="RGMTYPE" property="rgmtype" jdbcType="DECIMAL" />
+		<result column="CHARGETYPE" property="chargetype" jdbcType="DECIMAL" />
+		<result column="ISDEAL" property="isdeal" jdbcType="DECIMAL" />
+		<result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL" />
+		<result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP" />
+		<result column="AUDITMAN" property="auditman" jdbcType="VARCHAR" />
+		<result column="MADETIME" property="madetime" jdbcType="TIMESTAMP" />
+		<result column="PAYOUTDATE" property="payoutdate" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, RGMORDERNO, UTORDERNO, RGMID, TENDERID, RGMMANID,
+		BMANID,
+		TENDERAMOUNT, GUARANTYFEE, RGMTYPE, CHARGETYPE, ISDEAL,
+		ISAUDIT,
+		AUDITTIME, AUDITMAN, MADETIME, PAYOUTDATE, REMARK
+	</sql>
+
+	<!-- 根据主键ID查询标的风险保证金记录详情 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from
+		RISKGUARANTYFEERECORD
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 根据主键ID删除标的风险保证金记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		RISKGUARANTYFEERECORD where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 新增标的风险保证金记录（参数可选） -->
+	<insert id="insertSelective" parameterType="com.ptpl.model.RiskGuarantyFeeRecord">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT RISKGUARANTYFEERECORD_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into RISKGUARANTYFEERECORD
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="rgmorderno != null">
+				RGMORDERNO,
+			</if>
+			<if test="utorderno != null">
+				UTORDERNO,
+			</if>
+			<if test="rgmid != null">
+				RGMID,
+			</if>
+			<if test="tenderid != null">
+				TENDERID,
+			</if>
+			<if test="rgmmanid != null">
+				RGMMANID,
+			</if>
+			<if test="bmanid != null">
+				BMANID,
+			</if>
+			<if test="tenderamount != null">
+				TENDERAMOUNT,
+			</if>
+			<if test="guarantyfee != null">
+				GUARANTYFEE,
+			</if>
+			<if test="rgmtype != null">
+				RGMTYPE,
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE,
+			</if>
+			<if test="isdeal != null">
+				ISDEAL,
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT,
+			</if>
+			<if test="audittime != null">
+				AUDITTIME,
+			</if>
+			<if test="auditman != null">
+				AUDITMAN,
+			</if>
+			<if test="madetime != null">
+				MADETIME,
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="rgmorderno != null">
+				#{rgmorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="utorderno != null">
+				#{utorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rgmid != null">
+				#{rgmid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				#{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="rgmmanid != null">
+				#{rgmmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="bmanid != null">
+				#{bmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderamount != null">
+				#{tenderamount,jdbcType=FLOAT},
+			</if>
+			<if test="guarantyfee != null">
+				#{guarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="rgmtype != null">
+				#{rgmtype,jdbcType=DECIMAL},
+			</if>
+			<if test="chargetype != null">
+				#{chargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				#{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				#{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				#{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				#{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				#{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				#{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据主键ID更新标的风险保证金记录（参数可选） -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RiskGuarantyFeeRecord">
+		update RISKGUARANTYFEERECORD
+		<set>
+			<if test="rgmorderno != null">
+				RGMORDERNO = #{rgmorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="utorderno != null">
+				UTORDERNO = #{utorderno,jdbcType=VARCHAR},
+			</if>
+			<if test="rgmid != null">
+				RGMID = #{rgmid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL},
+			</if>
+			<if test="rgmmanid != null">
+				RGMMANID = #{rgmmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="bmanid != null">
+				BMANID = #{bmanid,jdbcType=DECIMAL},
+			</if>
+			<if test="tenderamount != null">
+				TENDERAMOUNT = #{tenderamount,jdbcType=FLOAT},
+			</if>
+			<if test="guarantyfee != null">
+				GUARANTYFEE = #{guarantyfee,jdbcType=FLOAT},
+			</if>
+			<if test="rgmtype != null">
+				RGMTYPE = #{rgmtype,jdbcType=DECIMAL},
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE = #{chargetype,jdbcType=DECIMAL},
+			</if>
+			<if test="isdeal != null">
+				ISDEAL = #{isdeal,jdbcType=DECIMAL},
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR},
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 条件查询标的风险保证金记录 -->
+	<select id="selectAllByCondition" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RiskGuarantyFeeRecord">
+		select
+		<include refid="Base_Column_List" />
+		from
+		riskguarantyfeerecord
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="rgmorderno != null">
+				RGMORDERNO = #{rgmorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="utorderno != null">
+				UTORDERNO = #{utorderno,jdbcType=VARCHAR}
+			</if>
+			<if test="rgmid != null">
+				RGMID = #{rgmid,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderid != null">
+				TENDERID = #{tenderid,jdbcType=DECIMAL}
+			</if>
+			<if test="rgmmanid != null">
+				RGMMANID = #{rgmmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="bmanid != null">
+				BMANID = #{bmanid,jdbcType=DECIMAL}
+			</if>
+			<if test="tenderamount != null">
+				TENDERAMOUNT = #{tenderamount,jdbcType=FLOAT}
+			</if>
+			<if test="guarantyfee != null">
+				GUARANTYFEE = #{guarantyfee,jdbcType=FLOAT}
+			</if>
+			<if test="rgmtype != null">
+				RGMTYPE = #{rgmtype,jdbcType=DECIMAL}
+			</if>
+			<if test="chargetype != null">
+				CHARGETYPE = #{chargetype,jdbcType=DECIMAL}
+			</if>
+			<if test="isdeal != null">
+				ISDEAL = #{isdeal,jdbcType=DECIMAL}
+			</if>
+			<if test="isaudit != null">
+				ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+			</if>
+			<if test="audittime != null">
+				AUDITTIME = #{audittime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="auditman != null">
+				AUDITMAN = #{auditman,jdbcType=VARCHAR}
+			</if>
+			<if test="madetime != null">
+				MADETIME = #{madetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="payoutdate != null">
+				PAYOUTDATE = #{payoutdate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 根据投标订单号查询标的风险保证金记录 -->
+	<select id="selectByUtOrderNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		riskguarantyfeerecord
+		where
+		utorderno = #{utorderno,jdbcType=VARCHAR}
+	</select>
+</mapper>

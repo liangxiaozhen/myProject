@@ -1,0 +1,1565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.TenderItemMapper">
+    <resultMap id="BaseResultMap" type="com.ptpl.model.TenderItem">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="LOANAPPID" property="loanappid" jdbcType="DECIMAL"/>
+        <result column="TNO" property="tno" jdbcType="VARCHAR"/>
+        <result column="TNAME" property="tname" jdbcType="VARCHAR"/>
+        <result column="TIMODE" property="timode" jdbcType="DECIMAL"/>
+        <result column="VALUEDATE" property="valuedate" jdbcType="TIMESTAMP"/>
+        <result column="TAMOUNT" property="tamount" jdbcType="FLOAT"/>
+        <result column="FINISHTAMOUNT" property="finishtamount" jdbcType="FLOAT"/>
+        <result column="TPRO" property="tpro" jdbcType="DECIMAL"/>
+        <result column="TBEGINTIME" property="tbegintime" jdbcType="TIMESTAMP"/>
+        <result column="TENDTIME" property="tendtime" jdbcType="TIMESTAMP"/>
+        <result column="LOANTIME" property="loantime" jdbcType="DECIMAL"/>
+        <result column="DAYORMONTH" property="dayormonth" jdbcType="VARCHAR"/>
+        <result column="TINTEREST" property="tinterest" jdbcType="FLOAT"/>
+        <result column="TDESC" property="tdesc" jdbcType="VARCHAR"/>
+        <result column="TSTATUS" property="tstatus" jdbcType="DECIMAL"/>
+        <result column="PMISCPAYMAN" property="pmiscpayman" jdbcType="VARCHAR"/>
+        <result column="PMISCRECMAN" property="pmiscrecman" jdbcType="VARCHAR"/>
+        <result column="ONETTIMES" property="onettimes" jdbcType="DECIMAL"/>
+        <result column="CRESTRICT" property="crestrict" jdbcType="VARCHAR"/>
+        <result column="ISFAKETENDER" property="isfaketender" jdbcType="DECIMAL"/>
+        <result column="ISAUTOTENDER" property="isautotender" jdbcType="DECIMAL"/>
+        <result column="TTYPE" property="ttype" jdbcType="DECIMAL"/>
+        <result column="ISACANCEL" property="isacancel" jdbcType="DECIMAL"/>
+        <result column="ALLOWCUGRADE" property="allowcugrade" jdbcType="VARCHAR"/>
+        <result column="ISSETGFUNDSINT" property="issetgfundsint" jdbcType="DECIMAL"/>
+        <result column="GFUNDSINTNO" property="gfundsintno" jdbcType="VARCHAR"/>
+        <result column="REPAYMENTTYPE" property="repaymenttype" jdbcType="DECIMAL"/>
+        <result column="REPAYMENTPRO" property="repaymentpro" jdbcType="DECIMAL"/>
+        <result column="REPAYSETMODE" property="repaysetmode" jdbcType="DECIMAL"/>
+        <result column="REPAYMAN" property="repayman" jdbcType="VARCHAR"/>
+        <result column="ISAPARTREPAY" property="isapartrepay" jdbcType="DECIMAL"/>
+        <result column="REPAYTIMEPOINT" property="repaytimepoint" jdbcType="VARCHAR"/>
+        <result column="ISAPPOINTTENDER" property="isappointtender" jdbcType="DECIMAL"/>
+        <result column="TPASS" property="tpass" jdbcType="VARCHAR"/>
+        <result column="MINONCETAMOUNT" property="minoncetamount" jdbcType="FLOAT"/>
+        <result column="MAXONCETAMOUNT" property="maxoncetamount" jdbcType="FLOAT"/>
+        <result column="UGRESTRICT" property="ugrestrict" jdbcType="VARCHAR"/>
+        <result column="REMOVENAMENO" property="removenameno" jdbcType="VARCHAR"/>
+        <result column="ISFAILTC" property="isfailtc" jdbcType="DECIMAL"/>
+        <result column="FAILTCNO" property="failtcno" jdbcType="VARCHAR"/>
+        <result column="ISAOVERDUEC" property="isaoverduec" jdbcType="DECIMAL"/>
+        <result column="OVERDUECNO" property="overduecno" jdbcType="VARCHAR"/>
+        <result column="ISAAHEADREPAY" property="isaaheadrepay" jdbcType="DECIMAL"/>
+        <result column="AHEADREPAYNO" property="aheadrepayno" jdbcType="VARCHAR"/>
+        <result column="ISADEBTATTORN" property="isadebtattorn" jdbcType="DECIMAL"/>
+        <result column="DEBTATTORNNO" property="debtattornno" jdbcType="VARCHAR"/>
+        <result column="ISAPLUS" property="isaplus" jdbcType="DECIMAL"/>
+        <result column="PLUSNO" property="plusno" jdbcType="VARCHAR"/>
+        <result column="ISAMEDIACY" property="isamediacy" jdbcType="DECIMAL"/>
+        <result column="MEDIACYFEENO" property="mediacyfeeno" jdbcType="VARCHAR"/>
+        <result column="ISAGUARANTEE" property="isaguarantee" jdbcType="DECIMAL"/>
+        <result column="GUARANTEEFEENO" property="guaranteefeeno" jdbcType="VARCHAR"/>
+        <result column="ISAINTEXP" property="isaintexp" jdbcType="DECIMAL"/>
+        <result column="INTEXPNO" property="intexpno" jdbcType="VARCHAR"/>
+        <result column="ISARISKGM" property="isariskgm" jdbcType="DECIMAL"/>
+        <result column="RISKGMNO" property="riskgmno" jdbcType="VARCHAR"/>
+        <result column="REPAYMODE" property="repaymode" jdbcType="DECIMAL"/>
+        <result column="BEGININVESTMONEY" property="begininvestmoney" jdbcType="FLOAT"/>
+        <result column="ISMULTIPLE" property="ismultiple" jdbcType="DECIMAL"/>
+        <result column="TOTALMONEYRESTRICT" property="totalmoneyrestrict" jdbcType="FLOAT"/>
+        <result column="AVERAGENUM" property="averagenum" jdbcType="DECIMAL"/>
+        <result column="AVERAGEMONEY" property="averagemoney" jdbcType="FLOAT"/>
+        <result column="ISAUDIT" property="isaudit" jdbcType="DECIMAL"/>
+        <result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL"/>
+        <result column="AUDITMAN" property="auditman" jdbcType="VARCHAR"/>
+        <result column="AUDITTIME" property="audittime" jdbcType="TIMESTAMP"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="ISRECORDED" property="isrecorded" jdbcType="DECIMAL"/>
+        <result column="BIDPRODTYPE" property="bidprodtype" jdbcType="VARCHAR"/>
+        <result column="RETDATE" property="retdate" jdbcType="TIMESTAMP"/>
+        <result column="LASTRETDATE" property="lastretdate" jdbcType="TIMESTAMP"/>
+        <result column="ISCOMPENSATORY" property="iscompensatory" jdbcType="DECIMAL"/>
+        <result column="COMPENSATORYMAN" property="compensatoryman" jdbcType="VARCHAR"/>
+        <result column="PMISCPAYMANID" property="pmiscpaymanid" jdbcType="DECIMAL"/>
+        <result column="PMISCRECMANID" property="pmiscrecmanid" jdbcType="DECIMAL"/>
+        <result column="VALUEPOINT" property="valuepoint" jdbcType="VARCHAR"/>
+        <result column="VALUERULE" property="valuerule" jdbcType="DECIMAL"/>
+        <result column="COMPENSATORYMAID" property="compensatorymaid" jdbcType="DECIMAL"/>
+        <result column="GRACEPERIOD" property="graceperiod" jdbcType="DECIMAL"/>
+        <result column="DAYLATEFEERATE" property="daylatefeerate" jdbcType="FLOAT"/>
+        <result column="ADDMAN" property="addman" jdbcType="VARCHAR"/>
+        <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP"/>
+        <result column="ISAHEADCOMPENSATORY" property="isaheadcompensatory" jdbcType="DECIMAL"/>
+        <result column="AHEADCOMPENSATORYMANID" property="aheadcompensatorymanid" jdbcType="DECIMAL"/>
+        <result column="AHEADCOMPENSATORYMAN" property="aheadcompensatoryman" jdbcType="VARCHAR"/>
+        <result column="ISINTCOMPENSATEON" property="isintcompensateon" jdbcType="DECIMAL"/>
+        <result column="ISAWARDCOMPENSATEON" property="isawardcompensateon" jdbcType="DECIMAL"/>
+        <result column="ISAOCFEE" property="isaocfee" jdbcType="DECIMAL"/>
+        <result column="ISPICOMPENSATEON" property="ispicompensateon" jdbcType="DECIMAL"/>
+        <result column="ISPLUSCOMPENSATEON" property="ispluscompensateon" jdbcType="DECIMAL"/>
+        <result column="ISFORPLATFORMON" property="isforplatformon" jdbcType="DECIMAL"/>
+        <result column="ISADEBTATTORNFEE" property="isadebtattornfee" jdbcType="DECIMAL"/>
+        <result column="SNLID" property="snlid" jdbcType="DECIMAL"/>
+        <result column="DISPLAYTYPE" property="displaytype" jdbcType="DECIMAL"/>
+        <result column="TSCORE" property="tscore" jdbcType="FLOAT"/>
+        <result column="TGRADE" property="tgrade" jdbcType="VARCHAR"/>
+        <result column="AHEADPERIOD" property="aheadperiod" jdbcType="DECIMAL"/>
+        <result column="OCMAXDAY" property="ocmaxday" jdbcType="DECIMAL"/>
+        <result column="PUTONTIME" property="putontime" jdbcType="TIMESTAMP"/>
+        <result column="PULLOFFTIME" property="pullofftime" jdbcType="TIMESTAMP"/>
+        <result column="SNLNO" property="snlno" jdbcType="VARCHAR"/>
+        <result column="ONANDDOWN" property="onanddown" jdbcType="DECIMAL"/>
+        <result column="INVESTERRANGE" property="investerrange" jdbcType="DECIMAL"/>
+        <association property="aheadRepayMode" column="id" select="com.ptpl.mapper.AheadRepayModeMapper.selectModeBytid"></association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    ID, LOANAPPID, TNO, TNAME, TIMODE, VALUEDATE, TAMOUNT, FINISHTAMOUNT, TPRO, TBEGINTIME, 
+    TENDTIME, LOANTIME, DAYORMONTH, TINTEREST, TDESC, TSTATUS, PMISCPAYMAN, PMISCRECMAN, 
+    ONETTIMES, CRESTRICT, ISFAKETENDER, ISAUTOTENDER, TTYPE, ISACANCEL, ALLOWCUGRADE, 
+    ISSETGFUNDSINT, GFUNDSINTNO, REPAYMENTTYPE, REPAYMENTPRO, REPAYSETMODE, REPAYMAN, 
+    ISAPARTREPAY, REPAYTIMEPOINT, ISAPPOINTTENDER, TPASS, MINONCETAMOUNT, MAXONCETAMOUNT, 
+    UGRESTRICT, REMOVENAMENO, ISFAILTC, FAILTCNO, ISAOVERDUEC, OVERDUECNO, ISAAHEADREPAY, 
+    AHEADREPAYNO, ISADEBTATTORN, DEBTATTORNNO, ISAPLUS, PLUSNO, ISAMEDIACY, MEDIACYFEENO, 
+    ISAGUARANTEE, GUARANTEEFEENO, ISAINTEXP, INTEXPNO, ISARISKGM, RISKGMNO, REPAYMODE, 
+    BEGININVESTMONEY, ISMULTIPLE, TOTALMONEYRESTRICT, AVERAGENUM, AVERAGEMONEY, ISAUDIT, 
+    ISTEMPLET, AUDITMAN, AUDITTIME, REMARK, ISRECORDED, BIDPRODTYPE, RETDATE, LASTRETDATE, 
+    ISCOMPENSATORY, COMPENSATORYMAN, PMISCPAYMANID, PMISCRECMANID, VALUEPOINT, VALUERULE, 
+    COMPENSATORYMAID, GRACEPERIOD, DAYLATEFEERATE, ADDMAN, ADDTIME, ISAHEADCOMPENSATORY, 
+    AHEADCOMPENSATORYMANID, AHEADCOMPENSATORYMAN, ISINTCOMPENSATEON, ISAWARDCOMPENSATEON, 
+    ISAOCFEE, ISPICOMPENSATEON, ISPLUSCOMPENSATEON, ISFORPLATFORMON, ISADEBTATTORNFEE, 
+    SNLID, DISPLAYTYPE, TSCORE, TGRADE, AHEADPERIOD,OCMAXDAY,PUTONTIME,PULLOFFTIME,SNLNO,ONANDDOWN,INVESTERRANGE
+  </sql>
+
+    <sql id="LeftJoin_Base_Column_List">
+    t.ID, t.LOANAPPID, t.TNO, t.TNAME, t.TIMODE, t.VALUEDATE, t.TAMOUNT, t.FINISHTAMOUNT, t.TPRO, t.TBEGINTIME,
+    t.TENDTIME, t.LOANTIME, t.DAYORMONTH, t.TINTEREST, t.TDESC, t.TSTATUS, t.PMISCPAYMAN, t.PMISCRECMAN,
+    t.ONETTIMES, t.CRESTRICT, t.ISFAKETENDER, t.ISAUTOTENDER, t.TTYPE, t.ISACANCEL, t.ALLOWCUGRADE,
+    t.ISSETGFUNDSINT, t.GFUNDSINTNO, t.REPAYMENTTYPE, t.REPAYMENTPRO, t.REPAYSETMODE, t.REPAYMAN,
+    t.ISAPARTREPAY, t.REPAYTIMEPOINT, t.ISAPPOINTTENDER, t.TPASS, t.MINONCETAMOUNT, t.MAXONCETAMOUNT,
+    t.UGRESTRICT, t.REMOVENAMENO, t.ISFAILTC, t.FAILTCNO, t.ISAOVERDUEC, t.OVERDUECNO, t.ISAAHEADREPAY,
+    t.AHEADREPAYNO, t.ISADEBTATTORN, t.DEBTATTORNNO, t.ISAPLUS, t.PLUSNO, t.ISAMEDIACY, t.MEDIACYFEENO,
+    t.ISAGUARANTEE, t.GUARANTEEFEENO, t.ISAINTEXP, t.INTEXPNO, t.ISARISKGM, t.RISKGMNO, t.REPAYMODE,
+    t.BEGININVESTMONEY, t.ISMULTIPLE, t.TOTALMONEYRESTRICT, t.AVERAGENUM, t.AVERAGEMONEY, t.ISAUDIT,
+    t.ISTEMPLET, t.AUDITMAN, t.AUDITTIME, t.REMARK, t.ISRECORDED, t.BIDPRODTYPE, t.RETDATE, t.LASTRETDATE,
+    t.ISCOMPENSATORY, t.COMPENSATORYMAN, t.PMISCPAYMANID, t.PMISCRECMANID, t.VALUEPOINT, t.VALUERULE,
+    t.COMPENSATORYMAID, t.GRACEPERIOD, t.DAYLATEFEERATE, t.ADDMAN, t.ADDTIME, t.ISAHEADCOMPENSATORY,
+    t.AHEADCOMPENSATORYMANID, t.AHEADCOMPENSATORYMAN, t.ISINTCOMPENSATEON, t.ISAWARDCOMPENSATEON,
+    t.ISAOCFEE, t.ISPICOMPENSATEON, t.ISPLUSCOMPENSATEON, t.ISFORPLATFORMON, t.ISADEBTATTORNFEE,
+    t.SNLID, t.DISPLAYTYPE, t.TSCORE, t.TGRADE, t.AHEADPERIOD,t.OCMAXDAY,t.PUTONTIME,t.PULLOFFTIME,t.INVESTERRANGE
+  </sql>
+
+    <!-- 首页新标专区-->
+    <!--Displaytype=1明标  ONANDDOWN=1已上架 按上架时间排序-->
+    <select id="callbackdesk" resultMap="BaseResultMap">
+        select t.tname,t.id,t.tinterest,t.loantime,t.dayormonth,t.tamount,
+        t.finishtamount,t.tbegintime,t.tstatus from TENDERITEM t where t.ONANDDOWN =1 and t.Displaytype=1
+    </select>
+
+
+    <!-- 前端调用 乾多多 -->
+    <select id="callbackdeskAll" resultMap="BaseResultMap">
+      select t.tname,t.id,t.tinterest,t.loantime,t.dayormonth,t.tamount,
+      t.finishtamount from tenderitem t where t.tstatus=3 and t.displaytype=1
+   </select>
+
+    <!-- 投标界面中标的详情 -->
+    <select id="callbackByid" resultType="com.ptpl.model.TenderItem">
+      select t.id,t.tno,t.tname,t.tamount,t.finishtamount,t.lastretdate,t.retDate,t.loantime,t.dayormonth,t.tinterest*100 as tinterest,t.repaymentPro,t.minOnceTAmount,t.tendtime,t.tbegintime,t.valuerule ,t.isMultiple,t.tstatus from TENDERITEM t where t.id=#{id,jdbcType=DECIMAL}
+   </select>
+
+    <!-- 前段调用(条件筛选) 乾多多 -->
+    <select id="getMapConditionsList" resultMap="BaseResultMap">
+        select t.putontime as putontime,t.tname,t.id as id,t.tinterest*100 as
+        tinterest,t.loantime,t.dayormonth,t.tamount,
+        t.finishtamount,t.tbegintime,t.tstatus from TENDERITEM t where t.displaytype=1 and t.onanddown =1
+        <if test="loantimes !=null ">
+            and t.dayormonth='月'
+            and t.loantime in
+            <foreach collection="loantimes" index="index" item="loant" open=" (" separator="," close=")">
+                #{loant}
+            </foreach>
+        </if>
+
+        <if test="repaymentpros != null">
+            and t.repaymentpro in
+            <foreach collection="repaymentpros" index="index" item="tpro" open=" (" separator="," close=")">
+                #{tpro}
+            </foreach>
+        </if>
+
+        <if test="tstatuss != null">
+            and t.tstatus in
+            <foreach collection="tstatuss" index="index" item="tatu" open=" (" separator="," close=")">
+                #{tatu}
+            </foreach>
+        </if>
+
+
+        <if test="yeargo != null">
+            union all
+            select t1.putontime as putontime,t1.tname,t1.id as id,t1.tinterest*100 as
+            tinterest,t1.loantime,t1.dayormonth,t1.tamount,
+            t1.finishtamount,t1.tbegintime as tbegintime,t1.tstatus from tenderitem t1 where t1.displaytype=1 and
+            t1.onanddown =1 and t1.dayormonth='年'
+            <if test="repaymentpros != null">
+                and t1.repaymentpro in
+                <foreach collection="repaymentpros" index="index" item="tpro" open=" (" separator="," close=")">
+                    #{tpro}
+                </foreach>
+            </if>
+            <if test="tstatuss != null">
+                and t1.tstatus in
+                <foreach collection="tstatuss" index="index" item="tatu" open=" (" separator="," close=")">
+                    #{tatu}
+                </foreach>
+            </if>
+        </if>
+
+
+        <if test="selectDay != null">
+            union all
+            select t2.putontime as putontime,t2.tname,t2.id as id,t2.tinterest*100 as
+            tinterest,t2.loantime,t2.dayormonth,t2.tamount,
+            t2.finishtamount,t2.tbegintime as tbegintime,t2.tstatus from tenderitem t2 where t2.displaytype=1 and
+            t2.onanddown =1 and t2.dayormonth='天'
+            <if test="repaymentpros != null">
+                and t2.repaymentpro in
+                <foreach collection="repaymentpros" index="index" item="tpro" open=" (" separator="," close=")">
+                    #{tpro}
+                </foreach>
+            </if>
+            <if test="tstatuss != null">
+                and t2.tstatus in
+                <foreach collection="tstatuss" index="index" item="tatu" open=" (" separator="," close=")">
+                    #{tatu}
+                </foreach>
+            </if>
+        </if>
+    </select>
+
+    <!-- 条件查找 返回单个对象 -->
+    <select id="findTenderItemByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"></include>
+        from TENDERITEM
+        <where>
+            <if test="loanappid != null">
+                AND LOANAPPID = #{loanappid}
+            </if>
+        </where>
+    </select>
+
+    <!-- 根据标的ID 查找标的信息 -->
+    <select id="findTenderItemById" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TENDERITEM where id = #{id,jdbcType=DECIMAL}
+    </select>
+
+    <!-- 根据借款id查询信息 -->
+    <select id="selectByloanid" parameterType="java.math.BigDecimal" resultType="double">
+      select sum(t.tamount) from TENDERITEM t where t.loanappid=#{loanid,jdbcType=DECIMAL}
+  </select>
+
+    <insert id="insert" parameterType="com.ptpl.model.TenderItem">
+        <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+            select TENDERITEM_SEQ.NEXTVAL as id from dual
+        </selectKey>
+        insert into TENDERITEM (ID, LOANAPPID, TNO,
+        TNAME, TIMODE, VALUEDATE,
+        TAMOUNT, FINISHTAMOUNT, TPRO,
+        TBEGINTIME, TENDTIME, LOANTIME,
+        DAYORMONTH, TINTEREST, TDESC,
+        TSTATUS, PMISCPAYMAN, PMISCRECMAN,
+        ONETTIMES, CRESTRICT, ISFAKETENDER,
+        ISAUTOTENDER, TTYPE, ISACANCEL,
+        ALLOWCUGRADE, ISSETGFUNDSINT, GFUNDSINTNO,
+        REPAYMENTTYPE, REPAYMENTPRO, REPAYSETMODE,
+        REPAYMAN, ISAPARTREPAY, REPAYTIMEPOINT,
+        ISAPPOINTTENDER, TPASS, MINONCETAMOUNT,
+        MAXONCETAMOUNT, UGRESTRICT, REMOVENAMENO,
+        ISFAILTC, FAILTCNO, ISAOVERDUEC,
+        OVERDUECNO, ISAAHEADREPAY, AHEADREPAYNO,
+        ISADEBTATTORN, DEBTATTORNNO, ISAPLUS,
+        PLUSNO, ISAMEDIACY, MEDIACYFEENO,
+        ISAGUARANTEE, GUARANTEEFEENO, ISAINTEXP,
+        INTEXPNO, ISARISKGM, RISKGMNO,
+        REPAYMODE, BEGININVESTMONEY, ISMULTIPLE,
+        TOTALMONEYRESTRICT, AVERAGENUM, AVERAGEMONEY,
+        ISAUDIT, ISTEMPLET, AUDITMAN,
+        AUDITTIME, REMARK, ISRECORDED,
+        BIDPRODTYPE, RETDATE, LASTRETDATE,
+        ISCOMPENSATORY, COMPENSATORYMAN, PMISCPAYMANID,
+        PMISCRECMANID, VALUEPOINT, VALUERULE,
+        COMPENSATORYMAID, GRACEPERIOD, DAYLATEFEERATE,
+        ADDMAN, ADDTIME, ISAHEADCOMPENSATORY,
+        AHEADCOMPENSATORYMANID, AHEADCOMPENSATORYMAN,
+        ISINTCOMPENSATEON, ISAWARDCOMPENSATEON,
+        ISAOCFEE, ISPICOMPENSATEON, ISPLUSCOMPENSATEON,
+        ISFORPLATFORMON, ISADEBTATTORNFEE, SNLID,
+        DISPLAYTYPE, TSCORE, TGRADE,
+        AHEADPERIOD,OCMAXDAY,PUTONTIME,PULLOFFTIME,SNLNO,ONANDDOWN,INVESTERRANGE)
+        values (#{id,jdbcType=DECIMAL}, #{loanappid,jdbcType=DECIMAL}, #{tno,jdbcType=VARCHAR},
+        #{tname,jdbcType=VARCHAR}, #{timode,jdbcType=DECIMAL}, #{valuedate,jdbcType=TIMESTAMP},
+        #{tamount,jdbcType=FLOAT}, #{finishtamount,jdbcType=FLOAT}, #{tpro,jdbcType=DECIMAL},
+        #{tbegintime,jdbcType=TIMESTAMP}, #{tendtime,jdbcType=TIMESTAMP}, #{loantime,jdbcType=DECIMAL},
+        #{dayormonth,jdbcType=VARCHAR}, #{tinterest,jdbcType=FLOAT}, #{tdesc,jdbcType=VARCHAR},
+        #{tstatus,jdbcType=DECIMAL}, #{pmiscpayman,jdbcType=VARCHAR}, #{pmiscrecman,jdbcType=VARCHAR},
+        #{onettimes,jdbcType=DECIMAL}, #{crestrict,jdbcType=VARCHAR}, #{isfaketender,jdbcType=DECIMAL},
+        #{isautotender,jdbcType=DECIMAL}, #{ttype,jdbcType=DECIMAL}, #{isacancel,jdbcType=DECIMAL},
+        #{allowcugrade,jdbcType=VARCHAR}, #{issetgfundsint,jdbcType=DECIMAL}, #{gfundsintno,jdbcType=VARCHAR},
+        #{repaymenttype,jdbcType=DECIMAL}, #{repaymentpro,jdbcType=DECIMAL}, #{repaysetmode,jdbcType=DECIMAL},
+        #{repayman,jdbcType=VARCHAR}, #{isapartrepay,jdbcType=DECIMAL}, #{repaytimepoint,jdbcType=VARCHAR},
+        #{isappointtender,jdbcType=DECIMAL}, #{tpass,jdbcType=VARCHAR}, #{minoncetamount,jdbcType=FLOAT},
+        #{maxoncetamount,jdbcType=FLOAT}, #{ugrestrict,jdbcType=VARCHAR}, #{removenameno,jdbcType=VARCHAR},
+        #{isfailtc,jdbcType=DECIMAL}, #{failtcno,jdbcType=VARCHAR}, #{isaoverduec,jdbcType=DECIMAL},
+        #{overduecno,jdbcType=VARCHAR}, #{isaaheadrepay,jdbcType=DECIMAL}, #{aheadrepayno,jdbcType=VARCHAR},
+        #{isadebtattorn,jdbcType=DECIMAL}, #{debtattornno,jdbcType=VARCHAR}, #{isaplus,jdbcType=DECIMAL},
+        #{plusno,jdbcType=VARCHAR}, #{isamediacy,jdbcType=DECIMAL}, #{mediacyfeeno,jdbcType=VARCHAR},
+        #{isaguarantee,jdbcType=DECIMAL}, #{guaranteefeeno,jdbcType=VARCHAR}, #{isaintexp,jdbcType=DECIMAL},
+        #{intexpno,jdbcType=VARCHAR}, #{isariskgm,jdbcType=DECIMAL}, #{riskgmno,jdbcType=VARCHAR},
+        #{repaymode,jdbcType=DECIMAL}, #{begininvestmoney,jdbcType=FLOAT}, #{ismultiple,jdbcType=DECIMAL},
+        #{totalmoneyrestrict,jdbcType=FLOAT}, #{averagenum,jdbcType=DECIMAL}, #{averagemoney,jdbcType=FLOAT},
+        #{isaudit,jdbcType=DECIMAL}, #{istemplet,jdbcType=DECIMAL}, #{auditman,jdbcType=VARCHAR},
+        #{audittime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{isrecorded,jdbcType=DECIMAL},
+        #{bidprodtype,jdbcType=VARCHAR}, #{retdate,jdbcType=TIMESTAMP}, #{lastretdate,jdbcType=TIMESTAMP},
+        #{iscompensatory,jdbcType=DECIMAL}, #{compensatoryman,jdbcType=VARCHAR}, #{pmiscpaymanid,jdbcType=DECIMAL},
+        #{pmiscrecmanid,jdbcType=DECIMAL}, #{valuepoint,jdbcType=VARCHAR}, #{valuerule,jdbcType=DECIMAL},
+        #{compensatorymaid,jdbcType=DECIMAL}, #{graceperiod,jdbcType=DECIMAL}, #{daylatefeerate,jdbcType=FLOAT},
+        #{addman,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP}, #{isaheadcompensatory,jdbcType=DECIMAL},
+        #{aheadcompensatorymanid,jdbcType=DECIMAL}, #{aheadcompensatoryman,jdbcType=VARCHAR},
+        #{isintcompensateon,jdbcType=DECIMAL}, #{isawardcompensateon,jdbcType=DECIMAL},
+        #{isaocfee,jdbcType=DECIMAL}, #{ispicompensateon,jdbcType=DECIMAL}, #{ispluscompensateon,jdbcType=DECIMAL},
+        #{isforplatformon,jdbcType=DECIMAL}, #{isadebtattornfee,jdbcType=DECIMAL}, #{snlid,jdbcType=DECIMAL},
+        #{displaytype,jdbcType=DECIMAL}, #{tscore,jdbcType=FLOAT}, #{tgrade,jdbcType=VARCHAR},
+        #{aheadperiod,jdbcType=DECIMAL},#{ocmaxday,jdbcType=DECIMAL},#{putontime,jdbcType=TIMESTAMP},#{pullofftime,jdbcType=TIMESTAMP},#{snlno,jdbcType=VARCHAR},#{onanddown,jdbcType=DECIMAL},#{investerrange,jdbcType=DECIMAL})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.ptpl.model.TenderItem">
+        <selectKey resultType="java.math.BigDecimal" keyProperty="id"
+                   order="BEFORE">
+            SELECT TENDERITEM_SEQ.NEXTVAL AS id from dual
+        </selectKey>
+        insert into TENDERITEM
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="loanappid != null">
+                LOANAPPID,
+            </if>
+            <if test="tno != null">
+                TNO,
+            </if>
+            <if test="tname != null">
+                TNAME,
+            </if>
+            <if test="timode != null">
+                TIMODE,
+            </if>
+            <if test="valuedate != null">
+                VALUEDATE,
+            </if>
+            <if test="tamount != null">
+                TAMOUNT,
+            </if>
+            <if test="finishtamount != null">
+                FINISHTAMOUNT,
+            </if>
+            <if test="tpro != null">
+                TPRO,
+            </if>
+            <if test="tbegintime != null">
+                TBEGINTIME,
+            </if>
+            <if test="tendtime != null">
+                TENDTIME,
+            </if>
+            <if test="loantime != null">
+                LOANTIME,
+            </if>
+            <if test="dayormonth != null">
+                DAYORMONTH,
+            </if>
+            <if test="tinterest != null">
+                TINTEREST,
+            </if>
+            <if test="tdesc != null">
+                TDESC,
+            </if>
+            <if test="tstatus != null">
+                TSTATUS,
+            </if>
+            <if test="pmiscpayman != null">
+                PMISCPAYMAN,
+            </if>
+            <if test="pmiscrecman != null">
+                PMISCRECMAN,
+            </if>
+            <if test="onettimes != null">
+                ONETTIMES,
+            </if>
+            <if test="crestrict != null">
+                CRESTRICT,
+            </if>
+            <if test="isfaketender != null">
+                ISFAKETENDER,
+            </if>
+            <if test="isautotender != null">
+                ISAUTOTENDER,
+            </if>
+            <if test="ttype != null">
+                TTYPE,
+            </if>
+            <if test="isacancel != null">
+                ISACANCEL,
+            </if>
+            <if test="allowcugrade != null">
+                ALLOWCUGRADE,
+            </if>
+            <if test="issetgfundsint != null">
+                ISSETGFUNDSINT,
+            </if>
+            <if test="gfundsintno != null">
+                GFUNDSINTNO,
+            </if>
+            <if test="repaymenttype != null">
+                REPAYMENTTYPE,
+            </if>
+            <if test="repaymentpro != null">
+                REPAYMENTPRO,
+            </if>
+            <if test="repaysetmode != null">
+                REPAYSETMODE,
+            </if>
+            <if test="repayman != null">
+                REPAYMAN,
+            </if>
+            <if test="isapartrepay != null">
+                ISAPARTREPAY,
+            </if>
+            <if test="repaytimepoint != null">
+                REPAYTIMEPOINT,
+            </if>
+            <if test="isappointtender != null">
+                ISAPPOINTTENDER,
+            </if>
+            <if test="tpass != null">
+                TPASS,
+            </if>
+            <if test="minoncetamount != null">
+                MINONCETAMOUNT,
+            </if>
+            <if test="maxoncetamount != null">
+                MAXONCETAMOUNT,
+            </if>
+            <if test="ugrestrict != null">
+                UGRESTRICT,
+            </if>
+            <if test="removenameno != null">
+                REMOVENAMENO,
+            </if>
+            <if test="isfailtc != null">
+                ISFAILTC,
+            </if>
+            <if test="failtcno != null">
+                FAILTCNO,
+            </if>
+            <if test="isaoverduec != null">
+                ISAOVERDUEC,
+            </if>
+            <if test="overduecno != null">
+                OVERDUECNO,
+            </if>
+            <if test="isaaheadrepay != null">
+                ISAAHEADREPAY,
+            </if>
+            <if test="aheadrepayno != null">
+                AHEADREPAYNO,
+            </if>
+            <if test="isadebtattorn != null">
+                ISADEBTATTORN,
+            </if>
+            <if test="debtattornno != null">
+                DEBTATTORNNO,
+            </if>
+            <if test="isaplus != null">
+                ISAPLUS,
+            </if>
+            <if test="plusno != null">
+                PLUSNO,
+            </if>
+            <if test="isamediacy != null">
+                ISAMEDIACY,
+            </if>
+            <if test="mediacyfeeno != null">
+                MEDIACYFEENO,
+            </if>
+            <if test="isaguarantee != null">
+                ISAGUARANTEE,
+            </if>
+            <if test="guaranteefeeno != null">
+                GUARANTEEFEENO,
+            </if>
+            <if test="isaintexp != null">
+                ISAINTEXP,
+            </if>
+            <if test="intexpno != null">
+                INTEXPNO,
+            </if>
+            <if test="isariskgm != null">
+                ISARISKGM,
+            </if>
+            <if test="riskgmno != null">
+                RISKGMNO,
+            </if>
+            <if test="repaymode != null">
+                REPAYMODE,
+            </if>
+            <if test="begininvestmoney != null">
+                BEGININVESTMONEY,
+            </if>
+            <if test="ismultiple != null">
+                ISMULTIPLE,
+            </if>
+            <if test="totalmoneyrestrict != null">
+                TOTALMONEYRESTRICT,
+            </if>
+            <if test="averagenum != null">
+                AVERAGENUM,
+            </if>
+            <if test="averagemoney != null">
+                AVERAGEMONEY,
+            </if>
+            <if test="isaudit != null">
+                ISAUDIT,
+            </if>
+            <if test="istemplet != null">
+                ISTEMPLET,
+            </if>
+            <if test="auditman != null">
+                AUDITMAN,
+            </if>
+            <if test="audittime != null">
+                AUDITTIME,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="isrecorded != null">
+                ISRECORDED,
+            </if>
+            <if test="bidprodtype != null">
+                BIDPRODTYPE,
+            </if>
+            <if test="retdate != null">
+                RETDATE,
+            </if>
+            <if test="lastretdate != null">
+                LASTRETDATE,
+            </if>
+            <if test="iscompensatory != null">
+                ISCOMPENSATORY,
+            </if>
+            <if test="compensatoryman != null">
+                COMPENSATORYMAN,
+            </if>
+            <if test="pmiscpaymanid != null">
+                PMISCPAYMANID,
+            </if>
+            <if test="pmiscrecmanid != null">
+                PMISCRECMANID,
+            </if>
+            <if test="valuepoint != null">
+                VALUEPOINT,
+            </if>
+            <if test="valuerule != null">
+                VALUERULE,
+            </if>
+            <if test="compensatorymaid != null">
+                COMPENSATORYMAID,
+            </if>
+            <if test="aheadperiod != null">
+                AHEADPERIOD,
+            </if>
+            <if test="ocmaxday != null">
+                OCMAXDAY,
+            </if>
+            <if test="putontime !=null">
+                PUTONTIME,
+            </if>
+            <if test="pullofftime != null">
+                PULLOFFTIME,
+            </if>
+            <if test="snlno != null">
+                SNLNO,
+            </if>
+            <if test="onanddown != null">
+                ONANDDOWN,
+            </if>
+            <if test="investerrange != null">
+                INVESTERRANGE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DECIMAL},
+            </if>
+            <if test="loanappid != null">
+                #{loanappid,jdbcType=DECIMAL},
+            </if>
+            <if test="tno != null">
+                #{tno,jdbcType=VARCHAR},
+            </if>
+            <if test="tname != null">
+                #{tname,jdbcType=VARCHAR},
+            </if>
+            <if test="timode != null">
+                #{timode,jdbcType=DECIMAL},
+            </if>
+            <if test="valuedate != null">
+                #{valuedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tamount != null">
+                #{tamount,jdbcType=FLOAT},
+            </if>
+            <if test="finishtamount != null">
+                #{finishtamount,jdbcType=FLOAT},
+            </if>
+            <if test="tpro != null">
+                #{tpro,jdbcType=DECIMAL},
+            </if>
+            <if test="tbegintime != null">
+                #{tbegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tendtime != null">
+                #{tendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loantime != null">
+                #{loantime,jdbcType=DECIMAL},
+            </if>
+            <if test="dayormonth != null">
+                #{dayormonth,jdbcType=VARCHAR},
+            </if>
+            <if test="tinterest != null">
+                #{tinterest,jdbcType=FLOAT},
+            </if>
+            <if test="tdesc != null">
+                #{tdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tstatus != null">
+                #{tstatus,jdbcType=DECIMAL},
+            </if>
+            <if test="pmiscpayman != null">
+                #{pmiscpayman,jdbcType=VARCHAR},
+            </if>
+            <if test="pmiscrecman != null">
+                #{pmiscrecman,jdbcType=VARCHAR},
+            </if>
+            <if test="onettimes != null">
+                #{onettimes,jdbcType=DECIMAL},
+            </if>
+            <if test="crestrict != null">
+                #{crestrict,jdbcType=VARCHAR},
+            </if>
+            <if test="isfaketender != null">
+                #{isfaketender,jdbcType=DECIMAL},
+            </if>
+            <if test="isautotender != null">
+                #{isautotender,jdbcType=DECIMAL},
+            </if>
+            <if test="ttype != null">
+                #{ttype,jdbcType=DECIMAL},
+            </if>
+            <if test="isacancel != null">
+                #{isacancel,jdbcType=DECIMAL},
+            </if>
+            <if test="allowcugrade != null">
+                #{allowcugrade,jdbcType=VARCHAR},
+            </if>
+            <if test="issetgfundsint != null">
+                #{issetgfundsint,jdbcType=DECIMAL},
+            </if>
+            <if test="gfundsintno != null">
+                #{gfundsintno,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymenttype != null">
+                #{repaymenttype,jdbcType=DECIMAL},
+            </if>
+            <if test="repaymentpro != null">
+                #{repaymentpro,jdbcType=DECIMAL},
+            </if>
+            <if test="repaysetmode != null">
+                #{repaysetmode,jdbcType=DECIMAL},
+            </if>
+            <if test="repayman != null">
+                #{repayman,jdbcType=VARCHAR},
+            </if>
+            <if test="isapartrepay != null">
+                #{isapartrepay,jdbcType=DECIMAL},
+            </if>
+            <if test="repaytimepoint != null">
+                #{repaytimepoint,jdbcType=VARCHAR},
+            </if>
+            <if test="isappointtender != null">
+                #{isappointtender,jdbcType=DECIMAL},
+            </if>
+            <if test="tpass != null">
+                #{tpass,jdbcType=VARCHAR},
+            </if>
+            <if test="minoncetamount != null">
+                #{minoncetamount,jdbcType=FLOAT},
+            </if>
+            <if test="maxoncetamount != null">
+                #{maxoncetamount,jdbcType=FLOAT},
+            </if>
+            <if test="ugrestrict != null">
+                #{ugrestrict,jdbcType=VARCHAR},
+            </if>
+            <if test="removenameno != null">
+                #{removenameno,jdbcType=VARCHAR},
+            </if>
+            <if test="isfailtc != null">
+                #{isfailtc,jdbcType=DECIMAL},
+            </if>
+            <if test="failtcno != null">
+                #{failtcno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaoverduec != null">
+                #{isaoverduec,jdbcType=DECIMAL},
+            </if>
+            <if test="overduecno != null">
+                #{overduecno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaaheadrepay != null">
+                #{isaaheadrepay,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadrepayno != null">
+                #{aheadrepayno,jdbcType=VARCHAR},
+            </if>
+            <if test="isadebtattorn != null">
+                #{isadebtattorn,jdbcType=DECIMAL},
+            </if>
+            <if test="debtattornno != null">
+                #{debtattornno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaplus != null">
+                #{isaplus,jdbcType=DECIMAL},
+            </if>
+            <if test="plusno != null">
+                #{plusno,jdbcType=VARCHAR},
+            </if>
+            <if test="isamediacy != null">
+                #{isamediacy,jdbcType=DECIMAL},
+            </if>
+            <if test="mediacyfeeno != null">
+                #{mediacyfeeno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaguarantee != null">
+                #{isaguarantee,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteefeeno != null">
+                #{guaranteefeeno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaintexp != null">
+                #{isaintexp,jdbcType=DECIMAL},
+            </if>
+            <if test="intexpno != null">
+                #{intexpno,jdbcType=VARCHAR},
+            </if>
+            <if test="isariskgm != null">
+                #{isariskgm,jdbcType=DECIMAL},
+            </if>
+            <if test="riskgmno != null">
+                #{riskgmno,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymode != null">
+                #{repaymode,jdbcType=DECIMAL},
+            </if>
+            <if test="begininvestmoney != null">
+                #{begininvestmoney,jdbcType=FLOAT},
+            </if>
+            <if test="ismultiple != null">
+                #{ismultiple,jdbcType=DECIMAL},
+            </if>
+            <if test="totalmoneyrestrict != null">
+                #{totalmoneyrestrict,jdbcType=FLOAT},
+            </if>
+            <if test="averagenum != null">
+                #{averagenum,jdbcType=DECIMAL},
+            </if>
+            <if test="averagemoney != null">
+                #{averagemoney,jdbcType=FLOAT},
+            </if>
+            <if test="isaudit != null">
+                #{isaudit,jdbcType=DECIMAL},
+            </if>
+            <if test="istemplet != null">
+                #{istemplet,jdbcType=DECIMAL},
+            </if>
+            <if test="auditman != null">
+                #{auditman,jdbcType=VARCHAR},
+            </if>
+            <if test="audittime != null">
+                #{audittime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isrecorded != null">
+                #{isrecorded,jdbcType=DECIMAL},
+            </if>
+            <if test="bidprodtype != null">
+                #{bidprodtype,jdbcType=VARCHAR},
+            </if>
+            <if test="retdate != null">
+                #{retdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastretdate != null">
+                #{lastretdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iscompensatory != null">
+                #{iscompensatory,jdbcType=DECIMAL},
+            </if>
+            <if test="compensatoryman != null">
+                #{compensatoryman,jdbcType=VARCHAR},
+            </if>
+            <if test="pmiscpaymanid != null">
+                #{pmiscpaymanid,jdbcType=DECIMAL},
+            </if>
+            <if test="pmiscrecmanid != null">
+                #{pmiscrecmanid,jdbcType=DECIMAL},
+            </if>
+            <if test="valuepoint != null">
+                #{valuepoint,jdbcType=VARCHAR},
+            </if>
+            <if test="valuerule != null">
+                #{valuerule,jdbcType=DECIMAL},
+            </if>
+            <if test="compensatorymaid != null">
+                #{compensatorymaid,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadperiod != null">
+                #{aheadperiod,jdbcType=DECIMAL},
+            </if>
+            <if test="ocmaxday != null">
+                #{ocmaxday,jdbcType=DECIMAL},
+            </if>
+            <if test="putontime != null">
+                #{putontime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pullofftime != null">
+                #{pullofftime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="snlno != null">
+                #{snlno,jdbcType=VARCHAR},
+            </if>
+            <if test="onanddown != null">
+                #{onanddown,jdbcType=DECIMAL},
+            </if>
+            <if test="investerrange != null">
+                #{investerrange,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatebytno" parameterType="com.ptpl.model.TenderItem">
+        update TENDERITEM
+        <set>
+            <if test="isrecorded != null">
+                ISRECORDED = #{isrecorded,jdbcType=DECIMAL},
+            </if>
+            <if test="tstatus != null">
+                TSTATUS = #{tstatus,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where TNO = #{tno,jdbcType=DECIMAL}
+    </update>
+
+    <update id="update" parameterType="com.ptpl.model.TenderItem">
+        update TENDERITEM
+        <set>
+            <if test="loanappid != null">
+                LOANAPPID = #{loanappid,jdbcType=DECIMAL},
+            </if>
+            <if test="tno != null">
+                TNO = #{tno,jdbcType=VARCHAR},
+            </if>
+            <if test="tname != null">
+                TNAME = #{tname,jdbcType=VARCHAR},
+            </if>
+            <if test="timode != null">
+                TIMODE = #{timode,jdbcType=DECIMAL},
+            </if>
+            <if test="valuedate != null">
+                VALUEDATE = #{valuedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tamount != null">
+                TAMOUNT = #{tamount,jdbcType=FLOAT},
+            </if>
+            <if test="finishtamount != null">
+                FINISHTAMOUNT = #{finishtamount,jdbcType=FLOAT},
+            </if>
+            <if test="tpro != null">
+                TPRO = #{tpro,jdbcType=DECIMAL},
+            </if>
+            <if test="tbegintime != null">
+                TBEGINTIME = #{tbegintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tendtime != null">
+                TENDTIME = #{tendtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="loantime != null">
+                LOANTIME = #{loantime,jdbcType=DECIMAL},
+            </if>
+            <if test="dayormonth != null">
+                DAYORMONTH = #{dayormonth,jdbcType=VARCHAR},
+            </if>
+            <if test="tinterest != null">
+                TINTEREST = #{tinterest,jdbcType=FLOAT},
+            </if>
+            <if test="tdesc != null">
+                TDESC = #{tdesc,jdbcType=VARCHAR},
+            </if>
+            <if test="tstatus != null">
+                TSTATUS = #{tstatus,jdbcType=DECIMAL},
+            </if>
+            <if test="pmiscpayman != null">
+                PMISCPAYMAN = #{pmiscpayman,jdbcType=VARCHAR},
+            </if>
+            <if test="pmiscrecman != null">
+                PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR},
+            </if>
+            <if test="onettimes != null">
+                ONETTIMES = #{onettimes,jdbcType=DECIMAL},
+            </if>
+            <if test="crestrict != null">
+                CRESTRICT = #{crestrict,jdbcType=VARCHAR},
+            </if>
+            <if test="isfaketender != null">
+                ISFAKETENDER = #{isfaketender,jdbcType=DECIMAL},
+            </if>
+            <if test="isautotender != null">
+                ISAUTOTENDER = #{isautotender,jdbcType=DECIMAL},
+            </if>
+            <if test="ttype != null">
+                TTYPE = #{ttype,jdbcType=DECIMAL},
+            </if>
+            <if test="isacancel != null">
+                ISACANCEL = #{isacancel,jdbcType=DECIMAL},
+            </if>
+            <if test="allowcugrade != null">
+                ALLOWCUGRADE = #{allowcugrade,jdbcType=VARCHAR},
+            </if>
+            <if test="issetgfundsint != null">
+                ISSETGFUNDSINT = #{issetgfundsint,jdbcType=DECIMAL},
+            </if>
+            <if test="gfundsintno != null">
+                GFUNDSINTNO = #{gfundsintno,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymenttype != null">
+                REPAYMENTTYPE = #{repaymenttype,jdbcType=DECIMAL},
+            </if>
+            <if test="repaymentpro != null">
+                REPAYMENTPRO = #{repaymentpro,jdbcType=DECIMAL},
+            </if>
+            <if test="repaysetmode != null">
+                REPAYSETMODE = #{repaysetmode,jdbcType=DECIMAL},
+            </if>
+            <if test="repayman != null">
+                REPAYMAN = #{repayman,jdbcType=VARCHAR},
+            </if>
+            <if test="isapartrepay != null">
+                ISAPARTREPAY = #{isapartrepay,jdbcType=DECIMAL},
+            </if>
+            <if test="repaytimepoint != null">
+                REPAYTIMEPOINT = #{repaytimepoint,jdbcType=VARCHAR},
+            </if>
+            <if test="isappointtender != null">
+                ISAPPOINTTENDER = #{isappointtender,jdbcType=DECIMAL},
+            </if>
+            <if test="tpass != null">
+                TPASS = #{tpass,jdbcType=VARCHAR},
+            </if>
+            <if test="minoncetamount != null">
+                MINONCETAMOUNT = #{minoncetamount,jdbcType=FLOAT},
+            </if>
+            <if test="maxoncetamount != null">
+                MAXONCETAMOUNT = #{maxoncetamount,jdbcType=FLOAT},
+            </if>
+            <if test="ugrestrict != null">
+                UGRESTRICT = #{ugrestrict,jdbcType=VARCHAR},
+            </if>
+            <if test="removenameno != null">
+                REMOVENAMENO = #{removenameno,jdbcType=VARCHAR},
+            </if>
+            <if test="isfailtc != null">
+                ISFAILTC = #{isfailtc,jdbcType=DECIMAL},
+            </if>
+            <if test="failtcno != null">
+                FAILTCNO = #{failtcno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaoverduec != null">
+                ISAOVERDUEC = #{isaoverduec,jdbcType=DECIMAL},
+            </if>
+            <if test="overduecno != null">
+                OVERDUECNO = #{overduecno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaaheadrepay != null">
+                ISAAHEADREPAY = #{isaaheadrepay,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadrepayno != null">
+                AHEADREPAYNO = #{aheadrepayno,jdbcType=VARCHAR},
+            </if>
+            <if test="isadebtattorn != null">
+                ISADEBTATTORN = #{isadebtattorn,jdbcType=DECIMAL},
+            </if>
+            <if test="debtattornno != null">
+                DEBTATTORNNO = #{debtattornno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaplus != null">
+                ISAPLUS = #{isaplus,jdbcType=DECIMAL},
+            </if>
+            <if test="plusno != null">
+                PLUSNO = #{plusno,jdbcType=VARCHAR},
+            </if>
+            <if test="isamediacy != null">
+                ISAMEDIACY = #{isamediacy,jdbcType=DECIMAL},
+            </if>
+            <if test="mediacyfeeno != null">
+                MEDIACYFEENO = #{mediacyfeeno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaguarantee != null">
+                ISAGUARANTEE = #{isaguarantee,jdbcType=DECIMAL},
+            </if>
+            <if test="guaranteefeeno != null">
+                GUARANTEEFEENO = #{guaranteefeeno,jdbcType=VARCHAR},
+            </if>
+            <if test="isaintexp != null">
+                ISAINTEXP = #{isaintexp,jdbcType=DECIMAL},
+            </if>
+            <if test="intexpno != null">
+                INTEXPNO = #{intexpno,jdbcType=VARCHAR},
+            </if>
+            <if test="isariskgm != null">
+                ISARISKGM = #{isariskgm,jdbcType=DECIMAL},
+            </if>
+            <if test="riskgmno != null">
+                RISKGMNO = #{riskgmno,jdbcType=VARCHAR},
+            </if>
+            <if test="repaymode != null">
+                REPAYMODE = #{repaymode,jdbcType=DECIMAL},
+            </if>
+            <if test="begininvestmoney != null">
+                BEGININVESTMONEY = #{begininvestmoney,jdbcType=FLOAT},
+            </if>
+            <if test="ismultiple != null">
+                ISMULTIPLE = #{ismultiple,jdbcType=DECIMAL},
+            </if>
+            <if test="totalmoneyrestrict != null">
+                TOTALMONEYRESTRICT = #{totalmoneyrestrict,jdbcType=FLOAT},
+            </if>
+            <if test="averagenum != null">
+                AVERAGENUM = #{averagenum,jdbcType=DECIMAL},
+            </if>
+            <if test="averagemoney != null">
+                AVERAGEMONEY = #{averagemoney,jdbcType=FLOAT},
+            </if>
+            <if test="isaudit != null">
+                ISAUDIT = #{isaudit,jdbcType=DECIMAL},
+            </if>
+            <if test="istemplet != null">
+                ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+            </if>
+            <if test="auditman != null">
+                AUDITMAN = #{auditman,jdbcType=VARCHAR},
+            </if>
+            <if test="audittime != null">
+                AUDITTIME = #{audittime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="isrecorded != null">
+                ISRECORDED = #{isrecorded,jdbcType=DECIMAL},
+            </if>
+            <if test="bidprodtype != null">
+                BIDPRODTYPE = #{bidprodtype,jdbcType=VARCHAR},
+            </if>
+            <if test="retdate != null">
+                RETDATE = #{retdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastretdate != null">
+                LASTRETDATE = #{lastretdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="iscompensatory != null">
+                ISCOMPENSATORY = #{iscompensatory,jdbcType=DECIMAL},
+            </if>
+            <if test="compensatoryman != null">
+                COMPENSATORYMAN = #{compensatoryman,jdbcType=VARCHAR},
+            </if>
+            <if test="pmiscpaymanid != null">
+                PMISCPAYMANID = #{pmiscpaymanid,jdbcType=DECIMAL},
+            </if>
+            <if test="pmiscrecmanid != null">
+                PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL},
+            </if>
+            <if test="valuepoint != null">
+                VALUEPOINT=#{valuepoint,jdbcType=VARCHAR},
+            </if>
+            <if test="valuerule != null">
+                VALUERULE=#{valuerule,jdbcType=DECIMAL},
+            </if>
+            <if test="compensatorymaid != null">
+                COMPENSATORYMAID=#{compensatorymaid,jdbcType=DECIMAL},
+            </if>
+            <if test="isaheadcompensatory != null">
+                ISAHEADCOMPENSATORY=#{isaheadcompensatory,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadcompensatorymanid != null">
+                AHEADCOMPENSATORYMANID=#{aheadcompensatorymanid,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadcompensatoryman != null">
+                AHEADCOMPENSATORYMAN=#{aheadcompensatoryman,jdbcType=VARCHAR},
+            </if>
+            <if test="graceperiod != null">
+                GRACEPERIOD=#{graceperiod,jdbcType=DECIMAL},
+            </if>
+            <if test="daylatefeerate != null">
+                DAYLATEFEERATE=#{daylatefeerate,jdbcType=DECIMAL},
+            </if>
+            <if test="addman != null">
+                ADDMAN=#{addman,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                ADDTIME=#{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isintcompensateon != null">
+                ISINTCOMPENSATEON=#{isintcompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="isawardcompensateon != null">
+                ISAWARDCOMPENSATEON=#{isawardcompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="isaocfee != null">
+                ISAOCFEE=#{isaocfee,jdbcType=DECIMAL},
+            </if>
+            <if test="ispicompensateon != null">
+                ISPICOMPENSATEON=#{ispicompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="ispluscompensateon != null">
+                ISPLUSCOMPENSATEON=#{ispluscompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="isforplatformon != null">
+                ISFORPLATFORMON=#{isforplatformon,jdbcType=DECIMAL},
+            </if>
+            <if test="isadebtattornfee != null">
+                ISADEBTATTORNFEE=#{isadebtattornfee,jdbcType=DECIMAL},
+            </if>
+            <if test="snlid != null">
+                SNLID=#{snlid,jdbcType=DECIMAL},
+            </if>
+            <if test="displaytype != null">
+                DISPLAYTYPE=#{displaytype,jdbcType=DECIMAL},
+            </if>
+            <if test="tscore != null">
+                TSCORE=#{tscore,jdbcType=DECIMAL},
+            </if>
+            <if test="tgrade != null">
+                TGRADE=#{tgrade,jdbcType=VARCHAR},
+            </if>
+            <if test="ocmaxday != null">
+                OCMAXDAY = #{ocmaxday,jdbcType=DECIMAL},
+            </if>
+            <if test="putontime != null">
+                PUTONTIME =#{putontime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pullofftime != null">
+                PULLOFFTIME =#{pullofftime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="snlno != null">
+                SNLNO =#{snlno,jdbcType=VARCHAR},
+            </if>
+            <if test="onanddown != null">
+                ONANDDOWN =#{onanddown,jdbcType=DECIMAL},
+            </if>
+            <if test="investerrange != null">
+                INVESTERRANGE =#{investerrange,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=DECIMAL}
+    </update>
+
+    <!-- 返回多条 -->
+    <select id="selectByCondition" parameterType="com.ptpl.model.TenderItem" resultMap="BaseResultMap">
+        select t.* ,t.tinterest*100 as tinteresttwo from TENDERITEM t
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id!=null and id!=''">
+                id=#{id,jdbcType=DECIMAL}
+            </if>
+            <if test="loanappid != null and loanappid!=''">
+                and LOANAPPID = #{loanappid,jdbcType=DECIMAL}
+            </if>
+            <if test="tno != null and tno!=''">
+                and TNO = #{tno,jdbcType=VARCHAR}
+            </if>
+            <if test="tname != null and tname!=''">
+                and TNAME = #{tname,jdbcType=VARCHAR}
+            </if>
+            <if test="timode != null and timode!=''">
+                and TIMODE = #{timode,jdbcType=DECIMAL}
+            </if>
+            <if test="valuedate != null and valuedate!=''">
+                and VALUEDATE = #{valuedate}
+            </if>
+            <if test="tamount != null and tamount!=''">
+                and TAMOUNT = #{tamount,jdbcType=FLOAT}
+            </if>
+            <if test="finishtamount != null and finishtamount!=''">
+                and FINISHTAMOUNT = #{finishtamount,jdbcType=FLOAT}
+            </if>
+            <if test="tpro != null and tpro!=''">
+                and TPRO = #{tpro,jdbcType=DECIMAL}
+            </if>
+            <if test="tbegintime != null and tbegintime!=''">
+                and TBEGINTIME = #{tbegintime}
+            </if>
+            <if test="tendtime != null and tendtime!=''">
+                and TENDTIME = #{tendtime}
+            </if>
+            <if test="loantime != null and loantime!=''">
+                and LOANTIME = #{loantime,jdbcType=DECIMAL}
+            </if>
+            <if test="dayormonth != null and dayormonth!=''">
+                and DAYORMONTH = #{dayormonth,jdbcType=VARCHAR}
+            </if>
+            <if test="tinterest != null and tinterest!=''">
+                and TINTEREST = #{tinterest,jdbcType=FLOAT}
+            </if>
+            <if test="tdesc != null and tdesc!=''">
+                and TDESC = #{tdesc,jdbcType=VARCHAR}
+            </if>
+            <if test="tstatus != null and tstatus!=''">
+                and TSTATUS = #{tstatus,jdbcType=DECIMAL}
+            </if>
+            <if test="pmiscpayman != null and pmiscpayman!=''">
+                and PMISCPAYMAN = #{pmiscpayman,jdbcType=VARCHAR}
+            </if>
+            <if test="pmiscrecman != null and pmiscrecman!=''">
+                and PMISCRECMAN = #{pmiscrecman,jdbcType=VARCHAR}
+            </if>
+            <if test="onettimes != null and onettimes!=''">
+                and ONETTIMES = #{onettimes,jdbcType=DECIMAL}
+            </if>
+            <if test="crestrict != null and crestrict!=''">
+                and CRESTRICT = #{crestrict,jdbcType=VARCHAR}
+            </if>
+            <if test="isfaketender != null and isfaketender!=''">
+                and ISFAKETENDER = #{isfaketender,jdbcType=DECIMAL}
+            </if>
+            <if test="isautotender != null and isautotender!=''">
+                and ISAUTOTENDER = #{isautotender,jdbcType=DECIMAL}
+            </if>
+            <if test="ttype != null and ttype!=''">
+                and TTYPE = #{ttype,jdbcType=DECIMAL}
+            </if>
+            <if test="isacancel != null and isacancel!=''">
+                and ISACANCEL = #{isacancel,jdbcType=DECIMAL}
+            </if>
+            <if test="allowcugrade != null and allowcugrade!=''">
+                and ALLOWCUGRADE = #{allowcugrade,jdbcType=VARCHAR}
+            </if>
+            <if test="issetgfundsint != null and issetgfundsint!=''">
+                and ISSETGFUNDSINT = #{issetgfundsint,jdbcType=DECIMAL}
+            </if>
+            <if test="gfundsintno != null and gfundsintno!=''">
+                and GFUNDSINTNO = #{gfundsintno,jdbcType=VARCHAR}
+            </if>
+            <if test="repaymenttype != null and repaymenttype!=''">
+                and REPAYMENTTYPE = #{repaymenttype,jdbcType=DECIMAL}
+            </if>
+            <if test="repaymentpro != null and repaymentpro!=''">
+                and REPAYMENTPRO = #{repaymentpro,jdbcType=DECIMAL}
+            </if>
+            <if test="repaysetmode != null and repaysetmode!=''">
+                and REPAYSETMODE = #{repaysetmode,jdbcType=DECIMAL}
+            </if>
+            <if test="repayman != null and repayman!=''">
+                and REPAYMAN = #{repayman,jdbcType=VARCHAR}
+            </if>
+            <if test="isapartrepay != null and isapartrepay!=''">
+                and ISAPARTREPAY = #{isapartrepay,jdbcType=DECIMAL}
+            </if>
+            <if test="repaytimepoint != null and repaytimepoint!=''">
+                and REPAYTIMEPOINT = #{repaytimepoint,jdbcType=VARCHAR}
+            </if>
+            <if test="isappointtender != null and isappointtender!=''">
+                and ISAPPOINTTENDER = #{isappointtender,jdbcType=DECIMAL}
+            </if>
+            <if test="tpass != null and tpass!=''">
+                and TPASS = #{tpass,jdbcType=VARCHAR}
+            </if>
+            <if test="minoncetamount != null and minoncetamount!=''">
+                and MINONCETAMOUNT = #{minoncetamount,jdbcType=FLOAT}
+            </if>
+            <if test="maxoncetamount != null and maxoncetamount!=''">
+                and MAXONCETAMOUNT = #{maxoncetamount,jdbcType=FLOAT}
+            </if>
+            <if test="ugrestrict != null and ugrestrict!=''">
+                and UGRESTRICT like #{ugrestrict,jdbcType=VARCHAR}
+            </if>
+            <if test="removenameno != null and removenameno!=''">
+                and REMOVENAMENO = #{removenameno,jdbcType=VARCHAR}
+            </if>
+            <if test="isfailtc != null and isfailtc!=''">
+                and ISFAILTC = #{isfailtc,jdbcType=DECIMAL}
+            </if>
+            <if test="failtcno != null and failtcno!=''">
+                and FAILTCNO = #{failtcno,jdbcType=VARCHAR}
+            </if>
+            <if test="isaoverduec != null and isaoverduec!=''">
+                and ISAOVERDUEC = #{isaoverduec,jdbcType=DECIMAL}
+            </if>
+            <if test="overduecno != null and overduecno!=''">
+                and OVERDUECNO = #{overduecno,jdbcType=VARCHAR}
+            </if>
+            <if test="isaaheadrepay != null and isaaheadrepay!=''">
+                and ISAAHEADREPAY = #{isaaheadrepay,jdbcType=DECIMAL}
+            </if>
+            <if test="aheadrepayno != null and aheadrepayno!=''">
+                and AHEADREPAYNO = #{aheadrepayno,jdbcType=VARCHAR}
+            </if>
+            <if test="isadebtattorn != null and isadebtattorn!=''">
+                and ISADEBTATTORN = #{isadebtattorn,jdbcType=DECIMAL}
+            </if>
+            <if test="debtattornno != null and debtattornno!=''">
+                and DEBTATTORNNO = #{debtattornno,jdbcType=VARCHAR}
+            </if>
+            <if test="isaplus != null and isaplus!=''">
+                and ISAPLUS = #{isaplus,jdbcType=DECIMAL}
+            </if>
+            <if test="plusno != null and plusno!=''">
+                and PLUSNO = #{plusno,jdbcType=VARCHAR}
+            </if>
+            <if test="isamediacy != null and isamediacy!=''">
+                and ISAMEDIACY = #{isamediacy,jdbcType=DECIMAL}
+            </if>
+            <if test="mediacyfeeno != null and mediacyfeeno!=''">
+                and MEDIACYFEENO = #{mediacyfeeno,jdbcType=VARCHAR}
+            </if>
+            <if test="isaguarantee != null and isaguarantee!=''">
+                and ISAGUARANTEE = #{isaguarantee,jdbcType=DECIMAL}
+            </if>
+            <if test="guaranteefeeno != null and guaranteefeeno!=''">
+                and GUARANTEEFEENO = #{guaranteefeeno,jdbcType=VARCHAR}
+            </if>
+            <if test="isaintexp != null and isaintexp!=''">
+                and ISAINTEXP = #{isaintexp,jdbcType=DECIMAL}
+            </if>
+            <if test="intexpno != null and intexpno!=''">
+                and INTEXPNO = #{intexpno,jdbcType=VARCHAR}
+            </if>
+            <if test="isariskgm != null and isariskgm!=''">
+                and ISARISKGM = #{isariskgm,jdbcType=DECIMAL}
+            </if>
+            <if test="riskgmno != null and riskgmno!=''">
+                and RISKGMNO = #{riskgmno,jdbcType=VARCHAR}
+            </if>
+            <if test="repaymode != null and repaymode!=''">
+                and REPAYMODE = #{repaymode,jdbcType=DECIMAL}
+            </if>
+            <if test="begininvestmoney != null and begininvestmoney!=''">
+                and BEGININVESTMONEY = #{begininvestmoney,jdbcType=FLOAT}
+            </if>
+            <if test="ismultiple != null and ismultiple!=''">
+                and ISMULTIPLE = #{ismultiple,jdbcType=DECIMAL}
+            </if>
+            <if test="totalmoneyrestrict != null and totalmoneyrestrict!=''">
+                and TOTALMONEYRESTRICT = #{totalmoneyrestrict,jdbcType=FLOAT}
+            </if>
+            <if test="averagenum != null and averagenum!=''">
+                and AVERAGENUM = #{averagenum,jdbcType=DECIMAL}
+            </if>
+            <if test="averagemoney != null and averagemoney!=''">
+                and AVERAGEMONEY = #{averagemoney,jdbcType=FLOAT}
+            </if>
+            <if test="isaudit != null and isaudit!=''">
+                and ISAUDIT = #{isaudit,jdbcType=DECIMAL}
+            </if>
+            <if test="istemplet != null">
+                and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+            </if>
+            <if test="auditman != null and auditman!=''">
+                and AUDITMAN = #{auditman,jdbcType=VARCHAR}
+            </if>
+            <if test="audittime != null and audittime!=''">
+                and AUDITTIME = #{audittime}
+            </if>
+            <if test="remark != null and remark!=''">
+                and REMARK = #{remark,jdbcType=VARCHAR}
+            </if>
+            <if test="bidprodtype != null and bidprodtype!=''">
+                and BIDPRODTYPE = #{bidprodtype,jdbcType=VARCHAR}
+            </if>
+            <if test="isrecorded != null and isrecorded!=''">
+                and ISRECORDED = #{isrecorded,jdbcType=DECIMAL}
+            </if>
+            <if test="retdate != null and retdate!=''">
+                and RETDATE = #{retdate}
+            </if>
+            <if test="lastretdate != null and lastretdate!=''">
+                and LASTRETDATE = #{lastretdate}
+            </if>
+            <if test="iscompensatory != null and iscompensatory!=''">
+                and ISCOMPENSATORY = #{iscompensatory}
+            </if>
+            <if test="compensatoryman != null and compensatoryman!=''">
+                and COMPENSATORYMAN = #{compensatoryman,jdbcType=VARCHAR}
+            </if>
+            <if test="pmiscpaymanid != null and pmiscpaymanid!=''">
+                and PMISCPAYMANID = #{pmiscpaymanid,jdbcType=DECIMAL}
+            </if>
+            <if test="pmiscrecmanid != null and pmiscrecmanid!=''">
+                and PMISCRECMANID = #{pmiscrecmanid,jdbcType=DECIMAL}
+            </if>
+            <if test="valuepoint != null and valuepoint!=''">
+                and VALUEPOINT=#{valuepoint,jdbcType=VARCHAR},
+            </if>
+            <if test="valuerule != null and valuepoint!=''">
+                and VALUERULE=#{valuerule,jdbcType=DECIMAL},
+            </if>
+            <if test="compensatorymaid != null and valuepoint!=''">
+                and COMPENSATORYMAID=#{compensatorymaid,jdbcType=DECIMAL},
+            </if>
+            <if test="isaheadcompensatory != null">
+                and ISAHEADCOMPENSATORY=#{isaheadcompensatory,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadcompensatorymanid != null">
+                and AHEADCOMPENSATORYMANID=#{aheadcompensatorymanid,jdbcType=DECIMAL},
+            </if>
+            <if test="aheadcompensatoryman != null">
+                and AHEADCOMPENSATORYMAN=#{aheadcompensatoryman,jdbcType=VARCHAR},
+            </if>
+            <if test="graceperiod != null">
+                and GRACEPERIOD=#{graceperiod,jdbcType=DECIMAL},
+            </if>
+            <if test="daylatefeerate != null">
+                and DAYLATEFEERATE=#{daylatefeerate,jdbcType=DECIMAL},
+            </if>
+            <if test="addman != null">
+                and ADDMAN=#{addman,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                and ADDTIME=#{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isintcompensateon != null">
+                and ISINTCOMPENSATEON=#{isintcompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="isawardcompensateon != null">
+                and ISAWARDCOMPENSATEON=#{isawardcompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="isaocfee != null">
+                and ISAOCFEE=#{isaocfee,jdbcType=DECIMAL},
+            </if>
+            <if test="ispicompensateon != null">
+                and ISPICOMPENSATEON=#{ispicompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="ispluscompensateon != null">
+                and ISPLUSCOMPENSATEON=#{ispluscompensateon,jdbcType=DECIMAL},
+            </if>
+            <if test="isforplatformon != null">
+                and ISFORPLATFORMON=#{isforplatformon,jdbcType=DECIMAL},
+            </if>
+            <if test="isadebtattornfee != null">
+                and ISADEBTATTORNFEE=#{isadebtattornfee,jdbcType=DECIMAL}
+            </if>
+            <if test="onanddown != null">
+                and onanddown=#{onanddown,jdbcType=DECIMAL}
+            </if>
+            <if test="investerrange != null">
+                and investerrange=#{investerrange,jdbcType=DECIMAL}
+            </if>
+        </trim>
+    </select>
+
+    <!-- 待录入  或  录入失败 -->
+    <select id="selectByConditionnotin" parameterType="com.ptpl.model.TenderItem" resultMap="BaseResultMap">
+        select t.* from TENDERITEM t where tstatus =1 or tstatus=9
+        <if test="id!=null and id!=''">
+            id=#{id,jdbcType=DECIMAL}
+        </if>
+        <if test="tname != null and tname!=''">
+            and tname = #{tname,jdbcType=VARCHAR}
+        </if>
+        <if test="tno != null and tno!=''">
+            and TNO = #{tno,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <!-- 查询所有标 -->
+    <select id="selectByAlltend" parameterType="com.ptpl.model.TenderItem" resultMap="BaseResultMap">
+        select t.* from TENDERITEM t
+        <trim prefix="where" prefixOverrides="and|or">
+            <if test="id!=null and id!=''">
+                id=#{id,jdbcType=DECIMAL}
+            </if>
+            <if test="tno != null and tno!=''">
+                and TNO = #{tno,jdbcType=VARCHAR}
+            </if>
+            <if test="tname != null and tname!=''">
+                and TNAME = #{tname,jdbcType=VARCHAR}
+            </if>
+            <if test="tstatus != null and tstatus!=''">
+                and TSTATUS = #{tstatus,jdbcType=DECIMAL}
+            </if>
+        </trim>
+    </select>
+
+    <delete id="delete" parameterType="java.math.BigDecimal">
+    delete from TENDERITEM
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+    <!-- 根据标号获得对应的标 -->
+    <select id="seltendbytno" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from TENDERITEM where tno = #{tno,jdbcType=VARCHAR}
+    </select>
+    <!--标状态为1,2,9的标 -->
+    <select id="getTenderItemBytpro" resultMap="BaseResultMap" parameterType="com.ptpl.model.TenderItem">
+        select
+        <include refid="Base_Column_List"/>
+        from TENDERITEM t where t.tpro=#{tpro,jdbcType=DECIMAL} and t.tstatus in(1,2,9)
+    </select>
+
+    <!--标状态为1,2,3,9的标 -->
+    <select id="getTenderItemBytpro2" resultMap="BaseResultMap" parameterType="com.ptpl.model.TenderItem">
+        select
+        <include refid="Base_Column_List"/>
+        from TENDERITEM t where t.tpro=#{tpro,jdbcType=DECIMAL} and t.tstatus in(1,2,3,9)
+    </select>
+
+    <select id="getTenderItemsLeftJoinLoanAppByCondition" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="LeftJoin_Base_Column_List"/>
+        from TENDERITEM t left join loanapp t2 on t.loanappid = t2.id
+        <where>
+            <if test="baseid">
+                and t2.baseid = #{baseid,jdbcType=DECIMAL}
+            </if>
+            <if test="tstatus">
+                and t.tstatus = #{tstatus,jdbcType=DECIMAL}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectByDateAndTstatus" parameterType="Date" resultMap="BaseResultMap">
+        select t.id,t.loanappid,t.tstatus,t.onanddown from tenderitem t where t.tstatus=2 and t.tbegintime &lt; #{time,jdbcType=TIMESTAMP} and #{time,jdbcType=TIMESTAMP} &lt; t.tendtime
+    </select>
+
+    <select id="selectByDateAndTstatus2" parameterType="Date" resultMap="BaseResultMap">
+        select t.id,t.loanappid,t.tstatus,t.onanddown from tenderitem t where t.tstatus=1 and t.tendtime &lt; #{time,jdbcType=TIMESTAMP}
+    </select>
+
+    <select id="selectByDateAndTstatus3" parameterType="Date" resultMap="BaseResultMap">
+        select t.id,t.loanappid,t.tstatus,t.onanddown from tenderitem t where t.tstatus=3 and t.tendtime &lt; #{time,jdbcType=TIMESTAMP}
+    </select>
+
+
+</mapper>

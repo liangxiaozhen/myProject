@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ptpjx:war exploded">
+    <output-path>E:/servers32/apache-tomcat-7.0.77-jx/webapps/ptpjx</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ptpjx" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ptpjx/web/Web" />
+    </root>
+  </artifact>
+</component>

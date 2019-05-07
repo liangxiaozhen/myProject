@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.TenderFeiTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.ptpl.model.TenderFeiType" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="TYPENAME" property="typename" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TYPENAME, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TENDERFEITYPE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAllTenderFeiType" resultMap="BaseResultMap">
+      select * from TENDERFEITYPE
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TENDERFEITYPE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.ptpl.model.TenderFeiType" >
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+      SELECT TENDERFEITYPE_SEQ.NEXTVAL as id FROM DUAL
+    </selectKey>
+    insert into TENDERFEITYPE (ID, TYPENAME, REMARK
+      )
+    values (#{id,jdbcType=DECIMAL}, #{typename,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ptpl.model.TenderFeiType" >
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+      SELECT TENDERFEITYPE_SEQ.NEXTVAL as id FROM DUAL
+    </selectKey>
+    insert into TENDERFEITYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="typename != null" >
+        TYPENAME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.TenderFeiType" >
+    update TENDERFEITYPE
+    <set >
+      <if test="typename != null" >
+        TYPENAME = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ptpl.model.TenderFeiType" >
+    update TENDERFEITYPE
+    set TYPENAME = #{typename,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,191 @@
+package junit.test;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.ptpl.mapper.UserRiskMapper;
+import com.ptpl.mapper.UserRiskMapper;
+import com.ptpl.model.UserBaseAccountInfo;
+import com.ptpl.model.UserRisk;
+import com.ptpl.service.UserBaseAccountInfoServiceI;
+import com.ptpl.service.UserRiskServiceI;
+/**
+ * 
+ * 用户风控 测试类
+ * UserRiskTest
+ * 创建人:chenjiaming
+ * 时间：2016年09月05日 15:37:00
+ * @version 1.0.0
+ *
+ */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={"classpath:spring/applicationContext.xml",
+		"classpath:mybatis/mybatis-config.xml"})
+public class UserRiskTest {
+
+	 @Autowired
+	 private UserRiskServiceI userRiskMapper;
+	 @Autowired
+	 UserBaseAccountInfoServiceI userBaseAccountInfoService;
+  	 
+	 @Test
+	 public void handle05(){
+		 ApplicationContext content = new ClassPathXmlApplicationContext("spring/applicationContext-dao.xml");
+		 System.out.println(content);
+		 String[] strings = content.getBeanDefinitionNames();
+		 for(String string :strings){
+			 System.out.println("==================="+string);
+		 }
+		 
+	 }
+	 
+	 
+	  /**
+	  * 
+	 * @Title: findUserRisks 
+	 * @Description: TODO(查询全部信息 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	 @Test
+	 public void findUserRisks(){
+	     UserRisk userRisk = new  UserRisk();
+		 List<UserRisk> userRisks = userRiskMapper.findUserRisks(userRisk);
+  		 for(UserRisk userRisk1 :userRisks){
+			System.out.println("=========================="+userRisk1.getAddman());
+  			}
+	 }
+	 
+	  /**
+	  * 
+	 * @Title: updateById 
+	 * @Description: TODO(更新 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	 @Test
+	 public void updateById(){
+		 UserRisk userRisk = new UserRisk();
+		 userRisk.setAddman("小胖子哈");
+		 userRisk.setAddtime(new Date());
+		 userRisk.setEmail("123456@public_XuanZe.xx");
+		 userRisk.setCookie("cookie");
+		 userRisk.setIp("120.0.0.0");
+		 userRisk.setMobile("13532323");
+		 userRisk.setRemark("备注信息");
+		 userRisk.setType((short) 2);
+		 userRisk.setUsername("小胖子180KG");
+		 userRisk.setMac("IOs");
+		 userRisk.setId(new BigDecimal(1));
+  		 int count = userRiskMapper.updateById(userRisk);
+		 if(count > 0){
+			 System.out.println("===================更新成功");
+		 }else{
+			 System.out.println("===================更新不成功");
+		 }
+	 }
+	 
+	  /**
+	  * 
+	 * @Title: findUserRiskById 
+	 * @Description: TODO(根据ID查找 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	 @Test
+	 public void findUserRiskById(){
+ 		
+		 UserRisk userRisk= userRiskMapper.findUserRiskById(new BigDecimal(2));
+		 System.out.println(userRisk.getId());
+	 }
+  /**
+	  * 
+	 * @Title: deleteById 
+	 * @Description: TODO(删除 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+	  @Test
+	 public void deleteById(){
+  		 int count = userRiskMapper.deleteById(new BigDecimal(3));
+ 		 if(count > 0){
+ 			 System.out.println("=============================删除成功");
+ 		 }else{
+ 			 System.out.println("=============================删除失败");
+ 		 }
+	 }
+	 
+	  /**
+	  * 
+	 * @Title: insertSelective 
+	 * @Description: TODO(新增 测试) 
+	 * @param   参数说明 
+	 * @return void    返回类型 
+	 * @author chenjiaming
+	 * @throws
+	  */
+ 	 @Test
+	 public void insertSelective(){
+ 		  
+  			UserRisk userRisk = new UserRisk();
+  			userRisk.setAddman("asdsd");
+  			userRisk.setAddtime(new Date());
+  			userRisk.setBaseid(new BigDecimal(1));
+  			userRisk.setCookie("测试数据");
+  			userRisk.setEmail("测试邮箱");
+  			userRisk.setIp("测试ip");
+  			userRisk.setMac("dsds");
+  			userRisk.setMobile("12121");
+  			userRisk.setType((short) 1);
+  			userRisk.setUsername("测试用户名");
+  			userRisk.setRemark("测试备注");
+    	    int count = 0;
+ 			count = userRiskMapper.insert(userRisk);
+ 			if(count > 0){
+ 				System.out.println("数据添加成功..");
+ 			}else{
+ 				System.out.println("数据添加失败");
+ 			}
+  		 
+ 
+ 	 }
+ 	 
+ 	 @Test
+ 	 public void SelectiveUserRisk(){
+ 		UserRisk userRisk = new UserRisk();
+ 		userRisk.setUsername("测试用户5");
+		 //通过loginname得到所有对应的信息并设置
+ 		 UserBaseAccountInfo userBaseAccountInfo = userBaseAccountInfoService.getuserloginname("测试用户5");
+ 		 System.out.println("userBaseAccountInfo==="+userBaseAccountInfo);
+		 userRisk.setBaseid(userBaseAccountInfo.getId());
+		 userRisk.setIp(userBaseAccountInfo.getRegip());
+		 userRisk.setCookie(userBaseAccountInfo.getRegcookie());
+		 userRisk.setMac(userBaseAccountInfo.getEmail());
+		 userRisk.setMobile(userBaseAccountInfo.getMobilephone());
+		 userRisk.setEmail(userBaseAccountInfo.getEmail());
+		 userRisk.setAddman("admin");
+		 userRisk.setAddtime(new Date());
+		 List<UserRisk> list=userRiskMapper.selectUserRiskByCondition(userRisk);
+		for(UserRisk u:list){
+			System.out.println("u=="+u.getUsername());
+		}
+ 	 }
+  
+}

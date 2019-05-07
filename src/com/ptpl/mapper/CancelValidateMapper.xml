@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.CancelValidateMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.CancelValidate">
+		<result column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="BASEID" property="baseid" jdbcType="DECIMAL" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="IP" property="ip" jdbcType="VARCHAR" />
+		<result column="COOKIE" property="cookie" jdbcType="VARCHAR" />
+		<result column="MAC" property="mac" jdbcType="VARCHAR" />
+		<result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		<result column="MOBILEUDID" property="mobileudid" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="CANCELTYPE" property="canceltype" jdbcType="VARCHAR" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, BASEID, USERNAME, IP, COOKIE, MAC, MOBILE, MOBILEUDID, EMAIL,
+		CANCELTYPE, ADDMAN,
+		ADDTIME, REMARK
+	</sql>
+	<!-- 更新操作 -->
+	<update id="updateById" parameterType="com.ptpl.model.CancelValidate">
+		update CANCELVALIDATE
+		<set>
+			<if test="baseid != null">
+				BASEID = #{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				USERNAME = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				IP = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="cookie != null">
+				COOKIE = #{cookie,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				MAC = #{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				MOBILE = #{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="mobileudid != null">
+				MOBILEUDID = #{mobileudid,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				EMAIL = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="canceltype != null">
+				CANCELTYPE = #{canceltype,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=DECIMAL}
+	</update>
+
+
+	<!-- 根据用户名查找id -->
+	<select id="getByUsername" resultMap="BaseResultMap">
+		select * from CANCELVALIDATE where username = #{username,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据用户ID删除信息 -->
+	<delete id="deleteByBaseId" parameterType="java.math.BigDecimal">
+		delete from CANCELVALIDATE where id = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据ID删除信息 -->
+	<delete id="deleteById" parameterType="java.math.BigDecimal">
+		delete from CANCELVALIDATE where id = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 根据ID查询信息 -->
+	<select id="findCancelValidateById" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List"></include>
+		from CANCELVALIDATE where id = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 查询全部信息 -->
+	<select id="findCancelValidates" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.CancelValidate">
+		select
+		<include refid="Base_Column_List"></include>
+		from CANCELVALIDATE
+		<where>
+			<if test="username != null">
+				USERNAME like '%${username}%'
+			</if>
+		</where>
+		order by addtime desc
+	</select>
+
+	<insert id="insert" parameterType="com.ptpl.model.CancelValidate">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT CANCELVALIDATE_SQL.NEXTVAL AS id from dual
+		</selectKey>
+		insert into CANCELVALIDATE (ID, BASEID, USERNAME,
+		IP, COOKIE, MAC, MOBILE,
+		MOBILEUDID, EMAIL, CANCELTYPE,
+		ADDMAN, ADDTIME, REMARK
+		)
+		values (#{id,jdbcType=DECIMAL}, #{baseid,jdbcType=DECIMAL},
+		#{username,jdbcType=VARCHAR},
+		#{ip,jdbcType=VARCHAR}, #{cookie,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR},
+		#{mobile,jdbcType=VARCHAR},
+		#{mobileudid,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{canceltype,jdbcType=VARCHAR},
+		#{addman,jdbcType=VARCHAR}, #{addtime,jdbcType=TIMESTAMP},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<!-- 根据用户查询信息条件 -->
+	<select id="selectCancelValidateByCondition" parameterType="com.ptpl.model.CancelValidate" resultMap="BaseResultMap">
+		select * from CANCELVALIDATE
+		<trim prefix="where" prefixOverrides="and|or">
+		<if test="baseid!=null">
+   			and	baseid=#{baseid,jdbcType=DECIMAL}
+   		</if>
+		<if test="username!=null and username!=''">
+   			and	username=#{username,jdbcType=VARCHAR}
+   		</if>
+   		<if test="ip!=null and ip!=''">
+   			and	ip=#{ip,jdbcType=VARCHAR}
+   		</if>
+   		<if test="cookie!=null and cookie!=''">
+   			and	cookie= #{cookie,jdbcType=VARCHAR}
+   		</if>
+   		<if test="mobile!=null and mobile!=''">
+   			and	mobile=#{mobile,jdbcType=VARCHAR}
+   		</if>
+   		<if test="email!=null and email!=''">
+   			and	email=#{email,jdbcType=VARCHAR}
+   		</if>
+		</trim>
+		order by id asc
+	</select>
+
+	<insert id="insertSelective" parameterType="com.ptpl.model.CancelValidate">
+		<selectKey order="BEFORE" resultType="java.math.BigDecimal"
+			keyProperty="id">
+			SELECT CANCELVALIDATE_SQL.NEXTVAL AS id from dual
+		</selectKey>
+		insert into CANCELVALIDATE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="baseid != null">
+				BASEID,
+			</if>
+			<if test="username != null">
+				USERNAME,
+			</if>
+			<if test="ip != null">
+				IP,
+			</if>
+			<if test="cookie != null">
+				COOKIE,
+			</if>
+			<if test="mac != null">
+				MAC,
+			</if>
+			<if test="mobile != null">
+				MOBILE,
+			</if>
+			<if test="mobileudid != null">
+				MOBILEUDID,
+			</if>
+			<if test="email != null">
+				EMAIL,
+			</if>
+			<if test="canceltype != null">
+				CANCELTYPE,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="baseid != null">
+				#{baseid,jdbcType=DECIMAL},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				#{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="cookie != null">
+				#{cookie,jdbcType=VARCHAR},
+			</if>
+			<if test="mac != null">
+				#{mac,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="mobileudid != null">
+				#{mobileudid,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="canceltype != null">
+				#{canceltype,jdbcType=VARCHAR},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+</mapper>

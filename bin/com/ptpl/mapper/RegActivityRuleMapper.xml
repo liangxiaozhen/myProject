@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.RegActivityRuleMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.RegActivityRule">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="ACTNO" property="actno" jdbcType="VARCHAR" />
+		<result column="ACTNAME" property="actname" jdbcType="VARCHAR" />
+		<result column="ACTBTIME" property="actbtime" jdbcType="TIMESTAMP" />
+		<result column="ACTETIME" property="actetime" jdbcType="TIMESTAMP" />
+		<result column="ISCONSIDERREGTIME" property="isconsiderregtime"
+			jdbcType="DECIMAL" />
+		<result column="STATUS" property="status" jdbcType="DECIMAL" />
+		<result column="ISAUDITALIST" property="isauditalist" jdbcType="DECIMAL" />
+		<result column="ADDMAN" property="addman" jdbcType="VARCHAR" />
+		<result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ISTEMPLET" property="istemplet" jdbcType="DECIMAL" />
+		<result column="GENERATETYPE" property="generatetype" jdbcType="DECIMAL" />
+		<result column="EXECUTETIME" property="executetime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, ACTNO, ACTNAME, ACTBTIME, ACTETIME, ISCONSIDERREGTIME,
+		STATUS,
+		ISAUDITALIST, ADDMAN, ADDTIME, REMARK, ISTEMPLET, GENERATETYPE,
+		EXECUTETIME
+	</sql>
+
+	<!-- （条件）获取注册活动规则列表 -->
+	<select id="findRegActivityRuleList" resultMap="BaseResultMap"
+		parameterType="com.ptpl.model.RegActivityRule">
+		select
+		<include refid="Base_Column_List" />
+		from
+		RegActivityRule
+		<trim prefix="where" prefixOverrides="and">
+			<if test="actno != null and actno != ''">
+				and actno = #{actno,jdbcType=VARCHAR}
+			</if>
+			<if test="actname != null">
+				and actname like '%'||#{actname}||'%'
+			</if>
+			<if test="actbtime != null">
+				and ACTBTIME = #{actbtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="actetime != null">
+				and ACTETIME = #{actetime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="isconsiderregtime != null">
+				and ISCONSIDERREGTIME =
+				#{isconsiderregtime,jdbcType=DECIMAL}
+			</if>
+			<if test="status != null">
+				and STATUS = #{status,jdbcType=DECIMAL}
+			</if>
+			<if test="isauditalist != null">
+				and ISAUDITALIST = #{isauditalist,jdbcType=DECIMAL}
+			</if>
+			<if test="addman != null">
+				and ADDMAN = #{addman,jdbcType=VARCHAR}
+			</if>
+			<if test="addtime != null">
+				and ADDTIME = #{addtime,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remark != null">
+				and REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="istemplet != null">
+				and ISTEMPLET = #{istemplet,jdbcType=DECIMAL}
+			</if>
+			<if test="generatetype != null">
+				and GENERATETYPE = #{generatetype,jdbcType=DECIMAL}
+			</if>
+			<if test="executetime != null">
+				and EXECUTETIME = #{executetime,jdbcType=DECIMAL}
+			</if>
+		</trim>
+	</select>
+
+	<!-- 查看注册活动规则详情 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from
+		REGACTIVITYRULE
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</select>
+
+	<!-- 删除注册活动规则 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		REGACTIVITYRULE where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+
+	<!-- 新增注册活动规则（参数可选） -->
+	<insert id="insertRegActivityRuleSelective" parameterType="com.ptpl.model.RegActivityRule">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id"
+			order="BEFORE">
+			SELECT REGACTIVITYRULE_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into REGACTIVITYRULE
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="actno != null">
+				ACTNO,
+			</if>
+			<if test="actname != null">
+				ACTNAME,
+			</if>
+			<if test="actbtime != null">
+				ACTBTIME,
+			</if>
+			<if test="actetime != null">
+				ACTETIME,
+			</if>
+			<if test="isconsiderregtime != null">
+				ISCONSIDERREGTIME,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="isauditalist != null">
+				ISAUDITALIST,
+			</if>
+			<if test="addman != null">
+				ADDMAN,
+			</if>
+			<if test="addtime != null">
+				ADDTIME,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET,
+			</if>
+			<if test="generatetype != null">
+				GENERATETYPE,
+			</if>
+			<if test="executetime != null">
+				EXECUTETIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="actno != null">
+				#{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="actname != null">
+				#{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="actbtime != null">
+				#{actbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actetime != null">
+				#{actetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isconsiderregtime != null">
+				#{isconsiderregtime,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isauditalist != null">
+				#{isauditalist,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				#{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="istemplet != null">
+				#{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="generatetype != null">
+				#{generatetype,jdbcType=DECIMAL},
+			</if>
+			<if test="executetime != null">
+				#{executetime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 根据主键ID更新注册活动规则（参数可选） -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.RegActivityRule">
+		update REGACTIVITYRULE
+		<set>
+			<if test="actno != null">
+				ACTNO = #{actno,jdbcType=VARCHAR},
+			</if>
+			<if test="actname != null">
+				ACTNAME = #{actname,jdbcType=VARCHAR},
+			</if>
+			<if test="actbtime != null">
+				ACTBTIME = #{actbtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="actetime != null">
+				ACTETIME = #{actetime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isconsiderregtime != null">
+				ISCONSIDERREGTIME =
+				#{isconsiderregtime,jdbcType=DECIMAL},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=DECIMAL},
+			</if>
+			<if test="isauditalist != null">
+				ISAUDITALIST = #{isauditalist,jdbcType=DECIMAL},
+			</if>
+			<if test="addman != null">
+				ADDMAN = #{addman,jdbcType=VARCHAR},
+			</if>
+			<if test="addtime != null">
+				ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="istemplet != null">
+				ISTEMPLET = #{istemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="generatetype != null">
+				GENERATETYPE = #{generatetype,jdbcType=DECIMAL},
+			</if>
+			<if test="executetime != null">
+				EXECUTETIME = #{executetime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<!-- 根据活动编号查询注册活动 -->
+	<select id="selectByActNo" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from
+		regactivityrule
+		where
+		actno = #{actno,jdbcType=VARCHAR}
+	</select>
+</mapper>

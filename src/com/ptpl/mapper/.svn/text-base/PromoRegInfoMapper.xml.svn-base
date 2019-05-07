@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.PromoRegInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.PromoRegInfo">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="PUSERID" property="puserid" jdbcType="DECIMAL" />
+		<result column="RUSERID" property="ruserid" jdbcType="DECIMAL" />
+		<result column="REGUSERCODE" property="regusercode" jdbcType="VARCHAR" />
+		<result column="REGTIME" property="regtime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, PUSERID, RUSERID, REGUSERCODE, REGTIME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from PROMOREGINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="selective" parameterType="com.ptpl.model.PromoRegInfo"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"></include>
+		from PROMOREGINFO
+		<where>
+			<if test="puserid != null">
+				AND PUSERID = #{puserid,jdbcType=DECIMAL}
+			</if>
+			<if test="ruserid != null">
+				AND RUSERID = #{ruserid,jdbcType=DECIMAL}
+			</if>
+			<if test="regusercode != null and regusercode != ''">
+				AND REGUSERCODE = #{regusercode,jdbcType=VARCHAR}
+			</if>
+			<if test="regtime != null">
+				AND REGTIME = #{regtime}
+			</if>
+		</where>
+		order by id
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from PROMOREGINFO
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.PromoRegInfo">
+	<selectKey order="BEFORE" resultType="java.math.BigDecimal" keyProperty="id">
+		SELECT PROMOREGINFO_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+		insert into PROMOREGINFO (ID, PUSERID, RUSERID,
+		REGUSERCODE, REGTIME)
+		values (#{id,jdbcType=DECIMAL}, #{puserid,jdbcType=DECIMAL},
+		#{ruserid,jdbcType=DECIMAL},
+		#{regusercode,jdbcType=VARCHAR}, #{regtime})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.PromoRegInfo">
+	<selectKey order="BEFORE" resultType="java.math.BigDecimal" keyProperty="id">
+		SELECT PROMOREGINFO_SEQ.NEXTVAL FROM DUAL
+	</selectKey>
+		insert into PROMOREGINFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="puserid != null">
+				PUSERID,
+			</if>
+			<if test="ruserid != null">
+				RUSERID,
+			</if>
+			<if test="regusercode != null">
+				REGUSERCODE,
+			</if>
+			<if test="regtime != null">
+				REGTIME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="puserid != null">
+				#{puserid,jdbcType=DECIMAL},
+			</if>
+			<if test="ruserid != null">
+				#{ruserid,jdbcType=DECIMAL},
+			</if>
+			<if test="regusercode != null">
+				#{regusercode,jdbcType=VARCHAR},
+			</if>
+			<if test="regtime != null">
+				#{regtime},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.PromoRegInfo">
+		update PROMOREGINFO
+		<set>
+			<if test="puserid != null">
+				PUSERID = #{puserid,jdbcType=DECIMAL},
+			</if>
+			<if test="ruserid != null">
+				RUSERID = #{ruserid,jdbcType=DECIMAL},
+			</if>
+			<if test="regusercode != null">
+				REGUSERCODE = #{regusercode,jdbcType=VARCHAR},
+			</if>
+			<if test="regtime != null">
+				REGTIME = #{regtime},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.PromoRegInfo">
+		update PROMOREGINFO
+		set PUSERID = #{puserid,jdbcType=DECIMAL},
+		RUSERID = #{ruserid,jdbcType=DECIMAL},
+		REGUSERCODE = #{regusercode,jdbcType=VARCHAR},
+		REGTIME = #{regtime}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>

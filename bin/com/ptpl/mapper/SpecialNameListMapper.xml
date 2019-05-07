@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.SpecialNameListMapper" >
+	<resultMap id="BaseResultMap" type="com.ptpl.model.SpecialNameList" >
+   		<id column="ID" property="id" jdbcType="DECIMAL" />
+   		<result column="BUSINESSTYPE" property="businessType" jdbcType="DECIMAL" />
+    	<result column="SYSTEMBUSTYPE" property="systemBusType" jdbcType="VARCHAR" />
+    	<result column="SMSTYPE" property="smsType" jdbcType="VARCHAR" />
+    	<result column="BUSINESSNO" property="businessNo" jdbcType="VARCHAR" />
+    	<result column="BUSINESSNAME" property="businessName" jdbcType="VARCHAR" />
+    	<result column="NAMEMODE" property="nameMode" jdbcType="DECIMAL" />
+    	<result column="ISUSE" property="isUse" jdbcType="DECIMAL" />
+    	<result column="ISQUOTE" property="isQuote" jdbcType="DECIMAL" />
+    	<result column="GENERATETYPE" property="generateType" jdbcType="DECIMAL" />
+    	<result column="ISTEMPLET" property="isTemplet" jdbcType="DECIMAL" />
+    	<result column="ADDTIME" property="addTime" jdbcType="TIMESTAMP" />
+    	<result column="ADDMAN" property="addMan" jdbcType="VARCHAR" />
+    	<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,BUSINESSTYPE,SYSTEMBUSTYPE,SMSTYPE,BUSINESSNO,BUSINESSNAME,NAMEMODE,ISUSE,
+		ISQUOTE,GENERATETYPE,ISTEMPLET,ADDTIME,ADDMAN,REMARK
+	</sql>
+	<insert id="insertSelective" parameterType="com.ptpl.model.SpecialNameList">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="id" order="BEFORE">
+			select SPECIALNAMELIST_SEQ.NEXTVAL AS id from dual
+		</selectKey>
+		insert into SPECIALNAMELIST
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">id,</if>
+			<if test="businessType != null">businessType,</if>
+			<if test="systemBusType != null">systemBusType,</if>
+			<if test="smsType != null">smsType,</if>
+			<if test="businessNo != null">businessNo,</if>
+			<if test="businessName != null">businessName,</if>
+			<if test="nameMode != null">nameMode,</if>
+			<if test="isUse != null">isUse,</if>
+			<if test="isQuote != null">isQuote,</if>
+			<if test="generateType != null">generateType,</if>
+			<if test="isTemplet != null">isTemplet,</if>
+			<if test="addTime != null">addTime,</if>
+			<if test="addMan != null">addMan,</if>
+			<if test="remark != null">remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id !=null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="businessType !=null">
+				#{businessType,jdbcType=DECIMAL},
+			</if>
+			<if test="systemBusType !=null">
+				#{systemBusType,jdbcType=VARCHAR},
+			</if>
+			<if test="smsType !=null">
+				#{smsType,jdbcType=VARCHAR},
+			</if>
+			<if test="businessNo !=null">
+				#{businessNo,jdbcType=VARCHAR},
+			</if>
+			<if test="businessName !=null">
+				#{businessName,jdbcType=VARCHAR},
+			</if>
+			<if test="nameMode !=null">
+				#{nameMode,jdbcType=DECIMAL},
+			</if>
+			<if test="isUse !=null">
+				#{isUse,jdbcType=DECIMAL},
+			</if>
+			<if test="isQuote !=null">
+				#{isQuote,jdbcType=DECIMAL},
+			</if>
+			<if test="generateType !=null">
+				#{generateType,jdbcType=DECIMAL},
+			</if>
+			<if test="isTemplet !=null">
+				#{isTemplet,jdbcType=DECIMAL},
+			</if>
+			<if test="addTime !=null">
+				#{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="addMan !=null">
+				#{addMan,jdbcType=VARCHAR},
+			</if>
+			<if test="remark !=null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	
+	<select id="getSpecialNameLists" resultMap="BaseResultMap" parameterType="com.ptpl.model.SpecialNameList">
+		select 
+			<include refid="Base_Column_List"></include> 
+		from SPECIALNAMELIST 
+		<where>
+			<if test="businessNo !=null and businessNo !=''">
+				and BUSINESSNO = #{businessNo,jdbcType=VARCHAR}
+			</if>
+			<if test="nameMode !=null">
+				and NAMEMODE = #{nameMode,jdbcType=DECIMAL}
+			</if>
+			<if test="businessType !=null">
+				and BUSINESSTYPE = #{businessType,jdbcType=DECIMAL}
+			</if>
+			<if test="businessName !=null and businessName!=''">
+				and BUSINESSNAME = #{businessName,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by id desc
+	</select>
+	
+	<!-- 根据定向编号，标题来获取定向名单列表 -->
+	<select id="getSnlsByNoOrName" resultMap="BaseResultMap" parameterType="com.ptpl.model.SpecialNameList">
+		select 
+			<include refid="Base_Column_List"></include> 
+		from SPECIALNAMELIST 
+		<where>
+			<if test="businessNo !=null and businessNo!=''">
+				and BUSINESSNO = #{businessNo,jdbcType=VARCHAR}
+			</if>
+			<if test="businessName !=null and businessName!=''">
+				and BUSINESSNAME = #{businessName,jdbcType=VARCHAR}
+			</if>
+		</where> 
+	</select>
+	
+	<!-- 根据是否为模板来获取定向名单 -->
+	<select id="getTemSpecialNameLists" resultMap="BaseResultMap" parameterType="com.ptpl.model.SpecialNameList">
+		select 
+			<include refid="Base_Column_List"></include> 
+		from SPECIALNAMELIST 
+		where isTemplet =#{isTemplet,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 根据id删除对应的定向名单 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    	delete from SPECIALNAMELIST where ID = #{id,jdbcType=DECIMAL}
+  	</delete>
+  	
+  	<!-- 更新定向名单列表的启用状态 -->
+  	<update id="updateSpecialNameList" parameterType="com.ptpl.model.ActiveObjectList" >
+	    update SPECIALNAMELIST 
+	    <set>
+	    	<if test="systemBusType !=null and systemBusType !=''">
+	    		SYSTEMBUSTYPE = #{systemBusType,jdbcType=VARCHAR}, 
+	    	</if>
+	    	<if test="smsType !=null and smsType !=''">
+	    		SMSTYPE = #{smsType,jdbcType=VARCHAR}, 
+	    	</if>
+	    	<if test="businessName !=null and businessName !=''">
+	    		BUSINESSNAME = #{businessName,jdbcType=VARCHAR}, 
+	    	</if>
+	    	<if test="isTemplet !=null">
+	    		ISTEMPLET = #{isTemplet,jdbcType=DECIMAL}, 
+	    	</if>
+	    	<if test="addTime !=null and addTime!=''">
+	    		ADDTIME = #{addTime,jdbcType=TIMESTAMP}, 
+	    	</if>
+	    	<if test="addMan !=null and addMan!=''">
+	    		ADDMAN = #{addMan,jdbcType=VARCHAR}, 
+	    	</if>
+	    	<if test="remark !=null and remark!=''">
+	    		REMARK = #{remark,jdbcType=VARCHAR}, 
+	    	</if>
+	    	<if test="isUse !=null">
+	    		ISUSE = #{isUse,jdbcType=DECIMAL}, 
+	    	</if>
+	    	<if test="isQuote !=null">
+	    		ISQUOTE = #{isQuote,jdbcType=DECIMAL} 
+	    	</if>
+	    </set> 
+	    where BUSINESSNO = #{businessNo,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 根据id获取定向名单列表 -->
+	<select id="getSpecialNameList" resultMap="BaseResultMap" parameterType="com.ptpl.model.SpecialNameList">
+		select 
+			<include refid="Base_Column_List"></include> 
+		from SPECIALNAMELIST 
+		where id =#{id,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 根据启用状态来获取对应的定向名单编号 -->
+	<select id="getSpecialNameListByNo" resultMap="BaseResultMap" parameterType="com.ptpl.model.SpecialNameList">
+		select 
+			<include refid="Base_Column_List"></include> 
+		from SPECIALNAMELIST 
+		where ISUSE =#{isUse,jdbcType=DECIMAL} and BUSINESSTYPE = #{businessType,jdbcType=DECIMAL}
+	</select>
+	
+	<!-- 编辑定向名单时查询定向标题是否重复    自身除外 -->
+	<select id="getSNLByName" resultMap="BaseResultMap" parameterType="com.ptpl.model.SpecialNameList">
+		select 
+			<include refid="Base_Column_List"></include> 
+		from SPECIALNAMELIST 
+	    where BUSINESSNAME = #{businessName,jdbcType=VARCHAR} and BUSINESSNO != #{businessNo,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 根据单条用户条件查询整条信息 -->
+	<select id="selectSpecialNameListByCondition" parameterType="com.ptpl.model.SpecialNameList" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		 from SPECIALNAMELIST
+		<where>
+		<if test="id!=null">
+		and ID=#{id,jdbcType=DECIMAL}
+		</if>
+		<if test="businessType !=null">
+		and	BUSINESSTYPE=#{businessType,jdbcType=DECIMAL}
+		</if>
+		<if test="systemBusType !=null">
+		and SYSTEMBUSTYPE=#{systemBusType,jdbcType=VARCHAR}
+		</if>
+		<if test="smsType !=null">
+		and SMSTYPE=#{smsType,jdbcType=VARCHAR}
+		</if>
+		<if test="businessNo !=null">
+		and	BUSINESSNO=#{businessNo,jdbcType=VARCHAR}
+		</if>
+		<if test="businessName !=null">
+		and	BUSINESSNAME=#{businessName,jdbcType=VARCHAR}
+		</if>
+		<if test="nameMode !=null">
+		and	NAMEMODE=#{nameMode,jdbcType=DECIMAL}
+		</if>
+		<if test="isUse !=null">
+		and	ISUSE=#{isUse,jdbcType=DECIMAL}
+		</if>
+		<if test="isQuote !=null">
+		and	ISQUOTE=#{isQuote,jdbcType=DECIMAL}
+		</if>
+		<if test="generateType !=null">
+		and	GENERATETYPE=#{generateType,jdbcType=DECIMAL}
+		</if>
+		<if test="isTemplet !=null">
+		and	ISTEMPLET=#{isTemplet,jdbcType=DECIMAL}
+		</if>
+		<if test="addTime !=null">
+		and	ADDTIME=#{addTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="addMan !=null">
+		and	ADDMAN=#{addMan,jdbcType=VARCHAR}
+		</if>
+		<if test="remark !=null">
+		and	REMARK=#{remark,jdbcType=VARCHAR}
+		</if>
+		</where>
+	</select>
+</mapper>

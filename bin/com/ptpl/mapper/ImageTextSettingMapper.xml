@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ptpl.mapper.ImageTextSettingMapper">
+	<resultMap id="BaseResultMap" type="com.ptpl.model.ImageTextSetting">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="SERIALNO" property="serialno" jdbcType="DECIMAL" />
+		<result column="ITINO" property="itino" jdbcType="DECIMAL" />
+		<result column="ISSUETIME" property="issuetime" jdbcType="TIMESTAMP" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="SUBTITLE1" property="subtitle1" jdbcType="VARCHAR" />
+		<result column="SUBTITLE2" property="subtitle2" jdbcType="VARCHAR" />
+		<result column="SUBTITLE3" property="subtitle3" jdbcType="VARCHAR" />
+		<result column="TITLEPIC" property="titlepic" jdbcType="VARCHAR" />
+		<result column="RESUME" property="resume" jdbcType="VARCHAR" />
+		<result column="CONTENT" property="content"/>
+		<result column="OPERATOR" property="operator" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="HYPERLINK" property="hyperlink" jdbcType="VARCHAR" />
+		<result column="ISUSE" property="isuse" jdbcType="DECIMAL" />
+		<result column="PCTERMINAL" property="pcterminal" jdbcType="DECIMAL" />
+		<result column="ANDROIDTERMINAL" property="androidterminal"
+			jdbcType="DECIMAL" />
+		<result column="IOSTERMINAL" property="iosterminal" jdbcType="DECIMAL" />
+		<result column="WAPTERMINAL" property="wapterminal" jdbcType="DECIMAL" />
+		<association property="imageTextItem" javaType="com.ptpl.model.ImageTextItem">
+			<id column="ITINAME" property="itiname" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, SERIALNO, ITINO, ISSUETIME, TITLE, SUBTITLE1,
+		SUBTITLE2, SUBTITLE3,
+		TITLEPIC,
+		RESUME, CONTENT, OPERATOR,
+		REMARK,HYPERLINK,ISUSE,PCTERMINAL,ANDROIDTERMINAL,IOSTERMINAL
+		,WAPTERMINAL
+	</sql>
+	<sql id="A_Column_List">
+		t1.ID, t1.SERIALNO, t1.ITINO, t1.ISSUETIME, t1.TITLE,
+		t1.SUBTITLE1,
+		t1.SUBTITLE2, t1.SUBTITLE3,
+		t1.TITLEPIC,
+		t1.RESUME,
+		t1.CONTENT, t1.OPERATOR,
+		t1.REMARK,t1.HYPERLINK,t1.ISUSE,t2.ITINAME,t1.PCTERMINAL,t1.ANDROIDTERMINAL,
+		t1.IOSTERMINAL,WAPTERMINAL
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from IMAGETEXTSETTING
+		where ID = #{id,jdbcType=DECIMAL}
+	</select>
+	<select id="listImageTextSetting" parameterType="com.ptpl.model.ImageTextSetting"
+		resultMap="BaseResultMap">
+		select
+		<include refid="A_Column_List"></include>
+		from IMAGETEXTSETTING t1,IMAGETEXTITEM t2
+		<where>
+			t1.itino=t2.id
+			<if test="serialno != null">
+				AND t1.SERIALNO = #{serialno,jdbcType=DECIMAL}
+			</if>
+			<if test="imageTextItem.isuse != null">
+				AND t2.isuse = #{imageTextItem.isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="itino != null">
+				AND t1.ITINO = #{itino,jdbcType=DECIMAL}
+			</if>
+			<if test="issuetime != null">
+				AND t1.ISSUETIME = #{issuetime}
+			</if>
+			<if test="title != null">
+				AND t1.TITLE = #{title,jdbcType=VARCHAR}
+			</if>
+			<if test="subtitle1 != null">
+				AND t1.SUBTITLE1 = #{subtitle1,jdbcType=VARCHAR}
+			</if>
+			<if test="subtitle2 != null">
+				AND t1.SUBTITLE2 = #{subtitle2,jdbcType=VARCHAR}
+			</if>
+			<if test="subtitle3 != null">
+				AND t1.SUBTITLE3 = #{subtitle3,jdbcType=VARCHAR}
+			</if>
+			<if test="titlepic != null">
+				AND t1.TITLEPIC = #{titlepic,jdbcType=VARCHAR}
+			</if>
+			<if test="resume != null">
+				AND t1.RESUME = #{resume,jdbcType=VARCHAR}
+			</if>
+			<if test="operator != null">
+				AND t1.OPERATOR = #{operator,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null">
+				AND t1.REMARK = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="hyperlink != null and hyperlink != ''">
+				AND t1.HYPERLINKE = #{hyperlink,jdbcType=VARCHAR}
+			</if>
+			<if test="isuse != null">
+				AND t1.ISUSE = #{isuse,jdbcType=DECIMAL}
+			</if>
+			<if test="pcterminal != null">
+				AND PCTERMINAL = #{pcterminal,jdbcType=DECIMAL}
+			</if>
+			<if test="androidterminal != null">
+				AND ANDROIDTERMINAL =#{androidterminal,jdbcType=DECIMAL}
+			</if>
+			<if test="iosterminal != null">
+				AND IOSTERMINAL = #{iosterminal,jdbcType=DECIMAL}
+			</if>
+			<if test="wapterminal != null">
+				AND WAPTERMINAL = #{wapterminal,jdbcType=DECIMAL}
+			</if>
+			<if test="imageTextItem.itiname != null and imageTextItem.itiname != ''">
+				AND t2.itiname =
+				#{imageTextItem.itiname,jdbcType=DECIMAL}
+			</if>
+		</where>
+		<if test="imageTextItem.sort == null">
+			order by t1.itino,t1.serialno
+		</if>
+		<if test="imageTextItem.sort == 1">
+			order by t1.itino,t1.serialno desc
+		</if>
+		<if test="imageTextItem.sort == 0">
+			order by t1.itino,t1.serialno
+		</if>
+	</select>
+	<select id="maxImageTextSettingBySerialNo" parameterType="Integer"
+		resultType="Long">
+		select MAX(SERIALNO) from IMAGETEXTSETTING where ITINO
+		=#{0}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from
+		IMAGETEXTSETTING
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.ptpl.model.ImageTextSetting">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT IMAGETEXTSETTING_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into IMAGETEXTSETTING (ID, SERIALNO, ITINO,
+		ISSUETIME, TITLE,
+		SUBTITLE1,
+		SUBTITLE2, SUBTITLE3, TITLEPIC,
+		RESUME, CONTENT, OPERATOR,
+		REMARK,HYPERLINKE,ISUSE)
+		values (#{id,jdbcType=DECIMAL},
+		#{serialno,jdbcType=DECIMAL},
+		#{itino,jdbcType=DECIMAL},
+		#{issuetime},
+		#{title,jdbcType=VARCHAR},
+		#{subtitle1,jdbcType=VARCHAR},
+		#{subtitle2,jdbcType=VARCHAR},
+		#{subtitle3,jdbcType=VARCHAR},
+		#{titlepic,jdbcType=VARCHAR},
+		#{resume,jdbcType=VARCHAR},
+		#{content},
+		#{operator,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},#{hyperlink,jdbcType=VARCHAR},
+		#{isuse,jdbcType=DECIMAL},#{pcterminal,jdbcType=DECIMAL},
+		#{androidterminal,jdbcType=DECIMAL},#{iosterminal,jdbcType=DECIMAL},
+		#{wapterminal,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.ptpl.model.ImageTextSetting">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.math.BigDecimal">
+			SELECT IMAGETEXTSETTING_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		insert into IMAGETEXTSETTING
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="serialno != null">
+				SERIALNO,
+			</if>
+			<if test="itino != null">
+				ITINO,
+			</if>
+			<if test="issuetime != null">
+				ISSUETIME,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="subtitle1 != null">
+				SUBTITLE1,
+			</if>
+			<if test="subtitle2 != null">
+				SUBTITLE2,
+			</if>
+			<if test="subtitle3 != null">
+				SUBTITLE3,
+			</if>
+			<if test="titlepic != null">
+				TITLEPIC,
+			</if>
+			<if test="resume != null">
+				RESUME,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="operator != null">
+				OPERATOR,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="hyperlink != null and hyperlink != ''">
+				HYPERLINK,
+			</if>
+			<if test="isuse != null">
+				ISUSE,
+			</if>
+			<if test="pcterminal != null">
+				PCTERMINAL,
+			</if>
+			<if test="androidterminal != null">
+				ANDROIDTERMINAL,
+			</if>
+			<if test="iosterminal != null">
+				IOSTERMINAL,
+			</if>
+			<if test="wapterminal != null">
+				WAPTERMINAL,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=DECIMAL},
+			</if>
+			<if test="serialno != null">
+				#{serialno,jdbcType=DECIMAL},
+			</if>
+			<if test="itino != null">
+				#{itino,jdbcType=DECIMAL},
+			</if>
+			<if test="issuetime != null">
+				#{issuetime},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle1 != null">
+				#{subtitle1,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle2 != null">
+				#{subtitle2,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle3 != null">
+				#{subtitle3,jdbcType=VARCHAR},
+			</if>
+			<if test="titlepic != null">
+				#{titlepic,jdbcType=VARCHAR},
+			</if>
+			<if test="resume != null">
+				#{resume,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				#{content},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="hyperlink != null and hyperlink != ''">
+				#{hyperlink,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				#{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="pcterminal != null">
+				#{pcterminal,jdbcType=DECIMAL},
+			</if>
+			<if test="androidterminal != null">
+				#{androidterminal,jdbcType=DECIMAL},
+			</if>
+			<if test="iosterminal != null">
+				#{iosterminal,jdbcType=DECIMAL},
+			</if>
+			<if test="wapterminal != null">
+				#{wapterminal,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.ptpl.model.ImageTextSetting">
+		update IMAGETEXTSETTING
+		<set>
+			<if test="serialno != null">
+				SERIALNO = #{serialno,jdbcType=DECIMAL},
+			</if>
+			<if test="itino != null">
+				ITINO = #{itino,jdbcType=DECIMAL},
+			</if>
+			<if test="issuetime != null">
+				ISSUETIME = #{issuetime},
+			</if>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle1 != null">
+				SUBTITLE1 = #{subtitle1,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle2 != null">
+				SUBTITLE2 = #{subtitle2,jdbcType=VARCHAR},
+			</if>
+			<if test="subtitle3 != null">
+				SUBTITLE3 = #{subtitle3,jdbcType=VARCHAR},
+			</if>
+			<if test="titlepic != null">
+				TITLEPIC = #{titlepic,jdbcType=VARCHAR},
+			</if>
+			<if test="resume != null">
+				RESUME = #{resume,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content},
+			</if>
+			<if test="operator != null">
+				OPERATOR = #{operator,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="hyperlink != null and hyperlink != ''">
+				HYPERLINK = #{hyperlink,jdbcType=VARCHAR},
+			</if>
+			<if test="isuse != null">
+				ISUSE = #{isuse,jdbcType=DECIMAL},
+			</if>
+			<if test="pcterminal != null">
+				PCTERMINAL = #{pcterminal,jdbcType=DECIMAL},
+			</if>
+			<if test="androidterminal != null">
+				ANDROIDTERMINAL =#{androidterminal,jdbcType=DECIMAL},
+			</if>
+			<if test="iosterminal != null">
+				IOSTERMINAL = #{iosterminal,jdbcType=DECIMAL},
+			</if>
+			<if test="wapterminal != null">
+				WAPTERMINAL = #{wapterminal,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.ptpl.model.ImageTextSetting">
+		update
+		IMAGETEXTSETTING
+		set SERIALNO = #{serialno,jdbcType=DECIMAL},
+		ITINO =
+		#{itino,jdbcType=DECIMAL},
+		ISSUETIME = #{issuetime},
+		TITLE =
+		#{title,jdbcType=VARCHAR},
+		SUBTITLE1 = #{subtitle1,jdbcType=VARCHAR},
+		SUBTITLE2 = #{subtitle2,jdbcType=VARCHAR},
+		SUBTITLE3 =
+		#{subtitle3,jdbcType=VARCHAR},
+		TITLEPIC = #{titlepic,jdbcType=VARCHAR},
+		RESUME = #{resume,jdbcType=VARCHAR},
+		CONTENT =
+		#{content},
+		OPERATOR = #{operator,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		HYPERLINKE =
+		#{hyperlink,jdbcType=VARCHAR},
+		ISUSE = #{isuse,jdbcType=DECIMAL},
+		PCTERMINAL = #{pcterminal,jdbcType=DECIMAL},
+		ANDROIDTERMINAL
+		=#{androidterminal,jdbcType=DECIMAL},
+		IOSTERMINAL =
+		#{iosterminal,jdbcType=DECIMAL},
+		WAPTERMINAL =
+		#{wapterminal,jdbcType=DECIMAL}
+		where
+		ID = #{id,jdbcType=DECIMAL}
+	</update>
+</mapper>
